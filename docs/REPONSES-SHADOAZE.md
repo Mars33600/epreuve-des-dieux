@@ -71,3 +71,11 @@ Réponses aux questions de `QUESTIONS-SHADOAZE.md`, recopiées fidèlement. Elle
 7. Quêtes sur simple déclaration : **oui**.
 8. Mise à jour du salon des règles :
    > Oui, je le mettrai à jour si le résultat est concluant et qu'on part là-dessus !
+
+---
+
+# Précision de Marceau (25/10/2026) : les quêtes du palier 3
+
+> Les Collectionneurs devront avoir 100 % de complétion sur ce guide complet, qui répertorie toutes les quêtes à faire de chaque étape : https://duffus.fr/guide-complet. À gauche, il y a les différentes étapes, et à l'intérieur l'ensemble des quêtes à réaliser.
+
+Conséquence pour le projet : le palier 3 d'un étage = **le ou les chapitres du guide Duffus correspondant à l'étage, terminés à 100 %**, sur déclaration du joueur. On ne récupère pas la liste des quêtes : le guide suit lui-même la progression du joueur, et on ne lit pas la base de Duffus sans l'accord de son auteur. Seuls les noms des chapitres de chaque étage sont à saisir dans la configuration. Pour l'étage 0, ils sont à demander à Shadoaze.

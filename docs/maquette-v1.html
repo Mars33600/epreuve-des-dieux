@@ -266,7 +266,12 @@ function actifs(){ return players.filter(p => p.actif); }
 function comptes(){ return actifs().filter(p => !p.retard); }
 // Points d'un grimpeur : paliers stricts (pas de 3 sans le 2, pas de 2 sans le 1).
 function points(p){ return p.donjon ? (p.succes ? (p.quetes ? 3 : 2) : 1) : 0; }
-function ptsLabel(p){ const n = points(p); return `${n} pt${n > 1 ? "s" : ""}<small>objectif ${POINTS[p.diff]}</small>`; }
+// « Sa part » = les points attendus pour sa difficulté. Au-delà, c'est du bonus pour le groupe.
+function ptsLabel(p){
+  const n = points(p), v = POINTS[p.diff];
+  const etat = n >= v ? `✓ sa part${n > v ? ` · +${n - v} bonus` : ""}` : `encore ${v - n} pt${v - n > 1 ? "s" : ""}`;
+  return `${n} pt${n > 1 ? "s" : ""}<small>${etat}</small>`;
+}
 function status(){
   const maximum = comptes().reduce((s, p) => s + POINTS[p.diff], 0);
   const pts = comptes().reduce((s, p) => s + points(p), 0);       // les retardataires ne comptent pas
