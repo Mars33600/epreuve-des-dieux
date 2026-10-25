@@ -1,0 +1,432 @@
+<title>L'Épreuve des Dieux</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700;800&family=Alegreya+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Mise en page : la tour à gauche (on la gravit), l'étage en cours et ses grimpeurs à droite. */
+:root{
+  --bg:#e7eaf1; --surface:#f7f8fb; --sunken:#dde2eb; --ink:#1b2133; --muted:#5a6276; --line:#c6ccd9;
+  --gold:#9a6a0c; --gold-wash:rgba(176,124,20,.14);
+  --easy:#257a5a; --med:#2a63a6; --hard:#83379f; --warn:#a9481f;
+  --fog:rgba(231,234,241,0);
+  --f-display:"Alegreya SC",Georgia,serif; --f-body:"Alegreya Sans",system-ui,sans-serif; --f-data:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f131d; --surface:#171d2b; --sunken:#0b0e16; --ink:#e5e8f1; --muted:#97a0b5; --line:#2a3245;
+  --gold:#e2b04a; --gold-wash:rgba(226,176,74,.13);
+  --easy:#5cc79c; --med:#6ea8ec; --hard:#c58ce0; --warn:#ee8a5c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f131d; --surface:#171d2b; --sunken:#0b0e16; --ink:#e5e8f1; --muted:#97a0b5; --line:#2a3245;
+  --gold:#e2b04a; --gold-wash:rgba(226,176,74,.13);
+  --easy:#5cc79c; --med:#6ea8ec; --hard:#c58ce0; --warn:#ee8a5c; color-scheme:dark}
+
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--f-body)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:24px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1}
+.eyebrow{font:500 12px/1 var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.demo{font-size:13px;color:var(--muted);border:1px dashed var(--line);border-radius:6px;padding:6px 10px;justify-self:start}
+
+/* En-tête */
+header{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between}
+header h1{font-size:clamp(34px,6vw,56px);font-weight:800;letter-spacing:.01em}
+header h1 span{color:var(--gold)}
+.sub{color:var(--muted);margin-top:6px}
+.clock{display:grid;gap:4px;text-align:right}
+.clock strong{font:500 26px/1 var(--f-data);font-variant-numeric:tabular-nums}
+
+.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:minmax(0,1fr)}}
+
+/* La tour */
+.tower{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:grid;gap:10px}
+@media (max-width:860px){.tower{position:static}}
+.floors{display:flex;flex-direction:column;align-items:center;gap:4px;padding:18px 0 0;position:relative}
+.floors::before{content:"";position:absolute;inset:0 0 auto;height:45%;background:linear-gradient(var(--bg),transparent);pointer-events:none;z-index:1}
+.floor{width:var(--w);border:1px solid var(--line);background:var(--surface);border-radius:3px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--muted)}
+.floor.locked{background:transparent;border-style:dashed}
+.floor.current{border-color:var(--gold);background:var(--gold-wash);color:var(--ink);box-shadow:0 0 0 3px var(--gold-wash)}
+.floor.current b{color:var(--gold)}
+.floor b{font-family:var(--f-display);font-weight:700}
+.base{width:100%;height:10px;background:var(--line);border-radius:2px}
+.tower p{margin:0;font-size:14px;color:var(--muted)}
+
+/* Carte de l'étage */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;display:grid;gap:16px}
+.floorhead{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:baseline}
+.floorhead h2{font-size:30px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 20px;color:var(--muted);font-size:15px}
+.facts b{color:var(--ink);font-weight:700}
+.gauges{display:grid;gap:14px}
+.gauge{border:1px solid var(--line);border-radius:6px;padding:14px;display:grid;gap:8px;background:var(--bg)}
+.gauge.ok{border-color:var(--c)}
+.gauge h3{font:700 15px/1.2 var(--f-body)}
+.gauge .tag{font:500 11px/1 var(--f-data);letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.gauge .count{font:500 28px/1 var(--f-data);font-variant-numeric:tabular-nums}
+.gauge .count small{font-size:14px;color:var(--muted)}
+.bar{height:8px;border-radius:4px;background:var(--sunken);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;width:var(--p);background:var(--c);border-radius:4px;transition:width .5s ease}
+.gauge .bar{height:14px;border-radius:7px;overflow:visible;margin-top:18px}
+.bar .seuil{position:absolute;top:-4px;bottom:-4px;left:var(--s);width:2px;background:var(--ink)}
+.bar .seuil::after{content:attr(data-label);position:absolute;top:-18px;left:50%;transform:translateX(-50%);font:500 11px/1 var(--f-data);color:var(--muted);white-space:nowrap}
+.detail{display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.detail b{color:var(--ink)}
+.paliers{display:flex;flex-wrap:wrap;gap:6px}
+.pts{font:500 14px/1.2 var(--f-data);color:var(--c);white-space:nowrap}
+.pts small{font:400 13px/1.2 var(--f-body);color:var(--muted);margin-left:6px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap}
+.gauge .left{font-size:14px;color:var(--muted)}
+.gauge.ok .left{color:var(--c);font-weight:700}
+.verdict{border-radius:6px;padding:12px 14px;background:var(--sunken);font-size:15px}
+.verdict.open{background:var(--gold-wash);color:var(--ink);border:1px solid var(--gold)}
+
+/* Coups de main */
+.help{display:grid;gap:8px}
+.help ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.help li{font-size:15px}
+.help li b{font-weight:700}
+
+/* Grimpeurs */
+.rosterhead{display:flex;flex-wrap:wrap;gap:10px 16px;justify-content:space-between;align-items:center}
+.rosterhead h2{font-size:26px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:14px}
+.chip[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.player{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:10px;border-left:4px solid var(--c)}
+.player:hover{border-color:var(--c)}
+.player:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.player.paused{opacity:.6}
+.ptop{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.ptop strong{font:700 18px/1.2 var(--f-display);overflow-wrap:anywhere}
+.diff{font:500 11px/1 var(--f-data);letter-spacing:.05em;text-transform:uppercase;color:var(--c);white-space:nowrap}
+.meta{font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.lvl{display:grid;gap:4px}
+.lvl .bar{height:6px}
+.lvl .bar i{background:var(--gold)}
+.over{color:var(--warn);font-weight:700}
+.marks{display:flex;gap:6px;flex-wrap:wrap}
+.mark{font-size:12px;border-radius:4px;padding:2px 7px;border:1px solid var(--line);color:var(--muted)}
+.mark.done{border-color:var(--c);color:var(--c);font-weight:700}
+
+/* Répartition des classes */
+.classes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px 16px}
+.cl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 8px;align-items:center;font-size:14px}
+.cl .bar{grid-column:1 / -1;height:5px}
+.cl .bar i{background:var(--gold)}
+.cl.none{color:var(--muted)}
+
+/* Fil des validations */
+.feed{margin:0;padding:0;list-style:none;display:grid}
+.feed li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.feed li:first-child{border-top:0}
+.feed time{font:500 13px/1.5 var(--f-data);color:var(--muted)}
+.feed li.fresh{animation:fresh 1.6s ease}
+@keyframes fresh{from{background:var(--gold-wash)}to{background:transparent}}
+
+/* Fiche joueur */
+dialog{border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:0;width:min(460px,calc(100vw - 32px))}
+dialog::backdrop{background:rgba(10,12,20,.55)}
+.sheet{padding:20px;display:grid;gap:14px}
+.sheet h3{font-size:26px}
+.checks{display:grid;gap:8px}
+.check{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.check.done{border-color:var(--c)}
+.check span small{display:block;color:var(--muted);font-size:13px}
+.btn{border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:6px 12px;font-size:14px}
+.btn.primary{border-color:var(--gold);background:var(--gold);color:var(--surface);font-weight:700}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.note{font-size:14px;color:var(--muted);margin:0}
+.note.warn{color:var(--warn)}
+.row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.switch{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}.feed li.fresh{animation:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Serveur Kourial · Guilde des grimpeurs</div>
+      <h1>L'Épreuve <span>des Dieux</span></h1>
+      <div class="sub">Une tour, des étages, une seule règle : on monte ensemble.</div>
+    </div>
+    <div class="clock">
+      <span class="eyebrow" id="clockLabel">Ouverture de l'étage 0</span>
+      <strong id="clock">—</strong>
+      <span class="note" id="clockSub"></span>
+    </div>
+  </header>
+
+  <div class="demo">Maquette : les grimpeurs et leurs validations sont fictifs. Les dates, la jauge à points et le seuil de 75 % viennent des réponses de Shadoaze.</div>
+
+  <div class="layout">
+    <aside class="tower" aria-label="La tour">
+      <div class="floors" id="floors"></div>
+      <div class="base"></div>
+      <p>Nul ne connaît le nombre d'étages. Chacun se dévoile quand la communauté débloque le précédent.</p>
+    </aside>
+
+    <main style="display:grid;gap:24px;min-width:0">
+      <section class="card" aria-labelledby="floorTitle">
+        <div class="floorhead">
+          <div>
+            <div class="eyebrow">Étage en cours</div>
+            <h2 id="floorTitle">Étage 0 · Le Seuil</h2>
+          </div>
+          <div class="facts">
+            <span>Cap de niveau <b class="num">20</b></span>
+            <span>Donjon <b>Kardorim</b></span>
+            <span>Quêtes <b>Incarnam</b></span>
+          </div>
+        </div>
+        <div class="gauges" id="gauges"></div>
+        <div class="verdict" id="verdict"></div>
+        <div class="help">
+          <div class="eyebrow">Qui peut faire avancer la jauge</div>
+          <ul id="help"></ul>
+        </div>
+      </section>
+
+      <section style="display:grid;gap:14px" aria-labelledby="rosterTitle">
+        <div class="rosterhead">
+          <h2 id="rosterTitle">Les grimpeurs</h2>
+          <div class="filters" id="filters"></div>
+        </div>
+        <div class="grid" id="roster"></div>
+      </section>
+
+      <section class="card" aria-labelledby="classesTitle">
+        <div class="row">
+          <h2 id="classesTitle" style="font-size:24px">Répartition des classes</h2>
+          <span class="note" id="classesNote"></span>
+        </div>
+        <div class="classes" id="classes"></div>
+      </section>
+
+      <section class="card" aria-labelledby="feedTitle">
+        <div class="row">
+          <h2 id="feedTitle" style="font-size:24px">Dernières validations</h2>
+          <label class="switch"><input type="checkbox" id="adminMode"> Mode admin (démo)</label>
+        </div>
+        <ul class="feed" id="feed"></ul>
+      </section>
+    </main>
+  </div>
+</div>
+
+<dialog id="sheet"><div class="sheet" id="sheetBody"></div></dialog>
+
+<script>
+const OPEN_FLOOR0 = new Date(2026, 9, 30, 17, 0);      // vendredi 30/10 à 17 h
+const EARLIEST_FLOOR1 = new Date(2026, 10, 13, 17, 0); // vendredi 13/11 à 17 h
+const CAP = 20;                // pas de tolérance automatique : un dépassement est jugé par un admin
+const SEUIL_PCT = 75;          // réglable par les admins
+const POINTS = {easy:1, med:2, hard:3};
+const DIFF = {
+  easy:{nom:"Aventurier", pluriel:"Aventuriers", c:"var(--easy)"},
+  med:{nom:"Éclaireur", pluriel:"Éclaireurs", c:"var(--med)"},
+  hard:{nom:"Collectionneur", pluriel:"Collectionneurs", c:"var(--hard)"}
+};
+// Les trois paliers, cumulatifs et stricts : 1 = donjon vaincu, 2 = full succès, 3 = full succès + quêtes.
+const CRITERIA = [
+  {key:"donjon", rang:1, titre:"Kardorim vaincu", court:"Donjon"},
+  {key:"succes", rang:2, titre:"Kardorim full succès", court:"Full succès"},
+  {key:"quetes", rang:3, titre:"Toutes les quêtes d'Incarnam", court:"Quêtes"}
+];
+const DIFF_KEYS = ["easy", "med", "hard"];
+
+const players = [
+  {id:1, pseudo:"Brindille", classe:"Eniripsa", diff:"hard", lvl:20, actif:true, donjon:true, succes:true, quetes:true},
+  {id:2, pseudo:"Kaskarot", classe:"Iop", diff:"easy", lvl:20, actif:true, donjon:true, succes:false, quetes:false},
+  {id:3, pseudo:"Mirelune", classe:"Crâ", diff:"med", lvl:19, actif:true, donjon:true, succes:true, quetes:false},
+  {id:4, pseudo:"Torvald", classe:"Sacrieur", diff:"med", lvl:20, actif:true, donjon:true, succes:false, quetes:false},
+  {id:5, pseudo:"Pépin-Lagrume", classe:"Enutrof", diff:"easy", lvl:17, actif:true, donjon:false, succes:false, quetes:false},
+  {id:6, pseudo:"Sélénith", classe:"Xélor", diff:"hard", lvl:20, actif:true, donjon:true, succes:true, quetes:false},
+  {id:7, pseudo:"Gromolo", classe:"Pandawa", diff:"easy", lvl:20, actif:true, donjon:true, succes:false, quetes:false},
+  {id:8, pseudo:"Ombrevive", classe:"Sram", diff:"med", lvl:22, actif:true, donjon:false, succes:false, quetes:false},
+  {id:9, pseudo:"Fleur-de-Bwork", classe:"Sadida", diff:"easy", lvl:14, actif:true, retard:true, donjon:false, succes:false, quetes:false},
+  {id:10, pseudo:"Cliquetis", classe:"Steamer", diff:"hard", lvl:20, actif:true, donjon:true, succes:false, quetes:true},
+  {id:11, pseudo:"Nalouette", classe:"Osamodas", diff:"easy", lvl:20, actif:true, donjon:true, succes:true, quetes:false},
+  {id:12, pseudo:"Vieux-Grain", classe:"Féca", diff:"med", lvl:11, actif:false, donjon:false, succes:false, quetes:false}
+];
+let feed = [
+  {t:"il y a 2 h", txt:"<b>Cliquetis</b> a déclaré avoir terminé toutes les quêtes d'Incarnam."},
+  {t:"il y a 5 h", txt:"<b>Sélénith</b> a validé le full succès Kardorim avec Mirelune et Brindille (niv. 20)."},
+  {t:"hier", txt:"<b>Fleur-de-Bwork</b> rejoint l'ascension. Il comptera une fois qu'il aura rattrapé le grimpeur le moins avancé."},
+  {t:"hier", txt:"<b>Nalouette</b> a vaincu le Kardorim (niv. 20)."},
+  {t:"il y a 2 j", txt:"<b>Vieux-Grain</b> fait une pause. Il ne compte plus dans les seuils."}
+];
+let filter = "all";
+const $ = id => document.getElementById(id);
+
+function actifs(){ return players.filter(p => p.actif); }
+function comptes(){ return actifs().filter(p => !p.retard); }
+// Points d'un grimpeur : paliers stricts (pas de 3 sans le 2, pas de 2 sans le 1).
+function points(p){ return p.donjon ? (p.succes ? (p.quetes ? 3 : 2) : 1) : 0; }
+function ptsLabel(p){ const n = points(p); return `${n} pt${n > 1 ? "s" : ""}<small>objectif ${POINTS[p.diff]}</small>`; }
+function status(){
+  const maximum = comptes().reduce((s, p) => s + POINTS[p.diff], 0);
+  const pts = comptes().reduce((s, p) => s + points(p), 0);       // les retardataires ne comptent pas
+  const seuil = Math.floor((maximum * SEUIL_PCT + 99) / 100);      // arrondi au-dessus, en entiers
+  const parDiff = {easy:0, med:0, hard:0}; comptes().forEach(p => parDiff[p.diff]++);
+  const parPalier = CRITERIA.map(c => actifs().filter(p => points(p) >= c.rang).length);
+  return {maximum, pts, seuil, parDiff, parPalier, pleine: maximum > 0 && pts >= seuil,
+          n: comptes().length, pause: players.filter(p => !p.actif).length, retard: actifs().filter(p => p.retard).length};
+}
+
+function renderClock(){
+  const now = new Date();
+  const target = now < OPEN_FLOOR0 ? OPEN_FLOOR0 : EARLIEST_FLOOR1;
+  $("clockLabel").textContent = now < OPEN_FLOOR0 ? "Ouverture de l'étage 0" : "Étage 1 déblocable au plus tôt";
+  const ms = target - now;
+  if (ms <= 0){ $("clock").textContent = "Ouvert"; $("clockSub").textContent = ""; return; }
+  const d = Math.floor(ms/864e5), h = Math.floor(ms/36e5)%24, m = Math.floor(ms/6e4)%60;
+  $("clock").textContent = `${d} j ${String(h).padStart(2,"0")} h ${String(m).padStart(2,"0")}`;
+  $("clockSub").textContent = target.toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"}) + " à 17 h";
+}
+
+function renderTower(){
+  const allOk = status().pleine;
+  const rows = [];
+  for (let i = 6; i >= 1; i--){
+    const w = 52 + (6 - i) * 7;
+    rows.push(`<div class="floor locked" style="--w:${w}%"><b>${i === 1 && allOk ? "Étage 1" : "?"}</b><span>${i === 1 ? (allOk ? "13 nov." : "scellé") : ""}</span></div>`);
+  }
+  rows.push(`<div class="floor current" style="--w:100%"><b>Étage 0</b><span>Le Seuil</span></div>`);
+  $("floors").innerHTML = rows.join("");
+}
+
+function renderGauges(){
+  const s = status();
+  const pct = s.maximum ? Math.min(100, s.pts / s.maximum * 100) : 0;
+  const manque = Math.max(0, s.seuil - s.pts);
+  const d = s.parDiff;
+  $("gauges").innerHTML = `<div class="gauge ${s.pleine ? "ok" : ""}" style="--c:var(--gold)">
+      <span class="tag">Jauge de l'étage · seuil ${SEUIL_PCT} % du maximum</span>
+      <div class="count">${s.pts}<small> points sur ${s.seuil} requis</small></div>
+      <div class="bar" role="img" aria-label="${s.pts} points sur ${s.seuil} requis, maximum ${s.maximum}"><i style="--p:${pct}%"></i><span class="seuil" style="--s:${SEUIL_PCT}%" data-label="seuil ${s.seuil}"></span></div>
+      <span class="left">${s.pleine ? "Seuil atteint" : `Il en manque ${manque}`}</span>
+      <div class="detail">
+        <span>Maximum <b class="num">${s.maximum}</b> = ${d.hard} Collectionneurs × 3 + ${d.med} Éclaireurs × 2 + ${d.easy} Aventuriers × 1</span>
+        <div class="paliers">${CRITERIA.map((c, i) => `<span class="mark ${s.parPalier[i] ? "done" : ""}" style="--c:var(--${DIFF_KEYS[i]})">Palier ${c.rang} · ${c.court} : <b class="num">${s.parPalier[i]}</b></span>`).join("")}</div>
+      </div>
+    </div>`;
+  const early = new Date() < EARLIEST_FLOOR1;
+  const v = $("verdict");
+  v.className = "verdict" + (s.pleine ? " open" : "");
+  const base = `${s.n} grimpeurs comptés${s.pause ? `, ${s.pause} en pause` : ""}${s.retard ? `, ${s.retard} retardataire${s.retard > 1 ? "s" : ""} (pas compté tant qu'il n'a pas rattrapé le moins avancé)` : ""}.`;
+  v.innerHTML = !s.maximum ? "Aucun grimpeur compté."
+    : s.pleine
+    ? `<b>Le seuil est atteint.</b> ${early ? "Un admin pourra ouvrir l'étage 1 le vendredi 13 novembre à 17 h, pas avant." : "Un admin peut ouvrir l'étage 1."} ${base}`
+    : `L'étage 1 s'ouvre quand la jauge atteint le seuil, et pas avant le vendredi 13 novembre à 17 h. ${base}`;
+}
+
+function renderHelp(){
+  const a = actifs(), atCap = p => p.lvl >= CAP - 1 && p.lvl <= CAP;
+  const items = [];
+  const succesTeam = a.filter(p => p.donjon && !p.succes && atCap(p));
+  if (succesTeam.length) items.push(`<b>Full succès Kardorim</b> : ${succesTeam.map(p => p.pseudo).join(", ")} ont battu le donjon mais pas tous les succès. Brindille, Sélénith et Mirelune l'ont déjà fait et peuvent les accompagner.`);
+  const donjonTeam = a.filter(p => !p.donjon && atCap(p));
+  const toLevel = a.filter(p => !p.donjon && p.lvl < CAP - 1);
+  if (donjonTeam.length) items.push(`<b>Kardorim</b> : ${donjonTeam.map(p => p.pseudo).join(", ")} sont au cap et peuvent le tenter.`);
+  if (toLevel.length) items.push(`<b>En montée</b> : ${toLevel.map(p => `${p.pseudo} (niv. ${p.lvl})`).join(", ")} doivent encore atteindre le cap.`);
+  const over = a.filter(p => p.lvl > CAP && !p.donjon);
+  if (over.length) items.push(`<span class="over">Au-dessus du cap</span> : ${over.map(p => `${p.pseudo} (niv. ${p.lvl})`).join(", ")}. Un admin jugera s'il s'agit d'un dépassement involontaire.`);
+  $("help").innerHTML = items.map(i => `<li>${i}</li>`).join("") || "<li>Tout le monde a fait sa part sur cet étage.</li>";
+}
+
+function renderFilters(){
+  const opts = [["all","Tous"], ...Object.entries(DIFF).map(([k,d]) => [k, d.pluriel])];
+  $("filters").innerHTML = opts.map(([k,l]) => {
+    const n = k === "all" ? players.length : players.filter(p => p.diff === k).length;
+    return `<button class="chip" data-f="${k}" aria-pressed="${filter === k}">${l} <span class="num">${n}</span></button>`;
+  }).join("");
+}
+
+function renderRoster(){
+  const list = players.filter(p => filter === "all" || p.diff === filter)
+    .sort((a,b) => (b.actif - a.actif) || a.pseudo.localeCompare(b.pseudo, "fr"));
+  $("roster").innerHTML = list.map(p => {
+    const d = DIFF[p.diff], over = p.lvl > CAP;
+    return `<button class="player ${p.actif ? "" : "paused"}" style="--c:${d.c}" data-id="${p.id}">
+      <div class="ptop"><strong>${p.pseudo}</strong><span class="diff">${d.nom}</span></div>
+      <div class="meta"><span>${p.classe}</span><span>${!p.actif ? "En pause" : p.retard ? "Rattrape le groupe" : "Actif"}</span></div>
+      <div class="lvl">
+        <div class="meta"><span class="num ${over ? "over" : ""}">Niv. ${p.lvl} / ${CAP}</span>${over ? `<span class="over">Dépasse le cap</span>` : ""}</div>
+        <div class="bar"><i style="--p:${Math.min(100, p.lvl / CAP * 100)}%"></i></div>
+      </div>
+      <div class="foot">
+        <div class="marks">${CRITERIA.map(c => `<span class="mark ${p[c.key] ? "done" : ""}">${c.court}</span>`).join("")}</div>
+        <span class="pts">${ptsLabel(p)}</span>
+      </div>
+    </button>`;
+  }).join("");
+}
+
+const CLASSES = ["Féca","Osamodas","Enutrof","Sram","Xélor","Ecaflip","Eniripsa","Iop","Crâ","Sadida","Sacrieur","Pandawa","Roublard","Zobal","Steamer","Eliotrope","Huppermage","Ouginak","Forgelance"];
+function renderClasses(){
+  const a = actifs(), max = Math.max(1, ...CLASSES.map(c => a.filter(p => p.classe === c).length));
+  const rows = CLASSES.map(c => [c, a.filter(p => p.classe === c).length]).sort((x, y) => y[1] - x[1] || x[0].localeCompare(y[0], "fr"));
+  $("classes").innerHTML = rows.map(([c, n]) => `<div class="cl ${n ? "" : "none"}"><span>${c}</span><span class="num">${n}</span><div class="bar"><i style="--p:${n / max * 100}%"></i></div></div>`).join("");
+  const absentes = rows.filter(r => !r[1]).length;
+  $("classesNote").textContent = `${absentes} classe${absentes > 1 ? "s" : ""} encore absente${absentes > 1 ? "s" : ""} du groupe`;
+}
+
+function renderFeed(fresh){
+  $("feed").innerHTML = feed.map((f,i) => `<li class="${fresh && i === 0 ? "fresh" : ""}"><time>${f.t}</time><span>${f.txt}</span></li>`).join("");
+}
+
+function openSheet(id){
+  const p = players.find(x => x.id === id), d = DIFF[p.diff];
+  const admin = $("adminMode").checked, over = p.lvl > CAP;
+  $("sheetBody").style.setProperty("--c", d.c);
+  $("sheetBody").innerHTML = `
+    <div class="row"><div><div class="eyebrow" style="color:${d.c}">${d.nom}</div><h3>${p.pseudo}</h3></div>
+      <button class="btn" data-close>Fermer</button></div>
+    <div class="meta"><span>${p.classe}</span><span class="num ${over ? "over" : ""}">Niveau ${p.lvl}, cap ${CAP}</span><span>${!p.actif ? "En pause" : p.retard ? "Rattrape le groupe" : "Actif"}</span><span class="pts">${ptsLabel(p)}</span></div>
+    <div class="checks">${CRITERIA.map(c => `
+      <div class="check ${p[c.key] ? "done" : ""}">
+        <span>Palier ${c.rang} · ${c.titre}<small>${p[c.key] ? (c.key === "quetes" ? "Déclaré par le joueur" : "Validé par un admin") : "Pas encore fait"}</small></span>
+        ${admin && !p[c.key] ? `<button class="btn primary" data-validate="${c.key}" ${!p.actif ? "disabled" : ""}>${over ? "Valider malgré le dépassement" : "Valider"}</button>` : ""}
+      </div>`).join("")}
+    </div>
+    ${admin && over ? `<p class="note warn">Niveau au-dessus du cap : le bot le signale, l’admin tranche (dépassement involontaire ou non).</p>` : ""}
+    ${admin && !p.actif ? `<p class="note">Grimpeur en pause : réactive-le pour valider.</p>` : ""}
+    ${admin ? `<button class="btn" data-pause>${p.actif ? "Mettre en pause" : "Réactiver"}</button>`
+            : `<p class="note">Active le mode admin, en bas de page, pour simuler une validation et voir les jauges bouger.</p>`}`;
+  $("sheet").dataset.id = id;
+  if (!$("sheet").open) $("sheet").showModal();
+}
+
+function validate(p, key){
+  p[key] = true;
+  if (key === "succes") p.donjon = true;   // le full succès implique d'avoir vaincu le donjon
+  const c = CRITERIA.find(x => x.key === key);
+  const before = feed.length;
+  feed.unshift({t:"à l'instant", txt: key === "quetes" ? `<b>${p.pseudo}</b> a déclaré avoir terminé toutes les quêtes d'Incarnam.` : `<b>${p.pseudo}</b> : ${c.titre.charAt(0).toLowerCase() + c.titre.slice(1)}, validé (niv. ${p.lvl}).`});
+  renderAll(before !== feed.length);
+}
+
+function renderAll(fresh){ renderTower(); renderGauges(); renderHelp(); renderFilters(); renderRoster(); renderClasses(); renderFeed(fresh); }
+
+$("filters").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (!b) return; filter = b.dataset.f; renderFilters(); renderRoster(); });
+$("roster").addEventListener("click", e => { const b = e.target.closest("[data-id]"); if (b) openSheet(+b.dataset.id); });
+$("sheet").addEventListener("click", e => {
+  const dlg = $("sheet"), p = players.find(x => x.id === +dlg.dataset.id);
+  if (e.target === dlg || e.target.closest("[data-close]")) return dlg.close();
+  const v = e.target.closest("[data-validate]");
+  if (v){ validate(p, v.dataset.validate); openSheet(p.id); return; }
+  if (e.target.closest("[data-pause]")){
+    p.actif = !p.actif;
+    if (p.actif) p.retard = true;          // au retour de pause, il doit rattraper le moins avancé
+    feed.unshift({t:"à l'instant", txt:`<b>${p.pseudo}</b> ${p.actif ? "reprend l'ascension. Il comptera de nouveau une fois le groupe rattrapé." : "fait une pause. Il ne compte plus dans la jauge."}`});
+    renderAll(true); openSheet(p.id);
+  }
+});
+
+renderClock(); setInterval(renderClock, 30000);
+renderAll(false);
+</script>
