@@ -1,0 +1,43 @@
+# Tests à chaque push : domaine (couverture 100 % exigée), base, bot, site ; analyse des secrets.
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: epreuve_test
+        ports: ["54329:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgresql+asyncpg://postgres:test@localhost:54329/epreuve_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --frozen
+      - name: Style
+        run: uv run ruff check .
+      - name: Tests et couverture du module de règles
+        run: uv run pytest --cov=epreuve.domaine --cov-branch --cov-report=term-missing --cov-fail-under=100
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Aucun secret dans les fichiers suivis
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

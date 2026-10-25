@@ -1,0 +1,21 @@
+# Environnement Python
+.venv/
+__pycache__/
+*.py[cod]
+
+# Outils de test et de qualité
+.pytest_cache/
+.hypothesis/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Secrets : jamais dans le dépôt (voir .env.example)
+.env
+.env.*
+!.env.example
+
+# Divers
+.DS_Store
+*.dump

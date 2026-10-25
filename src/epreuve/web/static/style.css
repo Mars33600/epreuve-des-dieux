@@ -1,0 +1,148 @@
+/* L'Épreuve des Dieux : style tiré de docs/maquette-v1.html (version jauge unique à points).
+   Mise en page : la tour à gauche (on la gravit), l'étage en cours et ses grimpeurs à droite.
+   Écarts voulus avec la maquette : pas de mode admin, section « Les classes de la guilde » ajoutée. */
+:root{
+  --bg:#e7eaf1; --surface:#f7f8fb; --sunken:#dde2eb; --ink:#1b2133; --muted:#5a6276; --line:#c6ccd9;
+  --gold:#9a6a0c; --gold-wash:rgba(176,124,20,.14);
+  --easy:#257a5a; --med:#2a63a6; --hard:#83379f; --warn:#a9481f;
+  --f-display:"Alegreya SC",Georgia,serif; --f-body:"Alegreya Sans",system-ui,sans-serif; --f-data:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f131d; --surface:#171d2b; --sunken:#0b0e16; --ink:#e5e8f1; --muted:#97a0b5; --line:#2a3245;
+  --gold:#e2b04a; --gold-wash:rgba(226,176,74,.13);
+  --easy:#5cc79c; --med:#6ea8ec; --hard:#c58ce0; --warn:#ee8a5c; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f131d; --surface:#171d2b; --sunken:#0b0e16; --ink:#e5e8f1; --muted:#97a0b5; --line:#2a3245;
+  --gold:#e2b04a; --gold-wash:rgba(226,176,74,.13);
+  --easy:#5cc79c; --med:#6ea8ec; --hard:#c58ce0; --warn:#ee8a5c; color-scheme:dark}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--f-body);overflow-wrap:anywhere}
+a{color:var(--gold)}
+.wrap{max-width:1180px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:24px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.1}
+.eyebrow{font:500 12px/1 var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+[hidden]{display:none !important}
+
+.demo{font-size:14px;color:var(--muted);border:1px dashed var(--gold);border-radius:6px;padding:8px 12px;background:var(--gold-wash)}
+.demo strong{color:var(--ink)}
+.alerte{font-size:15px;border:1px solid var(--warn);color:var(--warn);border-radius:6px;padding:8px 12px}
+
+/* En-tête */
+header{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:flex-end;justify-content:space-between}
+header h1{font-size:clamp(34px,6vw,56px);font-weight:800;letter-spacing:.01em}
+header h1 span{color:var(--gold)}
+.sub{color:var(--muted);margin-top:6px}
+.clock{display:grid;gap:4px;text-align:right}
+.clock strong{font:500 26px/1 var(--f-data);font-variant-numeric:tabular-nums}
+@media (max-width:520px){.clock{text-align:left}}
+
+.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:minmax(0,1fr)}}
+.colonne{display:grid;gap:24px;min-width:0}
+.pile{display:grid;gap:14px}
+.titre-section{font-size:24px}
+
+/* La tour */
+.tower{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:grid;gap:10px}
+@media (max-width:860px){.tower{position:static}}
+.floors{display:flex;flex-direction:column;align-items:center;gap:4px;padding:18px 0 0;position:relative}
+.floors::before{content:"";position:absolute;inset:0 0 auto;height:45%;background:linear-gradient(var(--bg),transparent);pointer-events:none;z-index:1}
+.floor{width:var(--w);border:1px solid var(--line);background:var(--surface);border-radius:3px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.floor.locked{background:transparent;border-style:dashed}
+.floor.current{border-color:var(--gold);background:var(--gold-wash);color:var(--ink);box-shadow:0 0 0 3px var(--gold-wash)}
+.floor.current b{color:var(--gold)}
+.floor b{font-family:var(--f-display);font-weight:700}
+.base{width:100%;height:10px;background:var(--line);border-radius:2px}
+.tower p{margin:0;font-size:14px;color:var(--muted)}
+
+/* Carte de l'étage */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;display:grid;gap:16px;min-width:0}
+@media (max-width:400px){.card{padding:16px}}
+.floorhead{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:baseline}
+.floorhead h2{font-size:30px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 20px;color:var(--muted);font-size:15px}
+.facts b{color:var(--ink);font-weight:700}
+.gauges{display:grid;gap:14px}
+.gauge{border:1px solid var(--line);border-radius:6px;padding:14px;display:grid;gap:8px;background:var(--bg)}
+.gauge.ok{border-color:var(--c)}
+.gauge .tag{font:500 11px/1.3 var(--f-data);letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+.gauge .count{font:500 28px/1 var(--f-data);font-variant-numeric:tabular-nums}
+.gauge .count small{font-size:14px;color:var(--muted)}
+.bar{height:8px;border-radius:4px;background:var(--sunken);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;width:var(--p);background:var(--c);border-radius:4px;transition:width .5s ease}
+/* La jauge unique : plus haute, et un repère vertical au seuil (75 % du maximum). */
+.gauge .bar{height:14px;border-radius:7px;overflow:visible;margin-top:18px}
+.bar .seuil{position:absolute;top:-4px;bottom:-4px;left:var(--s);width:2px;background:var(--ink)}
+.bar .seuil::after{content:attr(data-label);position:absolute;top:-18px;right:4px;font:500 11px/1 var(--f-data);color:var(--muted);white-space:nowrap}
+.gauge .left{font-size:14px;color:var(--muted)}
+.gauge.ok .left{color:var(--c);font-weight:700}
+.detail{display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.detail b{color:var(--ink)}
+.paliers{display:flex;flex-wrap:wrap;gap:6px}
+.pts{font:500 13px/1 var(--f-data);color:var(--c)}
+.verdict{border-radius:6px;padding:12px 14px;background:var(--sunken);font-size:15px}
+.verdict.open{background:var(--gold-wash);color:var(--ink);border:1px solid var(--gold)}
+
+/* Les classes de la guilde : une liste lisible, pas un graphique */
+.note{font-size:14px;color:var(--muted);margin:4px 0 0}
+.classes{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.classe{border:1px solid var(--line);border-radius:6px;padding:8px 10px;display:grid;gap:2px;background:var(--bg)}
+.classe b{font-weight:700}
+.classe .combien{font:500 15px/1.3 var(--f-data)}
+.classe small{font-size:12px;color:var(--muted)}
+.classe.vide{border-style:dashed;border-color:var(--gold);background:transparent}
+.classe.vide .combien{font:italic 500 14px/1.3 var(--f-body);color:var(--gold)}
+
+/* Grimpeurs */
+.rosterhead{display:flex;flex-wrap:wrap;gap:10px 16px;justify-content:space-between;align-items:center}
+.rosterhead h2{font-size:26px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:4px 12px;font-size:14px}
+.chip[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));gap:12px}
+.player{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;display:grid;gap:10px;border-left:4px solid var(--c);min-width:0}
+.player:hover{border-color:var(--c)}
+.player:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.player.paused{opacity:.6}
+.ptop{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.ptop strong{font:700 18px/1.2 var(--f-display);overflow-wrap:anywhere;min-width:0}
+.diff{font:500 11px/1 var(--f-data);letter-spacing:.05em;text-transform:uppercase;color:var(--c);white-space:nowrap}
+.meta{font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px}
+.lvl{display:grid;gap:4px}
+.lvl .bar{height:6px}
+.lvl .bar i{background:var(--gold)}
+.over{color:var(--warn);font-weight:700}
+.marks{display:flex;gap:6px;flex-wrap:wrap}
+.mark{font-size:12px;border-radius:4px;padding:2px 7px;border:1px solid var(--line);color:var(--muted)}
+.mark.done{border-color:var(--c);color:var(--c);font-weight:700}
+.vide-liste{color:var(--muted);font-size:15px;margin:0}
+
+/* Fil des validations */
+.feed{margin:0;padding:0;list-style:none;display:grid}
+.feed li{display:grid;grid-template-columns:92px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.feed li:first-child{border-top:0}
+.feed time{font:500 13px/1.5 var(--f-data);color:var(--muted)}
+.feed li.fresh{animation:fresh 1.6s ease}
+@keyframes fresh{from{background:var(--gold-wash)}to{background:transparent}}
+
+/* Fiche joueur, en lecture seule */
+dialog{border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:0;width:min(460px,calc(100vw - 32px))}
+dialog::backdrop{background:rgba(10,12,20,.55)}
+.sheet{padding:20px;display:grid;gap:14px}
+.sheet h3{font-size:26px}
+.checks{display:grid;gap:8px}
+.check{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.check.done{border-color:var(--c)}
+.check small{display:block;color:var(--muted);font-size:13px}
+.check .etat{font:500 12px/1 var(--f-data);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.check.done .etat{color:var(--c)}
+.btn{border:1px solid var(--line);background:var(--bg);border-radius:6px;padding:6px 12px;font-size:14px}
+.row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}.feed li.fresh{animation:none}}
