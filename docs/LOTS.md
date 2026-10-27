@@ -633,6 +633,68 @@ blocs:
 
 ---
 
+### Addendum B0 : relevé du schéma Duffus (28/10/2026)
+
+**Fait par le dev B1, à valider par l'architecte** (qui fige `duffus/schema.py`). Relevé : `donnees/duffus/schema-2026-10-28.json` (9 requêtes ; l'OpenAPI de PostgREST est fermée, le relevé s'est fait par une ligne de chaque table). Aspiration des étages 0 et 1 : `donnees/duffus/2026-10-28/`, 10 requêtes, aucun refus. Les colonnes retenues sont dans `src/epreuve/duffus/schema.py`. Les images (stockage Duffus) ne sont jamais recopiées.
+
+**Colonnes utiles.**
+
+| Table Duffus | Fichier | Lignes | Colonnes retenues | Rôle |
+|---|---|---|---|---|
+| `guide_ranges` | `guide_ranges.json` | 24 | id, order_index, range_key, label, title, is_active, dungeon_count, **categories** | Les tranches. `categories` = les **blocs** du guide, chacun avec ses `items` dans l'ordre : `quest` (id → `quest_list.id`), `monster_success`, `tip`. |
+| `quest_list` | `quest_list.json` | 1 205 | id, title, url, level, category, Order, **quest_ornot**, own_page, zone, pnj, pos, note, note2, succes, **is_dungeon**, dungeon_info, **dungeons**, **dofus_id** | Les entrées du guide. `url` = `/quete/<slug>` (fiche Duffus), `/guide/<dofus>` ou un site externe. |
+| `quest_pages` | `quest_pages.json` (étages 0-1) et `quest_prereqs.json` (toutes, colonnes légères) | 69 / 616 | slug, published, status, meta (titre, niveau, zone, PNJ de départ, coordonnées), prereqs, **prereq_quests**, rewards, manual_resources, steps, **content_html** | Les fiches. Rattachées par `slug` = fin de `quest_list.url`. |
+| `dungeon_pages` | `dungeon_pages.json` | 127 | id, slug, published, meta (title, bossName, level, zone, coords, dofusMonsterId), **successes**, linked_quests | Les donjons. `successes` = `challenge1`, `challenge2`, `special` (nom, règle). |
+| `achievements` | `achievements.json` | 1 017 (sur 2 781) | id, name, description, category_id, level, order | Copie des succès du jeu ; seuls ceux « … dans son donjon … » sont gardés. |
+| `dofus_list` | `dofus_list.json` | 26 | id, nom, quest_id, advised_level | Les Dofus ; `quest_id` → l'entrée `quest_list` qui fait obtenir le Dofus. |
+
+Non retenues : `achievement_objectives` (les descriptions de `achievements` suffisent) et `monsters` (ni icône ni lien utiles : les icônes viendront de DofusDB).
+
+**Rattachement aux tranches.** Étage N = la (N+1)-ième tranche active par `order_index` (24 tranches, de « 1-20 » à « 200-7 », donc **étages 0 à 23**, et non 0 à 25). Le contenu d'un étage est la liste des `items` de ses blocs :
+- **quêtes** : les items `quest` dont l'entrée a `quest_ornot` vrai. Les autres entrées sont des **rappels** du guide (« Lancez la quête X », « Allez voir Rathrosk … ») : elles ne sont pas des quêtes à cocher, et leur texte est la meilleure source de « jusqu'où » pour la quête nommée (à valider) ;
+- **donjons** : ceux que nomme une entrée du bloc (`dungeons[].url` = `/donjon/<slug>` → `dungeon_pages.slug`), ce qui suit DECISIONS-V4 §12 Q2 (« ceux que duffus.fr rattache à la tranche »). Le compte retrouve `dungeon_count` sur les deux étages ;
+- les items `monster_success` et `tip` ne sont pas du contenu cochable.
+
+| | Étage 0 (1-20) | Étage 1 (20-40) |
+|---|---|---|
+| Blocs | 2 (« Quêtes du tutoriel », « Quêtes d'Incarnam ») | 2 (« Quêtes d'Astrub et obtention du Dofus Argenté », « Quêtes pour débloquer la Diligence d'Astrub et l'accès à Pandala ») |
+| Quêtes | 27 | 43 (+ 6 rappels, 11 `monster_success`) |
+| Fiches Duffus | 27/27 | 42/43 (« Quête de classe » renvoie vers un site externe) |
+| Donjons (`dungeon_count`) | 1 (1) : Crypte de Kardorim | 4 (4) : Grange du Tournesol Affamé, Château Ensablé, Cour du Bouftou Royal, Cache de Kankreblath |
+| Succès de donjon trouvés chez Duffus | 5/5 | 5/5 pour chacun des 4 |
+
+**Case « classique ».** Les 5 succès d'un donjon se trouvent dans `achievements` (T-02 : source Duffus) :
+- la **classique** est le succès dont le `name` est exactement `meta.title` du donjon (« Crypte de Kardorim ») et dont la description ne contient pas `[challenge,` (« Vaincre Kardorim dans son donjon. ») ;
+- les **4 autres** sont les succès de la même `category_id` dont le nom commence par `meta.bossName + " ("` et dont la description contient `[challenge,`, sans « (Compagnon) ». Ordre : la classique, « (Duo) », puis les autres par `order` ;
+- couverture sur les 127 donjons : **102 donnent exactement 5**, 7 en donnent 6 (un défi de plus, alerte), 6 n'en donnent qu'un (bossName différent du nom des succès) et 12 n'ont pas de classique au nom exact. Ces 18 derniers passent par le repli DofusDB, avec une alerte. Les 5 donjons des étages 0 et 1 sont tous dans le premier cas.
+- les noms de défi de `dungeon_pages.successes` (« Collant », « Premier ») et la règle du « special » complètent la condition affichée.
+
+**Chaînes vers les Dofus : point bloquant pour la nature.** `dofus_list.quest_id` et `quest_list.dofus_id` ne désignent que l'entrée d'**obtention** (« Allez voir Rathrosk … »), dont l'`url` est `/guide/<dofus>` : le **guide par Dofus lui-même n'est dans aucune des 8 tables connues**, et l'entrée d'obtention n'a pas de fiche, donc pas de prérequis. `quest_pages.prereq_quests` donne bien des prérequis de quête à quête (448 fiches sur 616, 526 liens, 13 hors du guide), ce qui permet la **fermeture** une fois les racines connues. En l'état, **aucune quête des étages 0 et 1 ne peut être classée principale à partir des seules données Duffus**. Trois issues, à trancher par l'architecte et Marceau (DECISIONS-V4 §12 interdit la supposition) :
+1. trouver dans le code public du site la table des guides par Dofus, puis l'ajouter au relevé ;
+2. prendre comme racines les quêtes des blocs « … obtention du Dofus X » (c'est une lecture du guide, pas une donnée explicite) ;
+3. repli DofusDB pour la nature (ARCHITECTURE §6.7), marqué « dofusdb ».
+En attendant, la construction classe tout en secondaire avec l'alerte « nature non déterminée », et l'admin corrige dans la revue.
+
+**Contenu des fiches** (69 fiches des étages 0 et 1). L'essentiel est dans `content_html`, structuré par classes CSS stables. Correspondance avec `FicheQuete` :
+
+| Champ de `FicheQuete` | Source Duffus | Fiches qui l'ont (ét. 0 / ét. 1) |
+|---|---|---|
+| étapes | blocs `div.qstep` (dialogue, move, marche, clique, combat, craft, text) de `content_html` ; `steps` est toujours vide | 27/27 · 42/42 |
+| objectif (en tête) | `div.qk-card.info` | presque toutes |
+| positions | `.qpos` ; `meta.startNpc` + `meta.startCoords` | 21 · 41 |
+| objets | blocs « à prévoir » (`.prevoir-qty`) ; `manual_resources` (1 seule fiche) | 7 · 5 |
+| monstres | `.mob-stats-card` / `.combat-line` | 10 · 28 |
+| prérequis | `prereq_quests` (JSON en texte : titre + `/quete/<slug>`) ; `prereqs` (texte libre) | 18 · 24 |
+| récompenses | `rewards` : xp, kamas, items (qté, nom), others | 27 · 41 |
+| succès lié | `quest_list.succes` (noms) | 25 · 41 |
+| « jusqu'où », « à lier » | aucune colonne dédiée : `note`/`note2` de l'entrée, et les rappels « Lancez la quête … » | — |
+
+Toutes les fiches contiennent des `<img>` (stockage Duffus), et 51 sur 69 des liens internes (`/monstre/…`, `/objet/…`, `/quete/…`, `/donjon/…`) : `nettoyer_fiche` retire les images et les liens, sauf les `/quete/<slug>` d'une quête d'un étage visible, réécrits vers notre fiche.
+
+**Écarts avec la spec.** 24 tranches (étages 0 à 23) au lieu de 26 ; guides par Dofus absents des tables connues (ci-dessus) ; « jusqu'où » et « à lier » sans colonne dédiée ; les fiches complètes ne sont aspirées que pour les étages demandés (`--etages`), les prérequis pour toutes les quêtes.
+
+---
+
 ## Traçabilité des exigences (EXIGENCES.md → lots)
 
 Le détail exigence par exigence, avec la section de spec, est dans **SPEC, annexe A**. En résumé :
