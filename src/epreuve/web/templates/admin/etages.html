@@ -1,0 +1,15 @@
+{% extends "site.html" %}
+{% block titre %}Admin · Étages{% endblock %}
+{% block page %}
+<section class="card" aria-labelledby="etagesTitre">
+  <div class="eyebrow">Admin</div>
+  <h2 id="etagesTitre">Les étages</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Étage</th><th>Nom</th><th>Tranche</th><th>Cap</th><th>Statut</th></tr></thead>
+    <tbody>{% for e in etages %}
+      <tr><td><a href="/admin/etages/{{ e.numero }}">Étage {{ e.numero }}</a></td><td>{{ e.nom }}</td><td>{{ e.niveau_min }} à {{ e.niveau_max }}</td><td class="num">{{ e.level_cap }}</td>
+        <td>{{ {"scelle": "Scellé", "ouvert": "Ouvert", "termine": "Terminé"}[e.statut] }}</td></tr>
+    {% endfor %}</tbody>
+  </table></div>
+</section>
+{% endblock %}

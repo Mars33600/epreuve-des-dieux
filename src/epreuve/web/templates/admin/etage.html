@@ -1,0 +1,105 @@
+{% extends "site.html" %}
+{% block titre %}Admin · Étage {{ etage.numero }}{% endblock %}
+{% block page %}
+{% macro csrf() %}<input type="hidden" name="csrf" value="{{ v.csrf }}"><input type="hidden" name="etage" value="{{ etage.numero }}">{% endmacro %}
+<section class="card" aria-labelledby="revueTitre">
+  <div class="eyebrow">Admin · Étage {{ etage.numero }} ({{ {"scelle": "scellé", "ouvert": "ouvert", "termine": "terminé"}[etage.statut] }})</div>
+  <h2 id="revueTitre">{{ etage.nom }}</h2>
+  {% if message %}<p class="succes-msg" role="status">{{ message }}</p>{% endif %}
+  {% if erreur %}<p class="alerte" role="alert">{{ erreur }}</p>{% endif %}
+  {% if alertes or sans_fiche %}
+  <div class="alerte"><b>Alertes de la dernière construction</b>
+    <ul>{% for a in alertes %}<li>{{ a }}</li>{% endfor %}
+      {% if sans_fiche %}<li>{{ sans_fiche|length }} quête(s) sans fiche Duffus : {{ sans_fiche|map(attribute="nom")|join(", ") }}.</li>{% endif %}</ul></div>
+  {% endif %}
+  <p><a href="/etages/{{ etage.numero }}">Voir l'étage tel que les grimpeurs le verront</a></p>
+  <form method="post" action="/admin/etages/{{ etage.numero }}/reglages" class="formrow">{{ csrf() }}
+    <div class="champ"><label for="nom">Nom</label><input type="text" id="nom" name="nom" value="{{ etage.nom }}"></div>
+    <div class="champ"><label for="ambiance_url">Image d'ambiance (création originale, https)</label><input type="url" id="ambiance_url" name="ambiance_url" value="{{ etage.ambiance_url or '' }}"></div>
+    <div class="champ"><label for="level_cap">Level cap</label><input type="number" id="level_cap" name="level_cap" min="1" max="200" value="{{ etage.level_cap }}"></div>
+    <button class="btn or" type="submit">Enregistrer</button>
+  </form>
+</section>
+
+{% if etage.statut == "ouvert" %}
+<section class="card" aria-labelledby="ouvTitre">
+  <h2 id="ouvTitre">Jauge et ouverture</h2>
+  <p>Score <b class="num">{{ vue.jauge.score }}</b> sur un palier de <b class="num">{{ vue.jauge.palier }}</b>{% if vue.jauge.palier_manuel %} (palier fixé par un admin){% endif %} · {{ vue.jauge.actifs }} actifs, {{ vue.jauge.en_pause }} en pause.</p>
+  <div class="formrow">
+    <form method="post" action="/admin/etages/{{ etage.numero }}/palier" class="formrow">{{ csrf() }}
+      <div class="champ"><label for="palier">Palier manuel (vide = la formule)</label><input type="number" id="palier" name="palier" min="1" value="{{ etage.palier_manuel or '' }}"></div>
+      <div class="champ"><label for="motifPalier">Motif (obligatoire)</label><input type="text" id="motifPalier" name="motif" required></div>
+      <button class="btn" type="submit">Régler le palier</button>
+    </form>
+    <form method="post" action="/admin/etages/{{ etage.numero }}/date-plancher" class="formrow">{{ csrf() }}
+      <div class="champ"><label for="date">Date plancher de l'étage suivant (heure de Paris)</label><input type="datetime-local" id="date" name="date" value="{{ plancher_local }}"></div>
+      <button class="btn" type="submit">Régler la date</button>
+    </form>
+  </div>
+  <h3 class="section-title">Détail par grimpeur</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Grimpeur</th><th>Statut</th>{% for info in CATS %}<th>{{ info.court }}</th>{% endfor %}<th>Points</th><th>Dernière activité</th></tr></thead>
+    <tbody>{% for g, cats, pts in detail %}
+      <tr><td><a href="/grimpeurs/{{ g.id }}">{{ g.pseudo }}</a></td><td>{{ g.statut }}</td>
+        {% for info in CATS %}{% set e = cats[info.cle] %}<td class="num">{{ e.faits }}/{{ e.total }}{% if e.acquise %} ✓{% endif %}</td>{% endfor %}
+        <td class="num">{{ pts }}</td><td>{{ activites.get(g.id)|heure_paris }}</td></tr>
+    {% endfor %}</tbody>
+  </table></div>
+  {% if prochain %}
+  <form method="post" action="/admin/etages/{{ prochain.numero }}/ouvrir">{{ csrf() }}
+    <button class="btn or" type="submit"{% if not decision.ok %} disabled{% endif %}>Ouvrir le prochain étage (étage {{ prochain.numero }})</button>
+  </form>
+  {% endif %}
+  {% if decision.raisons %}<ul class="raisons">{% for r in decision.raisons %}<li>{{ r }}</li>{% endfor %}</ul>{% endif %}
+  {% if prochain and not decision.ok %}
+  <details class="force"><summary class="linkbtn">Forcer l'ouverture (cas exceptionnel)</summary>
+    <form method="post" action="/admin/etages/{{ prochain.numero }}/ouvrir" class="formrow">{{ csrf() }}<input type="hidden" name="forcer" value="oui">
+      <div class="champ"><label for="motifForce">Motif (obligatoire, inscrit au journal)</label><input type="text" id="motifForce" name="motif" required></div>
+      <button class="btn danger" type="submit">Forcer l'ouverture</button>
+    </form></details>
+  {% endif %}
+</section>
+{% endif %}
+{% if bilan %}<section class="card"><h2>Bilan figé</h2><p>Le {{ bilan.fige_le|date_paris }} : score {{ bilan.score }} sur {{ bilan.palier }}, {{ bilan.actifs }} actifs.{% if bilan.force %} <b class="alerte">Ouverture forcée : {{ bilan.motif }}</b>{% endif %}</p></section>{% endif %}
+
+<section class="card" aria-labelledby="donjonsTitre">
+  <h2 id="donjonsTitre">Donjons</h2>
+  {%- for d in donjons %}
+  <div class="dj">
+    <header>{{ d.nom }} <span class="cnt">niv. {{ d.niveau or "?" }} · {{ "proposé" if d.origine == "propose" else "ajouté par un admin" }} · succès : {{ "Duffus" if d.succes_source == "duffus" else "DofusDB" }}{% if d.masque %} · masqué{% endif %}</span></header>
+    <form method="post" action="/admin/donjons/{{ d.id }}" class="inline">{{ csrf() }}<input type="text" name="nom" value="{{ d.nom }}" aria-label="Nom du donjon"><button class="btn" type="submit">Renommer</button></form>
+    <form method="post" action="/admin/donjons/{{ d.id }}" class="inline">{{ csrf() }}<input type="hidden" name="masque" value="{{ 'non' if d.masque else 'oui' }}"><button class="btn" type="submit">{{ "Démasquer" if d.masque else "Masquer (retirer de l'étage)" }}</button></form>
+    <ul class="ticks">{% for c in cases[d.id] %}
+      <li><form method="post" action="/admin/cases/{{ c.id }}" class="inline">{{ csrf() }}<span class="num">{{ c.ordre }}{% if c.est_classique %} ★{% endif %}</span>
+        <input type="text" name="nom" value="{{ c.nom }}" aria-label="Libellé"><input type="text" name="condition" value="{{ c.condition }}" aria-label="Condition"><button class="btn" type="submit">Corriger</button></form>
+        <form method="post" action="/admin/cases/{{ c.id }}" class="inline">{{ csrf() }}<input type="hidden" name="masquee" value="{{ 'non' if c.masquee else 'oui' }}"><button class="btn" type="submit">{{ "Démasquer" if c.masquee else "Masquer" }}</button></form></li>
+    {% endfor %}</ul>
+  </div>
+  {%- endfor %}
+  {% if disponibles %}
+  <form method="post" action="/admin/etages/{{ etage.numero }}/donjons" class="formrow">{{ csrf() }}
+    <div class="champ"><label for="duffus_id">Ajouter un donjon aspiré (T-03)</label>
+      <select id="duffus_id" name="duffus_id">{% for did, nom, niv in disponibles %}<option value="{{ did }}">{{ nom }}{% if niv %} (niv. {{ niv }}){% endif %}</option>{% endfor %}</select></div>
+    <button class="btn" type="submit">Ajouter</button>
+  </form>
+  {% endif %}
+</section>
+
+<section class="card" aria-labelledby="quetesTitre">
+  <h2 id="quetesTitre">Quêtes</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Quête</th><th>Bloc</th><th>Nature</th><th>Actions</th></tr></thead>
+    <tbody>{% for q in quetes %}
+      <tr><td>{{ q.nom }}<br><span class="muted">niv. {{ q.niveau or "?" }}{% if not q.a_une_fiche %} · sans fiche Duffus{% endif %}{% if q.masquee %} · masquée{% endif %}</span></td>
+        <td>{{ q.bloc }}</td><td>{{ q.nature }} <span class="muted">({{ q.nature_origine }})</span></td>
+        <td>
+          <form method="post" action="/admin/quetes/{{ q.id }}" class="inline">{{ csrf() }}
+            <select name="nature" aria-label="Nature"><option value="principale"{% if q.nature == "principale" %} selected{% endif %}>Principale</option><option value="secondaire"{% if q.nature == "secondaire" %} selected{% endif %}>Secondaire</option></select>
+            <input type="text" name="motif" required placeholder="Motif" aria-label="Motif du changement de nature"><button class="btn" type="submit">Changer la nature</button></form>
+          <form method="post" action="/admin/quetes/{{ q.id }}" class="inline">{{ csrf() }}<input type="hidden" name="masquee" value="{{ 'non' if q.masquee else 'oui' }}"><button class="btn" type="submit">{{ "Démasquer" if q.masquee else "Masquer" }}</button></form>
+          <form method="post" action="/admin/quetes/{{ q.id }}" class="inline">{{ csrf() }}<input type="text" name="nom" value="{{ q.nom }}" aria-label="Nom de la quête"><button class="btn" type="submit">Renommer</button></form>
+        </td></tr>
+    {% endfor %}</tbody>
+  </table></div>
+</section>
+{% endblock %}

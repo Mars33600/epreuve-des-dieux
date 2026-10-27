@@ -1,0 +1,29 @@
+{% extends "site.html" %}
+{% block titre %}Créer ma fiche · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<section class="card solo" aria-labelledby="inscrTitre">
+  {% if hors_liste %}
+  <div class="eyebrow">Presque</div>
+  <h2 id="inscrTitre">Tu n'es pas encore inscrit à l'expédition.</h2>
+  <p>Envoie ta validation en MP à Shadoaze. Dès qu'il t'aura ajouté à la liste des grimpeurs, reviens ici.</p>
+  {% else %}
+  <div class="eyebrow">Bienvenue, {{ v.session.nom_discord }}</div>
+  <h2 id="inscrTitre">Créer ma fiche</h2>
+  {% if erreur %}<p class="alerte" role="alert">{{ erreur }}</p>{% endif %}
+  <form method="post" action="/inscription" class="ask">
+    <input type="hidden" name="csrf" value="{{ v.csrf }}">
+    <div class="champ"><label for="pseudo">Pseudo en jeu</label>
+      <input type="text" id="pseudo" name="pseudo" required minlength="2" maxlength="30" value="{{ valeurs.pseudo or '' }}" autocomplete="nickname">
+      <small>2 à 30 caractères, unique (sans tenir compte des majuscules).</small></div>
+    <div class="champ"><label for="classe">Classe{% if not regles.classe_obligatoire %} (facultative){% endif %}</label>
+      <select id="classe" name="classe"{% if regles.classe_obligatoire %} required{% endif %}>
+        <option value="">—</option>
+        {% for c in classes %}<option{% if valeurs.classe == c %} selected{% endif %}>{{ c }}</option>{% endfor %}
+      </select></div>
+    <div class="champ"><label for="niveau">Niveau (facultatif)</label>
+      <input type="number" id="niveau" name="niveau" min="1" max="200" value="{{ valeurs.niveau or '' }}"></div>
+    <p><button class="btn or" type="submit">Créer ma fiche</button></p>
+  </form>
+  {% endif %}
+</section>
+{% endblock %}

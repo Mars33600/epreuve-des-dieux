@@ -1,0 +1,133 @@
+{# Composants de la DA (docs/design/DA.md), tirés de maquette-v2.html. Jinja échappe tout par défaut.
+   Couleurs et pourcentages passent par des classes (c-donjons, p-45…) : la CSP interdit style="…". #}
+
+{% macro sprite() -%}
+<svg class="svg-sprite" aria-hidden="true">
+  <symbol id="i-donjon" viewBox="0 0 24 24"><path d="M5 21V11a7 7 0 0 1 14 0v10"/><path d="M3 21h18"/><path d="M10 21v-6h4v6"/></symbol>
+  <symbol id="i-succes" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></symbol>
+  <symbol id="i-princ" viewBox="0 0 24 24"><path d="M12 3c3.6 0 6.5 5.6 6.5 10.2A6.5 6.5 0 0 1 5.5 13.2C5.5 8.6 8.4 3 12 3z"/><path d="M9.5 11.5c.6-1.6 1.6-2.7 2.8-3.2"/></symbol>
+  <symbol id="i-second" viewBox="0 0 24 24"><path d="M8 4h11v13a3 3 0 0 1-3 3H7"/><path d="M8 4a2.5 2.5 0 0 0-2.5 2.5V9H8"/><path d="M7 20a2.5 2.5 0 0 1-2.5-2.5V16h9v1.5"/><path d="M11 8.5h5M11 12h5"/></symbol>
+</svg>
+{%- endmacro %}
+
+{% macro icone(id, cls="i") -%}
+<svg class="{{ cls }}" viewBox="0 0 24 24" aria-hidden="true"><use href="#{{ id }}"/></svg>
+{%- endmacro %}
+
+{% macro pip(info, etat, big=False) -%}
+{%- set lab = info.nom ~ " : " ~ ("point obtenu" if etat.acquise else (etat.faits ~ " sur " ~ etat.total)) -%}
+<span class="pip c-{{ info.cle }} {{ etat.faits|pct(etat.total) }}{% if etat.acquise %} got{% endif %}{% if big %} big{% endif %}" role="img" aria-label="{{ lab }}" title="{{ lab }}" data-pip="{{ info.cle }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><use href="#{{ info.icone }}"/></svg></span>
+{%- endmacro %}
+
+{% macro badge_nature(q) -%}
+{%- if q.nature == "principale" -%}
+<span class="badge princ">{{ icone("i-princ") }}Principale</span>
+{%- else -%}
+<span class="badge second">{{ icone("i-second") }}Secondaire</span>
+{%- endif -%}
+{%- endmacro %}
+
+{% macro tour(etages, jauge, nb_scelles) -%}
+{%- set ouvert = etages|selectattr("statut", "equalto", "ouvert")|first -%}
+<div class="floors">
+  <div class="towermist"></div>
+  <div class="sealedgroup">
+  {%- for i in range(nb_scelles, 0, -1) %}
+    {%- if i == 1 and ouvert and jauge and jauge.pleine %}
+    <div class="floor ready w-{{ 7 - i }}"><b>Étage {{ ouvert.numero + 1 }}</b><span>· prêt</span></div>
+    {%- else %}
+    <div class="floor sealed w-{{ 7 - i }}" aria-label="Étage scellé"><span class="seal" aria-hidden="true">?</span></div>
+    {%- endif %}
+  {%- endfor %}
+  </div>
+  {%- for e in etages|reverse %}
+  <a class="floor w-full {{ 'current' if e.statut == 'ouvert' else 'done' }}" href="/etages/{{ e.numero }}"><b>Étage {{ e.numero }}</b><span>{{ e.nom }}{% if e.statut == "termine" %} · terminé{% endif %}</span>{% if e.statut == "ouvert" and jauge %}<i class="fill {{ jauge.score|pct(jauge.palier) }}"></i>{% endif %}</a>
+  {%- endfor %}
+</div>
+<div class="base"></div>
+<p>Nul ne connaît le nombre d'étages. Chacun se dévoile quand la guilde a descellé le précédent.</p>
+{%- endmacro %}
+
+{% macro jauge_bloc(jauge, encoches, formule, texte, verdict_plein, verdict_pas_plein) -%}
+<div class="gauge{% if jauge.pleine %} ok{% endif %}" id="jauge" data-palier="{{ jauge.palier }}" data-actifs="{{ jauge.actifs }}" data-en-pause="{{ jauge.en_pause }}">
+  <div class="eyebrow">Jauge de l'étage</div>
+  <div class="gcount"><strong><span data-j="score">{{ jauge.score }}</span><small> / {{ jauge.palier }} points</small></strong>
+    <span>{{ formule }}</span></div>
+  <div class="notches" id="encoches" role="img" aria-label="{{ jauge.score }} points sur {{ jauge.palier }} requis">
+    {%- for c in encoches %}<i class="{{ c }}"{% if c != "vide" %} data-c{% endif %}></i>{% endfor -%}
+  </div>
+  <div class="gfoot"><span data-j="manque">{% if jauge.pleine %}<b>Palier atteint</b>{% else %}Il manque <b class="num">{{ jauge.manquants }}</b> point{{ "s" if jauge.manquants > 1 }}{% endif %}</span><span>Maximum possible : <span class="num">{{ jauge.maximum }}</span></span></div>
+  <p class="muted" data-j="texte">{{ texte }}</p>
+</div>
+<div class="cats">
+  {%- for info in CATS %}{% set k = jauge.points_par_categorie.get(info.cle, 0) %}
+  <div class="cat c-{{ info.cle }}">
+    <span class="ic">{{ icone(info.icone) }}</span><h3>{{ info.nom }}</h3><p>{{ info.desc }}</p>
+    <div class="stat"><b><span data-jcat="{{ info.cle }}">{{ k }}</span><small> / {{ jauge.actifs }} grimpeurs</small></b><a class="linkbtn" href="/grimpeurs?quoi=categorie:{{ info.cle }}">Qui manque&nbsp;?</a></div>
+    <div class="mini"><i class="{{ k|pct(jauge.actifs) }}" data-jmini="{{ info.cle }}"></i></div>
+  </div>
+  {%- endfor %}
+</div>
+<p class="verdict{% if jauge.pleine %} open{% endif %}" id="verdict" data-plein="{{ verdict_plein }}" data-pas-plein="{{ verdict_pas_plein }}">{{ verdict_plein if jauge.pleine else verdict_pas_plein }}</p>
+{%- endmacro %}
+
+{% macro compteur(vue, ref) -%}
+<a class="compteur" href="/grimpeurs?quoi={{ ref }}" data-compteur="{{ ref }}" title="Qui ne l'a pas fait ?" aria-label="{{ vue.compteurs.get(ref, 0) }} grimpeurs actifs sur {{ vue.jauge.actifs }} l'ont fait. Qui ne l'a pas fait ?">{{ vue.compteurs.get(ref, 0) }}/{{ vue.jauge.actifs }}</a>
+{%- endmacro %}
+
+{% macro liste_etage(vue, cible, cochable) -%}
+{%- set coches = vue.coches_de(cible.id if cible else none) -%}
+{%- set numero = vue.etage.numero -%}
+{%- for bloc in vue.blocs() %}
+<section class="bloc">
+  {% if bloc.nom %}<h3>{{ bloc.nom }}</h3>{% endif %}
+  <ul class="liste">
+  {%- for l in bloc.lignes %}
+  {%- if l.type == "quete" %}{% set q = l.quete %}{% set cat = "principales" if q.nature == "principale" else "secondaires" %}{% set fait = q.id in coches.quetes %}
+    <li data-cats="{{ cat }}" data-fait="{{ 1 if fait else 0 }}">
+      <div class="ligne">
+        <div class="qrow">
+          <label class="qbox c-{{ cat }}"><input type="checkbox" data-ref="quete:{{ q.id }}"{% if fait %} checked{% endif %}{% if not cochable %} disabled{% endif %}><span class="sr-only">Faite : {{ q.nom }}</span></label>
+          <a class="qname" href="/etages/{{ numero }}/quetes/{{ q.id }}" data-qopen="{{ q.id }}" aria-haspopup="dialog"><b>{{ q.nom }}</b><small>niv. {{ q.niveau if q.niveau is not none else "?" }}{% if q.dofus %} · {{ q.dofus|join(", ") }}{% endif %} · voir la fiche</small>{% if q.jusqu_ou %}<span class="jusqu">Jusqu'où : {{ q.jusqu_ou }}</span>{% endif %}{% if q.a_lier %}<span class="lier">À lier : {{ q.a_lier }}</span>{% endif %}</a>
+        </div>
+        <div class="droite-ligne">{{ badge_nature(q) }}{{ compteur(vue, "quete:" ~ q.id) }}</div>
+      </div>
+    </li>
+  {%- else %}{% set d = l.donjon %}{% set faits = l.cases|selectattr("id", "in", coches.cases)|list|length %}{% set classique = l.cases|selectattr("est_classique")|first %}
+    <li data-cats="donjons full_succes" data-donjon="{{ d.id }}" data-fait="{{ 1 if l.cases and faits == l.cases|length else 0 }}" data-vaincu="{{ 1 if classique and classique.id in coches.cases else 0 }}">
+      <details class="dj-ligne">
+        <summary><span class="nomdj">{{ icone("i-donjon") }}{{ d.nom }}</span>
+          <span class="droite-ligne"><span class="num muted">niv. {{ d.niveau if d.niveau is not none else "?" }} · <span data-djcompte>{{ faits }}</span>/{{ l.cases|length }}</span>
+            <span class="badge donjon{% if classique and classique.id in coches.cases %} on{% endif %}" data-djbadge="donjon">{{ icone("i-donjon") }}Donjon</span>
+            <span class="badge succes{% if l.cases and faits == l.cases|length %} on{% endif %}" data-djbadge="succes">{{ icone("i-succes") }}Full succès</span></span>
+        </summary>
+        <div class="dj-corps">
+          <ul class="ticks">
+          {%- for c in l.cases %}
+            <li><label class="tick c-{{ 'donjons' if c.est_classique else 'full_succes' }}"><input type="checkbox" data-ref="case:{{ c.id }}"{% if c.id in coches.cases %} checked{% endif %}{% if not cochable %} disabled{% endif %}>
+              <span><b>{{ c.nom }}</b><small>{{ c.condition }}{% if c.est_classique %} · compte pour le point Donjons{% endif %}</small></span></label>{{ compteur(vue, "case:" ~ c.id) }}</li>
+          {%- endfor %}
+          </ul>
+          {% if cochable %}<p><button class="btn" type="button" data-donjon-tout="{{ d.id }}">Tout le donjon (5 cases)</button></p>{% endif %}
+        </div>
+      </details>
+    </li>
+  {%- endif %}
+  {%- endfor %}
+  </ul>
+</section>
+{%- endfor %}
+{%- endmacro %}
+
+{% macro filtre() -%}
+<fieldset class="filtre" id="filtre" aria-label="Filtrer la liste">
+  {%- for info in CATS %}
+  <label class="c-{{ info.cle }}"><input type="checkbox" value="{{ info.cle }}" checked>{{ icone(info.icone) }}{{ info.nom }}</label>
+  {%- endfor %}
+  <label class="reste"><input type="checkbox" value="reste">Seulement ce qui me reste</label>
+</fieldset>
+{%- endmacro %}
+
+{% macro personnes(liste, cls) -%}
+<div class="people">{% for g in liste %}<span class="person {{ cls }}">{{ g.pseudo }}{% if g.classe %} <span class="muted">{{ g.classe }}</span>{% endif %}</span>{% endfor %}</div>
+{%- endmacro %}

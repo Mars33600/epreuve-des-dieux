@@ -1,0 +1,90 @@
+{#- La fiche de quête (SPEC §4.4 bis) : fragment chargé par app.js dans le panneau <dialog>, ou inclus dans
+    quete.html (page complète sans JavaScript). Chaque bloc n'apparaît que s'il a des données. Le seul HTML
+    inséré tel quel est le texte des étapes, nettoyé par liste blanche à la construction (nettoyer_fiche). -#}
+{%- from "_macros.html" import badge_nature, compteur, personnes, icone -%}
+{%- set cat = "principales" if quete.nature == "principale" else "secondaires" -%}
+{%- set coches = vue.coches_de(cible.id if cible else none) -%}
+{%- set fait_moi = quete.id in coches.quetes -%}
+{%- set jusqu_ou = quete.jusqu_ou or (fiche.jusqu_ou if fiche else none) -%}
+{%- set a_lier = quete.a_lier or (fiche.a_lier if fiche else none) -%}
+<div class="qd-in" data-quete="{{ quete.id }}">
+  <header class="qd-head">
+    <div class="qd-top">
+      {% if pleine_page %}<a class="retour" href="/etages/{{ etage.numero }}">← Retour à la liste</a>{% else %}<button class="retour" type="button" data-qclose>← Retour à la liste</button>{% endif %}
+      <div><div class="eyebrow">Fiche de quête · étage {{ etage.numero }}</div><h2 id="qdTitle" tabindex="-1">{{ quete.nom }}</h2></div>
+      {% if not pleine_page %}<button class="x" type="button" data-qclose aria-label="Fermer la fiche">×</button>{% endif %}
+    </div>
+    <div class="qd-meta">
+      {{ badge_nature(quete) }}
+      {% if quete.dofus %}<span>{{ icone("i-princ") }} <b>{{ quete.dofus|join(", ") }}</b></span>{% endif %}
+      <span>Niveau <b class="num">{{ quete.niveau if quete.niveau is not none else "?" }}</b></span><span>{{ quete.bloc }}</span>
+    </div>
+    <div class="qd-meta">
+      <label class="qdone c-{{ cat }}"><input type="checkbox" data-ref="quete:{{ quete.id }}"{% if fait_moi %} checked{% endif %}{% if not cochable %} disabled{% endif %}>
+        Faite <small>{% if cochable %}(ta fiche){% elif cible %}(lecture seule){% else %}(tu n'as pas de fiche){% endif %}</small></label>
+      {{ compteur(vue, "quete:" ~ quete.id) }}
+      <a href="/grimpeurs?quoi=quete:{{ quete.id }}">Qui ne l'a pas fait&nbsp;?</a>
+    </div>
+  </header>
+  <div class="qd-body">
+    {% if fiche is none or not fiche.complete %}<p class="indispo">Fiche détaillée indisponible.</p>{% endif %}
+    {% if jusqu_ou or a_lier %}
+    <section class="qd-sec">
+      {% if jusqu_ou %}<div class="encart stop"><b>Jusqu'où la faire</b>{{ jusqu_ou }}</div>{% endif %}
+      {% if a_lier %}<div class="encart lier"><b>À lier</b>{{ a_lier }}</div>{% endif %}
+    </section>
+    {% endif %}
+    {% if fiche %}
+    {% if fiche.prerequis %}
+    <section class="qd-sec"><h3>Prérequis</h3>
+      <ul class="plist">
+      {%- for p in fiche.prerequis %}
+        <li>
+        {%- if p.statut == "scelle" %}<span class="muted">Prérequis d'un étage pas encore ouvert</span>
+        {%- elif p.statut == "visible" and p.quete_id is not none and p.quete_id in carte %}<a class="qlink" href="/etages/{{ carte[p.quete_id] }}/quetes/{{ p.quete_id }}" data-qopen="{{ p.quete_id }}" data-qetage="{{ carte[p.quete_id] }}">{{ p.nom }}</a>
+          {%- if cible %}{% set ok = p.quete_id in vue.coches_de(cible.id).quetes %}<span class="state {{ 'ok' if ok else 'no' }}">{{ "✓ Faite" if ok else "✗ Pas encore faite" }}</span>{% endif %}
+        {%- else %}<span>{{ p.nom }}</span><span class="muted">hors du guide</span>{% endif %}
+        </li>
+      {%- endfor %}
+      </ul>
+    </section>
+    {% endif %}
+    {% if fiche.etapes %}
+    <section class="qd-sec"><h3>Étapes</h3>
+      <ol class="steps">
+      {%- for e in fiche.etapes %}
+        <li><b>{{ e.titre }}</b><div class="etape-texte">{{ e.texte_html|safe }}</div>
+          {% if e.objectifs %}<ul class="objectifs">{% for o in e.objectifs %}<li>{{ o }}</li>{% endfor %}</ul>{% endif %}</li>
+      {%- endfor %}
+      </ol>
+    </section>
+    {% endif %}
+    {% if fiche.objets or fiche.monstres %}
+    <section class="qd-sec"><h3>Ce dont tu as besoin</h3>
+      <ul class="items">
+        {%- for b in fiche.objets %}<li><span class="k">Objet</span><span>{{ b.nom }}</span><span class="q">×{{ b.quantite }}</span></li>{% endfor %}
+        {%- for b in fiche.monstres %}<li><span class="k">Monstre</span><span>{% if b.icone_url and b.icone_url.startswith("https://api.dofusdb.fr/") %}<img src="{{ b.icone_url }}" alt="" width="24" height="24" loading="lazy"> {% endif %}{{ b.nom }}</span><span class="q">×{{ b.quantite }}</span></li>{% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+    {% if fiche.positions %}
+    <section class="qd-sec"><h3>Positions</h3>
+      <ul class="items positions">
+        {%- for p in fiche.positions %}<li><span>{{ p.libelle }}{% if p.zone %}<small>{{ p.zone }}</small>{% endif %}</span><button class="pos-copier" type="button" data-copier="/travel {{ p.x }},{{ p.y }}" title="Copier la commande de trajet">[{{ p.x }},{{ p.y }}]</button></li>{% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+    {% if fiche.succes_lie %}<section class="qd-sec"><h3>Succès lié</h3><p>{{ fiche.succes_lie }}</p></section>{% endif %}
+    {% if fiche.recompenses %}
+    <section class="qd-sec"><h3>Récompenses</h3>
+      <ul class="items">{% for r in fiche.recompenses %}<li><span class="k">Gain</span><span>{{ r }}</span><span></span></li>{% endfor %}</ul>
+    </section>
+    {% endif %}
+    {% if fiche.source == "duffus+dofusdb" %}<p class="source">Fiche complétée avec DofusDB.</p>{% elif fiche.source == "dofusdb" %}<p class="source">Informations venues de DofusDB.</p>{% endif %}
+    {% endif %}
+    <section class="qd-sec qd-foot"><h3>Qui ne l'a pas encore faite ?</h3>
+      {% if pas_fait %}{{ personnes(pas_fait, "miss") }}{% else %}<p>Tous les grimpeurs actifs l'ont faite.</p>{% endif %}
+      {% if fait and pas_fait %}<p>Déjà faite par {{ fait|length }} grimpeur{{ "s" if fait|length > 1 }}, qui peuvent accompagner les autres :</p>{{ personnes(fait, "done") }}{% endif %}
+    </section>
+  </div>
+</div>
