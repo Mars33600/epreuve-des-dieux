@@ -3,7 +3,7 @@
 Ce sont des middlewares ASGI « purs » : ils voient passer chaque requête avant toute route, statiques
 et 404 compris. Une route ajoutée plus tard est donc filtrée d'office, sans qu'on y pense.
 
-- `FiltreMode` : en mode teaser, seuls `/`, `/sante` et `/static/…` répondent. Le reste reçoit
+- `FiltreMode` : en mode teaser, seuls `/`, `/sante` et `/static/…` répondent (websockets compris). Le reste reçoit
   une redirection 303 vers `/`, sauf les chemins `/api/…`, qui reçoivent un 404 (un appel de
   script n'a que faire d'une redirection vers une page).
 - `EntetesSecurite` : pose la CSP et les autres en-têtes sur toutes les réponses qui le traversent.
@@ -19,6 +19,7 @@ from datetime import datetime
 from starlette.datastructures import MutableHeaders
 from starlette.responses import JSONResponse, RedirectResponse
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
+from starlette.websockets import WebSocketClose
 
 from epreuve.domaine.mode_site import (
     CHEMINS_TOUJOURS_PERMIS,
@@ -52,7 +53,8 @@ class FiltreMode:
         self.app, self.reglage, self.ouvert_le, self.horloge = app, reglage, ouvert_le, horloge
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-        if scope["type"] != "http" or chemin_permis(scope["path"]):
+        # Les websockets aussi : une route `@app.websocket` du lot B ne doit pas échapper au teaser.
+        if scope["type"] not in ("http", "websocket") or chemin_permis(scope["path"]):
             await self.app(scope, receive, send)
             return
         mode = mode_effectif(self.reglage, self.ouvert_le, self.horloge())
@@ -60,7 +62,9 @@ class FiltreMode:
         if voit_site_complet(mode, est_admin=False, est_testeur=False):
             await self.app(scope, receive, send)
             return
-        if scope["path"] == "/api" or scope["path"].startswith("/api/"):
+        if scope["type"] == "websocket":
+            reponse = WebSocketClose(code=1008)  # « violation de règle » : la connexion est refusée
+        elif scope["path"] == "/api" or scope["path"].startswith("/api/"):
             reponse = JSONResponse({"erreur": "introuvable"}, status_code=404)
         else:
             reponse = RedirectResponse("/", status_code=303)
