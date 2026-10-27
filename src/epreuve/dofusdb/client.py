@@ -36,7 +36,3 @@ class ClientDofusDB:
 
     async def succes(self, id_: int) -> dict:
         return await self._get(f"/achievements/{id_}")
-
-    async def categorie_quetes(self, id_: int) -> dict:
-        """`name.fr` et `questIds` : toutes les quêtes d'une zone."""
-        return await self._get(f"/quest-categories/{id_}")

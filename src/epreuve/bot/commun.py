@@ -88,7 +88,19 @@ async def autoriser(interaction: discord.Interaction, admin_role_id: int) -> boo
     return False
 
 
+async def differer(interaction: discord.Interaction, ephemere: bool = True) -> None:
+    """« Le bot réfléchit… » : à appeler avant plusieurs requêtes en base. Discord n'attend que
+    3 secondes une première réponse ; après `defer`, on a 15 minutes pour répondre."""
+    if not interaction.response.is_done():
+        await interaction.response.defer(ephemeral=ephemere, thinking=True)
+
+
 async def envoyer(interaction: discord.Interaction, reponse: Reponse, **extra) -> None:
+    """Envoie la réponse : directement, ou en suite d'un `differer` (followup)."""
     journal_bot.info("/%s par %s : %s", getattr(interaction.command, "qualified_name", "?"),
                      interaction.user.id, reponse.texte.splitlines()[0][:120])
-    await interaction.response.send_message(tronquer(reponse.texte), ephemeral=reponse.ephemere, **extra)
+    est_fait = getattr(interaction.response, "is_done", None)
+    if est_fait is not None and est_fait():
+        await interaction.followup.send(tronquer(reponse.texte), ephemeral=reponse.ephemere, **extra)
+    else:
+        await interaction.response.send_message(tronquer(reponse.texte), ephemeral=reponse.ephemere, **extra)

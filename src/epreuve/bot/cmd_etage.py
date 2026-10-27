@@ -11,7 +11,7 @@ from zoneinfo import ZoneInfo
 import discord
 from discord import app_commands
 
-from epreuve.bot.commun import Contexte, Reponse, autoriser, contexte_de, envoyer
+from epreuve.bot.commun import Contexte, Reponse, autoriser, contexte_de, differer, envoyer
 from epreuve.db.depot import Depot
 from epreuve.domaine.jauges import EtatEtage, calculer_etat_etage
 
@@ -47,7 +47,7 @@ def texte_verdict(etat: EtatEtage, fuseau: ZoneInfo) -> str:
     suivant = etat.etage.numero + 1
     plancher = etat.etage.date_plancher_suivant
     if etat.jauge.maximum == 0:
-        return "Aucun grimpeur compté : la jauge ne peut pas se remplir."
+        return "Aucun grimpeur actif : la jauge ne peut pas se remplir."
     if etat.deblocable:
         phrase = f"Le seuil est atteint : un admin peut ouvrir l'étage {suivant}."
     elif etat.jauge.pleine:
@@ -57,11 +57,9 @@ def texte_verdict(etat: EtatEtage, fuseau: ZoneInfo) -> str:
     else:
         pas_avant = f", et pas avant le {date_longue(plancher, fuseau)}" if plancher else ""
         phrase = f"L'étage {suivant} s'ouvre quand la jauge atteint le seuil{pas_avant}."
-    morceaux = [f"{etat.n_comptes} grimpeurs comptés"]
+    morceaux = [f"{etat.n_comptes} grimpeurs actifs"]
     if etat.n_pause:
         morceaux.append(f"{etat.n_pause} en pause")
-    if etat.n_retardataires:
-        morceaux.append(f"{etat.n_retardataires} retardataire{'s' if etat.n_retardataires > 1 else ''}")
     return f"{phrase} {', '.join(morceaux)}."
 
 
@@ -90,7 +88,7 @@ async def etage_etat(ctx: Contexte, public: bool = False) -> Reponse:
 # --- Couche Discord -----------------------------------------------------------------------------
 
 
-@app_commands.default_permissions(manage_guild=True)
+@app_commands.default_permissions(administrator=True)
 @app_commands.guild_only()
 class GroupeEtage(app_commands.Group):
     def __init__(self, depot: Depot, guild_id: int, admin_role_id: int, fuseau: str) -> None:
@@ -102,5 +100,6 @@ class GroupeEtage(app_commands.Group):
     async def etat(self, interaction: discord.Interaction, public: bool = False) -> None:
         if not await autoriser(interaction, self.admin_role_id):
             return
+        await differer(interaction, ephemere=not public)
         ctx = contexte_de(interaction, self.depot, self.guild_id, self.fuseau)
         await envoyer(interaction, await etage_etat(ctx, public))

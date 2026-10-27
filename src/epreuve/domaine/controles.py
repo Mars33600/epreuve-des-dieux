@@ -86,6 +86,14 @@ def controler_validation(
     return Controle(ok=not bloquants, bloquants=tuple(bloquants), avertissements=tuple(avertissements))
 
 
+def statut_a_l_inscription(inscrit_le: datetime, etage0: Etage | None) -> str:
+    """Un joueur inscrit après l'ouverture de l'étage 0 arrive EN PAUSE (décision du 25/10) :
+    un admin le passe actif, au cas par cas, quand il le juge prêt. Avant, il est actif."""
+    if etage0 is None or etage0.ouvert_le is None or inscrit_le < etage0.ouvert_le:
+        return "actif"
+    return "pause"
+
+
 def validation_compte(v: Validation, etage: Etage) -> bool:
     """Vrai si la validation rapporte des points sur l'étage.
 

@@ -1,5 +1,7 @@
 """/quetes : le grimpeur déclare lui-même ses quêtes (SPEC §4.2, Shadoaze Q4).
 
+Le palier 3 d'un étage, c'est son chapitre du guide Duffus (https://duffus.fr/guide-complet ;
+étage N = chapitre N) terminé à 100 %. Le guide suit lui-même la progression du joueur.
 Pas de screen exigé ni de niveau : « on se basera sur la parole des gens ». Le joueur peut joindre
 le lien d'un screen. Un admin peut déclarer pour un grimpeur non relié (`pour`) et annuler une
 déclaration avec /annuler.
@@ -12,10 +14,10 @@ from discord import app_commands
 
 from epreuve.bot.acces import REPONSE_REFUS, est_admin
 from epreuve.bot.cmd_validation import lire_preuve, trouver_contenu
-from epreuve.bot.commun import Contexte, Reponse, contexte_de, envoyer, normaliser, suggestions
+from epreuve.bot.commun import Contexte, Reponse, contexte_de, differer, envoyer, normaliser, suggestions
 from epreuve.db.depot import DejaValide, Depot
 from epreuve.domaine.controles import controler_validation
-from epreuve.domaine.modeles import TYPES_QUETES, Grimpeur, liste_francaise
+from epreuve.domaine.modeles import TYPES_QUETES, URL_GUIDE_DUFFUS, Grimpeur, liste_francaise
 
 TOUTES = "toutes"
 REPONSE_NON_RELIE = "Demande à un admin de relier ton compte"
@@ -49,7 +51,9 @@ async def declarer_quetes(ctx: Contexte, contenu: str, preuve: str | None = None
     else:
         trouve = trouver_contenu(contenu, quetes)
         if trouve is None:
-            return Reponse(f"Rien n'a été enregistré : quête « {contenu} » inconnue sur l'étage en cours.")
+            noms = liste_francaise([f"« {c.nom_court} »" for c in quetes]) or "aucune"
+            return Reponse(f"Rien n'a été enregistré : « {contenu} » inconnu sur l'étage en cours. "
+                           f"À déclarer : {noms} (guide : <{URL_GUIDE_DUFFUS}>).")
         choisis = [trouve]
 
     preuve_lue = None
@@ -72,6 +76,7 @@ async def declarer_quetes(ctx: Contexte, contenu: str, preuve: str | None = None
         return Reponse("Rien n'a été enregistré : déjà déclaré.")
     titres = liste_francaise([f"« {c.nom_court} »" for c in choisis])
     return Reponse(f"✅ **{g.pseudo}** a déclaré avoir terminé {titres} (n° {', '.join(map(str, ids))}). "
+                   f"Le guide : <{URL_GUIDE_DUFFUS}>. "
                    "Les quêtes rapportent des points une fois le full succès atteint.")
 
 
@@ -102,12 +107,14 @@ class CommandesJoueur:
     def _quetes(self) -> app_commands.Command:
         outil = self
 
-        @app_commands.command(name="quetes", description="Déclarer les quêtes que tu as terminées")
+        @app_commands.command(name="quetes", description="Déclarer ton chapitre du guide Duffus terminé à 100 %")
         @app_commands.guild_only()
-        @app_commands.describe(contenu="Une quête, ou « toutes »", preuve="Lien d'un screen (facultatif)",
+        @app_commands.describe(contenu="Le chapitre du guide Duffus terminé à 100 %, ou « toutes »",
+                               preuve="Lien d'un screen (facultatif)",
                                pour="Réservé aux admins : déclarer pour ce grimpeur")
         async def quetes_cmd(interaction: discord.Interaction, contenu: str, preuve: str | None = None,
                              pour: str | None = None) -> None:
+            await differer(interaction)
             ctx = contexte_de(interaction, outil.depot, outil.guild_id, outil.fuseau)
             admin = est_admin(interaction.user, outil.admin_role_id)
             await envoyer(interaction, await declarer_quetes(ctx, contenu, preuve, pour, admin))

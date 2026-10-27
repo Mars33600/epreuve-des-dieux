@@ -1,5 +1,5 @@
 # Étage 0 : « Le Seuil ». Format décrit dans docs/ARCHITECTURE.md §6.
-# Import : uv run python -m epreuve.dofusdb.import_etage config/etages/etage-0.yaml [--a-blanc]
+# Import : uv run --env-file .env python -m epreuve.dofusdb.import_etage config/etages/etage-0.yaml [--a-blanc]
 # Valeurs issues des réponses de Shadoaze (docs/REPONSES-SHADOAZE.md).
 numero: 0
 nom: Le Seuil
@@ -9,6 +9,9 @@ ouvert_le: 2026-10-30T17:00:00+01:00           # vendredi 17 h, heure de Paris (
 date_plancher_suivant: 2026-11-13T17:00:00+01:00
 zone_quetes: Incarnam
 donjons_affiches: [Kardorim]
+# Étage N = chapitre N du guide Duffus (https://duffus.fr/guide-complet).
+# ⚠️ PROVISOIRE : nom exact du chapitre 0 à confirmer par Shadoaze.
+chapitre_guide: "Chapitre 0 (nom à confirmer par Shadoaze)"
 paliers:
   - rang: 1
     libelle: Kardorim vaincu
@@ -20,6 +23,6 @@ paliers:
     contenus:
       - {dofusdb_succes_du_donjon: 90}       # développé en 5 contenus (33, 487, 571, 574, 6148)
   - rang: 3
-    libelle: Toutes les quêtes d'Incarnam
+    libelle: Guide Duffus à 100 %
     contenus:
-      - {lot_quetes: "Toutes les quêtes d'Incarnam", dofusdb_categorie_quetes: 19}
+      - {guide_duffus: true}                 # le chapitre ci-dessus, terminé à 100 %, déclaré par le joueur

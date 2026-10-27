@@ -112,3 +112,15 @@ def test_declaration_sans_niveau_compte():
 def test_avant_ouverture_ou_etage_sans_date_ne_compte_pas():
     assert not validation_compte(validation(1, 1, realisee_le=OUVERTURE - timedelta(minutes=1)), ETAGE0)
     assert not validation_compte(validation(1, 1), replace(ETAGE0, ouvert_le=None))
+
+
+# --- Statut à l'inscription (décision du 25/10 : pas de retardataire automatique) -----------------
+
+
+def test_inscription_avant_l_ouverture_actif_apres_en_pause():
+    from epreuve.domaine.controles import statut_a_l_inscription
+
+    assert statut_a_l_inscription(OUVERTURE - timedelta(seconds=1), ETAGE0) == "actif"
+    assert statut_a_l_inscription(OUVERTURE, ETAGE0) == "pause"
+    assert statut_a_l_inscription(OUVERTURE, None) == "actif"  # pas encore d'étage 0
+    assert statut_a_l_inscription(OUVERTURE, replace(ETAGE0, ouvert_le=None)) == "actif"

@@ -23,7 +23,7 @@ def test_actifs_pause_et_exclus():
         grimpeur(1, classe="Féca"),
         grimpeur(2, classe="Féca", statut="pause"),
         grimpeur(3, classe="Iop"),
-        grimpeur(4, classe="Iop", retard=True),  # un retardataire joue bien sa classe
+        grimpeur(4, classe="Iop"),
         grimpeur(5, classe="Sram", statut="exclu"),
     ]
     r = {x.classe: x for x in repartition_classes(g)}
@@ -37,7 +37,7 @@ def test_actifs_pause_et_exclus():
                                                ("statut", "fantome")])
 def test_grimpeur_refuse_les_valeurs_hors_liste(champ, valeur):
     args = {"id": 1, "pseudo": "X", "classe": "Iop", "difficulte": "easy", "statut": "actif",
-            "niveau_connu": None, "inscrit_le": AVANT, "inclus_le": AVANT}
+            "niveau_connu": None, "inscrit_le": AVANT}
     args[champ] = valeur
     with pytest.raises(ValueError):
         Grimpeur(**args)

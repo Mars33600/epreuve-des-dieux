@@ -32,9 +32,9 @@ async def test_etage0_produit_6_contenus_et_les_bons_paliers():
     appels: list[str] = []
     e = await _preparer(appels)
     assert len(e.contenus) == 6
-    assert {cle[1] for cle in e.contenus} == {33, 487, 571, 574, 6148, 19}
-    paliers = {p.rang: {cle[1] for cle in p.contenus} for p in e.paliers}
-    assert paliers == {1: {33}, 2: {33, 487, 571, 574, 6148}, 3: {19}}
+    assert set(e.contenus) == {("achievement", i) for i in (33, 487, 571, 574, 6148)} | {("guide_duffus", 0)}
+    paliers = {p.rang: set(p.contenus) for p in e.paliers}
+    assert paliers[1] == {("achievement", 33)} and len(paliers[2]) == 5 and paliers[3] == {("guide_duffus", 0)}
     assert e.seuil_pourcent == 75 and e.level_cap == 20
     assert e.ouvert_le == datetime(2026, 10, 30, 17, 0, tzinfo=PARIS)
     assert e.date_plancher_suivant == datetime(2026, 11, 13, 17, 0, tzinfo=PARIS)
@@ -42,10 +42,12 @@ async def test_etage0_produit_6_contenus_et_les_bons_paliers():
     assert e.contenus[("achievement", 33)].nom_court == "Kardorim vaincu"
     assert e.contenus[("achievement", 33)].nom == "Crypte de Kardorim"
     assert e.contenus[("achievement", 487)].nom_court == "Kardorim (Duo)"
-    lot = e.contenus[("quest_category", 19)]
-    assert lot.type == "lot_quetes" and len(lot.dofusdb_ids_couverts) == 24
-    assert lot.nom == "Toutes les quêtes d'Incarnam (24)"
+    guide = e.contenus[("guide_duffus", 0)]
+    assert guide.type == "lot_quetes" and guide.dofusdb_ids_couverts is None
+    assert guide.nom == "Guide Duffus : Chapitre 0 (nom à confirmer par Shadoaze) à 100 %"
+    assert e.chapitre_guide == "Chapitre 0 (nom à confirmer par Shadoaze)"
     assert not set(TEMPORIS) & set(appels)  # les succès Temporis ne sont jamais demandés
+    assert not [a for a in appels if "quest" in a]  # plus aucune quête lue dans DofusDB
 
 
 @pytest.mark.parametrize("casser", [
@@ -69,6 +71,13 @@ async def test_seuil_hors_bornes_refuse(pourcent):
         await _preparer(config=config)
 
 
+async def test_guide_duffus_sans_chapitre_refuse():
+    config = config0()
+    config.pop("chapitre_guide")
+    with pytest.raises(ConfigInvalide, match="chapitre_guide"):
+        await _preparer(config=config)
+
+
 async def test_raccourci_inconnu_et_date_sans_fuseau_refuses():
     config = config0()
     config["paliers"][0]["contenus"] = [{"dofusdb_inconnu": 1}]
@@ -84,7 +93,7 @@ async def test_a_blanc_n_ecrit_rien_et_ne_demande_pas_de_base():
     rapport = await importer(Path(YAML0), a_blanc=True, database_url=None,
                              client=ClientDofusDB(transport=transport_dofusdb()))
     assert "rien n'a été écrit" in rapport
-    assert "seuil 75 %" in rapport and "palier 3" in rapport and "24 quêtes" in rapport
+    assert "seuil 75 %" in rapport and "palier 3" in rapport and "guide Duffus" in rapport
 
 
 async def test_ecriture_rejouable_sans_doublon(depot, moteur):
@@ -107,10 +116,15 @@ async def test_reimport_ne_change_pas_le_statut_mais_met_a_jour_le_reste(depot, 
     await ecrire_etage(moteur, e)
     async with moteur.begin() as c:
         await c.execute(t.etage.update().values(statut="termine"))
+    assert not await depot.journal()  # une création n'est pas une modification
     e.seuil_pourcent = 70
     await ecrire_etage(moteur, e)
     etage = (await depot.etages())[0]
     assert etage.statut == "termine" and etage.seuil_pourcent == 70
+    (entree,) = await depot.journal()
+    assert entree.type == "import_etage" and entree.details["changements"] == {"seuil_pourcent": [75, 70]}
+    await ecrire_etage(moteur, e)  # rejoué sans changement : rien de plus au journal
+    assert len(await depot.journal()) == 1
 
 
 async def test_etage_suivant_cree_scelle(depot, moteur):

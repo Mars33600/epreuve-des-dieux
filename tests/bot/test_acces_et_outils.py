@@ -19,14 +19,22 @@ from tests.fabrique import CONTENUS
 GUILD, ROLE_ADMIN = 1000, 2000
 
 
-def membre(roles=(), gerer=False, id_=7):
+def membre(roles=(), administrateur=False, gerer=False, id_=7):
     return SimpleNamespace(id=id_, roles=[SimpleNamespace(id=r) for r in roles],
-                           guild_permissions=SimpleNamespace(manage_guild=gerer))
+                           guild_permissions=SimpleNamespace(administrator=administrateur, manage_guild=gerer))
 
 
 def interaction(user, guild_id=GUILD):
+    """Une fausse interaction Discord. `defer` marque la réponse comme commencée, comme le vrai."""
+    reponse = SimpleNamespace(send_message=AsyncMock(), edit_message=AsyncMock(), fait=False)
+    reponse.is_done = lambda: reponse.fait
+
+    async def defer(**_):
+        reponse.fait = True
+
+    reponse.defer = defer
     return SimpleNamespace(user=user, guild_id=guild_id, command=SimpleNamespace(qualified_name="test"),
-                           response=SimpleNamespace(send_message=AsyncMock(), edit_message=AsyncMock()))
+                           response=reponse, followup=SimpleNamespace(send=AsyncMock()))
 
 
 class DepotInterdit:
@@ -38,7 +46,8 @@ class DepotInterdit:
 
 def test_est_admin():
     assert est_admin(membre(roles=[ROLE_ADMIN]), ROLE_ADMIN)
-    assert est_admin(membre(gerer=True), ROLE_ADMIN)
+    assert est_admin(membre(administrateur=True), ROLE_ADMIN)
+    assert not est_admin(membre(gerer=True), ROLE_ADMIN)  # « Gérer le serveur » ne suffit pas (Q6)
     assert not est_admin(membre(roles=[123]), ROLE_ADMIN)
     assert not est_admin(SimpleNamespace(id=1), ROLE_ADMIN)  # un User hors serveur
 
@@ -60,9 +69,9 @@ def test_commandes_masquees_par_defaut_et_serialisables():
         if nom == "quetes":
             assert c.default_permissions is None  # commande des joueurs : visible de tous
         else:
-            assert c.default_permissions is not None and c.default_permissions.manage_guild
+            assert c.default_permissions is not None and c.default_permissions.administrator
     sous = {s.name for s in cmds["grimpeur"].commands}
-    assert sous == {"ajouter", "modifier", "inclure", "pause", "reprendre", "exclure", "voir", "liste"}
+    assert sous == {"ajouter", "modifier", "pause", "reprendre", "exclure", "voir", "liste"}
     assert {s.name for s in cmds["etage"].commands} == {"etat"}
     noms = [p.name for p in cmds["valider"].parameters]
     assert noms[:3] == ["contenu", "grimpeur1", "niveau1"] and noms[-1] == "preuve"
@@ -77,7 +86,7 @@ def test_choix_proposes_pour_classe_difficulte_et_statut():
     assert [c.name for c in params["difficulte"].choices] == ["Aventurier", "Éclaireur", "Collectionneur"]
     assert params["pseudo"].min_value == 2 and params["pseudo"].max_value == 30
     statut = {p.name: p for p in grimpeur.get_command("liste").parameters}["statut"]
-    assert [c.value for c in statut.choices] == ["actif", "pause", "exclu", "retardataire"]
+    assert [c.value for c in statut.choices] == ["actif", "pause", "exclu"]
 
 
 async def _appeler(cmd, inter, **kw):
@@ -91,7 +100,6 @@ async def _appeler(cmd, inter, **kw):
 @pytest.mark.parametrize(("chemin", "args"), [
     (("grimpeur", "ajouter"), {"pseudo": "Brindille", "classe": "Eniripsa", "difficulte": "hard"}),
     (("grimpeur", "modifier"), {"pseudo": "Brindille", "difficulte": "hard"}),
-    (("grimpeur", "inclure"), {"pseudo": "Brindille"}),
     (("grimpeur", "pause"), {"pseudo": "Brindille"}),
     (("grimpeur", "reprendre"), {"pseudo": "Brindille"}),
     (("grimpeur", "exclure"), {"pseudo": "Brindille", "motif": "triche"}),
@@ -113,7 +121,8 @@ async def test_non_admin_recoit_reserve_aux_admins_et_rien_n_est_ecrit(chemin, a
 async def test_quetes_pour_reserve_aux_admins():
     inter = interaction(membre(roles=[123]))
     await _appeler(commandes(bot())["quetes"], inter, contenu="toutes", pour="Brindille")
-    assert inter.response.send_message.await_args.args[0].startswith(REPONSE_REFUS)
+    # /quetes diffère sa réponse (« le bot réfléchit… ») : elle arrive par le followup.
+    assert inter.followup.send.await_args.args[0].startswith(REPONSE_REFUS)
 
 
 async def test_verrou_de_serveur():
@@ -177,3 +186,45 @@ def test_tronquer_et_reponse():
     long = tronquer("x" * 3000)
     assert len(long) <= 2000 and long.endswith("(liste tronquée)")
     assert Reponse("a").ephemere
+
+
+def test_annuler_borne_le_numero():
+    validation = {p.name: p for p in commandes(bot())["annuler"].parameters}["validation"]
+    assert (validation.min_value, validation.max_value) == (1, 2**31 - 1)
+
+
+async def test_erreur_imprevue_reponse_claire_et_journalisee(caplog):
+    from discord import app_commands
+
+    from epreuve.bot.client import MESSAGE_ERREUR
+
+    b = bot()
+    inter = interaction(membre(roles=[ROLE_ADMIN]))
+    await b.tree.on_error(inter, app_commands.AppCommandError("boum"))
+    inter.response.send_message.assert_awaited_once_with(MESSAGE_ERREUR, ephemeral=True)
+    assert "erreur dans /test" in caplog.text
+    # Réponse déjà commencée (defer) : on passe par le followup.
+    inter2 = interaction(membre(roles=[ROLE_ADMIN]))
+    inter2.response.fait = True
+    transformeur = SimpleNamespace(_error_display_name="entier")
+    await b.tree.on_error(inter2, app_commands.TransformerError("x", discord.AppCommandOptionType.integer, transformeur))
+    assert "pas la bonne forme" in inter2.followup.send.await_args.args[0]
+    # Un autre serveur : aucune réponse.
+    inter3 = interaction(membre(), guild_id=999)
+    await b.tree.on_error(inter3, app_commands.CheckFailure())
+    inter3.response.send_message.assert_not_awaited()
+
+
+async def test_erreur_impossible_a_signaler(caplog):
+    b = bot()
+    inter = interaction(membre(roles=[ROLE_ADMIN]))
+    inter.response.send_message = AsyncMock(side_effect=discord.HTTPException(SimpleNamespace(status=500,
+                                                                                              reason="x"), "x"))
+    await b.tree.on_error(inter, app_commands_erreur())
+    assert "impossible de prévenir" in caplog.text
+
+
+def app_commands_erreur():
+    from discord import app_commands
+
+    return app_commands.AppCommandError("boum")

@@ -1,7 +1,7 @@
-"""/grimpeur ajouter|modifier|inclure|pause|reprendre|exclure|voir|liste : le registre des grimpeurs.
+"""/grimpeur ajouter|modifier|pause|reprendre|exclure|voir|liste : le registre des grimpeurs.
 
 Toutes ces actions sont écrites au journal avec leur auteur, mais restent hors du fil public.
-Celles qui changent le maximum de la jauge (inscription, difficulté, inclusion, pause…) affichent
+Celles qui changent le maximum de la jauge (inscription, difficulté, pause, reprise…) affichent
 leur effet : « Maximum 24 → 25, seuil 18 → 19 ».
 """
 
@@ -17,22 +17,20 @@ from epreuve.bot.commun import (
     autoriser,
     contexte_de,
     date_lisible,
+    differer,
     envoyer,
     suggestions,
 )
 from epreuve.db.depot import Depot, ErreurDepot
 from epreuve.domaine.classes import CLASSES
-from epreuve.domaine.inclusion import est_retardataire
 from epreuve.domaine.jauges import EtatEtage
 from epreuve.domaine.modeles import DIFFICULTES, NOM_DIFFICULTE, Grimpeur
 
 NOM_STATUT_VALIDATION = {"acceptee": "acceptée", "refusee": "refusée", "annulee": "annulée"}
-STATUTS_LISTE = {"actif": "actifs", "pause": "en pause", "exclu": "exclus", "retardataire": "retardataires"}
+STATUTS_LISTE = {"actif": "actifs", "pause": "en pause", "exclu": "exclus"}
 
 
 def nom_statut(g: Grimpeur) -> str:
-    if est_retardataire(g):
-        return "retardataire (rattrape le groupe)"
     return {"actif": "actif", "pause": "en pause", "exclu": "exclu"}[g.statut]
 
 
@@ -80,9 +78,9 @@ async def grimpeur_ajouter(ctx: Contexte, pseudo: str, classe: str, difficulte: 
         return Reponse(f"Rien n'a été enregistré : {e}.")
     apres = await charger_etat(ctx)
     texte = f"**{g.pseudo}** est inscrit : {g.classe}, {NOM_DIFFICULTE[g.difficulte]}."
-    if est_retardataire(g):
-        texte += ("\nL'étage est déjà ouvert : il arrive en **retardataire**. Il n'entre dans la jauge (maximum "
-                  "et points) qu'en rattrapant le grimpeur compté le moins avancé, ou avec `/grimpeur inclure`.")
+    if g.statut == "pause":
+        texte += ("\nL'étage 0 est déjà ouvert : il arrive **en pause**, hors de la jauge. Passe-le actif avec "
+                  f"`/grimpeur reprendre pseudo:{g.pseudo}` quand tu le juges prêt.")
     return _avec_effet(texte, avant, apres)
 
 
@@ -116,28 +114,11 @@ async def grimpeur_modifier(ctx: Contexte, pseudo: str, nouveau_pseudo: str | No
             "niveau_connu": "niveau", "discord_user_id": "membre Discord"}
     details = []
     for champ, (av, ap) in changements.items():
-        if champ == "inclus":
-            continue
         if champ == "difficulte":
             av, ap = NOM_DIFFICULTE[av], NOM_DIFFICULTE[ap]
         details.append(f"{noms[champ]} : {av if av is not None else '—'} → {ap}")
     texte = f"**{nouveau.pseudo}** modifié. " + " ; ".join(details) + "."
-    if "inclus" in changements:
-        texte += "\nIl a rattrapé le groupe : il n'est plus retardataire et entre dans la jauge."
     return _avec_effet(texte, avant, await charger_etat(ctx))
-
-
-async def grimpeur_inclure(ctx: Contexte, pseudo: str, motif: str | None = None) -> Reponse:
-    g = await _trouver(ctx, pseudo)
-    if isinstance(g, Reponse):
-        return g
-    avant = await charger_etat(ctx)
-    try:
-        await ctx.depot.inclure(g.id, motif, ctx.acteur_id, ctx.maintenant)
-    except ErreurDepot as e:
-        return Reponse(f"Rien n'a changé : {e}.")
-    return _avec_effet(f"**{g.pseudo}** est inclus : il entre dans la jauge (maximum et points).",
-                       avant, await charger_etat(ctx))
 
 
 async def grimpeur_pause(ctx: Contexte, pseudo: str, motif: str | None = None) -> Reponse:
@@ -150,7 +131,7 @@ async def grimpeur_pause(ctx: Contexte, pseudo: str, motif: str | None = None) -
         return Reponse(f"**{g.pseudo}** est exclu. Utilise `/grimpeur reprendre` d'abord.")
     avant = await charger_etat(ctx)
     await ctx.depot.changer_statut(g.id, "pause", motif, "pause", ctx.acteur_id, ctx.maintenant)
-    texte = f"**{g.pseudo}** est en pause : il sort de la jauge. À sa reprise, il devra rattraper le groupe."
+    texte = f"**{g.pseudo}** est en pause : il sort de la jauge (maximum et points)."
     return _avec_effet(texte, avant, await charger_etat(ctx))
 
 
@@ -161,12 +142,8 @@ async def grimpeur_reprendre(ctx: Contexte, pseudo: str) -> Reponse:
     if g.statut == "actif":
         return Reponse(f"**{g.pseudo}** est déjà actif.")
     avant = await charger_etat(ctx)
-    repris = await ctx.depot.changer_statut(g.id, "actif", None, "reprise", ctx.acteur_id, ctx.maintenant)
-    if est_retardataire(repris):
-        texte = (f"**{g.pseudo}** reprend l'ascension en **retardataire** : il rentre dans la jauge en rattrapant "
-                 "le grimpeur compté le moins avancé, ou avec `/grimpeur inclure`.")
-    else:
-        texte = f"**{g.pseudo}** reprend l'ascension : il est déjà au niveau du groupe et compte tout de suite."
+    await ctx.depot.changer_statut(g.id, "actif", None, "reprise", ctx.acteur_id, ctx.maintenant)
+    texte = f"**{g.pseudo}** reprend l'ascension : il compte de nouveau dans la jauge."
     return _avec_effet(texte, avant, await charger_etat(ctx))
 
 
@@ -235,9 +212,8 @@ CHOIX_DIFFICULTES = [app_commands.Choice(name=NOM_DIFFICULTE[d], value=d) for d 
 CHOIX_STATUTS = [app_commands.Choice(name=n, value=s) for s, n in STATUTS_LISTE.items()]
 
 
-async def autocompletion_pseudo(depot: Depot, saisie: str, seulement_retardataires: bool = False
-                                ) -> list[app_commands.Choice[str]]:
-    grimpeurs = await depot.grimpeurs("retardataire" if seulement_retardataires else None)
+async def autocompletion_pseudo(depot: Depot, saisie: str) -> list[app_commands.Choice[str]]:
+    grimpeurs = await depot.grimpeurs()
     options = [(g.pseudo, g.pseudo) for g in grimpeurs if g.statut != "exclu"]
     options += [(f"{g.pseudo} (exclu)", g.pseudo) for g in grimpeurs if g.statut == "exclu"]
     return [app_commands.Choice(name=n, value=v) for n, v in suggestions(saisie, options)]
@@ -264,7 +240,7 @@ class ConfirmationExclusion(discord.ui.View):
         await interaction.response.edit_message(content="Exclusion abandonnée, rien n'a changé.", view=None)
 
 
-@app_commands.default_permissions(manage_guild=True)
+@app_commands.default_permissions(administrator=True)
 @app_commands.guild_only()
 class GroupeGrimpeur(app_commands.Group):
     def __init__(self, depot: Depot, guild_id: int, admin_role_id: int, fuseau: str) -> None:
@@ -277,9 +253,6 @@ class GroupeGrimpeur(app_commands.Group):
     async def _pseudos(self, _interaction: discord.Interaction, saisie: str):
         return await autocompletion_pseudo(self.depot, saisie)
 
-    async def _retardataires(self, _interaction: discord.Interaction, saisie: str):
-        return await autocompletion_pseudo(self.depot, saisie, seulement_retardataires=True)
-
     @app_commands.command(name="ajouter", description="Inscrire un grimpeur")
     @app_commands.describe(pseudo="Pseudo en jeu (2 à 30 caractères)", membre="Son compte Discord (facultatif)")
     @app_commands.choices(classe=CHOIX_CLASSES, difficulte=CHOIX_DIFFICULTES)
@@ -287,6 +260,7 @@ class GroupeGrimpeur(app_commands.Group):
                       classe: str, difficulte: str, membre: discord.Member | None = None) -> None:
         if not await autoriser(interaction, self.admin_role_id):
             return
+        await differer(interaction)
         rep = await grimpeur_ajouter(self.ctx(interaction), pseudo, classe, difficulte, membre.id if membre else None)
         await envoyer(interaction, rep)
 
@@ -299,37 +273,35 @@ class GroupeGrimpeur(app_commands.Group):
                        membre: discord.Member | None = None) -> None:
         if not await autoriser(interaction, self.admin_role_id):
             return
+        await differer(interaction)
         rep = await grimpeur_modifier(self.ctx(interaction), pseudo, nouveau_pseudo, classe, difficulte,
                                       niveau, membre.id if membre else None)
         await envoyer(interaction, rep)
-
-    @app_commands.command(name="inclure", description="Faire entrer un retardataire dans le maximum")
-    async def inclure(self, interaction: discord.Interaction, pseudo: str, motif: str | None = None) -> None:
-        if not await autoriser(interaction, self.admin_role_id):
-            return
-        await envoyer(interaction, await grimpeur_inclure(self.ctx(interaction), pseudo, motif))
 
     @app_commands.command(name="pause", description="Mettre un grimpeur en pause (il sort de la jauge)")
     async def pause(self, interaction: discord.Interaction, pseudo: str, motif: str | None = None) -> None:
         if not await autoriser(interaction, self.admin_role_id):
             return
+        await differer(interaction)
         await envoyer(interaction, await grimpeur_pause(self.ctx(interaction), pseudo, motif))
 
     @app_commands.command(name="reprendre", description="Remettre un grimpeur actif (après pause ou exclusion)")
     async def reprendre(self, interaction: discord.Interaction, pseudo: str) -> None:
         if not await autoriser(interaction, self.admin_role_id):
             return
+        await differer(interaction)
         await envoyer(interaction, await grimpeur_reprendre(self.ctx(interaction), pseudo))
 
     @app_commands.command(name="exclure", description="Exclure un grimpeur (demande une confirmation)")
     async def exclure(self, interaction: discord.Interaction, pseudo: str, motif: str) -> None:
         if not await autoriser(interaction, self.admin_role_id):
             return
+        await differer(interaction)
         g = await self.depot.grimpeur_par_pseudo(pseudo)
         if g is None:
             await envoyer(interaction, Reponse(f"Aucun grimpeur nommé « {pseudo} »."))
             return
-        await interaction.response.send_message(
+        await interaction.followup.send(
             f"Exclure **{g.pseudo}** ? Motif : {motif}", ephemeral=True,
             view=ConfirmationExclusion(self, g.pseudo, motif),
         )
@@ -338,6 +310,7 @@ class GroupeGrimpeur(app_commands.Group):
     async def voir(self, interaction: discord.Interaction, pseudo: str) -> None:
         if not await autoriser(interaction, self.admin_role_id):
             return
+        await differer(interaction)
         await envoyer(interaction, await grimpeur_voir(self.ctx(interaction), pseudo))
 
     @app_commands.command(name="liste", description="Le registre, filtrable par statut")
@@ -345,6 +318,7 @@ class GroupeGrimpeur(app_commands.Group):
     async def liste(self, interaction: discord.Interaction, statut: str | None = None) -> None:
         if not await autoriser(interaction, self.admin_role_id):
             return
+        await differer(interaction)
         await envoyer(interaction, await grimpeur_liste(self.ctx(interaction), statut))
 
     # La même autocomplétion des pseudos sert à toutes les sous-commandes.
@@ -353,4 +327,3 @@ class GroupeGrimpeur(app_commands.Group):
     reprendre.autocomplete("pseudo")(_pseudos)
     exclure.autocomplete("pseudo")(_pseudos)
     voir.autocomplete("pseudo")(_pseudos)
-    inclure.autocomplete("pseudo")(_retardataires)

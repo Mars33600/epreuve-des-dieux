@@ -34,6 +34,7 @@ etage = Table(
     Column("date_plancher_suivant", Horodatage),
     Column("zone_quetes", Text, nullable=False, server_default=""),
     Column("donjons_affiches", ARRAY(Text), nullable=False, server_default="{}"),
+    Column("chapitre_guide", Text),
 )  # fmt: skip
 
 palier = Table(
@@ -73,8 +74,6 @@ grimpeur = Table(
     Column("niveau_connu", Integer),
     Column("niveau_maj_le", Horodatage),
     Column("inscrit_le", Horodatage, nullable=False),
-    Column("inclus_le", Horodatage),
-    Column("inclusion_forcee", Boolean, nullable=False, server_default="false"),
 )  # fmt: skip
 
 preuve = Table(

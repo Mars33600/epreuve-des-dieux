@@ -24,6 +24,7 @@ from epreuve.bot.commun import (
     autoriser,
     contexte_de,
     date_lisible,
+    differer,
     envoyer,
     normaliser,
     suggestions,
@@ -33,6 +34,7 @@ from epreuve.domaine.controles import MOTIF_DEJA_VALIDE, controler_validation
 from epreuve.domaine.modeles import TYPES_QUETES, Contenu, Grimpeur, liste_francaise, phrase_validation
 
 NB_MAX_GRIMPEURS = 8
+ID_MAX = 2**31 - 1  # le plus grand identifiant possible d'une validation (entier Postgres)
 DELAI_CONFIRMATION_S = 600  # les boutons d'avertissement expirent après 10 minutes
 
 # --- Liens de preuve -----------------------------------------------------------------------------
@@ -169,6 +171,8 @@ async def valider(ctx: Contexte, d: DemandeValidation, accepter_depassement: boo
 
 
 async def annuler(ctx: Contexte, validation_id: int, motif: str) -> Reponse:
+    if not 1 <= validation_id <= ID_MAX:
+        return Reponse(f"Rien n'a été annulé : numéro de validation invalide ({validation_id}).")
     if not motif.strip():
         return Reponse("Rien n'a été annulé : indique un motif.")
     try:
@@ -237,7 +241,7 @@ class CommandesValidation:
         outil = self
 
         @app_commands.command(name="valider", description="Enregistrer un donjon ou un succès (1 à 8 grimpeurs)")
-        @app_commands.default_permissions(manage_guild=True)
+        @app_commands.default_permissions(administrator=True)
         @app_commands.guild_only()
         @app_commands.describe(contenu="Le succès réalisé", preuve="Lien du message du screen")
         async def valider_cmd(
@@ -264,12 +268,13 @@ class CommandesValidation:
             if oublis:
                 await envoyer(interaction, Reponse("Rien n'a été enregistré :\n" + "\n".join(oublis)))
                 return
+            await differer(interaction)
             ctx = contexte_de(interaction, outil.depot, outil.guild_id, outil.fuseau)
             demande = DemandeValidation(contenu, couples, preuve)
             rep = await valider(ctx, demande)
             if isinstance(rep, AConfirmer):
                 vue = ConfirmationDepassement(outil, interaction.user.id, demande)
-                await interaction.response.send_message(rep.texte, ephemeral=True, view=vue)
+                await interaction.followup.send(rep.texte, ephemeral=True, view=vue)
                 return
             await envoyer(interaction, rep)
 
@@ -282,12 +287,14 @@ class CommandesValidation:
         outil = self
 
         @app_commands.command(name="annuler", description="Annuler une validation ou une déclaration")
-        @app_commands.default_permissions(manage_guild=True)
+        @app_commands.default_permissions(administrator=True)
         @app_commands.guild_only()
         @app_commands.describe(validation="Numéro de la validation", motif="Pourquoi on l'annule")
-        async def annuler_cmd(interaction: discord.Interaction, validation: int, motif: str) -> None:
+        async def annuler_cmd(interaction: discord.Interaction, validation: app_commands.Range[int, 1, ID_MAX],
+                              motif: str) -> None:
             if not await autoriser(interaction, outil.admin_role_id):
                 return
+            await differer(interaction)
             ctx = contexte_de(interaction, outil.depot, outil.guild_id, outil.fuseau)
             await envoyer(interaction, await annuler(ctx, validation, motif))
 

@@ -99,7 +99,7 @@ async def test_pseudo_unique_sans_la_casse_et_membre_unique(depot):
 
 async def test_le_depot_renvoie_des_objets_du_domaine(etage0):
     g = await etage0.ajouter_grimpeur("Brindille", "Eniripsa", "hard", None, ADMIN, AVANT)
-    assert isinstance(g, Grimpeur) and g.statut == "actif" and g.inclus_le == AVANT
+    assert isinstance(g, Grimpeur) and g.statut == "actif" and g.inscrit_le == AVANT
     etage = await etage0.etage_ouvert()
     k = (await etage0.contenus(etage.id))[0]
     await etage0.creer_validations(etage, k, [(g, 20, False)], PENDANT, None, ADMIN, PENDANT)
@@ -111,65 +111,18 @@ async def test_le_depot_renvoie_des_objets_du_domaine(etage0):
     assert (await etage0.grimpeur_par_pseudo("brindille")).niveau_connu == 20
 
 
-async def test_inscription_apres_l_ouverture_retardataire(etage0):
+async def test_inscription_apres_l_ouverture_en_pause(etage0):
     avant = await etage0.ajouter_grimpeur("Tot", "Iop", "easy", None, ADMIN, OUVERTURE - timedelta(seconds=1))
     apres = await etage0.ajouter_grimpeur("Tard", "Iop", "easy", None, ADMIN, OUVERTURE)
-    assert avant.inclus_le is not None and apres.inclus_le is None
-    assert [g.pseudo for g in await etage0.grimpeurs("retardataire")] == ["Tard"]
+    assert (avant.statut, apres.statut) == ("actif", "pause")
+    (inscription,) = [e for e in await etage0.journal() if e.grimpeur_id == apres.id]
+    assert inscription.details["statut"] == "pause"
+    # Un admin le passe actif : aucun calcul automatique, il compte tout de suite.
+    assert (await etage0.changer_statut(apres.id, "actif", None, "reprise", ADMIN, PENDANT)).statut == "actif"
 
 
-async def test_inclusion_automatique_sur_mise_a_jour_de_niveau(etage0):
-    g = await etage0.ajouter_grimpeur("Tard", "Iop", "easy", None, ADMIN, PENDANT)
-    _, changements = await etage0.modifier_grimpeur(g.id, ADMIN, PENDANT, niveau=19)
-    assert "inclus" not in changements
-    nouveau, changements = await etage0.modifier_grimpeur(g.id, ADMIN, PENDANT, niveau=20)
-    assert changements["inclus"] == [False, True] and nouveau.inclus_le == PENDANT
-    inclusion = [e for e in await etage0.journal() if e.type == "inclusion"]
-    assert len(inclusion) == 1 and inclusion[0].details["raison"] == "rattrapage"
-    assert inclusion[0].details["niveau_plancher"] == 20  # aucun compté n'a de niveau : le cap
-
-
-async def test_inclusion_au_niveau_du_moins_avance(etage0):
-    await etage0.ajouter_grimpeur("Ancien", "Iop", "easy", None, ADMIN, AVANT)
-    ancien = await etage0.grimpeur_par_pseudo("Ancien")
-    await etage0.modifier_grimpeur(ancien.id, ADMIN, AVANT, niveau=14)
-    g = await etage0.ajouter_grimpeur("Tard", "Iop", "easy", None, ADMIN, PENDANT)
-    _, changements = await etage0.modifier_grimpeur(g.id, ADMIN, PENDANT, niveau=14)
-    assert changements["inclus"] == [False, True]
-
-
-async def test_retour_de_pause_retardataire(etage0):
-    await etage0.ajouter_grimpeur("Ancien", "Iop", "easy", None, ADMIN, AVANT)
-    await etage0.ajouter_grimpeur("Dormeur", "Iop", "easy", None, ADMIN, AVANT)
-    ancien, dormeur = await etage0.grimpeur_par_pseudo("Ancien"), await etage0.grimpeur_par_pseudo("Dormeur")
-    await etage0.modifier_grimpeur(ancien.id, ADMIN, AVANT, niveau=18)
-    await etage0.changer_statut(dormeur.id, "pause", None, "pause", ADMIN, PENDANT)
-    repris = await etage0.changer_statut(dormeur.id, "actif", None, "reprise", ADMIN, PENDANT)
-    assert repris.inclus_le is None  # niveau inconnu : il redevient retardataire
-    await etage0.modifier_grimpeur(dormeur.id, ADMIN, PENDANT, niveau=18)
-    assert (await etage0.grimpeur_par_pseudo("Dormeur")).inclus_le is not None
-    # Déjà au niveau du groupe : la reprise le réinclut tout de suite.
-    await etage0.changer_statut(dormeur.id, "pause", None, "pause", ADMIN, PENDANT)
-    repris = await etage0.changer_statut(dormeur.id, "actif", None, "reprise", ADMIN, PENDANT)
-    assert repris.inclus_le == PENDANT
-
-
-async def test_inclusion_automatique_par_une_validation(etage0):
-    g = await etage0.ajouter_grimpeur("Tard", "Iop", "easy", None, ADMIN, PENDANT)
-    etage = await etage0.etage_ouvert()
-    k = (await etage0.contenus(etage.id))[0]
-    await etage0.creer_validations(etage, k, [(g, 20, False)], PENDANT, None, ADMIN, PENDANT)
-    assert (await etage0.grimpeur_par_pseudo("Tard")).inclus_le is not None
-
-
-async def test_inclure_a_la_main(etage0):
-    g = await etage0.ajouter_grimpeur("Tard", "Iop", "easy", None, ADMIN, PENDANT)
-    inclus = await etage0.inclure(g.id, "il joue avec nous depuis le début", ADMIN, PENDANT)
-    assert inclus.inclus_le == PENDANT and inclus.inclusion_forcee
-    with pytest.raises(ErreurDepot, match="pas retardataire"):
-        await etage0.inclure(g.id, None, ADMIN, PENDANT)
-    with pytest.raises(Introuvable):
-        await etage0.inclure(999, None, ADMIN, PENDANT)
+async def test_inscription_sans_etage_actif(depot):
+    assert (await depot.ajouter_grimpeur("Tot", "Iop", "easy", None, ADMIN, PENDANT)).statut == "actif"
 
 
 async def _deux_grimpeurs(depot):
@@ -237,7 +190,7 @@ async def test_declarer_et_doublon(etage0):
         await etage0.declarer(etage, [lot], g1, None, g1.id, PENDANT)
     (entree,) = await etage0.journal(public=True)
     assert entree.type == "declaration"
-    assert entree.details["validations"][0]["contenu"] == "Toutes les quêtes d'Incarnam"
+    assert entree.details["validations"][0]["contenu"].startswith("Guide Duffus : ")
 
 
 async def test_modifier_et_journal(etage0):
@@ -281,3 +234,32 @@ async def test_preuve_reutilisee_et_visible(etage0):
         assert (await c.execute(text("SELECT count(*) FROM epreuve.preuve"))).scalar() == 1
     lignes = await etage0.validations_du_grimpeur(g1.id)
     assert [lv.preuve for lv in lignes] == [p.lien, p.lien]
+
+
+async def test_meme_preuve_saisie_en_meme_temps(etage0):
+    """Deux admins saisissent le même screen au même moment pour deux grimpeurs : deux validations,
+    une seule preuve (ON CONFLICT DO NOTHING, puis lecture)."""
+    g1, g2, etage, k = await _deux_grimpeurs(etage0)
+    p = PreuveDiscord(1, 2, 4, "https://discord.com/channels/1/2/4", OUVERTURE + timedelta(hours=1))
+    r1, r2 = await asyncio.gather(
+        etage0.creer_validations(etage, k, [(g1, 20, False)], p.poste_le, p, ADMIN, PENDANT),
+        etage0.creer_validations(etage, k, [(g2, 20, False)], p.poste_le, p, ADMIN, PENDANT),
+    )
+    assert len(r1) == len(r2) == 1
+    async with etage0._moteur.connect() as c:
+        assert (await c.execute(text("SELECT count(*) FROM epreuve.preuve"))).scalar() == 1
+
+
+async def test_doublon_de_preuve_traduit_en_deja_valide(etage0, moteur):
+    from sqlalchemy.exc import IntegrityError as Erreur
+
+    from epreuve.db.depot import _est_doublon
+
+    async with moteur.begin() as c:
+        await c.execute(insert(t.preuve).values(discord_guild_id=1, discord_channel_id=2, discord_message_id=9,
+                                                lien="x", poste_le=PENDANT, cree_le=PENDANT))
+    with pytest.raises(Erreur) as e:
+        async with moteur.begin() as c:
+            await c.execute(insert(t.preuve).values(discord_guild_id=1, discord_channel_id=2, discord_message_id=9,
+                                                    lien="x", poste_le=PENDANT, cree_le=PENDANT))
+    assert _est_doublon(e.value)

@@ -2,7 +2,7 @@
 
 Base de test : un Postgres jetable, par défaut celui lancé par
     docker run -d --rm --name epreuve-pg-test -p 54329:5432 \
-        -e POSTGRES_PASSWORD=test -e POSTGRES_DB=epreuve_test postgres:16-alpine
+        -e POSTGRES_PASSWORD=test -e POSTGRES_DB=epreuve_test postgres:17-alpine
 (ou l'adresse donnée par TEST_DATABASE_URL). Si la base est injoignable, les tests marqués `db`
 sont sautés avec un message : le reste de la suite tourne quand même.
 """

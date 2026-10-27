@@ -1,6 +1,6 @@
 """Les points visés par difficulté et le seuil de la jauge, calculé en entiers.
 
-La jauge d'un étage (SPEC §5.3) : chaque grimpeur compté « vise » 1, 2 ou 3 points selon sa
+La jauge d'un étage (SPEC §5.3) : chaque grimpeur actif « vise » 1, 2 ou 3 points selon sa
 difficulté. Le maximum est la somme des points visés ; le seuil est un pourcentage de ce maximum,
 arrondi au-dessus.
 

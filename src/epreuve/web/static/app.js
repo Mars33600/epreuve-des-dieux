@@ -155,7 +155,9 @@ const Epreuve = (() => {
       el("span", {}, "Cap de niveau ", el("b", { class: "num", text: ec.level_cap })),
       ec.donjons.length ? el("span", {}, ec.donjons.length > 1 ? "Donjons " : "Donjon ",
         el("b", { text: ec.donjons.join(", ") })) : null,
-      ec.zone_quetes ? el("span", {}, "Quêtes ", el("b", { text: ec.zone_quetes })) : null);
+      ec.chapitre_guide ? el("span", {}, "Quêtes ", el("a", { attrs: { href: ec.lien_guide, rel: "noopener" } },
+        el("b", { text: `guide Duffus : ${ec.chapitre_guide}` })))
+        : ec.zone_quetes ? el("span", {}, "Quêtes ", el("b", { text: ec.zone_quetes })) : null);
 
     // Une seule jauge : remplie à min(points ÷ maximum, 100 %), repère au seuil.
     const j = ec.jauge, d = ec.comptes_par_difficulte;
@@ -184,12 +186,11 @@ const Epreuve = (() => {
     const avantPlancher = plancher && maintenant() < plancher;
     v.className = "verdict" + (j.pleine ? " open" : "");
     if (j.maximum === 0) {
-      v.replaceChildren(el("b", { text: "Aucun grimpeur compté." }), " La jauge se remplira dès la première inscription.");
+      v.replaceChildren(el("b", { text: "Aucun grimpeur actif." }), " La jauge se remplira dès la première inscription.");
       return;
     }
-    const morceaux = [`${ec.n_comptes} grimpeur${ec.n_comptes > 1 ? "s" : ""} compté${ec.n_comptes > 1 ? "s" : ""}`];
+    const morceaux = [`${ec.n_comptes} grimpeur${ec.n_comptes > 1 ? "s" : ""} actif${ec.n_comptes > 1 ? "s" : ""}`];
     if (ec.n_pause) morceaux.push(`${ec.n_pause} en pause`);
-    if (ec.n_retardataires) morceaux.push(`${ec.n_retardataires} retardataire${ec.n_retardataires > 1 ? "s" : ""} (hors de la jauge tant qu'il n'a pas rattrapé)`);
     const base = " " + morceaux.join(", ") + ".";
     if (j.pleine) {
       v.replaceChildren(el("b", { text: "Le seuil est atteint." }),
@@ -221,8 +222,17 @@ const Epreuve = (() => {
   }
 
   function statutLisible(g) {
-    if (g.statut !== "actif") return "En pause";
-    return g.retardataire ? "Rattrape le groupe" : "Actif";
+    return g.statut === "actif" ? "Actif" : "En pause";
+  }
+
+  /** « 2 pts · ✓ sa part », « 3 pts · ✓ sa part · +2 bonus » ou « 0 pt · encore 2 pts » (maquette).
+   *  « Sa part » = les points attendus pour sa difficulté ; au-delà, c'est du bonus pour le groupe. */
+  function ptsLabel(points, vises) {
+    const nb = (n) => `${n} pt${n > 1 ? "s" : ""}`;
+    const etat = points >= vises
+      ? `✓ sa part${points > vises ? ` · +${points - vises} bonus` : ""}`
+      : `encore ${nb(vises - points)}`;
+    return `${nb(points)} · ${etat}`;
   }
 
   function marques(g) {
@@ -243,7 +253,7 @@ const Epreuve = (() => {
       attrs: { type: "button", "aria-haspopup": "dialog" }, data: { id: g.id } },
       el("div", { class: "ptop" }, el("strong", { text: g.pseudo }), el("span", { class: "diff", text: d.nom })),
       el("div", { class: "meta" }, el("span", { text: g.classe }), el("span", { text: statutLisible(g) }),
-        el("span", { class: "pts", text: `${g.points} / ${g.points_vises} pt${g.points_vises > 1 ? "s" : ""}` })),
+        el("span", { class: "pts", text: ptsLabel(g.points, g.points_vises) })),
       el("div", { class: "lvl" },
         el("div", { class: "meta" }, el("span", { class: "num" + (g.au_dessus_du_cap ? " over" : ""), text: niveau }),
           g.au_dessus_du_cap ? el("span", { class: "over", text: "Dépasse le cap" }) : null),
@@ -298,16 +308,17 @@ const Epreuve = (() => {
       el("div", { class: "meta" }, el("span", { text: g.classe }),
         el("span", { class: "num" + (g.au_dessus_du_cap ? " over" : ""), text: niveau }),
         el("span", { text: statutLisible(g) }),
-        el("span", { class: "pts", text: `${g.points} / ${g.points_vises} points` })),
+        el("span", { class: "pts", text: ptsLabel(g.points, g.points_vises) })),
       el("div", { class: "checks" }, (ec ? ec.paliers : []).map((p) => {
         const fait = !!g.marques[String(p.rang)];
         return el("div", { class: "check" + (fait ? " done" : "") },
           el("span", {}, `Palier ${p.rang} · ${p.libelle}`,
-            el("small", { text: fait ? (p.rang === 3 ? "Déclaré par le grimpeur" : "Validé par un admin") : "Pas encore fait" })),
+            el("small", { text: fait ? (p.rang === 3 ? "Déclaré par le grimpeur" : "Validé par un admin") : "Pas encore fait" }),
+            p.rang === 3 && ec.chapitre_guide ? el("small", {}, el("a", { attrs: { href: ec.lien_guide, rel: "noopener" },
+              text: `Guide Duffus : ${ec.chapitre_guide}` })) : null),
           el("span", { class: "etat", text: fait ? "Fait" : "À faire" }));
       })),
       el("p", { class: "note", text: "Les points suivent l'ordre des paliers : les quêtes ne rapportent qu'une fois le full succès atteint." }),
-      g.retardataire ? el("p", { class: "note", text: "Rattrape le groupe : ses points ne comptent pas encore. Il entrera dans la jauge en rattrapant le grimpeur le moins avancé." }) : null,
       g.au_dessus_du_cap ? el("p", { class: "note over", text: "Niveau au-dessus du cap : un admin jugera s'il s'agit d'un dépassement involontaire." }) : null,
       g.statut !== "actif" ? el("p", { class: "note", text: "En pause : ne compte pas dans la jauge pour l’instant." }) : null);
     const dlg = $("sheet");
@@ -367,5 +378,5 @@ const Epreuve = (() => {
     else demarrer();
   }
 
-  return { compteARebours, duree, ilYA, trierGrimpeurs };
+  return { compteARebours, duree, ilYA, trierGrimpeurs, ptsLabel };
 })();

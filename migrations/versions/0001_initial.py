@@ -36,7 +36,8 @@ CREATE TABLE epreuve.etage (
     ouvert_le              timestamptz,
     date_plancher_suivant  timestamptz,
     zone_quetes            text NOT NULL DEFAULT '',
-    donjons_affiches       text[] NOT NULL DEFAULT '{{}}'
+    donjons_affiches       text[] NOT NULL DEFAULT '{{}}',
+    chapitre_guide         text            -- étage N = chapitre N du guide Duffus (palier 3)
 );
 -- Au plus un étage ouvert à la fois.
 CREATE UNIQUE INDEX etage_un_seul_ouvert ON epreuve.etage (statut) WHERE statut = 'ouvert';
@@ -79,9 +80,7 @@ CREATE TABLE epreuve.grimpeur (
     discord_user_id  bigint,
     niveau_connu     integer CHECK (niveau_connu BETWEEN 1 AND 200),
     niveau_maj_le    timestamptz,
-    inscrit_le       timestamptz NOT NULL DEFAULT now(),
-    inclus_le        timestamptz,          -- vide : retardataire, hors du maximum de la jauge
-    inclusion_forcee boolean NOT NULL DEFAULT false
+    inscrit_le       timestamptz NOT NULL DEFAULT now()
 );
 -- Pseudo unique sans tenir compte de la casse ; un compte Discord relié à un seul grimpeur.
 CREATE UNIQUE INDEX grimpeur_pseudo_unique ON epreuve.grimpeur (lower(pseudo_ig));

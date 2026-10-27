@@ -17,6 +17,8 @@ from epreuve.bot.cmd_validation import CommandesValidation
 from epreuve.db.depot import Depot
 
 journal = logging.getLogger("epreuve.bot")
+MESSAGE_ERREUR = ("La commande a échoué de façon inattendue. Vérifie l'état avec `/grimpeur voir` "
+                  "avant de réessayer, ou préviens Marceau.")
 
 
 class ArbreVerrouille(app_commands.CommandTree):
@@ -28,6 +30,24 @@ class ArbreVerrouille(app_commands.CommandTree):
 
     async def interaction_check(self, interaction: discord.Interaction) -> bool:
         return interaction.guild_id == self.guild_id
+
+    async def on_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError) -> None:
+        """Toute erreur non prévue d'une commande : on la journalise et on répond clairement,
+        en éphémère, au lieu de laisser Discord afficher « L'application ne répond pas »."""
+        if interaction.guild_id != self.guild_id:
+            return  # un autre serveur : le bot ne lui répond pas
+        nom = getattr(interaction.command, "qualified_name", "?")
+        journal.error("erreur dans /%s (par %s)", nom, interaction.user.id, exc_info=error)
+        message = MESSAGE_ERREUR
+        if isinstance(error, app_commands.TransformerError):
+            message = "Une option n'a pas la bonne forme. Vérifie la saisie et réessaie."
+        try:
+            if interaction.response.is_done():
+                await interaction.followup.send(message, ephemeral=True)
+            else:
+                await interaction.response.send_message(message, ephemeral=True)
+        except discord.HTTPException:
+            journal.warning("impossible de prévenir l'utilisateur de l'erreur dans /%s", nom)
 
 
 class BotEpreuve(discord.Client):

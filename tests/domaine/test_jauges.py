@@ -117,13 +117,16 @@ def test_pause_hors_du_maximum_et_des_points():
     assert e.jauge.maximum == 21 and e.jauge.points == 0 and e.n_pause == 1 and e.n_comptes == 11
 
 
-def test_retardataire_hors_du_maximum_et_des_points():
-    g = [*douze(), grimpeur(13, difficulte="hard", retard=True)]
+def test_inscrit_tardif_en_pause_hors_du_maximum_et_des_points():
+    g = [*douze(), grimpeur(13, difficulte="hard", statut="pause")]
     e = etat(g, faits(13) + faits(1, (1,)))
-    assert e.jauge.maximum == 24 and e.jauge.points == 1  # les 3 points du retardataire ne comptent pas
-    assert e.n_retardataires == 1 and e.n_comptes == 12
+    assert e.jauge.maximum == 24 and e.jauge.points == 1  # ses 3 points ne comptent pas tant qu'il est en pause
+    assert e.n_pause == 1 and e.n_comptes == 12
     assert e.grimpeurs_par_palier == (1, 0, 0)
     assert points_grimpeur(g[-1], PALIERS, faits(13), ETAGE0) == 3  # ses points personnels restent visibles
+    repris = replace(g[-1], statut="actif")  # un admin le passe actif
+    apres = etat([*douze(), repris], faits(13) + faits(1, (1,)))
+    assert (apres.jauge.maximum, apres.jauge.points) == (27, 4)
 
 
 def test_exclu_ne_compte_nulle_part():
@@ -138,7 +141,7 @@ def test_points_au_dela_du_maximum():
 
 
 def test_maximum_nul():
-    for e in (etat([], []), etat([grimpeur(1, retard=True)], faits(1)), etat([grimpeur(1, statut="pause")], [])):
+    for e in (etat([], []), etat([grimpeur(1, statut="pause")], faits(1)), etat([grimpeur(1, statut="exclu")], [])):
         assert e.jauge.maximum == 0 and e.jauge.seuil == 0 and not e.jauge.pleine and not e.deblocable
 
 
@@ -180,7 +183,6 @@ registres = st.lists(
     st.tuples(
         st.sampled_from(["actif", "actif", "pause", "exclu"]),
         st.sampled_from(["easy", "med", "hard"]),
-        st.booleans(),  # retardataire ?
         st.lists(  # (contenu, niveau, statut, forcée)
             st.tuples(st.integers(1, 6), st.sampled_from([None, 15, 20, 21, 23]),
                       st.sampled_from(["acceptee", "acceptee", "annulee", "refusee"]), st.booleans()),
@@ -195,14 +197,14 @@ registres = st.lists(
 @given(registres)
 def test_coherence_points_marques_paliers(registre):
     grimpeurs, validations = [], []
-    for i, (statut, diff, retard, valids) in enumerate(registre, start=1):
-        grimpeurs.append(grimpeur(i, statut=statut, difficulte=diff, retard=retard))
+    for i, (statut, diff, valids) in enumerate(registre, start=1):
+        grimpeurs.append(grimpeur(i, statut=statut, difficulte=diff))
         validations += [validation(i, c, niveau=n, statut=s, forcee=f) for c, n, s, f in valids]
 
     e = etat(grimpeurs, validations)
-    comptes = [g for g in grimpeurs if g.statut == "actif" and g.inclus_le is not None]
+    comptes = [g for g in grimpeurs if g.statut == "actif"]
     pts = {g.id: points_grimpeur(g, PALIERS, validations, ETAGE0) for g in comptes}
-    assert e.jauge.points == sum(pts.values())  # les retardataires ne comptent pas
+    assert e.jauge.points == sum(pts.values())  # seuls les actifs comptent
     for g in comptes:
         marques = marques_grimpeur(g, PALIERS, validations, ETAGE0)
         assert all(marques[k] for k in range(1, pts[g.id] + 1))  # points ≥ k ⇒ marques 1..k

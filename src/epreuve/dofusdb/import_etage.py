@@ -13,6 +13,10 @@ Deux étapes bien séparées :
 Le fichier doit décrire exactement les paliers 1, 2 et 3, chacun avec au moins un contenu
 (SPEC §8 bis, f) : sinon un Collectionneur ne pourrait jamais atteindre ses 3 points.
 
+Le palier 3 n'est pas lu dans DofusDB : c'est le chapitre du guide Duffus de l'étage
+(https://duffus.fr/guide-complet, étage N = chapitre N), terminé à 100 % et déclaré par le joueur.
+Le fichier donne seulement le nom du chapitre (`chapitre_guide`). On n'interroge pas le site Duffus.
+
 Le statut de l'étage (scellé, ouvert, terminé) n'est fixé qu'à la création : l'étage 0 est créé
 ouvert, les suivants scellés (ils s'ouvriront par `/etage ouvrir`, au jalon lancement).
 Un nouvel import ne change jamais ce statut.
@@ -25,16 +29,17 @@ import asyncio
 import os
 import sys
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 import yaml
-from sqlalchemy import delete, insert, select, update
+from sqlalchemy import delete, func, insert, select, update
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from epreuve.db import tables as t
 from epreuve.db.session import creer_moteur
 from epreuve.dofusdb.client import ClientDofusDB
+from epreuve.domaine.modeles import URL_GUIDE_DUFFUS
 
 
 class ConfigInvalide(ValueError):
@@ -73,6 +78,7 @@ class EtagePrepare:
     date_plancher_suivant: datetime | None
     zone_quetes: str
     donjons_affiches: list[str]
+    chapitre_guide: str | None
     paliers: list[PalierPrepare]
     contenus: dict[tuple[str, int], ContenuPrepare]  # un contenu partagé par 2 paliers n'est créé qu'une fois
 
@@ -106,6 +112,7 @@ async def developper_etage(config: dict, client: ClientDofusDB) -> EtagePrepare:
 
     contenus: dict[tuple[str, int], ContenuPrepare] = {}
     paliers: list[PalierPrepare] = []
+    chapitre = (config.get("chapitre_guide") or "").strip() or None
 
     def ajouter(c: ContenuPrepare, palier: PalierPrepare, nom_court: str | None) -> None:
         if c.cle not in contenus:
@@ -131,12 +138,13 @@ async def developper_etage(config: dict, client: ClientDofusDB) -> EtagePrepare:
                     s = await client.succes(id_succes)
                     ajouter(ContenuPrepare("succes", s["name"]["fr"], s["name"]["fr"], "achievement", s["id"]),
                             palier, None)
-            elif "dofusdb_categorie_quetes" in raccourci:
-                cat = await client.categorie_quetes(int(raccourci["dofusdb_categorie_quetes"]))
-                quetes = list(cat["questIds"])
-                lot = raccourci.get("lot_quetes") or f"Toutes les quêtes de {cat['name']['fr']}"
-                ajouter(ContenuPrepare("lot_quetes", f"{lot} ({len(quetes)})", lot, "quest_category",
-                                       cat["id"], quetes), palier, nom_court)
+            elif "guide_duffus" in raccourci:
+                # Le chapitre du guide Duffus de l'étage, à 100 % : un seul contenu, déclaré par le joueur.
+                if not chapitre:
+                    raise ConfigInvalide("le palier `guide_duffus` demande `chapitre_guide` (nom du chapitre)")
+                nom = f"Guide Duffus : {chapitre} à 100 %"
+                # Clé de source « guide_duffus » / numéro de l'étage : rend l'import rejouable sans doublon.
+                ajouter(ContenuPrepare("lot_quetes", nom, nom, "guide_duffus", int(config["numero"])), palier, None)
             else:
                 raise ConfigInvalide(f"raccourci de contenu inconnu au palier {palier.rang} : {raccourci}")
         paliers.append(palier)
@@ -146,7 +154,7 @@ async def developper_etage(config: dict, client: ClientDofusDB) -> EtagePrepare:
         seuil_pourcent=pourcent, ouvert_le=_date(config.get("ouvert_le")),
         date_plancher_suivant=_date(config.get("date_plancher_suivant")),
         zone_quetes=config.get("zone_quetes", ""), donjons_affiches=list(config.get("donjons_affiches", [])),
-        paliers=paliers, contenus=contenus,
+        chapitre_guide=chapitre, paliers=paliers, contenus=contenus,
     )  # fmt: skip
 
 
@@ -154,14 +162,23 @@ def decrire(e: EtagePrepare) -> str:
     """Ce qui serait écrit, lisible par un humain (mode --a-blanc)."""
     lignes = [f"Étage {e.numero} · {e.nom} — cap {e.level_cap}, seuil {e.seuil_pourcent} %, quêtes : {e.zone_quetes}",
               f"  ouverture {e.ouvert_le}, date plancher {e.date_plancher_suivant}",
+              f"  guide Duffus ({URL_GUIDE_DUFFUS}) : {e.chapitre_guide or '—'}",
               f"  {len(e.contenus)} contenus :"]
     for c in e.contenus.values():
-        couverts = f", {len(c.dofusdb_ids_couverts)} quêtes" if c.dofusdb_ids_couverts else ""
-        lignes.append(f"    - [{c.dofusdb_type} {c.dofusdb_id}] {c.nom_court} ({c.type}{couverts})")
+        lignes.append(f"    - [{c.dofusdb_type} {c.dofusdb_id}] {c.nom_court} ({c.type})")
     for p in e.paliers:
         noms = ", ".join(e.contenus[cle].nom_court for cle in p.contenus)
         lignes.append(f"  palier {p.rang} « {p.libelle} » : {noms}")
     return "\n".join(lignes)
+
+
+def _lisible(valeur):
+    """Une valeur rangeable en JSON (dates en ISO, en UTC pour comparer des instants) pour le journal."""
+    if isinstance(valeur, datetime):
+        return valeur.astimezone(UTC).isoformat()
+    if isinstance(valeur, (list, tuple)):
+        return list(valeur)
+    return valeur
 
 
 async def ecrire_etage(moteur: AsyncEngine, e: EtagePrepare) -> int:
@@ -169,15 +186,24 @@ async def ecrire_etage(moteur: AsyncEngine, e: EtagePrepare) -> int:
     async with moteur.begin() as c:
         champs = dict(nom=e.nom, level_cap=e.level_cap, seuil_pourcent=e.seuil_pourcent, ouvert_le=e.ouvert_le,
                       date_plancher_suivant=e.date_plancher_suivant, zone_quetes=e.zone_quetes,
-                      donjons_affiches=e.donjons_affiches)
-        etage_id = (await c.execute(select(t.etage.c.id).where(t.etage.c.numero == e.numero))).scalar()
-        if etage_id is None:
+                      donjons_affiches=e.donjons_affiches, chapitre_guide=e.chapitre_guide)
+        avant = (await c.execute(select(t.etage).where(t.etage.c.numero == e.numero))).first()
+        if avant is None:
             statut = "ouvert" if e.numero == 0 else "scelle"
             etage_id = (await c.execute(
                 insert(t.etage).values(numero=e.numero, statut=statut, **champs).returning(t.etage.c.id)
             )).scalar_one()  # fmt: skip
         else:
+            etage_id = avant.id
             await c.execute(update(t.etage).where(t.etage.c.id == etage_id).values(**champs))
+            # Un étage existant modifié : l'avant et l'après vont au journal, dans la même transaction.
+            changes = {k: [_lisible(getattr(avant, k)), _lisible(v)] for k, v in champs.items()
+                       if _lisible(getattr(avant, k)) != _lisible(v)}
+            if changes:
+                await c.execute(insert(t.journal).values(
+                    horodatage=func.now(), acteur_discord_id=None, type="import_etage", etage_id=etage_id,
+                    details={"numero": e.numero, "changements": changes}, public=False,
+                ))  # fmt: skip
 
         ids_contenus: dict[tuple[str, int], int] = {}
         for cle, ct in e.contenus.items():

@@ -14,7 +14,6 @@ from epreuve.bot.cmd_etage import etage_etat
 from epreuve.bot.cmd_grimpeur import (
     grimpeur_ajouter,
     grimpeur_exclure,
-    grimpeur_inclure,
     grimpeur_liste,
     grimpeur_modifier,
     grimpeur_pause,
@@ -29,6 +28,7 @@ from tests.fabrique import AVANT, OUVERTURE, PENDANT
 
 GUILD, ADMIN, JOUEUR = 1000, 111, 555
 PARIS = ZoneInfo("Europe/Paris")
+GUIDE = "Guide Duffus : Chapitre 0 (nom à confirmer par Shadoaze) à 100 %"
 # Des identifiants de messages Discord fabriqués à une date donnée (millisecondes depuis 2015, décalées de 22 bits).
 MSG_PENDANT = ((1793534400000 - 1420070400000) << 22) + 1  # 01/11/2026 12:00 UTC (13:00 à Paris)
 MSG_AVANT = ((1793361600000 - 1420070400000) << 22) + 1  # 30/10/2026 13:00 à Paris : avant l'ouverture de 17:00
@@ -146,7 +146,8 @@ async def test_accepter_refait_les_controles(etage0):
 
 async def test_valider_refuse_les_quetes(etage0):
     await inscrire(etage0, "Brindille")
-    rep = await valider(ctx(etage0), DemandeValidation("Toutes les quêtes d'Incarnam", [("Brindille", 20)]))
+    guide = "Guide Duffus : Chapitre 0 (nom à confirmer par Shadoaze) à 100 %"
+    rep = await valider(ctx(etage0), DemandeValidation(guide, [("Brindille", 20)]))
     assert "inconnu" in rep.texte and "/quetes" in rep.texte
 
 
@@ -226,7 +227,7 @@ async def test_pause_puis_reprise(etage0):
     assert "déjà en pause" in (await grimpeur_pause(ctx(etage0), "Coll1")).texte
     assert "Maximum 21 → 24" in (await grimpeur_reprendre(ctx(etage0), "Coll1")).texte
     assert "déjà actif" in (await grimpeur_reprendre(ctx(etage0), "Coll1")).texte
-    assert (await etage0.grimpeur_par_pseudo("Coll1")).inclus_le is not None  # pas redevenu retardataire
+    assert (await etage0.grimpeur_par_pseudo("Coll1")).statut == "actif"
 
 
 async def test_exclusion_disparait_du_site(etage0):
@@ -242,45 +243,22 @@ async def test_exclusion_disparait_du_site(etage0):
     assert "grimpeur exclu" in (await valider(ctx(etage0), DemandeValidation("2", [("Fourbe", 20)]))).texte
 
 
-# --- Critère 9 : retardataires -------------------------------------------------------------------------
+# --- Critère 9 : inscription après l'ouverture, réintégration à la main ------------------------------
 
 
-async def test_retardataire_puis_inclusion_au_niveau_du_moins_avance(etage0):
-    await inscrire(etage0, "Ancien", "Lent")
-    await grimpeur_modifier(ctx(etage0), "Lent", niveau=16)  # le compté le moins avancé
+async def test_inscrit_apres_l_ouverture_en_pause_puis_repris_par_un_admin(etage0):
+    await inscrire(etage0, "Ancien")
     rep = await grimpeur_ajouter(ctx(etage0), "Fleur", "Sadida", "easy")  # après l'ouverture
-    assert "retardataire" in rep.texte and "/grimpeur inclure" in rep.texte and "Maximum" not in rep.texte
-    await valider(ctx(etage0), DemandeValidation("1", [("Fleur", 15)]))
+    assert "**en pause**" in rep.texte and "/grimpeur reprendre pseudo:Fleur" in rep.texte and "Maximum" not in rep.texte
     site = await etat_site(etage0)
     fleur = next(g for g in site["grimpeurs"] if g["pseudo"] == "Fleur")
-    assert fleur["retardataire"] and fleur["points"] == 1  # ses points personnels…
-    assert site["etage_courant"]["jauge"] == {"points": 0, "maximum": 2, "seuil": 2, "pleine": False}  # …hors jauge
-    assert site["etage_courant"]["n_retardataires"] == 1
-    assert "retardataire" in (await grimpeur_voir(ctx(etage0), "Fleur")).texte
-
-    rep = await grimpeur_modifier(ctx(etage0), "Fleur", niveau=16)  # rattrape Lent, sans atteindre le cap
-    assert "n'est plus retardataire" in rep.texte and "Maximum 2 → 3" in rep.texte
-    assert (await jauge(etage0))["points"] == 1  # ses points entrent dans la jauge
-    assert any(e.type == "inclusion" for e in await etage0.journal())
-
-
-async def test_retour_de_pause_retardataire(etage0):
-    await inscrire(etage0, "Ancien", "Dormeur")
-    await grimpeur_modifier(ctx(etage0), "Ancien", niveau=18)
-    await grimpeur_pause(ctx(etage0), "Dormeur")
-    rep = await grimpeur_reprendre(ctx(etage0), "Dormeur")
-    assert "en **retardataire**" in rep.texte and "Maximum" not in rep.texte
-    assert "n'est plus retardataire" in (await grimpeur_modifier(ctx(etage0), "Dormeur", niveau=18)).texte
-
-
-async def test_inclure_a_la_main(etage0):
-    await grimpeur_ajouter(ctx(etage0), "Fleur", "Sadida", "hard")
-    assert (await grimpeur_liste(ctx(etage0), "retardataire")).texte.startswith("**1 grimpeurs retardataires**")
-    rep = await grimpeur_inclure(ctx(etage0), "Fleur", "arrivé avec un ami")
-    assert "est inclus" in rep.texte and "Maximum 0 → 3" in rep.texte
-    assert "pas retardataire" in (await grimpeur_inclure(ctx(etage0), "Fleur")).texte
-    assert "Aucun grimpeur nommé" in (await grimpeur_inclure(ctx(etage0), "Personne")).texte
-    assert (await grimpeur_liste(ctx(etage0), "retardataire")).texte == "Aucun grimpeur retardataires."
+    assert fleur["statut"] == "pause" and "retardataire" not in fleur
+    assert site["etage_courant"]["jauge"]["maximum"] == 1 and site["etage_courant"]["n_pause"] == 1
+    assert "n_retardataires" not in site["etage_courant"]
+    await grimpeur_modifier(ctx(etage0), "Fleur", niveau=20)  # monter de niveau ne change rien seul
+    assert (await etage0.grimpeur_par_pseudo("Fleur")).statut == "pause"
+    rep = await grimpeur_reprendre(ctx(etage0), "Fleur")
+    assert "reprend l'ascension" in rep.texte and "Maximum 1 → 2" in rep.texte
 
 
 # --- Critère 10 : /quetes --------------------------------------------------------------------------
@@ -290,15 +268,16 @@ async def test_quetes_par_un_grimpeur_relie(etage0):
     await inscrire(etage0, "Brindille", membre=JOUEUR)
     lien = f"https://discord.com/channels/{GUILD}/5/{MSG_PENDANT}"
     rep = await declarer_quetes(ctx(etage0, acteur=JOUEUR), "toutes", preuve=lien)
-    assert rep.texte.startswith("✅ **Brindille** a déclaré avoir terminé « Toutes les quêtes d'Incarnam »")
+    assert rep.texte.startswith(f"✅ **Brindille** a déclaré avoir terminé « {GUIDE} »")
+    assert "https://duffus.fr/guide-complet" in rep.texte
     (v,) = await etage0.validations()
     assert v.source == "declaration" and v.niveau is None and v.realisee_le == PENDANT
     fil = (await etat_site(etage0))["fil"]
-    assert fil[0]["texte"] == "a déclaré avoir terminé « Toutes les quêtes d'Incarnam »."
+    assert fil[0]["texte"] == f"a déclaré avoir terminé « {GUIDE} »."
     voir = await grimpeur_voir(ctx(etage0), "Brindille")
     assert "(déclaré)" in voir.texte and f"preuve : {lien}" in voir.texte
     assert "déjà déclaré toutes" in (await declarer_quetes(ctx(etage0, acteur=JOUEUR), "toutes")).texte
-    rep = await declarer_quetes(ctx(etage0, acteur=JOUEUR), "Toutes les quêtes d'Incarnam")
+    rep = await declarer_quetes(ctx(etage0, acteur=JOUEUR), GUIDE)
     assert "déjà validé" in rep.texte
     assert "annulée" in (await annuler(ctx(etage0), v.id, "déclaration erronée")).texte  # un admin annule
 
@@ -316,7 +295,8 @@ async def test_quetes_non_relie_ou_pour(etage0):
 
 async def test_quetes_refus(etage0):
     await inscrire(etage0, "Brindille", membre=JOUEUR)
-    assert "inconnue" in (await declarer_quetes(ctx(etage0, acteur=JOUEUR), "Kardorim vaincu")).texte
+    rep = await declarer_quetes(ctx(etage0, acteur=JOUEUR), "Kardorim vaincu")
+    assert "inconnu" in rep.texte and GUIDE in rep.texte and "duffus.fr" in rep.texte
     rep = await declarer_quetes(ctx(etage0, acteur=JOUEUR), "toutes", preuve="https://discord.com/channels/42/5/6")
     assert "autre serveur" in rep.texte
     rep = await declarer_quetes(ctx(etage0, quand=OUVERTURE - timedelta(hours=1), acteur=JOUEUR), "toutes")
@@ -344,7 +324,7 @@ async def test_premier_eniripsa(etage0):
 
 async def test_maximum_nul_verdict(etage0):
     rep = await etage_etat(ctx(etage0))
-    assert "Aucun grimpeur compté" in rep.texte and "0 points sur 0 requis" in rep.texte
+    assert "Aucun grimpeur actif" in rep.texte and "0 points sur 0 requis" in rep.texte
 
 
 async def test_preuve_fixe_la_date_de_realisation(etage0):
@@ -371,8 +351,8 @@ async def test_preuve_avant_ouverture_ou_autre_serveur_refusee(etage0):
 
 async def test_journal_complet_et_fil_public_limite(etage0):
     await inscrire(etage0, "Brindille", "Torvald", membre=None)
-    await grimpeur_ajouter(ctx(etage0), "Tard", "Iop", "easy")
-    await grimpeur_inclure(ctx(etage0), "Tard")
+    await grimpeur_ajouter(ctx(etage0), "Tard", "Iop", "easy")  # arrive en pause
+    await grimpeur_reprendre(ctx(etage0), "Tard")
     await grimpeur_modifier(ctx(etage0), "Brindille", difficulte="hard")
     await grimpeur_pause(ctx(etage0), "Torvald")
     await grimpeur_reprendre(ctx(etage0), "Torvald")
@@ -384,8 +364,7 @@ async def test_journal_complet_et_fil_public_limite(etage0):
     await grimpeur_exclure(ctx(etage0), "Torvald", "abandon")
     journal = await etage0.journal()
     assert sorted(e.type for e in journal) == sorted([
-        "inscription", "inscription", "inscription", "inclusion", "difficulte", "pause", "reprise", "validation",
-        "inclusion",  # Torvald, redevenu retardataire après sa pause, rattrape le groupe par sa validation
+        "inscription", "inscription", "inscription", "reprise", "difficulte", "pause", "reprise", "validation",
         "validation", "depassement_accepte", "declaration", "annulation", "exclusion"])
     assert {e.type for e in journal if e.public} == {"validation", "declaration"}
     async with etage0._moteur.connect() as c:
@@ -439,7 +418,7 @@ async def test_etage_etat_public(etage0):
     assert "Maximum 23 = 4 Collectionneurs × 3 + 4 Éclaireurs × 2 + 3 Aventuriers × 1. Seuil 75 % → 18." in rep.texte
     assert "Palier 1 · Kardorim vaincu : 0 grimpeur" in rep.texte
     assert "pas avant le vendredi 13 novembre à 17 h" in rep.texte
-    assert "11 grimpeurs comptés, 1 en pause, 1 retardataire." in rep.texte
+    assert "11 grimpeurs actifs, 2 en pause." in rep.texte
 
 
 async def test_etage_etat_seuil_atteint(etage0):
@@ -467,4 +446,4 @@ async def test_sans_etage_ouvert(depot):
     assert "aucun étage n'est ouvert" in (await valider(ctx(depot), DemandeValidation("1", [("A", 20)]))).texte
     await inscrire(depot, "Brindille", membre=JOUEUR)
     assert "aucun étage n'est ouvert" in (await declarer_quetes(ctx(depot, acteur=JOUEUR), "toutes")).texte
-    assert (await depot.grimpeur_par_pseudo("Brindille")).inclus_le is not None  # pas d'étage : compté
+    assert (await depot.grimpeur_par_pseudo("Brindille")).statut == "actif"  # pas d'étage : actif

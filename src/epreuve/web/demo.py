@@ -2,9 +2,10 @@
 
     uv run python -m epreuve.web.demo          puis ouvrir http://127.0.0.1:8080
 
-Les 12 grimpeurs de la maquette (docs/maquette-v1.html), dont un retardataire et un grimpeur en
-pause, plus un exclu (invisible sur le site) et une validation annulée (absente du fil), pour voir
-ces règles à l'œuvre. L'horloge est simulée au dimanche 8 novembre 2026 à 18:00 ;
+Les 12 grimpeurs de la maquette (docs/maquette-v1.html), dont deux en pause (l'un inscrit après
+l'ouverture, en attente qu'un admin le passe actif), plus un exclu (invisible sur le site) et une
+validation annulée (absente du fil), pour voir ces règles à l'œuvre.
+L'horloge est simulée au dimanche 8 novembre 2026 à 18:00 ;
 `?horloge=2026-11-13T17:00` dans l'adresse en simule une autre.
 
 Le calcul de la jauge est le VRAI calcul du domaine : seules les données sont inventées.
@@ -24,12 +25,13 @@ from epreuve.web.app import creer_app
 PARIS = ZoneInfo("Europe/Paris")
 HORLOGE_DEMO = datetime(2026, 11, 8, 18, 0, tzinfo=PARIS)
 OUVERTURE = datetime(2026, 10, 30, 17, 0, tzinfo=PARIS).astimezone(UTC)
-INSCRIPTION = OUVERTURE - timedelta(days=3)  # inscrits avant l'ouverture : comptés
+INSCRIPTION = OUVERTURE - timedelta(days=3)  # inscrits avant l'ouverture : actifs
 
 ETAGE0 = Etage(
     id=1, numero=0, nom="Le Seuil", level_cap=20, seuil_pourcent=75, statut="ouvert", ouvert_le=OUVERTURE,
     date_plancher_suivant=datetime(2026, 11, 13, 17, 0, tzinfo=PARIS).astimezone(UTC),
     zone_quetes="Incarnam", donjons_affiches=("Kardorim",),
+    chapitre_guide="Chapitre 0 (nom à confirmer par Shadoaze)",
 )  # fmt: skip
 
 CONTENUS = (
@@ -38,18 +40,19 @@ CONTENUS = (
     Contenu(3, 1, "succes", "Kardorim (Zombie)", "Kardorim (Zombie)"),
     Contenu(4, 1, "succes", "Kardorim (Premier)", "Kardorim (Premier)"),
     Contenu(5, 1, "succes", "Kardorim (Spécial)", "Kardorim (Spécial)"),
-    Contenu(6, 1, "lot_quetes", "Toutes les quêtes d'Incarnam (24)", "Toutes les quêtes d'Incarnam"),
+    Contenu(6, 1, "lot_quetes", "Guide Duffus : Chapitre 0 (nom à confirmer par Shadoaze) à 100 %",
+            "Guide Duffus : Chapitre 0 (nom à confirmer par Shadoaze) à 100 %"),
 )
 PALIERS = (
     Palier(1, 1, 1, "Kardorim vaincu", frozenset({1})),
     Palier(2, 1, 2, "Kardorim full succès", frozenset({1, 2, 3, 4, 5})),
-    Palier(3, 1, 3, "Toutes les quêtes d'Incarnam", frozenset({6})),
+    Palier(3, 1, 3, "Guide Duffus à 100 %", frozenset({6})),
 )
 
 
-def _g(id_, pseudo, classe, diff, statut, niveau, retard=False):
-    inscrit = HORLOGE_DEMO.astimezone(UTC) - timedelta(days=1) if retard else INSCRIPTION
-    return Grimpeur(id_, pseudo, classe, diff, statut, niveau, inscrit, None if retard else inscrit)
+def _g(id_, pseudo, classe, diff, statut, niveau, tardif=False):
+    inscrit = HORLOGE_DEMO.astimezone(UTC) - timedelta(days=1) if tardif else INSCRIPTION
+    return Grimpeur(id_, pseudo, classe, diff, statut, niveau, inscrit)
 
 
 # Les grimpeurs fictifs de la maquette.
@@ -62,7 +65,7 @@ GRIMPEURS = (
     _g(6, "Sélénith", "Xélor", "hard", "actif", 20),
     _g(7, "Gromolo", "Pandawa", "easy", "actif", 20),
     _g(8, "Ombrevive", "Sram", "med", "actif", 22),
-    _g(9, "Fleur-de-Bwork", "Sadida", "easy", "actif", 14, retard=True),  # arrivée hier : rattrape le groupe
+    _g(9, "Fleur-de-Bwork", "Sadida", "easy", "pause", 14, tardif=True),  # arrivée hier : en pause par défaut
     _g(10, "Cliquetis", "Steamer", "hard", "actif", 20),
     _g(11, "Nalouette", "Osamodas", "easy", "actif", 20),
     _g(12, "Vieux-Grain", "Féca", "med", "pause", 11),
@@ -80,7 +83,7 @@ SEANCES = [
     (100, (1,), [(13, 20)], False),  # l'exclu : entrée masquée du fil
     (96, (6,), [(1, None)], False),
     (40, (1,), [(5, 17)], True),  # saisie par erreur puis annulée : absente du fil et de la jauge
-    (2, (6,), [(10, None)], False),  # quêtes sans full succès : marque Quêtes, mais 1 point
+    (2, (6,), [(10, None)], False),  # guide sans full succès : marque Quêtes, mais 1 point
 ]
 
 

@@ -24,9 +24,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from epreuve.domaine.classes import repartition_classes
-from epreuve.domaine.inclusion import est_retardataire
 from epreuve.domaine.jauges import calculer_etat_etage, marques_grimpeur, points_grimpeur
-from epreuve.domaine.modeles import Instantane, phrase_validation
+from epreuve.domaine.modeles import URL_GUIDE_DUFFUS, Instantane, phrase_validation
 from epreuve.domaine.seuil import POINTS_VISES
 
 journal = logging.getLogger("epreuve.web")
@@ -72,9 +71,10 @@ def construire_etat(inst: Instantane, maintenant: datetime, fuseau: ZoneInfo) ->
         courant = {
             "numero": etage.numero, "nom": etage.nom, "level_cap": etage.level_cap,
             "seuil_pourcent": etage.seuil_pourcent, "donjons": list(etage.donjons_affiches),
-            "zone_quetes": etage.zone_quetes, "ouvert_le": _iso(etage.ouvert_le, fuseau),
+            "zone_quetes": etage.zone_quetes, "chapitre_guide": etage.chapitre_guide, "lien_guide": URL_GUIDE_DUFFUS,
+            "ouvert_le": _iso(etage.ouvert_le, fuseau),
             "date_plancher_suivant": _iso(etage.date_plancher_suivant, fuseau),
-            "n_comptes": etat.n_comptes, "n_pause": etat.n_pause, "n_retardataires": etat.n_retardataires,
+            "n_comptes": etat.n_comptes, "n_pause": etat.n_pause,
             "jauge": {"points": j.points, "maximum": j.maximum, "seuil": j.seuil, "pleine": j.pleine},
             "comptes_par_difficulte": dict(etat.comptes_par_difficulte),
             "paliers": [{"rang": rang, "libelle": libelles.get(rang, f"Palier {rang}"), "grimpeurs": n}
@@ -93,7 +93,7 @@ def construire_etat(inst: Instantane, maintenant: datetime, fuseau: ZoneInfo) ->
         points = points_grimpeur(g, inst.paliers, inst.validations, etage) if etage and g.statut == "actif" else 0
         grimpeurs.append({
             "id": g.id, "pseudo": g.pseudo, "classe": g.classe, "difficulte": g.difficulte,
-            "statut": g.statut, "retardataire": est_retardataire(g), "niveau": g.niveau_connu,
+            "statut": g.statut, "niveau": g.niveau_connu,
             "au_dessus_du_cap": au_dessus, "points": points, "points_vises": POINTS_VISES[g.difficulte],
             "marques": {str(rang): bool(marques.get(rang)) for rang in RANGS},
         })  # fmt: skip

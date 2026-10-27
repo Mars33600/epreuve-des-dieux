@@ -4,9 +4,9 @@ Règles (SPEC §5, réponses de Shadoaze) :
 - trois paliers cumulatifs : 1 = donjons vaincus, 2 = full succès, 3 = full succès + quêtes ;
 - points(g) = le plus haut rang k tel que les paliers 1 à k sont tous atteints (paliers STRICTS :
   des quêtes sans full succès ne font pas passer de 1 à 3) ;
-- maximum = Σ points visés (1, 2 ou 3 selon la difficulté) des grimpeurs COMPTÉS ;
-- points de la jauge = Σ points des grimpeurs COMPTÉS : un retardataire n'entre ni dans le maximum
-  ni dans les points tant qu'il n'a pas rattrapé (Shadoaze, §8 bis d) ;
+- seuls les grimpeurs ACTIFS comptent : en pause ou exclus, ils sortent du maximum et des points ;
+- maximum = Σ points visés (1, 2 ou 3 selon la difficulté) des actifs ;
+- points de la jauge = Σ points des actifs ;
 - seuil = 75 % du maximum (arrondi au-dessus) ; pleine ⇔ maximum > 0 et points ≥ seuil ;
 - déblocable ⇔ pleine et maintenant ≥ date plancher.
 
@@ -21,7 +21,6 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from epreuve.domaine.controles import validation_compte
-from epreuve.domaine.inclusion import est_compte, est_retardataire
 from epreuve.domaine.modeles import DIFFICULTES, Etage, Grimpeur, Palier, Validation
 from epreuve.domaine.seuil import POINTS_VISES, seuil
 
@@ -42,12 +41,11 @@ class EtatJauge:
 @dataclass(frozen=True)
 class EtatEtage:
     etage: Etage
-    n_comptes: int
+    n_comptes: int  # les actifs : eux seuls entrent dans la jauge
     n_pause: int
-    n_retardataires: int
     jauge: EtatJauge
     comptes_par_difficulte: dict[str, int]  # pour écrire « 4 × 3 + 4 × 2 + 4 × 1 »
-    grimpeurs_par_palier: tuple[int, int, int]  # comptés ayant au moins 1, 2, 3 points
+    grimpeurs_par_palier: tuple[int, int, int]  # actifs ayant au moins 1, 2, 3 points
     deblocable: bool
 
 
@@ -94,7 +92,7 @@ def calculer_etat_etage(
     maintenant: datetime,
 ) -> EtatEtage:
     paliers, grimpeurs, validations = list(paliers), list(grimpeurs), list(validations)
-    comptes = [g for g in grimpeurs if est_compte(g)]
+    comptes = [g for g in grimpeurs if g.statut == "actif"]
 
     points_par_compte = [points_grimpeur(g, paliers, validations, etage) for g in comptes]
     maximum = sum(POINTS_VISES[g.difficulte] for g in comptes)
@@ -107,7 +105,6 @@ def calculer_etat_etage(
         etage=etage,
         n_comptes=len(comptes),
         n_pause=sum(1 for g in grimpeurs if g.statut == "pause"),
-        n_retardataires=sum(1 for g in grimpeurs if est_retardataire(g)),
         jauge=EtatJauge(total, maximum, s, etage.seuil_pourcent, pleine),
         comptes_par_difficulte={d: sum(1 for g in comptes if g.difficulte == d) for d in DIFFICULTES},
         grimpeurs_par_palier=(

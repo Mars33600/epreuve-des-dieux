@@ -41,6 +41,11 @@ class Etage:
     date_plancher_suivant: datetime | None
     zone_quetes: str
     donjons_affiches: tuple[str, ...]
+    chapitre_guide: str | None = None  # le chapitre du guide Duffus de cet étage (palier 3)
+
+
+# Les étages de la tour sont les chapitres du guide Duffus : étage N = chapitre N.
+URL_GUIDE_DUFFUS = "https://duffus.fr/guide-complet"
 
 
 @dataclass(frozen=True)
@@ -73,10 +78,8 @@ class Grimpeur:
     classe: str
     difficulte: Difficulte
     statut: Statut
-    niveau_connu: int | None
+    niveau_connu: int | None  # sert à l'affichage et au contrôle du cap
     inscrit_le: datetime
-    inclus_le: datetime | None  # vide tant qu'il est retardataire
-    inclusion_forcee: bool = False
 
     def __post_init__(self) -> None:
         # Le domaine refuse une classe inconnue : la base a la même règle (contrainte CHECK).

@@ -1,9 +1,17 @@
-# Sauvegarde nocturne de la base (ARCHITECTURE §5) : pg_dump du schéma « epreuve », gardé 30 jours
-# comme artefact privé du dépôt. Secret à créer dans GitHub : DATABASE_URL_SAUVEGARDE, l'adresse
-# Postgres au format libpq (postgresql://…, sans « +asyncpg »).
+# Sauvegarde nocturne de la base (ARCHITECTURE §5) : pg_dump du schéma « epreuve », CHIFFRÉ avec age,
+# gardé 30 jours comme artefact privé du dépôt.
+#
+# Secrets GitHub (PREREQUIS D.3) :
+#   DATABASE_URL   la même adresse que pour l'application (postgresql+asyncpg://…) ; le « +asyncpg »
+#                  est retiré ici, car pg_dump attend une adresse postgresql:// classique ;
+#   AGE_RECIPIENT  la clé PUBLIQUE age (age1…). La clé privée ne quitte jamais le poste de Marceau.
+#
+# Client Postgres 18 : la doc Supabase indique Postgres 17 pour les projets neufs (2026) ; pg_dump sait
+# sauvegarder un serveur plus ancien que lui, pas l'inverse : le client le plus récent couvre les deux.
 #
 # Restauration (à tester une fois à la main, critère 17) :
-#   télécharger l'artefact, puis  pg_restore --clean --if-exists -d "$URL" epreuve.dump
+#   age -d -i cle-sauvegarde.txt epreuve.dump.age > epreuve.dump
+#   pg_restore --clean --if-exists --no-owner -d "postgresql://…" epreuve.dump
 name: sauvegarde
 
 on:
@@ -18,18 +26,25 @@ jobs:
   pg_dump:
     runs-on: ubuntu-latest
     steps:
-      - name: Installer le client Postgres 16
+      - name: Installer le client Postgres 18 et age
         run: |
           sudo install -d /usr/share/postgresql-common/pgdg
           sudo curl -fsSo /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
           echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
-          sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client-16
-      - name: Sauvegarder
+          sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client-18 age
+      - name: Sauvegarder et chiffrer
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_SAUVEGARDE }}
-        run: /usr/lib/postgresql/16/bin/pg_dump --format=custom --schema=epreuve --no-owner -f epreuve.dump "$DATABASE_URL"
-      - uses: actions/upload-artifact@v4
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          AGE_RECIPIENT: ${{ secrets.AGE_RECIPIENT }}
+        run: |
+          set -euo pipefail
+          test -n "$AGE_RECIPIENT" || { echo "secret AGE_RECIPIENT manquant" >&2; exit 1; }
+          URL_LIBPQ="${DATABASE_URL/postgresql+asyncpg:/postgresql:}"
+          # Le dump en clair ne touche jamais le disque : il passe directement dans age.
+          /usr/lib/postgresql/18/bin/pg_dump --format=custom --schema=epreuve --no-owner "$URL_LIBPQ" \
+            | age --encrypt --recipient "$AGE_RECIPIENT" --output epreuve.dump.age
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
         with:
           name: sauvegarde-${{ github.run_id }}
-          path: epreuve.dump
+          path: epreuve.dump.age
           retention-days: 30

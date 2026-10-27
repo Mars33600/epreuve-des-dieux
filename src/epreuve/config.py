@@ -12,7 +12,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Config(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
+    # env_ignore_empty : une variable vide dans .env (« IA_ACTIVE= ») vaut « absente » et prend sa valeur par défaut.
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore", env_ignore_empty=True)
 
     # --- Obligatoires dès le jalon bêta ---
     discord_token: SecretStr = Field(alias="DISCORD_TOKEN")
