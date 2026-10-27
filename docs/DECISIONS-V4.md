@@ -83,3 +83,11 @@ Selon Marceau, l'auteur de duffus.fr a donné son accord pour réutiliser son co
 **duffus.fr est la source unique du contenu des étages.** L'étage N correspond à la tranche N du guide. Les donjons, les succès détaillés, les quêtes principales et secondaires de chaque tranche en viennent. Le classement principal / secondaire se déduit des guides « par Dofus » de Duffus.
 
 Les salons Discord `étage-X` de Shadoaze n'étaient qu'une aide provisoire pour les joueurs : ce n'est pas une source de données.
+
+## 12. Réponses de Marceau du 28/10 (priment sur les défauts de SPEC §8.2)
+
+- **Q1 (étage ↔ tranche, cap)** : oui. Étage 0 = la première tranche du guide Duffus, puis une tranche par étage. Le cap est la borne haute de la tranche.
+- **Q2 (donjons d'un étage)** : ceux que duffus.fr rattache à la tranche, comme sur le site Duffus.
+- **Q3 et Q4** : aucune supposition. Le contenu de chaque étage (catégories, quêtes principales, Dofus) se déduit **uniquement des données de duffus.fr**. La règle du palier pour une catégorie vide ne s'applique que si Duffus ne donne effectivement rien.
+- **Q8 (images des étages)** : à récupérer depuis le Discord, en lecture seule.
+- **Duffus** : le projet est autonome. On ne sollicite pas l'auteur. L'import passe par les points d'accès publics du site, de façon polie et mise en cache, avec « Merci Duffus » en pied de page.

@@ -67,7 +67,7 @@ Ce sont les huit questions de `SPEC.md` §8.2, dans le même ordre. Les plus urg
 ### B.2 Fly.io (20 min)
 
 1. https://fly.io → **Sign up** avec GitHub. **Ajouter une carte bancaire** : il n'y a plus d'offre gratuite pour les nouveaux comptes, et la facturation se fait à l'usage. Compter 2 à 3 $ par mois.
-2. **Billing** → alerte de dépense à 10 $ par mois.
+2. Fly ne propose pas d'alerte de dépense : surveiller **Billing → Cost Explorer** de temps en temps. Le coût reste borné par la taille de la machine (`fly.toml`).
 3. Sur le Mac : `brew install flyctl`, puis `fly auth login`.
 4. Le dev crée l'application (`fly launch --no-deploy`, région `cdg`, nom `epreuve-des-dieux` déjà prévu dans `fly.toml`). Marceau lance ensuite le premier `fly deploy` avec le dev.
 
@@ -132,29 +132,9 @@ Créer un petit serveur « Tour – test » avec un rôle « Administrateur », 
 
 L'auteur a donné son accord, mais **ne peut pas fournir d'export**. On lit donc sa base nous-mêmes, comme le fait son propre site. Méthode, règles de politesse et limites : ARCHITECTURE §6.
 
-### D.1 Message à l'auteur (✉️, à envoyer le 27/10)
+### D.1 et D.2 Accès aux données Duffus
 
-> Bonjour, et encore merci pour ton accord ! Pour être transparents sur la façon dont on récupère les données :
-> - un script lancé **à la main**, quelques fois au total (avant chaque nouvel étage, au plus une fois par semaine), qui lit tes tables publiques (`guide_ranges`, `quest_list`, `quest_pages`, `dungeon_pages`, `achievements`, `achievement_objectives`, `dofus_list`) avec la clé publique de ton site, à **1 requête par seconde au plus**, avec un User-Agent qui nous identifie ;
-> - **jamais** d'appel chez toi pendant que nos joueurs naviguent : tout est copié chez nous, derrière une connexion réservée aux participants ;
-> - un « Merci Duffus » avec un lien vers duffus.fr en pied de chaque page.
->
-> Est-ce que ça te convient ? Peux-tu me confirmer l'adresse de ta base et la clé publique à utiliser ? Tu préfères qu'on évite certaines tables ou certains horaires ? Et si tu changes la structure de ta base, tu pourrais nous prévenir ? Notre script s'arrêtera proprement de toute façon.
-
-Garder sa réponse écrite. Si elle restreint quelque chose, le noter dans ARCHITECTURE §6.2.
-
-### D.2 La clé et l'adresse (🧑‍💻)
-
-L'adresse du projet Supabase de Duffus et sa **clé publique** (« anon ») : on les demande à l'auteur dans le message D.1 plutôt que de les extraire du code de son site. Les mettre **dans le `.env` local seulement** :
-
-```
-DUFFUS_SUPABASE_URL=https://<projet>.supabase.co
-DUFFUS_SUPABASE_CLE=<clé anon publique>
-```
-
-Elles ne vont **ni sur Fly ni dans le dépôt**. Le site n'en a jamais besoin, puisque seul le script d'aspiration, lancé depuis le Mac, les utilise.
-
-Si l'auteur n'a pas répondu le **30/10 au soir**, c'est un déclencheur du plan de repli (`LOTS.md`, lot B).
+Aucune démarche de Marceau : le projet est autonome (DECISIONS-V4 §12). Le chantier B0 relève lui-même l'adresse et la clé publique du site et les place dans le `.env` local, jamais sur Fly ni dans le dépôt.
 
 ### D.3 Lancer le relevé, puis l'aspiration (🧑‍💻 avec le dev)
 
