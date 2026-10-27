@@ -18,8 +18,11 @@ ModeEffectif = Literal["teaser", "ouvert"]
 
 # Ce que le middleware laisse passer en mode teaser, pour tout le monde.
 CHEMINS_TOUJOURS_PERMIS: frozenset[str] = frozenset({"/", "/sante"})
-PREFIXES_TOUJOURS_PERMIS: tuple[str, ...] = ("/static/",)
-# Le lot B ajoute : "/connexion", "/auth/discord/retour", "/deconnexion", "/inscription".
+# Seuls les dossiers du teaser : une route à paramètre en tête déclarée au lot B (`/{x}/…`) ne doit
+# jamais passer pour un fichier statique.
+PREFIXES_TOUJOURS_PERMIS: tuple[str, ...] = ("/static/teaser/", "/static/fonts/")
+# Le lot B ajoute : "/connexion", "/auth/discord/retour", "/deconnexion" (admins seulement ;
+# "/inscription" n'est pas permis en mode teaser).
 
 
 def mode_effectif(reglage: ReglageMode, ouvert_le: datetime, maintenant: datetime) -> ModeEffectif:
@@ -35,6 +38,9 @@ def mode_effectif(reglage: ReglageMode, ouvert_le: datetime, maintenant: datetim
     return "ouvert"
 
 
-def voit_site_complet(mode: ModeEffectif, est_admin: bool, est_testeur: bool) -> bool:
-    """Vrai en mode ouvert, ou pour un admin ou un testeur (qui voient le site derrière le teaser)."""
-    return mode == "ouvert" or est_admin or est_testeur
+def voit_site_complet(mode: ModeEffectif, est_admin: bool) -> bool:
+    """Vrai en mode ouvert, ou pour un admin (qui voit le site derrière le teaser).
+
+    Aucun joueur avant l'ouverture : le statut de « testeur » du lot A a disparu au lot B.
+    """
+    return mode == "ouvert" or est_admin

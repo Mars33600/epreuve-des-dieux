@@ -201,9 +201,9 @@ def test_statiques_permis_mais_seulement_ceux_du_teaser():
     c = client()
     assert c.get("/static/teaser/teaser.css").status_code == 200
     assert c.get("/static/teaser/teaser.js").status_code == 200
-    # L'ancienne page v3 reste dans le dépôt jusqu'au lot B, mais n'est pas servie.
-    assert c.get("/static/app.js").status_code == 404
-    assert c.get("/static/style.css").status_code == 404
+    # L'ancienne page v3 reste dans le dépôt jusqu'au lot B, mais n'est pas servie (hors des préfixes permis).
+    assert c.get("/static/app.js").status_code in (303, 404)
+    assert c.get("/static/style.css").status_code in (303, 404)
 
 
 # --- La bascule (critère 7) -------------------------------------------------------------------------------
@@ -271,13 +271,13 @@ def test_entetes_sur_une_404_en_mode_ouvert_et_une_erreur_500():
     _verifier_entetes(client(APRES).get("/une-adresse-inventee"))
     r = client(source=Source(RuntimeError("panne"))).get("/sante")  # erreur rattrapée : pas une 500
     assert r.status_code == 200
-    app = creer_app(config(), horloge=lambda: AVANT)
+    app = creer_app(config(), horloge=lambda: APRES)  # mode ouvert : le filtre laisse passer la route
 
-    @app.get("/static/boum")  # sous /static/ pour passer le filtre du mode
+    @app.get("/boum")
     async def boum():
         raise RuntimeError("trace interne")
 
-    r = TestClient(app, raise_server_exceptions=False).get("/static/boum")
+    r = TestClient(app, raise_server_exceptions=False).get("/boum")
     assert r.status_code == 500 and "trace interne" not in r.text
     _verifier_entetes(r)
 

@@ -66,8 +66,8 @@ class FiltreMode:
             await self.app(scope, receive, send)
             return
         mode = mode_effectif(self.reglage, self.ouvert_le, self.horloge())
-        # Au lot A, personne n'est connecté : ni admin ni testeur. Le lot B lit la session ici.
-        if voit_site_complet(mode, est_admin=False, est_testeur=False):
+        # Au lot A, personne n'est connecté. Le lot B lit la session ici.
+        if voit_site_complet(mode, est_admin=False):
             await self.app(scope, receive, send)
             return
         if scope["type"] == "websocket":
