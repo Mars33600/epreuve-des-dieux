@@ -22,3 +22,6 @@ htmlcov/
 
 # Exports du serveur Discord (identifiants des membres) : restent en local
 docs/discord/
+
+# Images brutes des étages (Discord de Shadoaze, 20 Mo) : sources locales, converties en WebP pour le site
+docs/design/etages/
