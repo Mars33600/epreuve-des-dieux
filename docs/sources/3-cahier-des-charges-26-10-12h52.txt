@@ -1,0 +1,33 @@
+📋 Début du prompt pour Claude Code
+Tu es un développeur Fullstack expert. Tu dois m'aider à coder un site web de suivi de progression et un bot Discord de validation pour un événement communautaire Dofus nommé "L'Épreuve des Dieux". Le site sera privé, restreint aux participants et hébergé à petit budget.
+Voici le cahier des charges strict, sans aucune place à l'interprétation :
+
+1. RÈGLES DE GESTION ET ALGORITHME DE PROGRESSION
+Le jeu se déroule par "Étages" (tranches de niveaux) bloqués. L'Étage suivant s'ouvre manuellement par un admin, mais l'action n'est éligible que si la jauge globale de l'étage atteint 75% de complétion.
+* Calcul de la Jauge Globale : \(\text{Score\ Max\ Théorique}=\sum (\text{Points\ max\ théoriques de chaque joueur actif})\) \(\text{Score\ Actuel}=\sum (\text{Points\ actuellement\ validés par chaque joueur active})\) \(\text{Condition\ de\ déblocage}=\left(\frac{\text{Score\ Actuel}}{\text{Score\ Max\ Théorique}}\right)\ge 0.75\)
+* Profils des Joueurs & Barème de points :
+    * Aventurier : Terminer les donjons de l'étage = 1 point.
+    * Éclaireur : Donjons en "Full Succès" = 2 points.
+    * Collectionneur : Donjons en "Full Succès" + 100% des quêtes (principales + annexes) = 3 points.
+* Bonus d'effort (Over-achieving) : Un joueur peut rapporter plus que son profil initial (ex: un Aventurier fait un Full Succès → il donne 2 points au lieu de 1). Cela fait monter le Score Actuel sans augmenter le Score Max Théorique, aidant ainsi le groupe. Les paliers sont stricts (pas de points partiels pour les quêtes seules).
+* Gestion des Pauses et Retards :
+    * Un joueur marqué "En Pause" par un admin est totalement exclu du calcul de la jauge (son score max et actuel passent à 0 dans l'algorithme).
+    * Un joueur retardataire ou de retour de pause doit rattraper le niveau du grimpeur actif le moins avancé avant d'être réintégré manuellement dans le calcul.
+
+2. FONCTIONNEMENT DES DISCORD VALIDATIONS & PREUVES
+* Donjons : Un donjon validé en "Full Succès" implique la réussite des 5 succès en jeu (Donjon, Duo, et les 3 conditions spéciales). Faire le Full Succès valide automatiquement le donjon simple.
+* Preuves : Système de confiance (déclaration) pour les quêtes. Pour les donjons, obligation de soumettre au bot un screen de l'interface de récapitulatif post-combat (vérification des pseudos de l'événement, du niveau, et des succès).
+* Règle de groupe : Si un joueur hors-événement est présent dans le groupe de donjon lors du combat, la validation est automatiquement refusée.
+* Marges : Être en dessous du niveau de l'étage est autorisé. Dépasser le cap est interdit, sauf tolérance admin si fait involontairement.
+
+3. ARCHITECTURE TECHNIQUE & INTERFACE DU SITE WEB
+Le site doit cloner l'ergonomie de duffus.fr, mais sous restriction stricte :
+* Fog of War (Lock des Étages) : Interdiction stricte de défiler (scroll) ou de voir le contenu des étages supérieurs non ouverts par les admins. Un cadenas visuel bloque l'interface.
+* Double Guide Dynamique (Vue Filtrée) : L'onglet Guide doit proposer un filtre selon le profil de l'utilisateur :
+    1. Vue Collectionneur : Affiche 100% des blocs de quêtes (principales et secondaires).
+    2. Vue Éclaireur / Aventurier : Filtre et masque automatiquement toutes les quêtes secondaires pour ne laisser visibles que les quêtes menant à l'obtention des Dofus (Quêtes principales/canons) et leurs prérequis stricts.
+* Interface Utilisateur (UI/UX) :
+    * Un code couleur ou badge net doit différencier une quête principale (Dofus) d'une quête secondaire.
+    * Chaque utilisateur dispose d'un système de cases à cocher (checkboxes) pour marquer ses quêtes faites, ce qui met à jour son Dashboard de progression personnel.
+* Modules à cloner/garder : Encyclopédie, Suivi des Avis de Recherche, Gestionnaire de Stuffs/Builder, Suivi des Archimonstres (sans l'onglet bourse aux échanges).
+* Nettoyage obligatoire : Supprimer l'intégralité des marques, logos, liens Twitch, serveurs Discord et widgets de dons appartenant au site source originel.

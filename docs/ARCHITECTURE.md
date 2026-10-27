@@ -1,6 +1,18 @@
 # L'Épreuve des Dieux : architecture
 
-Version 1, 25/10/2026. Ce document dit **comment** on construit ce que décrit `SPEC.md`, et **pourquoi** chaque choix a été fait. Les décisions sont prises. Les alternatives écartées sont notées pour qu'on puisse revenir dessus en connaissance de cause.
+Version 4, 27/10/2026. Ce document dit **comment** on construit ce que décrit `SPEC.md`, et **pourquoi**. Les décisions sont prises. Les alternatives écartées sont notées, pour qu'on puisse y revenir en connaissance de cause.
+
+## Ce qui change en v4
+
+| Avant (v3) | Maintenant (v4) | Pourquoi |
+|---|---|---|
+| Un seul programme : **bot discord.py** connecté en permanence + site FastAPI en lecture seule. | Un **site FastAPI** seul, avec des pages rendues par le serveur et un peu de JavaScript pour les cases. **Plus de bot connecté en permanence.** | Les joueurs cochent sur le site. Le bot n'a plus de rôle indispensable. |
+| Pas de compte sur le site. | **Connexion avec Discord (OAuth2)**, sessions côté serveur, protection CSRF (§8). | Chaque joueur écrit sa propre progression. |
+| Import DofusDB depuis un YAML par étage. | **Aspiration polie de la base Supabase de Duffus**, lancée à la main, puis **extraits versionnés** dans le dépôt, puis construction des étages (§6). DofusDB passe en complément et en repli. | Duffus est la source unique, et l'auteur ne peut pas fournir d'export. |
+| Domaine : paliers, difficultés, retardataires, contrôles de cap. | Domaine : **barème à 4 catégories**, palier ⌈N × K ÷ 2⌉, progression, filtres, ouverture, **mode du site**, classement principal / secondaire (§4). | Nouveau modèle de points. |
+| Règles écrites en dur dans le code. | **`config/regles.yaml`** : tout point encore ouvert avec Shadoaze (EXIGENCES T-nn) se règle sans toucher au code (§4). | EX-109 et arbitrage du chef de projet. |
+| IA vision (Claude Haiku) au jalon lancement. | **Retirée** du périmètre des lots A et B. Une validation par screen en option au lot D, en reprenant la conception v3. | Confiance, zéro screen. |
+| Machine Fly de 512 Mo, intents Discord, permissions du bot. | Machine Fly de **256 Mo** (sans bot ni Pillow), **nom de domaine**, page **teaser** servie en mode `teaser` (§7). | Calendrier du reveal. |
 
 ---
 
@@ -8,401 +20,437 @@ Version 1, 25/10/2026. Ce document dit **comment** on construit ce que décrit `
 
 | Brique | Choix | Pourquoi, en une ligne |
 |---|---|---|
-| Langage | **Python 3.12** | Marceau le maîtrise. Bot, calcul, IA et tests restent dans une seule langue. |
-| Bot Discord | **discord.py 2.x** | Bibliothèque Python de référence, maintenue. Elle gère les commandes slash, l'autocomplétion, les boutons, les fenêtres de saisie et les commandes de clic droit. |
-| Site | **FastAPI + gabarit Jinja2 + le JS de la maquette** | Une page servie par le même programme que le bot. Pas d'outil de build ni de Node, et la maquette est réutilisée presque telle quelle. |
-| Base de données | **PostgreSQL hébergé chez Supabase** (offre gratuite) | Une vraie base relationnelle, une console web pour corriger une donnée en urgence, et un stockage de fichiers pour les screens. |
-| Accès aux données | **SQLAlchemy 2 (async) + asyncpg, migrations Alembic** | Le standard Python : schéma versionné, requêtes typées. |
-| IA vision | **Claude Haiku 5.5** (`claude-haiku-5-5`) via le SDK `anthropic` | Le modèle le moins cher de la gamme actuelle, qui lit les images. Environ 0,1 centime par screen. |
-| Hébergement | **Fly.io**, une petite machine toujours allumée à Paris (`cdg`) | Un bot Discord doit rester connecté en permanence. C'est l'option la moins chère et la plus simple pour ça (environ 2,2 $ par mois en 256 Mo, 3,7 $ en 512 Mo ; Paris est un peu plus cher que les États-Unis). |
-| Données de jeu | **API DofusDB**, importée une fois par étage | La seule source publique qui relie donjons, succès et quêtes de Dofus 3. |
-| Outils | **uv** (dépendances), **pytest** (tests), **ruff** (style) | Rapides, standards, un seul fichier `pyproject.toml`. |
+| Langage | **Python 3.12** | Marceau le maîtrise. Domaine, site, aspiration et tests restent dans une seule langue. |
+| Site | **FastAPI + gabarits Jinja2 + JavaScript « vanilla »** (un fichier, sans outil de build) | Des pages rendues par le serveur : simples à sécuriser (le serveur décide de ce qui est envoyé, essentiel pour le brouillard de guerre), rapides sur mobile, et sans Node ni bundler. Le JS ne sert qu'aux cases, aux filtres et au compte à rebours. |
+| Connexion | **Discord OAuth2**, écrit à la main avec `httpx` (environ 100 lignes) | Pas de mot de passe à gérer, et l'identité est celle du serveur (§8). |
+| Sessions | **Table `session` en base** et cookie opaque `__Host-` | Déconnexion réelle, révocation possible, rien de sensible dans le cookie. |
+| Base de données | **PostgreSQL chez Supabase** (offre gratuite), schéma dédié `epreuve` | Déjà choisi en v3. Une console web pour corriger une donnée en urgence. |
+| Accès aux données | **SQLAlchemy 2 (async) + asyncpg, migrations Alembic** | Déjà en place et testé. |
+| Données de jeu | **Duffus** (aspiration ponctuelle) + **DofusDB** (icônes, monstres, repli) | Arbitrage du 27/10 (§6). |
+| Hébergement | **Fly.io**, une machine à Paris (`cdg`) + **nom de domaine** | Déjà configuré (`fly.toml`). HTTPS automatique, y compris pour un domaine à nous. |
+| Outils | **uv**, **pytest** (+ hypothesis), **ruff** | Déjà en place. |
+
+Dépendances ajoutées : `python-multipart` (formulaires FastAPI) et **`nh3`**, qui filtre par liste blanche le HTML des fiches de quête recopiées de Duffus (§6.5). C'est une bibliothèque Rust maintenue, le successeur recommandé de `bleach`. `discord.py` est **retiré** de l'exécution. Il reste dans l'historique git pour un éventuel lot D.
 
 ---
 
 ## 2. Schéma des composants
 
 ```
-                         Serveur Discord « L'Épreuve des Dieux »
-   ┌───────────────────────────────────────────────────────────────────┐
-   │  #screen-validation          #validations-admin (privé)           │
-   │   joueurs postent ──┐          propositions IA + boutons ◄──┐     │
-   │                     │          commandes slash des admins   │     │
-   └─────────────────────┼───────────────────────────────────────┼─────┘
-                         │ passerelle Discord (WebSocket)        │
-                         ▼                                       │
-   ┌───────────────────────────────────────────────────────────────────┐
-   │  Machine Fly.io (Paris) : UN programme Python, une boucle asyncio │
-   │                                                                   │
-   │  ┌──────────────┐   ┌───────────────────┐   ┌──────────────────┐  │
-   │  │ bot/         │──►│ domaine/          │◄──│ web/             │  │
-   │  │ discord.py   │   │ calcul de jauge   │   │ FastAPI          │  │
-   │  │ commandes,   │   │ contrôles de cap  │   │ GET /            │  │
-   │  │ boutons      │   │ (Python pur,      │   │ GET /api/etat    │  │
-   │  └──────┬───────┘   │  sans base)       │   │ GET /sante       │  │
-   │         │           └─────────▲─────────┘   └────────┬─────────┘  │
-   │         │  ┌──────────────┐   │                      │            │
-   │         ├─►│ ia/ vision   │   │                      │            │
-   │         │  │ Claude Haiku │   │                      │            │
-   │         │  └──────┬───────┘   │                      │            │
-   │         ▼         │           │                      ▼            │
-   │  ┌────────────────┴───────────┴────────────────────────────────┐  │
-   │  │ db/ : dépôt de données (SQLAlchemy async)                    │  │
-   │  └──────────────────────────────┬──────────────────────────────┘  │
-   └─────────────────────────────────┼─────────────────────────────────┘
-               HTTPS                 │ Postgres (TLS)          ▲ HTTPS
-                 │                   ▼                         │
-   ┌─────────────▼──────┐  ┌────────────────────────┐   ┌──────┴───────┐
-   │ API Anthropic      │  │ Supabase               │   │ Visiteurs du │
-   │ (Haiku 5.5 vision) │  │ Postgres + Storage     │   │ site public  │
-   └────────────────────┘  │ (copies des screens)   │   └──────────────┘
-                           └────────────────────────┘
-   Hors ligne, sur le poste de Marceau :
-   outil d'import  ──HTTPS──►  api.dofusdb.fr   (une fois par étage)
+  Navigateur du grimpeur (mobile d'abord)
+     │  HTTPS (domaine à nous → Fly.io)
+     ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│ Machine Fly.io (Paris) : UN programme Python (uvicorn + FastAPI)     │
+│                                                                      │
+│  web/securite.py : en-têtes, mode teaser, CSRF, session ──────┐      │
+│  web/pages.py   web/api.py   web/admin.py   web/auth.py        │      │
+│        │             │            │             │              │      │
+│        ▼             ▼            ▼             ▼              │      │
+│  ┌──────────────────────────┐   ┌─────────────────────────┐    │      │
+│  │ domaine/ (Python pur)     │   │ discord/oauth.py (httpx) │────┼──► discord.com (connexion,
+│  │ barème, palier, jauge,    │   │ discord/annonces.py      │    │     rôles, annonce facultative)
+│  │ progression, ouverture,   │   └─────────────────────────┘    │      │
+│  │ mode du site, nature      │                                  │      │
+│  └────────────▲─────────────┘                                  │      │
+│               │ objets du domaine                              │      │
+│  ┌────────────┴───────────────────────────────────────────┐    │      │
+│  │ db/ : dépôt (SQLAlchemy async)                          │◄───┘      │
+│  └────────────┬───────────────────────────────────────────┘           │
+└───────────────┼───────────────────────────────────────────────────────┘
+                │ Postgres (TLS)
+                ▼
+        Supabase (schéma epreuve)
+                ▲
+                │ écrit les étages (scellés) après revue
+   Poste d'un admin (hors ligne du site) :
+   python -m epreuve.duffus aspirer ──HTTPS, ≤ 1 req/s──► base Supabase de Duffus (lecture, clé publique)
+        └─► donnees/duffus/AAAA-MM-JJ/*.json (extraits versionnés, revus dans git)
+   python -m epreuve.contenu construire ──► DofusDB (repli, icônes) ──► notre base
 ```
 
-**L'idée directrice : « l'IA lit, le code juge, l'humain décide ».**
-- L'IA ne fait que **lire** un screen : quels mots, quels pseudos, quels niveaux.
-- Le module `domaine/` applique les **règles** : paliers et points, seuil, cap, membres inscrits, doublons, dates. C'est du Python pur, sans base de données ni réseau, et donc facile à tester.
-- L'admin **décide** d'un clic.
+**L'idée directrice : « le serveur décide de tout ce qui est montré ».**
+- Le module `domaine/` applique les **règles** (points, palier, ouverture, visibilité des étages). C'est du Python pur, sans base ni réseau, donc facile à tester.
+- Les gabarits ne reçoivent **que** des étages ouverts ou terminés. Un étage scellé n'existe pas pour un grimpeur, ni dans le HTML, ni dans le JSON, ni par son adresse.
+- Le navigateur n'a jamais le dernier mot : une coche est revalidée côté serveur (session, étage cochable, élément visible).
 
-### Pourquoi un seul programme pour le bot et le site
+### Pourquoi plus de bot connecté en permanence
 
-- **Une seule source de vérité pour le calcul.** Le bot (`/etage etat`) et le site appellent la même fonction `calculer_etat_etage`. Si le site était une application JavaScript séparée qui lit la base, il faudrait réécrire le calcul en JS ou en SQL, avec le risque que les deux versions divergent.
-- **Un seul déploiement, un seul jeu de secrets, une seule facture.**
-- Contrepartie acceptée : si le programme tombe, le site tombe aussi. Fly.io redémarre la machine automatiquement, et pour un événement entre amis c'est suffisant.
-
-Techniquement, `main.py` lance dans la même boucle asyncio le serveur web (`uvicorn.Server.serve()`) et le bot (`bot.start(token)`), avec `asyncio.gather`. C'est un bon exercice pour comprendre l'asynchrone en Python : une seule boucle, deux tâches qui attendent le réseau à tour de rôle.
+Toute écriture passe maintenant par le site. Un bot connecté à la passerelle Discord n'apporterait que des annonces, et il demanderait une connexion permanente, des intents, une boucle asyncio partagée et des tests de faux objets Discord. Une annonce, c'est **un seul appel REST** (`POST /channels/{id}/messages` avec le jeton du bot), sans connexion permanente. Le jeton reste dans `.env` pour ça, et pour un éventuel lot D.
 
 ---
 
-## 3. Arborescence du dépôt
+## 3. Arborescence du dépôt (cible du lot B)
 
 ```
 epreuve-des-dieux/
-├── pyproject.toml          # dépendances (uv), config pytest et ruff
-├── uv.lock
-├── Dockerfile              # image de production
-├── fly.toml                # config Fly.io (machine toujours allumée)
-├── .env.example            # liste des variables, sans valeurs
-├── alembic.ini
-├── migrations/             # migrations Alembic (schéma versionné)
+├── pyproject.toml, uv.lock, Dockerfile, fly.toml, alembic.ini, .env.example
+├── migrations/versions/0001_initial.py   # RÉÉCRITE en v4 (aucune donnée de production n'existe)
 ├── config/
-│   └── etages/
-│       └── etage-0.yaml    # contenu de l'étage 0 (voir §6)
+│   ├── regles.yaml          # règles réglables sans code (SPEC §8.1) : multiplicateur du palier, catégorie vide,
+│   │                        #   coches (succès ⇒ vaincu, pause), fiche, bonus, inscription, verrouillage des modules
+│   ├── etages.yaml          # étage ↔ tranche Duffus, cap, nom, image, dates (étage 0 : 30/10 et 13/11) (T-04, T-28)
+│   └── dofus.yaml           # Dofus retenus pour « principale » (SPEC §8.2 Q4) + natures forcées
+├── donnees/duffus/AAAA-MM-JJ/   # extraits versionnés de l'aspiration (§6)
 ├── src/epreuve/
-│   ├── main.py             # lance bot + site dans la même boucle
-│   ├── config.py           # lecture des variables d'environnement (pydantic-settings)
-│   ├── domaine/            # règles du jeu, Python pur, aucun import de discord/sqlalchemy
-│   │   ├── modeles.py      # dataclasses : Etage, Palier, Contenu, Grimpeur, Validation…
-│   │   ├── seuil.py        # POINTS_VISES, seuil(maximum, pourcent) en entiers
-│   │   ├── jauges.py       # points_grimpeur(), calculer_etat_etage(), marques_grimpeur()
-│   │   ├── inclusion.py    # est_compte(), doit_etre_inclus() : les retardataires
-│   │   ├── classes.py      # les 19 classes de Dofus 3 (ordre du jeu), repartition_classes()
-│   │   ├── controles.py    # controler_validation() : cap, statut, doublon, date
-│   │   ├── ouverture.py    # ouvrir_etage(), photo de l'étage (lancement)
-│   │   └── propositions.py # construire_proposition() (lancement)
+│   ├── main.py              # uvicorn seul (plus de bot)
+│   ├── config.py            # pydantic-settings
+│   ├── domaine/             # Python pur : n'importe RIEN d'autre du projet
+│   │   ├── modeles.py       # dataclasses figées : Etage, Donjon, CaseSucces, Quete, Grimpeur, Bonus…
+│   │   ├── classes.py       # GARDÉ : les 19 classes, repartition_classes()
+│   │   ├── bareme.py        # catégories, points, palier, jauge
+│   │   ├── progression.py   # avancement, compteurs « 7/12 », qui_n_a_pas_fait, moins_avance
+│   │   ├── ouverture.py     # peut_ouvrir(), bilan_etage()
+│   │   ├── visibilite.py    # étages visibles, élément cochable
+│   │   ├── mode_site.py     # teaser / complet (lot A)
+│   │   ├── nature.py        # principal / secondaire : fermeture des prérequis, critères DofusDB
+│   │   └── textes.py        # liste_francaise, formats de dates et de nombres (repris de modeles.py)
 │   ├── db/
-│   │   ├── tables.py       # tables SQLAlchemy
-│   │   ├── session.py      # moteur async, pool
-│   │   └── depot.py        # fonctions de lecture/écriture, renvoient des objets domaine
+│   │   ├── tables.py, session.py (GARDÉ), depot.py
+│   ├── duffus/              # aspiration (lot B)
+│   │   ├── client.py        # lecteur PostgREST poli (débit, pagination, User-Agent)
+│   │   ├── schema.py        # modèles pydantic des tables lues (colonnes exigées)
+│   │   └── aspirer.py       # CLI : relevé du schéma, aspiration, rapport de différences
 │   ├── dofusdb/
-│   │   ├── client.py       # appels HTTP à api.dofusdb.fr (httpx)
-│   │   └── import_etage.py # CLI : YAML → base (python -m epreuve.dofusdb.import_etage)
-│   ├── bot/
-│   │   ├── client.py       # création du bot, verrou de serveur, synchro des commandes
-│   │   ├── acces.py        # est_admin(membre)
-│   │   ├── cmd_grimpeur.py # /grimpeur …
-│   │   ├── cmd_validation.py # /valider, /annuler, /refuser, clic droit « Valider ce screen »
-│   │   ├── cmd_etage.py    # /etage etat|ouvrir|seuil
-│   │   ├── cmd_joueur.py   # /quetes (bêta) ; /moi, /niveau (lancement)
-│   │   ├── cmd_ia.py       # /ia stats (lancement)
-│   │   ├── formulaire.py   # fenêtre de saisie partagée clic droit / Corriger (lancement)
-│   │   ├── ecoute_screens.py # on_message, 👀, file d'attente (lancement)
-│   │   └── propositions.py # carte de proposition IA + boutons persistants
-│   ├── stockage/
-│   │   └── supabase.py     # copies des screens dans Storage (lancement)
-│   ├── ia/                 # analyse des screens (jalon lancement)
-│   │   ├── analyse.py      # appel Claude, schéma de sortie
-│   │   ├── prompt.py       # consigne système, contexte
-│   │   └── images.py       # téléchargement, redimensionnement (Pillow)
+│   │   ├── client.py        # GARDÉ et étendu (quêtes, objets, succès)
+│   │   └── repli.py         # 5 succès d'un donjon, fermeture d'un Dofus (SPEC §6.3)
+│   ├── contenu/
+│   │   ├── construire.py    # extrait Duffus (+ repli) → EtagePrepare, alertes
+│   │   ├── ecrire.py        # EtagePrepare → base (rejouable, garde-fous)
+│   │   └── __main__.py      # CLI : python -m epreuve.contenu construire --etage N [--a-blanc]
+│   ├── discord/
+│   │   ├── oauth.py         # échange du code, /users/@me, membre du serveur
+│   │   └── annonces.py      # POST d'un message (facultatif)
 │   └── web/
-│       ├── app.py          # FastAPI : /, /api/etat, /sante
-│       ├── templates/index.html
-│       └── static/         # style.css et app.js tirés de la maquette
-└── tests/
-    ├── domaine/            # tests unitaires purs (rapides, la majorité)
-    ├── db/                 # tests contre un vrai Postgres (marqueur pytest « db »)
-    ├── bot/                # tests des handlers avec de faux objets Discord
-    ├── web/                # tests de l'API avec le TestClient de FastAPI
-    └── donnees/            # réponses DofusDB enregistrées, screens d'exemple
+│       ├── app.py           # creer_app() : assemblage (GARDÉ dans l'esprit)
+│       ├── securite.py      # en-têtes, middleware du mode teaser, CSRF
+│       ├── auth.py          # /connexion, /auth/discord/retour, /deconnexion, dépendances
+│       ├── pages.py         # /, /etages/{n}, /grimpeurs, /grimpeurs/{id}, /inscription
+│       ├── api.py           # POST /api/coches, GET /api/etages/{n}/manque
+│       ├── admin.py         # /admin/…
+│       ├── demo.py          # jeu de démonstration sans base (GARDÉ dans l'esprit)
+│       ├── templates/       # base.html, teaser.html, tour.html, etage.html, …, admin/*.html
+│       └── static/          # style.css, app.js, teaser/teaser.{css,js}, fonts/*.woff2
+└── tests/ domaine/ db/ web/ duffus/ dofusdb/ contenu/ donnees/
 ```
 
-Hors `src/` : `scripts/eval_ia.py` (évaluation hors ligne de l'IA, lancement) et `.github/workflows/` (tests et sauvegarde nocturne).
-
-**La règle de dépendance** : `domaine/` n'importe rien d'autre du projet. `db/`, `bot/`, `web/` et `ia/` importent `domaine/`, jamais l'inverse. C'est ce qui rend les règles testables sans Discord ni base de données, et c'est la première chose que le relecteur vérifie.
+**La règle de dépendance**, inchangée : `domaine/` n'importe rien d'autre du projet. `db/`, `web/`, `contenu/`, `duffus/` et `dofusdb/` importent `domaine/`, jamais l'inverse. C'est ce qui rend les règles testables sans base ni réseau, et c'est la première chose que le relecteur vérifie.
 
 ---
 
 ## 4. Le domaine : interfaces centrales
 
-Signatures de référence. Les types exacts sont figés dans `LOTS.md` (lot 1).
+Les signatures exactes sont **figées dans `LOTS.md`** (lot B). Le principe :
 
-- `POINTS_VISES = {"easy": 1, "med": 2, "hard": 3}` et `seuil(maximum: int, pourcent: int) -> int`, calculé en entiers : `(maximum × pourcent + 99) // 100`, et 0 si le maximum est nul. Pourquoi des entiers : avec des nombres à virgule, `0,75 × 24` peut donner 18,000000000000004, et l'arrondi au-dessus donnerait alors 19.
-- `points_grimpeur(grimpeur, paliers, validations, etage) -> int` (de 0 à 3) : le plus haut rang *k* tel que les paliers 1 à *k* sont tous atteints. Les paliers sont **stricts** (SPEC §5.2).
-- `est_compte(grimpeur) -> bool` (actif et `inclus_le` renseigné) et `doit_etre_inclus(grimpeur, etage) -> bool` (retardataire dont le niveau connu atteint le cap) : la règle des retardataires (SPEC §5.4). La couche base de données appelle `doit_etre_inclus` à chaque mise à jour de niveau, et renseigne `inclus_le` si besoin.
-- `controler_validation(grimpeur, contenu, niveau | None, realisee_le, etage, deja_acceptee: bool) -> Controle`
-  renvoie deux listes de motifs lisibles :
-  - **bloquants** : « grimpeur en pause », « réalisée avant l'ouverture de l'étage », « déjà validé », « contenu hors de l'étage en cours », « membre non inscrit » ;
-  - **avertissements**, que l'admin doit trancher : « niveau 21 au-dessus du cap 20 ».
+- **Une photographie** : `ContenuEtage(etage, donjons, cases, quetes)` est le contenu **visible** d'un étage (sans les éléments masqués), et `Coches(grimpeur_id, cases, quetes)` l'ensemble de ce qu'un grimpeur a coché. Tout calcul part de ces deux objets.
+- **Le barème** (`bareme.py`) :
+  - `categories_grimpeur(contenu, coches) -> dict[Categorie, EtatCategorie]` donne pour chaque catégorie faits / total / acquise / vide ;
+  - `points_grimpeur(contenu, coches) -> int`, de 0 à 4 ;
+  - `palier(nb_actifs, nb_categories, regles, palier_manuel) -> int` vaut ⌈ m × N × K ÷ 4 ⌉, avec m = `regles.points_par_joueur` (2 par défaut), ou le palier manuel.
+- **Les règles** : `Regles` est une dataclass figée, lue depuis `config/regles.yaml` au démarrage et validée par pydantic, puis **passée en paramètre** aux fonctions du domaine. Le domaine ne lit jamais de fichier : il reste pur et testable avec n'importe quelle combinaison de règles.
 
-  `ok` est vrai s'il n'y a aucun motif bloquant. Il n'y a plus de tolérance automatique ni d'option `forcer` : un avertissement accepté par l'admin donne une validation `forcee`.
-- `calculer_etat_etage(etage, paliers, grimpeurs, validations, maintenant) -> EtatEtage`
-  `EtatEtage` contient :
-  - le nombre de comptés, de grimpeurs en pause et de retardataires ;
-  - la jauge : points, maximum, seuil, pourcentage, pleine ou non ;
-  - le détail du maximum par difficulté et le nombre de grimpeurs par palier ;
-  - `deblocable`.
-- `marques_grimpeur(grimpeur, paliers, validations, etage) -> dict[int, bool]` : pour chaque rang, les contenus **propres** à ce palier sont-ils faits ? Ce sont les marques des cartes. Elles sont non strictes : la marque Quêtes peut s'allumer sans le full succès. Elles utilisent la **même** fonction interne « contenus faits » que `points_grimpeur`.
-- `repartition_classes(grimpeurs) -> list[RepartitionClasse]` : pour chacune des 19 classes, dans l'ordre du jeu, le nombre de grimpeurs actifs et le nombre en pause. Les classes à zéro sont incluses, puisque ce sont elles qui intéressent un nouveau venu. La liste des classes est une constante du domaine, recopiée une fois depuis `GET /breeds` de DofusDB. Une nouvelle classe ajoutée au jeu demande donc une mise à jour du code, ce qui est rare et voulu : la classe d'un grimpeur est contrôlée contre cette liste.
+  Pourquoi pas de nombres à virgule : `0,75 × 24` peut donner 18,000000000000004, et l'arrondi au-dessus donnerait alors 19 (le piège déjà noté en v3). On calcule avec `fractions.Fraction`, qui est exacte : m peut valoir 2 ou 5/2 sans erreur d'arrondi, et `math.ceil` d'une fraction est exact.
+- **La jauge** : `calculer_jauge(contenu, grimpeurs, coches_par_grimpeur, bonus, maintenant) -> EtatJauge` donne le score, le palier, les actifs, les pauses, le détail par catégorie, le total des bonus, `pleine` et `ouvrable`. Elle s'appuie sur `points_grimpeur`. **Une seule fonction** alimente la page de l'étage, la tour, la fiche et l'admin (SPEC §5.4).
+- **La progression** (`progression.py`) : `compteurs(contenu, actifs, coches) -> dict[ElementRef, int]` pour les « 7/12 », `qui_n_a_pas_fait(element, grimpeurs, coches) -> list[Grimpeur]`, `avancement(contenu, coches) -> float` et `moins_avance(contenu, actifs, coches) -> Grimpeur | None`.
+- **L'ouverture** (`ouverture.py`) : `peut_ouvrir(jauge, etage, prochain, maintenant) -> Decision(ok, raisons)` et `bilan_etage(jauge, maintenant) -> Bilan`.
+- **La visibilité** (`visibilite.py`) : `etages_visibles(etages, est_admin) -> list[Etage]` et `element_cochable(etage) -> bool`. Les gabarits ne reçoivent que le résultat de `etages_visibles`.
+- **Le mode du site** (`mode_site.py`, lot A) : `mode_effectif(reglage, ouvert_le, maintenant) -> "teaser" | "ouvert"` et `voit_le_site_complet(mode, utilisateur) -> bool`.
+- **La nature** (`nature.py`) :
+  - `quetes_obligatoires(critere: str) -> set[int]` analyse un `startCriterion` DofusDB et ne garde que les « ET » ;
+  - `fermeture(racines, prerequis) -> set[int]` donne tous les prérequis, directs ou indirects ;
+  - `classer(quetes_etage, guides_dofus, dofus_retenus, forcees) -> dict[id, Nature]`.
 
-**Pourquoi des paliers « contenus propres » plutôt que « cumulés »** : on stocke pour chaque palier les contenus qu'il **ajoute**, ou qu'il reprend, puisque les ensembles peuvent se recouper. Atteindre le palier *k*, c'est avoir fait l'union des contenus des paliers 1 à *k*. Un étage à deux donjons s'écrit naturellement : palier 1 = les 2 succès de base, palier 2 = les 2 × 5 succès.
+  Ce sont des fonctions pures, testées sur des graphes fabriqués et sur les vraies réponses enregistrées.
+
+`classes.py` est **gardé tel quel** (19 classes, `repartition_classes`). La dataclass `Grimpeur` perd `difficulte` et gagne `discord_user_id` et `niveau_declare`.
 
 ---
 
 ## 5. Base de données
 
-PostgreSQL chez Supabase, dans un **schéma dédié `epreuve`** et non dans `public`. Pourquoi : Supabase publie automatiquement une API REST sur les tables de `public`. On n'en veut pas, puisque toute écriture doit passer par le bot. On active en plus la *Row Level Security* sans aucune règle, comme ceinture de sécurité. Notre programme se connecte directement à Postgres et n'est pas concerné.
+PostgreSQL chez Supabase, **schéma dédié `epreuve`**, hors de l'API REST automatique de Supabase, avec *Row Level Security* activée sans règle comme ceinture de sécurité. Rien ne change sur ces points depuis la v3. La migration `0001_initial.py` est **réécrite** : aucune base de production n'a encore été créée (`DATABASE_URL` est vide dans `.env`), donc pas de données à migrer.
 
 | Table | Colonnes (type) | Contraintes |
 |---|---|---|
-| `etage` | id (serial), numero (int), nom (text), level_cap (int), **seuil_pourcent (int, défaut 75, entre 1 et 100)**, statut (text : scelle/ouvert/termine), ouvert_le (timestamptz, null), date_plancher_suivant (timestamptz, null), zone_quetes (text), donjons_affiches (text[]) | numero unique. Au plus un étage `ouvert`, par un index unique partiel. |
-| `palier` | id, etage_id, rang (int : 1, 2 ou 3), libelle (text) | (etage_id, rang) unique |
-| `contenu` | id, etage_id, type (text : succes/quete/lot_quetes/autre), nom (text), nom_court (text), dofusdb_type (text, null), dofusdb_id (int, null), dofusdb_ids_couverts (int[], null) | (etage_id, dofusdb_type, dofusdb_id) unique quand non nul |
-| `palier_contenu` | palier_id, contenu_id | clé primaire composée |
-| `grimpeur` | id, pseudo_ig (text), classe (text), difficulte (text : easy/med/hard), statut (text : actif/pause/exclu), discord_user_id (bigint, null), niveau_connu (int, null), niveau_maj_le (timestamptz, null), inscrit_le (timestamptz), **inclus_le (timestamptz, null : retardataire)**, **inclusion_forcee (bool)** | pseudo_ig unique sans tenir compte de la casse, discord_user_id unique quand non nul |
-| `preuve` | id, discord_guild_id, discord_channel_id, discord_message_id (bigint), lien (text), auteur_discord_id (bigint), poste_le (timestamptz), image_chemin (text, null), analyse_ia (jsonb, null), statut_ia (text : sans/en_attente/proposee/traitee/echec), cree_le | discord_message_id unique |
-| `validation` | id, grimpeur_id, contenu_id, preuve_id (null), **niveau (int, null pour une déclaration)**, statut (text : acceptee/refusee/annulee), forcee (bool), motif (text, null), source (text : manuelle/ia_confirmee/ia_corrigee/**declaration**), decidee_par (bigint : l'admin, ou le joueur qui déclare), decidee_le (timestamptz), realisee_le (timestamptz) | **index unique partiel (grimpeur_id, contenu_id) WHERE statut='acceptee'**, et `CHECK (niveau IS NOT NULL OR source = 'declaration')` |
-| `journal` | id, horodatage, acteur_discord_id (bigint, null), type (text), grimpeur_id (null), etage_id (null), details (jsonb), public (bool) | index sur horodatage décroissant |
+| `etage` | id serial, numero int, nom text, niveau_min int, niveau_max int, level_cap int, statut text (scelle/ouvert/termine), ouvert_le timestamptz null, date_plancher_suivant timestamptz null, palier_manuel int null, duffus_tranche_id text null, lien_guide text null, ambiance_url text null, alertes jsonb (dernière construction), maj_le timestamptz | numero unique. **Au plus un étage `ouvert`** (index unique partiel). CHECK palier_manuel ≥ 0. |
+| `donjon` | id, etage_id, nom, niveau int null, ordre int, bloc text null, duffus_id text null, dofusdb_id int null, origine text (propose/admin, T-03), succes_source text (duffus/dofusdb, T-02), masque bool | (etage_id, duffus_id) unique quand non nul |
+| `case_succes` | id, donjon_id, ordre int (1 à n), nom, condition text, est_classique bool, duffus_id text null, masquee bool | (donjon_id, ordre) unique. **Une seule case classique par donjon** (index unique partiel). |
+| `quete` | id, etage_id, nom, niveau int null, bloc text, ordre int, nature text (principale/secondaire), nature_origine text (duffus/dofusdb/admin), nature_motif text null, dofus text[], jusqu_ou text null, fiche_html text null (nettoyé par nh3), duffus_id text null, dofusdb_id int null, masquee bool | (etage_id, duffus_id) unique quand non nul |
+| `liste_officielle` | discord_user_id bigint PK, statut_initial text, ajoute_par bigint, ajoute_le timestamptz | — |
+| `grimpeur` | id, discord_user_id bigint, nom_discord text (mis à jour à chaque connexion, T-20), pseudo_ig text, classe text null (facultative, T-20), statut text (actif/pause/exclu), niveau_declare int null, inscrit_le timestamptz | discord_user_id unique. pseudo unique sans tenir compte de la casse (`lower(pseudo_ig)`). CHECK classe ∈ 19 classes, CHECK niveau entre 1 et 200. |
+| `coche_case` | grimpeur_id, case_id, cochee_le timestamptz, cochee_par bigint | **PK (grimpeur_id, case_id)** |
+| `coche_quete` | grimpeur_id, quete_id, cochee_le, cochee_par | **PK (grimpeur_id, quete_id)** |
+| `bonus` | id, etage_id, grimpeur_id null, points int, motif text, par bigint, le timestamptz, annule_le timestamptz null, annule_par bigint null | CHECK points entre −10 et 10 et ≠ 0. motif non vide. |
+| `bilan_etage` | etage_id PK, fige_le, actifs int, palier int, score int, detail jsonb, force bool, motif text null | — |
+| `session` | id_hache bytea PK (SHA-256 du jeton du cookie), discord_user_id bigint, nom_discord text, est_admin bool, roles_verifies_le timestamptz, cree_le, expire_le, jeton_oauth text, csrf text | index sur expire_le. Purge des sessions expirées au démarrage et une fois par jour. |
+| `journal` | id, horodatage, acteur_discord_id bigint null, type text, grimpeur_id null, etage_id null, details jsonb, public bool | index sur horodatage décroissant |
 
 Choix notables :
-- **Des textes contrôlés plutôt que des types ENUM Postgres** : plus simples à faire évoluer avec Alembic. Les valeurs permises sont vérifiées par une contrainte `CHECK`.
-- **L'index unique partiel** sur les validations acceptées garantit au niveau de la base qu'on ne compte jamais deux fois la même chose, même si deux admins cliquent en même temps.
-- **Connexion** : Supabase fournit plusieurs adresses. On utilise le *pooler en mode session* (port 5432), compatible IPv4 et avec les requêtes préparées d'asyncpg. Le mode *transaction* (port 6543) casse les requêtes préparées d'asyncpg sans réglage particulier, d'où ce choix.
-- **Mise en veille de l'offre gratuite** : Supabase met en pause un projet gratuit après 7 jours sans activité. Le bot interroge la base en permanence (site, commandes, et une requête de vie toutes les heures), donc ça ne devrait pas arriver. En cas de pause, il faut la lever à la main depuis la console Supabase.
-- **Sauvegardes** : l'offre gratuite n'offre pas de restauration à un instant donné. **Dès le jalon bêta**, puisque les validations saisies pendant la bêta sont de vraies données, une action GitHub nocturne lance `pg_dump` et garde le fichier 30 jours comme artefact privé. C'est gratuit et indépendant de Supabase.
+- **Deux tables de coches plutôt qu'une table générique** (« type + id ») : chaque coche a une vraie clé étrangère, et la base refuse une coche vers une case qui n'existe pas. Le prix, c'est deux requêtes au lieu d'une : négligeable.
+- **Une coche est une ligne qu'on supprime au décochage** (`INSERT … ON CONFLICT DO NOTHING` pour cocher, `DELETE` pour décocher). L'opération est idempotente : un double toucher ne crée pas deux lignes et ne casse rien. Le journal garde l'historique.
+- **On masque, on ne supprime pas** un élément de contenu. `ON DELETE RESTRICT` sur les clés étrangères des coches : la base elle-même empêche de supprimer un élément coché.
+- **Textes contrôlés par CHECK plutôt que types ENUM** (inchangé depuis la v3) : plus simples à faire évoluer.
+- **Sessions en base, cookie opaque** (§8) : le cookie ne contient qu'un jeton aléatoire de 256 bits. La base ne stocke que son empreinte. Une fuite de la base ne permet donc pas de se faire passer pour quelqu'un.
+- **Performances** : 30 grimpeurs × environ 300 éléments par étage, c'est au plus 9 000 coches par étage. On charge l'étage et toutes ses coches en deux requêtes, et on calcule en Python. Pas de cache au lot B.
+- **Connexion** : pooler Supabase en **mode session** (port 5432), compatible avec les requêtes préparées d'asyncpg (inchangé).
+- **Mise en veille** : Supabase met en pause un projet gratuit après 7 jours sans activité. La vérification de santé de Fly appelle `/sante` toutes les 30 secondes, et `/sante` interroge la base : le projet reste actif. Il faut créer le projet Supabase **au début du lot B**, pas avant, sinon il s'endort pendant le lot A, où la base n'est pas utilisée.
+- **Sauvegardes** : action GitHub nocturne `pg_dump` **chiffrée avec age**, gardée 30 jours (version de la branche `wip/corrections-revue`, à reprendre telle quelle).
 
 ---
 
-## 6. Données de jeu : DofusDB
+## 6. Données de jeu : aspiration de Duffus, DofusDB en complément
 
-### Ce qu'on a vérifié le 25/10/2026
+### 6.1 Le principe en trois étapes séparées
 
-**api.dofusdb.fr** est une API publique en lecture, sans clé, qui accepte les requêtes depuis n'importe quel site (`Access-Control-Allow-Origin: *`). Elle utilise le style de requêtes Feathers : `$limit`, `$skip`, `$select[]=champ`, `champ[$regex]=…`, `champ[$lte]=…`. Les données correspondent à Dofus 3, avec des mises à jour datées de 2026.
-
-| Point d'accès | Ce qui nous sert |
-|---|---|
-| `GET /dungeons/{id}` | `name.fr`, `optimalPlayerLevel`, **`achievements` : la liste des succès du donjon**, `bosses`, `subarea` |
-| `GET /achievements/{id}` ou `?name.fr[$regex]=…` | nom, description (« Vaincre Kardorim dans son donjon en validant le challenge … »), `categoryId`, `img` |
-| `GET /achievement-categories/{id}` | pour reconnaître et écarter les catégories hors sujet (par exemple *Temporis*) |
-| `GET /quest-categories/{id}` | **`questIds` : toutes les quêtes d'une zone** |
-| `GET /quests?categoryId=…` | nom, `levelMin`/`levelMax`, `isDungeonQuest` |
-| `GET /subareas/{id}`, `/areas/{id}` | rattacher un donjon à sa zone (Crypte de Kardorim → Incarnam) |
-| `GET /breeds` | les 19 classes : Féca, Osamodas, Enutrof, Sram, Xélor, Ecaflip, Eniripsa, Iop, Crâ, Sadida, Sacrieur, Pandawa, Roublard, Zobal, Steamer, Eliotrope, Huppermage, Ouginak, Forgelance |
-
-**Exemple de l'étage 0, vérifié** :
-- Donjon **90 « Crypte de Kardorim »**, niveau optimal 10, boss Kardorim (monstre 4051), sous-zone 447, zone 45 Incarnam.
-- `achievements` du donjon : **33** *Crypte de Kardorim* (vaincre Kardorim), **487** *Kardorim (Duo)*, **571** *Kardorim (Zombie)*, **574** *Kardorim (Premier)*, **6148** *Kardorim (Spécial)*. Ce sont les 5 succès du full succès.
-- Une recherche par nom remonte aussi 3 succès « Kardorim » des catégories 104 à 106 (*Temporis*, Donjons première, deuxième et troisième vague). Ils ne figurent pas dans `achievements` du donjon et ne concernent que les serveurs Temporis. **C'est pour ça qu'on part de l'objet donjon et non d'une recherche par nom.**
-- Quêtes : catégorie **19 « Incarnam »**, **24 quêtes** (ids 1631 à 1655, 2004, 2512, 2513), dont « Cryptologie » (1638), quête de donjon.
-
-**dofusdude** (`api.dofusdu.de/dofus3/v1`, version de jeu 3.7.12.12) : n'expose que les objets, panoplies, montures et l'almanax. Pas de quêtes, succès ni donjons (réponse 404). **On ne s'en sert pas.**
-
-### Comment on s'en sert
-
-- **Jamais pendant le fonctionnement du bot.** DofusDB est un projet communautaire sans garantie de disponibilité. On l'interroge **une fois par étage**, depuis le poste de Marceau, avec l'outil d'import, et on recopie dans notre base les noms français et les identifiants. Si DofusDB tombe, le bot et le site continuent de tourner.
-- L'outil lit un fichier YAML lisible par un humain et développe les raccourcis :
-
-```yaml
-# config/etages/etage-0.yaml
-numero: 0
-nom: Le Seuil
-level_cap: 20                                  # pas de tolérance (Shadoaze, Q9)
-seuil_pourcent: 75                             # Shadoaze, Q7
-ouvert_le: 2026-10-30T17:00:00+01:00           # vendredi 17 h, heure de Paris (Shadoaze, Q5)
-date_plancher_suivant: 2026-11-13T17:00:00+01:00
-zone_quetes: Incarnam
-donjons_affiches: [Kardorim]
-paliers:
-  - rang: 1
-    libelle: Kardorim vaincu
-    contenus:
-      - {dofusdb_achievement: 33, nom_court: Kardorim vaincu}
-  - rang: 2
-    libelle: Kardorim full succès
-    contenus:
-      - {dofusdb_succes_du_donjon: 90}       # développé en 5 contenus (33, 487, 571, 574, 6148)
-  - rang: 3
-    libelle: Toutes les quêtes d'Incarnam
-    contenus:
-      - {lot_quetes: "Toutes les quêtes d'Incarnam", dofusdb_categorie_quetes: 19}
+```
+(1) ASPIRER  ──►  (2) REVOIR dans git  ──►  (3) CONSTRUIRE l'étage (scellé)  ──►  revue admin sur le site  ──►  ouverture
+ base Duffus        donnees/duffus/            notre base Postgres
+ (lecture seule)    AAAA-MM-JJ/*.json
 ```
 
-- L'import **refuse** un fichier qui n'a pas exactement les rangs 1, 2 et 3, chacun avec au moins un contenu (SPEC §8 bis, f).
-- L'import est **rejouable** : relancé, il met à jour au lieu de dupliquer. Il a un mode `--a-blanc` qui affiche ce qui serait écrit sans rien écrire. Il envoie un `User-Agent` qui identifie le projet et fait peu de requêtes.
-- Les réponses DofusDB utilisées dans les tests sont **enregistrées** dans `tests/donnees/`. Les tests ne dépendent pas du réseau.
+Pourquoi trois étapes et non un seul import :
+- **(1) ne touche que Duffus, et une seule fois.** Une aspiration donne une copie datée. Tout le reste (tests, constructions, corrections) travaille sur cette copie, **sans jamais réinterroger duffus.fr**.
+- **(2) rend les changements visibles.** Les extraits sont des fichiers JSON triés et mis en forme de façon stable. Un `git diff` entre deux aspirations montre exactement ce que l'auteur a modifié dans son guide (une quête ajoutée, un succès renommé) avant que ça n'atteigne les joueurs.
+- **(3) est rejouable et sans réseau** (sauf le repli DofusDB, lui aussi mis en cache). On peut reconstruire un étage autant de fois qu'on veut.
+
+### 6.2 Comment on lit la base de Duffus
+
+**Le constat**, établi par le coordinateur : duffus.fr est une application React qui lit ses données directement dans une base **Supabase**, avec une **clé publique** (la clé « anon », présente dans le code JavaScript livré à tout visiteur). Les tables repérées sont `guide_ranges`, `quest_list`, `quest_pages`, `dungeon_pages`, `achievements`, `achievement_objectives`, `monsters` et `dofus_list`, parmi d'autres. Une base Supabase s'interroge par **PostgREST**, une API REST générée automatiquement :
+
+```
+GET https://<projet-duffus>.supabase.co/rest/v1/guide_ranges?select=*&order=id.asc
+    apikey: <clé anon publique>
+    Authorization: Bearer <clé anon publique>
+    Range: 0-999
+    User-Agent: EpreuveDesDieux-aspiration/1.0 (projet non lucratif, accord de l'auteur ; contact : …)
+```
+
+**On ne lit que ce que la clé publique permet déjà à n'importe quel visiteur de son site**, avec **l'accord explicite de l'auteur**. On ne contourne aucune protection et on n'essaie aucune autre clé.
+
+**Les règles de politesse**, codées dans `duffus/client.py` et non laissées à la discipline :
+
+| Règle | Valeur | Pourquoi |
+|---|---|---|
+| Déclenchement | **À la main**, par un admin, en ligne de commande (lot B) | Jamais automatique, jamais pendant la navigation d'un joueur |
+| Débit | **1 requête par seconde au plus**, une seule à la fois | Négligeable pour son projet Supabase, dont l'offre gratuite a ses propres quotas |
+| Pagination | Pages de 1 000 lignes (en-tête `Range`), tri par clé pour un résultat stable | Le maximum par défaut de PostgREST chez Supabase |
+| Colonnes | `select=` limité aux **colonnes utiles** une fois le schéma relevé | Moins de transfert. On ne récupère pas le texte long des fiches. |
+| Identification | `User-Agent` explicite avec un contact | L'auteur sait qui l'appelle et peut nous joindre |
+| Erreurs | Arrêt immédiat sur 401, 403 ou 404 ; sur 429 ou 5xx, attente de `Retry-After` (30 s par défaut), puis **3 essais au plus** | Ne jamais insister |
+| Fréquence | Une aspiration avant la préparation des étages, puis **au plus une par semaine**, ou à la demande de l'auteur | Volume total estimé : quelques dizaines de requêtes par aspiration |
+
+**La clé et l'adresse** sont des réglages (`DUFFUS_SUPABASE_URL`, `DUFFUS_SUPABASE_CLE`) dans le `.env` de l'admin qui aspire. Elles ne sont **pas** commitées. La clé est publique, mais elle appartient à l'auteur, et il doit pouvoir la changer sans que notre dépôt l'expose.
+
+### 6.3 Le relevé du schéma : première tâche du lot B
+
+On connaît les **noms** des tables, pas leurs **colonnes** ni leurs liens. La commande `python -m epreuve.duffus releve` :
+1. demande l'**OpenAPI** que PostgREST publie à la racine `/rest/v1/` (la liste des tables et colonnes visibles avec la clé) ;
+2. si c'est fermé, lit **une seule ligne** de chaque table connue (`limit=1`) ;
+3. écrit le résultat dans `donnees/duffus/schema-AAAA-MM-JJ.json`.
+
+À partir de ce relevé, l'architecte fige dans `duffus/schema.py` les **modèles pydantic** des tables utiles, avec les seules colonnes dont on a besoin, et le dev écrit la transformation vers notre modèle (§6.5). C'est le point de risque principal du lot B (voir §6.6 et le plan de repli de `LOTS.md`).
+
+### 6.4 L'aspiration
+
+`python -m epreuve.duffus aspirer [--tables t1,t2] [--a-blanc]` :
+1. lit chaque table utile, page par page, avec les règles du §6.2 ;
+2. **valide chaque ligne** contre son modèle pydantic : une colonne exigée absente ou d'un mauvais type arrête tout, avec un message clair (« `quest_list.range_id` manquant : le schéma de Duffus a changé, refaire le relevé ») ;
+3. écrit `donnees/duffus/AAAA-MM-JJ/<table>.json`, trié par clé, une ligne par enregistrement, avec seulement les colonnes retenues ;
+4. affiche un **rapport de différences** avec l'aspiration précédente : lignes ajoutées, retirées et modifiées par table, plus la liste des étages **ouverts** touchés ;
+5. `--a-blanc` affiche le rapport sans rien écrire.
+
+Les extraits sont **commités** dans le dépôt privé (avec l'accord de l'auteur). Ils servent aussi de **données de test réelles**.
+
+### 6.5 La construction d'un étage
+
+`python -m epreuve.contenu construire --etage N [--aspiration AAAA-MM-JJ] [--a-blanc] [--forcer]` :
+1. **Tranche** : `config/etages.yaml` dit quelle tranche de `guide_ranges` correspond à l'étage N, avec le cap, le nom, l'image d'ambiance et les dates (T-04, T-28). Par défaut, l'étage N est la N-ième tranche et le cap est sa borne haute. Pour l'étage 0 : `ouvert_le` le 30/10 à 17:00 et `date_plancher_suivant` le 13/11 à 17:00.
+2. **Donjons proposés** (`dungeon_pages`) : ceux dont le niveau est dans la tranche, avec l'origine `propose`. L'admin valide la liste dans la revue, retire ou **ajoute** un donjon pris dans la liste complète des donjons aspirés, avec l'origine `admin` (T-03). Une reconstruction **conserve** ces choix.
+3. **Succès de chaque donjon** (T-02) : pris dans `achievements` / `achievement_objectives` de Duffus **si ces tables en donnent pour ce donjon**, sinon dans DofusDB (`achievements` du donjon, sans la catégorie Compagnons 142). La source retenue est notée (`succes_source`) et affichée dans la revue. La case « classique » est repérée par une règle à fixer après le relevé (par exemple, le succès qui porte le nom du donjon, sans condition de défi). Un donjon qui n'a pas 5 succès donne une **alerte**.
+4. **Quêtes de la tranche** (`quest_list`), avec le bloc, l'ordre, « jusqu'où » et la **fiche** (`quest_pages`) **recopiée** (EX-52, EX-70). Le HTML de la fiche passe par `nh3` avec une liste blanche de balises de mise en forme (titres, paragraphes, listes, gras, italique). Scripts, styles, attributs d'événement et **images** sont retirés : afficher une image de Duffus ferait appeler son site pendant la navigation. Les **liens vers duffus.fr sont retirés**, ou réécrits vers notre fiche s'ils visent une quête d'un étage ouvert. Le résultat est relu par un test sur toutes les fiches réelles aspirées.
+5. **Nature** (`nature.classer`) à partir des guides par Dofus (`dofus_list` et ses quêtes et prérequis), de `config/dofus.yaml` et des natures déjà forcées par un admin en base, qui **priment toujours**. Pour un Dofus sans guide Duffus, le **repli DofusDB** (§6.7) s'applique, marqué comme tel.
+6. **Écriture** (`contenu/ecrire.py`), dans une transaction :
+   - un étage nouveau est créé `scelle`, sauf l'étage 0, créé `ouvert` ;
+   - un étage existant est **mis à jour par identifiant Duffus** : on ajoute ce qui est nouveau, on met à jour les libellés, et on **masque** ce qui a disparu au lieu de le supprimer ;
+   - **garde-fou** : sur un étage **ouvert**, si plus de 10 % des éléments disparaîtraient ou changeraient de nature, l'écriture est refusée sans `--forcer`, et le rapport l'explique ;
+   - chaque changement d'un étage existant passe au **journal** (type `contenu_maj`, avant et après), repris de la branche `wip/corrections-revue`.
+
+### 6.6 Limites et fragilité, dites franchement
+
+| Risque | Ce qui se passe | Parade |
+|---|---|---|
+| **L'auteur change son schéma** (colonne renommée, table scindée) | L'aspiration s'arrête à la validation pydantic, avec un message clair. **Le site n'est pas touché** : il vit sur la dernière copie. | Refaire le relevé (§6.3), adapter `duffus/schema.py` et la transformation. Demander à l'auteur de prévenir avant un changement. |
+| **L'auteur renumérote ses identifiants** | Les éléments seraient vus comme « disparus » et « nouveaux ». | Nos coches pointent vers **nos** identifiants, jamais vers ceux de Duffus. Le garde-fou de 10 % bloque une mise à jour massive d'un étage ouvert. Rapprochement par nom et niveau en dernier recours, revu par l'admin. |
+| **La clé publique change, ou l'accès est fermé** (règles RLS, quotas) | Erreur 401 ou 403 : arrêt immédiat. | La dernière copie reste valable. On reprend contact avec l'auteur. Pour les étages pas encore préparés, repli DofusDB (§6.7). |
+| **L'auteur modifie son guide** en cours d'événement | Rien ne change chez nous tant qu'on n'a pas réaspiré. | C'est voulu : un étage ouvert ne bouge pas sous les pieds des joueurs. On réaspire avant de préparer les étages suivants, et le rapport montre les écarts. |
+| **Données incomplètes** (donjon sans succès, Dofus sans guide) | Alerte à la construction. | Repli DofusDB marqué, puis décision de l'admin dans la revue. |
+| **Fiches de quête recopiées** | La copie vieillit si l'auteur corrige une fiche. Un HTML inattendu pourrait contenir du code. | Rapport de différences à chaque aspiration ; filtrage `nh3` par liste blanche, testé sur toutes les fiches réelles ; CSP stricte en dernière ceinture. |
+| **Dépendance à un tiers** | Notre contenu est celui d'un projet amateur qui peut s'arrêter. | Les extraits versionnés sont une copie autonome. Le site n'a jamais besoin de duffus.fr pour fonctionner. |
+
+Pourquoi ne pas lire Duffus « en direct » pendant la navigation : ce serait plus simple et toujours à jour, mais chaque visite d'un de nos joueurs deviendrait une requête chez lui (impoli et coûteux pour son quota), notre site tomberait avec le sien, et un changement de son côté changerait un étage ouvert sans revue. **Écarté.**
+
+### 6.7 DofusDB : complément et repli
+
+api.dofusdb.fr, publique et sans clé, déjà utilisée en v3 (`dofusdb/client.py` est gardé) :
+- **Complément** : icônes (`img`) des Dofus, monstres et objets, détails des monstres. Elles sont lues à la construction et copiées en base (adresse de l'image), jamais pendant la navigation.
+- **Repli des succès d'un donjon** : `GET /dungeons/{id}` → `achievements`, sans la catégorie 142 (*Compagnons*). Vérifié le 27/10 sur les donjons 34 et 13.
+- **Repli de la nature**, vérifié le 27/10/2026 :
+  - `GET /items?typeId=23` donne les 34 Dofus ;
+  - chaque Dofus a `questsThatReward` ou `achievementsThatReward` ;
+  - `GET /achievements/{id}` → `objectives[].criterion` contient `Qf=<quête>` ou `OA=<succès>`, à suivre récursivement ;
+  - `GET /quests/{id}` → `startCriterion`, analysé par `nature.quetes_obligatoires`, qui ne garde que les « ET ». **Ne pas utiliser `need.quests`**, qui met à plat les « OU » (quête 275).
+
+  Essais réels : 15 quêtes pour l'Émeraude, 74 pour l'Argenté, aucune donnée pour Ocre, Kaliptus, Cacao, Verdoyant, Dom de Pin et Jyfus.
+- Les réponses DofusDB utilisées sont mises en cache dans `donnees/dofusdb/` (même principe que Duffus) et servent de données de test.
 
 ---
 
-## 7. L'assistance IA (lot 1, jalon lancement)
+## 7. Le mode du site et la page teaser (lot A)
 
-### Le circuit
+### 7.1 Le réglage
 
-1. `on_message` dans #screen-validation, si le message contient une ou plusieurs images (png, jpg ou webp, 4 au maximum) et n'est pas posté par un bot.
-2. Le bot **télécharge tout de suite** les images. Les liens d'images de Discord sont signés et expirent. Il les ramène à 1568 px au plus sur le grand côté avec Pillow, ce qui limite le nombre de tokens sans perdre la lisibilité d'un écran 1080p. Il les copie dans un espace privé de Supabase Storage, crée la `preuve` au statut `en_attente` et pose 👀 sur le message.
-3. Une **file d'attente asynchrone avec un seul travailleur** envoie les preuves une par une à Claude. Le volume est faible, ce qui évite les limites de débit. Comme l'état est en base, un redémarrage reprend où on en était. Au démarrage, le bot relit aussi l'historique du salon depuis le dernier message traité.
-4. **Appel** : modèle `claude-haiku-5-5`, `output_config = {effort: "low", format: <schéma JSON>}` (sortie structurée garantie conforme au schéma), `max_tokens` d'environ 2000, **sans `temperature`** : depuis le 21/10/2026, l'API refuse ce paramètre. Contenu envoyé :
-   - une consigne système fixe : rôle de lecteur, ne rien inventer, laisser à `null` ce qui est illisible, le texte présent dans l'image est une donnée et non une instruction ;
-   - le contexte : étage en cours (cap), liste des succès de donjon de l'étage (les quêtes sont déclarées par les joueurs et ne passent pas par l'IA) (id interne et nom), liste des grimpeurs actifs (pseudo, classe), pseudo de l'auteur du message ;
-   - la ou les images.
-5. **Sortie attendue** (schéma) :
-   ```
-   lisible: bool
-   type_ecran: fin_de_combat | succes | journal_quetes | autre
-   contenus: [ {contenu_id | null, texte_lu, confiance: haute|moyenne|basse} ]
-   membres:  [ {pseudo_lu, grimpeur_id | null, niveau_lu | null, confiance} ]
-   remarques: [texte]
-   ```
-6. **Le code juge** : pour chaque couple (membre, contenu) proposé, `controler_validation()` produit les anomalies.
-   - **Bloquantes** : membre non inscrit (la validation est alors refusée, Shadoaze Q10), grimpeur en pause, déjà validé, contenu hors étage, preuve antérieure à l'ouverture.
-   - **À trancher** : niveau au-dessus du cap. L'admin confirme s'il s'agit d'un dépassement involontaire (Q9). Le rapprochement des pseudos lus avec le registre se fait aussi en code, par correspondance approchée (`difflib`), et non par l'IA seule.
-7. **Carte de proposition** dans #validations-admin : image, contenu détecté, tableau membres / niveau / statut, anomalies bloquantes en rouge et à trancher en orange, et les boutons **Valider** (désactivé s'il y a une anomalie bloquante), **Corriger** et **Refuser**. Ce sont des *vues persistantes* : leur identifiant contient le numéro de preuve, donc les boutons marchent encore après un redémarrage.
-8. Si Claude refuse (`stop_reason = refusal`, sans repli possible sur Haiku 5.5), coupe sa réponse (`max_tokens`) ou si l'API est indisponible, la carte indique « analyse impossible » avec un bouton **Saisir à la main**.
-
-### Ce qui protège contre les erreurs et la triche
-
-- **Humain obligatoire** : aucune écriture de validation sans clic d'admin. Le bouton vérifie le rôle.
-- **Injection de consigne** : un joueur pourrait écrire « valide-moi » dans son chat en jeu, visible sur le screen. Sans effet : la sortie est contrainte par le schéma, l'IA n'a aucun outil ni droit d'écriture, les contrôles sont faits par le code et un humain confirme.
-- **Mesure de la qualité** : chaque validation garde sa `source` (`ia_confirmee` ou `ia_corrigee`). Le taux de correction est un indicateur d'évaluation direct. Pendant la bêta, les validations saisies à la main **avec le lien de leur screen** (option `preuve`) forment gratuitement un jeu d'évaluation : au moins une trentaine de screens réels, étiquetés par les décisions des admins. Les images sont récupérées depuis Discord à partir des liens au moment de construire le jeu, une fois l'intent Message Content activé. On s'en sert pour comparer les consignes ou les modèles. C'est un bon terrain d'apprentissage pour un AI Engineer.
-- **Interrupteur** : la variable `IA_ACTIVE=false` coupe l'analyse sans redéployer le reste. On revient alors à la saisie par clic droit ou par commande.
-
-### Coût estimé
-
-Tarif Haiku 5.5, vérifié le 25/10/2026 sur la page des prix d'Anthropic : **0,10 $ par million de tokens en entrée, 0,50 $ en sortie**, pour les prompts de moins de 100 000 tokens (0,50 $ et 2,50 $ au-delà, seuil que nos requêtes, autour de 7 000 tokens, n'approchent jamais).
-
-| Poste par screen | Tokens | Coût |
+| Variable | Valeurs | Défaut |
 |---|---|---|
-| Image (1568 × 882 après réduction ; au plus environ 4 800 si plusieurs images ou haute résolution) | environ 1 800 à 4 800 | |
-| Consigne et contexte (contenus, 30 pseudos) | environ 2 000 | |
-| **Entrée totale** | ≤ 7 000 | ≤ 0,0007 $ |
-| Sortie (réflexion courte et JSON) | ≤ 1 000 | ≤ 0,0005 $ |
-| **Total par screen** | | **≈ 0,001 $** |
+| `SITE_MODE` | `auto`, `teaser` ou `ouvert` | `auto` |
+| `SITE_OUVERT_LE` | date ISO avec fuseau | `2026-11-13T17:00:00+01:00` |
+| `TEASER_LIEN_ENTRER` | adresse du bouton « Entrer dans la tour » | vide : bouton masqué ; **renseignée le jour J** (arbitrage du chef de projet) |
+| `BETA_TESTEURS` | identifiants Discord séparés par des virgules (lot B) | vide |
 
-| Scénario mensuel | Screens par mois | Coût IA |
-|---|---|---|
-| 10 joueurs, rythme tranquille | ~100 | ~0,10 $ |
-| 30 joueurs, ~15 screens chacun | ~450 | ~0,50 $ |
-| 30 joueurs très actifs, avec relances | ~1 500 | ~1,80 $ |
+`mode_effectif(reglage, ouvert_le, maintenant)` donne `teaser` si le réglage est `teaser`, ou s'il est `auto` avant `SITE_OUVERT_LE`. Sinon, il donne `ouvert`. Pourquoi `auto` par défaut : la bascule tombe un vendredi à 17 h, et elle ne doit pas dépendre de la présence de Marceau devant son ordinateur. `teaser` et `ouvert` permettent de reprendre la main en une commande (`fly secrets set SITE_MODE=teaser`), qui redémarre la machine en quelques secondes.
 
-Un crédit prépayé de 5 $ chez Anthropic couvre donc plusieurs mois. On fixe en plus une **limite de dépense mensuelle** dans la console Anthropic (par exemple 5 $), comme garde-fou contre une boucle folle.
+### 7.2 Le middleware
+
+`web/securite.py` contient un middleware qui, en mode `teaser`, laisse passer seulement :
+- `/` (le teaser) et `/sante` ;
+- `/static/…` ;
+- au lot B, `/connexion`, `/auth/discord/retour`, `/deconnexion` et `/inscription`. Cette dernière ne montre que le formulaire de fiche ;
+- **toutes** les pages pour un admin ou un testeur connecté.
+
+Toute autre requête reçoit une redirection 303 vers `/`, et les requêtes `/api/` reçoivent un 404. Le test de ce middleware énumère **toutes les routes déclarées** de l'application : une route ajoutée plus tard sans y penser est donc couverte d'office.
+
+### 7.3 L'intégration du travail du designer
+
+`docs/design/teaser.html` est une page autonome (HTML, CSS et JS en ligne, polices Google). `docs/design/DA.md` et `maquette-v2.html` **font foi pour le visuel** de tout le site. Au lot A, le dev transpose le teaser **sans toucher au rendu** :
+- le CSS va dans `static/teaser/teaser.css` et le JS dans `static/teaser/teaser.js`. Ce découpage permet une politique de sécurité de contenu (CSP) stricte, `script-src 'self'`, sans script en ligne ;
+- les constantes du JS, `OUVERTURE` et `LIEN_SITE`, ne sont plus écrites en dur : le gabarit les pose en attributs, `<body data-ouverture="2026-11-13T17:00:00+01:00" data-lien-site="…">`, à partir de `SITE_OUVERT_LE` et de `TEASER_LIEN_ENTRER`. Comme dans le code du designer, le bouton n'apparaît qu'après la fin du compte à rebours **et** si le lien est renseigné ;
+- les **polices** de la DA (Alegreya SC, Alegreya Sans, IBM Plex Mono, licence libre SIL OFL) sont **auto-hébergées** dans `static/fonts/` au lieu d'être chargées chez Google. Le rendu est identique, mais on n'envoie pas l'adresse IP des visiteurs à Google et la CSP reste `'self'` ;
+- **thème sombre uniquement** (`color-scheme: dark`) sur tout le site, teaser compris, et aucune feuille de style claire. Les décors sont générés (dégradés, canvas, SVG) ou sont des images originales : jamais de capture du jeu ;
+- le pied de page ajoute « Merci [Duffus](https://duffus.fr) » ;
+- les paramètres d'aperçu du designer (`?etat=ouvert`, `?dans=12`) sont gardés : ils ne révèlent rien ;
+- sans JavaScript, la date est écrite en clair dans le HTML.
 
 ---
 
-## 8. Hébergement et coût total
+## 8. Connexion avec Discord (OAuth2)
 
-### Pourquoi Fly.io
-
-Un bot Discord garde une connexion WebSocket ouverte en permanence avec Discord. Il lui faut donc une machine **qui ne s'endort jamais**.
+### 8.1 Le choix est validé, avec ses raisons
 
 | Option | Verdict |
 |---|---|
-| **Fly.io**, machine `shared-cpu-1x` de 512 Mo à Paris | ✅ **Retenu.** Environ 2,2 $ par mois en 256 Mo, autour de 3,7 $ en 512 Mo (tarifs américains ; Paris un peu plus) (plus confortable pour Python, Pillow et le SDK). Déploiement par `fly deploy` depuis le Dockerfile, secrets chiffrés (`fly secrets set`), HTTPS et domaine `*.fly.dev` fournis, redémarrage automatique. Pas d'offre gratuite pour les nouveaux comptes : carte bancaire requise. |
-| Koyeb, offre gratuite | ❌ La machine gratuite s'arrête après une heure sans trafic web, ce qui coupe le bot. |
-| Render, offre gratuite | ❌ Même problème : mise en veille après 15 minutes. |
-| Railway | ⚠️ Fonctionne, mais l'offre Hobby coûte 5 $ par mois au minimum. Plus cher pour le même service. |
-| Oracle Cloud « Always Free » | ⚠️ Gratuit, mais l'inscription est capricieuse et il faut administrer soi-même un serveur Linux. Plan B si le budget devient un sujet. |
-| Le NUC de Marceau | ⚠️ Gratuit, mais l'événement dépendrait de sa box internet et se mêlerait à la domotique. Déconseillé. |
-| Vercel ou Cloudflare Pages pour le site seul | ❌ Ils ne peuvent pas héberger le bot, et séparer le site obligerait à dupliquer le calcul (§2). |
+| **Discord OAuth2** | ✅ **Retenue.** Tous les participants ont un compte Discord, puisque l'inscription passe par le serveur. Le site ne stocke **aucun mot de passe**. L'identité vérifiée est celle du serveur : on vérifie l'appartenance au serveur et le rôle « Administrateur » directement, sans saisie. La liste officielle est une liste d'identifiants Discord, ce qui rend le rapprochement automatique. |
+| Mot de passe propre au site | ❌ Hachage, réinitialisation par e-mail (donc un service d'envoi), support des oublis. Plus de risques et de code pour moins de confort. |
+| Lien magique par e-mail | ❌ Il faut collecter des e-mails (une donnée personnelle de plus) et un service d'envoi, et la délivrabilité est capricieuse. |
+| Supabase Auth (fournisseur Discord) | ❌ Un second système d'authentification à côté de notre serveur, qui fait de toute façon toutes les écritures. Ça ajoute le client JS Supabase et des règles RLS à écrire. Pas de gain ici. |
+| Bibliothèque OAuth (Authlib…) | ❌ Pour un seul fournisseur et un seul flux, 100 lignes avec `httpx` sont plus lisibles, plus faciles à tester (faux transport `httpx.MockTransport`) et plus pédagogiques. |
 
-Réglages Fly.io importants : `auto_stop_machines = "off"`, `min_machines_running = 1`, une seule machine (le bot ne doit pas tourner en double, sinon chaque commande serait traitée deux fois), vérification de santé sur `GET /sante`.
+**Limites acceptées** : si Discord est en panne, personne ne peut **se connecter** (les sessions ouvertes continuent, puisqu'elles durent 7 jours). Chaque joueur doit accepter l'écran d'autorisation une fois.
 
-### Coût total mensuel
+### 8.2 Le flux
+
+1. `GET /connexion` : le serveur tire un `state` aléatoire (32 octets), le pose dans un cookie `__Host-oauth_state` de courte durée (10 minutes, `Secure`, `HttpOnly`, `SameSite=Lax`) et redirige vers l'adresse ci-dessous. Pas besoin de signer ce cookie : un autre site ne peut ni le lire ni l'écrire, et c'est la **comparaison** entre le cookie et le paramètre renvoyé par Discord qui protège :
+   `https://discord.com/oauth2/authorize?response_type=code&client_id=1564210808509038622&scope=identify%20guilds.members.read&redirect_uri=<REDIRECT>&state=<state>&prompt=none`
+2. Discord renvoie vers `GET /auth/discord/retour?code=…&state=…`. Le serveur :
+   - vérifie que `state` correspond au cookie. Sinon, c'est un refus (protection contre la falsification de requête) ;
+   - échange le code : `POST https://discord.com/api/v10/oauth2/token` (formulaire : `grant_type=authorization_code`, `code`, `redirect_uri`, avec `client_id` et `client_secret`). Il reçoit un jeton d'accès valable 7 jours ;
+   - `GET /api/v10/users/@me` donne l'identifiant et le nom affiché ;
+   - `GET /api/v10/users/@me/guilds/{DISCORD_GUILD_ID}/member` (portée `guilds.members.read`, vérifié dans la documentation Discord le 27/10) donne le membre et ses **rôles**. Une erreur 404 veut dire « pas membre du serveur » : refus ;
+   - **admin** ⇔ un des rôles est dans `DISCORD_ADMIN_ROLE_IDS`, ou l'identifiant est dans `ADMINS_SUPPLEMENTAIRES`. Ce dernier est un filet pour Marceau et Shadoaze si le rôle était mal réglé, parce que l'objet membre donne les rôles mais pas les permissions calculées ;
+   - crée la **session** en base, avec un jeton aléatoire de 256 bits dans le cookie `__Host-session` (`Secure`, `HttpOnly`, `SameSite=Lax`, `Path=/`, 7 jours), et ne stocke que son empreinte SHA-256 ;
+   - redirige vers `/inscription` s'il n'y a pas de fiche, sinon vers `/`.
+3. **Revérification des droits d'admin** : avant toute action d'admin, si `roles_verifies_le` date de plus de 10 minutes, le serveur rappelle `/users/@me/guilds/{id}/member` avec le jeton OAuth stocké dans la session. Si le jeton a expiré ou que le rôle a disparu, la session redevient non-admin. **Aucun bot n'est nécessaire.**
+4. `POST /deconnexion` supprime la session en base et révoque le jeton chez Discord (`POST /oauth2/token/revoke`).
+
+Le **jeton OAuth** stocké en base a une portée réduite à la lecture (identité et appartenance au serveur), dure 7 jours et est révoqué à la déconnexion. C'est un compromis assumé, qui évite de dépendre du bot pour revérifier les rôles.
+
+### 8.3 Protection des écritures
+
+- **CSRF** : chaque session a un jeton `csrf` aléatoire. Les formulaires le portent dans un champ caché, et les appels `fetch` dans l'en-tête `X-CSRF-Token`. Le serveur compare en temps constant (`hmac.compare_digest`). En plus, toute requête `POST` dont l'en-tête `Origin` n'est pas le nôtre est refusée. `SameSite=Lax` est une troisième ceinture.
+- **Autorisation** : une coche n'est acceptée que pour **soi-même**, sauf pour un admin, sur un élément **visible** d'un étage **ouvert ou terminé**. C'est vérifié côté serveur, quelle que soit la requête.
+- **Échappement** : Jinja échappe tout par défaut. Côté JS, uniquement `textContent`, jamais `innerHTML` avec des données (règle déjà établie en v3).
+
+---
+
+## 9. Le site : routes
+
+| Route | Qui | Rôle |
+|---|---|---|
+| `GET /` | tous | Teaser (mode teaser), sinon accueil (non connecté) ou **tour** (connecté) |
+| `GET /connexion`, `GET /auth/discord/retour`, `POST /deconnexion` | tous | §8 |
+| `GET/POST /inscription` | membre sur la liste officielle | Création de la fiche |
+| `GET /etages/{numero}` | grimpeur | L'onglet de l'étage. **404** si l'étage est scellé (sauf admin). |
+| `GET /etages/{numero}/quetes/{id}` | grimpeur | La fiche de quête intégrée (fragment HTML chargé au toucher, ou page complète sans JS). 404 si l'étage est scellé. |
+| `GET /grimpeurs`, `GET /grimpeurs/{id}` | grimpeur | Liste avec filtre par élément, fiche |
+| `POST /grimpeurs/moi` | grimpeur | Modifier son pseudo, sa classe et son niveau |
+| `POST /api/coches` | grimpeur | Corps JSON `{type: "case" ou "quete", id, cochee, grimpeur_id?}`. Répond avec l'état de la jauge et les compteurs mis à jour. |
+| `GET /api/etages/{numero}/manque?type=…&id=…` | grimpeur | « Qui ne l'a pas fait ? » |
+| `GET /admin`, `/admin/grimpeurs`, `/admin/etages`, `/admin/etages/{n}`, `/admin/journal` | admin | Pages d'admin |
+| `POST /admin/liste`, `/admin/grimpeurs/{id}/statut`, `/admin/grimpeurs/{id}`, `/admin/bonus`, `/admin/bonus/{id}/annuler`, `/admin/etages/{n}/palier`, `/admin/etages/{n}/date-plancher`, `/admin/etages/{n}/ouvrir`, `/admin/etages/{n}/reglages` (nom, image, cap), `/admin/etages/{n}/donjons` (ajouter un donjon, T-03), `/admin/quetes/{id}`, `/admin/donjons/{id}`, `/admin/cases/{id}` | admin | Actions, toutes journalisées |
+| `GET /sante` | tous | État de la base. Utilisé par Fly. |
+
+**En-têtes de sécurité** sur toutes les réponses :
+- `Content-Security-Policy: default-src 'self'; img-src 'self' https://api.dofusdb.fr data:; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'` ;
+- `X-Robots-Tag: noindex, nofollow` ;
+- `Referrer-Policy: strict-origin-when-cross-origin` ;
+- `X-Content-Type-Options: nosniff`.
+
+Le pied de page « Merci Duffus » est dans `base.html`, que toutes les pages étendent. Le test le vérifie sur chaque route.
+
+---
+
+## 10. Hébergement, domaine et coût
+
+- **Fly.io**, une machine `shared-cpu-1x` de **256 Mo** à Paris. Sans bot ni Pillow, le programme tient largement dans 256 Mo. On repasse à 512 Mo si les journaux montrent une pression mémoire. `min_machines_running = 1` et `auto_stop_machines = "off"` : pas de démarrage à froid le soir du reveal. Une seule machine suffit : le programme n'a plus de bot à ne pas dupliquer, mais une seule machine garde la purge des sessions simple.
+- **Nom de domaine** : acheté chez un registrar (OVHcloud, Gandi ou Porkbun, entre 7 et 12 € par an pour un `.fr` ou un `.com`). On fait pointer le domaine vers Fly avec les enregistrements DNS donnés par `fly ips list`, puis `fly certs add <domaine>` obtient un certificat HTTPS automatiquement. Le domaine en `*.fly.dev` reste un plan B gratuit et immédiat.
+- **Le domaine n'est pas un détail du lot B** : l'adresse de retour OAuth (`https://<domaine>/auth/discord/retour`) doit être déclarée chez Discord. En changer plus tard oblige à refaire ce réglage.
 
 | Poste | Coût |
 |---|---|
-| Fly.io (1 machine toujours allumée, 512 Mo) | ~3,7 à 4,5 $ (3,69 $ aux États-Unis, Paris un peu plus ; à confirmer dans le calculateur Fly) |
-| Supabase (offre gratuite : 500 Mo de base, 1 Go de fichiers) | 0 $ |
-| API Anthropic (Haiku 5.5, dès que l'IA est active) | 0,10 à 2 $ |
-| GitHub (dépôt privé et action de sauvegarde) | 0 $ |
-| **Total** | **≈ 4 à 6 $ par mois** |
-
-Volumes : 30 grimpeurs × quelques centaines de validations, c'est quelques mégaoctets. Les copies de screens, réduites (~300 Ko chacune), restent sous 1 Go jusqu'à environ 3 000 screens. Au-delà, on purge les copies de plus de 3 mois : le lien Discord reste.
+| Fly.io (256 Mo, Paris) | environ 2 à 3 $ par mois |
+| Nom de domaine | environ 10 € par an |
+| Supabase (offre gratuite) | 0 $ |
+| GitHub (dépôt privé, actions) | 0 $ |
+| **Total** | **environ 3 à 4 $ par mois**, plus le domaine |
 
 ---
 
-## 9. Sécurité
+## 11. Sécurité : secrets et réglages
 
-### Secrets
-
-| Secret | Où il vit | Qui le voit |
-|---|---|---|
-| `DISCORD_TOKEN` (jeton du bot) | Fly secrets, `.env` local de Marceau | Marceau |
-| `DATABASE_URL` (Postgres Supabase, avec mot de passe) | Fly secrets, `.env` local, secret GitHub (sauvegarde) | Marceau |
-| `SUPABASE_URL` + `SUPABASE_SERVICE_KEY` (Storage) | Fly secrets | Marceau |
-| `ANTHROPIC_API_KEY` (IA) | Fly secrets | Marceau |
-
-Règles :
-- `.env` est dans `.gitignore` dès le premier commit. `.env.example` liste les noms sans valeurs.
-- Aucun secret dans les journaux du programme : la configuration masque les valeurs quand elle s'affiche.
-- En cas de fuite d'un jeton Discord, le bouton **Reset Token** du portail l'invalide immédiatement. Pour les autres secrets, même réflexe : régénérer, puis `fly secrets set`.
-- La clé Anthropic est dédiée au projet, avec une limite de dépense mensuelle.
-- La clé « service » de Supabase ne sort jamais du serveur. Le site n'en a pas besoin, puisqu'il passe par notre API.
-
-### Permissions Discord (le minimum)
-
-**Portées d'invitation** : `bot` et `applications.commands`.
-
-**Permissions du bot sur le serveur**, demandées une fois pour tous les lots, ce qui évite de refaire inviter le bot :
-
-| Permission | Valeur | Pourquoi |
-|---|---|---|
-| View Channels (Voir les salons) | 1024 | Voir #screen-validation et #validations-admin |
-| Send Messages (Envoyer des messages) | 2048 | Répondre, publier les propositions et les annonces d'étage |
-| Embed Links (Intégrer des liens) | 16384 | Cartes de proposition et récapitulatifs mis en forme |
-| Attach Files (Joindre des fichiers) | 32768 | Remettre la copie du screen dans la carte de proposition IA |
-| Read Message History (Voir l'historique) | 65536 | Relire le salon après une panne, retrouver le message d'une preuve |
-| Add Reactions (Ajouter des réactions) | 64 | 👀, ✅ et ❌ sur les screens des joueurs |
-| **Total** | **117824** | |
-
-**Ce qu'on ne demande pas** : Administrateur, Gérer les messages (le bot n'efface rien), Gérer les rôles, Mentionner @everyone, Créer des fils. Les commandes slash n'exigent aucune permission en plus de la portée `applications.commands`.
-
-**Intents de la passerelle** (ce que Discord envoie au bot) :
-
-| Intent | Privilégié ? | Nécessaire à partir de | Pourquoi |
+| Variable | Secret ? | Où | Lot |
 |---|---|---|---|
-| `GUILDS` | non | jalon bêta | Indispensable : salons, rôles, synchronisation des commandes |
-| `GUILD_MESSAGES` | non | activation de l'IA | Être prévenu quand un screen est posté |
-| `MESSAGE_CONTENT` | **oui** | activation de l'IA | Sans lui, Discord envoie les messages **sans leurs pièces jointes** : pas de screen à analyser. À cocher dans le portail développeur. C'est gratuit et sans validation sous 10 000 utilisateurs. |
-| `GUILD_MESSAGE_REACTIONS` | non | jamais | Pas nécessaire : on valide par bouton, et poser une réaction ne demande pas cet intent. |
-| `GUILD_MEMBERS` | **oui** | jamais | Pas nécessaire : les commandes et les clics fournissent déjà le membre et ses rôles. |
+| `SITE_MODE`, `SITE_OUVERT_LE`, `FUSEAU`, `SITE_URL` | non | `fly.toml` [env] | A |
+| `DATABASE_URL` | **oui** | Fly secrets, `.env`, secret GitHub (sauvegarde) | B |
+| `DISCORD_CLIENT_ID` (1564210808509038622) | non | `fly.toml` | B |
+| `DISCORD_CLIENT_SECRET` | **oui** | Fly secrets, `.env` | B |
+| `DISCORD_GUILD_ID`, `DISCORD_ADMIN_ROLE_IDS`, `ADMINS_SUPPLEMENTAIRES`, `BETA_TESTEURS` | non | Fly secrets (pour ne pas les publier dans le dépôt) | B |
+| `DISCORD_TOKEN` (jeton du bot) | **oui** | Fly secrets, seulement si les annonces sont activées | B (facultatif) |
+| `DISCORD_ANNONCE_CHANNEL_ID` | non | Fly secrets | B (facultatif) |
+| `DUFFUS_SUPABASE_URL`, `DUFFUS_SUPABASE_CLE` | publique, mais appartient à l'auteur | `.env` de l'admin qui aspire, **jamais** sur Fly ni dans le dépôt | B |
+| `AGE_RECIPIENT` | clé publique | secret GitHub | B |
 
-Tant que l'IA n'est pas active, le bot fonctionne **sans aucun intent privilégié**. Les commandes slash et la commande de clic droit « Valider ce screen » donnent accès au message ciblé et à ses pièces jointes, même sans Message Content. C'est une exception prévue par Discord.
+Règles inchangées depuis la v3 :
+- `.env` est dans `.gitignore` ;
+- la configuration masque les secrets (`SecretStr`) ;
+- en cas de fuite d'un jeton, on le **réinitialise** dans le portail Discord, puis `fly secrets set` ;
+- `gitleaks` tourne en intégration continue.
 
-### Autres protections
-
-- **Verrou de serveur** : le bot ne répond que sur le serveur `DISCORD_GUILD_ID` et quitte tout autre serveur où on l'ajouterait. L'option *Public Bot* est désactivée une fois l'invitation faite.
-- **Accès admin vérifié deux fois** : les commandes admin sont masquées par défaut (permission « Gérer le serveur »), et chaque commande ou bouton vérifie dans le code que la personne a le rôle `DISCORD_ADMIN_ROLE_ID` ou « Gérer le serveur ». Le masquage seul ne suffit pas : c'est un réglage modifiable dans Discord.
-- **Entrées contrôlées** : niveau entre 1 et 200, pseudo entre 2 et 30 caractères, le lien de preuve doit pointer vers `discord.com/channels/<notre serveur>/…`.
-- **Site** : lecture seule (méthode GET uniquement), aucun identifiant Discord exposé. **Toute donnée affichée est échappée** : Jinja le fait par défaut, et côté JS on remplace les `innerHTML` de la maquette par `textContent` ou par une fonction d'échappement. Sinon un pseudo du type `<img onerror=…>` exécuterait du code chez les visiteurs.
-- **Base** : schéma `epreuve` hors de l'API REST automatique de Supabase, RLS activée, mot de passe fort, connexion TLS.
-- **Données envoyées à Anthropic** : le screen et la liste des pseudos. Anthropic n'utilise pas par défaut les données de son API pour entraîner ses modèles. On le mentionne quand même dans le salon des règles par transparence (texte proposé dans PREREQUIS).
+**Le jeton du bot présent dans `.env`** : il n'est plus nécessaire au lot B, sauf pour les annonces. Il est inutile de le déposer sur Fly tant que les annonces ne sont pas activées. Moins de secrets en production, c'est moins de risques.
 
 ---
 
-## 10. Exploitation
+## 12. Exploitation
 
-- **Journaux** : sortie standard au format texte structuré, lisibles avec `fly logs`. Chaque commande admin produit une ligne (qui, quoi, résultat), sans secret.
-- **Santé** : `GET /sante` renvoie l'état de la connexion Discord et de la base. Fly redémarre la machine si la vérification échoue.
-- **Déploiement** : `fly deploy`. Les migrations Alembic sont appliquées au démarrage (`release_command`) avant la bascule.
-- **Fuseau** : stockage en UTC (`timestamptz`), affichage en `Europe/Paris` côté serveur et dans le navigateur.
-- **Mise à jour des commandes** : synchronisation sur le seul serveur cible au démarrage, ce qui est instantané (contrairement à la synchronisation globale, qui peut prendre jusqu'à une heure).
+- **Journaux** : sortie standard, lisible avec `fly logs`. Une ligne par action d'admin et par erreur, sans secret ni jeton.
+- **Santé** : `GET /sante` renvoie l'état de la base (`ok`, `absente` en mode teaser sans base, ou `erreur`). Fly redémarre la machine si la vérification échoue.
+- **Déploiement** : `fly deploy`. Les migrations Alembic passent avant la bascule (`release_command`). Au lot A, sans `DATABASE_URL`, la commande de release est désactivée.
+- **Fuseau** : stockage en UTC (`timestamptz`), affichage en `Europe/Paris`.
+- **Le soir du départ** (13/11 à 17:00) : en mode `auto`, rien à faire. Marceau vérifie à 17:01 que `/` montre bien l'accueil, et garde `fly secrets set SITE_MODE=teaser` sous la main en cas de souci.
