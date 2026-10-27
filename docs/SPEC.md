@@ -5,19 +5,23 @@ Version 4, 27/10/2026. Ce document dit **quoi** construire et **pourquoi**. Le *
 Sources, par ordre de priorité. Une source plus récente prime sur une plus ancienne quand elles se contredisent :
 1. **Les arbitrages du coordinateur du 27/10** :
    - duffus.fr est la **source unique** du contenu des étages, avec l'accord de son auteur ;
-   - le bot n'a pas de rôle indispensable ;
+   - **aucun bot** : la connexion passe par Discord OAuth2 seulement, et l'admin annonce lui-même l'ouverture d'un étage ;
    - les salons d'étage ne sont pas une source de données ;
    - aucun export Duffus : on lit sa base nous-mêmes, poliment.
-2. `docs/DECISIONS-V4.md` : les décisions du 26 et 27/10 entre Marceau et Shadoaze.
-3. `docs/discord/concept-et-règles.md` : le **règlement officiel** mis à jour par Shadoaze.
-4. `docs/sources/4-cahier-des-charges-VALIDE-26-10-14h06.txt` : le **cahier des charges validé** par Shadoaze. Il prime sur les résumés, sauf sur les points tranchés après lui (voir §1.3).
+2. **La conversation Marceau ↔ Shadoaze** (25 au 27/10), avec les cahiers des charges qu'elle contient (`docs/sources/`, dont le n° 4 validé le 26/10 à 14 h 06). Ce qui y est dit après le CdC n° 4 l'emporte sur lui (§1.3). **Règle de Marceau : « notre conversation fait foi, pas le discord ».** Le salon #concept-et-règles (`docs/discord/concept-et-règles.md`) n'est **pas** une source d'exigence : c'est le texte destiné aux joueurs.
+3. `docs/DECISIONS-V4.md` : la synthèse de cette conversation par Marceau.
+4. *(retiré : voir la règle du point 2)*
 5. `docs/REPONSES-SHADOAZE.md` et `docs/REGLES.md` : ce qui n'est pas contredit reste valable (rôle « Administrateur », ouverture manuelle, étages cachés).
 6. `docs/design/DA.md`, `docs/design/teaser.html` et `docs/design/maquette-v2.html` : la direction artistique, le teaser et la maquette du site. **Ils font foi pour le visuel** (arbitrage du chef de projet).
 
 `docs/EXIGENCES.md` (115 exigences EX-01 à EX-115, points ouverts T-01 à T-32) **prime sur ce document** en cas de contradiction. Cette version l'intègre, avec les arbitrages du chef de projet du 27/10 :
-- **T-01** est tranché en faveur du règlement ;
+- **T-01** est tranché par la conversation : un point par catégorie complète ;
 - **T-09** : « Merci Duffus » avec un lien vers duffus.fr, et aucun lien par quête ;
 - **T-02** : succès de donjon pris chez Duffus s'il les a, sinon chez DofusDB, au choix de l'import ;
+- **T-14** : aucun bot ; **T-19** : connexion Discord OAuth2 ;
+- **T-22** : les points bonus sont **hors du lot B** et passent au **lot C**. La conversation ne les demande pas (DECISIONS §2 : « rien à coder pour l'instant »).
+- **Avant le 13/11, aucun accès joueur** : seul le compte à rebours est visible, et seuls les admins voient le site, pour la recette. Marceau : « rien à cocher avant le 13, le site sera même pas accessible ».
+- **Aucune écriture sur le serveur Discord** (ni bot, ni webhook), à aucun lot, sans demande explicite de Marceau ;
 - tous les autres T-nn reçoivent leur réponse par défaut, **réglable sans changer le code** (§8).
 
 L'**annexe A** relie chaque exigence à sa section et à son lot.
@@ -26,18 +30,17 @@ L'**annexe A** relie chaque exigence à sa section et à son lot.
 
 | Avant (v3) | Maintenant (v4) | Pourquoi |
 |---|---|---|
-| Un **bot Discord** où les admins saisissent les validations, plus un site public en lecture seule. | Une **application web privée** : chaque grimpeur se connecte avec Discord et **coche lui-même** sa progression. Le bot n'a plus de rôle indispensable. | Cahier des charges (CdC) §3 « zéro screen », règlement II, arbitrage du 27/10. |
-| Trois difficultés, paliers de 1, 2 ou 3 points. | **Plus de difficulté.** **4 catégories, 1 point chacune** par grimpeur et par étage. | Règlement III, DECISIONS §1 et §2, CdC §1. |
+| Un **bot Discord** où les admins saisissent les validations, plus un site public en lecture seule. | Une **application web privée** : chaque grimpeur se connecte avec Discord et **coche lui-même** sa progression. Le bot n'a plus de rôle indispensable. | Cahier des charges (CdC) §3 « zéro screen », conversation du 26/10, arbitrage du 27/10. |
+| Trois difficultés, paliers de 1, 2 ou 3 points. | **Plus de difficulté.** **4 catégories, 1 point chacune** par grimpeur et par étage. | Conversation : Shadoaze, 26/10 à 13 h 31 (« 1 point pour passer les donjons, 1 pour full succès, 1 quêtes principales, 1 secondaires… 4 points max ») et 13 h 52 (« à la complétion des donjons d'un étage ») ; DECISIONS §1 et §2 ; CdC §1. |
 | Seuil = 75 % d'un maximum. | **Palier de validation = 2 × nombre de grimpeurs actifs.** | CdC §1, DECISIONS §2. |
-| Retardataires calculés automatiquement. | **Pause = « gel »** : le joueur sort du calcul. Il est **réintégré à la main** par un admin quand il a rattrapé le moins avancé des actifs. | CdC §1, règlement V, DECISIONS §6. |
-| Pas de bonus. | **Points bonus** donnés par un admin lors d'événements spéciaux, journalisés. | Règlement III. |
+| Retardataires calculés automatiquement. | **Pause = « gel »** : le joueur sort du calcul. Il est **réintégré à la main** par un admin quand il a rattrapé le moins avancé des actifs. | CdC §1, conversation du 25/10 à 21 h 41, DECISIONS §6. |
 | Contenu d'étage saisi depuis DofusDB. | **Tout le contenu vient de duffus.fr** (tranches, donjons, succès, quêtes, guides par Dofus), aspiré par un script lancé à la main, mis en cache chez nous, puis **validé par un admin**. DofusDB ne sert plus qu'en complément et en repli. | CdC §3, accord de l'auteur, arbitrage du 27/10. |
 | Quêtes « toutes ou rien ». | Quêtes **principales** (requises pour un Dofus, prérequis compris) et **secondaires**, classées de façon **déterministe** à partir des guides par Dofus de Duffus. | DECISIONS §4, CdC §1. |
 | Une page unique avec des cartes. | Une **tour en pyramide** (« brouillard de guerre ») et, par étage, une **liste unique** avec des **badges de catégorie** et un **filtre cumulatif** par cases. | CdC §2. |
 | Site public dès le départ. | Une **page teaser** avec compte à rebours jusqu'au 13/11 à 17 h, puis un site **réservé aux participants**. | DECISIONS §8, CdC (en-tête). |
 | Inscription saisie par un admin dans le bot. | Le grimpeur crée sa fiche lui-même s'il figure sur la **liste officielle** de l'expédition. | `docs/discord/liste-grimpeurs.md`. |
 
-**Dates**, confirmées par le règlement et le CdC : l'**étage 0** s'ouvre le **vendredi 30/10/2026 à 17:00** (accès anticipé, le site n'est pas attendu). L'**étage 1** ne peut pas s'ouvrir avant le **vendredi 13/11/2026 à 17:00** (heure de Paris), le « vrai départ ». Le guide compte au moins **26 étages, de 0 à 25**.
+**Dates**, confirmées par la conversation et le CdC n° 4 : l'**étage 0** s'ouvre le **vendredi 30/10/2026 à 17:00** (accès anticipé, le site n'est pas attendu). L'**étage 1** ne peut pas s'ouvrir avant le **vendredi 13/11/2026 à 17:00** (heure de Paris), le « vrai départ ». Le nombre d'étages est celui des tranches du guide Duffus retenues. Il n'est jamais révélé aux joueurs.
 
 Tout ce qui portait sur les difficultés, les paliers, les retardataires automatiques, `/valider`, `/quetes`, l'IA de lecture des screens et l'import par les salons Discord est **retiré**.
 
@@ -55,7 +58,7 @@ Un site privé où chaque grimpeur se connecte avec Discord, monte la **tour** �
 |---|---|
 | La progression est collective, pas une course. | Le cœur du site, c'est la jauge. Pas de classement ni de podium. |
 | **Confiance, zéro screen** : la case cochée est la preuve. | Aucune validation par un admin. Un admin peut corriger les coches d'un joueur, et tout passe au journal. |
-| **4 catégories, 1 point chacune** par grimpeur et par étage (§5). | Un grimpeur rapporte de 0 à 4 points à l'étage en cours, plus d'éventuels bonus. |
+| **4 catégories, 1 point chacune** par grimpeur et par étage (§5). | Un grimpeur rapporte de 0 à 4 points à l'étage en cours. |
 | **Palier = 2 × grimpeurs actifs.** | Les grimpeurs en pause et les exclus ne comptent ni dans le palier ni dans le score. |
 | **Ouverture manuelle** par un admin, possible seulement si la jauge atteint le palier, et jamais avant la date plancher. | Le bouton d'ouverture n'est actif que dans ces conditions. |
 | **Brouillard de guerre** : les étages non ouverts ne sont pas générés. | Le serveur n'envoie **aucune** donnée sur un étage scellé, pas même leur nombre. La pyramide s'arrête à l'étage ouvert. |
@@ -65,9 +68,9 @@ Un site privé où chaque grimpeur se connecte avec Discord, monte la **tour** �
 
 ### 1.3 Un écart entre les sources, tranché (T-01)
 
-Le **CdC validé** (26/10, 14 h 06) dit, au pied de la lettre : « 1 quête cochée = +1 point au score actuel global ». C'est un point **par action**. Le **règlement officiel** (#concept-et-règles, publié après le CdC) dit au contraire : « valider **tous** les donjons présents dans un étage = 1 point », soit 4 points au maximum par joueur et par étage. Shadoaze a d'ailleurs refusé un point par succès, qui « ferait grimper les sommes ».
+Le **CdC validé** (26/10, 14 h 06) dit, au pied de la lettre : « 1 quête cochée = +1 point au score actuel global ». C'est un point **par action**. La **conversation** dit au contraire, et c'est elle qui fait foi : Shadoaze, 26/10 à 13 h 31, « 1 point pour passer les donjons, 1 pour full succès, 1 quêtes principales, 1 secondaires… 4 points max » ; à 13 h 52, « à la complétion des donjons d'un étage ». Il a refusé un point par succès, qui « ferait grimper les sommes ».
 
-**Arbitrage du chef de projet (27/10) : le règlement fait foi.** Chaque catégorie **complète** de l'étage rapporte 1 point par joueur, 4 au maximum. Le comptage « 1 quête = 1 point » est **abandonné**. Le CdC reste suivi pour tout le reste : 5 sous-cases par donjon, full succès quand les 5 sont cochées, liste unique, filtres et pyramide.
+**Tranché (arbitrage de Marceau) : la conversation fait foi.** Chaque catégorie **complète** de l'étage rapporte 1 point par joueur, 4 au maximum. Le comptage « 1 quête = 1 point » est **abandonné**. Le CdC reste suivi pour tout le reste : 5 sous-cases par donjon, full succès quand les 5 sont cochées, liste unique, filtres et pyramide.
 
 ### 1.4 Ce que le produit ne fait pas
 
@@ -87,15 +90,14 @@ Le **CdC validé** (26/10, 14 h 06) dit, au pied de la lettre : « 1 quête coch
 | **Statut** | `actif`, `pause` (gelé) ou `exclu`. Seuls les actifs comptent dans le palier et dans le score. |
 | **Admin** | Un membre qui a le rôle Discord **« Administrateur »**, vérifié sur le serveur. |
 | **Étage** | Une épreuve, numérotée à partir de 0. **Étage N = tranche de niveau N du guide Duffus.** Il porte un level cap, un statut (`scelle`, `ouvert` ou `termine`), une date d'ouverture et une **date plancher** avant laquelle l'étage suivant ne peut pas s'ouvrir. |
-| **Donjon de l'étage** | Un donjon de la tranche, d'après Duffus. Il a **5 sous-cases** : « Finir le donjon classique », « Duo » et 3 défis propres au boss. |
+| **Donjon de l'étage** | Un donjon de la tranche, d'après Duffus. Il a **5 sous-cases** : « Vaincre le boss », « Duo » et 3 défis propres au boss. |
 | **Quête de l'étage** | Une quête de la tranche, d'après Duffus, rangée dans un **bloc** (dans l'ordre optimisé du guide). Elle est **principale** ou **secondaire**. |
 | **Quête principale** | Une quête nécessaire pour obtenir un Dofus, directement ou comme prérequis. |
-| **Quête secondaire** | Toute autre quête de l'étage : « quêtes annexes de complétion » (CdC), « utiles pour le 100 % succès » (règlement). |
+| **Quête secondaire** | Toute autre quête de l'étage : « quêtes annexes de complétion » (CdC n° 4), tout ce qui n'est pas nécessaire pour un Dofus (conversation, 26/10 à 11 h 16). |
 | **Catégorie** | L'une des 4 sources de points : **Donjons**, **Full succès**, **Quêtes principales**, **Quêtes secondaires** (§5). |
 | **Coche** | Une sous-case de donjon ou une quête cochée par un grimpeur. Elle est datée, et on peut la décocher. |
-| **Bonus** | Des points ajoutés par un admin à un grimpeur, ou à toute la guilde, pour un événement spécial, avec un motif. |
-| **Score** | La somme des points des grimpeurs actifs sur l'étage en cours, plus les bonus. |
-| **Palier de validation** | Le score à atteindre pour que l'ouverture de l'étage suivant soit permise. |
+| **Score** | La somme des points des grimpeurs actifs sur l'étage en cours. |
+| **Palier de validation** | Le score à atteindre pour que l'ouverture de l'étage suivant soit permise. À l'écran, on écrit « palier », le mot de Shadoaze, là où la maquette dit « seuil ». |
 | **Jauge** | Le score comparé au palier. |
 | **Bilan d'étage** | La photo figée au moment où l'étage suivant s'ouvre. |
 | **Journal** | L'historique horodaté de tout ce qui change. |
@@ -111,10 +113,9 @@ Le **CdC validé** (26/10, 14 h 06) dit, au pied de la lettre : « 1 quête coch
 | **Visiteur** | Quelqu'un qui a le lien, sans être connecté | Voir le teaser (avant l'ouverture du site) ou l'accueil avec « Se connecter avec Discord » (après). Rien d'autre. |
 | **Membre** | Connecté avec Discord et membre du serveur, sans fiche | Créer sa fiche s'il est sur la liste officielle. Sinon, il voit un message qui l'invite à contacter Shadoaze. |
 | **Grimpeur** | Membre avec une fiche | Cocher et décocher **sa** progression. Voir la tour, l'étage ouvert, les étages passés, toutes les fiches et les filtres. Modifier son pseudo, sa classe et son niveau déclaré. |
-| **Testeur** | Un grimpeur listé dans la configuration `BETA_TESTEURS` | Voir le site complet pendant le mode teaser, pour le bêta-test que le règlement prévoit (IV). |
-| **Admin** | Rôle « Administrateur » | Tout ce que fait un grimpeur, plus : gérer la liste officielle, geler, dégeler ou exclure, corriger des coches, donner des bonus, revoir et ajuster le contenu d'un étage, voir les étages scellés, ouvrir un étage, régler la date plancher ou le palier, lire le journal, **lancer l'aspiration Duffus** (en ligne de commande au lot B). |
+| **Admin** | Rôle « Administrateur » | Tout ce que fait un grimpeur, plus : gérer la liste officielle, geler, dégeler ou exclure, corriger des coches, revoir et ajuster le contenu d'un étage, voir les étages scellés, ouvrir un étage, régler la date plancher ou le palier, lire le journal, **lancer l'aspiration Duffus** (en ligne de commande au lot B). |
 | **Mainteneur** | Marceau | Déployer, lancer l'aspiration, corriger les données en dernier recours. |
-| **Bot** | « Gardien de la Tour » | **Aucun rôle indispensable aux lots A et B.** Au lot B, s'il est configuré, il poste une annonce à l'ouverture d'un étage, par un simple appel REST. Les autres usages éventuels sont au lot C. |
+| **Bot** | — | **Aucun bot aux lots A et B** (arbitrage du chef de projet). La connexion passe par OAuth2 seul. L'admin annonce lui-même l'ouverture d'un étage sur Discord. **Aucune écriture sur le serveur Discord** (ni bot, ni webhook), à aucun lot, sans demande explicite de Marceau. Le « bot d'atelier » de Marceau (EX-93) est un outil interne, hors du site. |
 
 ---
 
@@ -123,11 +124,10 @@ Le **CdC validé** (26/10, 14 h 06) dit, au pied de la lettre : « 1 quête coch
 ### 4.1 Avant l'ouverture du site : le teaser (lot A)
 
 - Jusqu'à l'ouverture, toute personne qui ouvre le lien voit **une seule page**, le teaser du designer (`docs/design/teaser.html`), avec un **compte à rebours jusqu'au vendredi 13/11/2026 à 17:00, heure de Paris**.
-- Aucune autre page n'est servie. Toute autre adresse renvoie vers le teaser, sauf `/sante`, les fichiers statiques et, à partir du lot B, la connexion et la création de fiche.
+- Aucune autre page n'est servie. Toute autre adresse renvoie vers le teaser, sauf `/sante`, les fichiers statiques et, à partir du lot B, la **connexion** (utile aux seuls admins).
 - Sans JavaScript, la date reste écrite en clair.
 - Le pied de page ajoute « Merci Duffus » à la mention du designer, avec un lien.
-- Au lot B, le teaser gagne un lien discret, **« Grimpeur ? Prépare ta fiche »**. Un participant de la liste officielle peut se connecter et créer sa fiche avant l'ouverture, pour que le palier soit juste dès la première minute. Après, il revoit le teaser avec « Fiche prête, rendez-vous le 13/11 à 17 h ».
-- Les **admins et testeurs connectés** voient le site complet, avec un bandeau « Mode teaser : les grimpeurs ne voient pas encore cette page ».
+- **Aucun accès joueur avant le 13/11 à 17 h** (Marceau : « rien à cocher avant le 13, le site sera même pas accessible »). Un joueur qui se connecte quand même revoit le teaser, et aucune fiche n'est créée. Seuls les **admins connectés** voient le site complet, pour la recette, avec un bandeau « Mode teaser : les grimpeurs ne voient pas encore cette page ». Les fiches se créent **le 13/11, à la première connexion** de chaque grimpeur.
 - **Bascule** : le mode est réglé par `SITE_MODE` (ARCHITECTURE §7). En mode `auto` (le défaut), le site s'ouvre de lui-même à `SITE_OUVERT_LE`, le 13/11 à 17:00. On peut forcer `teaser` ou `ouvert` sans redéployer le code.
 - **Le bouton « Entrer dans la tour »** du teaser n'apparaît qu'une fois le compte à rebours terminé, et seulement si la variable de configuration `TEASER_LIEN_ENTRER` est renseignée. Elle est vide par défaut et se remplit le jour J (arbitrage du chef de projet).
 
@@ -136,15 +136,17 @@ Le **CdC validé** (26/10, 14 h 06) dit, au pied de la lettre : « 1 quête coch
 1. « Se connecter avec Discord ». Discord montre au grimpeur ce que le site demande, son identité et son appartenance au serveur, et il accepte.
 2. Le site vérifie qu'il est **membre du serveur** de l'événement. Sinon : « Ce site est réservé aux grimpeurs de L'Épreuve des Dieux. »
 3. S'il n'a pas de fiche :
-   - **sur la liste officielle** : « Créer ma fiche » avec pseudo en jeu (2 à 30 caractères, unique sans tenir compte de la casse), classe (une des 19) et niveau (facultatif) ;
+   - **sur la liste officielle** : « Créer ma fiche » avec pseudo en jeu (2 à 30 caractères, unique sans tenir compte de la casse), classe (facultative, une des 19) et niveau (facultatif, de 1 à 200) ;
    - **hors de la liste** : « Tu n'es pas encore inscrit à l'expédition. Envoie ta validation en MP à Shadoaze. »
-4. Le **statut** de la fiche est celui que l'admin a choisi en ajoutant le joueur à la liste, `actif` par défaut. Un joueur qui rejoint en cours de route peut être ajouté en `pause`, gelé jusqu'à ce qu'un admin le réintègre.
+4. Le **statut** de la fiche est celui que l'admin a choisi en ajoutant le joueur à la liste : `actif` (par défaut) ou `pause`. Un joueur qui rejoint en cours de route peut être ajouté en `pause`, gelé jusqu'à ce qu'un admin le réintègre.
 5. La session dure **7 jours**. Les droits d'admin sont revérifiés auprès de Discord **au plus toutes les 10 minutes**, au moment d'une action d'admin. Retirer le rôle sur Discord coupe donc l'accès admin en moins de 10 minutes.
+6. Un **admin sans fiche** (pas sur la liste officielle, ou qui ne joue pas) accède à l'admin et peut tout consulter. Il ne coche rien pour lui-même et ne compte pas dans la jauge.
+7. Un grimpeur **exclu** peut se connecter, mais il voit seulement « Ta participation est suspendue. Contacte un admin. » Il ne peut plus cocher.
 
 ### 4.3 La tour en pyramide (lot B)
 
 - Page d'accueil après connexion : **la tour**, des blocs empilés en pyramide selon la DA (`docs/design/DA.md`, composant « Tour », et `maquette-v2.html`). L'**étage ouvert** est en pleine largeur, avec sa jauge miniature, et les étages terminés sont accessibles.
-- **Brouillard de guerre** : au-dessus de l'étage ouvert, la DA dessine des blocs scellés marqués « ? », de plus en plus étroits, qui s'effacent dans la brume. Ce sont des **décors en nombre fixe** (6), identiques quel que soit l'état réel de la tour. Ils ne portent ni numéro, ni nom, ni lien, et ne révèlent pas combien d'étages existent. Le **serveur n'envoie aucune donnée** d'un étage scellé (CdC §2 : « techniquement impossible » d'y accéder), et une adresse comme `/etages/7` sur un étage scellé répond « introuvable » (404), exactement comme un étage qui n'existe pas.
+- **Brouillard de guerre** : au-dessus de l'étage ouvert, la DA dessine des blocs scellés marqués « ? », de plus en plus étroits, qui s'effacent dans la brume. Ce sont des **décors en nombre fixe** (6), identiques quel que soit l'état réel de la tour. Ils ne portent ni numéro, ni nom, ni lien, et ne révèlent pas combien d'étages existent. Seule exception, reprise de la DA et de la maquette : quand la jauge est pleine, le premier bloc affiche « Étage N+1 · prêt », N étant l'étage ouvert. Ce numéro se déduit de l'étage ouvert, et il s'affiche que l'étage N+1 soit préparé ou non : il ne révèle donc rien. Le **serveur n'envoie aucune donnée** d'un étage scellé (CdC §2 : « techniquement impossible » d'y accéder), et une adresse comme `/etages/7` sur un étage scellé répond « introuvable » (404), exactement comme un étage qui n'existe pas.
 - Chaque étage peut avoir une **image d'ambiance** (adresse réglée par un admin, facultative). Ce sont toujours des **créations originales** (dégradés, canvas, SVG ou images générées), **jamais des captures ou visuels du jeu** (DA, « À ne pas faire »).
 - Toucher une assise ouvre **l'onglet de cet étage** (§4.4). Les étages terminés montrent leur bilan figé.
 - En tête : la jauge de l'étage ouvert et la **répartition des 19 classes** (classes que personne ne joue mises en évidence, repris de la v3).
@@ -154,51 +156,72 @@ Le **CdC validé** (26/10, 14 h 06) dit, au pied de la lettre : « 1 quête coch
 Tout le monde voit **la même liste unifiée** pour un étage donné (CdC §2).
 
 1. **En-tête** : numéro, nom (par défaut « Étage N », sinon le nom réglé par un admin, T-28), tranche (« Niveaux 40 à 50 »), **level cap** (EX-26), rappel des règles (« entre grimpeurs, sans dépasser le cap, sans PL ») et la **formule du palier** (T-21). À gauche sur grand écran, ou dans un menu sur mobile, **les tranches des étages ouverts** seulement, comme la colonne du guide Duffus (EX-51, EX-63).
-2. **Ma progression** : mes 4 catégories avec leur avancement (« Donjons 4/6 », « Full succès 17/30 », « Principales 8/8 ✓ », « Secondaires 12/40 »), mes points (« 1 point sur 4 ») et mes bonus.
+2. **Ma progression** : mes 4 catégories avec leur avancement (« Donjons 4/6 », « Full succès 17/30 », « Principales 8/8 ✓ », « Secondaires 12/40 »), et mes points (« 1 point sur 4 »).
 3. **La jauge** (§4.5).
 4. **Le filtre cumulatif** : quatre cases à cocher, **☑ Donjons · ☑ Full succès · ☑ Quêtes principales · ☑ Quêtes secondaires**, toutes cochées par défaut. Le site n'affiche que les lignes des catégories cochées. On peut composer n'importe quel mélange, par exemple « Principales + Donjons » ou « Secondaires seules ». Une cinquième case, **« Seulement ce qui me reste »**, masque ce que j'ai déjà fait. Le choix est mémorisé sur l'appareil.
 5. **La liste unique**, dans l'ordre du guide Duffus : les donjons à leur place dans les blocs, sinon en tête de liste. Chaque ligne porte un **badge de catégorie** très net, à la fois en couleur, en icône et en texte, pour rester lisible sans la couleur. Couleurs et icônes sont celles de la DA : Donjons jade (porte en arche), Full succès améthyste (étoile), Principales azur (œuf de Dofus), Secondaires corail (parchemin).
    - **Quête principale** : pilule « Principale » à fond azur teinté et bordure pleine, avec le ou les Dofus visés ;
    - **Quête secondaire** : pilule « Secondaire » à contour corail **en pointillés**. Le trait plein ou pointillé distingue les deux sans la couleur ;
-   - **Donjon** : une ligne repliable avec deux badges d'état, **« Donjon »** (allumé si la case classique est cochée) et **« Full succès »** (allumé si les 5 le sont). Une fois dépliée, elle montre les **5 sous-cases** : *Finir le donjon classique*, *Duo*, puis les 3 défis du boss, chacun avec son intitulé et sa condition (venus de Duffus). Le filtre « Donjons » ou « Full succès » affiche les lignes de donjon. Avec « Full succès » seul, elles s'ouvrent dépliées.
+   - **Donjon** : une ligne repliable avec deux badges d'état, **« Donjon »** (allumé si la case classique est cochée) et **« Full succès »** (allumé si les 5 le sont). Une fois dépliée, elle montre les **5 sous-cases** : *Vaincre le boss*, *Duo*, puis les 3 défis du boss, chacun avec son intitulé et sa condition (venus de Duffus). Le filtre « Donjons » ou « Full succès » affiche les lignes de donjon. Avec « Full succès » seul, elles s'ouvrent dépliées.
    - chaque quête porte en plus sa case, son niveau, la précision « **jusqu'où faire la quête** » quand le guide la donne (EX-51), et le compteur « 7/12 » (le nombre de grimpeurs actifs qui l'ont cochée). Chaque sous-case de donjon a aussi son compteur ;
-   - **la fiche de quête** (EX-52) : un toucher sur le nom d'une quête ouvre sa fiche **intégrée chez nous**. Elle montre comment la réaliser, ce dont on a besoin, le succès lié et les prérequis, d'après Duffus. Il n'y a **aucun lien vers duffus.fr** (EX-70). Les liens internes du texte Duffus sont retirés ou réécrits vers nos propres fiches s'ils visent un étage ouvert. Les images de Duffus ne sont pas reprises au lot B, puisque les afficher ferait appeler son site pendant la navigation (§10).
+   - **la fiche de quête** (EX-52) : un toucher sur le nom d'une quête ouvre sa fiche, détaillée au §4.4 bis.
 
 Règles de la coche :
 - Un toucher suffit. L'enregistrement est immédiat, et la jauge et les compteurs se mettent à jour sans recharger la page.
 - On ne peut cocher que sur un étage **ouvert ou terminé**. Un étage terminé reste cochable pour la fiche, sans effet sur son bilan figé (§5.5).
 - Si le réseau échoue, la case revient à son état précédent avec « Pas enregistré, réessaie ».
-- **Cocher un succès de donjon coche aussi « Finir le donjon classique »**, puisqu'on ne réussit pas un succès de boss sans le battre. **Décocher la case classique décoche les 4 autres** (T-16, réglable : `coches.succes_coche_vaincu`).
+- **Cocher un succès de donjon coche aussi « Vaincre le boss »**, puisqu'on ne réussit pas un succès de boss sans le battre. **Décocher la case classique décoche les 4 autres** (T-16, réglable : `coches.succes_coche_vaincu`).
 - Un grimpeur **en pause** peut continuer à cocher : c'est comme ça qu'il rattrape son retard. Ses coches comptent dès sa réintégration (T-13, réglable : `coches.pause_peut_cocher`).
 - Chaque coche ou décoche est **au journal**, avec son auteur.
+
+### 4.4 bis La fiche de quête (lot B, exigence forte de Marceau)
+
+**Pourquoi** : c'est ce qui rend le guide utile en jeu. Conversation, 26/10 : « quand tu cliques sur une quête ça t'affiche un guide qui t'explique comment la réaliser, ce dont t'as besoin, le succès lié, les prérequis ». Le guide Duffus « précise jusqu'où faire la quête, s'il faut la lier ». **Objectif : la parité avec la fiche de duffus.fr**, intégrée chez nous, sans aucun lien vers duffus.fr (EX-70).
+
+**Contenu**, dans cet ordre. Chaque bloc n'apparaît que s'il a des données :
+1. **En-tête** : nom, niveau, bloc, badge de nature (Principale, avec les Dofus visés, ou Secondaire), case à cocher (la même que dans la liste, et synchronisée avec elle), compteur « 7/12 » et lien « Qui ne l'a pas fait ? ».
+2. **« Jusqu'où la faire »** et **« À lier »** (s'il faut la lier à une autre quête, ou la faire en même temps), mis en évidence en tête de fiche.
+3. **Prérequis**, **cliquables** : un prérequis d'un étage ouvert ou terminé ouvre sa propre fiche. Un prérequis hors du guide s'affiche en texte. Un prérequis d'un **étage scellé** s'affiche « Prérequis d'un étage pas encore ouvert », **sans son nom** (EX-111).
+4. **Étapes**, numérotées : le texte de chaque étape (comment la réaliser), avec ses **objectifs**.
+5. **Objets nécessaires** (nom et quantité) et **monstres à vaincre** (nom, quantité, et icône DofusDB si elle est disponible).
+6. **Positions** : les coordonnées `[x, y]` des PNJ et des lieux, avec leur zone. On peut les copier d'un toucher, pour la commande de trajet du jeu.
+7. **Succès lié**.
+8. **Récompenses** : expérience, kamas, objets, émotes et titres.
+
+**Affichage** :
+- **Mobile** (moins de 1024 px) : un **panneau plein écran** qui glisse par-dessus la liste. Une barre du haut porte « ← Retour à la liste » et la case à cocher. Le bouton retour du téléphone ferme le panneau, l'adresse `…/quetes/{id}` étant poussée dans l'historique. En revenant à la liste, on retrouve sa position de défilement.
+- **Ordinateur** (1024 px et plus) : un **panneau latéral** à droite, sur 40 % de la largeur environ. La liste reste visible et défilable, et toucher une autre quête remplace le contenu du panneau. `Échap` le ferme.
+- **Sans JavaScript** : l'adresse `/etages/{n}/quetes/{id}` est une page complète.
+- **Accessibilité** : le panneau est un dialogue (`role="dialog"`, titre annoncé, focus déplacé à l'ouverture et rendu à la ligne de la quête à la fermeture). Les composants et les couleurs sont ceux de la DA.
+
+**Sources** : Duffus d'abord (`quest_pages` et les tables qu'elle référence, structure exacte relevée au chantier B0). **DofusDB complète** ce que Duffus n'a pas, comme les récompenses, les objectifs ou les icônes, et la fiche indique alors « complété avec DofusDB ». **Une quête sans fiche Duffus reste l'exception** : elle affiche nom, niveau, prérequis et récompenses venus de DofusDB, porte la mention « Fiche détaillée indisponible », et **chaque cas est signalé à Marceau**. Le rapport de construction en donne la liste et le nombre, et la revue de l'étage les compte en tête. Le **repli manuel** de LOTS (sans aspiration Duffus) prive de fiches tout l'étage : c'est pourquoi il n'est déclenché que sur décision de Marceau.
 
 ### 4.5 La jauge
 
 Le texte est toujours présent et lisible sans la couleur : « **Score 19 sur un palier de 24**, il en manque 5. 12 grimpeurs actifs, 2 en pause. »
-- La jauge a **une encoche par point requis** (DA, « Jauge d'étage »). Les encoches se remplissent dans l'ordre des catégories, chacune de sa couleur, puis avec les bonus. Au-dessus : le grand chiffre « 20 / 24 points » et la formule du palier. Au-delà du palier, elle affiche « plein » avec le score réel.
-- **Détail** : « Donjons 10 · Full succès 3 · Principales 4 · Secondaires 2 · Bonus 0 », c'est-à-dire le nombre de grimpeurs actifs qui ont le point dans chaque catégorie, plus le total des bonus.
+- La jauge a **une encoche par point requis** (DA, « Jauge d'étage »). Les encoches se remplissent dans l'ordre des catégories, chacune de sa couleur. Au-dessus : le grand chiffre « 19 / 24 points » et la formule du palier (« Palier = 2 × 12 grimpeurs actifs »). Au-dessous : ce qui manque et le maximum possible (K × N). Au-delà du palier, elle affiche « plein » avec le score réel.
+- **Détail** : « Donjons 10 · Full succès 3 · Principales 4 · Secondaires 2 », c'est-à-dire le nombre de grimpeurs actifs qui ont le point dans chaque catégorie. Ce détail prend la forme des **4 tuiles de catégorie** de la DA : « x / N grimpeurs », une mini-barre et un lien « Qui manque ? », qui liste les actifs sans le point de cette catégorie.
 - **Verdict** :
-  - « Un admin pourra ouvrir le prochain étage quand la jauge sera pleine, et pas avant le vendredi 13 novembre à 17 h » ;
+  - « Un admin pourra ouvrir le prochain étage quand la jauge sera pleine, et pas avant le vendredi 13 novembre à 17 h » (la date plancher de l'étage, quand il en a une) ;
   - ou « Jauge pleine : un admin va vérifier et ouvrir le prochain étage ».
   - On ne nomme jamais un étage scellé.
 
 ### 4.6 Fiches et filtres par élément (lot B)
 
 - **Les grimpeurs** : toutes les fiches, actifs d'abord, puis en pause, par ordre alphabétique. **Jamais de tri par score.** Chaque carte montre le pseudo en jeu, le **nom Discord** (pour se contacter, T-20, réglable : `fiche.afficher_nom_discord`), la classe (facultative), le statut, le niveau déclaré et les 4 pastilles de l'étage ouvert.
-- **La fiche d'un grimpeur** (son « tableau de bord ») : pour l'étage ouvert et chaque étage passé, ses 4 catégories, ses points, ses bonus, son **pourcentage d'avancement** (cases cochées ÷ cases de l'étage) et le détail de ce qu'il a coché ou non. Tous les grimpeurs connectés peuvent la voir. Seuls lui et les admins peuvent la modifier.
+- **La fiche d'un grimpeur** (son « tableau de bord ») : pour l'étage ouvert et chaque étage passé, ses 4 catégories, ses points, son **pourcentage d'avancement** (cases cochées ÷ cases de l'étage) et le détail de ce qu'il a coché ou non, avec un **récapitulatif des succès de donjon** (T-17). En tête, un **avancement global** sur tous les étages ouverts ou terminés (EX-49). Tous les grimpeurs connectés peuvent la voir. Seuls lui et les admins peuvent la modifier.
 - **« Qui ne l'a pas fait ? »** : un toucher sur le compteur « 7/12 » d'une quête ou d'une sous-case ouvre la liste des grimpeurs **actifs** qui ne l'ont pas cochée, avec leur classe (DECISIONS §5).
-- **Filtre par élément** sur la page des grimpeurs (DA, « Filtre qui n'a pas fait… ? ») : une liste déroulante groupée (catégories, donjons, succès, quêtes de l'étage ouvert) affiche deux listes, **« Pas encore fait »** et **« Déjà fait, ils peuvent accompagner »**. Les cartes concernées sont entourées, les autres estompées.
+- **Filtre par élément** sur la page des grimpeurs (DA, « Filtre qui n'a pas fait… ? ») : une liste déroulante groupée (catégories, donjons, succès, quêtes de l'étage ouvert) affiche deux listes, **« Pas encore fait »** et **« Déjà fait, ils peuvent accompagner »**. Pour une catégorie, « fait » veut dire « a le point ». Choisir un donjon revient à choisir sa case « Vaincre le boss ». Les cartes concernées sont entourées, les autres estompées.
 - Les exclus n'apparaissent nulle part, sauf pour les admins.
 
 ### 4.7 L'admin gère les grimpeurs (lot B)
 
 Page **Admin → Grimpeurs** :
-- **Liste officielle** : on ajoute un participant par son identifiant Discord, ou par la mention `<@…>` copiée de #liste-grimpeurs, avec un statut initial (`actif` par défaut). Un champ accepte plusieurs mentions collées d'un coup. Les 10 de `docs/discord/liste-grimpeurs.md` passent en un collage.
+- **Liste officielle** : on ajoute un participant par son identifiant Discord, ou par la mention `<@…>` copiée de #liste-grimpeurs, avec un statut initial, `actif` (par défaut) ou `pause`. Un champ accepte plusieurs mentions collées d'un coup. Les 10 de `docs/discord/liste-grimpeurs.md` passent en un collage.
 - **Tableau** : pseudo (ou « fiche à créer »), classe, statut, niveau déclaré, **dernière activité** (dernière coche), date d'inscription.
 - **Geler** ou **réintégrer**, avec un motif facultatif. L'effet sur le palier s'affiche avant de confirmer : « Palier 24 → 22 ». Pour aider à juger d'une réintégration (« rattraper au minimum le grimpeur actif le moins avancé »), la ligne d'un grimpeur gelé montre ses points et son avancement sur l'étage ouvert, et son niveau déclaré, à côté de ceux du **moins avancé des actifs** (le moins de points, puis le plus faible avancement). C'est une information : l'admin décide.
-- **Exclure**, avec un motif obligatoire et une confirmation. C'est réversible.
-- **Corriger** le pseudo ou la classe. **Modifier les coches** en ouvrant la fiche en mode édition, par exemple pour retirer une validation contraire au règlement.
-- **Bonus** : des points pour un grimpeur ou pour toute la guilde, sur l'étage ouvert. Un nombre de −10 à +10 et un motif obligatoire, par exemple « Événement Halloween ». Un bonus s'annule mais ne s'efface pas.
+- **Exclure**, avec un motif obligatoire et une confirmation. C'est réversible. Un exclu ne peut plus cocher, et ses coches sont gardées.
+- **Corriger** le pseudo ou la classe. **Modifier les coches** en ouvrant la fiche en mode édition, par exemple pour retirer une validation contraire aux règles convenues (T-15). Toute coche ou décoche faite par un admin sur la fiche d'un autre exige un **motif**. Elle passe au journal, **non public** : le grimpeur ne voit ni le motif ni l'auteur sur sa fiche.
 
 ### 4.8 L'admin prépare et ouvre un étage (lot B)
 
@@ -218,11 +241,11 @@ Page **Admin → Grimpeurs** :
    - corriger un libellé ;
    - régler la date plancher, le level cap, le **nom** et l'**image d'ambiance** de l'étage (T-28 ; ce sont des créations originales, par exemple les images générées par Shadoaze, EX-104, jamais des captures du jeu).
 4. **Ouverture** : le bouton **Ouvrir le prochain étage** n'est actif que si **la jauge de l'étage en cours est pleine** et **la date plancher est passée**. L'admin voit un récapitulatif (score, palier, actifs, date) **et le détail par grimpeur** : qui a gagné quel point, ses coches, sa dernière activité (EX-83, sa « dernière vérification manuelle »). Puis il confirme. Sinon, le bouton est grisé et donne la raison. Il reste **forçable** avec un motif obligatoire inscrit au journal, pour un cas exceptionnel voulu par Shadoaze. Le récapitulatif l'affiche en rouge.
-5. L'ouverture **fige le bilan** de l'étage précédent, qui passe à `termine`, et fait apparaître le nouvel étage dans la pyramide. Si un salon d'annonces est configuré, le bot y poste « 🗼 L'étage N est ouvert ! ».
+5. L'ouverture **fige le bilan** de l'étage précédent, qui passe à `termine`, et fait apparaître le nouvel étage dans la pyramide. Le site ne poste rien sur Discord (aucun bot) : l'admin annonce lui-même l'ouverture.
 
-**Palier manuel** : *Admin → Étage ouvert → Palier* remplace la formule par un nombre fixe, avec un motif. C'est la soupape si une catégorie est vide (§5.3) ou si Shadoaze veut ajuster. Vider le champ rétablit la formule. Chaque changement passe au journal.
+**Palier manuel** : *Admin → Étage ouvert → Palier* remplace la formule par un nombre fixe, avec un motif. C'est la soupape si une catégorie est vide (§5.3) ou si Shadoaze veut ajuster. Le palier manuel vaut au moins 1. Vider le champ rétablit la formule. Chaque changement passe au journal.
 
-**L'étage 0** est construit ouvert, avec `ouvert_le = 30/10/2026 17:00` et `date_plancher_suivant = 13/11/2026 17:00` (EX-28, EX-29). Dès l'ouverture du site, les grimpeurs y **cochent rétroactivement** ce qu'ils ont fait depuis le 30/10 (T-07). L'alternative proposée à Shadoaze, ouvrir le site quelques jours avant le 13/11, ne demande qu'un réglage : `SITE_OUVERT_LE`.
+**L'étage 0** est construit ouvert, avec `ouvert_le = 30/10/2026 17:00` et `date_plancher_suivant = 13/11/2026 17:00` (EX-28, EX-29). Dès l'ouverture du site, les grimpeurs y **cochent rétroactivement** ce qu'ils ont fait depuis le 30/10 (T-07). Aucun accès joueur n'est ouvert avant (tranché par Marceau).
 
 ### 4.9 Le journal (lot B)
 
@@ -238,7 +261,7 @@ Seuls les éléments **non masqués** de *E* comptent : seuls ceux de la tranche
 
 | Catégorie | Le point est acquis quand… | Exemple avec 6 donjons |
 |---|---|---|
-| **Donjons** | la sous-case « Finir le donjon classique » de **chaque** donjon de *E* est cochée | 6 cases |
+| **Donjons** | la sous-case « Vaincre le boss » de **chaque** donjon de *E* est cochée | 6 cases |
 | **Full succès** | **les 5 sous-cases** de **chaque** donjon de *E* sont cochées | 30 cases |
 | **Quêtes principales** | toutes les quêtes principales de *E* sont cochées | par exemple 8 |
 | **Quêtes secondaires** | toutes les quêtes secondaires de *E* sont cochées | par exemple 40 |
@@ -251,10 +274,10 @@ Seuls les éléments **non masqués** de *E* comptent : seuls ceux de la tranche
 ### 5.2 Score, palier et jauge de l'étage en cours
 
 - **Actifs** A = les grimpeurs au statut `actif`, et N = leur nombre.
-- **Score** P = Σ points(g, E) pour g ∈ A, **+** les bonus individuels non annulés des grimpeurs de A, **+** les bonus collectifs non annulés, sur *E*.
+- **Score** P = Σ points(g, E) pour g ∈ A. *(Les points bonus d'événement viendront au lot C, en s'ajoutant à P sans changer le palier.)*
 - **K** = le nombre de catégories **non vides** de *E* (4 en général).
 - **Palier** S : le palier manuel s'il est fixé, sinon **S = ⌈ m × N × K ÷ 4 ⌉**, où **m** = `palier.points_par_joueur` (réglage, **2** par défaut, EX-109). Avec m = 2 et 4 catégories, **S = 2 × N**, la règle du CdC (EX-09). Le calcul est exact, en fractions (`fractions.Fraction`) et en entiers, sans nombre à virgule. Les bonus ne changent pas le palier.
-- **Jauge pleine** ⇔ N > 0 et P ≥ S.
+- **Jauge pleine** ⇔ N > 0, S > 0 et P ≥ S. S ne vaut 0 que pour un étage sans aucune catégorie non vide : la construction le signale par une alerte, et l'admin règle un palier manuel.
 - **Prochain étage ouvrable** ⇔ jauge pleine **et** maintenant ≥ date plancher de *E* (si elle existe) **et** un étage scellé de numéro supérieur existe.
 
 | Situation | N | K | S | P | Pleine ? |
@@ -262,7 +285,6 @@ Seuls les éléments **non masqués** de *E* comptent : seuls ceux de la tranche
 | 12 actifs, 4 catégories | 12 | 4 | 24 | 26 | oui |
 | 12 actifs, aucune quête principale | 12 | 3 | 18 | 17 | non |
 | 11 actifs, 3 catégories | 11 | 3 | 17 (16,5 arrondi au-dessus) | 17 | oui |
-| 10 actifs, bonus collectif de 2 | 10 | 4 | 20 | 18 + 2 | oui |
 | Personne d'actif | 0 | 4 | 0 | 0 | non (« Aucun grimpeur actif ») |
 
 ### 5.3 Pourquoi ⌈ N × K ÷ 2 ⌉ quand une catégorie est vide
@@ -275,7 +297,7 @@ Les badges, les points, les compteurs « 7/12 », les filtres et la jauge sont c
 
 ### 5.5 Bilan figé
 
-À l'ouverture d'un étage, on enregistre pour l'étage qui se termine la date, N, S, P, les points par catégorie et les bonus. Les coches faites ensuite enrichissent les fiches, mais **ne changent pas le bilan**.
+À l'ouverture d'un étage, on enregistre pour l'étage qui se termine la date, N, S, P, et les points par catégorie. Les coches faites ensuite enrichissent les fiches, mais **ne changent pas le bilan**.
 
 ---
 
@@ -287,7 +309,7 @@ Les badges, les points, les compteurs « 7/12 », les filtres et la jauge sont c
 |---|---|---|
 | Tranches | **Duffus** (`guide_ranges`) | La correspondance étage ↔ tranche et le cap sont **réglés dans `config/etages.yaml`** (T-04). Par défaut : étage 0 = première tranche (jusqu'au niveau 20), puis une tranche par étage, cap = borne haute. |
 | Donjons de la tranche (proposés par niveau, **liste validée par un admin**, T-03), leurs **5 succès** (intitulé, condition) | **Duffus** (`dungeon_pages`) ; succès dans `achievements` / `achievement_objectives` **s'ils y sont, sinon DofusDB** : le choix se fait à l'import, donjon par donjon (T-02) | Le guide Duffus lui-même n'a pas les succès de donjon (EX-64) |
-| Quêtes de la tranche, **blocs**, ordre, « jusqu'où », **fiche intégrée** (comment, besoins, succès lié, prérequis) | **Duffus** (`quest_list`, `quest_pages`) | — |
+| Quêtes de la tranche, **blocs**, ordre, « jusqu'où », « à lier », **fiche intégrée** (étapes, objets, monstres, positions, prérequis, succès lié, récompenses, §4.4 bis) | **Duffus** (`quest_list`, `quest_pages`) | — |
 | **Principal / secondaire** | **Duffus**, guides par Dofus (`dofus_list` et les quêtes et prérequis de chaque guide) | Calcul déterministe (§6.3) |
 | Icônes de Dofus, de monstres et d'objets, détails des monstres | **DofusDB** (complément) | Pour l'affichage seulement |
 | **Repli** : succès d'un donjon, ou classement principal / secondaire, si une donnée Duffus manque | **DofusDB** | Marqué « repli » dans la revue, à valider par l'admin |
@@ -299,7 +321,7 @@ Les **fiches de quête** (`quest_pages`) sont **recopiées** chez nous à l'aspi
 
 ### 6.2 Les 5 sous-cases d'un donjon
 
-Les succès du donjon, dans l'ordre : *Finir le donjon classique*, puis *Duo*, puis les 3 défis du boss. Ils viennent des tables `achievements` / `achievement_objectives` de Duffus **si elles les contiennent**, sinon de DofusDB. Le choix se fait **à l'import, donjon par donjon**, et il est affiché dans la revue (T-02, arbitrage du chef de projet). Le guide Duffus lui-même n'a pas ces succès (EX-64). Si la source ne donne pas exactement 5 succès, l'import lève une **alerte** et l'admin garde ce que le jeu donne ou masque une sous-case.
+Les succès du donjon, dans l'ordre : *Vaincre le boss*, puis *Duo*, puis les 3 défis du boss. Ils viennent des tables `achievements` / `achievement_objectives` de Duffus **si elles les contiennent**, sinon de DofusDB. Le choix se fait **à l'import, donjon par donjon**, et il est affiché dans la revue (T-02, arbitrage du chef de projet). Le guide Duffus lui-même n'a pas ces succès (EX-64). Si la source ne donne pas exactement 5 succès, l'import lève une **alerte** et l'admin garde ce que le jeu donne ou masque une sous-case.
 
 Avec DofusDB (vérifié le 27/10/2026) : le champ `achievements` du donjon, sans la catégorie *Compagnons* (142). *Maison Fantôme* (34) et *Donjon des Bworks* (13) ont par exemple un 6e succès « (Compagnon) », qui ne fait pas partie des 5.
 
@@ -331,7 +353,7 @@ Le type exact de chaque colonne est dans ARCHITECTURE §5.
 etage ──< donjon ──< case_succes ──< coche_case >──┐
   │                                                 ├── grimpeur
   ├──< quete ─────────────────────< coche_quete >──┘      │
-  ├──< bonus (grimpeur facultatif)                     liste_officielle
+  │                                                    liste_officielle
   └── bilan_etage
 journal · session (connexions)
 ```
@@ -345,7 +367,6 @@ journal · session (connexions)
 | `liste_officielle` | Qui peut créer une fiche | id Discord, statut initial, ajouté par, ajouté le |
 | `grimpeur` | Une fiche | **discord_user_id** (unique), pseudo en jeu (unique sans tenir compte de la casse), classe, statut, niveau déclaré, inscrit_le |
 | `coche_case`, `coche_quete` | Ce qu'un grimpeur a coché | grimpeur, élément, cochée_le, cochée_par |
-| `bonus` | Points bonus | étage, grimpeur (vide = collectif), points, motif, par, le, annulé |
 | `bilan_etage` | La photo à l'ouverture du suivant | étage, figé_le, actifs, palier, score, détail |
 | `journal` | Tout ce qui change | horodatage, acteur (id Discord), type, grimpeur, étage, détails, public |
 | *(fichiers, pas une table)* | Copies datées des tables Duffus | `donnees/duffus/AAAA-MM-JJ/<table>.json`, versionnées dans le dépôt privé (ARCHITECTURE §6) |
@@ -353,7 +374,7 @@ journal · session (connexions)
 Règles d'intégrité :
 - une coche par couple (grimpeur, élément), garantie par la clé primaire ;
 - **décocher supprime la ligne de coche**, et le journal en garde la trace. Une coche est un état que le joueur gère, pas une décision ;
-- un élément coché par quelqu'un n'est **jamais supprimé**, seulement masqué. Un bonus est annulé, jamais effacé ;
+- un élément coché par quelqu'un n'est **jamais supprimé**, seulement masqué ;
 - le site n'expose **jamais** un identifiant Discord numérique. Il montre le pseudo en jeu et, aux seuls participants connectés, le nom Discord (T-20) ;
 - la date de dernière activité se calcule à partir des coches.
 
@@ -378,15 +399,15 @@ Les réponses par défaut d'EXIGENCES.md vont être soumises à Shadoaze. Chacun
 | T-02 Source des succès de donjon | Duffus s'il les a, sinon DofusDB, donjon par donjon | Automatique à l'import, signalé dans la revue ; l'admin masque ou corrige une sous-case |
 | T-03 Donjons d'un étage | Ceux dont le niveau est dans la tranche, puis liste **validée par un admin** | Action admin : retirer ou ajouter un donjon (§4.8) |
 | T-04 Étage ↔ tranche, cap | Étage 0 = première tranche (jusqu'au niveau 20), une tranche par étage, cap = borne haute | `etages.yaml` (tranche, cap, nom, dates) ; le cap se règle aussi par action admin |
-| T-05 Bêta-test | Bêta fermée avant l'ouverture : admins et `BETA_TESTEURS` | Variable `BETA_TESTEURS` |
+| T-05 Bêta-test | **Tranché par Marceau** : aucun accès joueur avant le 13/11 ; recette par les admins seulement | — |
 | T-06 Teaser | En ligne au plus tard le 6/11, compte à rebours jusqu'au 13/11 à 17 h | `SITE_OUVERT_LE` ; `TEASER_LIEN_ENTRER` le jour J |
-| T-07 Étage 0 pendant le teaser | Cochage rétroactif à l'ouverture du site | `SITE_OUVERT_LE` pour ouvrir plus tôt |
+| T-07 Étage 0 pendant le teaser | **Tranché par Marceau** : cochage rétroactif le 13/11, à l'ouverture du site | — |
 | T-08 Encyclopédie et outils contre étages cachés | Non verrouillés (données du jeu) | `regles.yaml` → `modules.verrouiller_par_etage` (lot E) |
 | T-09 Crédit | « Merci Duffus » avec lien vers duffus.fr, aucun lien par quête (**tranché**) | — |
 | T-10 Ergonomie | La pyramide pour naviguer, l'organisation Duffus à l'intérieur d'un étage | — (choix de conception) |
 | T-12 Quête principale hors de sa tranche | La tranche Duffus fait foi, l'écart est signalé | Action admin : masquer ou changer la nature |
 | T-13 Coches d'un grimpeur en pause | Permises, elles comptent à la réintégration | `regles.yaml` → `coches.pause_peut_cocher` |
-| T-14 Bot | Aucun bot côté joueurs. Annonce d'ouverture facultative. | Variable `DISCORD_ANNONCE_CHANNEL_ID` (vide = pas d'annonce) |
+| T-14 Bot | Aucun bot (**tranché**). L'admin annonce l'ouverture à la main. | — |
 | T-15 Retrait d'une coche par un admin | Oui, avec un motif, journalisé, jamais affiché publiquement | — |
 | T-16 Un succès coche « vaincre » | Oui, et décocher « vaincre » décoche les 4 autres | `regles.yaml` → `coches.succes_coche_vaincu` |
 | T-17 Succès de donjon | Dans la liste de l'étage, plus un récapitulatif sur la fiche | — |
@@ -394,7 +415,7 @@ Les réponses par défaut d'EXIGENCES.md vont être soumises à Shadoaze. Chacun
 | T-19 Connexion | Discord, réservée à la liste officielle | `regles.yaml` → `inscription.liste_officielle_obligatoire` |
 | T-20 Champs de la fiche | Pseudo en jeu, classe facultative, nom Discord visible des participants | `regles.yaml` → `fiche.classe_obligatoire`, `fiche.afficher_nom_discord` |
 | T-21 Palier non écrit dans le règlement | Formule affichée à côté de la jauge | — (suggérer à Shadoaze de l'écrire dans #concept-et-règles) |
-| T-22 Points bonus | Ajout manuel par un admin, avec motif, sur l'étage en cours (demande du coordinateur) | `regles.yaml` → `bonus.actif`, `bonus.individuel_si_pause` |
+| T-22 Points bonus | **Lot C** : ajout manuel par un admin, avec motif. Rien au lot B (DECISIONS §2 : « rien à coder pour l'instant »). | — |
 | T-25 Archimonstres | Suivi personnel | Lot E2 |
 | T-26 Mise à jour Duffus | Aspiration à la préparation de chaque étage, relue, puis figée | Commande lancée à la main |
 | T-28 Nom et image des étages | « Étage N », sans image | `etages.yaml` ou action admin |
@@ -411,10 +432,10 @@ Seulement ce qui **bloque la préparation des étages** ou change ce que voient 
 | **Q2** | **Quels donjons pour l'étage 0 et l'étage 1 ?** On propose ceux dont le niveau est dans la tranche. Tu valides ou tu corriges la liste. (T-03, EX-12 : le premier point doit rester facile) | Ceux de la tranche | La revue des étages 0 et 1, le 7/11 |
 | **Q3** | Un étage **sans quête principale** (probablement l'étage 0) : la catégorie disparaît et le palier baisse en proportion (18 au lieu de 24 pour 12 joueurs), ou le point est offert à tous ? (T-11) | Elle disparaît, palier ⌈N × K ÷ 2⌉ | L'ouverture du site, le 13/11 |
 | **Q4** | Quels **Dofus** rendent une quête « principale » ? Ceux d'événement (Cacao, Dom de Pin, Jyfus, Dofoozbz) et ceux qui se fabriquent (Dofawa, Dokoko, Dotruche) en font-ils partie ? | Tous ceux qui ont un guide chez Duffus | La construction des étages |
-| **Q5** | Peut-on montrer le site aux grimpeurs **avant le 13/11**, pour qu'ils cochent l'étage 0 au fil de l'eau ? (T-05, T-07) | Non : bêta fermée, puis cochage rétroactif le 13/11 | Le 10/11 |
-| **Q6** | **Points bonus** : à un joueur, à toute la guilde, ou les deux ? Comptent-ils pour un joueur en pause ? (T-22) | Les deux ; pas pour un joueur en pause | Le premier événement |
-| **Q7** | Encyclopédie, stuffs, builder : vu leur coût (§9), acceptes-tu des **liens** vers les outils existants au lieu d'une copie « à l'identique » (EX-55 à EX-58) ? Et faut-il y cacher le contenu des étages futurs ? (T-08) | Liens pour l'encyclopédie et le builder ; rien de caché | Le lot E (après le 13/11) |
-| **Q8** | Peux-tu ajouter la formule du palier (**2 × grimpeurs actifs**) au salon #concept-et-règles ? (T-21) | Formule affichée sur le site | — |
+| **Q5** | **Points bonus** (lot C) : à un joueur, à toute la guilde, ou les deux ? Comptent-ils pour un joueur en pause ? (T-22) | Les deux ; pas pour un joueur en pause | Le lot C |
+| **Q6** | Encyclopédie, stuffs, builder : vu leur coût (§9), acceptes-tu des **liens** vers les outils existants au lieu d'une copie « à l'identique » (EX-55 à EX-58) ? Et faut-il y cacher le contenu des étages futurs ? (T-08) | Liens pour l'encyclopédie et le builder ; rien de caché | Le lot E (après le 13/11) |
+| **Q7** | Peux-tu ajouter la formule du palier (**2 × grimpeurs actifs**) au salon #concept-et-règles ? (T-21) | Formule affichée sur le site | — |
+| **Q8** | Peux-tu nous passer tes **images d'étage** ? Elles serviraient de décor sur la page de l'étage (T-28, EX-104). | « Étage N » et la tranche, sans image | — |
 
 ## 9. Les autres modules de duffus.fr
 
@@ -426,15 +447,15 @@ Le CdC (§4) demande de cloner l'Encyclopédie, les Avis de recherche, les Stuff
 | **Tableau de bord** | **Lot B** : la fiche du grimpeur et la tour. | inclus | — |
 | **Avis de recherche** | **À refaire** (lot E1) : une liste à cocher par grimpeur, avec la mécanique et les filtres du guide. | 1 à 1,5 j | 1 |
 | **Archimonstres** (suivi des captures, sans la bourse) | **À refaire** (lot E2) : environ 300 monstres par grimpeur, par étape et par zone, avec compteurs, filtre « qui a capturé X » pour s'entraider, et lien avec le Dofus Ocre. Le coût est surtout l'écran : 300 cases sur mobile doivent rester utilisables (recherche, regroupement, « toute l'étape »). Données : table `monsters` de Duffus, icônes DofusDB. | 3 à 4 j | 2 |
-| **Stuffs** (stuffs recommandés par tranche) | Au début, des **liens** vers la page Duffus de la tranche, depuis l'en-tête de l'étage. **Intégration** ensuite si la table s'y prête. | 0,5 j (liens) ; environ 3 j (intégration) | 3 |
-| **Encyclopédie** (objets, monstres, ressources…) | Des **liens**, vers DofusDB ou Duffus. La refaire, ce sont des milliers de fiches à afficher, chercher et tenir à jour à chaque version du jeu, pour un service qui existe déjà. | 0,5 j (liens) ; plus de 10 j pour la refaire | 4, en liens seulement (Q7) |
-| **Builder** | Un **lien** vers un builder existant. C'est un produit à part entière (caractéristiques, conditions, panoplies, effets), de plusieurs semaines, que la moindre erreur de calcul rend inutile. | plusieurs semaines | hors périmètre, à rediscuter avec Shadoaze (Q7) |
+| **Stuffs** (stuffs recommandés par tranche) | **Intégration** depuis la table Duffus de la tranche, dans l'onglet de l'étage. Pas de lien vers la page Duffus : elle montrerait les tranches suivantes (EX-70, T-09). | environ 3 j | 3 |
+| **Encyclopédie** (objets, monstres, ressources…) | Des **liens** vers DofusDB ou un autre outil existant, **jamais vers duffus.fr** (T-09). La refaire, ce sont des milliers de fiches à afficher, chercher et tenir à jour à chaque version du jeu, pour un service qui existe déjà. | 0,5 j (liens) ; plus de 10 j pour la refaire | 4, en liens seulement (Q6) |
+| **Builder** | Un **lien** vers un builder existant. C'est un produit à part entière (caractéristiques, conditions, panoplies, effets), de plusieurs semaines, que la moindre erreur de calcul rend inutile. | plusieurs semaines | hors périmètre, à rediscuter avec Shadoaze (Q6) |
 | **Outils** (hors tutoriels) | Une page « Boîte à outils » avec des liens, plus un encart Almanax du jour. | 0,5 j + 1 j | 5 |
 | **Bourse aux échanges** | **Retirée** (CdC §4, DECISIONS §7). | — | — |
 
-**Ordre proposé après le lot C** : avis de recherche, archimonstres (suivi personnel, T-25), stuffs (liens puis intégration), boîte à outils. Encyclopédie et builder restent des liens, sauf demande expresse de Shadoaze une fois les coûts connus.
+**Ordre proposé après le lot C** : avis de recherche, archimonstres (suivi personnel, T-25), stuffs (intégration), boîte à outils. Encyclopédie et builder restent des liens, sauf demande expresse de Shadoaze une fois les coûts connus.
 
-**Honnêteté sur l'écart** : EX-55 à EX-58 demandent ces modules « à l'identique », avec le statut « ferme ». Notre recommandation (des liens pour l'encyclopédie et le builder) s'en écarte **pour des raisons de coût**, pas de faisabilité. C'est donc à Shadoaze de trancher, en connaissant les chiffres (§8.2, Q7). Si ces outils sont recopiés, la question du verrouillage du contenu des étages futurs se pose aussi (T-08, réglage `modules.verrouiller_par_etage`).
+**Honnêteté sur l'écart** : EX-55 à EX-58 demandent ces modules « à l'identique », avec le statut « ferme ». Notre recommandation (des liens pour l'encyclopédie et le builder) s'en écarte **pour des raisons de coût**, pas de faisabilité. C'est donc à Shadoaze de trancher, en connaissant les chiffres (§8.2, Q6). Si ces outils sont recopiés, la question du verrouillage du contenu des étages futurs se pose aussi (T-08, réglage `modules.verrouiller_par_etage`).
 
 ---
 
@@ -451,7 +472,7 @@ Le CdC (§4) demande de cloner l'Encyclopédie, les Avis de recherche, les Stuff
 - **Politesse envers Duffus** : jamais d'appel à duffus.fr ni à sa base pendant la navigation. L'aspiration est lancée à la main, à faible débit (ARCHITECTURE §6).
 - **Traçabilité** : toute écriture a un auteur et une date (journal).
 - **Fuseau** : tout est stocké en UTC et affiché en heure de Paris.
-- **Coût** : environ 5 $ par mois, plus un nom de domaine à environ 10 € par an (ARCHITECTURE §8).
+- **Coût** : environ 3 à 4 $ par mois, plus un nom de domaine à environ 10 € par an (ARCHITECTURE §10).
 
 ---
 
@@ -485,12 +506,12 @@ Chaque exigence d'`EXIGENCES.md` → section de cette spec → lot. « — » = 
 | EX-42 (rattrapage automatique) | — (EX-41) | — |
 | EX-43 (exclusion, signe de vie) | §4.7 (T-29) | B |
 | EX-44 à EX-48 (cocher, 5 cases, suivi, mise à jour immédiate) | §4.4, §6.2 | B |
-| EX-49, EX-50, EX-59 (tableau de bord, ce qui manque) | §4.6 | B |
+| EX-49, EX-50, EX-59 (tableau de bord, avancement global, ce qui manque) | §4.6 | B |
 | EX-51, EX-102 (guide à l'identique, ergonomie Duffus) | §4.4 (T-10) | B |
-| EX-52 (fiche de quête) | §4.4, §6.1 | B |
+| EX-52 (fiche de quête) | §4.4 bis, §6.1 | B |
 | EX-53 (archimonstres) | §9 | E2 |
 | EX-54 (avis de recherche) | §9 | E1 |
-| EX-55 à EX-58 (encyclopédie, outils, stuffs, builder) | §9, §8.2 Q7 | E (à trancher) |
+| EX-55 à EX-58 (encyclopédie, outils, stuffs, builder) | §9, §8.2 Q6 | E (à trancher) |
 | EX-60, EX-61 (sans bourse, sans habillage Duffus) | §9, §10 | A, B |
 | EX-62 (« Merci Duffus ») | §1.2, §10 | A, B |
 | EX-63 (tranches non dévoilées verrouillées) | §4.3, §4.4 | B |
@@ -510,7 +531,7 @@ Chaque exigence d'`EXIGENCES.md` → section de cette spec → lot. « — » = 
 | EX-86, EX-87, EX-89 à EX-92 (validation admin, screens, bot IA) | — (EX-88) | — |
 | EX-88 (zéro screen) | §1.2 | B |
 | EX-93 (bot d'atelier) | hors site (outil interne existant) | — |
-| EX-94 (rôle du bot) | §3, §8.1 T-14 | B (annonce facultative), C |
+| EX-94 (rôle du bot) | §3, §8.1 T-14 : aucun bot ni aucune écriture sur Discord, à aucun lot sans demande explicite de Marceau | — |
 | EX-95 à EX-97 (secret, teaser, annonce) | §4.1 | A |
 | EX-98, EX-99 (trailers) | hors site (Marceau, après le site) | — |
 | EX-100, EX-108 (appel, hébergement local) | — | — |

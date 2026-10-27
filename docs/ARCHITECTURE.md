@@ -49,7 +49,7 @@ Dépendances ajoutées : `python-multipart` (formulaires FastAPI) et **`nh3`**, 
 │        ▼             ▼            ▼             ▼              │      │
 │  ┌──────────────────────────┐   ┌─────────────────────────┐    │      │
 │  │ domaine/ (Python pur)     │   │ discord/oauth.py (httpx) │────┼──► discord.com (connexion,
-│  │ barème, palier, jauge,    │   │ discord/annonces.py      │    │     rôles, annonce facultative)
+│  │ barème, palier, jauge,    │   │ (connexion seulement)    │    │     rôles ; aucun bot)
 │  │ progression, ouverture,   │   └─────────────────────────┘    │      │
 │  │ mode du site, nature      │                                  │      │
 │  └────────────▲─────────────┘                                  │      │
@@ -76,7 +76,7 @@ Dépendances ajoutées : `python-multipart` (formulaires FastAPI) et **`nh3`**, 
 
 ### Pourquoi plus de bot connecté en permanence
 
-Toute écriture passe maintenant par le site. Un bot connecté à la passerelle Discord n'apporterait que des annonces, et il demanderait une connexion permanente, des intents, une boucle asyncio partagée et des tests de faux objets Discord. Une annonce, c'est **un seul appel REST** (`POST /channels/{id}/messages` avec le jeton du bot), sans connexion permanente. Le jeton reste dans `.env` pour ça, et pour un éventuel lot D.
+Toute écriture passe maintenant par le site, et l'arbitrage du chef de projet exclut **tout bot**. Un bot connecté à la passerelle Discord n'apporterait que des annonces, au prix d'une connexion permanente, d'intents, d'une boucle asyncio partagée et de tests de faux objets Discord. L'admin annonce donc lui-même l'ouverture d'un étage. **Aucune écriture sur le serveur Discord** (ni bot, ni webhook), à aucun lot, sans demande explicite de Marceau. Le jeton du bot reste dans le `.env` de Marceau pour le bot d'atelier (EX-93), hors du site.
 
 ---
 
@@ -88,7 +88,7 @@ epreuve-des-dieux/
 ├── migrations/versions/0001_initial.py   # RÉÉCRITE en v4 (aucune donnée de production n'existe)
 ├── config/
 │   ├── regles.yaml          # règles réglables sans code (SPEC §8.1) : multiplicateur du palier, catégorie vide,
-│   │                        #   coches (succès ⇒ vaincu, pause), fiche, bonus, inscription, verrouillage des modules
+│   │                        #   coches (succès ⇒ vaincu, pause), fiche, inscription, verrouillage des modules (bonus : lot C)
 │   ├── etages.yaml          # étage ↔ tranche Duffus, cap, nom, image, dates (étage 0 : 30/10 et 13/11) (T-04, T-28)
 │   └── dofus.yaml           # Dofus retenus pour « principale » (SPEC §8.2 Q4) + natures forcées
 ├── donnees/duffus/AAAA-MM-JJ/   # extraits versionnés de l'aspiration (§6)
@@ -96,12 +96,13 @@ epreuve-des-dieux/
 │   ├── main.py              # uvicorn seul (plus de bot)
 │   ├── config.py            # pydantic-settings
 │   ├── domaine/             # Python pur : n'importe RIEN d'autre du projet
-│   │   ├── modeles.py       # dataclasses figées : Etage, Donjon, CaseSucces, Quete, Grimpeur, Bonus…
+│   │   ├── modeles.py       # dataclasses figées : Etage, Donjon, CaseSucces, Quete, Grimpeur…
+│   │   ├── fiche.py         # FicheQuete et masquer_prerequis_scelles (SPEC §4.4 bis)
 │   │   ├── classes.py       # GARDÉ : les 19 classes, repartition_classes()
 │   │   ├── bareme.py        # catégories, points, palier, jauge
-│   │   ├── progression.py   # avancement, compteurs « 7/12 », qui_n_a_pas_fait, moins_avance
+│   │   ├── progression.py   # avancement, compteurs « 7/12 », qui, qui_categorie, moins_avance
 │   │   ├── ouverture.py     # peut_ouvrir(), bilan_etage()
-│   │   ├── visibilite.py    # étages visibles, élément cochable
+│   │   ├── visibilite.py    # étages visibles, étage cochable
 │   │   ├── mode_site.py     # teaser / complet (lot A)
 │   │   ├── nature.py        # principal / secondaire : fermeture des prérequis, critères DofusDB
 │   │   └── textes.py        # liste_francaise, formats de dates et de nombres (repris de modeles.py)
@@ -119,8 +120,7 @@ epreuve-des-dieux/
 │   │   ├── ecrire.py        # EtagePrepare → base (rejouable, garde-fous)
 │   │   └── __main__.py      # CLI : python -m epreuve.contenu construire --etage N [--a-blanc]
 │   ├── discord/
-│   │   ├── oauth.py         # échange du code, /users/@me, membre du serveur
-│   │   └── annonces.py      # POST d'un message (facultatif)
+│   │   └── oauth.py         # échange du code, /users/@me, membre du serveur (aucun bot)
 │   └── web/
 │       ├── app.py           # creer_app() : assemblage (GARDÉ dans l'esprit)
 │       ├── securite.py      # en-têtes, middleware du mode teaser, CSRF
@@ -140,25 +140,25 @@ epreuve-des-dieux/
 
 ## 4. Le domaine : interfaces centrales
 
-Les signatures exactes sont **figées dans `LOTS.md`** (lot B). Le principe :
+Les signatures exactes sont **figées dans `LOTS.md`** (lot B), qui fait foi en cas d'écart. Le principe :
 
 - **Une photographie** : `ContenuEtage(etage, donjons, cases, quetes)` est le contenu **visible** d'un étage (sans les éléments masqués), et `Coches(grimpeur_id, cases, quetes)` l'ensemble de ce qu'un grimpeur a coché. Tout calcul part de ces deux objets.
 - **Le barème** (`bareme.py`) :
   - `categories_grimpeur(contenu, coches) -> dict[Categorie, EtatCategorie]` donne pour chaque catégorie faits / total / acquise / vide ;
-  - `points_grimpeur(contenu, coches) -> int`, de 0 à 4 ;
+  - `points_grimpeur(contenu, coches, regles) -> int`, de 0 à 4 ;
   - `palier(nb_actifs, nb_categories, regles, palier_manuel) -> int` vaut ⌈ m × N × K ÷ 4 ⌉, avec m = `regles.points_par_joueur` (2 par défaut), ou le palier manuel.
 - **Les règles** : `Regles` est une dataclass figée, lue depuis `config/regles.yaml` au démarrage et validée par pydantic, puis **passée en paramètre** aux fonctions du domaine. Le domaine ne lit jamais de fichier : il reste pur et testable avec n'importe quelle combinaison de règles.
 
   Pourquoi pas de nombres à virgule : `0,75 × 24` peut donner 18,000000000000004, et l'arrondi au-dessus donnerait alors 19 (le piège déjà noté en v3). On calcule avec `fractions.Fraction`, qui est exacte : m peut valoir 2 ou 5/2 sans erreur d'arrondi, et `math.ceil` d'une fraction est exact.
-- **La jauge** : `calculer_jauge(contenu, grimpeurs, coches_par_grimpeur, bonus, maintenant) -> EtatJauge` donne le score, le palier, les actifs, les pauses, le détail par catégorie, le total des bonus, `pleine` et `ouvrable`. Elle s'appuie sur `points_grimpeur`. **Une seule fonction** alimente la page de l'étage, la tour, la fiche et l'admin (SPEC §5.4).
-- **La progression** (`progression.py`) : `compteurs(contenu, actifs, coches) -> dict[ElementRef, int]` pour les « 7/12 », `qui_n_a_pas_fait(element, grimpeurs, coches) -> list[Grimpeur]`, `avancement(contenu, coches) -> float` et `moins_avance(contenu, actifs, coches) -> Grimpeur | None`.
-- **L'ouverture** (`ouverture.py`) : `peut_ouvrir(jauge, etage, prochain, maintenant) -> Decision(ok, raisons)` et `bilan_etage(jauge, maintenant) -> Bilan`.
-- **La visibilité** (`visibilite.py`) : `etages_visibles(etages, est_admin) -> list[Etage]` et `element_cochable(etage) -> bool`. Les gabarits ne reçoivent que le résultat de `etages_visibles`.
-- **Le mode du site** (`mode_site.py`, lot A) : `mode_effectif(reglage, ouvert_le, maintenant) -> "teaser" | "ouvert"` et `voit_le_site_complet(mode, utilisateur) -> bool`.
+- **La jauge** : `calculer_jauge(contenu, grimpeurs, coches_par_grimpeur, regles) -> EtatJauge` donne le score, le palier, K, les actifs, les pauses, le détail par catégorie, `pleine` et `maximum`. Les bonus viendront au lot C. L'ouverture, qui dépend aussi de la date, est décidée par `ouverture.peut_ouvrir`. Elle s'appuie sur `points_grimpeur`. **Une seule fonction** alimente la page de l'étage, la tour, la fiche et l'admin (SPEC §5.4).
+- **La progression** (`progression.py`) : `compteurs(contenu, grimpeurs, coches) -> dict[ElementRef, int]` pour les « 7/12 », `qui(element, grimpeurs, coches, fait)` et `qui_categorie(contenu, categorie, grimpeurs, coches, fait)` pour « qui ne l'a pas fait ? », `avancement(contenu, coches) -> tuple[int, int]` et `moins_avance(contenu, grimpeurs, coches, regles) -> Grimpeur | None`.
+- **L'ouverture** (`ouverture.py`) : `peut_ouvrir(jauge, etage, prochain, maintenant) -> Decision(ok, raisons)` et `bilan_etage(jauge, maintenant, force, motif) -> Bilan`.
+- **La visibilité** (`visibilite.py`) : `etages_visibles(etages, est_admin) -> list[Etage]`, `etage_cochable(etage) -> bool` et `peut_modifier_coches(acteur, est_admin, cible) -> bool`. Les gabarits ne reçoivent que le résultat de `etages_visibles`.
+- **Le mode du site** (`mode_site.py`, lot A) : `mode_effectif(reglage, ouvert_le, maintenant) -> "teaser" | "ouvert"` et `voit_site_complet(mode, est_admin) -> bool` (le paramètre `est_testeur` du lot A est retiré en tête du lot B : aucun joueur avant le 13/11).
 - **La nature** (`nature.py`) :
-  - `quetes_obligatoires(critere: str) -> set[int]` analyse un `startCriterion` DofusDB et ne garde que les « ET » ;
-  - `fermeture(racines, prerequis) -> set[int]` donne tous les prérequis, directs ou indirects ;
-  - `classer(quetes_etage, guides_dofus, dofus_retenus, forcees) -> dict[id, Nature]`.
+  - `quetes_obligatoires(critere: str) -> frozenset[int]` analyse un `startCriterion` DofusDB et ne garde que les « ET » ;
+  - `fermeture(racines, prerequis) -> frozenset[int]` donne tous les prérequis, directs ou indirects ;
+  - `classer(quetes, guides_duffus, guides_repli, dofus_retenus, forcees) -> dict[int, Classement]` (nature, origine, Dofus visés).
 
   Ce sont des fonctions pures, testées sur des graphes fabriqués et sur les vraies réponses enregistrées.
 
@@ -172,18 +172,19 @@ PostgreSQL chez Supabase, **schéma dédié `epreuve`**, hors de l'API REST auto
 
 | Table | Colonnes (type) | Contraintes |
 |---|---|---|
-| `etage` | id serial, numero int, nom text, niveau_min int, niveau_max int, level_cap int, statut text (scelle/ouvert/termine), ouvert_le timestamptz null, date_plancher_suivant timestamptz null, palier_manuel int null, duffus_tranche_id text null, lien_guide text null, ambiance_url text null, alertes jsonb (dernière construction), maj_le timestamptz | numero unique. **Au plus un étage `ouvert`** (index unique partiel). CHECK palier_manuel ≥ 0. |
+| `etage` | id serial, numero int, nom text, niveau_min int, niveau_max int, level_cap int, statut text (scelle/ouvert/termine), ouvert_le timestamptz null, date_plancher_suivant timestamptz null, palier_manuel int null, duffus_tranche_id text null, ambiance_url text null, alertes jsonb (dernière construction), maj_le timestamptz | numero unique. **Au plus un étage `ouvert`** (index unique partiel). CHECK palier_manuel ≥ 1. Aucune colonne de lien vers duffus.fr (EX-70). |
 | `donjon` | id, etage_id, nom, niveau int null, ordre int, bloc text null, duffus_id text null, dofusdb_id int null, origine text (propose/admin, T-03), succes_source text (duffus/dofusdb, T-02), masque bool | (etage_id, duffus_id) unique quand non nul |
 | `case_succes` | id, donjon_id, ordre int (1 à n), nom, condition text, est_classique bool, duffus_id text null, masquee bool | (donjon_id, ordre) unique. **Une seule case classique par donjon** (index unique partiel). |
-| `quete` | id, etage_id, nom, niveau int null, bloc text, ordre int, nature text (principale/secondaire), nature_origine text (duffus/dofusdb/admin), nature_motif text null, dofus text[], jusqu_ou text null, fiche_html text null (nettoyé par nh3), duffus_id text null, dofusdb_id int null, masquee bool | (etage_id, duffus_id) unique quand non nul |
+| `quete` | id, etage_id, nom, niveau int null, bloc text, ordre int, nature text (principale/secondaire), nature_origine text (duffus/dofusdb/admin), nature_motif text null, dofus text[], jusqu_ou text null, a_lier text null, duffus_id text null, dofusdb_id int null, masquee bool | (etage_id, duffus_id) unique quand non nul |
 | `liste_officielle` | discord_user_id bigint PK, statut_initial text, ajoute_par bigint, ajoute_le timestamptz | — |
 | `grimpeur` | id, discord_user_id bigint, nom_discord text (mis à jour à chaque connexion, T-20), pseudo_ig text, classe text null (facultative, T-20), statut text (actif/pause/exclu), niveau_declare int null, inscrit_le timestamptz | discord_user_id unique. pseudo unique sans tenir compte de la casse (`lower(pseudo_ig)`). CHECK classe ∈ 19 classes, CHECK niveau entre 1 et 200. |
 | `coche_case` | grimpeur_id, case_id, cochee_le timestamptz, cochee_par bigint | **PK (grimpeur_id, case_id)** |
 | `coche_quete` | grimpeur_id, quete_id, cochee_le, cochee_par | **PK (grimpeur_id, quete_id)** |
-| `bonus` | id, etage_id, grimpeur_id null, points int, motif text, par bigint, le timestamptz, annule_le timestamptz null, annule_par bigint null | CHECK points entre −10 et 10 et ≠ 0. motif non vide. |
+| `fiche_quete` | quete_id PK, source text (duffus / duffus+dofusdb / dofusdb), contenu jsonb (la `FicheQuete` sérialisée : étapes au HTML nettoyé par nh3, objets, monstres, positions, prérequis, succès lié, récompenses, « à lier ») | contenu validé par pydantic à l'écriture et à la lecture |
+| *(lot C)* `bonus` | id, etage_id, grimpeur_id null, points int, motif text, par bigint, le timestamptz, annule_le timestamptz null, annule_par bigint null | CHECK points entre −10 et 10 et ≠ 0. motif non vide. |
 | `bilan_etage` | etage_id PK, fige_le, actifs int, palier int, score int, detail jsonb, force bool, motif text null | — |
 | `session` | id_hache bytea PK (SHA-256 du jeton du cookie), discord_user_id bigint, nom_discord text, est_admin bool, roles_verifies_le timestamptz, cree_le, expire_le, jeton_oauth text, csrf text | index sur expire_le. Purge des sessions expirées au démarrage et une fois par jour. |
-| `journal` | id, horodatage, acteur_discord_id bigint null, type text, grimpeur_id null, etage_id null, details jsonb, public bool | index sur horodatage décroissant |
+| `journal` | id, horodatage, acteur_discord_id bigint null, type text, grimpeur_id null, etage_id null, details jsonb, public bool | index sur horodatage décroissant. `public` est faux pour la modération : coche d'un admin sur la fiche d'un autre (avec son motif, T-15), gel, exclusion. |
 
 Choix notables :
 - **Deux tables de coches plutôt qu'une table générique** (« type + id ») : chaque coche a une vraie clé étrangère, et la base refuse une coche vers une case qui n'existe pas. Le prix, c'est deux requêtes au lieu d'une : négligeable.
@@ -193,7 +194,7 @@ Choix notables :
 - **Sessions en base, cookie opaque** (§8) : le cookie ne contient qu'un jeton aléatoire de 256 bits. La base ne stocke que son empreinte. Une fuite de la base ne permet donc pas de se faire passer pour quelqu'un.
 - **Performances** : 30 grimpeurs × environ 300 éléments par étage, c'est au plus 9 000 coches par étage. On charge l'étage et toutes ses coches en deux requêtes, et on calcule en Python. Pas de cache au lot B.
 - **Connexion** : pooler Supabase en **mode session** (port 5432), compatible avec les requêtes préparées d'asyncpg (inchangé).
-- **Mise en veille** : Supabase met en pause un projet gratuit après 7 jours sans activité. La vérification de santé de Fly appelle `/sante` toutes les 30 secondes, et `/sante` interroge la base : le projet reste actif. Il faut créer le projet Supabase **au début du lot B**, pas avant, sinon il s'endort pendant le lot A, où la base n'est pas utilisée.
+- **Mise en veille** : Supabase met en pause un projet gratuit après 7 jours sans activité. La vérification de santé de Fly appelle `/sante` toutes les 30 secondes, et `/sante` interroge la base : le projet reste actif. On crée donc le projet avant le 2/11 et on dépose `DATABASE_URL` **tout de suite** sur Fly (PREREQUIS E.1) : pendant le lot A, `/sante` l'interroge déjà, et le projet ne s'endort pas. Le schéma, lui, n'est créé qu'au lot B (migration).
 - **Sauvegardes** : action GitHub nocturne `pg_dump` **chiffrée avec age**, gardée 30 jours (version de la branche `wip/corrections-revue`, à reprendre telle quelle).
 
 ---
@@ -267,7 +268,7 @@ Les extraits sont **commités** dans le dépôt privé (avec l'accord de l'auteu
 1. **Tranche** : `config/etages.yaml` dit quelle tranche de `guide_ranges` correspond à l'étage N, avec le cap, le nom, l'image d'ambiance et les dates (T-04, T-28). Par défaut, l'étage N est la N-ième tranche et le cap est sa borne haute. Pour l'étage 0 : `ouvert_le` le 30/10 à 17:00 et `date_plancher_suivant` le 13/11 à 17:00.
 2. **Donjons proposés** (`dungeon_pages`) : ceux dont le niveau est dans la tranche, avec l'origine `propose`. L'admin valide la liste dans la revue, retire ou **ajoute** un donjon pris dans la liste complète des donjons aspirés, avec l'origine `admin` (T-03). Une reconstruction **conserve** ces choix.
 3. **Succès de chaque donjon** (T-02) : pris dans `achievements` / `achievement_objectives` de Duffus **si ces tables en donnent pour ce donjon**, sinon dans DofusDB (`achievements` du donjon, sans la catégorie Compagnons 142). La source retenue est notée (`succes_source`) et affichée dans la revue. La case « classique » est repérée par une règle à fixer après le relevé (par exemple, le succès qui porte le nom du donjon, sans condition de défi). Un donjon qui n'a pas 5 succès donne une **alerte**.
-4. **Quêtes de la tranche** (`quest_list`), avec le bloc, l'ordre, « jusqu'où » et la **fiche** (`quest_pages`) **recopiée** (EX-52, EX-70). Le HTML de la fiche passe par `nh3` avec une liste blanche de balises de mise en forme (titres, paragraphes, listes, gras, italique). Scripts, styles, attributs d'événement et **images** sont retirés : afficher une image de Duffus ferait appeler son site pendant la navigation. Les **liens vers duffus.fr sont retirés**, ou réécrits vers notre fiche s'ils visent une quête d'un étage ouvert. Le résultat est relu par un test sur toutes les fiches réelles aspirées.
+4. **Quêtes de la tranche** (`quest_list`), avec le bloc, l'ordre, « jusqu'où », « à lier » et la **fiche** (`quest_pages` et les tables qu'elle référence) **recopiée et structurée** en `FicheQuete` (SPEC §4.4 bis, EX-52, EX-70) : étapes et objectifs, objets, monstres, positions, prérequis, succès lié, récompenses. DofusDB complète les champs absents, avec la source notée. Les quêtes sans fiche Duffus sont listées dans le rapport, et la construction s'arrête au-delà de 5 % sans `--forcer`. Le HTML de la fiche passe par `nh3` avec une liste blanche de balises de mise en forme (titres, paragraphes, listes, gras, italique). Scripts, styles, attributs d'événement et **images** sont retirés : afficher une image de Duffus ferait appeler son site pendant la navigation. Les **liens vers duffus.fr sont retirés**, ou réécrits vers notre fiche s'ils visent une quête d'un étage ouvert. Le résultat est relu par un test sur toutes les fiches réelles aspirées.
 5. **Nature** (`nature.classer`) à partir des guides par Dofus (`dofus_list` et ses quêtes et prérequis), de `config/dofus.yaml` et des natures déjà forcées par un admin en base, qui **priment toujours**. Pour un Dofus sans guide Duffus, le **repli DofusDB** (§6.7) s'applique, marqué comme tel.
 6. **Écriture** (`contenu/ecrire.py`), dans une transaction :
    - un étage nouveau est créé `scelle`, sauf l'étage 0, créé `ouvert` ;
@@ -314,7 +315,6 @@ api.dofusdb.fr, publique et sans clé, déjà utilisée en v3 (`dofusdb/client.p
 | `SITE_MODE` | `auto`, `teaser` ou `ouvert` | `auto` |
 | `SITE_OUVERT_LE` | date ISO avec fuseau | `2026-11-13T17:00:00+01:00` |
 | `TEASER_LIEN_ENTRER` | adresse du bouton « Entrer dans la tour » | vide : bouton masqué ; **renseignée le jour J** (arbitrage du chef de projet) |
-| `BETA_TESTEURS` | identifiants Discord séparés par des virgules (lot B) | vide |
 
 `mode_effectif(reglage, ouvert_le, maintenant)` donne `teaser` si le réglage est `teaser`, ou s'il est `auto` avant `SITE_OUVERT_LE`. Sinon, il donne `ouvert`. Pourquoi `auto` par défaut : la bascule tombe un vendredi à 17 h, et elle ne doit pas dépendre de la présence de Marceau devant son ordinateur. `teaser` et `ouvert` permettent de reprendre la main en une commande (`fly secrets set SITE_MODE=teaser`), qui redémarre la machine en quelques secondes.
 
@@ -323,8 +323,8 @@ api.dofusdb.fr, publique et sans clé, déjà utilisée en v3 (`dofusdb/client.p
 `web/securite.py` contient un middleware qui, en mode `teaser`, laisse passer seulement :
 - `/` (le teaser) et `/sante` ;
 - `/static/…` ;
-- au lot B, `/connexion`, `/auth/discord/retour`, `/deconnexion` et `/inscription`. Cette dernière ne montre que le formulaire de fiche ;
-- **toutes** les pages pour un admin ou un testeur connecté.
+- au lot B, `/connexion`, `/auth/discord/retour` et `/deconnexion`, pour que les admins puissent se connecter. Un joueur connecté revoit le teaser, et `/inscription` n'est **pas** permise : aucune fiche n'est créée avant le 13/11 ;
+- **toutes** les pages pour un **admin** connecté (recette). Il n'y a pas de rôle de testeur.
 
 Toute autre requête reçoit une redirection 303 vers `/`, et les requêtes `/api/` reçoivent un 404. Le test de ce middleware énumère **toutes les routes déclarées** de l'application : une route ajoutée plus tard sans y penser est donc couverte d'office.
 
@@ -375,7 +375,7 @@ Le **jeton OAuth** stocké en base a une portée réduite à la lecture (identit
 ### 8.3 Protection des écritures
 
 - **CSRF** : chaque session a un jeton `csrf` aléatoire. Les formulaires le portent dans un champ caché, et les appels `fetch` dans l'en-tête `X-CSRF-Token`. Le serveur compare en temps constant (`hmac.compare_digest`). En plus, toute requête `POST` dont l'en-tête `Origin` n'est pas le nôtre est refusée. `SameSite=Lax` est une troisième ceinture.
-- **Autorisation** : une coche n'est acceptée que pour **soi-même**, sauf pour un admin, sur un élément **visible** d'un étage **ouvert ou terminé**. C'est vérifié côté serveur, quelle que soit la requête.
+- **Autorisation** : une coche n'est acceptée que pour **soi-même**, sauf pour un admin, qui donne alors un motif (T-15), et seulement sur un élément **visible** d'un étage **ouvert ou terminé**. Un exclu ne coche plus. C'est vérifié côté serveur, quelle que soit la requête.
 - **Échappement** : Jinja échappe tout par défaut. Côté JS, uniquement `textContent`, jamais `innerHTML` avec des données (règle déjà établie en v3).
 
 ---
@@ -388,14 +388,16 @@ Le **jeton OAuth** stocké en base a une portée réduite à la lecture (identit
 | `GET /connexion`, `GET /auth/discord/retour`, `POST /deconnexion` | tous | §8 |
 | `GET/POST /inscription` | membre sur la liste officielle | Création de la fiche |
 | `GET /etages/{numero}` | grimpeur | L'onglet de l'étage. **404** si l'étage est scellé (sauf admin). |
-| `GET /etages/{numero}/quetes/{id}` | grimpeur | La fiche de quête intégrée (fragment HTML chargé au toucher, ou page complète sans JS). 404 si l'étage est scellé. |
+| `GET /etages/{numero}/quetes/{id}` | grimpeur | La fiche de quête intégrée : fragment HTML (en-tête `Accept: text/html-fragment` envoyé par `app.js`), affiché en panneau plein écran sur mobile et en panneau latéral sur ordinateur, ou page complète sans JS. Les prérequis scellés sont toujours masqués (`masquer_prerequis_scelles`). 404 si l'étage est scellé. |
 | `GET /grimpeurs`, `GET /grimpeurs/{id}` | grimpeur | Liste avec filtre par élément, fiche |
 | `POST /grimpeurs/moi` | grimpeur | Modifier son pseudo, sa classe et son niveau |
-| `POST /api/coches` | grimpeur | Corps JSON `{type: "case" ou "quete", id, cochee, grimpeur_id?}`. Répond avec l'état de la jauge et les compteurs mis à jour. |
-| `GET /api/etages/{numero}/manque?type=…&id=…` | grimpeur | « Qui ne l'a pas fait ? » |
+| `POST /api/coches` | grimpeur | Corps JSON `{type: "case", "quete" ou "donjon", id, cochee, grimpeur_id?, motif?}` (détail et codes d'erreur dans LOTS). Répond avec l'état de la jauge et les compteurs mis à jour. |
+| `GET /api/etages/{numero}/manque?type=…&id=…` | grimpeur | « Qui ne l'a pas fait ? », pour un élément ou une catégorie |
 | `GET /admin`, `/admin/grimpeurs`, `/admin/etages`, `/admin/etages/{n}`, `/admin/journal` | admin | Pages d'admin |
-| `POST /admin/liste`, `/admin/grimpeurs/{id}/statut`, `/admin/grimpeurs/{id}`, `/admin/bonus`, `/admin/bonus/{id}/annuler`, `/admin/etages/{n}/palier`, `/admin/etages/{n}/date-plancher`, `/admin/etages/{n}/ouvrir`, `/admin/etages/{n}/reglages` (nom, image, cap), `/admin/etages/{n}/donjons` (ajouter un donjon, T-03), `/admin/quetes/{id}`, `/admin/donjons/{id}`, `/admin/cases/{id}` | admin | Actions, toutes journalisées |
+| `POST /admin/liste`, `/admin/grimpeurs/{id}/statut`, `/admin/grimpeurs/{id}`, `/admin/etages/{n}/palier`, `/admin/etages/{n}/date-plancher`, `/admin/etages/{n}/ouvrir`, `/admin/etages/{n}/reglages` (nom, image, cap), `/admin/etages/{n}/donjons` (ajouter un donjon, T-03), `/admin/quetes/{id}`, `/admin/donjons/{id}`, `/admin/cases/{id}` | admin | Actions, toutes journalisées |
 | `GET /sante` | tous | État de la base. Utilisé par Fly. |
+
+« grimpeur » veut dire ici : connecté, avec une fiche qui n'est pas exclue, **ou** admin, même sans fiche (SPEC §4.2).
 
 **En-têtes de sécurité** sur toutes les réponses :
 - `Content-Security-Policy: default-src 'self'; img-src 'self' https://api.dofusdb.fr data:; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'` ;
@@ -431,9 +433,8 @@ Le pied de page « Merci Duffus » est dans `base.html`, que toutes les pages é
 | `DATABASE_URL` | **oui** | Fly secrets, `.env`, secret GitHub (sauvegarde) | B |
 | `DISCORD_CLIENT_ID` (1564210808509038622) | non | `fly.toml` | B |
 | `DISCORD_CLIENT_SECRET` | **oui** | Fly secrets, `.env` | B |
-| `DISCORD_GUILD_ID`, `DISCORD_ADMIN_ROLE_IDS`, `ADMINS_SUPPLEMENTAIRES`, `BETA_TESTEURS` | non | Fly secrets (pour ne pas les publier dans le dépôt) | B |
-| `DISCORD_TOKEN` (jeton du bot) | **oui** | Fly secrets, seulement si les annonces sont activées | B (facultatif) |
-| `DISCORD_ANNONCE_CHANNEL_ID` | non | Fly secrets | B (facultatif) |
+| `DISCORD_GUILD_ID`, `DISCORD_ADMIN_ROLE_IDS`, `ADMINS_SUPPLEMENTAIRES` | non | Fly secrets (pour ne pas les publier dans le dépôt) | B |
+| `DISCORD_TOKEN` (jeton du bot) | **oui** | `.env` de Marceau seulement (bot d'atelier, EX-93), **jamais sur Fly** | — (aucun bot sur le site) |
 | `DUFFUS_SUPABASE_URL`, `DUFFUS_SUPABASE_CLE` | publique, mais appartient à l'auteur | `.env` de l'admin qui aspire, **jamais** sur Fly ni dans le dépôt | B |
 | `AGE_RECIPIENT` | clé publique | secret GitHub | B |
 
@@ -443,7 +444,7 @@ Règles inchangées depuis la v3 :
 - en cas de fuite d'un jeton, on le **réinitialise** dans le portail Discord, puis `fly secrets set` ;
 - `gitleaks` tourne en intégration continue.
 
-**Le jeton du bot présent dans `.env`** : il n'est plus nécessaire au lot B, sauf pour les annonces. Il est inutile de le déposer sur Fly tant que les annonces ne sont pas activées. Moins de secrets en production, c'est moins de risques.
+**Le jeton du bot présent dans `.env`** : le site n'en a pas besoin, puisqu'il n'y a aucun bot. Il ne va pas sur Fly. Moins de secrets en production, c'est moins de risques.
 
 ---
 

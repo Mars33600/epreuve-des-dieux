@@ -6,7 +6,7 @@ Légende : 🧑‍💻 Marceau seul · 🤝 avec Shadoaze · ✉️ avec l'auteu
 
 ## Ce qui change en v4
 
-- **Le bot n'est plus indispensable.** Plus d'intents à activer, de permissions à régler ni de commandes à rendre visibles pour le site. On le garde pour une **annonce facultative** et pour le « bot d'atelier » de Marceau, qui lit les salons (EX-93).
+- **Aucun bot pour le site** (arbitrage du chef de projet). Plus d'intents à activer, de permissions à régler ni de commandes. Le seul bot qui reste est le « bot d'atelier » de Marceau, qui lit les salons (EX-93) : il est hors du site.
 - **Nouveau : la connexion avec Discord (OAuth2).** Il faut un *Client Secret* et une **adresse de retour** déclarée dans le portail Discord (section C).
 - **Nouveau : un nom de domaine**, à acheter et à relier à Fly **avant le 3/11**, pour le teaser (section B).
 - **Nouveau : la lecture de la base de Duffus**, à cadrer avec son auteur (section D).
@@ -24,7 +24,7 @@ Légende : 🧑‍💻 Marceau seul · 🤝 avec Shadoaze · ✉️ avec l'auteu
 | Application Discord « Gardien de la Tour », Application ID **1564210808509038622** | ✅ créée |
 | Jeton du bot (`DISCORD_TOKEN`) dans `.env`, qui est bien dans `.gitignore` | ✅ |
 | Intent **Message Content** activé | ✅. Il n'est **pas** nécessaire au site. Le garder seulement si le bot d'atelier en a besoin pour lire les salons. |
-| Bot présent sur le serveur | **Probable** : les exports de `docs/discord/` portent la mention « lu par le bot le 27/10 ». À vérifier (C.1). Il n'a pas accès aux salons d'étage, mais ce n'est plus utile : ils ne sont pas une source de données. |
+| Bot présent sur le serveur | **Probable** : les exports de `docs/discord/` portent la mention « lu par le bot le 27/10 ». Le site n'en a pas besoin (C.1). Il n'a pas accès aux salons d'étage, mais ce n'est plus utile : ils ne sont pas une source de données. |
 | OAuth2 (Client Secret, adresse de retour) | ❌ à faire (C.2) |
 | Domaine, Fly.io, Supabase, dépôt GitHub distant | ❌ à faire (`DATABASE_URL` est vide dans `.env`, et il n'y a pas de dépôt distant) |
 | Accès à la base de Duffus | Accord de principe de l'auteur ✅. Modalités ❌ à cadrer (D). |
@@ -36,27 +36,22 @@ Légende : 🧑‍💻 Marceau seul · 🤝 avec Shadoaze · ✉️ avec l'auteu
 
 ### A.1 Les questions pour Shadoaze (🤝)
 
-Ce sont les huit questions de `SPEC.md` §8.2. Les plus urgentes sont **Q1** (étage ↔ tranche et cap) et **Q2** (donjons des étages 0 et 1), à obtenir **avant le 7/11** pour construire les étages. Chaque question a déjà une réponse par défaut appliquée : rien ne bloque le développement. Message proposé :
+Ce sont les huit questions de `SPEC.md` §8.2, dans le même ordre. Les plus urgentes sont **Q1** (étage ↔ tranche et cap) et **Q2** (donjons des étages 0 et 1), à obtenir **avant le 7/11** pour construire les étages. Chaque question a déjà une réponse par défaut appliquée : rien ne bloque le développement. Message proposé :
 
 > Salut Shadoaze ! Le site avance : connexion avec Discord, cases à cocher, jauge 2 × actifs, tour en pyramide. J'ai besoin de toi sur quelques points. Pour chacun, je te donne ce que j'applique si tu ne dis rien, et un « ok » suffit :
 > 1. Étage ↔ tranche Duffus : étage 0 = la première tranche (jusqu'au niveau 20), puis une tranche par étage, et le cap = le haut de la tranche ?
 > 2. Donjons des étages 0 et 1 : je prends ceux dont le niveau est dans la tranche, et je t'envoie la liste à valider.
 > 3. Un étage sans quête principale (l'étage 0, sûrement) : la catégorie disparaît et le palier baisse en proportion (18 au lieu de 24 pour 12 joueurs). Ok ?
 > 4. Les Dofus qui rendent une quête « principale » : tous ceux qui ont un guide chez Duffus ?
-> 5. Le site reste caché jusqu'au 13/11 à 17 h. Ce jour-là, chacun coche ce qu'il a fait à l'étage 0 depuis le 30/10. Ok ?
-> 6. Points bonus d'événement : à un joueur ou à toute la guilde, au choix de l'admin ? Pas pour un joueur en pause ?
-> 7. Encyclopédie et builder : les refaire coûte des semaines. Je propose des liens vers les outils existants. Ça te va ?
-> 8. Tu peux ajouter « palier = 2 × grimpeurs actifs » dans #concept-et-règles ?
-> 9. Tu as généré des images pour chaque étage : tu peux me les passer ? Elles serviraient de décor sur la page de l'étage (sinon : « Étage N » et la tranche, sans image).
+> 5. Points bonus d'événement (pas pour le lancement, plus tard) : à un joueur ou à toute la guilde, au choix de l'admin ? Pas pour un joueur en pause ?
+> 6. Encyclopédie et builder : les refaire coûte des semaines. Je propose des liens vers les outils existants. Ça te va ?
+> 7. Tu peux ajouter « palier = 2 × grimpeurs actifs » dans #concept-et-règles ?
+> 8. Tu as généré des images pour chaque étage : tu peux me les passer ? Elles serviraient de décor sur la page de l'étage (sinon : « Étage N » et la tranche, sans image).
 > Merci !
 
 ### A.2 La liste officielle des grimpeurs (🤝)
 
 ✅ Les 10 identifiants Discord sont dans `docs/discord/liste-grimpeurs.md`. Le jour du déploiement (10/11), Marceau les colle dans *Admin → Grimpeurs → Liste officielle*. Les inscrits suivants y seront ajoutés de la même façon, et Shadoaze, en tant qu'admin, pourra le faire lui-même.
-
-### A.3 Les bêta-testeurs (🤝)
-
-Un ou deux joueurs de confiance (T-05). Il faut leur **identifiant Discord** (clic droit sur le pseudo → « Copier l'identifiant », avec le mode développeur activé) pour `BETA_TESTEURS`. À obtenir avant le 10/11.
 
 ---
 
@@ -100,17 +95,11 @@ Plan B gratuit et immédiat, si le DNS traîne : l'adresse `https://epreuve-des-
 
 ---
 
-## C. Lot B : Discord (🧑‍💻, 20 min, avant le 31/10)
+## C. Lot B : Discord (🧑‍💻, 20 min, avant le 3/11, pour l'intégration du 4/11)
 
-### C.1 Vérifier la présence du bot
+### C.1 Le bot : rien à faire pour le site
 
-Paramètres du serveur → **Intégrations**. Si « Gardien de la Tour » y figure, il n'y a rien à faire. Sinon, et seulement si on veut l'**annonce** d'ouverture d'étage, l'inviter avec le minimum de permissions : voir les salons, envoyer des messages et intégrer des liens, soit 1024 + 2048 + 16384 = **19456**.
-
-```
-https://discord.com/oauth2/authorize?client_id=1564210808509038622&scope=bot&permissions=19456
-```
-
-Pas de portée `applications.commands` : il n'y a plus de commandes. Ensuite, désactiver **Public Bot** dans le portail (onglet Bot).
+Le site n'utilise **aucun bot**. « Gardien de la Tour » sert seulement d'application pour la connexion OAuth2 (C.2), et elle n'a pas besoin d'un bot présent sur le serveur. Si le bot d'atelier y est déjà, le laisser tel quel. Dans le portail (onglet Bot), désactiver **Public Bot**.
 
 ### C.2 Configurer OAuth2 pour la connexion au site
 
@@ -131,8 +120,7 @@ Pourquoi `guilds.members.read` : c'est la portée qui permet au site de lire **l
 Avec le mode développeur (Paramètres utilisateur → Avancés → Mode développeur), faire un clic droit, puis « Copier l'identifiant » :
 - le serveur → `DISCORD_GUILD_ID` ;
 - le rôle « Administrateur » → `DISCORD_ADMIN_ROLE_IDS` ;
-- son propre compte et celui de Shadoaze → `ADMINS_SUPPLEMENTAIRES`, un filet si le rôle était mal réglé ;
-- *(facultatif)* le salon d'annonces → `DISCORD_ANNONCE_CHANNEL_ID`.
+- son propre compte et celui de Shadoaze → `ADMINS_SUPPLEMENTAIRES`, un filet si le rôle était mal réglé.
 
 ### C.4 Un serveur de test (5 min)
 
@@ -166,10 +154,14 @@ DUFFUS_SUPABASE_CLE=<clé anon publique>
 
 Elles ne vont **ni sur Fly ni dans le dépôt**. Le site n'en a jamais besoin, puisque seul le script d'aspiration, lancé depuis le Mac, les utilise.
 
+Si l'auteur n'a pas répondu le **30/10 au soir**, c'est un déclencheur du plan de repli (`LOTS.md`, lot B).
+
 ### D.3 Lancer le relevé, puis l'aspiration (🧑‍💻 avec le dev)
 
 - Le 28/10 : `uv run python -m epreuve.duffus releve` (chantier B0), pour relever le schéma.
-- Vers le 6/11 : `uv run python -m epreuve.duffus aspirer`, puis la relecture du `git diff` des extraits, puis `uv run python -m epreuve.contenu construire --etage N` pour chaque étage.
+- Le 29/10 : `uv run python -m epreuve.duffus aspirer`, puis la relecture du `git diff` des extraits. Ces extraits servent aux tests du lot B et à la décision de repli du 31/10.
+- Le 4/11 : `uv run python -m epreuve.contenu construire --etage 0` puis `--etage 1`, pour la relecture de Shadoaze.
+- Les 7 et 8/11 : une nouvelle aspiration seulement si le guide a changé (au plus une par semaine), puis `construire --etage N` pour chaque étage.
 
 ---
 
@@ -181,7 +173,7 @@ Elles ne vont **ni sur Fly ni dans le dépôt**. Le site n'en a jamais besoin, p
 2. **Connect** → *Session pooler* (port 5432). Copier l'adresse, y mettre le mot de passe, et remplacer `postgresql://` par `postgresql+asyncpg://`. C'est `DATABASE_URL`. **Secret.**
 3. **Le déposer tout de suite sur Fly** (`fly secrets set DATABASE_URL=…`), même pendant le lot A. `/sante` interrogera la base toutes les 30 secondes, ce qui empêche Supabase d'endormir le projet gratuit après 7 jours sans activité.
 
-### E.2 Postgres local pour les tests
+### E.2 Postgres local pour les tests (dès le 28/10, les devs en ont besoin)
 
 Docker Desktop, puis :
 
@@ -203,12 +195,10 @@ Sans ce conteneur, les tests marqués `db` sont sautés. C'est ce qui explique l
 
 ```
 fly secrets set DATABASE_URL=… DISCORD_CLIENT_SECRET=… DISCORD_GUILD_ID=… \
-  DISCORD_ADMIN_ROLE_IDS=… ADMINS_SUPPLEMENTAIRES=… BETA_TESTEURS=…
-# facultatif, seulement pour l'annonce d'ouverture :
-fly secrets set DISCORD_TOKEN=… DISCORD_ANNONCE_CHANNEL_ID=…
+  DISCORD_ADMIN_ROLE_IDS=… ADMINS_SUPPLEMENTAIRES=…
 ```
 
-`SITE_MODE=auto`, `SITE_OUVERT_LE`, `SITE_URL` et `DISCORD_CLIENT_ID` sont dans `fly.toml` (non secrets). Les clés Duffus ne vont **pas** sur Fly.
+`SITE_MODE=auto`, `SITE_OUVERT_LE`, `SITE_URL` et `DISCORD_CLIENT_ID` sont dans `fly.toml` (non secrets). Les clés Duffus et le jeton du bot ne vont **pas** sur Fly.
 
 ---
 
@@ -230,7 +220,11 @@ fly secrets set DISCORD_TOKEN=… DISCORD_ANNONCE_CHANNEL_ID=…
 - [ ] B.1 Domaine acheté
 
 ### Avant le 28/10 au matin (chantier B0)
-- [ ] D.2 `DUFFUS_SUPABASE_URL` et `DUFFUS_SUPABASE_CLE` dans `.env`
+- [ ] D.2 `DUFFUS_SUPABASE_URL` et `DUFFUS_SUPABASE_CLE` dans `.env` (sinon : plan de repli si rien le 30/10 au soir)
+- [ ] E.2 Docker pour les tests locaux
+
+### Le 29/10
+- [ ] D.3 Première aspiration Duffus, extraits relus
 
 ### Avant le 2/11 (lot A)
 - [ ] B.2 Compte Fly.io, carte, alerte de dépense, `flyctl`
@@ -238,20 +232,19 @@ fly secrets set DISCORD_TOKEN=… DISCORD_ANNONCE_CHANNEL_ID=…
 - [ ] B.4 Dépôt GitHub privé
 - [ ] E.1 Projet Supabase et `DATABASE_URL` déposé sur Fly
 
+### Avant le 3/11 (intégration du lot B le 4/11)
+- [ ] C.2 Client Secret et adresses de retour OAuth2
+- [ ] C.3 Identifiants copiés
+- [ ] C.4 Serveur de test
+
 ### Avant le 6/11
 - [ ] B.5 Teaser vérifié sur téléphone, lien donné quand Shadoaze le décide
 
 ### Avant le 7/11 (construction des étages)
 - [ ] Réponses de Shadoaze à Q1 et Q2, ou défauts acceptés
-- [ ] D.3 Aspiration Duffus relue
+- [ ] D.3 Étages 0 et 1 relus par Shadoaze, puis étages 0 à 25 construits
 
 ### Avant le 10/11 (lot B)
-- [ ] C.1 Bot vérifié (ou rien, sans annonce)
-- [ ] C.2 Client Secret et adresses de retour OAuth2
-- [ ] C.3 Identifiants copiés
-- [ ] C.4 Serveur de test
-- [ ] A.3 Identifiants des bêta-testeurs
-- [ ] E.2 Docker pour les tests locaux
 - [ ] E.3 Sauvegarde chiffrée (clé age, secrets GitHub)
 - [ ] F Réglages déposés sur Fly
 - [ ] A.2 Liste officielle collée dans l'admin

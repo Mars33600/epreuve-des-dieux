@@ -234,12 +234,12 @@ select{min-height:44px;width:100%;min-width:0;flex:1 1 220px;padding:8px 12px;bo
 .tick span{display:grid;gap:1px;font-size:15px;line-height:1.3}
 .tick small{font-size:13px;color:var(--muted)}
 /* Case à cocher : un carré gravé qui se remplit de la couleur de sa catégorie. */
-.tick input{appearance:none;-webkit-appearance:none;flex:none;margin:1px 0 0;width:22px;height:22px;border-radius:5px;
+:is(.tick,.qbox,.qdone) input{appearance:none;-webkit-appearance:none;flex:none;margin:1px 0 0;width:22px;height:22px;border-radius:5px;
   border:1.5px solid var(--faint);background:var(--sunken);display:grid;place-items:center;cursor:pointer;transition:background .15s,border-color .15s}
-.tick input::after{content:"";width:6px;height:11px;border:solid #0b0e1a;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px);opacity:0}
-.tick input:checked{background:var(--c);border-color:var(--c)}
-.tick input:checked::after{opacity:1}
-.tick input:disabled{cursor:default}
+:is(.tick,.qbox,.qdone) input::after{content:"";width:6px;height:11px;border:solid #0b0e1a;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translate(-1px,-1px);opacity:0}
+:is(.tick,.qbox,.qdone) input:checked{background:var(--c);border-color:var(--c)}
+:is(.tick,.qbox,.qdone) input:checked::after{opacity:1}
+:is(.tick,.qbox,.qdone) input:disabled{cursor:default}
 .tick:has(input:disabled){cursor:default}
 .tick:has(input:disabled):hover{background:none}
 .tick input:checked + span b{color:var(--ink)}
@@ -251,7 +251,15 @@ select{min-height:44px;width:100%;min-width:0;flex:1 1 220px;padding:8px 12px;bo
 .quests{margin:0;padding:0;list-style:none;display:grid;gap:4px}
 .quests li{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line-soft);padding:2px 0}
 .quests li:last-child{border-bottom:0}
-.quests .tick{flex:1 1 240px}
+.quests .qrow{flex:1 1 240px}
+.qrow{display:flex;align-items:flex-start;gap:2px;min-width:0}
+.qbox{flex:none;width:44px;height:44px;display:grid;place-items:center;cursor:pointer}
+.qname{all:unset;box-sizing:border-box;cursor:pointer;flex:1;min-width:0;min-height:44px;display:grid;gap:1px;align-content:center;padding:6px 6px;border-radius:6px;font-size:15px;line-height:1.3}
+.qname:hover{background:rgba(143,150,173,.07)}
+.qname:focus-visible{outline:2px solid var(--gold-hi);outline-offset:1px}
+.qname b{color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold-line);text-underline-offset:3px}
+.qname:hover b{text-decoration-color:var(--gold-hi)}
+.qname small{font-size:13px;color:var(--muted)}
 /* Badge principal / secondaire */
 .badge{display:inline-flex;align-items:center;gap:6px;font:500 12px/1 var(--f-data);letter-spacing:.04em;padding:5px 9px;border-radius:999px;white-space:nowrap}
 .badge svg{width:14px;height:14px}
@@ -273,6 +281,62 @@ select{min-height:44px;width:100%;min-width:0;flex:1 1 220px;padding:8px 12px;bo
 footer{position:relative;z-index:1;text-align:center;font-size:13px;color:var(--faint);padding:0 16px 24px}
 footer a{color:var(--gold);text-underline-offset:3px}
 
+/* ---------- Fiche de quête : panneau latéral (plein écran sur mobile) ---------- */
+.qd{padding:0;border:0;margin:0 0 0 auto;width:min(560px,100vw);max-width:100vw;height:100vh;max-height:none;
+  background:linear-gradient(180deg,#161c33,#0c1020);color:var(--ink);border-left:1px solid var(--gold-line);
+  box-shadow:-24px 0 60px rgba(0,0,0,.6);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
+@supports (height:1dvh){.qd{height:100dvh}}
+.qd::backdrop{background:rgba(3,4,10,.66)}
+.qd[open]{animation:slidein .26s ease}
+@keyframes slidein{from{transform:translateX(48px);opacity:0}}
+.qd-in{min-height:100%;display:flex;flex-direction:column}
+.qd-head{position:sticky;top:0;z-index:2;display:grid;gap:10px;padding:14px 14px 12px 20px;
+  background:rgba(20,25,46,.97);border-bottom:1px solid var(--line-soft);box-shadow:inset 0 1px 0 var(--gold-line)}
+.qd-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.qd-top h2{font-size:clamp(24px,5vw,30px);outline:none}
+.x{flex:none;width:44px;height:44px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);display:grid;place-items:center;font-size:22px;line-height:1}
+.x:hover{border-color:var(--gold-line)}
+.qd-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:14px;color:var(--muted)}
+.qd-meta b{color:var(--ink);font-weight:500}
+.qdone{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 14px 0 10px;border-radius:8px;border:1px solid var(--line);background:var(--sunken);cursor:pointer;font-weight:700}
+.qdone:has(input:checked){border-color:var(--c)}
+.qdone:has(input:disabled){cursor:default}
+.qdone small{font-weight:400;color:var(--muted)}
+.pos{font:500 13px/1 var(--f-data);color:var(--gold-hi);white-space:nowrap}
+.qd-body{flex:1;display:grid;gap:22px;align-content:start;padding:18px 20px 32px}
+.qd-sec{display:grid;gap:10px}
+.qd-sec > h3{font:500 12px/1.3 var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.qd-sec p{font-size:15px;color:var(--muted)}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:15px}
+.chain .sep{color:var(--faint)}
+.chain .cur{color:var(--ink);font-weight:700}
+.chain .dofus{display:inline-flex;align-items:center;gap:6px;color:var(--c-princ);font-weight:700}
+.qlink{all:unset;box-sizing:border-box;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;color:var(--gold-hi);text-decoration:underline;text-underline-offset:3px}
+.qlink:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px;border-radius:4px}
+.plist{margin:0;padding:0;list-style:none;display:grid;gap:2px}
+.plist li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 12px;border-bottom:1px solid var(--line-soft)}
+.plist li:last-child{border-bottom:0}
+.state{font-size:14px;white-space:nowrap}
+.state.ok{color:var(--c-donjon)}
+.state.no{color:var(--warn)}
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:14px;counter-reset:st}
+.steps > li{position:relative;padding-left:40px;font-size:15px;counter-increment:st}
+.steps > li::before{content:counter(st);position:absolute;left:0;top:-2px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--gold-line);background:var(--sunken);font:500 13px/1 var(--f-data);color:var(--gold-hi)}
+.steps > li.after{color:var(--muted)}
+.steps > li.after::before{border-style:dashed;color:var(--faint)}
+.encart{margin-top:8px;display:grid;gap:2px;padding:10px 12px;border-radius:8px;font-size:14px;color:var(--muted)}
+.encart b{color:var(--ink);font-size:13px;font-family:var(--f-data);letter-spacing:.06em;text-transform:uppercase}
+.encart.stop{border:1px solid var(--warn);background:rgba(240,138,93,.08)}
+.encart.lier{border:1px dashed var(--c-donjon);background:rgba(99,199,160,.07)}
+.items{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.items li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;background:rgba(10,14,27,.7);border:1px solid var(--line-soft);font-size:15px}
+.items .k{font:500 11px/1 var(--f-data);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:3px 6px;white-space:nowrap}
+.items .q{font:500 14px/1 var(--f-data);color:var(--ink);white-space:nowrap}
+.items small{display:block;color:var(--muted);font-size:13px}
+.qd-foot{border-top:1px solid var(--line-soft);padding-top:18px}
+@media (max-width:640px){.qd{width:100vw;border-left:0}}
+
 /* ---------- Mobile ---------- */
 @media (max-width:860px){
   .layout{grid-template-columns:minmax(0,1fr)}
@@ -290,6 +354,7 @@ footer a{color:var(--gold);text-underline-offset:3px}
   .fog,.glow,.towermist{animation:none!important}
   .mini i,.floor .fill,.ambiance{transition:none}
   .feed li.fresh{animation:none}
+  .qd[open]{animation:none}
   html{scroll-behavior:auto}
 }
 </style>
@@ -401,6 +466,7 @@ footer a{color:var(--gold);text-underline-offset:3px}
     </main>
   </div>
 </div>
+<dialog class="qd" id="qd" aria-modal="true" aria-labelledby="qdTitle"><div class="qd-in" id="qdIn"></div></dialog>
 <footer>Projet de fans, non officiel et sans lien avec Ankama. Dofus et le Monde des Douze sont des marques d'Ankama.<br><a href="https://duffus.fr" rel="noopener">Merci Duffus</a></footer>
 
 <script>
@@ -446,6 +512,65 @@ const CATS = [
   {k:"princ",  nom:"Quêtes principales", court:"Princ.", desc:"Les quêtes qui mènent à un Dofus, l'œuf légendaire du jeu.", c:"var(--c-princ)", ic:"i-princ"},
   {k:"second", nom:"Quêtes secondaires", court:"Second.", desc:"Toutes les autres quêtes de l'étage.", c:"var(--c-second)", ic:"i-second"}
 ];
+/* Fiches de quête (fictives). [x,y] = position sur la carte du jeu.
+   suite : la quête qu'elle débloque ; dofus : le Dofus au bout de la chaîne ; stop : étape où s'arrêter pour cet étage. */
+const QDATA = {
+  p1:{niv:5, zone:"Incarnam · Prairie des Âmes", pnj:"Gardienne Ysolde", pos:[3,-2], prereq:[], suite:"p2",
+    etapes:[
+      {t:"Parler à la Gardienne Ysolde en [3,-2], au pied de la statue d'Incarnam."},
+      {t:"Récolter 5 Pétales de Pissenlit dans les champs en [1,-3].", lier:"Les pissenlits poussent aussi sur le chemin du « Bouftou égaré » : fais les deux quêtes dans la foulée."},
+      {t:"Vaincre 3 Bouftons Blancs en [2,-4]."},
+      {t:"Rapporter les pétales à Ysolde en [3,-2]."}],
+    besoin:[{k:"Ressource", n:"Pétale de Pissenlit", q:5, d:"Récolte, champs d'Incarnam"}, {k:"Monstre", n:"Boufton Blanc", q:3, d:"Niveau 4 à 6, en [2,-4]"}],
+    gains:{xp:"1 200", kamas:"150", objets:["Amulette de l'Éveil"], succes:"L'Appel entendu"}},
+  p2:{niv:12, zone:"Astrub · Champs du Sud", pnj:"Mère Cawotte", pos:[5,-17], prereq:["p1"], suite:"p3", stop:3,
+    etapes:[
+      {t:"Retrouver Mère Cawotte dans son potager en [5,-17]."},
+      {t:"Lui apporter 10 Blés et 3 Graines de Cawotte. Les graines tombent sur les Pissenlits Diaboliques en [6,-18]."},
+      {t:"Vaincre la Cawotte Enragée qui ravage le potager en [6,-16]. Combat à 2 grimpeurs conseillé."},
+      {t:"Planter la graine bénie au Temple d'Astrub en [4,-20] (demande le niveau 25)."},
+      {t:"Revenir voir Mère Cawotte en [5,-17]."}],
+    besoin:[{k:"Ressource", n:"Blé", q:10, d:"Récolte ou hôtel de vente"}, {k:"Objet", n:"Graine de Cawotte", q:3, d:"Butin des Pissenlits Diaboliques"}, {k:"Monstre", n:"Cawotte Enragée", q:1, d:"Niveau 14, en [6,-16]"}],
+    gains:{xp:"4 800", kamas:"600", objets:["Graine bénie"], succes:"Main verte"}},
+  p3:{niv:18, zone:"Astrub · Potager de la Cité", pnj:"Jardinier Aldric", pos:[3,-21], prereq:["p1","p2"], dofus:"Dofus Cawotte",
+    etapes:[
+      {t:"Parler au Jardinier Aldric en [3,-21]."},
+      {t:"Obtenir un Bourgeon Divin sur le boss du Donjon des Champs (entrée en [6,-24]).", lier:"Fais cette étape pendant ton passage au Donjon des Champs : tu avances ta quête et tes succès de donjon dans le même combat."},
+      {t:"Réunir 20 Cawottes et 5 Fleurs de Lin."},
+      {t:"Veiller sur le potager : survivre à 3 vagues de Larves Bleues en [3,-21]."},
+      {t:"Recevoir le Dofus Cawotte des mains d'Aldric."}],
+    besoin:[{k:"Objet", n:"Bourgeon Divin", q:1, d:"Butin du boss du Donjon des Champs"}, {k:"Ressource", n:"Cawotte", q:20, d:"Récolte ou hôtel de vente"}, {k:"Ressource", n:"Fleur de Lin", q:5, d:"Récolte, niveau 10 de paysan"}, {k:"Monstre", n:"Larve Bleue", q:"3 vagues", d:"Niveau 16 à 20"}],
+    gains:{xp:"9 500", kamas:"1 200", objets:["Dofus Cawotte"], succes:"Le Gardien du Potager"}},
+  s1:{niv:8, zone:"Incarnam · Pâturages", pnj:"Berger Tobin", pos:[0,-2], prereq:[],
+    etapes:[
+      {t:"Parler au Berger Tobin en [0,-2]."},
+      {t:"Retrouver le bouftou égaré en [-1,-4]."},
+      {t:"Le ramener sans combattre : éviter les groupes de monstres sur le trajet."},
+      {t:"Vaincre 4 Bouftons Noirs qui rôdent autour de l'enclos en [0,-3]."}],
+    besoin:[{k:"Monstre", n:"Boufton Noir", q:4, d:"Niveau 6 à 8"}],
+    gains:{xp:"900", kamas:"100", objets:["Cape de laine"], succes:"Berger d'un jour"}},
+  s2:{niv:10, zone:"Astrub · Forêt", pnj:"Herboriste Malva", pos:[6,-20], prereq:[],
+    etapes:[
+      {t:"Parler à l'Herboriste Malva en [6,-20]."},
+      {t:"Ramasser 8 Champignons dans la forêt d'Astrub, entre [5,-21] et [7,-22]."},
+      {t:"Rapporter la cueillette à Malva."}],
+    besoin:[{k:"Ressource", n:"Champignon", q:8, d:"Butin des Champignons Sauvages"}],
+    gains:{xp:"1 500", kamas:"250", objets:["Potion de soin mineure ×5"], succes:null}},
+  s3:{niv:6, zone:"Astrub · Poste", pnj:"Facteur Pléthore", pos:[4,-18], prereq:[],
+    etapes:[
+      {t:"Prendre les lettres auprès du Facteur Pléthore en [4,-18]."},
+      {t:"Livrer une lettre à la Gardienne Ysolde en [3,-2], au Berger Tobin en [0,-2] et à l'Aubergiste en [2,0]."},
+      {t:"Revenir voir le facteur."}],
+    besoin:[{k:"Objet", n:"Lettre scellée", q:3, d:"Remise au départ"}],
+    gains:{xp:"700", kamas:"400", objets:[], succes:"Courrier du Ciel"}},
+  s4:{niv:15, zone:"Astrub · Moulin", pnj:"Meunier Gaspard", pos:[7,-15], prereq:["s3"],
+    etapes:[
+      {t:"Parler au Meunier Gaspard en [7,-15]."},
+      {t:"Vaincre 6 Rats du grenier, à l'étage du moulin."},
+      {t:"Boucher les 3 trous du grenier avec des Planches de Frêne."}],
+    besoin:[{k:"Monstre", n:"Rat du grenier", q:6, d:"Niveau 12 à 15"}, {k:"Objet", n:"Planche de Frêne", q:3, d:"Atelier du bûcheron"}],
+    gains:{xp:"2 600", kamas:"350", objets:["Émote « Faire la sieste »"], succes:"Chasseur de rats"}}
+};
 const MOI = 1; // le visiteur connecté (démo) : il ne peut cocher que sa propre fiche
 
 // d = nombre de succès cochés par donjon (le 1er est « Vaincre le boss ») ; p, s = quêtes principales / secondaires faites.
@@ -640,8 +765,8 @@ function renderSheet(){
     </article>`;
   }).join("");
   const qs = ETAGE.quetes.filter(q => questFilter === "all" || q.type === questFilter).map(q => `<li>
-      <label class="tick"><input type="checkbox" data-item="q:${q.id}" style="--c:${q.type === "princ" ? "var(--c-princ)" : "var(--c-second)"}" ${p.done.has(`q:${q.id}`) ? "checked" : ""} ${dis}>
-        <span><b>${esc(q.nom)}</b><small>${esc(q.note)}</small></span></label>
+      <div class="qrow"><label class="qbox"><input type="checkbox" data-item="q:${q.id}" style="--c:${q.type === "princ" ? "var(--c-princ)" : "var(--c-second)"}" ${p.done.has(`q:${q.id}`) ? "checked" : ""} ${dis}><span class="sr-only">Faite : ${esc(q.nom)}</span></label>
+        <button class="qname" type="button" data-qopen="${q.id}" aria-haspopup="dialog"><b>${esc(q.nom)}</b><small>${esc(q.note)} · niv. ${QDATA[q.id].niv} · voir la fiche</small></button></div>
       ${q.type === "princ" ? `<span class="badge princ">${ic("i-princ")}Principale</span>` : `<span class="badge second">${ic("i-second")}Secondaire</span>`}
     </li>`).join("");
   const chip = (v, l) => `<button class="chip" type="button" data-qf="${v}" aria-pressed="${questFilter === v}">${l}</button>`;
@@ -660,8 +785,93 @@ function renderSheet(){
     <div class="dungeons">${djs}</div>
     <h3 class="section-title">Quêtes de l'étage</h3>
     <div class="qtools" role="group" aria-label="Filtrer les quêtes">${chip("all", "Toutes")}${chip("princ", ic("i-princ") + "Principales")}${chip("second", ic("i-second") + "Secondaires")}</div>
+    <p class="muted" style="font-size:14px">Touche le nom d'une quête pour ouvrir sa fiche : où aller, quoi faire, quoi apporter.</p>
     <ul class="quests">${qs}</ul>`;
 }
+
+/* =================== Fiche de quête =================== */
+let qdId = null, qdTrigger = null;
+const pos = t => esc(t).replace(/\[(-?\d+),(-?\d+)\]/g, '<span class="pos">[$1,$2]</span>');
+function chaine(id){                      // de la quête jusqu'au Dofus
+  const out = []; let q = id;
+  while (q && out.length < 10){ out.push(q); if (QDATA[q].dofus) return {ids:out, dofus:QDATA[q].dofus}; q = QDATA[q].suite; }
+  return {ids:out, dofus:null};
+}
+function renderQuest(){
+  const q = ETAGE.quetes.find(x => x.id === qdId), d = QDATA[qdId], p = players.find(x => x.id === sheetId);
+  const mine = p.id === MOI && p.actif, princ = q.type === "princ", c = princ ? "var(--c-princ)" : "var(--c-second)";
+  const fait = id => p.done.has(`q:${id}`), nomQ = id => ETAGE.quetes.find(x => x.id === id).nom;
+  const ch = chaine(qdId);
+  const pourquoi = princ
+    ? `<div class="chain">${ch.ids.map(id => id === qdId ? `<span class="cur">${esc(nomQ(id))}</span>` : `<button class="qlink" type="button" data-qopen="${id}">${esc(nomQ(id))}</button>`).join('<span class="sep" aria-hidden="true">→</span>')}<span class="sep" aria-hidden="true">→</span><span class="dofus">${ic("i-princ")}${esc(ch.dofus)}</span></div>
+       <p>${d.dofus ? "Elle donne le Dofus" : "C'est un prérequis du Dofus"} : un œuf de dragon légendaire, l'objet le plus convoité du jeu. Elle compte pour le point Quêtes principales.</p>`
+    : `<p>Elle ne mène à aucun Dofus. Elle rapporte de l'expérience, des kamas ${d.gains.succes ? "et un succès " : ""}et compte pour le point Quêtes secondaires.</p>`;
+  const prereq = d.prereq.length
+    ? `<ul class="plist">${d.prereq.map(id => `<li><button class="qlink" type="button" data-qopen="${id}">${esc(nomQ(id))}</button><span class="state ${fait(id) ? "ok" : "no"}">${fait(id) ? "✓ Faite" : "✗ Pas encore faite"}</span></li>`).join("")}</ul>`
+    : `<p>Aucune : elle peut se lancer directement.</p>`;
+  const etapes = d.etapes.map((e, i) => `<li class="${d.stop && i >= d.stop ? "after" : ""}">${pos(e.t)}
+      ${e.lier ? `<div class="encart lier"><b>À lier</b>${esc(e.lier)}</div>` : ""}
+      ${d.stop && i === d.stop - 1 ? `<div class="encart stop"><b>Jusqu'où la faire</b>S'arrêter à l'étape ${d.stop} pour l'instant. La suite demande un niveau au-dessus du cap : elle se fera à un prochain étage. Pour cet étage, la quête compte comme faite à la fin de l'étape ${d.stop}.</div>` : ""}</li>`).join("");
+  const items = l => `<ul class="items">${l.map(b => `<li><span class="k">${esc(b.k)}</span><span>${esc(b.n)}<small>${pos(b.d)}</small></span><span class="q">${typeof b.q === "number" ? "×" + b.q : esc(b.q)}</span></li>`).join("")}</ul>`;
+  const g = d.gains, gains = [{k:"XP", n:"Expérience", q:g.xp, d:"Au niveau conseillé"}, {k:"Kamas", n:"Kamas", q:g.kamas, d:"Monnaie du jeu"},
+    ...g.objets.map(o => ({k:"Objet", n:o, q:1, d:""})), ...(g.succes ? [{k:"Succès", n:g.succes, q:1, d:"Succès de quête"}] : [])];
+  const a = actifs(), manque = a.filter(x => !x.done.has(`q:${qdId}`)), ok = a.filter(x => x.done.has(`q:${qdId}`));
+  const chips = (l, cls) => l.map(x => `<span class="person ${cls}">${esc(x.pseudo)} <span class="num muted">niv. ${x.lvl}</span></span>`).join("");
+  $("qdIn").innerHTML = `
+    <header class="qd-head">
+      <div class="qd-top">
+        <div><div class="eyebrow">Fiche de quête · étage ${ETAGE.num}</div><h2 id="qdTitle" tabindex="-1">${esc(q.nom)}</h2></div>
+        <button class="x" type="button" data-qclose aria-label="Fermer la fiche">×</button>
+      </div>
+      <div class="qd-meta">
+        ${princ ? `<span class="badge princ">${ic("i-princ")}Principale</span>` : `<span class="badge second">${ic("i-second")}Secondaire</span>`}
+        <span>Niveau <b class="num">${d.niv}</b></span><span>${esc(d.zone)}</span>
+        <span>Départ : <b>${esc(d.pnj)}</b> <span class="pos">[${d.pos.join(",")}]</span></span>
+      </div>
+      <label class="qdone" style="--c:${c}"><input type="checkbox" data-item="q:${qdId}" style="--c:${c}" ${fait(qdId) ? "checked" : ""} ${mine ? "" : "disabled"}>
+        Faite <small>${mine ? "(ta fiche)" : `(fiche de ${esc(p.pseudo)}, lecture seule)`}</small></label>
+    </header>
+    <div class="qd-body">
+      <section class="qd-sec"><h3>Pourquoi la faire</h3>${pourquoi}</section>
+      <section class="qd-sec"><h3>Prérequis</h3>${prereq}</section>
+      <section class="qd-sec"><h3>Étapes</h3><ol class="steps">${etapes}</ol></section>
+      <section class="qd-sec"><h3>Ce dont tu as besoin</h3>${items(d.besoin)}</section>
+      <section class="qd-sec"><h3>Récompenses</h3>${items(gains)}</section>
+      <section class="qd-sec qd-foot"><h3>Qui ne l'a pas encore faite ?</h3>
+        <div class="people">${chips(manque, "miss") || `<span class="muted">Tout le monde l'a faite.</span>`}</div>
+        ${ok.length && manque.length ? `<p>Déjà faite par ${ok.length} grimpeur${ok.length > 1 ? "s" : ""}, qui peuvent accompagner les autres :</p><div class="people">${chips(ok, "done")}</div>` : ""}
+      </section>
+    </div>`;
+}
+function ouvrirQuete(id, declencheur){
+  const dlg = $("qd");
+  if (!dlg.open) qdTrigger = declencheur || document.activeElement;
+  qdId = id; renderQuest(); dlg.scrollTop = 0;
+  if (!dlg.open) dlg.showModal();
+  $("qdTitle").focus();
+}
+$("qd").addEventListener("close", () => {
+  // Rendre le focus au déclencheur (ou à son équivalent s'il a été redessiné).
+  const t = qdTrigger && document.contains(qdTrigger) ? qdTrigger : $("sheet").querySelector(`[data-qopen="${qdTrigger && qdTrigger.dataset ? qdTrigger.dataset.qopen : ""}"]`);
+  qdId = null; if (t) t.focus();
+});
+$("qd").addEventListener("click", e => {
+  if (e.target === $("qd") || e.target.closest("[data-qclose]")) $("qd").close();   // clic sur le fond ou la croix
+});
+$("qd").addEventListener("keydown", e => {                    // focus piégé dans le panneau
+  if (e.key !== "Tab") return;
+  const f = [...$("qd").querySelectorAll("button,input:not([disabled]),[href]")].filter(x => x.offsetParent !== null);
+  if (!f.length) return;
+  const first = f[0], last = f[f.length - 1];
+  if (e.shiftKey && (document.activeElement === first || document.activeElement === $("qdTitle"))){ e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+});
+$("qd").addEventListener("change", e => {
+  const box = e.target.closest("input[data-item]"); if (!box) return;
+  cocher(box.dataset.item, box.checked);
+  const y = $("qd").scrollTop; renderQuest(); $("qd").scrollTop = y;
+  const again = $("qd").querySelector(`[data-item="${box.dataset.item}"]`); if (again) again.focus();
+});
 
 const CLASSES = ["Féca","Osamodas","Enutrof","Sram","Xélor","Ecaflip","Eniripsa","Iop","Crâ","Sadida","Sacrieur","Pandawa","Roublard","Zobal","Steamer","Eliotrope","Huppermage","Ouginak","Forgelance"];
 function renderClasses(){
@@ -681,23 +891,29 @@ document.addEventListener("click", e => {
   if (ask){ askVal = ask.dataset.ask; renderAsk(); renderRoster(); $("ask").scrollIntoView({behavior:reduit ? "auto" : "smooth", block:"start"}); return; }
   const card = e.target.closest(".player[data-id]");
   if (card){ sheetId = +card.dataset.id; renderRoster(); renderSheet(); $("sheet").scrollIntoView({behavior:reduit ? "auto" : "smooth", block:"start"}); $("sheet").focus({preventScroll:true}); return; }
+  const qo = e.target.closest("[data-qopen]");
+  if (qo){ ouvrirQuete(qo.dataset.qopen, $("qd").open ? null : qo); return; }
   const qf = e.target.closest("[data-qf]");
   if (qf){ questFilter = qf.dataset.qf; renderSheet(); return; }
   if (e.target.id === "askClear"){ askVal = ""; renderAsk(); renderRoster(); }
 });
 $("askSel").addEventListener("change", e => { askVal = e.target.value; renderAsk(); renderRoster(); });
-$("sheet").addEventListener("change", e => {
-  const box = e.target.closest("input[data-item]"); if (!box) return;
+// Cocher ou décocher : partagé par la liste de la fiche et la fiche de quête (cases synchronisées).
+function cocher(item, coche){
   const p = players.find(x => x.id === sheetId); if (p.id !== MOI) return;
-  const avant = points(p), item = box.dataset.item;
-  box.checked ? p.done.add(item) : p.done.delete(item);
+  const avant = points(p), box = {checked:coche};
+  coche ? p.done.add(item) : p.done.delete(item);
   const [t, a, b] = item.split(":");
   const nom = t === "d" ? `« ${ETAGE.donjons.find(x => x.id === a).succes[+b]} » (${ETAGE.donjons.find(x => x.id === a).nom})` : `« ${ETAGE.quetes.find(q => q.id === a).nom} »`;
   feed.unshift({t:"à l'instant", txt:`<b>${esc(p.pseudo)}</b> a ${box.checked ? "coché" : "décoché"} ${esc(nom)}.`});
   const apres = points(p);
   if (apres !== avant) feed.unshift({t:"à l'instant", txt:`<b>${esc(p.pseudo)}</b> ${apres > avant ? "obtient" : "perd"} un point : ${apres}/4.`});
   const y = scrollY; renderAll(true); scrollTo(0, y);
-  const again = $("sheet").querySelector(`[data-item="${item}"]`); if (again) again.focus({preventScroll:true});
+}
+$("sheet").addEventListener("change", e => {
+  const box = e.target.closest("input[data-item]"); if (!box) return;
+  cocher(box.dataset.item, box.checked);
+  const again = $("sheet").querySelector(`[data-item="${box.dataset.item}"]`); if (again) again.focus({preventScroll:true});
 });
 
 /* =================== Décor : étoiles, poussières, image d'ambiance =================== */
@@ -751,6 +967,7 @@ function ciel(){
 
 options();
 renderAll(false);
+{ const q = new URLSearchParams(location.search).get("quete"); if (q && QDATA[q]) ouvrirQuete(q, $("sheet").querySelector(`[data-qopen="${q}"]`)); }
 horloge(); setInterval(horloge, 1000);
 ambiance(new URLSearchParams(location.search).get("ambiance") || AMBIANCES[ETAGE.num]);
 ciel();
