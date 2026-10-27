@@ -1,0 +1,9 @@
+# Correspondance étage ↔ tranche du guide Duffus (T-04, T-28 ; DECISIONS-V4 §12 Q1).
+# Par défaut, l'étage N est la (N+1)-ième tranche active du guide (par order_index), et le cap est la borne
+# haute de la tranche. Une entrée ci-dessous ne sert qu'à changer un de ces défauts, ou à fixer les dates.
+# Champs possibles : tranche (range_key Duffus), nom, level_cap, ambiance_url, ouvert_le, date_plancher_suivant.
+
+etages:
+  0:
+    ouvert_le: "2026-10-30T17:00:00+01:00"
+    date_plancher_suivant: "2026-11-13T17:00:00+01:00"
