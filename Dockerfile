@@ -13,6 +13,7 @@ COPY src ./src
 COPY migrations ./migrations
 COPY alembic.ini ./
 COPY config ./config
+# Le lot B ajoute : COPY donnees ./donnees
 RUN uv sync --frozen --no-dev
 
 # Un utilisateur sans privilège pour faire tourner le programme.

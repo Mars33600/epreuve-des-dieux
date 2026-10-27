@@ -1,25 +1,31 @@
-# Configuration Fly.io (ARCHITECTURE §8). Rien n'est déployé tant que Marceau n'a pas créé le compte.
+# Configuration Fly.io (ARCHITECTURE §10). Rien n'est déployé tant que Marceau n'a pas lancé `fly deploy`.
 app = "epreuve-des-dieux"
 primary_region = "cdg"            # Paris
 
 [build]
 
-[deploy]
-  # Les migrations passent AVANT la bascule vers la nouvelle version.
-  release_command = "alembic upgrade head"
+# Lot A : pas de schéma à migrer. Le lot B remet la commande de release :
+# les migrations passent AVANT la bascule vers la nouvelle version.
+# [deploy]
+#   release_command = "alembic upgrade head"
 
 [env]
-  SITE_PORT = "8080"
+  # Réglages publics du mode (ARCHITECTURE §11). Les secrets passent par `fly secrets set`.
+  SITE_MODE = "auto"                          # teaser jusqu'à SITE_OUVERT_LE, puis ouvert
+  SITE_OUVERT_LE = "2026-11-13T17:00:00+01:00"
   FUSEAU = "Europe/Paris"
+  SITE_PORT = "8080"
   JOURNAL_NIVEAU = "INFO"
+  # SITE_URL = "https://<domaine>"            # à décommenter une fois le domaine acheté
 
 [http_service]
   internal_port = 8080
-  force_https = true
-  auto_stop_machines = "off"      # un bot Discord ne doit jamais s'endormir
+  force_https = true              # HTTP redirigé vers HTTPS
+  auto_stop_machines = "off"      # pas de démarrage à froid le soir du reveal
   auto_start_machines = true
   min_machines_running = 1
 
+  # Fly redémarre la machine si /sante ne répond plus.
   [[http_service.checks]]
     grace_period = "20s"
     interval = "30s"
@@ -29,4 +35,4 @@ primary_region = "cdg"            # Paris
 
 [[vm]]
   size = "shared-cpu-1x"
-  memory = "512mb"
+  memory = "256mb"                # sans bot, le programme tient largement ; 512 Mo si les journaux montrent une pression

@@ -1,22 +1,40 @@
 # L'Épreuve des Dieux
 
-Bot Discord et site de suivi de « L'Épreuve des Dieux », aventure Dofus 3 communautaire.
-Le bot tient le registre des grimpeurs et les validations ; le site public montre la jauge à points
-de l'étage en cours (étage N = chapitre N du [guide Duffus](https://duffus.fr/guide-complet)),
-les grimpeurs, la répartition des classes et le fil des validations.
+Site de suivi de « L'Épreuve des Dieux », aventure Dofus 3 communautaire.
+Jusqu'au vendredi 13/11/2026 à 17 h (heure de Paris), le site ne montre que la page teaser, avec son
+compte à rebours (lot A). Le cœur du site (connexion Discord, cases à cocher, jauge, tour) arrive au lot B.
 
 Documentation : `docs/SPEC.md` (quoi), `docs/ARCHITECTURE.md` (comment), `docs/LOTS.md` (découpage),
-`docs/REPONSES-SHADOAZE.md` (les règles tranchées par l'organisateur).
+`docs/PREREQUIS.md` (ce que Marceau prépare), `docs/design/` (la direction artistique, qui fait foi).
 
-## Voir le site en local (données fictives, sans aucun compte)
+## Voir le teaser en local (sans aucun compte ni base)
 
 ```bash
-uv run python -m epreuve.web.demo        # puis http://127.0.0.1:8080
+uv sync
+uv run python -m epreuve.main        # puis http://127.0.0.1:8080
 ```
 
-La démo utilise le vrai calcul de la jauge sur les 12 grimpeurs fictifs de la maquette. L'horloge est
-simulée au 8 novembre 2026 ; `?horloge=2026-10-29T12:00` ou `?horloge=2026-11-13T17:00` dans
-l'adresse montre le compte à rebours avant l'ouverture ou après la date plancher.
+Aperçus du designer, dans l'adresse : `?dans=12` lance un compte à rebours de 12 secondes pour voir la
+bascule, `?etat=ouvert` montre l'état « Les portes sont ouvertes ». Le bouton « Entrer dans la tour »
+n'apparaît que si `TEASER_LIEN_ENTRER` est renseignée :
+
+```bash
+TEASER_LIEN_ENTRER=https://exemple.fr uv run python -m epreuve.main
+SITE_MODE=ouvert uv run python -m epreuve.main     # la page provisoire du mode ouvert
+```
+
+## Le mode du site
+
+| Variable | Valeurs | Défaut |
+|---|---|---|
+| `SITE_MODE` | `auto`, `teaser` ou `ouvert` | `auto` : teaser jusqu'à `SITE_OUVERT_LE`, puis ouvert |
+| `SITE_OUVERT_LE` | date ISO **avec fuseau** | `2026-11-13T17:00:00+01:00` |
+| `TEASER_LIEN_ENTRER` | adresse du bouton | vide : bouton masqué |
+
+En mode teaser, seuls `/`, `/sante` et `/static/…` répondent ; tout le reste renvoie vers `/` (303),
+ou 404 pour `/api/…`. Chaque réponse porte une CSP stricte (aucun script en ligne) et `X-Robots-Tag: noindex`.
+Les polices sont servies par le site (`src/epreuve/web/static/fonts/`, licence SIL OFL) : la page ne fait
+aucune requête vers un autre domaine.
 
 ## Lancer les tests
 
@@ -25,34 +43,39 @@ l'adresse montre le compte à rebours avant l'ouverture ou après la date planch
 docker run -d --rm --name epreuve-pg-test -p 54329:5432 \
   -e POSTGRES_PASSWORD=test -e POSTGRES_DB=epreuve_test postgres:17-alpine
 
+uv run ruff check .
 uv run pytest --cov=epreuve.domaine --cov-branch --cov-report=term-missing
-uv run pytest -m "not db"                 # seulement ce qui tourne sans base
 ```
 
-Le module de règles (`src/epreuve/domaine/`) doit rester couvert à 100 % (contrôlé par la CI).
+Le module de règles (`src/epreuve/domaine/`, dont `mode_site.py`) doit rester couvert à 100 % (contrôlé par la CI).
 
 ## Organisation du code
 
 | Dossier | Rôle |
 |---|---|
-| `src/epreuve/domaine/` | Les règles, en Python pur : seuil, jauge, paliers, contrôles, classes |
-| `src/epreuve/db/` | Tables, connexion et dépôt (SQLAlchemy async) ; renvoie des objets du domaine |
-| `src/epreuve/bot/` | Commandes Discord : une fonction métier testable + une fine couche Discord |
-| `src/epreuve/web/` | FastAPI : `/`, `/api/etat`, `/sante`, et la démo locale |
-| `src/epreuve/dofusdb/` | Import d'un étage depuis son YAML et l'API DofusDB (hors ligne) |
+| `src/epreuve/domaine/` | Les règles, en Python pur. `mode_site.py` : teaser ou ouvert. Le reste (v3) attend sa réécriture au lot B |
+| `src/epreuve/web/` | FastAPI : `app.py` (le teaser, `/sante`), `securite.py` (filtre du mode, en-têtes), gabarits et statiques |
+| `src/epreuve/db/` | Tables, connexion et dépôt (SQLAlchemy async) ; au lot A, seul `ping()` sert à `/sante` |
+| `src/epreuve/dofusdb/` | Import depuis l'API DofusDB (réécrit au lot B) |
 | `migrations/` | Schéma Postgres versionné (Alembic) |
 
-## Mise en production (plus tard)
+## Mettre le teaser en ligne (Fly.io)
 
-Copier `.env.example` en `.env` et le remplir. `--env-file .env` fait lire ce fichier par uv :
-Alembic et l'outil d'import trouvent ainsi `DATABASE_URL` sans l'exporter à la main.
+Prérequis : compte Fly, `flyctl` installé et connecté (`docs/PREREQUIS.md`, section B). Les réglages
+publics sont dans `fly.toml` ; aucun secret n'est nécessaire au lot A.
 
 ```bash
-uv run --env-file .env alembic upgrade head                                   # crée le schéma
-uv run --env-file .env python -m epreuve.dofusdb.import_etage config/etages/etage-0.yaml --a-blanc  # aperçu
-uv run --env-file .env python -m epreuve.dofusdb.import_etage config/etages/etage-0.yaml            # import
-uv run --env-file .env python -m epreuve.main                                 # bot + site
+fly launch --no-deploy --copy-config --name epreuve-des-dieux --region cdg   # une seule fois
+fly deploy                                                                  # construit l'image et la déploie
+fly status && curl https://epreuve-des-dieux.fly.dev/sante                  # {"statut":"ok",…,"mode":"teaser"}
+
+# Facultatif, recommandé dès que Supabase existe (garde le projet gratuit éveillé, PREREQUIS E.1) :
+fly secrets set DATABASE_URL='postgresql+asyncpg://…'
+
+# Le domaine (PREREQUIS B.3) : enregistrements A et AAAA vers les adresses de `fly ips list`, puis
+fly certs add <domaine>
+fly certs show <domaine>                       # attendre « Issued »
 ```
 
-Le déploiement Fly.io, les secrets GitHub et la clé de chiffrement des sauvegardes sont décrits
-dans `docs/PREREQUIS.md`.
+Reprendre la main : `fly secrets set SITE_MODE=teaser` (ou `ouvert`) redémarre la machine en quelques secondes.
+Le jour J vers 16 h 50 : `fly secrets set TEASER_LIEN_ENTRER=https://<domaine>/`.
