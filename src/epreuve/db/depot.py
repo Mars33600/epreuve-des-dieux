@@ -1,459 +1,99 @@
-"""Le dépôt : toutes les lectures et écritures en base, derrière des fonctions simples.
+"""STUB B2 — remplacé par la version de B1 à l'intégration (interfaces figées de LOTS.md, lot B).
 
-Le reste du programme ne voit jamais de SQL : il appelle `depot.grimpeurs()` et reçoit des
-objets du domaine. Chaque écriture se fait dans UNE transaction (`async with self._moteur.begin()`)
-qui écrit aussi la ligne de journal : soit tout est enregistré, soit rien.
-
-Toutes les écritures reçoivent `acteur` (l'id Discord de l'admin, ou du joueur qui déclare) et
-`maintenant` : ça rend le journal complet et les tests reproductibles (pas d'horloge cachée).
+Seules les erreurs et les signatures sont là : le site se développe contre `web/demo.py`
+(un dépôt en mémoire), en attendant le vrai dépôt Postgres de B1.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
+from typing import Literal
 
-from sqlalchemy import func, insert, select, text, update
-from sqlalchemy.dialects.postgresql import insert as insert_pg
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.ext.asyncio import AsyncConnection, AsyncEngine
+from sqlalchemy.ext.asyncio import AsyncEngine
 
-from epreuve.db import tables as t
-from epreuve.domaine.controles import statut_a_l_inscription
+from epreuve.domaine.fiche import FicheQuete
 from epreuve.domaine.modeles import (
-    Contenu,
+    CaseSucces,
+    Coches,
+    ContenuEtage,
+    Donjon,
+    ElementRef,
     EntreeJournal,
     Etage,
     Grimpeur,
-    Instantane,
-    Palier,
-    Validation,
+    Nature,
+    Quete,
+    Regles,
+    Session,
+    Statut,
 )
-
-# --- Erreurs métier remontées au bot -------------------------------------------------------------
-
-
-class ErreurDepot(Exception):
-    """Une écriture refusée pour une raison compréhensible par un admin."""
+from epreuve.domaine.ouverture import Bilan
 
 
-class PseudoDejaPris(ErreurDepot):
-    pass
+class ErreurDepot(Exception): ...
+class Introuvable(ErreurDepot): ...
+class PseudoDejaPris(ErreurDepot): ...
+class PasSurLaListe(ErreurDepot): ...
+class DejaInscrit(ErreurDepot): ...
+class EtatInvalide(ErreurDepot): ...
+class CocheRefusee(ErreurDepot): ...
 
 
-class MembreDejaRelie(ErreurDepot):
-    pass
-
-
-class Introuvable(ErreurDepot):
-    pass
-
-
-class DejaValide(ErreurDepot):
-    """L'index unique a bloqué une deuxième validation acceptée (deux admins en même temps)."""
-
-
-@dataclass(frozen=True)
-class PreuveDiscord:
-    """Le lien d'un message Discord, découpé, et la date du message."""
-
-    guild_id: int
-    channel_id: int
-    message_id: int
-    lien: str
-    poste_le: datetime
-
-
-@dataclass(frozen=True)
-class LigneValidation:
-    """Une validation avec ce qu'il faut pour l'afficher dans `/grimpeur voir`."""
-
-    validation: Validation
-    contenu: str
-    motif: str | None
-    preuve: str | None
-
-
-def _contrainte(e: IntegrityError) -> str:
-    """Le nom de la contrainte violée, lu dans l'erreur d'asyncpg (ou le message à défaut)."""
-    cause = getattr(e.orig, "__cause__", None)
-    return getattr(cause, "constraint_name", None) or str(e.orig)
-
-
-def _est_doublon(e: IntegrityError) -> bool:
-    """Une violation d'unicité sur une validation acceptée ou sur une preuve : « déjà validé »."""
-    nom = _contrainte(e)
-    return "validation_une_acceptee" in nom or "preuve_discord_message_id" in nom
-
-
-# --- Conversions ligne de base → objet du domaine ------------------------------------------------
-
-
-def _etage(r) -> Etage:
-    return Etage(r.id, r.numero, r.nom, r.level_cap, r.seuil_pourcent, r.statut, r.ouvert_le,
-                 r.date_plancher_suivant, r.zone_quetes, tuple(r.donjons_affiches or ()), r.chapitre_guide)
-
-
-def _grimpeur(r) -> Grimpeur:
-    return Grimpeur(r.id, r.pseudo_ig, r.classe, r.difficulte, r.statut, r.niveau_connu, r.inscrit_le)
-
-
-def _validation(r) -> Validation:
-    return Validation(r.id, r.grimpeur_id, r.contenu_id, r.niveau, r.statut, r.forcee, r.source, r.realisee_le)
-
-
-def _contenu(r) -> Contenu:
-    return Contenu(r.id, r.etage_id, r.type, r.nom, r.nom_court)
-
-
-def _entree(r) -> EntreeJournal:
-    return EntreeJournal(r.id, r.horodatage, r.type, r.public, r.grimpeur_id, r.details)
-
-
-# Dernière activité d'un grimpeur, lue dans le journal : ses validations, ses déclarations
-# et les mises à jour de son niveau. Les validations d'un groupe sont dans `details.validations`.
-_SQL_ACTIVITE = text("""
-    SELECT gid, max(horodatage) AS derniere FROM (
-        SELECT grimpeur_id AS gid, horodatage FROM epreuve.journal
-        WHERE type = 'niveau' AND grimpeur_id IS NOT NULL
-        UNION ALL
-        SELECT (v ->> 'grimpeur_id')::int AS gid, j.horodatage
-        FROM epreuve.journal j, jsonb_array_elements(j.details -> 'validations') AS v
-        WHERE j.type IN ('validation', 'declaration')
-    ) AS activite GROUP BY gid
-""")
-
-
-class Depot:
+class Depot:  # pragma: no cover — stub
     def __init__(self, moteur: AsyncEngine) -> None:
         self._moteur = moteur
 
-    # --- Santé -----------------------------------------------------------------------------------
-
-    async def ping(self) -> bool:
-        try:
-            async with self._moteur.connect() as c:
-                await c.execute(text("SELECT 1"))
-            return True
-        except Exception:  # noqa: BLE001 — toute erreur veut dire « base injoignable »
-            return False
-
-    # --- Lectures --------------------------------------------------------------------------------
-
-    async def etages(self) -> list[Etage]:
-        async with self._moteur.connect() as c:
-            return await self._etages(c)
-
-    @staticmethod
-    async def _etages(c: AsyncConnection) -> list[Etage]:
-        return [_etage(r) for r in await c.execute(select(t.etage).order_by(t.etage.c.numero))]
-
-    async def etage_ouvert(self) -> Etage | None:
-        return next((e for e in await self.etages() if e.statut == "ouvert"), None)
-
-    async def paliers(self, etage_id: int) -> list[Palier]:
-        async with self._moteur.connect() as c:
-            return await self._paliers(c, etage_id)
-
-    @staticmethod
-    async def _paliers(c: AsyncConnection, etage_id: int) -> list[Palier]:
-        lignes = (await c.execute(
-            select(t.palier).where(t.palier.c.etage_id == etage_id).order_by(t.palier.c.rang)
-        )).all()  # fmt: skip
-        liens = (await c.execute(
-            select(t.palier_contenu).join(t.palier).where(t.palier.c.etage_id == etage_id)
-        )).all()  # fmt: skip
-        contenus: dict[int, set[int]] = {}
-        for lien in liens:
-            contenus.setdefault(lien.palier_id, set()).add(lien.contenu_id)
-        return [Palier(r.id, r.etage_id, r.rang, r.libelle, frozenset(contenus.get(r.id, set()))) for r in lignes]
-
-    async def contenus(self, etage_id: int) -> list[Contenu]:
-        async with self._moteur.connect() as c:
-            res = await c.execute(
-                select(t.contenu).where(t.contenu.c.etage_id == etage_id).order_by(t.contenu.c.id)
-            )
-            return [_contenu(r) for r in res]
-
-    async def grimpeurs(self, statut: str | None = None) -> list[Grimpeur]:
-        """Tous les grimpeurs, ou ceux d'un statut (actif, pause ou exclu)."""
-        requete = select(t.grimpeur).order_by(func.lower(t.grimpeur.c.pseudo_ig))
-        if statut:
-            requete = requete.where(t.grimpeur.c.statut == statut)
-        async with self._moteur.connect() as c:
-            return [_grimpeur(r) for r in await c.execute(requete)]
-
-    async def grimpeur_par_pseudo(self, pseudo: str) -> Grimpeur | None:
-        async with self._moteur.connect() as c:
-            r = (await c.execute(
-                select(t.grimpeur).where(func.lower(t.grimpeur.c.pseudo_ig) == pseudo.strip().lower())
-            )).first()  # fmt: skip
-            return _grimpeur(r) if r else None
-
-    async def grimpeur_par_discord(self, discord_user_id: int) -> Grimpeur | None:
-        """Le grimpeur relié à ce compte Discord (pour /quetes)."""
-        async with self._moteur.connect() as c:
-            r = (await c.execute(
-                select(t.grimpeur).where(t.grimpeur.c.discord_user_id == discord_user_id)
-            )).first()  # fmt: skip
-            return _grimpeur(r) if r else None
-
-    async def discord_du_grimpeur(self, grimpeur_id: int) -> int | None:
-        """L'id Discord relié (affiché aux admins seulement, jamais sur le site)."""
-        async with self._moteur.connect() as c:
-            return (await c.execute(
-                select(t.grimpeur.c.discord_user_id).where(t.grimpeur.c.id == grimpeur_id)
-            )).scalar()  # fmt: skip
-
-    async def validations(self) -> list[Validation]:
-        async with self._moteur.connect() as c:
-            return [_validation(r) for r in await c.execute(select(t.validation).order_by(t.validation.c.id))]
-
-    async def validation_acceptee(self, grimpeur_id: int, contenu_id: int) -> Validation | None:
-        async with self._moteur.connect() as c:
-            r = (await c.execute(select(t.validation).where(
-                t.validation.c.grimpeur_id == grimpeur_id,
-                t.validation.c.contenu_id == contenu_id,
-                t.validation.c.statut == "acceptee",
-            ))).first()  # fmt: skip
-            return _validation(r) if r else None
-
-    async def validations_du_grimpeur(self, grimpeur_id: int) -> list[LigneValidation]:
-        """Toutes ses validations et déclarations, annulées comprises (rien ne s'efface)."""
-        async with self._moteur.connect() as c:
-            res = await c.execute(
-                select(t.validation, t.contenu.c.nom_court, t.preuve.c.lien)
-                .join(t.contenu, t.contenu.c.id == t.validation.c.contenu_id)
-                .outerjoin(t.preuve, t.preuve.c.id == t.validation.c.preuve_id)
-                .where(t.validation.c.grimpeur_id == grimpeur_id)
-                .order_by(t.validation.c.id)
-            )
-            return [LigneValidation(_validation(r), r.nom_court, r.motif, r.lien) for r in res]
-
-    async def journal(self, limite: int = 100, public: bool | None = None) -> list[EntreeJournal]:
-        requete = select(t.journal).order_by(t.journal.c.horodatage.desc(), t.journal.c.id.desc())
-        if public is not None:
-            requete = requete.where(t.journal.c.public == public)
-        async with self._moteur.connect() as c:
-            return [_entree(r) for r in await c.execute(requete.limit(limite))]
-
-    async def dernieres_activites(self) -> dict[int, datetime]:
-        """{grimpeur_id: date de dernière activité} (réservé aux admins, jamais sur le site)."""
-        async with self._moteur.connect() as c:
-            return {r.gid: r.derniere for r in await c.execute(_SQL_ACTIVITE)}
-
-    async def derniere_activite(self, grimpeur_id: int) -> datetime | None:
-        return (await self.dernieres_activites()).get(grimpeur_id)
-
-    async def charger_instantane(self) -> Instantane:
-        """Tout ce que le site affiche, lu sur une seule connexion."""
-        async with self._moteur.connect() as c:
-            etages = await self._etages(c)
-            ouvert = next((e for e in etages if e.statut == "ouvert"), None)
-            paliers, contenus = [], []
-            if ouvert:
-                paliers = await self._paliers(c, ouvert.id)
-                res = await c.execute(select(t.contenu).where(t.contenu.c.etage_id == ouvert.id))
-                contenus = [_contenu(r) for r in res]
-            grimpeurs = [_grimpeur(r) for r in await c.execute(select(t.grimpeur))]
-            validations = [_validation(r) for r in await c.execute(select(t.validation))]
-            # On lit plus de 30 entrées : certaines seront masquées (validation annulée, exclu).
-            res = await c.execute(
-                select(t.journal).where(t.journal.c.public.is_(True))
-                .order_by(t.journal.c.horodatage.desc(), t.journal.c.id.desc()).limit(200)
-            )
-            journal = [_entree(r) for r in res]
-        return Instantane(tuple(etages), tuple(paliers), tuple(contenus), tuple(grimpeurs),
-                          tuple(validations), tuple(journal))
-
-    # --- Écritures : outils internes --------------------------------------------------------------
-
-    @staticmethod
-    async def _journaliser(c: AsyncConnection, type_: str, acteur: int | None, maintenant: datetime,
-                           details: dict, grimpeur_id: int | None = None, etage_id: int | None = None,
-                           public: bool = False) -> None:
-        await c.execute(insert(t.journal).values(
-            horodatage=maintenant, acteur_discord_id=acteur, type=type_, grimpeur_id=grimpeur_id,
-            etage_id=etage_id, details=details, public=public,
-        ))  # fmt: skip
-
-    # --- Écritures : registre des grimpeurs ------------------------------------------------------
-
-    async def ajouter_grimpeur(self, pseudo: str, classe: str, difficulte: str, discord_user_id: int | None,
-                               acteur: int, maintenant: datetime) -> Grimpeur:
-        """Inscrit un grimpeur. Après l'ouverture de l'étage 0, il arrive en pause (un admin le reprend)."""
-        try:
-            async with self._moteur.begin() as c:
-                etage0 = next((e for e in await self._etages(c) if e.numero == 0), None)
-                statut = statut_a_l_inscription(maintenant, etage0)
-                r = (await c.execute(insert(t.grimpeur).values(
-                    pseudo_ig=pseudo, classe=classe, difficulte=difficulte, statut=statut,
-                    discord_user_id=discord_user_id, inscrit_le=maintenant,
-                ).returning(t.grimpeur))).one()  # fmt: skip
-                await self._journaliser(c, "inscription", acteur, maintenant,
-                                        {"pseudo": pseudo, "classe": classe, "difficulte": difficulte,
-                                         "statut": statut}, grimpeur_id=r.id)
-                return _grimpeur(r)
-        except IntegrityError as e:
-            raise self._traduire(e, pseudo) from None
-
-    @staticmethod
-    def _traduire(e: IntegrityError, pseudo: str) -> ErreurDepot:
-        nom = _contrainte(e)
-        if "grimpeur_pseudo_unique" in nom:
-            return PseudoDejaPris(f"le pseudo « {pseudo} » est déjà inscrit")
-        if "grimpeur_discord_unique" in nom:
-            return MembreDejaRelie("ce membre Discord est déjà relié à un autre grimpeur")
-        raise e
-
-    async def modifier_grimpeur(self, grimpeur_id: int, acteur: int, maintenant: datetime, *,
-                                pseudo: str | None = None, classe: str | None = None,
-                                difficulte: str | None = None, niveau: int | None = None,
-                                discord_user_id: int | None = None) -> tuple[Grimpeur, dict]:
-        """Change les champs donnés. Renvoie le grimpeur à jour et les changements {champ: [avant, après]}.
-
-        Le changement de difficulté et celui de niveau ont chacun leur ligne de journal.
-        """
-        try:
-            async with self._moteur.begin() as c:
-                avant = (await c.execute(
-                    select(t.grimpeur).where(t.grimpeur.c.id == grimpeur_id).with_for_update()
-                )).first()  # fmt: skip
-                if avant is None:
-                    raise Introuvable("grimpeur introuvable")
-                voulu = {"pseudo_ig": pseudo, "classe": classe, "difficulte": difficulte,
-                         "niveau_connu": niveau, "discord_user_id": discord_user_id}
-                valeurs = {k: v for k, v in voulu.items() if v is not None and v != getattr(avant, k)}
-                if not valeurs:
-                    return _grimpeur(avant), {}
-                if "niveau_connu" in valeurs:
-                    valeurs["niveau_maj_le"] = maintenant
-                await c.execute(update(t.grimpeur).where(t.grimpeur.c.id == grimpeur_id).values(**valeurs))
-                changements = {k: [getattr(avant, k), v] for k, v in valeurs.items() if k != "niveau_maj_le"}
-                if "discord_user_id" in changements:  # pas d'identifiant Discord en clair au journal
-                    changements["discord_user_id"] = ["…", "relié"]
-                for champ, type_ in (("difficulte", "difficulte"), ("niveau_connu", "niveau")):
-                    if champ in changements:
-                        av, ap = changements[champ]
-                        await self._journaliser(c, type_, acteur, maintenant, {"avant": av, "apres": ap},
-                                                grimpeur_id=grimpeur_id)
-                autres = {k: v for k, v in changements.items() if k not in ("difficulte", "niveau_connu")}
-                if autres:
-                    await self._journaliser(c, "modification", acteur, maintenant, autres, grimpeur_id=grimpeur_id)
-                apres = (await c.execute(select(t.grimpeur).where(t.grimpeur.c.id == grimpeur_id))).one()
-                return _grimpeur(apres), changements
-        except IntegrityError as e:
-            raise self._traduire(e, pseudo or "") from None
-
-    async def changer_statut(self, grimpeur_id: int, statut: str, motif: str | None, type_journal: str,
-                             acteur: int, maintenant: datetime) -> Grimpeur:
-        """Pause, reprise ou exclusion : on change le statut et on l'écrit au journal (non public).
-
-        Aucun calcul automatique : c'est l'admin qui juge quand un joueur reprend (décision du 25/10).
-        """
-        async with self._moteur.begin() as c:
-            r = (await c.execute(
-                update(t.grimpeur).where(t.grimpeur.c.id == grimpeur_id).values(statut=statut).returning(t.grimpeur)
-            )).first()  # fmt: skip
-            if r is None:
-                raise Introuvable("grimpeur introuvable")
-            await self._journaliser(c, type_journal, acteur, maintenant, {"statut": statut, "motif": motif},
-                                    grimpeur_id=grimpeur_id)
-            return _grimpeur(r)
-
-    # --- Écritures : validations et déclarations -------------------------------------------------
-
-    async def creer_validations(self, etage: Etage, contenu: Contenu, couples: list[tuple[Grimpeur, int, bool]],
-                                realisee_le: datetime, preuve: PreuveDiscord | None, acteur: int,
-                                maintenant: datetime) -> list[int]:
-        """Crée une validation par couple (grimpeur, niveau, forcée ?), TOUT OU RIEN, et une entrée publique.
-
-        Les contrôles métier sont faits avant, par le domaine. Ici, la base apporte la garantie
-        finale : si une validation acceptée existe déjà pour un couple (deux admins en même temps),
-        l'index unique fait échouer la transaction entière et on lève `DejaValide`.
-        """
-        try:
-            async with self._moteur.begin() as c:
-                preuve_id = await self._preuve(c, preuve) if preuve else None
-                lignes = []
-                for g, niveau, forcee in couples:
-                    vid = (await c.execute(insert(t.validation).values(
-                        grimpeur_id=g.id, contenu_id=contenu.id, preuve_id=preuve_id, niveau=niveau,
-                        statut="acceptee", forcee=forcee, source="manuelle",
-                        decidee_par=acteur, decidee_le=maintenant, realisee_le=realisee_le,
-                    ).returning(t.validation.c.id))).scalar_one()  # fmt: skip
-                    lignes.append({"id": vid, "grimpeur_id": g.id, "niveau": niveau, "contenu": contenu.nom_court,
-                                   "forcee": forcee})
-                await self._journaliser(c, "validation", acteur, maintenant, {
-                    "contenu_id": contenu.id, "validations": lignes, "preuve": preuve.lien if preuve else None,
-                }, etage_id=etage.id, public=True)  # fmt: skip
-                forcees = [ligne for ligne in lignes if ligne["forcee"]]
-                if forcees:
-                    await self._journaliser(c, "depassement_accepte", acteur, maintenant,
-                                            {"cap": etage.level_cap, "validations": forcees}, etage_id=etage.id)
-                for g, niveau, _ in couples:
-                    # Niveau connu : le plus haut niveau vu sur une validation acceptée.
-                    await c.execute(
-                        update(t.grimpeur).where(t.grimpeur.c.id == g.id)
-                        .where(func.coalesce(t.grimpeur.c.niveau_connu, 0) < niveau)
-                        .values(niveau_connu=niveau, niveau_maj_le=maintenant)
-                    )  # fmt: skip
-                return [ligne["id"] for ligne in lignes]
-        except IntegrityError as e:
-            if _est_doublon(e):
-                raise DejaValide("déjà validé") from None
-            raise
-
-    async def declarer(self, etage: Etage, contenus: list[Contenu], g: Grimpeur, preuve: PreuveDiscord | None,
-                       acteur: int, maintenant: datetime) -> list[int]:
-        """`/quetes` : des validations acceptées, source « declaration », sans niveau. Une entrée publique."""
-        try:
-            async with self._moteur.begin() as c:
-                preuve_id = await self._preuve(c, preuve) if preuve else None
-                lignes = []
-                for contenu in contenus:
-                    vid = (await c.execute(insert(t.validation).values(
-                        grimpeur_id=g.id, contenu_id=contenu.id, preuve_id=preuve_id, niveau=None,
-                        statut="acceptee", forcee=False, source="declaration",
-                        decidee_par=acteur, decidee_le=maintenant, realisee_le=maintenant,
-                    ).returning(t.validation.c.id))).scalar_one()  # fmt: skip
-                    lignes.append({"id": vid, "grimpeur_id": g.id, "niveau": None, "contenu": contenu.nom_court})
-                await self._journaliser(c, "declaration", acteur, maintenant,
-                                        {"validations": lignes, "preuve": preuve.lien if preuve else None},
-                                        grimpeur_id=g.id, etage_id=etage.id, public=True)
-                return [ligne["id"] for ligne in lignes]
-        except IntegrityError as e:
-            if _est_doublon(e):
-                raise DejaValide("déjà déclaré") from None
-            raise
-
-    @staticmethod
-    async def _preuve(c: AsyncConnection, p: PreuveDiscord) -> int:
-        """Retrouve ou crée la preuve : un même screen peut servir à plusieurs commandes.
-
-        `ON CONFLICT DO NOTHING` puis lecture : si deux admins saisissent le même screen en même
-        temps, la seconde insertion attend la première au lieu d'échouer, puis relit la ligne.
-        """
-        await c.execute(insert_pg(t.preuve).values(
-            discord_guild_id=p.guild_id, discord_channel_id=p.channel_id, discord_message_id=p.message_id,
-            lien=p.lien, poste_le=p.poste_le, statut_ia="sans", cree_le=func.now(),
-        ).on_conflict_do_nothing(index_elements=["discord_message_id"]))  # fmt: skip
-        return (await c.execute(
-            select(t.preuve.c.id).where(t.preuve.c.discord_message_id == p.message_id)
-        )).scalar_one()  # fmt: skip
-
-    async def annuler_validation(self, validation_id: int, motif: str, acteur: int,
-                                 maintenant: datetime) -> Validation:
-        """Passe une validation ou une déclaration en « annulée ». Elle reste en base et au journal."""
-        async with self._moteur.begin() as c:
-            r = (await c.execute(
-                update(t.validation)
-                .where(t.validation.c.id == validation_id, t.validation.c.statut == "acceptee")
-                .values(statut="annulee", motif=motif, decidee_par=acteur, decidee_le=maintenant)
-                .returning(t.validation)
-            )).first()  # fmt: skip
-            if r is None:
-                raise Introuvable(f"pas de validation acceptée n° {validation_id}")
-            await self._journaliser(c, "annulation", acteur, maintenant,
-                                    {"validation_id": validation_id, "motif": motif}, grimpeur_id=r.grimpeur_id)
-            return _validation(r)
+    async def ping(self) -> bool: raise NotImplementedError
+    async def etages(self) -> list[Etage]: raise NotImplementedError
+    async def etage_par_numero(self, numero: int) -> Etage | None: raise NotImplementedError
+    async def contenu_etage(self, etage_id: int) -> ContenuEtage: raise NotImplementedError
+    async def contenu_brut(self, etage_id: int) -> tuple[Etage, list[Donjon], list[CaseSucces], list[Quete]]:
+        raise NotImplementedError
+    async def alertes_etage(self, etage_id: int) -> list[str]: raise NotImplementedError
+    async def coches_etage(self, etage_id: int) -> dict[int, Coches]: raise NotImplementedError
+    async def grimpeurs(self) -> list[Grimpeur]: raise NotImplementedError
+    async def grimpeur(self, grimpeur_id: int) -> Grimpeur | None: raise NotImplementedError
+    async def grimpeur_par_discord(self, discord_user_id: int) -> Grimpeur | None: raise NotImplementedError
+    async def liste_officielle(self) -> dict[int, Statut]: raise NotImplementedError
+    async def dernieres_activites(self) -> dict[int, datetime]: raise NotImplementedError
+    async def bilan(self, etage_id: int) -> Bilan | None: raise NotImplementedError
+    async def journal(self, limite: int = 200, grimpeur_id: int | None = None, etage_id: int | None = None,
+                      type_: str | None = None) -> list[EntreeJournal]: raise NotImplementedError
+    async def creer_grimpeur(self, discord_user_id, nom_discord, pseudo, classe, niveau_declare,
+                             maintenant) -> Grimpeur: raise NotImplementedError
+    async def maj_nom_discord(self, discord_user_id, nom_discord) -> None: raise NotImplementedError
+    async def modifier_grimpeur(self, grimpeur_id, acteur, maintenant, *, pseudo=None, classe=None,
+                                niveau_declare=None) -> Grimpeur: raise NotImplementedError
+    async def cocher(self, grimpeur_id, ref: ElementRef, cochee: bool, acteur, maintenant, regles: Regles,
+                     motif: str | None = None) -> tuple[ElementRef, ...]: raise NotImplementedError
+    async def cocher_donjon(self, grimpeur_id, donjon_id, acteur, maintenant, regles: Regles,
+                            motif: str | None = None) -> int: raise NotImplementedError
+    async def ajouter_liste(self, discord_ids: list[int], statut_initial: Literal["actif", "pause"], acteur,
+                            maintenant) -> list[int]: raise NotImplementedError
+    async def changer_statut(self, grimpeur_id, statut: Statut, motif: str | None, acteur,
+                             maintenant) -> Grimpeur: raise NotImplementedError
+    async def regler_palier(self, etage_id, palier: int | None, motif: str, acteur, maintenant) -> Etage:
+        raise NotImplementedError
+    async def regler_date_plancher(self, etage_id, date: datetime | None, acteur, maintenant) -> Etage:
+        raise NotImplementedError
+    async def modifier_quete(self, quete_id, acteur, maintenant, *, nature: Nature | None = None,
+                             motif: str | None = None, masquee: bool | None = None,
+                             nom: str | None = None) -> Quete: raise NotImplementedError
+    async def modifier_donjon(self, donjon_id, acteur, maintenant, *, masque=None, nom=None) -> Donjon:
+        raise NotImplementedError
+    async def ajouter_donjon(self, etage_id, duffus_id: str, acteur, maintenant) -> Donjon: raise NotImplementedError
+    async def donjons_disponibles(self) -> list[tuple[str, str, int | None]]: raise NotImplementedError
+    async def regler_etage(self, etage_id, acteur, maintenant, *, nom=None, ambiance_url=None,
+                           level_cap=None) -> Etage: raise NotImplementedError
+    async def fiche_quete(self, quete_id: int) -> FicheQuete | None: raise NotImplementedError
+    async def quetes_sans_fiche(self, etage_id: int) -> list[Quete]: raise NotImplementedError
+    async def modifier_case(self, case_id, acteur, maintenant, *, masquee=None, nom=None,
+                            condition=None) -> CaseSucces: raise NotImplementedError
+    async def ouvrir_etage(self, numero: int, bilan_precedent: Bilan, acteur, maintenant) -> Etage:
+        raise NotImplementedError
+    async def creer_session(self, id_hache: bytes, discord_user_id, nom_discord, est_admin, jeton_oauth, csrf,
+                            maintenant, duree: timedelta) -> None: raise NotImplementedError
+    async def session(self, id_hache: bytes, maintenant) -> Session | None: raise NotImplementedError
+    async def maj_roles_session(self, id_hache, est_admin, maintenant) -> None: raise NotImplementedError
+    async def supprimer_session(self, id_hache) -> str | None: raise NotImplementedError
+    async def purger_sessions(self, maintenant) -> int: raise NotImplementedError
