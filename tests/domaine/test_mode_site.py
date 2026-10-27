@@ -1,7 +1,8 @@
 """mode_effectif() et voit_site_complet() : la bascule du teaser vers le site complet."""
 
 import itertools
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone, tzinfo
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -59,3 +60,41 @@ def test_voit_site_complet_les_8_combinaisons(mode, est_admin, est_testeur):
 def test_chemins_permis_du_lot_a():
     assert CHEMINS_TOUJOURS_PERMIS == {"/", "/sante"}
     assert PREFIXES_TOUJOURS_PERMIS == ("/static/",)
+
+
+# --- Cas adverses ---------------------------------------------------------------------------------------
+
+
+class FuseauSansDecalage(tzinfo):
+    """Un tzinfo présent mais qui ne connaît pas son décalage : la date reste « naïve » pour Python."""
+
+    def utcoffset(self, dt):
+        return None
+
+    def dst(self, dt):
+        return None
+
+
+@pytest.mark.parametrize("reglage", ["auto", "teaser", "ouvert"])
+def test_fuseau_sans_decalage_refuse(reglage):
+    bancale = datetime(2026, 11, 13, 17, 0, tzinfo=FuseauSansDecalage())
+    with pytest.raises(ValueError, match="ouvert_le"):
+        mode_effectif(reglage, bancale, OUVERTURE)
+    with pytest.raises(ValueError, match="maintenant"):
+        mode_effectif(reglage, OUVERTURE, bancale)
+
+
+def test_ouverture_ecrite_avec_le_fuseau_nomme_de_paris():
+    # Avec ZoneInfo, le 13/11 tombe en heure d'hiver : 17:00 à Paris = 16:00 UTC, pas 15:00.
+    ouverture = datetime(2026, 11, 13, 17, 0, tzinfo=ZoneInfo("Europe/Paris"))
+    assert ouverture == OUVERTURE
+    assert mode_effectif("auto", ouverture, datetime(2026, 11, 13, 15, 59, 59, 999999, tzinfo=UTC)) == "teaser"
+    assert mode_effectif("auto", ouverture, datetime(2026, 11, 13, 16, 0, tzinfo=UTC)) == "ouvert"
+
+
+@pytest.mark.parametrize("decalage_h", [-12, -5, 0, 5.5, 14])
+def test_meme_instant_quel_que_soit_le_fuseau_de_l_horloge(decalage_h):
+    fuseau = timezone(timedelta(hours=decalage_h))
+    assert mode_effectif("auto", OUVERTURE, (OUVERTURE - SECONDE).astimezone(fuseau)) == "teaser"
+    assert mode_effectif("auto", OUVERTURE, OUVERTURE.astimezone(fuseau)) == "ouvert"
+
