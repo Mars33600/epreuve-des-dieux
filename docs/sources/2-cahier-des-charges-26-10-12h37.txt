@@ -1,0 +1,46 @@
+
+🎮 Contexte du Projet
+
+Vous développez bénévolement un site web de suivi et un bot Discord de validation pour un événement communautaire sur le jeu Dofus organisé par Shadoaze (nommé "L'Épreuve des Dieux"). Le concept repose sur une progression par "étages" (tranches de niveaux) que la communauté doit débloquer collectivement.
+
+📌 Synthèse des Règles et Décisions Validées
+
+
+1. Système de Progression et Calcul des Points
+
+• Jauge unique globale : L'étage suivant s'ouvre lorsque la jauge commune atteint 75 % d'une valeur maximale théorique.
+• Calcul de la jauge : Basé sur tous les joueurs inscrits, excluant ceux explicitement marqués "en pause".
+• Barème par catégorie de joueur :
+	• Aventurier (Facile) : Juste vaincre les donjons de l'étage → 1 point.
+	• Éclaireur (Moyen) : Quêtes principales recommandées + Donjons en "Full Succès" → 2 points.
+	• Collectionneur (Difficile) : 100 % de complétion du guide (quêtes principales + annexes) + Donjons en "Full Succès" → 3 points.
+• Aide au groupe : Un joueur peut rapporter plus de points que sa difficulté initiale (ex: un Aventurier qui réalise un Full Succès apporte 2 points au lieu de 1), ce qui aide la jauge sans augmenter l'objectif global. Les paliers sont stricts (pas de points intermédiaires).
+• Gestion des retardataires / retours de pause : Ils ne rentrent à nouveau dans l'algorithme de calcul des points que lorsqu'ils ont rattrapé au minimum le grimpeur le moins avancé. La réintégration se fera manuellement par les admins au cas par cas.
+
+2. Fonctionnement des Donjons et Preuves
+
+• Full Succès : Cela représente la validation des 5 succès liés à un donjon (le donjon classique, le Duo, et les 3 conditions spéciales). Vaincre le boss en Full Succès valide automatiquement le donjon simple.
+• Niveau des personnages : Être en dessous du niveau (cap) de l'étage est autorisé. Seul le dépassement volontaire du cap pose problème.
+• Preuves de validation : Pour les quêtes, la parole des joueurs suffit (système de confiance, les admins peuvent révoquer). Pour les donjons, les joueurs devront soumettre un screen de l'interface de récapitulatif post-combat (qui affiche le niveau, les joueurs présents et les succès débloqués).
+• Contrainte de groupe : Si un joueur extérieur à l'événement est présent dans le groupe de donjon, la validation est refusée.
+
+3. Calendrier et Logistique de lancement
+
+• Lancement de l'Étage 0 (Accès anticipé) : Vendredi 30 octobre 2026 à 17h00. Cette phase de 2 semaines servira de bêta-test, de création des personnages et d'adhésion à la guilde en jeu.
+• Blocage temporel : Même si la jauge de points est remplie à 100 %, l'Étage 1 restera verrouillé jusqu'au vendredi 13 novembre 2026 à 17h00.
+• Validation humaine : L'ouverture des étages ne sera pas automatique. Un administrateur devra presser un bouton manuellement après vérification des scores.
+
+🛠️ Spécifications Techniques pour le futur Site Web
+
+Shadoaze souhaite que vous "absorbiez" la structure et les données du site de référence duffus.fr (notamment leur guide de progression optimisé), mais en y appliquant de fortes restrictions d'affichage.
+
+À intégrer et coder :
+
+• Cadenas sur le Lore (Fog of War) : Masquer complètement et interdire le défilement (scroll) des étages et étapes supérieurs tant qu'ils n'ont pas été ouverts par un admin.
+• Double Guide Dynamique : Idéalement, proposer deux affichages de quêtes selon le profil choisi :
+	1. Version Collectionneur : Affichage de 100 % des quêtes (principales et secondaires).
+	2. Version Éclaireur/Aventurier : Version épurée filtrant et masquant toutes les quêtes secondaires pour ne laisser visibles que les quêtes menant à l'obtention des Dofus et leurs prérequis stricts.
+• Indicateur visuel : Mettre un code couleur ou un encadré net pour différencier au premier coup d'œil une quête principale (Dofus) d'une quête secondaire.
+• Système de Checkbox et Dashboard : Permettre à chaque utilisateur connecté de cocher ses quêtes faites pour mettre à jour son tableau de bord personnel et voir son pourcentage d'avancement.
+• Modules à cloner de la source : Section de tracking des Avis de recherche, l'Encyclopédie, le gestionnaire de Stuffs/Builder, et le suivi des Archimonstres (sans l'onglet de bourse aux échanges).
+• Éléments à supprimer de la source : Retirer toutes les mentions à Duffus, leurs logos, leurs liens de réseaux sociaux (Twitch, Discord) et leurs widgets de dons.

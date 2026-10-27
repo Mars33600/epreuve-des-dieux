@@ -1,0 +1,53 @@
+
+📋 Début du prompt pour Claude Code
+
+Tu es un développeur Fullstack expert. Tu dois m'aider à coder un site web de suivi de progression et un bot Discord de validation pour un événement communautaire Dofus nommé "L'Épreuve des Dieux". Le site sera privé, restreint aux participants et hébergé à petit budget.
+Voici le cahier des charges strict, sans aucune place à l'interprétation :
+
+1. ALGORITHME DE PROGRESSION & SYSTÈME DE POINTS
+
+Le jeu se déroule par "Étages" (tranches de niveaux) bloqués. L'Étage suivant s'ouvre manuellement par un admin, mais l'action n'est éligible que si la jauge globale de l'étage atteint le palier requis.
+• Règle du Point Unique : Il n'y a pas de barème de points complexe ou asymétrique. Chaque action majeure accomplie par n'importe quel joueur rapporte exactement 1 point, réparti dans les 4 catégories d'actions suivantes :
+	1. Donjons validés (Battre le boss en mode normal / finir le donjon classique).
+	2. Donjons validés en full succès (Réaliser l'intégralité des 5 sous-succès du boss).
+	3. Quêtes principales (Quêtes nécessaires pour l'obtention des Dofus).
+	4. Quêtes secondaires (Quêtes annexes de complétion).
+• Calcul du Palier de l'Étage :
+Le score requis pour débloquer manuellement un étage est dynamique et dépend uniquement du nombre de joueurs actifs :
+\(\text{Palier\ de\ validation}=2\times \text{Nombre\ de\ joueurs\ actifs}\)
+• Calcul de la Jauge Globale :
+	• Score Actuel = Somme de tous les points (actions majeures cochées) validés par l'ensemble des joueurs actifs.
+	• L'étage peut être validé si : Score Actuel ≥ Palier de validation.
+• Gestion des Pauses et Retards :
+	• Un joueur marqué "En Pause" par un admin est totalement exclu du calcul. Son état passe à inactif, ce qui baisse immédiatement le Palier de validation de l'étage pour le groupe.
+	• Un joueur retardataire ou de retour de pause doit rattraper le niveau du grimpeur actif le moins avancé avant d'être réintégré manuellement par un admin.
+
+2. INTERFACE EN PYRAMIDE & SYSTÈME DE FILTRES TRADITIONNEL
+
+• Design en Pyramide (Fog of War) : L'interface globale du site doit être modélisée sous forme de pyramide symbolisant la tour. Les étages supérieurs non ouverts par les administrateurs ne sont pas encore générés graphiquement, rendant leur accès et leur visualisation techniquement impossibles pour les joueurs afin de maintenir la surprise totale.
+• Onglet Unique par Étage : Pour l'étage actif ouvert, tout le monde consulte la même interface et la même liste unifiée.
+• Filtre Classique Cumulatif : L'interface doit proposer un système de filtre standard via des cases à cocher de sélection. Le site affiche uniquement les catégories qui ont été sélectionnées par l'utilisateur. Il peut ainsi choisir d'afficher un mix personnalisé (ex: Quêtes principales + Donjons, ou uniquement Quêtes secondaires, ou tout afficher simultanément).
+• Mise en valeur visuelle : Un code couleur très net, un badge ou un encadré distinctif doit permettre de différencier au premier coup d'œil la catégorie de chaque ligne (Quête Principale, Quête Secondaire, Donjon Normal, Full Succès) au sein de cette liste unique.
+
+3. SOURCING DES DONNÉES & FONCTIONNEMENT DES VALIDATIONS
+
+• Source des Données : L'intégralité des listes de quêtes principales, quêtes secondaires, ainsi que l'ensemble des succès détaillés de chaque donjon seront extraits et récupérés depuis le site source duffus.fr. Tu devras prévoir l'intégration de ces données dans notre base de données.
+• Système de Preuves (Zéro Screen) : Aucun screen n'est demandé. Tout fonctionne via un système de cases à cocher (checkboxes) directement intégrées sur l'interface utilisateur du site.
+• Gestion des Quêtes : L'utilisateur coche la quête sur sa liste lorsqu'elle est faite (1 quête cochée = +1 point au score actuel global).
+• Gestion Granulaire et Logique des Donjons (Règle Spécifique) :
+La section d'un donjon se déploie pour afficher 5 sous-cases à cocher individuelles, correspondant aux 5 succès réels issus du site source :
+	• 4 cases de Challenges additionnels (Duo + 3 défis spécifiques au boss).
+	• 1 case "Finir le donjon classique" (Battre le boss de base).
+	• Logique d'interconnexion : Dès qu'un joueur coche la sous-case "Finir le donjon classique", le système doit accorder immédiatement +1 point global (catégorie 1 : Donjon validé).
+	• Condition du Full Succès : Le joueur peut cocher les 4 autres sous-cases de challenges au fil de ses tentatives pour savoir exactement où il en est. Le point de la catégorie "Donjon validé en full succès" (+1 point global supplémentaire) n'est accordé et comptabilisé dans la jauge de l'étage que lorsque les 5 sous-cases de ce donjon (Donjon classique + les 4 challenges) sont intégralement à TRUE.
+• Règle de groupe : Si un joueur hors-événement est présent dans le groupe de donjon lors du combat, la validation est refusée.
+• Marges de niveau : Être en dessous du niveau (cap) de l'étage est autorisé. Dépasser le cap de l'étage en cours est interdit, sauf tolérance admin si fait involontairement.
+
+4. ARCHITECTURE TECHNIQUE & CONFIGURATION
+
+• Modules à cloner/garder : Encyclopédie, Suivi des Avis de Recherche, Gestionnaire de Stuffs/Builder, Suivi des Archimonstres (sans l'onglet bourse aux échanges).
+• Nettoyage obligatoire : Supprimer l'intégralité des marques, logos, liens Twitch, serveurs Discord et widgets de dons appartenant au site source originel.
+• Timing de configuration :
+	• Étage 0 (Accès anticipé / Setup de guilde) : Vendredi 30 octobre 2026 à 17h00.
+	• Étage 1 (Vrai départ) : Vendredi 13 novembre 2026 à 17h00. L'étage 1 reste bloqué dans le temps d'ici là, même si le palier de l'étage 0 est atteint.
+Pour débuter le projet, propose-moi l'architecture complète de la base de données (tables SQL). Prends bien en compte dans ton schéma la table des succès de donjons pour stocker l'état (coché/décoché) des 5 sous-succès individuels par joueur (le donjon classique + les 4 challenges), et écris la requête ou la logique permettant de déclencher le point du donjon classique, ainsi que le point bonus du Full succès uniquement lorsque les 5 sous-cases sont à TRUE. Précise également comment structurer au mieux les tables pour accueillir proprement les données importées depuis le site source.

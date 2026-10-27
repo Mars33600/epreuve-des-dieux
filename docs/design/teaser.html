@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>L'Épreuve des Dieux</title>
+<meta name="description" content="Une tour bâtie par les Dieux s'est réveillée. Ses portes s'ouvrent le vendredi 13 novembre 2026 à 17 h, heure de Paris.">
+<meta name="theme-color" content="#05070e">
+<meta property="og:title" content="L'Épreuve des Dieux">
+<meta property="og:description" content="La tour s'est réveillée. Ouverture des portes le vendredi 13 novembre 2026 à 17 h.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2305070e'/%3E%3Cg fill='%23e3b552'%3E%3Crect x='5' y='25' width='22' height='4'/%3E%3Crect x='8' y='19' width='16' height='4'/%3E%3Crect x='11' y='13' width='10' height='4'/%3E%3Crect x='14' y='7' width='4' height='4' opacity='.6'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* ==========================================================================
+   L'Épreuve des Dieux · page de révélation (teaser)
+   Page autonome : HTML, CSS et JS vanilla, aucun visuel du jeu.
+   Tout le décor est généré : ciel en dégradés, étoiles et poussières d'or
+   en canvas, tour en SVG, brume en couches CSS. Voir docs/design/DA.md.
+
+   Aperçus pour la recette :
+     ?etat=ouvert   affiche l'état « Les portes sont ouvertes »
+     ?dans=12       lance un compte à rebours de 12 secondes pour voir la bascule
+     ?ambiance=URL  teste une image d'ambiance (repli sur le décor généré)
+   ========================================================================== */
+:root{
+  color-scheme:dark;
+  /* Nuit */
+  --night-0:#05070e; --night-1:#0a0e1c; --night-2:#141a30; --horizon:#2a2240;
+  /* Pierre de la tour */
+  --stone-hi:#2a3150; --stone-lo:#0c1020;
+  /* Texte */
+  --ink:#f1ead9; --muted:#b8b2a2; --faint:#9aa1b8;
+  /* Or divin */
+  --gold:#e3b552; --gold-hi:#f6d58a; --gold-deep:#a8781f;
+  --gold-wash:rgba(227,181,82,.12); --gold-line:rgba(227,181,82,.32);
+
+  --f-display:"Alegreya SC",Georgia,serif;
+  --f-body:"Alegreya Sans",system-ui,sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,monospace;
+
+  /* Composition : la tour est pilotée par 3 variables.
+     --tx : axe horizontal de la tour ; --B : hauteur de sa base ; --H : sa hauteur. */
+  --vh:1vh; --tx:50%; --B:calc(var(--vh) * 50); --H:min(calc(var(--vh) * 58),125vw);
+}
+@supports (height:1svh){:root{--vh:1svh}}
+/* Grand écran : texte à gauche, tour en majesté à droite, posée au sol. */
+@media (min-width:900px){:root{--tx:69%; --B:0px; --H:min(calc(var(--vh) * 94),78vw)}}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%}
+html{overflow-x:clip}
+body{
+  background:var(--night-0);color:var(--ink);
+  font:400 18px/1.55 var(--f-body);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:4px}
+
+/* ---------- Le décor, en calques du fond vers l'avant ---------- */
+.scene{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.scene > *{position:absolute}
+
+/* 1. Ciel : zénith presque noir, horizon violacé. */
+.sky{inset:0;background:
+  radial-gradient(120% 70% at 50% 108%,var(--horizon) 0%,transparent 60%),
+  linear-gradient(180deg,var(--night-0) 0%,var(--night-1) 45%,var(--night-2) 100%)}
+
+/* 2. Image d'ambiance (option) : invisible tant qu'elle n'est pas chargée. */
+.ambiance{inset:0;background:center/cover no-repeat;opacity:0;transition:opacity 1.6s ease;
+  filter:saturate(.7) brightness(.55)}
+.ambiance.ready{opacity:.55}
+
+/* 3. Étoiles (canvas) */
+#stars{inset:0;width:100%;height:100%}
+
+/* 4. Lueur divine au sommet + rayons + colonne de lumière */
+.glow{left:var(--tx);top:calc(var(--vh) * 100 - var(--B) - var(--H) * .78);width:150vmax;height:110vmax;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(closest-side,rgba(255,221,150,.40),rgba(227,181,82,.14) 38%,rgba(120,90,160,.06) 62%,transparent 100%);
+  animation:breathe 10s ease-in-out infinite}
+.rays{left:var(--tx);top:calc(var(--vh) * 100 - var(--B) - var(--H) * .78);width:180vmax;height:180vmax;
+  transform:translate(-50%,-50%);
+  background:repeating-conic-gradient(from 0deg,rgba(255,220,150,.035) 0deg 1.5deg,transparent 1.5deg 13deg);
+  -webkit-mask:radial-gradient(closest-side,#000 0%,rgba(0,0,0,.5) 25%,transparent 60%);
+          mask:radial-gradient(closest-side,#000 0%,rgba(0,0,0,.5) 25%,transparent 60%);
+  animation:turn 140s linear infinite}
+.beam{left:var(--tx);top:0;width:min(14vw,90px);height:calc(var(--vh) * 100 - var(--B) - var(--H) * .70);transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(255,226,160,.20) 35%,rgba(255,240,200,.38) 50%,rgba(255,226,160,.20) 65%,transparent);
+  -webkit-mask:linear-gradient(180deg,transparent,#000 35%,#000 85%,transparent);
+          mask:linear-gradient(180deg,transparent,#000 35%,#000 85%,transparent);
+  animation:breathe 7s ease-in-out infinite reverse}
+
+/* 5. Crêtes et ruines lointaines */
+.ridge{left:0;right:0;bottom:calc(var(--B) - 1px);width:100%;height:calc(var(--vh) * 30)}
+.ground{left:0;right:0;bottom:0;height:var(--B);background:linear-gradient(180deg,#070a14,#04060c)}
+
+/* 6. La tour */
+.tower{left:var(--tx);bottom:var(--B);height:var(--H);width:calc(var(--H) * .6);transform:translateX(-50%)}
+.tower .ledge{fill:#151a2e}
+.tower .rim{stroke:var(--gold-hi);stroke-width:1.4;opacity:.6;fill:none}
+.tower .win{fill:#04060c}
+.tower .win.lit{fill:url(#warm)}
+.tower .seal circle{fill:none;stroke:var(--gold);stroke-width:1.2;opacity:.45}
+.tower .seal text{fill:var(--gold);opacity:.7;font-family:var(--f-display);font-weight:700;text-anchor:middle;dominant-baseline:central}
+.tower .gate{fill:url(#gateGlow);opacity:.35;transition:opacity 1.2s ease}
+.tower .tier{transition:filter 1s ease}
+
+/* 7. Brume en bandes qui dérivent (transform seul : peu coûteux) */
+.crown{left:var(--tx);top:calc(var(--vh) * 100 - var(--B) - var(--H) * .66);width:calc(var(--H) * 1.1);height:calc(var(--H) * .36);
+  transform:translate(-50%,-50%);
+  background:
+    radial-gradient(34% 30% at 50% 58%,rgba(196,190,215,.30),transparent 75%),
+    radial-gradient(48% 22% at 36% 66%,rgba(150,156,192,.26),transparent 75%),
+    radial-gradient(44% 20% at 66% 50%,rgba(150,156,192,.24),transparent 75%),
+    radial-gradient(26% 26% at 52% 36%,rgba(255,226,170,.16),transparent 75%);
+  animation:breathe 12s ease-in-out infinite}
+.fog{left:0;width:200%;background-repeat:repeat-x;background-size:50% 100%;will-change:transform}
+.fog-high{top:calc(var(--vh) * 100 - var(--B) - var(--H) * .92);height:calc(var(--H) * .42);opacity:.95;
+  background-image:
+    radial-gradient(28% 34% at 22% 52%,rgba(178,176,205,.28),transparent 70%),
+    radial-gradient(22% 26% at 48% 38%,rgba(255,226,170,.16),transparent 70%),
+    radial-gradient(30% 30% at 74% 60%,rgba(150,158,196,.24),transparent 70%),
+    radial-gradient(40% 22% at 50% 75%,rgba(120,128,170,.20),transparent 70%);
+  animation:drift 110s linear infinite}
+.fog-mid{top:calc(var(--vh) * 100 - var(--B) - var(--H) * .58);height:calc(var(--H) * .30);opacity:.7;
+  background-image:
+    radial-gradient(26% 30% at 15% 50%,rgba(140,150,190,.16),transparent 70%),
+    radial-gradient(34% 26% at 62% 44%,rgba(140,150,190,.13),transparent 70%);
+  animation:drift 160s linear infinite reverse}
+.fog-ground{bottom:calc(var(--B) - var(--vh) * 10);height:calc(var(--vh) * 40);
+  background-image:
+    radial-gradient(30% 50% at 20% 70%,rgba(96,106,150,.34),transparent 72%),
+    radial-gradient(36% 46% at 64% 62%,rgba(96,106,150,.30),transparent 72%),
+    linear-gradient(180deg,transparent,rgba(8,10,20,.65) 70%);
+  animation:drift 90s linear infinite}
+
+/* 8. Poussières d'or (canvas) et vignette pour la lisibilité */
+#motes{inset:0;width:100%;height:100%}
+.vignette{inset:0;background:
+  radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(2,3,8,.75) 100%),
+  linear-gradient(180deg,transparent 45%,rgba(4,6,12,.55) 100%)}
+
+@keyframes drift{to{transform:translate3d(-50%,0,0)}}
+@keyframes breathe{0%,100%{opacity:.78}50%{opacity:1}}
+@keyframes turn{to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+/* ---------- Le contenu ---------- */
+.stage{
+  position:relative;z-index:1;min-height:calc(var(--vh) * 100);
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  text-align:center;gap:16px;
+  /* Petit écran : la tour occupe le haut, le texte commence au pied de la tour, dans la brume. */
+  padding:calc(var(--vh) * 100 - var(--B) - 34px) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+}
+.stage > *{position:relative}
+.halo{position:absolute;left:0;right:0;top:calc(var(--vh) * 100 - var(--B) - 120px);bottom:0;
+  background:radial-gradient(60% 50% at 50% 45%,rgba(4,6,13,.78),rgba(4,6,13,.5) 60%,transparent 85%);pointer-events:none}
+.eyebrow{font:500 12px/1.4 var(--f-data);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+  text-shadow:0 1px 8px rgba(0,0,0,.9)}
+h1{margin:0;font-family:var(--f-display);font-weight:800;line-height:.92;letter-spacing:.015em;
+  font-size:clamp(44px,7.4vw,108px);text-wrap:balance;
+  text-shadow:0 2px 24px rgba(0,0,0,.85),0 0 60px rgba(4,6,13,.9)}
+h1 .l1{display:block;color:var(--ink)}
+h1 .l2{display:block;color:var(--gold-hi)}
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  h1 .l2{background:linear-gradient(180deg,#fdeec4 5%,#f0c86a 55%,#d6a043 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;
+    filter:drop-shadow(0 2px 14px rgba(0,0,0,.9))}
+}
+.rule{width:min(240px,50vw);height:12px;display:block;margin:0 auto;color:var(--gold)}
+.lore{margin:0;max-width:34em;font-size:clamp(17px,2.1vw,20px);color:var(--muted);text-wrap:pretty;
+  text-shadow:0 1px 10px rgba(0,0,0,.95)}
+.lore em{display:block;margin-top:8px;font-style:italic;color:var(--ink)}
+
+/* Compte à rebours */
+.countdown{display:grid;gap:12px;justify-items:center;margin-top:6px}
+.cd-label{font:500 12px/1.3 var(--f-data);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.cells{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(6px,1.6vw,14px);width:min(560px,100%)}
+.cell{position:relative;display:grid;gap:4px;justify-items:center;padding:clamp(10px,2vw,16px) 4px clamp(8px,1.6vw,12px);
+  background:linear-gradient(180deg,rgba(26,31,54,.82),rgba(9,12,24,.88));
+  border:1px solid rgba(143,150,173,.22);border-radius:6px;
+  box-shadow:inset 0 1px 0 var(--gold-line),0 10px 30px rgba(0,0,0,.45)}
+.cell b{font:500 clamp(30px,8vw,64px)/1 var(--f-data);font-variant-numeric:tabular-nums;color:var(--ink);letter-spacing:-.02em}
+.cell span{font:500 clamp(10px,1.6vw,12px)/1 var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.date{margin:0;font-size:16px;color:var(--muted);text-shadow:0 1px 8px rgba(0,0,0,.95)}
+.date strong{color:var(--ink);font-weight:500}
+.local{display:block;font-size:14px;color:var(--faint)}
+
+/* État « portes ouvertes » */
+.opened{display:grid;gap:12px;justify-items:center;margin-top:6px}
+.opened h2{margin:0;font:700 clamp(30px,5.6vw,54px)/1.05 var(--f-display);color:var(--gold-hi);
+  text-shadow:0 0 30px rgba(227,181,82,.45),0 2px 16px rgba(0,0,0,.9)}
+.opened p{margin:0;max-width:30em;color:var(--muted);text-shadow:0 1px 8px rgba(0,0,0,.95)}
+.enter{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:12px 26px;border-radius:6px;
+  background:linear-gradient(180deg,#f2cf7c,#d9a441);color:#1b1407;text-decoration:none;
+  font:700 17px/1 var(--f-display);letter-spacing:.06em;box-shadow:0 0 0 1px rgba(255,236,190,.5),0 8px 30px rgba(227,181,82,.35)}
+.enter:hover{background:linear-gradient(180deg,#f8dc98,#e3b552)}
+[hidden]{display:none!important}
+
+footer{position:relative;z-index:1;text-align:center;padding:0 16px max(16px,env(safe-area-inset-bottom));
+  font-size:13px;color:var(--faint);text-shadow:0 1px 6px #000}
+footer a{color:var(--gold);text-underline-offset:3px}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Bascule : portes ouvertes */
+body.is-open .gate{opacity:1}
+body.is-open .glow{background:radial-gradient(closest-side,rgba(255,226,160,.55),rgba(227,181,82,.22) 38%,rgba(120,90,160,.06) 62%,transparent 100%)}
+body.is-open .seal circle{opacity:.85}
+body.is-open .seal text{opacity:1}
+body.opening .tier{animation:wake 1.4s ease both;animation-delay:calc(var(--i) * 160ms)}
+@keyframes wake{0%{filter:none}40%{filter:brightness(2.2) drop-shadow(0 0 8px rgba(246,213,138,.9))}100%{filter:none}}
+body.opening .opened{animation:rise 1.6s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+@media (min-width:900px){
+  .stage{align-items:flex-start;justify-content:center;text-align:left;
+    padding:48px 0 48px max(7vw,32px);max-width:min(52vw,720px)}
+  .halo{left:0;top:0;bottom:0;width:62vw;transform:none;
+    background:linear-gradient(90deg,rgba(4,6,13,.72),rgba(4,6,13,.45) 60%,transparent)}
+  .rule{margin:0}
+  .countdown,.opened{justify-items:start}
+  .opened p{text-align:left}
+}
+
+/* Petits écrans */
+@media (max-width:520px){
+  body{font-size:17px}
+  .stage{gap:12px}
+  .date{font-size:15px}
+}
+@media (max-height:640px) and (min-width:700px){
+  h1{font-size:clamp(40px,7vw,80px)}
+  .stage{gap:12px}
+}
+
+/* Mouvement réduit : le décor est figé, le compte à rebours continue. */
+@media (prefers-reduced-motion:reduce){
+  .fog,.glow,.beam,.rays,.crown{animation:none!important}
+  body.opening .tier,body.opening .opened{animation:none!important}
+  .ambiance,.gate{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="scene" aria-hidden="true">
+  <div class="sky"></div>
+  <div class="ambiance" id="ambiance"></div>
+  <canvas id="stars"></canvas>
+  <div class="glow"></div>
+  <div class="rays"></div>
+  <div class="beam"></div>
+  <div class="ground"></div>
+  <svg class="ridge" viewBox="0 0 1600 340" preserveAspectRatio="xMidYMax slice">
+    <!-- Crête lointaine -->
+    <path fill="#0f1426" d="M0 210 L90 170 L170 196 L260 140 L340 182 L430 150 L520 190 L600 166 L700 200 L800 172 L900 204 L1000 160 L1090 188 L1180 142 L1270 180 L1360 150 L1460 192 L1540 164 L1600 180 V340 H0Z"/>
+    <!-- Ruines proches : colonnes brisées et arche, à gauche et à droite -->
+    <g fill="#070a14">
+      <path d="M0 262 L120 244 L260 258 L420 236 L560 256 L700 246 L800 254 L900 246 L1040 256 L1180 238 L1340 258 L1480 244 L1600 256 V340 H0Z"/>
+      <path d="M150 250 V150 L160 140 L172 146 L176 132 L186 138 V250Z"/>
+      <path d="M232 256 V188 L240 180 L252 186 L256 176 L262 182 V256Z"/>
+      <path d="M300 250 V120 H312 V112 H372 V120 H384 V250 H364 V160 A22 22 0 0 0 320 160 V250Z"/>
+      <path d="M1290 252 V136 L1298 128 L1310 134 L1316 118 L1326 126 V252Z"/>
+      <path d="M1380 248 V176 L1388 168 L1398 174 L1404 162 L1410 170 V248Z"/>
+      <path d="M1440 254 V204 H1474 V196 H1482 V254Z"/>
+    </g>
+  </svg>
+  <svg class="tower" id="tower" viewBox="0 0 600 1000" preserveAspectRatio="xMidYMax meet"></svg>
+  <div class="crown"></div>
+  <div class="fog fog-high"></div>
+  <div class="fog fog-mid"></div>
+  <div class="fog fog-ground"></div>
+  <canvas id="motes"></canvas>
+  <div class="vignette"></div>
+</div>
+
+<main class="stage">
+  <div class="halo" aria-hidden="true"></div>
+  <p class="eyebrow">Monde des Douze · Serveur Kourial</p>
+  <h1><span class="l1">L'Épreuve</span> <span class="l2">des Dieux</span></h1>
+  <svg class="rule" viewBox="0 0 240 12" aria-hidden="true"><path d="M0 6 H104 M136 6 H240" stroke="currentColor" stroke-width="1" opacity=".55"/><path d="M120 0 L126 6 L120 12 L114 6Z" fill="currentColor"/></svg>
+  <p class="lore">
+    Nul ne sait quand elle fut érigée, ni combien d'étages elle compte. Les Dieux l'ont bâtie pour trouver leur successeur&nbsp;; un seul en est revenu. Depuis, la tour se taisait.
+    <em>Elle vient de se réveiller. Cette fois, nul ne montera seul.</em>
+  </p>
+
+  <section class="countdown" id="countdown" aria-labelledby="cdLabel">
+    <span class="cd-label" id="cdLabel">Les portes s'ouvrent dans</span>
+    <div class="cells" role="timer" aria-hidden="true">
+      <div class="cell"><b id="cdD">--</b><span>jours</span></div>
+      <div class="cell"><b id="cdH">--</b><span>heures</span></div>
+      <div class="cell"><b id="cdM">--</b><span>minutes</span></div>
+      <div class="cell"><b id="cdS">--</b><span>secondes</span></div>
+    </div>
+    <p class="sr-only" id="cdSpoken" aria-live="polite"></p>
+    <p class="date"><strong>Vendredi 13 novembre 2026 · 17 h 00</strong>, heure de Paris
+      <span class="local" id="localTime"></span></p>
+  </section>
+
+  <section class="opened" id="opened" hidden aria-live="polite">
+    <h2>Les portes sont ouvertes</h2>
+    <p>La tour attend ses grimpeurs. Le premier étage se gravit ensemble&nbsp;: rejoignez l'ascension depuis le Discord de l'événement.</p>
+    <a class="enter" id="enter" href="#" hidden>Entrer dans la tour <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+
+<footer>Projet de fans, non officiel et sans lien avec Ankama. Dofus et le Monde des Douze sont des marques d'Ankama&nbsp;; tous les visuels de cette page sont dessinés par le code.<br><a href="https://duffus.fr" rel="noopener">Merci Duffus</a></footer>
+
+<script>
+(() => {
+"use strict";
+
+/* ---------- Réglages ---------- */
+const OUVERTURE = {annee:2026, mois:11, jour:13, heure:17, minute:0}; // heure de Paris
+const LIEN_SITE = "";       // à renseigner le jour J : le bouton « Entrer dans la tour » n'apparaît que s'il est rempli
+const AMBIANCE = "";        // image d'ambiance optionnelle (URL). Vide = décor généré seul.
+
+const params = new URLSearchParams(location.search);
+const reduit = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = id => document.getElementById(id);
+
+/* ---------- Heure de Paris, quel que soit le fuseau du visiteur ---------- */
+// Décalage (en minutes) entre l'heure de Paris et UTC à l'instant ts.
+function decalageParis(ts){
+  try{
+    const f = new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Paris",hourCycle:"h23",
+      year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"});
+    const p = {}; f.formatToParts(new Date(ts)).forEach(x => p[x.type] = x.value);
+    return Math.round((Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second) - ts) / 60000);
+  }catch(e){ return 60; } // repli : heure d'hiver (UTC+1), valable en novembre
+}
+// Instant UTC correspondant à une heure murale de Paris.
+function heureParis({annee, mois, jour, heure, minute}){
+  const naif = Date.UTC(annee, mois - 1, jour, heure, minute);
+  let t = naif - decalageParis(naif) * 60000;
+  t = naif - decalageParis(t) * 60000;   // second passage : sûr autour des changements d'heure
+  return t;
+}
+
+let CIBLE = heureParis(OUVERTURE);
+if (params.get("etat") === "ouvert") CIBLE = Date.now() - 1000;
+if (params.has("dans")) CIBLE = Date.now() + Math.max(1, +params.get("dans") || 10) * 1000;
+
+// Rappel de l'heure locale si le visiteur n'est pas à l'heure de Paris.
+if (-new Date(CIBLE).getTimezoneOffset() !== decalageParis(CIBLE)){
+  $("localTime").textContent = "Chez vous : " + new Date(CIBLE).toLocaleString("fr-FR",
+    {weekday:"long", day:"numeric", month:"long", hour:"2-digit", minute:"2-digit"});
+}
+
+/* ---------- Compte à rebours ---------- */
+const deux = n => String(n).padStart(2, "0");
+let dernierePhrase = "";
+function tic(){
+  const ms = CIBLE - Date.now();
+  if (ms <= 0){ ouvrir(true); return; }
+  const s = Math.floor(ms / 1000);
+  const j = Math.floor(s / 86400), h = Math.floor(s / 3600) % 24, m = Math.floor(s / 60) % 60;
+  $("cdD").textContent = j; $("cdH").textContent = deux(h);
+  $("cdM").textContent = deux(m); $("cdS").textContent = deux(s % 60);
+  // Pour les lecteurs d'écran : une phrase par minute, pas un tic par seconde.
+  const phrase = `Ouverture dans ${j} jour${j > 1 ? "s" : ""}, ${h} heure${h > 1 ? "s" : ""} et ${m} minute${m > 1 ? "s" : ""}.`;
+  if (phrase !== dernierePhrase){ $("cdSpoken").textContent = phrase; dernierePhrase = phrase; }
+  setTimeout(tic, 1000 - (Date.now() % 1000) + 8);
+}
+function ouvrir(enDirect){
+  document.body.classList.add("is-open");
+  if (enDirect && !reduit && document.body.dataset.vu) document.body.classList.add("opening");
+  $("countdown").hidden = true; $("opened").hidden = false;
+  if (LIEN_SITE){ $("enter").href = LIEN_SITE; $("enter").hidden = false; }
+  document.title = "Les portes sont ouvertes · L'Épreuve des Dieux";
+}
+
+/* ---------- La tour (SVG généré) ---------- */
+function construireTour(){
+  const W = 600, CX = 300, NB = 14;
+  let y = 1000, w = 560, h = 94, out = "";
+  const defs = `<defs>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a4268"/><stop offset="1" stop-color="#11162a"/></linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".38" stop-color="#ffe2a0" stop-opacity=".07"/>
+      <stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></linearGradient>
+    <radialGradient id="warm" cx=".5" cy=".7" r=".7"><stop offset="0" stop-color="#ffd890"/><stop offset="1" stop-color="#9a6418"/></radialGradient>
+    <radialGradient id="gateGlow" cx=".5" cy=".85" r=".9"><stop offset="0" stop-color="#fff1c8"/><stop offset=".35" stop-color="#f2c868"/><stop offset="1" stop-color="#6e4610" stop-opacity=".2"/></radialGradient>
+    <linearGradient id="fadeUp" x1="0" y1="0" x2="0" y2="1"><stop offset=".2" stop-color="#fff" stop-opacity="0"/><stop offset=".42" stop-color="#fff" stop-opacity=".7"/><stop offset=".62" stop-color="#fff"/></linearGradient>
+    <mask id="fade"><rect width="${W}" height="1000" fill="url(#fadeUp)"/></mask>
+  </defs>`;
+  for (let i = 0; i < NB; i++){
+    const top = y - h, x0 = CX - w / 2, x1 = CX + w / 2, ins = w * .035, base = y - 7;
+    let g = `<g class="tier" style="--i:${i}">`;
+    g += `<rect class="ledge" x="${x0 - 6}" y="${base}" width="${w + 12}" height="7"/>`;
+    const body = `M${x0} ${base}L${x0 + ins} ${top}H${x1 - ins}L${x1} ${base}Z`;
+    g += `<path d="${body}" fill="url(#stone)"/><path d="${body}" fill="url(#shade)"/>`;
+    g += `<path class="rim" d="M${x0 + ins} ${top + .6}H${x1 - ins}"/>`;
+    // Fenêtres en arche, réparties de part et d'autre du sceau central.
+    const ww = Math.max(4, h * .15), wh = h * .42, yb = base - h * .2;
+    const inner = w - 2 * ins, n = Math.max(2, Math.floor(inner / 54));
+    for (let k = 0; k < n; k++){
+      const x = x0 + ins + (k + .5) * inner / n;
+      if (Math.abs(x - CX) < h * .45) continue;
+      const lit = ((i * 7 + k * 13) % 4 === 0) ? " lit" : "";
+      g += `<path class="win${lit}" d="M${x - ww / 2} ${yb}V${yb - wh + ww / 2}A${ww / 2} ${ww / 2} 0 0 1 ${x + ww / 2} ${yb - wh + ww / 2}V${yb}Z"/>`;
+    }
+    if (i === 0){
+      // Porte d'entrée : faible lueur, qui s'embrase à l'ouverture.
+      const gw = 66, gh = h * .74;
+      g += `<path class="gate" d="M${CX - gw / 2} ${base}V${base - gh + gw / 2}A${gw / 2} ${gw / 2} 0 0 1 ${CX + gw / 2} ${base - gh + gw / 2}V${base}Z"/>`;
+      g += `<path d="M${CX - gw / 2 - 5} ${base}V${base - gh + gw / 2}A${gw / 2 + 5} ${gw / 2 + 5} 0 0 1 ${CX + gw / 2 + 5} ${base - gh + gw / 2}V${base}" fill="none" stroke="#e3b552" stroke-opacity=".5" stroke-width="1.5"/>`;
+    } else {
+      const r = h * .3, cy = top + h * .48;
+      g += `<g class="seal"><circle cx="${CX}" cy="${cy}" r="${r}"/><text x="${CX}" y="${cy + 1}" font-size="${(h * .4).toFixed(1)}">?</text></g>`;
+    }
+    out += g + "</g>";
+    y = top; w *= .86; h *= .91;
+  }
+  // Flèche du sommet, déjà dans les nuées.
+  out += `<path d="M${CX - w * .4} ${y}L${CX} ${y - 70}L${CX + w * .4} ${y}Z" fill="url(#stone)"/>`;
+  $("tower").innerHTML = defs + `<g mask="url(#fade)">${out}</g>`;
+}
+
+/* ---------- Image d'ambiance optionnelle, avec repli ---------- */
+function chargerAmbiance(url){
+  if (!url) return;
+  const img = new Image();
+  img.decoding = "async";
+  img.onload = () => { const el = $("ambiance"); el.style.backgroundImage = `url("${url.replace(/"/g, "%22")}")`; el.classList.add("ready"); };
+  img.onerror = () => {}; // repli silencieux : le décor généré reste seul
+  img.src = url;
+}
+
+/* ---------- Ciel étoilé et poussières d'or (canvas) ---------- */
+function ciel(){
+  const sc = $("stars"), mc = $("motes");
+  const sx = sc.getContext("2d"), mx = mc.getContext("2d");
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  let W = 0, H = 0, etoiles = [], scintillantes = [], motes = [], fond = null;
+
+  // Sprite de poussière : un dégradé radial pré-rendu, recopié à chaque image.
+  const sprite = document.createElement("canvas"); sprite.width = sprite.height = 32;
+  const sg = sprite.getContext("2d"), rg = sg.createRadialGradient(16, 16, 0, 16, 16, 16);
+  rg.addColorStop(0, "rgba(255,236,190,1)"); rg.addColorStop(.25, "rgba(246,205,120,.55)"); rg.addColorStop(1, "rgba(227,181,82,0)");
+  sg.fillStyle = rg; sg.fillRect(0, 0, 32, 32);
+
+  const alea = (a, b) => a + Math.random() * (b - a);
+  function dimensionner(){
+    W = innerWidth; H = innerHeight;
+    for (const c of [sc, mc]){ c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); }
+    sx.setTransform(dpr, 0, 0, dpr, 0, 0); mx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(Math.min(320, W * H / 4200));
+    etoiles = Array.from({length:n}, () => {
+      const y = Math.pow(Math.random(), 1.6) * H * .8;          // plus denses vers le zénith
+      return {x:alea(0, W), y, r:alea(.25, 1.15), a:alea(.25, .9) * (1 - y / H * .7), t:Math.random() < .1, p:alea(0, 6.28)};
+    });
+    scintillantes = etoiles.filter(e => e.t);
+    // Fond d'étoiles fixes, dessiné une seule fois.
+    fond = document.createElement("canvas"); fond.width = sc.width; fond.height = sc.height;
+    const fx = fond.getContext("2d"); fx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    for (const e of etoiles) if (!e.t){
+      fx.globalAlpha = e.a; fx.fillStyle = e.r > .9 ? "#fff3d6" : "#d8def5";
+      fx.beginPath(); fx.arc(e.x, e.y, e.r, 0, 6.283); fx.fill();
+    }
+    const nm = Math.round(Math.min(46, W * H / 26000));
+    motes = Array.from({length:nm}, () => nouvelle(true));
+  }
+  function nouvelle(partout){
+    return {x:alea(W * .1, W * .9), y:partout ? alea(0, H) : H + 10, v:alea(6, 16), s:alea(2.5, 7),
+            ph:alea(0, 6.28), amp:alea(6, 22), vie:0, duree:alea(10, 22)};
+  }
+  function dessiner(t){
+    sx.setTransform(1, 0, 0, 1, 0, 0); sx.clearRect(0, 0, sc.width, sc.height); sx.drawImage(fond, 0, 0);
+    sx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    for (const e of scintillantes){
+      sx.globalAlpha = e.a * (.55 + .45 * Math.sin(t / 900 + e.p)); sx.fillStyle = "#fff6e0";
+      sx.beginPath(); sx.arc(e.x, e.y, e.r + .2, 0, 6.283); sx.fill();
+    }
+    mx.clearRect(0, 0, W, H);
+    for (const m of motes){
+      const k = m.vie / m.duree, a = Math.sin(Math.min(1, Math.max(0, k)) * Math.PI) * .8;
+      mx.globalAlpha = a;
+      mx.drawImage(sprite, m.x + Math.sin(t / 2600 + m.ph) * m.amp - m.s / 2, m.y - m.s / 2, m.s, m.s);
+    }
+  }
+  let prec = 0, enCours = false;
+  function boucle(t){
+    if (!enCours) return;
+    const dt = Math.min(.1, (t - (prec || t)) / 1000);
+    if (t - prec >= 33){                                            // ~30 images/s suffisent
+      for (let i = 0; i < motes.length; i++){
+        const m = motes[i]; m.y -= m.v * dt; m.vie += dt;
+        if (m.vie > m.duree || m.y < -10) motes[i] = nouvelle(false);
+      }
+      dessiner(t); prec = t;
+    }
+    requestAnimationFrame(boucle);
+  }
+  dimensionner();
+  dessiner(0);
+  if (!reduit){
+    enCours = true; requestAnimationFrame(boucle);
+    document.addEventListener("visibilitychange", () => {
+      enCours = !document.hidden; if (enCours){ prec = 0; requestAnimationFrame(boucle); }
+    });
+  }
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { dimensionner(); dessiner(performance.now()); }, 150); });
+}
+
+construireTour();
+chargerAmbiance(params.get("ambiance") || AMBIANCE);
+ciel();
+if (CIBLE <= Date.now()) ouvrir(false); else { document.body.dataset.vu = "1"; tic(); }
+})();
+</script>
+</body>
+</html>

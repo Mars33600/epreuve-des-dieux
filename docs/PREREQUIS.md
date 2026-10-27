@@ -1,160 +1,260 @@
 # L'Épreuve des Dieux : prérequis
 
-Version 2, 25/10/2026 (après les réponses de Shadoaze). Ce que **Marceau** doit faire lui-même, et ce qu'il doit **demander à Shadoaze**, avant chaque jalon. Les étapes sont concrètes et dans l'ordre. Comptez environ 1 h 30 pour la partie « avant le jalon bêta ».
+Version 4, 27/10/2026. Ce que **Marceau** doit faire lui-même, et ce qu'il doit **demander à Shadoaze ou à l'auteur de Duffus**, avant chaque lot. Les étapes sont concrètes et dans l'ordre.
 
-Légende : 🧑‍💻 Marceau seul · 🤝 avec Shadoaze · ⏳ peut attendre le jalon lancement.
+Légende : 🧑‍💻 Marceau seul · 🤝 avec Shadoaze · ✉️ avec l'auteur de Duffus · ✅ déjà fait.
 
----
+## Ce qui change en v4
 
-## A. À demander à Shadoaze (le plus tôt possible)
-
-### A.1 Les questions sur le règlement (🤝)
-
-✅ **Fait.** Les 14 questions de `QUESTIONS-SHADOAZE.md` ont reçu leurs réponses (`REPONSES-SHADOAZE.md`), reportées dans `SPEC.md` §8. **Reste à faire** : soumettre à Shadoaze les **questions de suivi** de `SPEC.md` §8 bis (a à l). Ce sont surtout des confirmations, puisqu'une décision par défaut est déjà appliquée à chacune. Il faut aussi lui proposer de mettre à jour le salon des règles Discord (jauge à points, dates du 30/10 et du 13/11 à 17 h).
-
-Plus tard, dans un second temps : lui demander d'ajouter le bot au serveur (section C), de créer #validations-admin et #bêta-site, et de fournir la liste des inscrits (A.4).
-
-### A.2 Le contenu de l'étage 0, à faire confirmer (🤝)
-
-Vérifié sur DofusDB le 25/10/2026 :
-- cap de niveau **20**, **sans tolérance automatique** (un dépassement involontaire est jugé par un admin) ;
-- donjon **Crypte de Kardorim** (DofusDB 90) ;
-- « full succès » = **5 succès** : Crypte de Kardorim, Kardorim (Duo), Kardorim (Zombie), Kardorim (Premier), Kardorim (Spécial) ;
-- « toutes les quêtes d'Incarnam » = **24 quêtes** de la catégorie Incarnam du journal de quêtes ;
-- **jauge à points** : palier 1 = Kardorim vaincu, palier 2 = full succès, palier 3 = full succès et toutes les quêtes ; seuil **75 %** du maximum ;
-- ouverture le **vendredi 30/10 à 17:00**, étage 1 bloqué jusqu'au **vendredi 13/11 à 17:00** (heure de Paris) ;
-- nom de l'étage : « Le Seuil », repris de la maquette (à lui faire valider ou remplacer).
-
-### A.3 Le contenu de l'étage 1 (🤝 ⏳)
-
-À obtenir idéalement **au plus tard le 6/11**, pour l'importer et le tester avant le 13/11 : numéro, nom, level cap, donjons (pour les paliers 1 et 2), quêtes de la tranche (palier 3), et pourcentage du seuil s'il change. L'étage reste scellé, invisible sur le site, jusqu'à son ouverture.
-
-### A.4 Le registre des grimpeurs (🤝)
-
-Pour chaque inscrit : **pseudo en jeu**, **classe** (une des 19), **difficulté** (Aventurier, Éclaireur ou Collectionneur), et **pseudo Discord**, **indispensable** désormais : un grimpeur doit être relié à son compte pour déclarer ses quêtes avec `/quetes`. Préciser aussi qui s'inscrit **après** le 30/10 à 17:00 : ces joueurs seront retardataires. Le plus simple : Shadoaze les saisit lui-même avec `/grimpeur ajouter` le jour de la mise en service, en 10 minutes, avec Marceau à côté pour la première fois.
-
-### A.5 Les volontaires de la bêta (🤝)
-
-1 ou 2 admins et 4 à 6 joueurs qui acceptent de donner leur avis dans #bêta-site (voir `LOTS.md`, jalon bêta-test).
-
-### A.6 Message de transparence à publier (🤝 ⏳, avant d'activer l'IA)
-
-> 🤖 **Le bot de la Tour** : à partir du [date], les screens postés dans #screen-validation sont lus par une IA (Claude, d'Anthropic) qui pré-remplit la validation. **C'est toujours un admin qui valide.** Le bot garde une copie du screen comme preuve. Seuls ton pseudo en jeu, ta classe et ta progression apparaissent sur le site public.
+- **Le bot n'est plus indispensable.** Plus d'intents à activer, de permissions à régler ni de commandes à rendre visibles pour le site. On le garde pour une **annonce facultative** et pour le « bot d'atelier » de Marceau, qui lit les salons (EX-93).
+- **Nouveau : la connexion avec Discord (OAuth2).** Il faut un *Client Secret* et une **adresse de retour** déclarée dans le portail Discord (section C).
+- **Nouveau : un nom de domaine**, à acheter et à relier à Fly **avant le 3/11**, pour le teaser (section B).
+- **Nouveau : la lecture de la base de Duffus**, à cadrer avec son auteur (section D).
+- **Plus de compte Anthropic** pour les lots A et B : l'IA de lecture des screens est retirée.
+- **Supabase** : un seul projet de production suffit. Les tests tournent sur un Postgres local sous Docker, ou dans la CI.
+- L'ordre suit le calendrier : **lot A** (teaser) avant le 3/11, **lot B** (cœur) avant le 10/11.
 
 ---
 
-## B. Discord : créer l'application (🧑‍💻, 15 min)
+## État réel au 27/10/2026
 
-1. **Activer le mode développeur** dans Discord, pour pouvoir copier les identifiants : Paramètres utilisateur → Avancés → **Mode développeur**. Un clic droit sur un serveur, un salon ou un rôle propose alors « Copier l'identifiant ».
-2. Aller sur **https://discord.com/developers/applications** → **New Application** → nom : « Gardien de la Tour » (ou autre) → accepter les conditions.
-3. Onglet **General Information** : noter l'**Application ID**. Il n'est pas secret.
-4. Onglet **Bot** :
-   - **Reset Token**, puis copier le jeton **une seule fois** dans le gestionnaire de mots de passe. C'est `DISCORD_TOKEN`. **Il est secret** : quiconque l'a contrôle le bot. Ne jamais le coller dans Discord, dans un commit ou dans une capture.
-   - **Public Bot** : le laisser **activé** le temps que Shadoaze invite le bot, puis le **désactiver** (étape C.4).
-   - **Privileged Gateway Intents** : tout laisser **désactivé** pour le jalon bêta. Au jalon lancement, activer **Message Content Intent** (⏳). Les deux autres (Presence, Server Members) restent désactivés : on n'en a pas besoin.
-5. Onglet **Installation** :
-   - Installation Contexts : cocher **Guild Install** uniquement (décocher User Install).
-   - Install Link : **None**. On utilise notre propre lien, plus précis.
-6. **Créer un serveur Discord de test** à soi (« Tour – test ») avec les salons #screen-validation, #validations-admin, #annonces et un rôle « Administrateur ». C'est là que les devs et le testeur essaient tout avant le vrai serveur.
-7. **Créer une seconde application** « Gardien de la Tour (test) » en refaisant les étapes 2 à 5, avec son propre jeton. Le bot de production ne répond que sur son serveur et quitte les autres : il faut donc un bot distinct pour le serveur de test. L'inviter sur le serveur de test avec le lien ci-dessous.
-
-### Le lien d'invitation
-
-Remplacer `APPLICATION_ID` par l'identifiant de l'étape 3 :
-
-```
-https://discord.com/oauth2/authorize?client_id=APPLICATION_ID&scope=bot+applications.commands&permissions=117824
-```
-
-`117824` est la somme exacte des 6 permissions nécessaires : Voir les salons, Envoyer des messages, Intégrer des liens, Joindre des fichiers, Voir l'historique des messages, Ajouter des réactions (détail et justification : `ARCHITECTURE.md` §9). Le lien est valable pour tous les jalons : on n'aura pas à refaire inviter le bot. **Aucune permission Administrateur.**
-
-Tester d'abord le lien sur le serveur de test (étapes 6 et 7), avec l'application de test.
+| Élément | État |
+|---|---|
+| Marceau admin du serveur Discord « L'Épreuve des Dieux » | ✅ |
+| Application Discord « Gardien de la Tour », Application ID **1564210808509038622** | ✅ créée |
+| Jeton du bot (`DISCORD_TOKEN`) dans `.env`, qui est bien dans `.gitignore` | ✅ |
+| Intent **Message Content** activé | ✅. Il n'est **pas** nécessaire au site. Le garder seulement si le bot d'atelier en a besoin pour lire les salons. |
+| Bot présent sur le serveur | **Probable** : les exports de `docs/discord/` portent la mention « lu par le bot le 27/10 ». À vérifier (C.1). Il n'a pas accès aux salons d'étage, mais ce n'est plus utile : ils ne sont pas une source de données. |
+| OAuth2 (Client Secret, adresse de retour) | ❌ à faire (C.2) |
+| Domaine, Fly.io, Supabase, dépôt GitHub distant | ❌ à faire (`DATABASE_URL` est vide dans `.env`, et il n'y a pas de dépôt distant) |
+| Accès à la base de Duffus | Accord de principe de l'auteur ✅. Modalités ❌ à cadrer (D). |
+| Page teaser et DA | ✅ `docs/design/teaser.html`, `DA.md`, `maquette-v2.html` |
 
 ---
 
-## C. Faire inviter le bot sur le vrai serveur (🤝, 5 min avec Shadoaze)
+## A. Questions et messages (le plus tôt possible, dès le 27/10)
 
-1. Envoyer le lien à Shadoaze. Il l'ouvre, choisit le serveur « L'Épreuve des Dieux », vérifie que la liste des permissions correspond aux 6 ci-dessus, puis clique sur **Autoriser**.
-2. **Salons** : #screen-validation doit être visible par le bot (c'est le cas si le salon est public). Pour **#validations-admin**, qui est privé : Modifier le salon → Permissions → ajouter le rôle du bot (il porte le nom de l'application) avec Voir le salon, Envoyer des messages, Intégrer des liens, Joindre des fichiers et Voir l'historique.
-3. **Visibilité des commandes admin** : Paramètres du serveur → **Intégrations** → le bot → pour les commandes `/grimpeur`, `/valider`, `/annuler`, `/etage` (puis `/refuser` et `/ia` au lancement), autoriser le rôle **« Administrateur »** (Shadoaze, Q6). Par défaut, seuls ceux qui ont « Gérer le serveur » les voient. La commande joueur **`/quetes`** reste visible de **tous**, ce qui est le réglage par défaut, et l'option `pour` est vérifiée par le bot. `/moi` et `/niveau` s'y ajoutent au lancement. Le bot revérifie de toute façon le rôle à chaque commande.
-4. Revenir au portail développeur → Bot → **désactiver Public Bot**. Plus personne ne peut ajouter le bot ailleurs, et le bot quitterait de toute façon un serveur inconnu.
-5. Récupérer, avec un clic droit puis « Copier l'identifiant » :
-   - l'identifiant du serveur → `DISCORD_GUILD_ID`
-   - le rôle « Administrateur » → `DISCORD_ADMIN_ROLE_ID`
-   - #screen-validation → `DISCORD_SCREEN_CHANNEL_ID`
-   - #validations-admin → `DISCORD_ADMIN_CHANNEL_ID` (⏳)
-   - le salon d'annonces → `DISCORD_ANNONCE_CHANNEL_ID` (⏳)
+### A.1 Les questions pour Shadoaze (🤝)
 
-   Faire de même sur le serveur de test : chaque environnement a ses propres identifiants.
+Ce sont les huit questions de `SPEC.md` §8.2. Les plus urgentes sont **Q1** (étage ↔ tranche et cap) et **Q2** (donjons des étages 0 et 1), à obtenir **avant le 7/11** pour construire les étages. Chaque question a déjà une réponse par défaut appliquée : rien ne bloque le développement. Message proposé :
+
+> Salut Shadoaze ! Le site avance : connexion avec Discord, cases à cocher, jauge 2 × actifs, tour en pyramide. J'ai besoin de toi sur quelques points. Pour chacun, je te donne ce que j'applique si tu ne dis rien, et un « ok » suffit :
+> 1. Étage ↔ tranche Duffus : étage 0 = la première tranche (jusqu'au niveau 20), puis une tranche par étage, et le cap = le haut de la tranche ?
+> 2. Donjons des étages 0 et 1 : je prends ceux dont le niveau est dans la tranche, et je t'envoie la liste à valider.
+> 3. Un étage sans quête principale (l'étage 0, sûrement) : la catégorie disparaît et le palier baisse en proportion (18 au lieu de 24 pour 12 joueurs). Ok ?
+> 4. Les Dofus qui rendent une quête « principale » : tous ceux qui ont un guide chez Duffus ?
+> 5. Le site reste caché jusqu'au 13/11 à 17 h. Ce jour-là, chacun coche ce qu'il a fait à l'étage 0 depuis le 30/10. Ok ?
+> 6. Points bonus d'événement : à un joueur ou à toute la guilde, au choix de l'admin ? Pas pour un joueur en pause ?
+> 7. Encyclopédie et builder : les refaire coûte des semaines. Je propose des liens vers les outils existants. Ça te va ?
+> 8. Tu peux ajouter « palier = 2 × grimpeurs actifs » dans #concept-et-règles ?
+> 9. Tu as généré des images pour chaque étage : tu peux me les passer ? Elles serviraient de décor sur la page de l'étage (sinon : « Étage N » et la tranche, sans image).
+> Merci !
+
+### A.2 La liste officielle des grimpeurs (🤝)
+
+✅ Les 10 identifiants Discord sont dans `docs/discord/liste-grimpeurs.md`. Le jour du déploiement (10/11), Marceau les colle dans *Admin → Grimpeurs → Liste officielle*. Les inscrits suivants y seront ajoutés de la même façon, et Shadoaze, en tant qu'admin, pourra le faire lui-même.
+
+### A.3 Les bêta-testeurs (🤝)
+
+Un ou deux joueurs de confiance (T-05). Il faut leur **identifiant Discord** (clic droit sur le pseudo → « Copier l'identifiant », avec le mode développeur activé) pour `BETA_TESTEURS`. À obtenir avant le 10/11.
 
 ---
 
-## D. Comptes d'hébergement (🧑‍💻, 30 min)
+## B. Lot A : domaine et hébergement (🧑‍💻, environ 1 h, avant le 2/11)
 
-### D.1 Supabase (base de données, gratuit)
+### B.1 Acheter le nom de domaine (15 min)
 
-1. https://supabase.com → **Start your project** → se connecter avec GitHub.
-2. **New project** : nom `epreuve-des-dieux`, région **West EU (Paris)**, mot de passe de base **long et généré**, à conserver dans le gestionnaire de mots de passe. Offre **Free**.
-3. **Connect** → onglet *Connection string* → choisir **Session pooler** (port 5432). Copier l'adresse, remplacer `[YOUR-PASSWORD]` par le mot de passe du projet, et remplacer `postgresql://` par `postgresql+asyncpg://`. Choisir à l'étape 2 un mot de passe composé uniquement de lettres et de chiffres, sinon un caractère spécial casserait l'adresse. C'est `DATABASE_URL`. **Secret.**
-4. Créer de la même façon un second projet, **`epreuve-test`**, pour les tests d'intégration et le serveur Discord de test. L'offre gratuite permet 2 projets actifs.
-5. ⏳ Jalon lancement : Storage → **New bucket** `preuves`, **privé**. Settings → API → copier **Project URL** (`SUPABASE_URL`) et la clé **service_role** (`SUPABASE_SERVICE_KEY`, **secret**, jamais côté navigateur).
+1. Choisir un registrar : **OVHcloud** ou **Gandi** (français), ou **Porkbun**. Compter 7 à 12 € par an pour un `.fr` ou un `.com`.
+2. Choisir un nom **qui ne révèle rien avant le reveal** : le domaine sera public. Par exemple `epreuve-des-dieux.fr`.
+3. Activer le renouvellement automatique et la protection des données du titulaire (« WHOIS privacy »), souvent gratuite.
+4. Ne rien configurer d'autre pour l'instant : les enregistrements DNS viennent à l'étape B.3.
 
-À savoir : un projet gratuit est mis en pause après 7 jours sans activité. Le bot l'utilise en continu, donc ça ne devrait pas arriver. Si ça arrive, on le relance d'un clic depuis le tableau de bord.
+### B.2 Fly.io (20 min)
 
-### D.2 Fly.io (hébergement, environ 4 $ par mois)
-
-1. https://fly.io → **Sign up** (avec GitHub). **Ajouter une carte bancaire** : il n'y a plus d'offre gratuite pour les nouveaux comptes, et la facturation se fait à l'usage.
-2. Dans Billing, régler une **alerte de dépense** (par exemple 10 $ par mois).
+1. https://fly.io → **Sign up** avec GitHub. **Ajouter une carte bancaire** : il n'y a plus d'offre gratuite pour les nouveaux comptes, et la facturation se fait à l'usage. Compter 2 à 3 $ par mois.
+2. **Billing** → alerte de dépense à 10 $ par mois.
 3. Sur le Mac : `brew install flyctl`, puis `fly auth login`.
-4. Le dev crée l'application (`fly launch --no-deploy`, région `cdg`). Marceau y dépose ensuite les secrets :
-   `fly secrets set DISCORD_TOKEN=… DATABASE_URL=… DISCORD_GUILD_ID=… DISCORD_ADMIN_ROLE_ID=… DISCORD_SCREEN_CHANNEL_ID=…`
-   Les secrets sont chiffrés chez Fly. Ils ne sont jamais écrits dans le dépôt.
+4. Le dev crée l'application (`fly launch --no-deploy`, région `cdg`, nom `epreuve-des-dieux` déjà prévu dans `fly.toml`). Marceau lance ensuite le premier `fly deploy` avec le dev.
 
-### D.3 GitHub (code et sauvegarde, gratuit)
+### B.3 Relier le domaine à Fly (15 min, puis attendre la propagation)
 
-1. Créer un dépôt **privé** `epreuve-des-dieux` et y pousser le dépôt local.
-2. Settings → Secrets and variables → Actions → **New repository secret** `DATABASE_URL`. La sauvegarde nocturne s'en sert.
+1. `fly ips list` donne une adresse IPv4 (partagée) et une IPv6.
+2. Chez le registrar, zone DNS du domaine :
+   - `A` sur `@` → l'adresse IPv4 de Fly ;
+   - `AAAA` sur `@` → l'adresse IPv6 de Fly ;
+   - `CNAME` sur `www` → `epreuve-des-dieux.fly.dev`.
+3. `fly certs add epreuve-des-dieux.fr`, puis `fly certs add www.epreuve-des-dieux.fr`. `fly certs show <domaine>` indique quand le certificat HTTPS est émis : quelques minutes à quelques heures, selon la propagation DNS.
+4. Vérifier `https://<domaine>/sante` dans un navigateur.
 
-### D.4 Anthropic (IA, ⏳ jalon lancement, environ 5 $ prépayés pour plusieurs mois)
+Plan B gratuit et immédiat, si le DNS traîne : l'adresse `https://epreuve-des-dieux.fly.dev` fonctionne dès le premier déploiement.
 
-1. https://console.anthropic.com → créer un compte, puis l'organisation.
-2. **Billing** → acheter **5 $ de crédits**. Au rythme estimé (0,10 à 2 $ par mois), cela dure plusieurs mois.
-3. **Limits** → fixer une **limite de dépense mensuelle** à 5 $. C'est le garde-fou contre une boucle qui s'emballerait.
-4. Créer un **workspace** « epreuve-des-dieux », puis **API Keys** → *Create Key* dans ce workspace. C'est `ANTHROPIC_API_KEY`. **Secret.** Le déposer avec `fly secrets set` et dans le `.env` local.
+### B.4 GitHub (10 min)
+
+1. Créer un dépôt **privé** `epreuve-des-dieux` et y pousser le dépôt local (branche `v4`). La CI des tests et l'analyse des secrets s'activent seules.
+2. Les secrets de la sauvegarde viennent à l'étape E.3.
+
+### B.5 Le jour du reveal (6/11 au plus tard)
+
+- Vérifier sur téléphone que `https://<domaine>` affiche le teaser, et seulement lui.
+- Donner le lien sur Discord quand Shadoaze le décide.
 
 ---
 
-## E. Poste de travail (🧑‍💻, 10 min)
+## C. Lot B : Discord (🧑‍💻, 20 min, avant le 31/10)
 
-- **uv** : `brew install uv` (gère Python 3.12 et les dépendances).
-- **Docker Desktop** (facultatif) : pour les tests de base de données en local. Sans Docker, ces tests visent le projet Supabase `epreuve-test`.
-- Un fichier **`.env`** à la racine du dépôt, à partir de `.env.example`, **jamais commité** (`.gitignore` l'exclut dès le premier commit) : jeton du bot **de test**, base `epreuve-test`, identifiants du serveur de test.
+### C.1 Vérifier la présence du bot
+
+Paramètres du serveur → **Intégrations**. Si « Gardien de la Tour » y figure, il n'y a rien à faire. Sinon, et seulement si on veut l'**annonce** d'ouverture d'étage, l'inviter avec le minimum de permissions : voir les salons, envoyer des messages et intégrer des liens, soit 1024 + 2048 + 16384 = **19456**.
+
+```
+https://discord.com/oauth2/authorize?client_id=1564210808509038622&scope=bot&permissions=19456
+```
+
+Pas de portée `applications.commands` : il n'y a plus de commandes. Ensuite, désactiver **Public Bot** dans le portail (onglet Bot).
+
+### C.2 Configurer OAuth2 pour la connexion au site
+
+Dans https://discord.com/developers/applications → « Gardien de la Tour » → onglet **OAuth2** :
+1. **Client ID** : c'est l'Application ID, `1564210808509038622`. Il n'est pas secret.
+2. **Client Secret** → *Reset Secret* → le copier **une seule fois** dans le gestionnaire de mots de passe. C'est `DISCORD_CLIENT_SECRET`. **Secret** : ne jamais le coller dans Discord, un commit ou une capture d'écran.
+3. **Redirects** → *Add Redirect*, une ligne par adresse, **à l'identique**, sans barre finale :
+   - `https://<domaine>/auth/discord/retour` (production) ;
+   - `http://localhost:8080/auth/discord/retour` (développement sur le Mac).
+
+   Discord refuse toute adresse de retour qui n'est pas dans cette liste. C'est une protection : personne ne peut détourner la connexion vers un autre site.
+4. **Rien d'autre à cocher.** Les portées (`identify`, `guilds.members.read`) sont demandées par le site dans l'adresse de connexion. Le « générateur d'URL » du portail ne sert pas ici.
+
+Pourquoi `guilds.members.read` : c'est la portée qui permet au site de lire **l'appartenance au serveur et les rôles** du joueur qui se connecte, avec son propre jeton, sans passer par le bot.
+
+### C.3 Copier les identifiants
+
+Avec le mode développeur (Paramètres utilisateur → Avancés → Mode développeur), faire un clic droit, puis « Copier l'identifiant » :
+- le serveur → `DISCORD_GUILD_ID` ;
+- le rôle « Administrateur » → `DISCORD_ADMIN_ROLE_IDS` ;
+- son propre compte et celui de Shadoaze → `ADMINS_SUPPLEMENTAIRES`, un filet si le rôle était mal réglé ;
+- *(facultatif)* le salon d'annonces → `DISCORD_ANNONCE_CHANNEL_ID`.
+
+### C.4 Un serveur de test (5 min)
+
+Créer un petit serveur « Tour – test » avec un rôle « Administrateur », pour que le testeur vérifie les refus (non-membre, non-admin) sans toucher au vrai serveur. Un second compte Discord sert de « joueur ». La **même application** suffit : seul `DISCORD_GUILD_ID` change dans le `.env` de test.
 
 ---
 
-## Récapitulatif par jalon
+## D. Lot B : la base de Duffus (✉️ et 🧑‍💻, avant le 28/10 au matin)
 
-### Avant le jalon bêta
+L'auteur a donné son accord, mais **ne peut pas fournir d'export**. On lit donc sa base nous-mêmes, comme le fait son propre site. Méthode, règles de politesse et limites : ARCHITECTURE §6.
 
-- [x] A.1 : réponses aux 14 questions (reçues le 25/10)
-- [ ] A.1 : questions de suivi du §8 bis soumises à Shadoaze (non bloquant : les décisions par défaut sont appliquées)
-- [ ] A.2 : contenu de l'étage 0 confirmé
-- [ ] A.4 : liste des inscrits, ou créneau de 15 min avec Shadoaze pour la saisie
-- [ ] A.5 : volontaires de la bêta
-- [ ] B : application Discord créée, jeton rangé, serveur de test prêt
-- [ ] C : bot invité sur le vrai serveur, salons et rôle réglés, identifiants copiés, Public Bot désactivé
-- [ ] D.1 : projets Supabase `epreuve-des-dieux` et `epreuve-test`
-- [ ] D.2 : compte Fly.io avec carte et alerte de dépense, `flyctl` installé
-- [ ] D.3 : dépôt GitHub privé et secret `DATABASE_URL`
-- [ ] E : uv installé, `.env` local
+### D.1 Message à l'auteur (✉️, à envoyer le 27/10)
 
-### Avant le jalon lancement
+> Bonjour, et encore merci pour ton accord ! Pour être transparents sur la façon dont on récupère les données :
+> - un script lancé **à la main**, quelques fois au total (avant chaque nouvel étage, au plus une fois par semaine), qui lit tes tables publiques (`guide_ranges`, `quest_list`, `quest_pages`, `dungeon_pages`, `achievements`, `achievement_objectives`, `dofus_list`) avec la clé publique de ton site, à **1 requête par seconde au plus**, avec un User-Agent qui nous identifie ;
+> - **jamais** d'appel chez toi pendant que nos joueurs naviguent : tout est copié chez nous, derrière une connexion réservée aux participants ;
+> - un « Merci Duffus » avec un lien vers duffus.fr en pied de chaque page.
+>
+> Est-ce que ça te convient ? Peux-tu me confirmer l'adresse de ta base et la clé publique à utiliser ? Tu préfères qu'on évite certaines tables ou certains horaires ? Et si tu changes la structure de ta base, tu pourrais nous prévenir ? Notre script s'arrêtera proprement de toute façon.
 
-- [ ] A.1 : confirmations du §8 bis reçues, ou décisions par défaut acceptées
-- [ ] A.3 : contenu de l'étage 1
-- [ ] A.6 : message de transparence publié
-- [ ] B.4 : **Message Content Intent** activé dans le portail
-- [ ] C.3 : visibilité des nouvelles commandes (`/refuser`, `/ia`) pour le rôle admin
-- [ ] C.5 : identifiants de #validations-admin et du salon d'annonces
-- [ ] D.1 : bucket `preuves` et clés Storage
-- [ ] D.4 : compte Anthropic, 5 $ de crédits, limite mensuelle, clé API
+Garder sa réponse écrite. Si elle restreint quelque chose, le noter dans ARCHITECTURE §6.2.
+
+### D.2 La clé et l'adresse (🧑‍💻)
+
+L'adresse du projet Supabase de Duffus et sa **clé publique** (« anon ») : on les demande à l'auteur dans le message D.1 plutôt que de les extraire du code de son site. Les mettre **dans le `.env` local seulement** :
+
+```
+DUFFUS_SUPABASE_URL=https://<projet>.supabase.co
+DUFFUS_SUPABASE_CLE=<clé anon publique>
+```
+
+Elles ne vont **ni sur Fly ni dans le dépôt**. Le site n'en a jamais besoin, puisque seul le script d'aspiration, lancé depuis le Mac, les utilise.
+
+### D.3 Lancer le relevé, puis l'aspiration (🧑‍💻 avec le dev)
+
+- Le 28/10 : `uv run python -m epreuve.duffus releve` (chantier B0), pour relever le schéma.
+- Vers le 6/11 : `uv run python -m epreuve.duffus aspirer`, puis la relecture du `git diff` des extraits, puis `uv run python -m epreuve.contenu construire --etage N` pour chaque étage.
+
+---
+
+## E. Lot B : base de données et sauvegarde (🧑‍💻, 30 min, avant le 3/11)
+
+### E.1 Supabase
+
+1. https://supabase.com → se connecter avec GitHub → **New project** : nom `epreuve-des-dieux`, région **West EU (Paris)**, offre **Free**, mot de passe de base **long, généré, composé uniquement de lettres et de chiffres** (un caractère spécial casserait l'adresse de connexion), rangé dans le gestionnaire de mots de passe.
+2. **Connect** → *Session pooler* (port 5432). Copier l'adresse, y mettre le mot de passe, et remplacer `postgresql://` par `postgresql+asyncpg://`. C'est `DATABASE_URL`. **Secret.**
+3. **Le déposer tout de suite sur Fly** (`fly secrets set DATABASE_URL=…`), même pendant le lot A. `/sante` interrogera la base toutes les 30 secondes, ce qui empêche Supabase d'endormir le projet gratuit après 7 jours sans activité.
+
+### E.2 Postgres local pour les tests
+
+Docker Desktop, puis :
+
+```
+docker run -d --rm --name epreuve-pg-test -p 54329:5432 -e POSTGRES_PASSWORD=test -e POSTGRES_DB=epreuve_test postgres:17-alpine
+```
+
+Sans ce conteneur, les tests marqués `db` sont sautés. C'est ce qui explique les 62 échecs relevés le 27/10 sur `main`.
+
+### E.3 Sauvegarde chiffrée
+
+1. `brew install age`, puis `age-keygen -o ~/cle-sauvegarde-epreuve.txt`. La ligne `# public key: age1…` est la clé **publique**. Le fichier, lui, est la clé **privée** : à ranger hors du dépôt, dans le gestionnaire de mots de passe.
+2. GitHub → Settings → Secrets and variables → Actions : `DATABASE_URL` (la même adresse) et `AGE_RECIPIENT` (la clé publique `age1…`).
+3. Une fois les premières données en base, lancer l'action « sauvegarde » à la main et tester la restauration une fois (commande en tête de `.github/workflows/sauvegarde.yml`).
+
+---
+
+## F. Déposer les réglages sur Fly (🧑‍💻 avec le dev, le 10/11)
+
+```
+fly secrets set DATABASE_URL=… DISCORD_CLIENT_SECRET=… DISCORD_GUILD_ID=… \
+  DISCORD_ADMIN_ROLE_IDS=… ADMINS_SUPPLEMENTAIRES=… BETA_TESTEURS=…
+# facultatif, seulement pour l'annonce d'ouverture :
+fly secrets set DISCORD_TOKEN=… DISCORD_ANNONCE_CHANNEL_ID=…
+```
+
+`SITE_MODE=auto`, `SITE_OUVERT_LE`, `SITE_URL` et `DISCORD_CLIENT_ID` sont dans `fly.toml` (non secrets). Les clés Duffus ne vont **pas** sur Fly.
+
+---
+
+## G. Le jour J, vendredi 13/11 (🧑‍💻)
+
+- **16 h 30** : `fly status` (machine en marche), `https://<domaine>/sante` en `ok`, et connexion admin vérifiée.
+- **16 h 50** : `fly secrets set TEASER_LIEN_ENTRER=https://<domaine>/`. Le bouton « Entrer dans la tour » apparaîtra à la fin du compte à rebours.
+- **17 h 00** : le mode `auto` bascule seul.
+- **17 h 01** : vérifier sur téléphone que l'accueil remplace le teaser et que la connexion fonctionne.
+- **En cas de souci** : `fly secrets set SITE_MODE=teaser` remet le teaser en quelques secondes.
+
+---
+
+## Récapitulatif par date
+
+### Le 27/10
+- [ ] A.1 Questions envoyées à Shadoaze
+- [ ] D.1 Message envoyé à l'auteur de Duffus
+- [ ] B.1 Domaine acheté
+
+### Avant le 28/10 au matin (chantier B0)
+- [ ] D.2 `DUFFUS_SUPABASE_URL` et `DUFFUS_SUPABASE_CLE` dans `.env`
+
+### Avant le 2/11 (lot A)
+- [ ] B.2 Compte Fly.io, carte, alerte de dépense, `flyctl`
+- [ ] B.3 DNS du domaine vers Fly, certificats émis
+- [ ] B.4 Dépôt GitHub privé
+- [ ] E.1 Projet Supabase et `DATABASE_URL` déposé sur Fly
+
+### Avant le 6/11
+- [ ] B.5 Teaser vérifié sur téléphone, lien donné quand Shadoaze le décide
+
+### Avant le 7/11 (construction des étages)
+- [ ] Réponses de Shadoaze à Q1 et Q2, ou défauts acceptés
+- [ ] D.3 Aspiration Duffus relue
+
+### Avant le 10/11 (lot B)
+- [ ] C.1 Bot vérifié (ou rien, sans annonce)
+- [ ] C.2 Client Secret et adresses de retour OAuth2
+- [ ] C.3 Identifiants copiés
+- [ ] C.4 Serveur de test
+- [ ] A.3 Identifiants des bêta-testeurs
+- [ ] E.2 Docker pour les tests locaux
+- [ ] E.3 Sauvegarde chiffrée (clé age, secrets GitHub)
+- [ ] F Réglages déposés sur Fly
+- [ ] A.2 Liste officielle collée dans l'admin
+
+### Le 13/11
+- [ ] G Le déroulé du jour J

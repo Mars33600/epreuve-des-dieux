@@ -19,3 +19,6 @@ htmlcov/
 # Divers
 .DS_Store
 *.dump
+
+# Exports du serveur Discord (identifiants des membres) : restent en local
+docs/discord/
