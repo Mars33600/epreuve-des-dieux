@@ -11,6 +11,7 @@ ni Discord. Les variables du lot B s'ajoutent ici (ARCHITECTURE §11).
 from __future__ import annotations
 
 from datetime import datetime
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -44,6 +45,16 @@ class Config(BaseSettings):
         # Sans fuseau, « 17:00 » serait lu à l'heure de la machine Fly (UTC) : une heure trop tard.
         if v.tzinfo is None:
             raise ValueError("SITE_OUVERT_LE doit porter son fuseau, ex. 2026-11-13T17:00:00+01:00")
+        return v
+
+    @field_validator("fuseau")
+    @classmethod
+    def _fuseau_connu(cls, v: str) -> str:
+        # Vérifié ici plutôt qu'au premier ZoneInfo() de l'application : même message clair que le reste.
+        try:
+            ZoneInfo(v)
+        except (ZoneInfoNotFoundError, ValueError) as e:
+            raise ValueError(f"FUSEAU inconnu : {v!r} (ex. Europe/Paris)") from e
         return v
 
     @field_validator("database_url")
