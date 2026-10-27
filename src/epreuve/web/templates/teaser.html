@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{# Le teaser du designer (docs/design/teaser.html), transposé sans toucher au rendu : CSS et JS dans
+   static/teaser/, polices dans static/fonts/. La date d'ouverture et le lien du bouton viennent de la
+   configuration (SITE_OUVERT_LE, TEASER_LIEN_ENTRER) ; la date est écrite en clair pour qui n'a pas JS.
+   En mode ouvert (lot A seulement), la page s'affiche directement dans son état « portes ouvertes ». #}
+{% set heure_ouverture %}{{ ouverture.hour }} h{% if ouverture.minute %} {{ "%02d"|format(ouverture.minute) }}{% endif %}{% endset %}
+{% block titre %}{% if ouvert %}Les portes sont ouvertes · {% endif %}L'Épreuve des Dieux{% endblock %}
+{% block tete %}
+<meta name="description" content="Une tour bâtie par les Dieux s'est réveillée. Ses portes s'ouvrent le {{ jour_ouverture }} à {{ heure_ouverture }}, heure de Paris.">
+<meta property="og:title" content="L'Épreuve des Dieux">
+<meta property="og:description" content="La tour s'est réveillée. Ouverture des portes le {{ jour_ouverture }} à {{ heure_ouverture }}.">
+<link rel="stylesheet" href="/static/teaser/teaser.css">
+{% endblock %}
+{% block attributs_body %} data-ouverture="{{ site_ouvert_le.isoformat() }}" data-lien-site="{{ teaser_lien_entrer }}"{% if ouvert %} class="is-open"{% endif %}{% endblock %}
+{% block contenu %}
+<div class="scene" aria-hidden="true">
+  <div class="sky"></div>
+  <div class="ambiance" id="ambiance"></div>
+  <canvas id="stars"></canvas>
+  <div class="glow"></div>
+  <div class="rays"></div>
+  <div class="beam"></div>
+  <div class="ground"></div>
+  <svg class="ridge" viewBox="0 0 1600 340" preserveAspectRatio="xMidYMax slice">
+    <!-- Crête lointaine -->
+    <path fill="#0f1426" d="M0 210 L90 170 L170 196 L260 140 L340 182 L430 150 L520 190 L600 166 L700 200 L800 172 L900 204 L1000 160 L1090 188 L1180 142 L1270 180 L1360 150 L1460 192 L1540 164 L1600 180 V340 H0Z"/>
+    <!-- Ruines proches : colonnes brisées et arche, à gauche et à droite -->
+    <g fill="#070a14">
+      <path d="M0 262 L120 244 L260 258 L420 236 L560 256 L700 246 L800 254 L900 246 L1040 256 L1180 238 L1340 258 L1480 244 L1600 256 V340 H0Z"/>
+      <path d="M150 250 V150 L160 140 L172 146 L176 132 L186 138 V250Z"/>
+      <path d="M232 256 V188 L240 180 L252 186 L256 176 L262 182 V256Z"/>
+      <path d="M300 250 V120 H312 V112 H372 V120 H384 V250 H364 V160 A22 22 0 0 0 320 160 V250Z"/>
+      <path d="M1290 252 V136 L1298 128 L1310 134 L1316 118 L1326 126 V252Z"/>
+      <path d="M1380 248 V176 L1388 168 L1398 174 L1404 162 L1410 170 V248Z"/>
+      <path d="M1440 254 V204 H1474 V196 H1482 V254Z"/>
+    </g>
+  </svg>
+  <svg class="tower" id="tower" viewBox="0 0 600 1000" preserveAspectRatio="xMidYMax meet"></svg>
+  <div class="crown"></div>
+  <div class="fog fog-high"></div>
+  <div class="fog fog-mid"></div>
+  <div class="fog fog-ground"></div>
+  <canvas id="motes"></canvas>
+  <div class="vignette"></div>
+</div>
+
+<main class="stage">
+  <div class="halo" aria-hidden="true"></div>
+  <p class="eyebrow">Monde des Douze · Serveur Kourial</p>
+  <h1><span class="l1">L'Épreuve</span> <span class="l2">des Dieux</span></h1>
+  <svg class="rule" viewBox="0 0 240 12" aria-hidden="true"><path d="M0 6 H104 M136 6 H240" stroke="currentColor" stroke-width="1" opacity=".55"/><path d="M120 0 L126 6 L120 12 L114 6Z" fill="currentColor"/></svg>
+  <p class="lore">
+    Nul ne sait quand elle fut érigée, ni combien d'étages elle compte. Les Dieux l'ont bâtie pour trouver leur successeur&nbsp;; un seul en est revenu. Depuis, la tour se taisait.
+    <em>Elle vient de se réveiller. Cette fois, nul ne montera seul.</em>
+  </p>
+
+  <section class="countdown" id="countdown" aria-labelledby="cdLabel"{% if ouvert %} hidden{% endif %}>
+    <span class="cd-label" id="cdLabel">Les portes s'ouvrent dans</span>
+    <div class="cells" role="timer" aria-hidden="true">
+      <div class="cell"><b id="cdD">--</b><span>jours</span></div>
+      <div class="cell"><b id="cdH">--</b><span>heures</span></div>
+      <div class="cell"><b id="cdM">--</b><span>minutes</span></div>
+      <div class="cell"><b id="cdS">--</b><span>secondes</span></div>
+    </div>
+    <p class="sr-only" id="cdSpoken" aria-live="polite"></p>
+    <p class="date"><strong>{{ jour_ouverture|capitalize }} · {{ "%d h %02d"|format(ouverture.hour, ouverture.minute) }}</strong>, heure de Paris
+      <span class="local" id="localTime"></span></p>
+  </section>
+
+  <section class="opened" id="opened"{% if not ouvert %} hidden{% endif %} aria-live="polite">
+    <h2>Les portes sont ouvertes</h2>
+    <p>La tour attend ses grimpeurs. Le premier étage se gravit ensemble&nbsp;: rejoignez l'ascension depuis le Discord de l'événement.</p>
+    <a class="enter" id="enter" href="#" hidden>Entrer dans la tour <span aria-hidden="true">→</span></a>
+  </section>
+</main>
+{% endblock %}
+{% block mention_visuels %}&nbsp;; tous les visuels de cette page sont dessinés par le code{% endblock %}
+{% block scripts %}<script src="/static/teaser/teaser.js"></script>{% endblock %}
