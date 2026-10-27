@@ -1,32 +1,34 @@
 """Les objets du domaine : des dataclasses figées, sans base de données ni Discord.
 
-Tout le reste du projet (bot, site, base) parle avec ces objets. Ils sont figés
-(`frozen=True`) : on ne modifie jamais un grimpeur « en place », on en fabrique un
-nouveau. Ça évite qu'une fonction de calcul change une donnée par effet de bord.
+Tout le reste du projet (site, base, construction des étages) parle avec ces objets. Ils sont figés
+(`frozen=True`) : on ne modifie jamais un grimpeur « en place », on en fabrique un nouveau. Une fonction
+de calcul ne peut donc pas changer une donnée par effet de bord.
 
-Tous les `datetime` sont avec fuseau, en UTC.
+Tous les `datetime` portent un fuseau, en UTC. Signatures figées : docs/LOTS.md, lot B.
 """
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 from datetime import datetime
+from fractions import Fraction
 from typing import Literal
 
 from epreuve.domaine.classes import CLASSES
 
-Difficulte = Literal["easy", "med", "hard"]
+Categorie = Literal["donjons", "full_succes", "principales", "secondaires"]
+CATEGORIES: tuple[Categorie, ...] = ("donjons", "full_succes", "principales", "secondaires")
+NOM_CATEGORIE: dict[Categorie, str] = {
+    "donjons": "Donjons", "full_succes": "Full succès",
+    "principales": "Quêtes principales", "secondaires": "Quêtes secondaires",
+}  # fmt: skip
 Statut = Literal["actif", "pause", "exclu"]
-StatutValid = Literal["acceptee", "refusee", "annulee"]
-Source = Literal["manuelle", "ia_confirmee", "ia_corrigee", "declaration"]
+STATUTS: tuple[Statut, ...] = ("actif", "pause", "exclu")
 StatutEtage = Literal["scelle", "ouvert", "termine"]
-
-DIFFICULTES: tuple[str, ...] = ("easy", "med", "hard")
-STATUTS: tuple[str, ...] = ("actif", "pause", "exclu")
-TYPES_QUETES: tuple[str, ...] = ("quete", "lot_quetes")  # ce qui se déclare avec /quetes
-
-# Ce que voit un humain : le règlement parle d'Aventuriers, d'Éclaireurs et de Collectionneurs.
-NOM_DIFFICULTE: dict[str, str] = {"easy": "Aventurier", "med": "Éclaireur", "hard": "Collectionneur"}
+Nature = Literal["principale", "secondaire"]
+OrigineNature = Literal["duffus", "dofusdb", "admin"]
+TypeElement = Literal["case", "quete"]
 
 
 @dataclass(frozen=True)
@@ -34,127 +36,158 @@ class Etage:
     id: int
     numero: int
     nom: str
+    niveau_min: int
+    niveau_max: int
     level_cap: int
-    seuil_pourcent: int
     statut: StatutEtage
     ouvert_le: datetime | None
     date_plancher_suivant: datetime | None
-    zone_quetes: str
-    donjons_affiches: tuple[str, ...]
-    chapitre_guide: str | None = None  # le chapitre du guide Duffus de cet étage (palier 3)
-
-
-# Les étages de la tour sont les chapitres du guide Duffus : étage N = chapitre N.
-URL_GUIDE_DUFFUS = "https://duffus.fr/guide-complet"
+    palier_manuel: int | None = None
+    ambiance_url: str | None = None  # aucun lien vers duffus.fr (EX-70)
 
 
 @dataclass(frozen=True)
-class Palier:
-    """Un palier de points (rang 1, 2 ou 3) et les contenus qu'il AJOUTE.
-
-    Atteindre le palier k, c'est avoir fait tous les contenus des paliers 1 à k.
-    """
-
+class Donjon:
     id: int
     etage_id: int
-    rang: int
-    libelle: str
-    contenu_ids: frozenset[int]
-
-
-@dataclass(frozen=True)
-class Contenu:
-    id: int
-    etage_id: int
-    type: str  # "succes", "quete", "lot_quetes" ou "autre"
     nom: str
-    nom_court: str
+    niveau: int | None
+    ordre: int
+    bloc: str | None
+    dofusdb_id: int | None
+    origine: Literal["propose", "admin"]
+    succes_source: Literal["duffus", "dofusdb"]
+    masque: bool = False
+
+
+@dataclass(frozen=True)
+class CaseSucces:
+    id: int
+    donjon_id: int
+    ordre: int
+    nom: str
+    condition: str
+    est_classique: bool
+    masquee: bool = False
+
+
+@dataclass(frozen=True)
+class Quete:
+    id: int
+    etage_id: int
+    nom: str
+    niveau: int | None
+    bloc: str
+    ordre: int
+    nature: Nature
+    nature_origine: OrigineNature
+    dofus: tuple[str, ...]
+    jusqu_ou: str | None
+    a_lier: str | None
+    a_une_fiche: bool  # la fiche elle-même se lit à part (FicheQuete)
+    masquee: bool = False
 
 
 @dataclass(frozen=True)
 class Grimpeur:
     id: int
+    discord_user_id: int
+    nom_discord: str
     pseudo: str
-    classe: str
-    difficulte: Difficulte
+    classe: str | None
     statut: Statut
-    niveau_connu: int | None  # sert à l'affichage et au contrôle du cap
+    niveau_declare: int | None
     inscrit_le: datetime
 
     def __post_init__(self) -> None:
-        # Le domaine refuse une classe inconnue : la base a la même règle (contrainte CHECK).
-        if self.classe not in CLASSES:
+        if self.classe is not None and self.classe not in CLASSES:
             raise ValueError(f"classe inconnue : {self.classe!r}")
-        if self.difficulte not in DIFFICULTES:
-            raise ValueError(f"difficulté inconnue : {self.difficulte!r}")
         if self.statut not in STATUTS:
             raise ValueError(f"statut inconnu : {self.statut!r}")
 
 
 @dataclass(frozen=True)
-class Validation:
-    id: int
-    grimpeur_id: int
-    contenu_id: int
-    niveau: int | None  # vide pour une déclaration de quêtes
-    statut: StatutValid
-    forcee: bool  # acceptée par un admin malgré un dépassement de cap
-    source: Source
-    realisee_le: datetime
-
-
-@dataclass(frozen=True)
 class EntreeJournal:
-    """Une ligne du journal. `details` est un petit dictionnaire libre (stocké en JSON)."""
-
     id: int
     horodatage: datetime
+    acteur_discord_id: int | None
     type: str
+    grimpeur_id: int | None
+    etage_id: int | None
+    details: Mapping[str, object]
     public: bool
-    grimpeur_id: int | None = None
-    details: dict = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
-class Instantane:
-    """Tout ce qu'il faut pour dessiner le site, lu en une fois.
+class Session:
+    """Jamais transmise à un gabarit : elle porte le jeton OAuth et le jeton CSRF."""
 
-    Le site ne sait pas d'où viennent les données : de la base en production,
-    ou d'un jeu de démonstration en local. C'est ce qui permet de lancer la démo
-    sans Postgres ni Discord.
+    discord_user_id: int
+    nom_discord: str
+    est_admin: bool
+    roles_verifies_le: datetime
+    expire_le: datetime
+    jeton_oauth: str = field(repr=False)
+    csrf: str = field(repr=False)
+
+
+@dataclass(frozen=True)
+class Regles:
+    """Les règles de jeu, lues depuis config/regles.yaml (SPEC §8.1) par `epreuve.regles`.
+
+    Les valeurs par défaut sont les réponses par défaut d'EXIGENCES. Le domaine ne lit jamais de
+    fichier : les règles lui sont passées en paramètre.
     """
 
-    etages: tuple[Etage, ...]
-    paliers: tuple[Palier, ...]  # ceux de l'étage ouvert
-    contenus: tuple[Contenu, ...]  # ceux de l'étage ouvert
-    grimpeurs: tuple[Grimpeur, ...]
-    validations: tuple[Validation, ...]
-    journal_public: tuple[EntreeJournal, ...]  # du plus récent au plus ancien
-
-    @property
-    def etage_ouvert(self) -> Etage | None:
-        return next((e for e in self.etages if e.statut == "ouvert"), None)
+    points_par_joueur: Fraction = Fraction(2)  # palier = ⌈ m × N × K ÷ 4 ⌉ (EX-09, EX-109)
+    categorie_vide: Literal["ignoree", "offerte"] = "ignoree"  # T-11
+    succes_coche_vaincu: bool = True  # T-16
+    pause_peut_cocher: bool = True  # T-13
+    classe_obligatoire: bool = False  # T-20
+    afficher_nom_discord: bool = True  # T-20
+    liste_officielle_obligatoire: bool = True  # T-19
+    verrouiller_modules_par_etage: bool = False  # T-08 (lot E)
 
 
-def liste_francaise(mots: list[str]) -> str:
-    """["A", "B", "C"] -> « A, B et C »."""
-    if len(mots) <= 1:
-        return "".join(mots)
-    return ", ".join(mots[:-1]) + " et " + mots[-1]
+@dataclass(frozen=True)
+class ElementRef:
+    type: TypeElement
+    id: int
 
 
-def phrase_validation(nb_grimpeurs: int, contenus: list[str], niveaux: list[int | None]) -> str:
-    """La fin de phrase d'une entrée du fil, après les pseudos (que le site met en gras).
+@dataclass(frozen=True)
+class Coches:
+    grimpeur_id: int
+    cases: frozenset[int] = frozenset()
+    quetes: frozenset[int] = frozenset()
 
-    - validation : « ont validé « Kardorim (Duo) » (niv. 20). »
-    - déclaration (aucun niveau) : « a déclaré avoir terminé « Toutes les quêtes d'Incarnam ». »
-    """
-    titres = liste_francaise([f"« {c} »" for c in contenus])
-    connus = [n for n in niveaux if n is not None]
-    if not connus:
-        verbe = "a déclaré" if nb_grimpeurs <= 1 else "ont déclaré"
-        return f"{verbe} avoir terminé {titres}."
-    verbe = "a validé" if nb_grimpeurs <= 1 else "ont validé"
-    bas, haut = min(connus), max(connus)
-    niv = f"niv. {bas}" if bas == haut else f"niv. {bas} à {haut}"
-    return f"{verbe} {titres} ({niv})."
+    def contient(self, ref: ElementRef) -> bool:
+        return ref.id in (self.cases if ref.type == "case" else self.quetes)
+
+
+@dataclass(frozen=True)
+class ContenuEtage:
+    """Le contenu VISIBLE d'un étage : rien de masqué. Une case d'un donjon masqué est exclue."""
+
+    etage: Etage
+    donjons: tuple[Donjon, ...]
+    cases: tuple[CaseSucces, ...]
+    quetes: tuple[Quete, ...]
+
+    @staticmethod
+    def visible(etage: Etage, donjons: Iterable[Donjon], cases: Iterable[CaseSucces],
+                quetes: Iterable[Quete]) -> ContenuEtage:
+        ds = tuple(sorted((d for d in donjons if not d.masque), key=lambda d: (d.ordre, d.id)))
+        ids = {d.id for d in ds}
+        cs = tuple(sorted((c for c in cases if not c.masquee and c.donjon_id in ids),
+                          key=lambda c: (c.donjon_id, c.ordre, c.id)))
+        qs = tuple(sorted((q for q in quetes if not q.masquee), key=lambda q: (q.ordre, q.id)))
+        return ContenuEtage(etage, ds, cs, qs)
+
+    def cases_du_donjon(self, donjon_id: int) -> tuple[CaseSucces, ...]:
+        """Triées par ordre (la case classique, « Vaincre le boss », vient en premier)."""
+        return tuple(c for c in self.cases if c.donjon_id == donjon_id)
+
+    def elements(self) -> tuple[ElementRef, ...]:
+        return (tuple(ElementRef("case", c.id) for c in self.cases)
+                + tuple(ElementRef("quete", q.id) for q in self.quetes))

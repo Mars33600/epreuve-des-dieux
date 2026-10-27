@@ -33,11 +33,13 @@ def repartition_classes(grimpeurs: Iterable[Grimpeur]) -> tuple[RepartitionClass
     """Pour chacune des 19 classes, dans l'ordre du jeu : combien d'actifs, combien en pause.
 
     Les classes à zéro sont gardées (c'est elles qui intéressent un nouveau venu).
-    Les exclus sont ignorés.
+    Les exclus et les grimpeurs sans classe (elle est facultative, T-20) sont ignorés.
     """
     actifs = dict.fromkeys(CLASSES, 0)
     en_pause = dict.fromkeys(CLASSES, 0)
     for g in grimpeurs:
+        if g.classe is None:
+            continue
         if g.statut == "actif":
             actifs[g.classe] += 1
         elif g.statut == "pause":
