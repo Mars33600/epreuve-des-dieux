@@ -77,14 +77,15 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
         journal.error("erreur non prévue : %r", exc)
         return JSONResponse({"erreur": MESSAGE_INDISPONIBLE}, status_code=500, headers=ENTETES_SECURITE)
 
-    @app.get("/", response_class=HTMLResponse)
+    # HEAD aussi : les outils d'analyse des en-têtes et certaines sondes n'envoient que HEAD.
+    @app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
     async def page(request: Request):
         return gabarits.TemplateResponse(request, "teaser.html", {
             "site_ouvert_le": config.site_ouvert_le, "teaser_lien_entrer": config.teaser_lien_entrer,
             "ouvert": mode() == "ouvert", "ouverture": ouverture, "jour_ouverture": jour_en_clair(ouverture),
         })  # fmt: skip
 
-    @app.get("/sante")
+    @app.api_route("/sante", methods=["GET", "HEAD"])
     async def sante():
         # Toujours 200 au lot A : le teaser ne dépend pas de la base. Au lot B, 503 si elle est injoignable.
         if source is None:

@@ -260,6 +260,13 @@ def test_entetes_sur_toutes_les_reponses(chemin):
     _verifier_entetes(client().get(chemin))
 
 
+@pytest.mark.parametrize("chemin", ["/", "/sante"])
+def test_head_repond_avec_les_entetes(chemin):
+    r = client().head(chemin)
+    assert r.status_code == 200 and r.content == b""
+    _verifier_entetes(r)
+
+
 def test_entetes_sur_une_404_en_mode_ouvert_et_une_erreur_500():
     _verifier_entetes(client(APRES).get("/une-adresse-inventee"))
     r = client(source=Source(RuntimeError("panne"))).get("/sante")  # erreur rattrapée : pas une 500
