@@ -17,9 +17,11 @@ ReglageMode = Literal["auto", "teaser", "ouvert"]
 ModeEffectif = Literal["teaser", "ouvert"]
 
 # Ce que le middleware laisse passer en mode teaser, pour tout le monde.
-CHEMINS_TOUJOURS_PERMIS: frozenset[str] = frozenset({"/", "/sante"})
+# Lot B : la connexion est permise pour que les admins puissent entrer pendant le teaser. Un joueur
+# connecté revoit le teaser : « /inscription » n'est PAS permise, aucune fiche n'est créée avant l'ouverture.
+CHEMINS_TOUJOURS_PERMIS: frozenset[str] = frozenset({"/", "/sante", "/connexion", "/auth/discord/retour",
+                                                     "/deconnexion"})
 PREFIXES_TOUJOURS_PERMIS: tuple[str, ...] = ("/static/",)
-# Le lot B ajoute : "/connexion", "/auth/discord/retour", "/deconnexion", "/inscription".
 
 
 def mode_effectif(reglage: ReglageMode, ouvert_le: datetime, maintenant: datetime) -> ModeEffectif:
@@ -35,6 +37,6 @@ def mode_effectif(reglage: ReglageMode, ouvert_le: datetime, maintenant: datetim
     return "ouvert"
 
 
-def voit_site_complet(mode: ModeEffectif, est_admin: bool, est_testeur: bool) -> bool:
-    """Vrai en mode ouvert, ou pour un admin ou un testeur (qui voient le site derrière le teaser)."""
-    return mode == "ouvert" or est_admin or est_testeur
+def voit_site_complet(mode: ModeEffectif, est_admin: bool) -> bool:
+    """Vrai en mode ouvert, ou pour un admin. Aucun joueur avant l'ouverture (arbitrage de Marceau)."""
+    return mode == "ouvert" or est_admin

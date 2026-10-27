@@ -39,6 +39,39 @@ class Config(BaseSettings):
     # --- Facultative au lot A : sans elle, /sante répond « base absente » ---
     database_url: SecretStr | None = Field(default=None, alias="DATABASE_URL")
 
+    # --- Connexion Discord, OAuth2 seulement (lot B, ARCHITECTURE §8 et §11). Aucun jeton de bot n'est lu. ---
+    discord_client_id: str = Field(default="1564210808509038622", alias="DISCORD_CLIENT_ID")
+    discord_client_secret: SecretStr | None = Field(default=None, alias="DISCORD_CLIENT_SECRET")
+    discord_guild_id: int | None = Field(default=None, alias="DISCORD_GUILD_ID")
+    # Listes d'identifiants séparés par des virgules (lues en texte : pydantic-settings attendrait du JSON).
+    discord_admin_role_ids_texte: str = Field(default="", alias="DISCORD_ADMIN_ROLE_IDS")
+    admins_supplementaires_texte: str = Field(default="", alias="ADMINS_SUPPLEMENTAIRES")
+
+    @staticmethod
+    def _ids(texte: str) -> frozenset[int]:
+        return frozenset(int(x) for x in texte.replace(";", ",").split(",") if x.strip())
+
+    @property
+    def discord_admin_role_ids(self) -> frozenset[int]:
+        return self._ids(self.discord_admin_role_ids_texte)
+
+    @property
+    def admins_supplementaires(self) -> frozenset[int]:
+        return self._ids(self.admins_supplementaires_texte)
+
+    @property
+    def redirect_uri(self) -> str:
+        return f"{(self.site_url or 'http://localhost:8080').rstrip('/')}/auth/discord/retour"
+
+    @field_validator("discord_admin_role_ids_texte", "admins_supplementaires_texte")
+    @classmethod
+    def _liste_d_ids(cls, v: str) -> str:
+        try:
+            cls._ids(v)
+        except ValueError as e:
+            raise ValueError(f"liste d'identifiants Discord séparés par des virgules attendue : {v!r}") from e
+        return v
+
     @field_validator("site_ouvert_le")
     @classmethod
     def _avec_fuseau(cls, v: datetime) -> datetime:

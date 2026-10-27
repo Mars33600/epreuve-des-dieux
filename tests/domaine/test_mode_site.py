@@ -48,17 +48,15 @@ def test_dates_sans_fuseau_refusees(reglage):
         mode_effectif(reglage, OUVERTURE, naive)
 
 
-@pytest.mark.parametrize(("mode", "est_admin", "est_testeur"),
-                         list(itertools.product(["teaser", "ouvert"], [False, True], [False, True])))
-def test_voit_site_complet_les_8_combinaisons(mode, est_admin, est_testeur):
-    attendu = mode == "ouvert" or est_admin or est_testeur
-    assert voit_site_complet(mode, est_admin, est_testeur) is attendu
-    # Le seul cas fermé : un visiteur ordinaire pendant le teaser.
-    assert attendu is not (mode == "teaser" and not est_admin and not est_testeur)
+@pytest.mark.parametrize(("mode", "est_admin"), list(itertools.product(["teaser", "ouvert"], [False, True])))
+def test_voit_site_complet_les_4_combinaisons(mode, est_admin):
+    # Plus de testeur au lot B : aucun joueur avant l'ouverture, seuls les admins voient le site.
+    assert voit_site_complet(mode, est_admin) is (mode == "ouvert" or est_admin)
 
 
-def test_chemins_permis_du_lot_a():
-    assert CHEMINS_TOUJOURS_PERMIS == {"/", "/sante"}
+def test_chemins_permis_du_lot_b():
+    assert CHEMINS_TOUJOURS_PERMIS == {"/", "/sante", "/connexion", "/auth/discord/retour", "/deconnexion"}
+    assert "/inscription" not in CHEMINS_TOUJOURS_PERMIS
     assert PREFIXES_TOUJOURS_PERMIS == ("/static/",)
 
 
