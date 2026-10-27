@@ -13,7 +13,6 @@ from sqlalchemy.exc import IntegrityError
 from epreuve.db import tables as t
 from epreuve.db.depot import (
     DejaValide,
-    ErreurDepot,
     Introuvable,
     MembreDejaRelie,
     PreuveDiscord,

@@ -4,6 +4,13 @@ Sans base : une fausse source fournit l'instantané. Le TestClient de FastAPI ap
 directement, sans serveur réseau. Le JavaScript pur (compte à rebours) tourne dans V8 (mini-racer).
 """
 
+# ruff: noqa: E402
+import pytest
+
+# La page v3 (index.html, /api/etat) n'est plus routée depuis le lot A, et creer_app a changé de forme.
+# Ces tests seront réécrits au lot B sur le nouveau modèle (docs/LOTS.md, inventaire) ; leurs idées restent ici.
+pytest.skip("page v3 retirée au lot A, tests réécrits au lot B", allow_module_level=True)
+
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 

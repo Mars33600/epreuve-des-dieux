@@ -4,6 +4,13 @@ La cohérence est vérifiée en recalculant P, S, M à la main à partir des CAR
 (et non avec les fonctions du domaine), sur des registres tirés au hasard.
 """
 
+# ruff: noqa: E402
+import pytest
+
+# La page v3 (index.html, /api/etat) n'est plus routée depuis le lot A, et creer_app a changé de forme.
+# Ces tests seront réécrits au lot B sur le nouveau modèle (docs/LOTS.md, inventaire) ; leurs idées restent ici.
+pytest.skip("page v3 retirée au lot A, tests réécrits au lot B", allow_module_level=True)
+
 from datetime import timedelta
 from zoneinfo import ZoneInfo
 

@@ -4,6 +4,13 @@ Chaque attendu vient de docs/SPEC.md §5 / §7 / §8 bis et de docs/REPONSES-SHA
 Pas de base, pas de réseau.
 """
 
+# ruff: noqa: E402, I001
+import pytest
+
+# Ce module importe domaine/inclusion.py, déjà supprimé sur la branche wip (retardataires automatiques
+# retirés) : il ne se chargeait plus. Ses idées de tests adverses seront reprises au lot B (docs/LOTS.md, inventaire).
+pytest.skip("domaine v3 (inclusion.py supprimé), tests réécrits au lot B", allow_module_level=True)
+
 from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 from pathlib import Path

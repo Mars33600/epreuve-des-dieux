@@ -1,12 +1,16 @@
-"""Le site public : une page, une API JSON en lecture seule, une sonde de santé.
+"""Le site, version lot A : le teaser, une sonde de santé, les fichiers statiques.
 
-    GET /           la page (gabarit Jinja + style.css + app.js tirés de la maquette)
-    GET /api/etat   tout l'état affiché, en JSON (contrat figé dans docs/LOTS.md)
-    GET /sante      {"discord": "ok"|"ko", "base": "ok"|"ko"}, code 200 ou 503
+    GET /        le teaser (mode teaser) ; en mode ouvert, provisoirement, le teaser dans son état
+                 « Les portes sont ouvertes » (le lot B y met l'accueil et la tour)
+    GET /sante   {"statut": "ok", "base": "absente"|"ok"|"erreur", "mode": "teaser"|"ouvert"}
+    /static/teaser/, /static/fonts/   la feuille, le script et les polices du teaser
 
-Le site ne sait pas d'où viennent les données : il reçoit une « source » qui sait
-`charger_instantane()` et `ping()`. En production c'est le dépôt (Postgres) ; pour la démo
-locale, un jeu de données en mémoire (voir `demo.py`).
+Tout le reste reçoit une redirection 303 vers `/` (ou un 404 pour `/api/…`) pendant le teaser :
+c'est le rôle de `securite.py`, qui pose aussi les en-têtes de sécurité sur chaque réponse.
+
+Le site ne sait pas d'où vient l'état de la base : il reçoit une « source » qui sait `ping()`.
+En production c'est le dépôt (Postgres) ; sans `DATABASE_URL`, il n'y en a pas, et le teaser
+tourne quand même.
 """
 
 from __future__ import annotations
@@ -23,179 +27,73 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from epreuve.domaine.classes import repartition_classes
-from epreuve.domaine.jauges import calculer_etat_etage, marques_grimpeur, points_grimpeur
-from epreuve.domaine.modeles import URL_GUIDE_DUFFUS, Instantane, phrase_validation
-from epreuve.domaine.seuil import POINTS_VISES
+from epreuve.config import Config
+from epreuve.domaine.mode_site import mode_effectif
+from epreuve.web.securite import ENTETES_SECURITE, EntetesSecurite, FiltreMode
 
 journal = logging.getLogger("epreuve.web")
 ICI = Path(__file__).parent
-TAILLE_FIL = 30
-RANGS = (1, 2, 3)
-MESSAGE_INDISPONIBLE = "Les données sont momentanément indisponibles. Réessaie dans une minute."
+MESSAGE_INDISPONIBLE = "Le site est momentanément indisponible. Réessaie dans une minute."
+JOURS = ("lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche")
+MOIS = ("janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre",
+        "novembre", "décembre")
 
 
 class SourceEtat(Protocol):
-    async def charger_instantane(self) -> Instantane: ...
+    # Au lot A, on ne demande à la base que d'être joignable. Le lot B ajoute les lectures.
     async def ping(self) -> bool: ...
 
 
-def _iso(d: datetime | None, fuseau: ZoneInfo) -> str | None:
-    """ISO 8601 avec le décalage de Paris : « 2026-10-31T00:00:00+01:00 »."""
-    return d.astimezone(fuseau).replace(microsecond=0).isoformat() if d else None
+def maintenant_utc() -> datetime:
+    return datetime.now(UTC)
 
 
-def construire_etat(inst: Instantane, maintenant: datetime, fuseau: ZoneInfo) -> dict:
-    """Transforme l'instantané en JSON de `/api/etat`. Fonction pure : facile à tester.
-
-    Garanties : aucun exclu, aucun identifiant Discord, aucune date d'activité, aucun nom
-    d'étage scellé.
-    """
-    visibles = [g for g in inst.grimpeurs if g.statut != "exclu"]
-    pseudos = {g.id: g.pseudo for g in visibles}
-    etage = inst.etage_ouvert
-
-    # --- La tour : les étages connus, plus un étage scellé au-dessus du dernier.
-    tour = [{"numero": e.numero, "nom": None if e.statut == "scelle" else e.nom, "statut": e.statut}
-            for e in inst.etages]
-    if not tour or tour[-1]["statut"] != "scelle":
-        tour.append({"numero": (tour[-1]["numero"] + 1) if tour else 0, "nom": None, "statut": "scelle"})
-    etage0 = next((e for e in inst.etages if e.numero == 0), None)
-
-    # --- L'étage en cours et sa jauge, calculées par le domaine.
-    courant = None
-    if etage:
-        etat = calculer_etat_etage(etage, inst.paliers, inst.grimpeurs, inst.validations, maintenant)
-        libelles = {p.rang: p.libelle for p in inst.paliers}
-        j = etat.jauge
-        courant = {
-            "numero": etage.numero, "nom": etage.nom, "level_cap": etage.level_cap,
-            "seuil_pourcent": etage.seuil_pourcent, "donjons": list(etage.donjons_affiches),
-            "zone_quetes": etage.zone_quetes, "chapitre_guide": etage.chapitre_guide, "lien_guide": URL_GUIDE_DUFFUS,
-            "ouvert_le": _iso(etage.ouvert_le, fuseau),
-            "date_plancher_suivant": _iso(etage.date_plancher_suivant, fuseau),
-            "n_comptes": etat.n_comptes, "n_pause": etat.n_pause,
-            "jauge": {"points": j.points, "maximum": j.maximum, "seuil": j.seuil, "pleine": j.pleine},
-            "comptes_par_difficulte": dict(etat.comptes_par_difficulte),
-            "paliers": [{"rang": rang, "libelle": libelles.get(rang, f"Palier {rang}"), "grimpeurs": n}
-                        for rang, n in zip(RANGS, etat.grimpeurs_par_palier, strict=True)],
-            "deblocable": etat.deblocable,
-        }  # fmt: skip
-
-    # --- Les grimpeurs : actifs d'abord, puis ordre alphabétique. Pas de tri par score.
-    def cle_tri(g):
-        return (g.statut != "actif", g.pseudo.casefold())
-
-    grimpeurs = []
-    for g in sorted(visibles, key=cle_tri):
-        au_dessus = bool(etage and g.niveau_connu is not None and g.niveau_connu > etage.level_cap)
-        marques = marques_grimpeur(g, inst.paliers, inst.validations, etage) if etage else {}
-        points = points_grimpeur(g, inst.paliers, inst.validations, etage) if etage and g.statut == "actif" else 0
-        grimpeurs.append({
-            "id": g.id, "pseudo": g.pseudo, "classe": g.classe, "difficulte": g.difficulte,
-            "statut": g.statut, "niveau": g.niveau_connu,
-            "au_dessus_du_cap": au_dessus, "points": points, "points_vises": POINTS_VISES[g.difficulte],
-            "marques": {str(rang): bool(marques.get(rang)) for rang in RANGS},
-        })  # fmt: skip
-
-    return {
-        "genere_le": _iso(maintenant, fuseau),
-        "ouverture_etage0": _iso(etage0.ouvert_le if etage0 else None, fuseau),
-        "tour": tour,
-        "etage_courant": courant,
-        "classes": [{"classe": r.classe, "actifs": r.actifs, "en_pause": r.en_pause}
-                    for r in repartition_classes(inst.grimpeurs)],
-        "grimpeurs": grimpeurs,
-        "fil": construire_fil(inst, pseudos, fuseau),
-    }
+def jour_en_clair(d: datetime) -> str:
+    """« vendredi 13 novembre 2026 » (« 1er » pour le premier du mois)."""
+    jour = "1er" if d.day == 1 else str(d.day)
+    return f"{JOURS[d.weekday()]} {jour} {MOIS[d.month - 1]} {d.year}"
 
 
-def construire_fil(inst: Instantane, pseudos: dict[int, str], fuseau: ZoneInfo) -> list[dict]:
-    """Les 30 dernières validations et déclarations publiques. Jamais de refus.
-
-    Une entrée ne montre que les grimpeurs dont la validation est TOUJOURS acceptée et qui ne sont
-    pas exclus : une annulation ou une exclusion se reflète dans le fil, sans rien effacer du
-    journal. Les pseudos sont ceux d'aujourd'hui (un changement de pseudo suit).
-    """
-    statuts = {v.id: v.statut for v in inst.validations}
-    fil = []
-    for entree in inst.journal_public:
-        if entree.type not in ("validation", "declaration"):
-            continue
-        restants = [v for v in entree.details.get("validations", [])
-                    if statuts.get(v["id"]) == "acceptee" and v["grimpeur_id"] in pseudos]
-        if not restants:
-            continue
-        noms_grimpeurs = list(dict.fromkeys(pseudos[v["grimpeur_id"]] for v in restants))
-        contenus = list(dict.fromkeys(v["contenu"] for v in restants))
-        fil.append({
-            "horodatage": _iso(entree.horodatage, fuseau),
-            "pseudos": noms_grimpeurs,
-            "texte": phrase_validation(len(noms_grimpeurs), contenus, [v["niveau"] for v in restants]),
-        })  # fmt: skip
-        if len(fil) == TAILLE_FIL:
-            break
-    return fil
-
-
-def creer_app(source: SourceEtat, discord_connecte: Callable[[], bool], fuseau: str = "Europe/Paris",
-              horloge: Callable[[], datetime] = lambda: datetime.now(UTC), demo: bool = False) -> FastAPI:
-    """Fabrique l'application. `horloge` est injectable : la démo et les tests simulent la date."""
-    zone = ZoneInfo(fuseau)
+def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
+              source: SourceEtat | None = None) -> FastAPI:
+    """Fabrique l'application. `horloge` est injectable : les tests simulent la date."""
     app = FastAPI(title="L'Épreuve des Dieux", docs_url=None, redoc_url=None, openapi_url=None)
-    app.mount("/static", StaticFiles(directory=ICI / "static"), name="static")
+    # Seuls les statiques du teaser sont servis : l'ancienne page (app.js, style.css) attend le lot B.
+    for dossier in ("teaser", "fonts"):
+        app.mount(f"/static/{dossier}", StaticFiles(directory=ICI / "static" / dossier), name=dossier)
+    # Ordre : le dernier ajouté enveloppe les autres. Les en-têtes s'ajoutent donc aussi aux 303 et 404 du filtre.
+    app.add_middleware(FiltreMode, reglage=config.site_mode, ouvert_le=config.site_ouvert_le, horloge=horloge)
+    app.add_middleware(EntetesSecurite)
     gabarits = Jinja2Templates(directory=ICI / "templates")
-    dernier_etat: dict = {}  # le dernier état calculé avec succès, servi si la base tombe
+    ouverture = config.site_ouvert_le.astimezone(ZoneInfo(config.fuseau))  # pour la date écrite en clair
 
-    def maintenant(request: Request) -> datetime:
-        # En démo seulement, `?horloge=2026-11-16T00:00` simule une autre date (critère 10).
-        if demo and (h := request.query_params.get("horloge")):
-            try:
-                d = datetime.fromisoformat(h)
-                return d if d.tzinfo else d.replace(tzinfo=zone)
-            except ValueError:
-                pass
-        return horloge()
-
-    async def etat_courant(request: Request) -> tuple[dict | None, bool]:
-        """(état, périmé ?). Si la base est injoignable, on ressert le dernier état connu."""
-        try:
-            etat = construire_etat(await source.charger_instantane(), maintenant(request), zone)
-        except Exception:
-            journal.exception("lecture de l'état impossible")
-            return (dernier_etat.get("etat"), True)
-        dernier_etat["etat"] = etat
-        return etat, False
+    def mode():
+        return mode_effectif(config.site_mode, config.site_ouvert_le, horloge())
 
     @app.exception_handler(Exception)
     async def _erreur(_request: Request, exc: Exception) -> JSONResponse:
         # Jamais de trace de pile vers le visiteur : elle part dans les journaux du serveur.
+        # Cette réponse ne traverse pas EntetesSecurite : on pose les en-têtes ici.
         journal.error("erreur non prévue : %r", exc)
-        return JSONResponse({"erreur": MESSAGE_INDISPONIBLE}, status_code=500)
+        return JSONResponse({"erreur": MESSAGE_INDISPONIBLE}, status_code=500, headers=ENTETES_SECURITE)
 
     @app.get("/", response_class=HTMLResponse)
     async def page(request: Request):
-        etat, perime = await etat_courant(request)
-        return gabarits.TemplateResponse(request, "index.html", {
-            "etat": etat, "perime": perime, "demo": demo,
-            "horloge": _iso(maintenant(request), zone) if demo else None,
+        return gabarits.TemplateResponse(request, "teaser.html", {
+            "site_ouvert_le": config.site_ouvert_le, "teaser_lien_entrer": config.teaser_lien_entrer,
+            "ouvert": mode() == "ouvert", "ouverture": ouverture, "jour_ouverture": jour_en_clair(ouverture),
         })  # fmt: skip
-
-    @app.get("/api/etat")
-    async def api_etat(request: Request):
-        etat, perime = await etat_courant(request)
-        if etat is None:
-            return JSONResponse({"erreur": MESSAGE_INDISPONIBLE}, status_code=503,
-                                headers={"Cache-Control": "no-store"})
-        entetes = {"Cache-Control": "max-age=30"}
-        if perime:
-            entetes["X-Etat-Perime"] = "1"  # le navigateur affiche « dernier état connu »
-        return JSONResponse(etat, headers=entetes)
 
     @app.get("/sante")
     async def sante():
-        corps = {"discord": "ok" if discord_connecte() else "ko", "base": "ok" if await source.ping() else "ko"}
-        code = 200 if corps == {"discord": "ok", "base": "ok"} else 503
-        return JSONResponse(corps, status_code=code, headers={"Cache-Control": "no-store"})
+        # Toujours 200 au lot A : le teaser ne dépend pas de la base. Au lot B, 503 si elle est injoignable.
+        if source is None:
+            base = "absente"
+        else:
+            try:
+                base = "ok" if await source.ping() else "erreur"
+            except Exception:  # noqa: BLE001 — toute erreur veut dire « base injoignable »
+                base = "erreur"
+        return JSONResponse({"statut": "ok", "base": base, "mode": mode()}, headers={"Cache-Control": "no-store"})
 
     return app

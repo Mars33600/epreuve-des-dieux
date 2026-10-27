@@ -1,11 +1,10 @@
 [project]
 name = "epreuve-des-dieux"
 version = "0.1.0"
-description = "Bot Discord et site de suivi de L'Épreuve des Dieux (aventure Dofus 3 communautaire)"
+description = "Site de suivi de L'Épreuve des Dieux (aventure Dofus 3 communautaire)"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
-    "discord.py>=2.4,<3",
     "fastapi>=0.115",
     "uvicorn>=0.30",
     "jinja2>=3.1",
@@ -41,9 +40,6 @@ pythonpath = ["."]
 asyncio_mode = "auto"
 asyncio_default_fixture_loop_scope = "session"
 asyncio_default_test_loop_scope = "session"
-filterwarnings = [
-    "ignore:'audioop' is deprecated:DeprecationWarning",  # vient de discord.py (partie vocale, inutilisée)
-]
 markers = [
     "db: tests contre un vrai Postgres (TEST_DATABASE_URL ; sautés si la base est injoignable)",
 ]
