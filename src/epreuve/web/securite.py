@@ -41,7 +41,15 @@ ENTETES_SECURITE: dict[str, str] = {
 
 
 def chemin_permis(chemin: str) -> bool:
-    """Le chemin répond-il à tout le monde, même pendant le teaser ?"""
+    """Le chemin répond-il à tout le monde, même pendant le teaser ?
+
+    Un chemin à segments « . », « .. » ou vides (`/static/../admin`, `/static//x`) n'est jamais permis :
+    un navigateur ne les envoie pas, et le routeur ne les normalise pas, donc une route à paramètre
+    du lot B pourrait y répondre en passant pour un fichier statique.
+    """
+    segments = chemin.split("/")[1:]
+    if any(s in (".", "..") for s in segments) or "" in segments[:-1]:
+        return False
     return chemin in CHEMINS_TOUJOURS_PERMIS or chemin.startswith(PREFIXES_TOUJOURS_PERMIS)
 
 
