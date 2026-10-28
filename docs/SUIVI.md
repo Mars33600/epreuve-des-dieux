@@ -42,18 +42,18 @@ Détails : `DECISIONS-V4.md`.
 - [x] Filtre « qui n'a pas fait… ? » par quête ou succès
 - [x] Un seul guide avec code couleur et filtre principales / secondaires
 - [x] Fiche de quête complète comme sur Duffus (étapes, besoins, prérequis, succès lié)
-- [ ] Onglet de validation des succès de donjon, dans la progression du tableau de bord
+- [x] Onglet de validation des succès de donjon, dans la progression du tableau de bord
 - [x] Tour en pyramide et ambiance de la maquette
 - [x] Accès réservé aux participants
 
 ## Modules de Duffus « à l'identique »
 
 - [x] Guide (cases, fiches, progression)
-- [ ] Tableau de bord
+- [x] Tableau de bord, à fusionner
 - [x] Archimonstres (sans la bourse aux échanges), à fusionner
 - [x] Avis de recherche, à fusionner
 - [ ] Encyclopédie : objets, monstres, recettes faits ; manquent sorts, PNJ, quêtes, page panoplies
-- [ ] Outils (sans les tutoriels)
+- [ ] Outils (sans les tutoriels) : 6 sur 7 faits (Almanax, drop, classes et sorts, élevage, craft, XP des métiers) ; manque la carte interactive
 - [x] Stuffs (builds PvM de Duffus)
 - [ ] Builder : base faite (objets, panoplies, conditions, totaux, builds partagés) ; manquent forgemagie, calculateurs d'arme et de sorts, comparaison, variantes
 - [x] Rien ne renvoie à Duffus (en-têtes, Twitch, Discord, soutien), sauf « Merci Duffus »
