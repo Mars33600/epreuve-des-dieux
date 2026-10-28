@@ -631,7 +631,7 @@ def creer_app_demo(mode: str = "ouvert"):
     from epreuve.web.app import creer_app
 
     depot = DepotDemo()
-    config = Config(SITE_MODE=mode, SITE_URL="http://127.0.0.1:8080", DISCORD_GUILD_ID=1,
+    config = Config(SITE_MODE=mode, DISCORD_GUILD_ID=1,  # sans SITE_URL : l’origine attendue est celle de la requête
                     DISCORD_ADMIN_ROLE_IDS=str(ROLE_ADMIN), _env_file=None)  # la démo ne lit jamais .env
     oauth = ClientOAuthDemo(config.discord_client_id, SecretStr("demo"), config.redirect_uri, 1,
                             transport=faux_discord(membres_demo(depot)))
@@ -639,11 +639,11 @@ def creer_app_demo(mode: str = "ouvert"):
 
     @app.get("/demo/qui", response_class=HTMLResponse)
     async def qui(request: Request, state: str = ""):
-        return app.state.gabarits.TemplateResponse(request, "demo_qui.html", {
-            "profils": [(f"/auth/discord/retour?code=code-{i}&state={state}", nom) for i, (nom, _) in
-                        PROFILS_DEMO.items()] + [(f"/auth/discord/retour?code=code-{ID_NON_MEMBRE}&state={state}",
-                                                  "Inconnu (pas membre du serveur)")],
-        })
+        from epreuve.web.rendu import rendre
+
+        profils = [*PROFILS_DEMO.items(), (ID_NON_MEMBRE, ("Inconnu (pas membre du serveur)", False))]
+        return await rendre(request, "demo_qui.html", {
+            "profils": [(f"/auth/discord/retour?code=code-{i}&state={state}", nom) for i, (nom, _) in profils]})
 
     return app
 
