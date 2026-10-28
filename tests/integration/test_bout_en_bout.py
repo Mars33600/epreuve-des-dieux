@@ -13,7 +13,9 @@ from epreuve.config import Config
 from epreuve.contenu import construire as k
 from epreuve.contenu.ecrire import ecrire_etage
 from epreuve.discord.oauth import ClientOAuth
+from epreuve.domaine.bareme import EtatJauge
 from epreuve.domaine.modeles import Regles
+from epreuve.domaine.ouverture import bilan_etage
 from epreuve.web.app import creer_app
 from epreuve.web.demo import faux_discord
 
@@ -176,3 +178,18 @@ async def test_sessions_purgees_chaque_jour(depot):
     with pytest.raises(RuntimeError):
         await purger_chaque_jour(depot, lambda: APRES_OUVERTURE, attendre)
     assert attentes == [86400] and await depot.session(b"x", APRES_OUVERTURE - timedelta(days=29)) is None
+
+
+async def test_image_d_ambiance_suit_l_ouverture(site, depot):
+    e0, e1 = await depot.etage_par_numero(0), await depot.etage_par_numero(1)
+    assert (e0.ambiance_url, e1.ambiance_url) == ("/etages/0/image", "/etages/1/image")
+    await depot.ajouter_liste([BRINDILLE], "actif", ADMIN, APRES_OUVERTURE)
+    await depot.creer_grimpeur(BRINDILLE, "b", "Brindille", None, None, APRES_OUVERTURE)
+    brindille = await site.connecter(BRINDILLE)
+    assert 'data-ambiance="/etages/0/image"' in (await brindille.get("/etages/0")).text
+    assert (await brindille.get("/etages/0/image")).status_code == 200
+    assert (await brindille.get("/etages/1/image")).status_code == 404
+    jauge = EtatJauge(0, 0, False, 1, 0, 4, {})
+    await depot.ouvrir_etage(1, bilan_etage(jauge, APRES_OUVERTURE, True, "test"), ADMIN, APRES_OUVERTURE)
+    assert (await brindille.get("/etages/1/image")).status_code == 200
+    await brindille.aclose()

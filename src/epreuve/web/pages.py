@@ -13,8 +13,10 @@ prérequis d'un étage scellé sont masqués par `masquer_prerequis_scelles` sur
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from fastapi import APIRouter, Request
-from fastapi.responses import RedirectResponse
+from fastapi.responses import FileResponse, RedirectResponse
 
 from epreuve.db.depot import DejaInscrit, Introuvable, PasSurLaListe, PseudoDejaPris
 from epreuve.domaine.classes import CLASSES, repartition_classes
@@ -36,6 +38,7 @@ from epreuve.web.vues import (
 )
 
 routeur = APIRouter()
+IMAGES_ETAGES = Path(__file__).resolve().parents[3] / "donnees" / "images" / "etages"
 INTROUVABLE = "Introuvable."
 MESSAGES_FICHE = {"pseudo": "Le pseudo doit faire entre 2 et 30 caractères.",
                   "pris": "Ce pseudo est déjà pris (sans tenir compte des majuscules).",
@@ -99,6 +102,20 @@ async def page_etage(request: Request, numero: int):
         "cochable": peut_cocher_soi(v, etage, s.regles), "motif_requis": False,
     }
     return await rendre(request, "etage.html", ctx)
+
+
+@routeur.get("/etages/{numero}/image")
+async def image_etage(request: Request, numero: int):
+    """L'image d'ambiance d'un étage, servie seulement si l'étage est visible (ouvert, terminé, ou admin).
+
+    Les images ne sont pas sous /static : une adresse devinée ne montre rien d'un étage scellé (404).
+    """
+    v = await exiger_grimpeur(request)
+    await etage_visible(request, numero, v)
+    fichier = IMAGES_ETAGES / f"etage-{numero}.webp"
+    if not fichier.is_file():
+        raise Refus(404, "Image introuvable.")
+    return FileResponse(fichier, media_type="image/webp", headers={"Cache-Control": "private, max-age=3600"})
 
 
 async def etage_de_quete(depot) -> dict[int, int]:

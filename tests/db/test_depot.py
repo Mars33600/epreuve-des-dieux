@@ -264,7 +264,10 @@ async def test_palier_date_et_reglages_d_etage(base):
                                 level_cap=21)
     assert (e.nom, e.ambiance_url, e.level_cap) == ("Le Seuil", "https://cdn.discordapp.com/a.png", 21)
     assert (await base.regler_etage(1, ADMIN, PENDANT, ambiance_url="")).ambiance_url is None
+    assert (await base.regler_etage(1, ADMIN, PENDANT, ambiance_url="/etages/0/image")).ambiance_url == \
+        "/etages/0/image"
     for kw in ({}, {"nom": " "}, {"ambiance_url": "https://duffus.fr/x.png"}, {"ambiance_url": "http://x"},
+               {"ambiance_url": "/etages/0/image/../x"},
                {"level_cap": 0}):
         with pytest.raises(ValueError):
             await base.regler_etage(1, ADMIN, PENDANT, **kw)

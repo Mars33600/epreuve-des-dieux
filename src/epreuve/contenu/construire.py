@@ -135,6 +135,8 @@ def lire_config_etages(chemin: Path = RACINE / "config" / "etages.yaml") -> dict
                 raise ConfigInvalide(f"{chemin.name}, étage {n} : une date doit porter son fuseau")
         if c.ambiance_url and "duffus" in c.ambiance_url.lower():
             raise ConfigInvalide(f"{chemin.name}, étage {n} : aucune image prise sur duffus.fr (EX-70)")
+        if c.ambiance_url and not c.ambiance_url.startswith("https://") and c.ambiance_url != f"/etages/{n}/image":
+            raise ConfigInvalide(f"{chemin.name}, étage {n} : image en https:// ou /etages/{n}/image")
     return cfg
 
 

@@ -219,7 +219,9 @@ def test_tranche_par_config_et_hors_guide(tmp_path):
 
 @pytest.mark.parametrize("contenu", ["etages:\n  0:\n    inconnu: 1\n",
                                      "etages:\n  0:\n    ouvert_le: 2026-10-30T17:00:00\n",
-                                     "etages:\n  0:\n    ambiance_url: https://duffus.fr/a.png\n", "etages: [\n"])
+                                     "etages:\n  0:\n    ambiance_url: https://duffus.fr/a.png\n", "etages: [\n",
+                                     "etages:\n  0:\n    ambiance_url: /etages/1/image\n",
+                                     "etages:\n  0:\n    ambiance_url: /static/etage-0.webp\n"])
 def test_config_etages_invalide(tmp_path, contenu):
     f = tmp_path / "etages.yaml"
     f.write_text(contenu, encoding="utf-8")

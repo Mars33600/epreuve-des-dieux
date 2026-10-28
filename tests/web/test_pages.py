@@ -475,6 +475,8 @@ def test_pied_de_page_sur_chaque_route_get():
                                                                                      "/sante")):
             continue
         r = c.get(_exemple(route.path))
+        if r.headers.get("content-type", "").startswith("image/"):
+            continue  # /etages/{n}/image : une image, pas une page
         if r.status_code == 303:
             continue  # /inscription pour un admin déjà connecté sans être sur la liste : redirection
         assert "Projet de fans" in r.text and '<a href="https://duffus.fr" rel="noopener">Merci Duffus</a>' in r.text, \

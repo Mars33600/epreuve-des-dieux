@@ -13,6 +13,7 @@ Les corrections d'un admin (libellé, masquage, nature) sont rangées à part de
 
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from datetime import datetime, timedelta
 from typing import Literal
@@ -547,8 +548,9 @@ class Depot:
             valeurs["nom"] = nom.strip()
         if ambiance_url is not None:
             url = ambiance_url.strip() or None
-            if url is not None and (not url.startswith("https://") or "duffus" in url.lower()):
-                raise ValueError("image d'ambiance : une adresse https, jamais duffus.fr")
+            interne = url is not None and re.fullmatch(r"/etages/\d+/image", url) is not None
+            if url is not None and not interne and (not url.startswith("https://") or "duffus" in url.lower()):
+                raise ValueError("image d'ambiance : une adresse https ou /etages/N/image, jamais duffus.fr")
             valeurs["ambiance_url"] = url
         if level_cap is not None:
             if not 1 <= level_cap <= 200:

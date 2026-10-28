@@ -51,7 +51,7 @@ ERREURS = {
     "ouverture": "Ouverture refusée : voir les raisons ci-dessous.", "concurrence":
         "Un autre admin vient d'ouvrir cet étage : rien n'a été fait en double.",
     "introuvable": "Élément introuvable.", "statut": "Statut inconnu.", "ids": "Aucun identifiant Discord reconnu.",
-    "nature": "Nature inconnue.", "url": "L'adresse de l'image doit commencer par https://.",
+    "nature": "Nature inconnue.", "url": "L'adresse de l'image doit commencer par https:// (ou être /etages/N/image).",
 }
 
 
@@ -263,7 +263,7 @@ async def admin_reglages(request: Request, numero: int):
     nom = str(form.get("nom", "")).strip() or None
     url = str(form.get("ambiance_url", "")).strip() or None
     cap = str(form.get("level_cap", "")).strip()
-    if url is not None and not url.startswith("https://"):
+    if url is not None and not url.startswith("https://") and url != f"/etages/{numero}/image":
         return retour(chemin, erreur="url")
     if cap and (not cap.isdigit() or not 1 <= int(cap) <= 200):
         return retour(chemin, erreur="cap")

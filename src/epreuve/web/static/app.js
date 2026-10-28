@@ -290,7 +290,7 @@ document.addEventListener("click", e => {
 
 /* =================== Décor : étoiles, poussières, image d'ambiance =================== */
 function ambiance(url){
-  if (!url || !$("ambiance") || !/^https:\/\//.test(url)) return;
+  if (!url || !$("ambiance") || !/^(https:\/\/|\/etages\/\d+\/image$)/.test(url)) return;
   const img = new Image(); img.decoding = "async";
   img.onload = () => { $("ambiance").style.backgroundImage = `url("${encodeURI(url).replace(/"/g, "%22")}")`; $("ambiance").classList.add("ready"); };
   img.src = url; // en cas d'erreur, rien ne change : le décor généré reste
