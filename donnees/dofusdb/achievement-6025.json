@@ -1,0 +1,32 @@
+{
+ "categoryId": 142,
+ "description": {
+  "de": "Die Herausforderung [challenge,1277] abschließen und damit den Himmlischen Barbär in seinem Dungeon besiegen.",
+  "en": "Defeat the Celestial Bearbarian in this boss's dungeon while completing the [challenge,1277] challenge.",
+  "es": "Vencer al Golosotrón Real en su mazmorra validando el reto [challenge,1277].",
+  "fr": "Vaincre Glourséleste dans son donjon en validant le challenge [challenge,1277]",
+  "id": "1046454",
+  "pt": "Derrotar Glurseleste em seu calabouço completando o desafio [challenge,1277]"
+ },
+ "id": 6025,
+ "name": {
+  "de": "Himmlischer Barbär (Begleiter)",
+  "en": "Celestial Bearbarian (Sidekick)",
+  "es": "Golosotrón Real (compañero)",
+  "fr": "Glourséleste (Compagnon)",
+  "id": "1000672",
+  "pt": "Glurseleste (Companheiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>952,0)",
+   "id": 13402,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 13403,
+   "order": 1
+  }
+ ]
+}

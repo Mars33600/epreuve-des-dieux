@@ -1,0 +1,47 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,96] abschließen und damit die 4 Königlichen Blobs in ihrem Dungeon besiegen.",
+  "en": "Defeat the 4 Royal Blops in these bosses' dungeon while completing the [challenge,96] challenge.",
+  "es": "Vencer a los 4 blops reales en su mazmorra validando el reto [challenge,96].",
+  "fr": "Vaincre les 4 Blops Royaux dans leur donjon en validant le challenge [challenge,96].",
+  "id": "852825",
+  "pt": "Derrotar os 4 Blops Reais em seu calabouço completando o desafio [challenge,96]."
+ },
+ "id": 503,
+ "name": {
+  "de": "Königliche Blobs (Duo)",
+  "en": "Royal Blops (Duo)",
+  "es": "Blops reales (dúo)",
+  "fr": "Blops Royaux (Duo)",
+  "id": "276158",
+  "pt": "Blops Reais (Duo)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>96,0)",
+   "id": 1227,
+   "order": 0
+  },
+  {
+   "criterion": "(EH>95,0)",
+   "id": 1228,
+   "order": 1
+  },
+  {
+   "criterion": "(EH>94,0)",
+   "id": 1229,
+   "order": 2
+  },
+  {
+   "criterion": "(EH>93,0)",
+   "id": 1230,
+   "order": 3
+  },
+  {
+   "criterion": "PL>59",
+   "id": 1231,
+   "order": 4
+  }
+ ]
+}

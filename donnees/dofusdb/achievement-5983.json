@@ -1,0 +1,32 @@
+{
+ "categoryId": 142,
+ "description": {
+  "de": "Die Herausforderung [challenge,1271] abschließen und damit die Fuji Eisfux Ziehmutter in ihrem Dungeon besiegen.",
+  "en": "Defeat Foster Fuji Snowfoux in this boss's dungeon while completing the [challenge,1271] challenge.",
+  "es": "Vencer a Fuji Gélifux Nodriza en su mazmorra validando el reto [challenge,1271].",
+  "fr": "Vaincre Fuji Givrefoux Nourricière dans son donjon en validant le challenge [challenge,1271]",
+  "id": "1046417",
+  "pt": "Derrotar Fuji Gelifox Maternal em seu calabouço completando o desafio [challenge,1271]"
+ },
+ "id": 5983,
+ "name": {
+  "de": "Fuji Eisfux Ziehmutter (Begleiter)",
+  "en": "Foster Fuji Snowfoux (Sidekick)",
+  "es": "Fuji Gélifux Nodriza (compañero)",
+  "fr": "Fuji Givrefoux Nourricière (Compagnon)",
+  "id": "1000446",
+  "pt": "Fuji Gelifox Maternal (Companheiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>916,0)",
+   "id": 13294,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 13295,
+   "order": 1
+  }
+ ]
+}

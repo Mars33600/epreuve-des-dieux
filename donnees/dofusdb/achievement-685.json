@@ -1,0 +1,47 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,154] abschließen und damit die 4 Königlichen Blobs in ihrem Dungeon besiegen.",
+  "en": "Defeat the 4 Royal Blops in these bosses' dungeon while completing the [challenge,154] challenge.",
+  "es": "Vencer a los 4 blops reales en su mazmorra validando el reto [challenge,154].",
+  "fr": "Vaincre les 4 Blops Royaux dans leur donjon en validant le challenge [challenge,154].",
+  "id": "852823",
+  "pt": "Derrotar os 4 Blops Reais em seu calabouço completando o desafio [challenge,154]."
+ },
+ "id": 685,
+ "name": {
+  "de": "Königliche Blobs (Vorsichtig)",
+  "en": "Royal Blops (Cautious)",
+  "es": "Blops Reales (prudente)",
+  "fr": "Blops Royaux (Prudent)",
+  "id": "1014006",
+  "pt": "Blops Reais (Prudente)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>154,0)",
+   "id": 1793,
+   "order": 0
+  },
+  {
+   "criterion": "(EH>152,0)",
+   "id": 1794,
+   "order": 1
+  },
+  {
+   "criterion": "(EH>150,0)",
+   "id": 1795,
+   "order": 2
+  },
+  {
+   "criterion": "(EH>148,0)",
+   "id": 1796,
+   "order": 3
+  },
+  {
+   "criterion": "PL>59",
+   "id": 1797,
+   "order": 4
+  }
+ ]
+}

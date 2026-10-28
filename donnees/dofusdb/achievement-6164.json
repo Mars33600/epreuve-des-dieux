@@ -1,0 +1,47 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,996] abschließen und damit die Königlichen Blobs in ihrem Dungeon besiegen.",
+  "en": "Defeat the Royal Blops in this boss's dungeon while completing the [challenge,996] challenge.",
+  "es": "Vencer a los Blops Reales en su mazmorra validando el reto [challenge,996].",
+  "fr": "Vaincre Blops Royaux dans son donjon en validant le challenge [challenge,996].",
+  "id": "1009931",
+  "pt": "Derrotar Blops Reais em seu calabouço completando o desafio [challenge,996]."
+ },
+ "id": 6164,
+ "name": {
+  "de": "Königliche Blobs (Spezial)",
+  "en": "Royal Blops (Special)",
+  "es": "Blops Reales (especial)",
+  "fr": "Blops Royaux (Spécial)",
+  "id": "1009930",
+  "pt": "Blops Reais (Especial)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>996,0)",
+   "id": 13817,
+   "order": 0
+  },
+  {
+   "criterion": "(EH>993,0)",
+   "id": 14019,
+   "order": 1
+  },
+  {
+   "criterion": "(EH>995,0)",
+   "id": 14020,
+   "order": 2
+  },
+  {
+   "criterion": "(EH>994,0)",
+   "id": 14021,
+   "order": 3
+  },
+  {
+   "criterion": "PL>59",
+   "id": 13818,
+   "order": 4
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,1039] abschließen und damit die Tynril in ihrem Dungeon besiegen.",
+  "en": "Defeat Tynrils in this boss's dungeon while completing the [challenge,1039] challenge.",
+  "es": "Vencer a Tynriles en su mazmorra validando el reto [challenge,1039].",
+  "fr": "Vaincre Tynrils dans son donjon en validant le challenge [challenge,1039].",
+  "id": "1010011",
+  "pt": "Derrotar Tynrils em seu calabouço completando o desafio [challenge,1039]."
+ },
+ "id": 6204,
+ "name": {
+  "de": "Tynril (Spezial)",
+  "en": "Tynrils (Special)",
+  "es": "Tynriles (especial)",
+  "fr": "Tynrils (Spécial)",
+  "id": "1010010",
+  "pt": "Tynrils (Especial)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>1039,0)",
+   "id": 13897,
+   "order": 0
+  },
+  {
+   "criterion": "PL>139",
+   "id": 13898,
+   "order": 1
+  }
+ ]
+}

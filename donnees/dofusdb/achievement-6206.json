@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,1041] abschließen und damit Hanshi und Shihan in ihrem Dungeon besiegen.",
+  "en": "Defeat Hanshi and Shihan in these bosses' dungeon while completing the [challenge,1041] challenge.",
+  "es": "Vencer a Hanshi y Shihan en su mazmorra validando el reto [challenge,1041].",
+  "fr": "Vaincre Hanshi et Shihan dans son donjon en validant le challenge [challenge,1041].",
+  "id": "1010015",
+  "pt": "Derrotar Hanshi e Shihan em seu calabouço completando o desafio [challenge,1041]."
+ },
+ "id": 6206,
+ "name": {
+  "de": "Hanshi und Shihan (Spezial)",
+  "en": "Hanshi and Shihan (Special)",
+  "es": "Hanshi y Shihan (especial)",
+  "fr": "Hanshi et Shihan (Spécial)",
+  "id": "1010014",
+  "pt": "Hanshi e Shihan (Especial)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>1041,0)",
+   "id": 13901,
+   "order": 0
+  },
+  {
+   "criterion": "PL>139",
+   "id": 13902,
+   "order": 1
+  }
+ ]
+}

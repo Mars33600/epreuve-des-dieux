@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,495] abschließen und damit Kumiho in ihrem Dungeon besiegen.",
+  "en": "Defeat Koumiho in this boss's dungeon while completing the [challenge,495] challenge.",
+  "es": "Vencer a Kumijo en su mazmorra validando el reto [challenge,495].",
+  "fr": "Vaincre Koumiho dans son donjon en validant le challenge [challenge,495].",
+  "id": "853323",
+  "pt": "Derrotar Kumihu em seu calabouço completando o desafio [challenge,495]."
+ },
+ "id": 3064,
+ "name": {
+  "de": "Kumiho (Als Erstes)",
+  "en": "Koumiho (First)",
+  "es": "Kumijo (primera posición)",
+  "fr": "Koumiho (Premier)",
+  "id": "853322",
+  "pt": "Kumihu (Primeiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>495,0)",
+   "id": 8879,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 8880,
+   "order": 1
+  }
+ ]
+}

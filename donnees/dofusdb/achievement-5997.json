@@ -1,0 +1,32 @@
+{
+ "categoryId": 142,
+ "description": {
+  "de": "Die Herausforderung [challenge,1273] abschließen und damit Kumiho in ihrem Dungeon besiegen.",
+  "en": "Defeat Koumiho in this boss's dungeon while completing the [challenge,1273] challenge.",
+  "es": "Vencer a Kumijo en su mazmorra validando el reto [challenge,1273].",
+  "fr": "Vaincre Koumiho dans son donjon en validant le challenge [challenge,1273]",
+  "id": "1046430",
+  "pt": "Derrotar Kumihu em seu calabouço completando o desafio [challenge,1273]"
+ },
+ "id": 5997,
+ "name": {
+  "de": "Kumiho (Begleiter)",
+  "en": "Koumiho (Sidekick)",
+  "es": "Kumijo (compañero)",
+  "fr": "Koumiho (Compagnon)",
+  "id": "1000540",
+  "pt": "Kumihu (Companheiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>931,0)",
+   "id": 13330,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 13331,
+   "order": 1
+  }
+ ]
+}

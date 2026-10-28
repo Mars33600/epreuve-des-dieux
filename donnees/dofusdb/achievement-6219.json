@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,1054] abschließen und damit die Fuji Eisfux Ziehmutter in ihrem Dungeon besiegen.",
+  "en": "Defeat Foster Fuji Snowfoux in this boss's dungeon while completing the [challenge,1054] challenge.",
+  "es": "Vencer a Fuji Gélifux Nodriza en su mazmorra validando el reto [challenge,1054].",
+  "fr": "Vaincre Fuji Givrefoux Nourricière dans son donjon en validant le challenge [challenge,1054].",
+  "id": "1010041",
+  "pt": "Derrotar Fuji Gelifox Maternal em seu calabouço completando o desafio [challenge,1054]."
+ },
+ "id": 6219,
+ "name": {
+  "de": "Fuji Eisfux Ziehmutter (Spezial)",
+  "en": "Foster Fuji Snowfoux (Special)",
+  "es": "Fuji Gélifux Nodriza (especial)",
+  "fr": "Fuji Givrefoux Nourricière (Spécial)",
+  "id": "1010040",
+  "pt": "Fuji Gelifox Maternal (Especial)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>1054,0)",
+   "id": 13927,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 13928,
+   "order": 1
+  }
+ ]
+}

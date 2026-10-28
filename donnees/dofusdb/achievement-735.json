@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,210] abschließen und damit die Tynril ihrem Dungeon besiegen.",
+  "en": "Defeat the Tynrils in these bosses' dungeon while completing the [challenge,210] challenge.",
+  "es": "Vencer a los Tynriles en su mazmorra validando el reto [challenge,210].",
+  "fr": "Vaincre les Tynrils dans leur donjon en validant le challenge [challenge,210].",
+  "id": "853039",
+  "pt": "Derrotar os Tynrils em seu calabouço completando o desafio [challenge,210]."
+ },
+ "id": 735,
+ "name": {
+  "de": "Tynril (Zombie)",
+  "en": "Tynrils (Zombie)",
+  "es": "Tynriles (zombi)",
+  "fr": "Tynrils (Zombie)",
+  "id": "276290",
+  "pt": "Tynrils (Zumbi)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>210,0)",
+   "id": 1986,
+   "order": 0
+  },
+  {
+   "criterion": "PL>139",
+   "id": 1987,
+   "order": 1
+  }
+ ]
+}

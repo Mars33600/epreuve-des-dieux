@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,223] abschließen und damit Tengu Eisfux in seinem Dungeon besiegen.",
+  "en": "Defeat Tengu Snowfoux in this boss's dungeon while completing the [challenge,223] challenge.",
+  "es": "Vencer a Tengu Gélifux en su mazmorra validando el reto [challenge,223].",
+  "fr": "Vaincre Tengu Givrefoux dans son donjon en validant le challenge [challenge,223].",
+  "id": "852975",
+  "pt": "Derrotar Tengu Gelifox em seu calabouço completando o desafio [challenge,223]."
+ },
+ "id": 748,
+ "name": {
+  "de": "Tengu Eisfux (Als Erstes)",
+  "en": "Tengu Snowfoux (First)",
+  "es": "Tengu Gélifux (primera posición)",
+  "fr": "Tengu Givrefoux (Premier)",
+  "id": "276304",
+  "pt": "Tengu Gelifox (Primeiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>223,0)",
+   "id": 2012,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 2013,
+   "order": 1
+  }
+ ]
+}

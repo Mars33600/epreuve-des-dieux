@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Tynril in seinem Dungeon besiegen.",
+  "en": "Defeat the Tynrils in their dungeon.",
+  "es": "Vencer a los Tynriles en su mazmorra.",
+  "fr": "Vaincre les Tynrils dans leur donjon.",
+  "id": "276495",
+  "pt": "Derrotar os Tynrils em seu calabouço."
+ },
+ "id": 65,
+ "name": {
+  "de": "Tynrils Laboratorium",
+  "en": "The Tynril Lab",
+  "es": "Laboratorio del Tynril",
+  "fr": "Laboratoire du Tynril",
+  "id": "276494",
+  "pt": "Laboratório do Tynril"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>1086,0,d)",
+   "id": 275,
+   "order": 0
+  },
+  {
+   "criterion": "PL>139",
+   "id": 276,
+   "order": 1
+  }
+ ]
+}

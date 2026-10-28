@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,240] abschließen und damit den Himmlischer Barbär im Team in seinem Dungeon besiegen.",
+  "en": "Defeat the Celestial Bearbarian in this boss's dungeon as a team while completing the [challenge,240] challenge.",
+  "es": "Vencer al Golosotrón Real en equipo en su mazmorra validando el reto [challenge,240].",
+  "fr": "Vaincre le Glourséleste en équipe dans son donjon en validant le challenge [challenge,240].",
+  "id": "853047",
+  "pt": "Derrotar o Glurseleste em equipe em seu calabouço completando o desafio [challenge,240]."
+ },
+ "id": 765,
+ "name": {
+  "de": "Himmlischer Barbär (Anhängsel)",
+  "en": "Celestial Bearbarian (Tight)",
+  "es": "Golosotrón Real (pegajoso)",
+  "fr": "Glourséleste (Collant)",
+  "id": "276278",
+  "pt": "Glurseleste (Pegajoso)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>240,0)",
+   "id": 2046,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 2047,
+   "order": 1
+  }
+ ]
+}

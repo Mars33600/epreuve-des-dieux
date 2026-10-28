@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,445] abschließen und damit Hanshi und Shihan in ihrem Dungeon besiegen.",
+  "en": "Defeat Hanshi and Shihan in these bosses' dungeon while completing the [challenge,445] challenge.",
+  "es": "Vencer a Hanshi y Shihan en su mazmorra validando el reto [challenge,445].",
+  "fr": "Vaincre Hanshi et Shihan dans leur donjon en validant le challenge [challenge,445].",
+  "id": "853049",
+  "pt": "Derrotar Hanshi e Shihan em seu calabouço completando o desafio [challenge,445]."
+ },
+ "id": 3012,
+ "name": {
+  "de": "Hanshi und Shihan (Vorsichtig)",
+  "en": "Hanshi and Shihan (Cautious)",
+  "es": "Hanshi y Shihan (prudente)",
+  "fr": "Hanshi et Shihan (Prudent)",
+  "id": "1013998",
+  "pt": "Hanshi e Shihan (Prudente)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>445,0)",
+   "id": 8709,
+   "order": 0
+  },
+  {
+   "criterion": "PL>139",
+   "id": 8710,
+   "order": 1
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+[
+ {
+  "achievements": [
+   36,
+   503,
+   6164,
+   685,
+   684
+  ],
+  "id": 11,
+  "name": {
+   "de": "Blob-Felder",
+   "en": "Blop Fields",
+   "es": "Enclave de los Blops",
+   "fr": "Clos des Blops",
+   "id": "659094",
+   "pt": "Claustro dos Blops"
+  },
+  "optimalPlayerLevel": 60
+ }
+]

@@ -1,0 +1,20 @@
+{
+ "achievements": [
+  3062,
+  3065,
+  6222,
+  3064,
+  3063,
+  5997
+ ],
+ "id": 131,
+ "name": {
+  "de": "Heim der Geister",
+  "en": "Spirit Abode",
+  "es": "Casa de los Espíritus",
+  "fr": "Demeure des Esprits",
+  "id": "853405",
+  "pt": "Morada dos Espíritos"
+ },
+ "optimalPlayerLevel": 170
+}

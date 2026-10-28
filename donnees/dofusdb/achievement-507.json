@@ -1,0 +1,47 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,111] abschließen und damit die Königlichen Gelees in ihrem Dungeon besiegen.",
+  "en": "Defeat the Royal Jellies in these bosses' dungeon while completing the [challenge,111] challenge.",
+  "es": "Vencer a las gelatinas reales en su mazmorra validando el reto [challenge,111].",
+  "fr": "Vaincre les Gelées Royales dans leur donjon en validant le challenge [challenge,111].",
+  "id": "852831",
+  "pt": "Derrotar as Gelatinas Reais em seu calabouço completando o desafio [challenge,111]."
+ },
+ "id": 507,
+ "name": {
+  "de": "Königliche Gelees (Duo)",
+  "en": "Royal Jellies (Duo)",
+  "es": "Gelatinas reales (dúo)",
+  "fr": "Gelées Royales (Duo)",
+  "id": "276150",
+  "pt": "Gelatinas Reais (Duo)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>111,0)",
+   "id": 1242,
+   "order": 0
+  },
+  {
+   "criterion": "(EH>112,0)",
+   "id": 1243,
+   "order": 1
+  },
+  {
+   "criterion": "(EH>113,0)",
+   "id": 1244,
+   "order": 2
+  },
+  {
+   "criterion": "(EH>114,0)",
+   "id": 1245,
+   "order": 3
+  },
+  {
+   "criterion": "PL>59",
+   "id": 1246,
+   "order": 4
+  }
+ ]
+}

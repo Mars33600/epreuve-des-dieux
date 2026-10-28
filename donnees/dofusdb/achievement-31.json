@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Tengu Eisfux in seinem Dungeon besiegen.",
+  "en": "Defeat Tengu Snowfoux in this boss's dungeon.",
+  "es": "Vencer a Tengu Gélifux en su mazmorra.",
+  "fr": "Vaincre Tengu Givrefoux dans son donjon.",
+  "id": "800273",
+  "pt": "Derrotar Tengu Gelifox em seu calabouço."
+ },
+ "id": 31,
+ "name": {
+  "de": "Eisfux-Höhlen",
+  "en": "Snowfoux Caverns",
+  "es": "Cavernas Gélifux",
+  "fr": "Cavernes Givrefoux",
+  "id": "276846",
+  "pt": "Cavernas Gelifox"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>2967,0,d)",
+   "id": 295,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 296,
+   "order": 1
+  }
+ ]
+}

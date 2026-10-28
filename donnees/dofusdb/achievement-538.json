@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,57] abschließen und damit Tengu Eisfux in seinem Dungeon besiegen.",
+  "en": "Defeat Tengu Snowfoux in this boss's dungeon while completing the [challenge,57] challenge.",
+  "es": "Vencer a Tengu Gélifux en su mazmorra validando el reto [challenge,57].",
+  "fr": "Vaincre Tengu Givrefoux dans son donjon en validant le challenge [challenge,57].",
+  "id": "852979",
+  "pt": "Derrotar Tengu Gelifox em seu calabouço completando o desafio [challenge,57]."
+ },
+ "id": 538,
+ "name": {
+  "de": "Tengu Eisfux (Duo)",
+  "en": "Tengu Snowfoux (Duo)",
+  "es": "Tengu Gélifux (dúo)",
+  "fr": "Tengu Givrefoux (Duo)",
+  "id": "276860",
+  "pt": "Tengu Gelifox (Duo)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>57,0)",
+   "id": 1321,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 1322,
+   "order": 1
+  }
+ ]
+}

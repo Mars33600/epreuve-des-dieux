@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,239] abschließen und damit den Himmlischen Barbär in seinem Dungeon besiegen.",
+  "en": "Defeat the Celestial Bearbarian in this boss's dungeon while completing the [challenge,239] challenge.",
+  "es": "Vencer al Golosotrón Real en su mazmorra validando el reto [challenge,239].",
+  "fr": "Vaincre le Glourséleste dans son donjon en validant le challenge [challenge,239].",
+  "id": "853045",
+  "pt": "Derrotar o Glurseleste em seu calabouço completando o desafio [challenge,239]."
+ },
+ "id": 764,
+ "name": {
+  "de": "Himmlischer Barbär (Als Erstes)",
+  "en": "Celestial Bearbarian (First)",
+  "es": "Golosotrón Real (primera posición)",
+  "fr": "Glourséleste (Premier)",
+  "id": "276280",
+  "pt": "Glurseleste (Primeiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>239,0)",
+   "id": 2044,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 2045,
+   "order": 1
+  }
+ ]
+}

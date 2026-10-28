@@ -1,0 +1,47 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,162] abschließen und damit die Königlichen Gelees im Team in ihrem Dungeon besiegen.",
+  "en": "Defeat the Royal Jellies in these bosses' dungeon as a team while completing the [challenge,162] challenge.",
+  "es": "Vencer a las gelatinas reales en equipo en su mazmorra validando el reto [challenge,162].",
+  "fr": "Vaincre les Gelées Royales en équipe dans leur donjon en validant le challenge [challenge,162].",
+  "id": "852829",
+  "pt": "Derrotar as Gelatinas Reais em equipe em seu calabouço completando o desafio [challenge,162]."
+ },
+ "id": 693,
+ "name": {
+  "de": "Königliche Gelees (Anhängsel)",
+  "en": "Royal Jellies (Tight)",
+  "es": "Gelatinas reales (pegajoso)",
+  "fr": "Gelées Royales (Collant)",
+  "id": "275773",
+  "pt": "Gelatinas Reais (Pegajoso)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>162,0)",
+   "id": 1815,
+   "order": 0
+  },
+  {
+   "criterion": "(EH>164,0)",
+   "id": 1816,
+   "order": 1
+  },
+  {
+   "criterion": "(EH>166,0)",
+   "id": 1817,
+   "order": 2
+  },
+  {
+   "criterion": "(EH>168,0)",
+   "id": 1818,
+   "order": 3
+  },
+  {
+   "criterion": "PL>59",
+   "id": 1819,
+   "order": 4
+  }
+ ]
+}

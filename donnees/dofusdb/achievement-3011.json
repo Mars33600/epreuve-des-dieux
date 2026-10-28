@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Hanshi und Shihan gemeinsam in ihrem Dungeon besiegen.",
+  "en": "Defeat Hanshi and Shihan together in these bosses' dungeon.",
+  "es": "Vencer a Hanshi y Shihan juntos en su mazmorra.",
+  "fr": "Vaincre Hanshi et Shihan ensemble dans leur donjon.",
+  "id": "850985",
+  "pt": "Derrotar Hanshi e Shihan juntos em seu calabouço."
+ },
+ "id": 3011,
+ "name": {
+  "de": "Dojo des Windes",
+  "en": "Wind Dojo",
+  "es": "Dojo del Viento",
+  "fr": "Dojo du Vent",
+  "id": "848014",
+  "pt": "Dojo do Vento"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>6204,0,d)",
+   "id": 8707,
+   "order": 0
+  },
+  {
+   "criterion": "PL>139",
+   "id": 8708,
+   "order": 1
+  }
+ ]
+}

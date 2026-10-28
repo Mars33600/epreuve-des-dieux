@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Fuji Eisfux Ziehmutter in ihrem Dungeon besiegen.",
+  "en": "Defeat Foster Fuji Snowfoux in this boss's dungeon.",
+  "es": "Vencer a Fuji Gélifux Nodriza en su mazmorra.",
+  "fr": "Vaincre la Fuji Givrefoux Nourricière dans son donjon.",
+  "id": "836710",
+  "pt": "Derrotar a Fuji Gelifox Maternal em seu calabouço."
+ },
+ "id": 134,
+ "name": {
+  "de": "Fuji Eisfux Ziehmutter",
+  "en": "Foster Caverns",
+  "es": "Cavernas Gélifux - Nodriza",
+  "fr": "Cavernes Nourricières",
+  "id": "276752",
+  "pt": "Cavernas Maternais"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>3234,0,d)",
+   "id": 297,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 298,
+   "order": 1
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Den Himmlischen Barbären in seinem Dungeon besiegen.",
+  "en": "Defeat the Celestial Bearbarian in this boss's dungeon.",
+  "es": "Vencer a Golosotrón Real en su mazmorra.",
+  "fr": "Vaincre le Glourséleste dans son donjon.",
+  "id": "338392",
+  "pt": "Derrotar o Glurseleste em seu calabouço."
+ },
+ "id": 20,
+ "name": {
+  "de": "Vorraum des Barbärenstockes",
+  "en": "Bearbarian Antichamber",
+  "es": "Antecámara de los Golosotes",
+  "fr": "Antichambre du Glourséleste",
+  "id": "338391",
+  "pt": "Antecâmara do Glurseleste"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>2864,0,d)",
+   "id": 285,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 286,
+   "order": 1
+  }
+ ]
+}

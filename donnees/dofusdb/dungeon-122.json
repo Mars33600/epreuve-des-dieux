@@ -1,0 +1,20 @@
+{
+ "achievements": [
+  3011,
+  6206,
+  3014,
+  3013,
+  3012,
+  6017
+ ],
+ "id": 122,
+ "name": {
+  "de": "Dojo des Windes",
+  "en": "Wind Dojo",
+  "es": "Dojo del Viento",
+  "fr": "Dojo du Vent",
+  "id": "841884",
+  "pt": "Dojo do Vento"
+ },
+ "optimalPlayerLevel": 140
+}

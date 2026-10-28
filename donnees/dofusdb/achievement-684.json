@@ -1,0 +1,47 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,153] abschließen und damit die 4 Königlichen Blobs im Team in ihrem Dungeon besiegen.",
+  "en": "Defeat the 4 Royal Blops in these bosses' dungeon as a team while completing the [challenge,153] challenge.",
+  "es": "Vencer a los 4 blops reales en equipo en su mazmorra validando el reto [challenge,153].",
+  "fr": "Vaincre les 4 Blops Royaux en équipe dans leur donjon en validant le challenge [challenge,153].",
+  "id": "852821",
+  "pt": "Derrotar os 4 Blops Reais em equipe em seu calabouço completando o desafio [challenge,153]."
+ },
+ "id": 684,
+ "name": {
+  "de": "Königliche Blobs (Duell)",
+  "en": "Royal Blops (Duel)",
+  "es": "Blops reales (duelo)",
+  "fr": "Blops Royaux (Duel)",
+  "id": "275602",
+  "pt": "Blops Reais (Duelo)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>153,0)",
+   "id": 1788,
+   "order": 0
+  },
+  {
+   "criterion": "(EH>151,0)",
+   "id": 1789,
+   "order": 1
+  },
+  {
+   "criterion": "(EH>149,0)",
+   "id": 1790,
+   "order": 2
+  },
+  {
+   "criterion": "(EH>147,0)",
+   "id": 1791,
+   "order": 3
+  },
+  {
+   "criterion": "PL>59",
+   "id": 1792,
+   "order": 4
+  }
+ ]
+}

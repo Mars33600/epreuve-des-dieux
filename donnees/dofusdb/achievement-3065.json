@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,494] abschließen und damit Kumiho in ihrem Dungeon besiegen.",
+  "en": "Defeat Koumiho in this boss's dungeon while completing the [challenge,494] challenge.",
+  "es": "Vencer a Kumijo en su mazmorra validando el reto [challenge,494].",
+  "fr": "Vaincre Koumiho dans son donjon en validant le challenge [challenge,494].",
+  "id": "853325",
+  "pt": "Derrotar Kumihu em seu calabouço completando o desafio [challenge,494]."
+ },
+ "id": 3065,
+ "name": {
+  "de": "Kumiho (Duo)",
+  "en": "Koumiho (Duo)",
+  "es": "Kumijo (dúo)",
+  "fr": "Koumiho (Duo)",
+  "id": "853324",
+  "pt": "Kumihu (Duo)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>494,0)",
+   "id": 8881,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 8882,
+   "order": 1
+  }
+ ]
+}

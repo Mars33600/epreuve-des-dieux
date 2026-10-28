@@ -1,0 +1,47 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die 4 Königlichen Blobs in ihrem Dungeon besiegen.",
+  "en": "Defeat the 4 Royal Blops in their dungeon.",
+  "es": "Vencer a los 4 blops reales en su mazmorra.",
+  "fr": "Vaincre les 4 Blops Royaux dans leur donjon.",
+  "id": "276329",
+  "pt": "Derrotar os 4 Blops Reais em seu calabouço."
+ },
+ "id": 36,
+ "name": {
+  "de": "Blob-Felder",
+  "en": "Blop Fields",
+  "es": "Enclave de los Blops",
+  "fr": "Clos des Blops",
+  "id": "757202",
+  "pt": "Claustro dos Blops"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>1187,0,d)",
+   "id": 227,
+   "order": 0
+  },
+  {
+   "criterion": "(EM>1186,0,d)",
+   "id": 228,
+   "order": 1
+  },
+  {
+   "criterion": "(EM>1185,0,d)",
+   "id": 229,
+   "order": 2
+  },
+  {
+   "criterion": "(EM>1184,0,d)",
+   "id": 230,
+   "order": 3
+  },
+  {
+   "criterion": "PL>59",
+   "id": 231,
+   "order": 4
+  }
+ ]
+}

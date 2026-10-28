@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,1057] abschließen und damit Kumiho in ihrem Dungeon besiegen.",
+  "en": "Defeat Koumiho in this boss's dungeon while completing the [challenge,1057] challenge.",
+  "es": "Vencer a Kumijo en su mazmorra validando el reto [challenge,1057].",
+  "fr": "Vaincre Koumiho dans son donjon en validant le challenge [challenge,1057].",
+  "id": "1010047",
+  "pt": "Derrotar Kumihu em seu calabouço completando o desafio [challenge,1057]."
+ },
+ "id": 6222,
+ "name": {
+  "de": "Kumiho (Spezial)",
+  "en": "Koumiho (Special)",
+  "es": "Kumijo (especial)",
+  "fr": "Koumiho (Spécial)",
+  "id": "1010046",
+  "pt": "Kumihu (Especial)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>1057,0)",
+   "id": 13933,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 13934,
+   "order": 1
+  }
+ ]
+}

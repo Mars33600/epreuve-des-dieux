@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,224] abschließen und damit Tengu Eisfux in seinem Dungeon besiegen.",
+  "en": "Defeat Tengu Snowfoux in this boss's dungeon while completing the [challenge,224] challenge.",
+  "es": "Vencer a Tengu Gélifux en su mazmorra validando el reto [challenge,224].",
+  "fr": "Vaincre Tengu Givrefoux dans son donjon en validant le challenge [challenge,224].",
+  "id": "852977",
+  "pt": "Derrotar Tengu Gelifox em seu calabouço completando o desafio [challenge,224]."
+ },
+ "id": 749,
+ "name": {
+  "de": "Tengu Eisfux (Statue)",
+  "en": "Tengu Snowfoux (Statue)",
+  "es": "Tengu Gélifux (estatua)",
+  "fr": "Tengu Givrefoux (Statue)",
+  "id": "276302",
+  "pt": "Tengu Gelifox  (Estátua)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>224,0)",
+   "id": 2014,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 2015,
+   "order": 1
+  }
+ ]
+}

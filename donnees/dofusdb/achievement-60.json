@@ -1,0 +1,47 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Königlichen Gelees in ihrem Dungeon besiegen.",
+  "en": "Defeat the Royal Jellies in their dungeon.",
+  "es": "Vencer a las gelatinas reales en su mazmorra.",
+  "fr": "Vaincre les Gelées Royales dans leur donjon.",
+  "id": "276527",
+  "pt": "Derrotar as Gelatinas Reais em seu calabouço."
+ },
+ "id": 60,
+ "name": {
+  "de": "Gelee-Dimension",
+  "en": "The Jellith Dimension",
+  "es": "Gelexta Dimensión",
+  "fr": "Gelaxième Dimension",
+  "id": "276526",
+  "pt": "Gelatésima Dimensão"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>85,0,d)",
+   "id": 240,
+   "order": 0
+  },
+  {
+   "criterion": "(EM>86,0,d)",
+   "id": 241,
+   "order": 1
+  },
+  {
+   "criterion": "(EM>430,0,d)",
+   "id": 242,
+   "order": 2
+  },
+  {
+   "criterion": "(EM>58,0,d)",
+   "id": 243,
+   "order": 3
+  },
+  {
+   "criterion": "PL>59",
+   "id": 244,
+   "order": 4
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+[
+ {
+  "achievements": [
+   20,
+   764,
+   546,
+   6229,
+   765,
+   6025
+  ],
+  "id": 61,
+  "name": {
+   "de": "Vorraum des Barbärenstockes",
+   "en": "Bearbarian Antichamber",
+   "es": "Antecámara de los Golosotes",
+   "fr": "Antichambre des Gloursons",
+   "id": "220615",
+   "pt": "Antecâmara dos Glursos"
+  },
+  "optimalPlayerLevel": 190
+ }
+]

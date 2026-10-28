@@ -1,0 +1,19 @@
+{
+ "achievements": [
+  60,
+  507,
+  693,
+  692,
+  6166
+ ],
+ "id": 24,
+ "name": {
+  "de": "Gelee-Dimension",
+  "en": "Jellith Dimension",
+  "es": "La Gelexta Dimensión",
+  "fr": "Gelaxième Dimension",
+  "id": "220705",
+  "pt": "Gelatésima Dimensão"
+ },
+ "optimalPlayerLevel": 60
+}

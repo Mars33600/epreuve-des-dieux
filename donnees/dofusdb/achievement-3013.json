@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,446] abschließen und damit Hanshi und Shihan in ihrem Dungeon besiegen.",
+  "en": "Defeat Hanshi and Shihan in these bosses' dungeon while completing the [challenge,446] challenge.",
+  "es": "Vencer a Hanshi y Shihan en su mazmorra validando el reto [challenge,446].",
+  "fr": "Vaincre Hanshi et Shihan dans leur donjon en validant le challenge [challenge,446].",
+  "id": "853051",
+  "pt": "Derrotar Hanshi e Shihan em seu calabouço completando o desafio [challenge,446]."
+ },
+ "id": 3013,
+ "name": {
+  "de": "Hanshi und Shihan (Als Letztes)",
+  "en": "Hanshi and Shihan (Last)",
+  "es": "Hanshi y Shihan (última posición)",
+  "fr": "Hanshi et Shihan (Dernier)",
+  "id": "850984",
+  "pt": "Hanshi e Shihan (Último)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>446,0)",
+   "id": 8711,
+   "order": 0
+  },
+  {
+   "criterion": "PL>139",
+   "id": 8712,
+   "order": 1
+  }
+ ]
+}

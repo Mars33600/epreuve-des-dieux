@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,66] abschließen und damit die Tynril ihrem Dungeon besiegen.",
+  "en": "Defeat the Tynrils in these bosses' dungeon while completing the [challenge,66] challenge.",
+  "es": "Vencer a los Tynriles en su mazmorra validando el reto [challenge,66].",
+  "fr": "Vaincre les Tynrils dans leur donjon en validant le challenge [challenge,66].",
+  "id": "853042",
+  "pt": "Derrotar os Tynrils em seu calabouço completando o desafio [challenge,66]."
+ },
+ "id": 531,
+ "name": {
+  "de": "Tynril (Duo)",
+  "en": "Tynrils (Duo)",
+  "es": "Tynriles (dúo)",
+  "fr": "Tynrils (Duo)",
+  "id": "276838",
+  "pt": "Tynrils (Duo)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>66,0)",
+   "id": 1305,
+   "order": 0
+  },
+  {
+   "criterion": "PL>139",
+   "id": 1306,
+   "order": 1
+  }
+ ]
+}

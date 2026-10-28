@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Kumiho in ihrem Dungeon besiegen.",
+  "en": "Defeat Koumiho in this boss's dungeon.",
+  "es": "Vencer a Kumijo en su mazmorra.",
+  "fr": "Vaincre Koumiho dans son donjon.",
+  "id": "853310",
+  "pt": "Derrotar Kumihu em seu calabouço."
+ },
+ "id": 3062,
+ "name": {
+  "de": "Heim der Geister",
+  "en": "Spirit Abode",
+  "es": "Casa de los Espíritus",
+  "fr": "Demeure des esprits",
+  "id": "853309",
+  "pt": "Morada dos Espíritos"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>6394,0,d)",
+   "id": 8875,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 8876,
+   "order": 1
+  }
+ ]
+}

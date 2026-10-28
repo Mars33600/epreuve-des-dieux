@@ -1,0 +1,32 @@
+{
+ "categoryId": 14,
+ "description": {
+  "de": "Die Herausforderung [challenge,496] abschließen und damit Kumiho in ihrem Dungeon besiegen.",
+  "en": "Defeat Koumiho in this boss's dungeon while completing the [challenge,496] challenge.",
+  "es": "Vencer a Kumijo en su mazmorra validando el reto [challenge,496].",
+  "fr": "Vaincre Koumiho dans son donjon en validant le challenge [challenge,496].",
+  "id": "853321",
+  "pt": "Derrotar Kumihu em seu calabouço completando o desafio [challenge,496]."
+ },
+ "id": 3063,
+ "name": {
+  "de": "Kumiho (Fokus)",
+  "en": "Koumiho (Focus)",
+  "es": "Kumijo (focalización)",
+  "fr": "Koumiho (Focus)",
+  "id": "853320",
+  "pt": "Kumihu (Foco)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>496,0)",
+   "id": 8877,
+   "order": 0
+  },
+  {
+   "criterion": "PL>169",
+   "id": 8878,
+   "order": 1
+  }
+ ]
+}

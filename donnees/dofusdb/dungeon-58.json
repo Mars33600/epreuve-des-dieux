@@ -1,0 +1,25 @@
+{
+ "achievements": [
+  31,
+  748,
+  538,
+  6218,
+  749,
+  134,
+  544,
+  6219,
+  761,
+  760,
+  5983
+ ],
+ "id": 58,
+ "name": {
+  "de": "Der Eisfuxbau",
+  "en": "Snowfoux Den",
+  "es": "Guarida de los Gélifux",
+  "fr": "Tanière Givrefoux",
+  "id": "194798",
+  "pt": "Toca Gelifox"
+ },
+ "optimalPlayerLevel": 170
+}

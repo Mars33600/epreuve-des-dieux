@@ -1,0 +1,19 @@
+{
+ "achievements": [
+  531,
+  735,
+  734,
+  6204,
+  65
+ ],
+ "id": 51,
+ "name": {
+  "de": "Tynrils Laboratorium",
+  "en": "Tynril Lab",
+  "es": "Laboratorio del Tynril",
+  "fr": "Laboratoire du Tynril",
+  "id": "140357",
+  "pt": "Laboratório do Tynril"
+ },
+ "optimalPlayerLevel": 140
+}
