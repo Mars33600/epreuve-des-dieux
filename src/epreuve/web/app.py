@@ -33,7 +33,7 @@ from epreuve.config import Config
 from epreuve.discord.oauth import ClientOAuth
 from epreuve.domaine.mode_site import mode_effectif
 from epreuve.domaine.modeles import Regles
-from epreuve.web import admin, api, auth, pages
+from epreuve.web import admin, api, auth, outils, pages, tableau
 from epreuve.web.auth import Refus, admin_pour_le_filtre, visiteur
 from epreuve.web.rendu import creer_gabarits, rendre
 from epreuve.web.securite import ENTETES_SECURITE, EntetesSecurite, FiltreMode
@@ -143,5 +143,7 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
     app.include_router(auth.routeur)
     app.include_router(pages.routeur)
     app.include_router(api.routeur)
+    app.include_router(tableau.routeur)
+    app.include_router(outils.routeur)
     app.include_router(admin.routeur)
     return app

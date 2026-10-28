@@ -1,0 +1,16 @@
+{% extends "site.html" %}
+{% block titre %}Outils · L'Épreuve des Dieux{% endblock %}
+{% block tete %}{{ super() }}<link rel="stylesheet" href="/static/outils.css">{% endblock %}
+{% block page %}
+<main class="outil">
+<section class="card" aria-labelledby="otTitre">
+  <div class="eyebrow">Boîte à outils</div><h2 id="otTitre">Outils</h2>
+  <p class="muted">Les outils pratiques du jeu, d'après ceux de duffus.fr.</p>
+  <ul class="cartes">
+  {%- for o in outils %}
+    <li><a class="carte-outil" href="/outils/{{ o.chemin }}"><b>{{ o.nom }}</b><span>{{ o.resume }}</span></a></li>
+  {%- endfor %}
+  </ul>
+</section>
+</main>
+{% endblock %}

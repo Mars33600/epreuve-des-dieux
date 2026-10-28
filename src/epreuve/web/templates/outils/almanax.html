@@ -1,0 +1,39 @@
+{% extends "outils/_base.html" %}
+{% block titre %}Almanax · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<main class="outil">
+<section class="card" aria-labelledby="otTitre">
+  <div class="eyebrow">Outils</div><h2 id="otTitre">Almanax</h2>
+  <div class="row">
+    <p class="num">{{ choisi.strftime("%d/%m/%Y") }}{% if choisi == aujourdhui %} · aujourd'hui{% endif %}</p>
+    <p class="pager">
+      {% if veille %}<a class="btn" href="/outils/almanax?jour={{ veille.isoformat() }}">← Veille</a>{% endif %}
+      {% if choisi != aujourdhui %}<a class="btn" href="/outils/almanax">Aujourd'hui</a>{% endif %}
+      {% if lendemain %}<a class="btn" href="/outils/almanax?jour={{ lendemain.isoformat() }}">Lendemain →</a>{% endif %}
+    </p>
+  </div>
+  {% if offrande %}
+  <h3>{{ offrande.type_bonus }}</h3>
+  <p>{{ offrande.bonus }}</p>
+  <dl class="faits">
+    <div><dt>Offrande</dt><dd><b class="num">{{ offrande.quantite }}</b> × {{ offrande.objet }}</dd></div>
+    <div><dt>Récompense</dt><dd><span class="num">{{ "{:,}".format(offrande.kamas).replace(",", " ") }}</span> kamas</dd></div>
+    <div><dt>Niveau optimal</dt><dd class="num">{{ offrande.niveau }}</dd></div>
+  </dl>
+  {% else %}
+  <p class="muted">Pas d'offrande connue pour ce jour (de {{ premier.strftime("%d/%m/%Y") }} à {{ dernier.strftime("%d/%m/%Y") }}).</p>
+  {% endif %}
+</section>
+{% if suivants %}
+<section class="card" aria-labelledby="suiteTitre">
+  <h3 id="suiteTitre">Les jours suivants</h3>
+  <ul class="liste">
+  {%- for o in suivants %}
+    <li class="ligne-alm"><a href="/outils/almanax?jour={{ o.jour.isoformat() }}" class="num">{{ o.jour.strftime("%d/%m") }}</a>
+      <span><b>{{ o.type_bonus }}</b><small class="muted">{{ o.quantite }} × {{ o.objet }}</small></span></li>
+  {%- endfor %}
+  </ul>
+</section>
+{% endif %}
+</main>
+{% endblock %}

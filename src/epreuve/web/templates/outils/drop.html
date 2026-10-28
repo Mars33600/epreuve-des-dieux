@@ -1,0 +1,26 @@
+{% extends "outils/_base.html" %}
+{% block titre %}Calculateur de drop · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<main class="outil" data-outil="drop">
+<section class="card" aria-labelledby="otTitre">
+  <div class="eyebrow">Outils</div><h2 id="otTitre">Calculateur de drop</h2>
+  <p class="muted">Renseigne le taux de base de l'objet et ta prospection, puis ajoute tes bonus (challenge, zone, almanax) et l'Ankama Shield.</p>
+  <div class="champs">
+    <div class="champ"><label for="dBase">Taux de base (%)</label><input id="dBase" type="number" min="0" step="0.1" value="1" inputmode="decimal"></div>
+    <div class="champ"><label for="dPP">Prospection (PP)</label><input id="dPP" type="number" min="0" step="1" value="100" inputmode="numeric"></div>
+    <div class="champ"><label for="dBonus">Bonus cumulé (%)</label><input id="dBonus" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+    <label class="coche-simple"><input id="dShield" type="checkbox">Ankama Shield (+5 %)</label>
+  </div>
+  <p class="resultat" aria-live="polite">Taux final par combat : <b class="num" id="dFinal">—</b></p>
+  <ul class="stats">
+    <li><b class="num" id="dC5">—</b><span>après 5 combats</span></li>
+    <li><b class="num" id="dC10">—</b><span>après 10 combats</span></li>
+    <li><b class="num" id="dC25">—</b><span>après 25 combats</span></li>
+  </ul>
+</section>
+<section class="card" aria-labelledby="courbeTitre">
+  <h3 id="courbeTitre">Taux final selon la prospection</h3>
+  <table class="tableau"><thead><tr><th scope="col">Prospection</th><th scope="col">Taux par combat</th></tr></thead><tbody id="dTable"></tbody></table>
+</section>
+</main>
+{% endblock %}
