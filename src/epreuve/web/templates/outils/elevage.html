@@ -1,0 +1,14 @@
+{% extends "outils/_base.html" %}
+{% block titre %}Croisements d'élevage · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<main class="outil" data-outil="elevage">
+<section class="card" aria-labelledby="otTitre">
+  <div class="eyebrow">Outils</div><h2 id="otTitre">Croisements d'élevage</h2>
+  <p class="muted">Suis ton élevage : coche les montures que tu as fait naître. Elles sont rangées par génération et restent sur cet appareil.</p>
+  <nav class="onglets" id="eOnglets" aria-label="Type de monture"></nav>
+  <p class="resultat" id="eBilan" aria-live="polite">Chargement…</p>
+  <label class="coche-simple"><input id="eManquantes" type="checkbox">Seulement les montures qu'il me manque</label>
+</section>
+<div id="eGenerations"></div>
+</main>
+{% endblock %}

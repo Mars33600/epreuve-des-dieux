@@ -1,0 +1,22 @@
+{% extends "outils/_base.html" %}
+{% block titre %}Simulateur d'XP des métiers · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<main class="outil" data-outil="xp">
+<section class="card" aria-labelledby="otTitre">
+  <div class="eyebrow">Outils</div><h2 id="otTitre">Simulateur d'XP des métiers</h2>
+  <p class="muted">Choisis un métier et tes niveaux : le simulateur classe les crafts qui donnent le plus d'XP et dit combien il en faut.</p>
+  <div class="champs">
+    <div class="champ"><label for="xMetier">Métier</label><select id="xMetier"></select></div>
+    <div class="champ"><label for="xDe">Niveau actuel</label><input id="xDe" type="number" min="1" max="199" value="1" inputmode="numeric"></div>
+    <div class="champ"><label for="xVers">Niveau visé</label><input id="xVers" type="number" min="2" max="200" value="100" inputmode="numeric"></div>
+    <div class="champ"><label for="xBonus">Bonus d'XP (%)</label><input id="xBonus" type="number" min="0" step="1" value="0" inputmode="numeric"></div>
+  </div>
+  <p class="resultat" aria-live="polite" id="xResume">Chargement des recettes…</p>
+</section>
+<section class="card" aria-labelledby="xTitre">
+  <h3 id="xTitre">Les meilleurs crafts à ton niveau</h3>
+  <p class="muted">Triés par XP par craft. « Pour y arriver » compte les crafts d'un seul objet, répétés jusqu'au niveau visé.</p>
+  <div class="defile"><table class="tableau"><thead><tr><th scope="col">Objet</th><th scope="col">Niv.</th><th scope="col">XP / craft</th><th scope="col">Pour y arriver</th></tr></thead><tbody id="xTable"></tbody></table></div>
+</section>
+</main>
+{% endblock %}

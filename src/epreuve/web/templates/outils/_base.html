@@ -1,0 +1,4 @@
+{% extends "site.html" %}
+{# Squelette des outils : feuille de style et script communs ; chaque outil dit son nom dans `data-outil`. #}
+{% block tete %}{{ super() }}<link rel="stylesheet" href="/static/outils.css">{% endblock %}
+{% block scripts %}{{ super() }}<script src="/static/outils.js" defer></script>{% endblock %}

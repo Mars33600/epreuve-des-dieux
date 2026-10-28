@@ -1,0 +1,35 @@
+{% extends "outils/_base.html" %}
+{% block titre %}{{ classe.nom if classe else "Classes et sorts" }} · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<main class="outil">
+<section class="card" aria-labelledby="otTitre">
+  <div class="eyebrow">Outils · Classes et sorts</div><h2 id="otTitre">{{ classe.nom if classe else "Les 19 classes" }}</h2>
+  <nav class="onglets" aria-label="Classes">
+  {%- for c in classes %}<a href="/outils/classes/{{ c.id }}"{% if classe and classe.id == c.id %} aria-current="page"{% endif %}>{{ c.nom }}</a>{% endfor %}
+  </nav>
+  {% if classe %}
+  <p><b>{{ classe.texte }}</b></p>
+  <p class="muted">{{ classe.histoire }}</p>
+  {% else %}
+  <p class="muted">Choisis une classe pour lire ses sorts : coût en PA, portée, relance et niveau requis pour chaque rang.</p>
+  {% endif %}
+</section>
+{% if classe %}
+<section class="card" aria-labelledby="sortsTitre">
+  <h3 id="sortsTitre">Sorts ({{ classe.sorts|length }})</h3>
+  {%- for s in classe.sorts %}
+  <details class="sort">
+    <summary><b>{{ s.nom }}</b></summary>
+    {% if s.texte %}<p class="muted">{{ s.texte }}</p>{% endif %}
+    {% if s.niveaux %}
+    <div class="defile"><table class="tableau">
+      <thead><tr><th scope="col">Rang</th><th scope="col">PA</th><th scope="col">Portée</th><th scope="col">Crit.</th><th scope="col">Lancers / tour</th><th scope="col">Relance</th><th scope="col">Niv. requis</th></tr></thead>
+      <tbody>{% for n in s.niveaux %}<tr class="num"><td>{{ n[0] }}</td><td>{{ n[1] }}</td><td>{{ n[2] if n[2] == n[3] else (n[2] ~ " à " ~ n[3]) }}</td><td>{{ "1/" ~ n[4] if n[4] else "—" }}</td><td>{{ n[5] or "—" }}</td><td>{{ n[6] or "—" }}</td><td>{{ n[7] or "—" }}</td></tr>{% endfor %}</tbody>
+    </table></div>
+    {% endif %}
+  </details>
+  {%- endfor %}
+</section>
+{% endif %}
+</main>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "outils/_base.html" %}
+{% block titre %}Module de craft · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<main class="outil" data-outil="craft">
+<section class="card" aria-labelledby="otTitre">
+  <div class="eyebrow">Outils</div><h2 id="otTitre">Module de craft</h2>
+  <p class="muted">Cherche un objet à fabriquer, ajoute-le avec sa quantité : la liste des ressources à réunir se calcule. Ta liste reste sur cet appareil.</p>
+  <div class="champs">
+    <div class="champ"><label for="cMetier">Métier</label><select id="cMetier"><option value="">Tous</option></select></div>
+    <div class="champ grand"><label for="cRecherche">Objet</label><input id="cRecherche" type="search" autocomplete="off" placeholder="ex. Épée de Boisaille"></div>
+  </div>
+  <ul class="liste" id="cResultats" aria-label="Résultats de la recherche"></ul>
+</section>
+<section class="card" aria-labelledby="cListeTitre">
+  <div class="row"><h3 id="cListeTitre">Ma liste de crafts</h3><button class="btn" type="button" id="cVider">Vider</button></div>
+  <ul class="liste" id="cListe"><li class="muted">Aucun objet pour l'instant.</li></ul>
+</section>
+<section class="card" aria-labelledby="cResTitre">
+  <div class="row"><h3 id="cResTitre">Ressources à réunir</h3>
+    <label class="coche-simple"><input id="cDecomposer" type="checkbox">Détailler aussi les sous-recettes</label></div>
+  <ul class="liste" id="cRessources"><li class="muted">Rien à réunir.</li></ul>
+</section>
+</main>
+{% endblock %}
