@@ -49,10 +49,10 @@ Détails : `DECISIONS-V4.md`.
 ## Modules de Duffus « à l'identique »
 
 - [x] Guide (cases, fiches, progression)
-- [x] Tableau de bord, à fusionner
-- [x] Archimonstres (sans la bourse aux échanges), à fusionner
-- [x] Avis de recherche, à fusionner
-- [x] Encyclopédie (objets, monstres, recettes, panoplies, sorts, PNJ, quêtes), à fusionner ; manquent les cartes et les variantes de sorts
+- [x] Tableau de bord
+- [x] Archimonstres (sans la bourse aux échanges)
+- [x] Avis de recherche
+- [x] Encyclopédie (objets, monstres, recettes, panoplies, sorts, PNJ, quêtes) ; manquent les cartes et les variantes de sorts
 - [ ] Outils (sans les tutoriels) : 6 sur 7 faits (Almanax, drop, classes et sorts, élevage, craft, XP des métiers) ; manque la carte interactive
 - [x] Stuffs (builds PvM de Duffus)
 - [ ] Builder : objets, panoplies, conditions, totaux, builds partagés, comparaison, duplication et dégâts d'arme faits ; manquent le calculateur de sorts, la forgemagie et les variantes (environ 7 jours)
