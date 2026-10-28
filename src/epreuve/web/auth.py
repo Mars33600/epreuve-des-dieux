@@ -6,7 +6,8 @@
 
 La session est en base ; le cookie `__Host-session` ne contient qu'un jeton aléatoire de 256 bits, dont
 la base ne garde que l'empreinte SHA-256. Les droits d'admin sont revérifiés auprès de Discord au plus
-toutes les 10 minutes, au moment d'une action d'admin.
+toutes les 10 minutes, dès la première requête qui suit (page, filtre du teaser ou action d'admin) : un admin
+dont on retire le rôle perd la vue admin en 10 minutes au plus.
 
 Les « dépendances » (`exiger_grimpeur`, `exiger_admin`, `verifier_ecriture`) sont appelées par les routes :
 elles lèvent `Refus`, que `app.py` transforme en redirection, en page d'erreur ou en JSON (`/api/…`).
@@ -64,6 +65,7 @@ class Visiteur:
     session: Session | None = None
     id_hache: bytes | None = None
     grimpeur: Grimpeur | None = None
+    discord_injoignable: bool = False  # revérification impossible : admin suspendu pour cette requête
 
     @property
     def connecte(self) -> bool:
@@ -103,8 +105,33 @@ async def visiteur(request: HTTPConnection) -> Visiteur:
         session = await s.depot.session(id_hache, s.horloge())
         if session is not None:
             v = Visiteur(session, id_hache, await s.depot.grimpeur_par_discord(session.discord_user_id))
+            if session.est_admin and s.horloge() - session.roles_verifies_le > REVERIFICATION:
+                await _reverifier(s, v)
     request.state.visiteur = v
     return v
+
+
+async def _reverifier(s, v: Visiteur) -> None:
+    """Redemande à Discord si l'admin a toujours son rôle, et enregistre la réponse dans la session.
+
+    Si Discord ne répond pas, la session garde son droit en base, mais cette requête-ci est servie sans
+    droits d'admin (et une action d'admin reçoit 503) : on ne montre jamais la vue admin sans vérification."""
+    maintenant = s.horloge()
+    try:
+        if s.oauth is None:
+            raise httpx.HTTPError("pas de client OAuth")
+        identite = await s.oauth.identite(v.session.jeton_oauth)
+        admin = est_admin(identite, s.config.discord_admin_role_ids, s.config.admins_supplementaires)
+    except (PasMembre, ErreurDiscord):
+        admin = False  # jeton expiré, rôle ou appartenance retirés : la session redevient non-admin
+    except httpx.HTTPError:
+        v.session = replace(v.session, est_admin=False)
+        v.discord_injoignable = True
+        return
+    await s.depot.maj_roles_session(v.id_hache, admin, maintenant)
+    v.session = replace(v.session, est_admin=admin, roles_verifies_le=maintenant)
+    if not admin:
+        journal.info("droits d'admin retirés après revérification")
 
 
 async def admin_pour_le_filtre(scope: Scope) -> bool:
@@ -136,33 +163,11 @@ async def exiger_grimpeur(request: Request) -> Visiteur:
     return v
 
 
-async def reverifier_admin(request: Request, v: Visiteur) -> bool:
-    """Au plus toutes les 10 minutes, redemande à Discord si l'admin a toujours son rôle."""
-    s = _services(request.app)
-    maintenant = s.horloge()
-    if not v.est_admin or v.session is None or v.id_hache is None:
-        return False
-    if maintenant - v.session.roles_verifies_le <= REVERIFICATION:
-        return True
-    if s.oauth is None:
-        raise Refus(503, "La vérification des droits auprès de Discord est indisponible.")
-    try:
-        identite = await s.oauth.identite(v.session.jeton_oauth)
-        admin = est_admin(identite, s.config.discord_admin_role_ids, s.config.admins_supplementaires)
-    except (PasMembre, ErreurDiscord):
-        admin = False  # jeton expiré, rôle ou appartenance retirés : la session redevient non-admin
-    except httpx.HTTPError as e:
-        raise Refus(503, "Discord ne répond pas : réessaie dans une minute.") from e
-    await s.depot.maj_roles_session(v.id_hache, admin, maintenant)
-    v.session = replace(v.session, est_admin=admin, roles_verifies_le=maintenant)
-    if not admin:
-        journal.info("droits d'admin retirés après revérification")
-    return admin
-
-
 async def exiger_admin(request: Request) -> Visiteur:
-    v = await exiger_connecte(request)
-    if not v.est_admin or not await reverifier_admin(request, v):
+    v = await exiger_connecte(request)  # `visiteur` a déjà revérifié le rôle s'il datait de plus de 10 minutes
+    if v.discord_injoignable:
+        raise Refus(503, "Discord ne répond pas : réessaie dans une minute.")
+    if not v.est_admin:
         raise Refus(403, "Cette page est réservée aux admins.")
     return v
 

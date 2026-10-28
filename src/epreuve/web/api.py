@@ -18,7 +18,7 @@ from fastapi.responses import JSONResponse
 from epreuve.db.depot import CocheRefusee, Introuvable
 from epreuve.domaine.modeles import ElementRef, Etage, Grimpeur
 from epreuve.domaine.visibilite import etage_cochable, peut_modifier_coches
-from epreuve.web.auth import MESSAGE_SUSPENDU, Refus, exiger_grimpeur, reverifier_admin, verifier_ecriture
+from epreuve.web.auth import MESSAGE_SUSPENDU, Refus, exiger_grimpeur, verifier_ecriture
 from epreuve.web.pages import etage_visible, resoudre_quoi
 from epreuve.web.vues import categories_json, charger_vue_etage, cle, jauge_json
 
@@ -62,9 +62,14 @@ async def etage_de_l_element(depot, type_: str, id_: int) -> Etage:
 @routeur.post("/api/coches")
 async def coches(request: Request):
     v = await verifier_ecriture(request)
+    corps = await lire_corps(request)
+    autre = corps["grimpeur_id"] is not None and corps["grimpeur_id"] != v.grimpeur_id
+    if autre and v.discord_injoignable:
+        raise Refus(503, "Discord ne répond pas : réessaie dans une minute.")
+    if autre and not v.est_admin:  # avant le contrôle de la fiche : cocher pour un autre est d'abord interdit
+        raise Refus(403, "Tu ne peux cocher que ta propre fiche.")
     v = await exiger_grimpeur(request)
     s = request.app.state
-    corps = await lire_corps(request)
     cible: Grimpeur | None
     if corps["grimpeur_id"] is None or corps["grimpeur_id"] == v.grimpeur_id:
         cible = v.grimpeur
@@ -74,8 +79,7 @@ async def coches(request: Request):
             raise Refus(403, MESSAGE_SUSPENDU)
         motif = None
     else:
-        if not peut_modifier_coches(v.grimpeur_id, v.est_admin, corps["grimpeur_id"]) \
-                or not await reverifier_admin(request, v):
+        if not peut_modifier_coches(v.grimpeur_id, v.est_admin, corps["grimpeur_id"]):
             raise Refus(403, "Tu ne peux cocher que ta propre fiche.")
         cible = await s.depot.grimpeur(corps["grimpeur_id"])
         if cible is None:

@@ -299,3 +299,30 @@ def test_mode_teaser_l_admin_voit_tout_avec_le_bandeau():
         assert r.status_code == 200 and "Mode teaser" in r.text, chemin
     # Même un admin ne crée pas de fiche avant l'ouverture.
     assert c.get("/inscription").headers["location"] == "/"
+
+
+def test_admin_retire_perd_la_vue_admin_en_10_minutes_sans_action_d_admin():
+    """Le rôle est relu dès la première requête qui suit les 10 minutes, même sur une page ordinaire."""
+    m = monde(mode="teaser", maintenant=AVANT_OUVERTURE)
+    c = m.connecter(ID_MARCEAU)
+    assert c.get("/etages/0").status_code == 200  # admin : le site derrière le teaser
+    m.membres[ID_MARCEAU] = ("Marceau", frozenset())  # rôle retiré sur Discord
+    m.avancer(minutes=9)
+    assert c.get("/etages/0").status_code == 200  # pas encore relu
+    m.avancer(minutes=2)
+    r = c.get("/etages/0")
+    assert r.status_code == 303 and r.headers["location"] == "/"  # plus que le teaser
+    assert not any(s.est_admin for s in m.depot._sessions.values())
+
+
+def test_discord_injoignable_page_servie_sans_vue_admin():
+    m = monde(mode="teaser", maintenant=AVANT_OUVERTURE)
+    c = m.connecter(ID_MARCEAU)
+    m.avancer(minutes=11)
+
+    def panne(_req):
+        raise httpx.ConnectError("hors ligne")
+
+    m.app.state.oauth = client_oauth(httpx.MockTransport(panne))
+    assert c.get("/etages/0").status_code == 303  # jamais de vue admin sans vérification
+    assert all(s.est_admin for s in m.depot._sessions.values())  # le droit n'est pas retiré pour autant
