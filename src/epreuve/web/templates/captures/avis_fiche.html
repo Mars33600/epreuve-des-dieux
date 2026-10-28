@@ -1,0 +1,52 @@
+{% extends "site.html" %}
+{% from "captures/_cp.html" import tete_captures, onglets, liste_qui %}
+{% block titre %}{{ a.nom }} · Avis de recherche · L'Épreuve des Dieux{% endblock %}
+{% block tete %}{{ super() }}{{ tete_captures() }}{% endblock %}
+{% block page %}
+<main class="cp" data-genre="avis">
+  <article class="card cp-fiche" aria-labelledby="ficheTitre">
+    {{ onglets("avis") }}
+    <p><a class="retour" href="/avis-de-recherche#avis-{{ a.id }}">← Tous les avis de recherche</a></p>
+    <header class="cp-fiche-tete">
+      {% if a.icone %}<img class="cp-icone grand" src="{{ a.icone }}" alt="" width="96" height="96">{% endif %}
+      <div>
+        <div class="eyebrow">Avis de recherche{% if a.milice %} · Milice {{ a.milice }}{% endif %}</div>
+        <h2 id="ficheTitre">{{ a.nom }}</h2>
+        <p class="cp-meta">{% if a.niveau_texte %}<span class="tag">{{ a.niveau_texte }}</span>{% endif %}{% if a.recompense %} <span class="tag">{{ a.recompense }} {{ a.recompense_type }}{{ "s" if a.recompense > 1 }}</span>{% endif %}{% if a.zone %} <span>{{ a.zone }}</span>{% endif %}</p>
+      </div>
+    </header>
+    {% if peut_suivre %}
+    <form method="post" action="/avis-de-recherche/{{ a.id }}" class="cp-capture" data-cp>
+      <input type="hidden" name="csrf" value="{{ v.csrf }}"><input type="hidden" name="vers" value="/avis-de-recherche/{{ a.slug }}">
+      <button type="submit" name="capture" value="{{ 0 if capture else 1 }}" aria-pressed="{{ 'true' if capture else 'false' }}" aria-label="{{ a.nom }} capturé"><span class="cp-coche" aria-hidden="true"></span><span data-etat>{{ "Capturé" if capture else "Pas capturé" }}</span></button>
+    </form>
+    {% endif %}
+
+    {% if a.resume_html %}
+    <section class="cp-sec"><h3>Résumé</h3><div class="cp-resume">{{ a.resume_html|safe }}</div></section>
+    {% endif %}
+    {% if a.chasse %}
+    <section class="cp-sec"><h3>Chasse au trésor</h3><p>Cet avis de recherche peut aussi être affronté via une chasse au trésor légendaire.</p></section>
+    {% endif %}
+    {% if a.grades %}
+    <section class="cp-sec"><h3>Caractéristiques</h3>
+      <div class="cp-table-defile">
+      <table class="cp-table">
+        <thead><tr><th scope="col">Grade</th><th scope="col">Niv.</th><th scope="col">PV</th><th scope="col">PA</th><th scope="col">PM</th><th scope="col">Neutre</th><th scope="col">Terre</th><th scope="col">Feu</th><th scope="col">Eau</th><th scope="col">Air</th></tr></thead>
+        <tbody>{% for g in a.grades %}<tr><th scope="row">{{ loop.index }}</th><td class="num">{{ g.niveau if g.niveau is not none else "—" }}</td><td class="num">{{ g.pv if g.pv is not none else "—" }}</td><td class="num">{{ g.pa if g.pa is not none else "—" }}</td><td class="num">{{ g.pm if g.pm is not none else "—" }}</td>{% for r in g.resistances %}<td class="num">{{ (r ~ " %") if r is not none else "—" }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+      </table>
+      </div>
+      {% set g = a.grades[0] %}
+      <p class="muted">Grade 1 : fuite {{ g.fuite if g.fuite is not none else "—" }}, tacle {{ g.tacle if g.tacle is not none else "—" }}, retrait PA {{ g.retrait_pa if g.retrait_pa is not none else "—" }}, retrait PM {{ g.retrait_pm if g.retrait_pm is not none else "—" }}, esquive PA {{ g.esquive_pa if g.esquive_pa is not none else "—" }}, esquive PM {{ g.esquive_pm if g.esquive_pm is not none else "—" }}.</p>
+    </section>
+    {% endif %}
+    <section class="cp-sec cp-qui" id="qui"><h3>Qui l'a capturé&nbsp;?</h3>{{ liste_qui(ont, pas, false) }}</section>
+    {% if meme_milice %}
+    <section class="cp-sec"><h3>Dans cette milice</h3>
+      <ul class="cp-liens">{% for x in meme_milice %}<li><a href="/avis-de-recherche/{{ x.slug }}">{{ x.nom }}</a> <small class="muted">{{ x.niveau_texte or "" }}</small>{% if x.id in captures %} <span class="tag me">✓ Capturé</span>{% endif %}</li>{% endfor %}</ul>
+    </section>
+    {% endif %}
+  </article>
+</main>
+{% endblock %}
+{% block scripts %}{{ super() }}<script src="/static/captures.js"></script>{% endblock %}
