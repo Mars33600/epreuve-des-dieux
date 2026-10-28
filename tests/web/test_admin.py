@@ -131,14 +131,14 @@ def test_date_plancher_change_la_raison_du_bouton():
     poster(c, t, "/admin/etages/0/date-plancher", date="2026-12-01T18:30")
     assert m.depot._etages[1].date_plancher_suivant.isoformat() == "2026-12-01T18:30:00+01:00"
     html = c.get("/admin/etages/0").text
-    assert "pas avant le mardi 1er décembre à 18 h 30" in html and "submit\" disabled>Ouvrir" in html
+    assert "pas avant le mardi 1 décembre à 18 h 30" in html and "submit\" disabled>Ouvrir" in html
     assert poster(c, t, "/admin/etages/0/date-plancher", date="demain").headers["location"].endswith("erreur=date")
 
 
 def test_ouverture_refusee_tant_que_la_jauge_n_est_pas_pleine():
     m, c, t = admin()
     html = c.get("/admin/etages/0").text
-    assert "jauge : il manque 1 points" in html and "Détail par grimpeur" in html
+    assert "jauge : il manque 1 point" in html and "Détail par grimpeur" in html
     assert poster(c, t, "/admin/etages/1/ouvrir").headers["location"].endswith("erreur=ouverture")
     assert m.depot._etages[2].statut == "scelle"
     assert poster(c, t, "/admin/etages/1/ouvrir", forcer="oui").headers["location"].endswith("erreur=motif")

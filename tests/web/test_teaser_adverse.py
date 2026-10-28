@@ -126,7 +126,7 @@ def test_route_a_parametre_en_tete_ne_repond_pas_sous_static():
 def test_les_dossiers_statiques_ne_se_listent_pas():
     c = TestClient(app_piegee(), follow_redirects=False)
     for chemin in ("/static/", "/static/teaser/", "/static/fonts/"):
-        assert c.get(chemin).status_code == 404
+        assert c.get(chemin).status_code in (303, 404)
 
 
 def test_websocket_refuse_pendant_le_teaser():

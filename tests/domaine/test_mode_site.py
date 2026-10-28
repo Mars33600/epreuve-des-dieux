@@ -57,7 +57,7 @@ def test_voit_site_complet_les_4_combinaisons(mode, est_admin):
 def test_chemins_permis_du_lot_b():
     assert CHEMINS_TOUJOURS_PERMIS == {"/", "/sante", "/connexion", "/auth/discord/retour", "/deconnexion"}
     assert "/inscription" not in CHEMINS_TOUJOURS_PERMIS
-    assert PREFIXES_TOUJOURS_PERMIS == ("/static/",)
+    assert PREFIXES_TOUJOURS_PERMIS == ("/static/teaser/", "/static/fonts/")
 
 
 # --- Cas adverses ---------------------------------------------------------------------------------------

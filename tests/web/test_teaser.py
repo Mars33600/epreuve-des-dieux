@@ -202,10 +202,10 @@ def test_statiques_permis_pendant_le_teaser():
     c = client()
     assert c.get("/static/teaser/teaser.css").status_code == 200
     assert c.get("/static/teaser/teaser.js").status_code == 200
-    # Lot B : la feuille et le script du site sont servis (ils ne contiennent aucune donnée).
-    assert c.get("/static/app.js").status_code == 200
-    assert c.get("/static/style.css").status_code == 200
-    assert c.get("/static/absent.js").status_code == 404
+    # Pendant le teaser, seuls les dossiers du teaser sont permis : la feuille et le script du site
+    # ne servent qu'aux admins (redirigés vers / pour un visiteur).
+    assert c.get("/static/app.js").status_code == 303
+    assert c.get("/static/style.css").status_code == 303
 
 
 # --- La bascule (critère 7) -------------------------------------------------------------------------------

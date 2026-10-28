@@ -28,7 +28,15 @@ async def lancer(config: Config) -> None:
 
         moteur = creer_moteur(config.database_url.get_secret_value())
         source = Depot(moteur)
-    app = creer_app(config, source=source)
+    oauth = None
+    if config.discord_client_secret is not None and config.discord_guild_id is not None:
+        from epreuve.discord.oauth import ClientOAuth
+
+        oauth = ClientOAuth(config.discord_client_id, config.discord_client_secret, config.redirect_uri,
+                            config.discord_guild_id)
+    from epreuve.regles import lire_regles
+
+    app = creer_app(config, source=source, oauth=oauth, regles=lire_regles())  # regles.yaml lu au démarrage
     serveur = uvicorn.Server(uvicorn.Config(app, host="0.0.0.0", port=config.site_port,  # noqa: S104
                                             log_level=config.journal_niveau.lower(), proxy_headers=True))
     try:

@@ -16,7 +16,7 @@ primary_region = "cdg"            # Paris
   FUSEAU = "Europe/Paris"
   SITE_PORT = "8080"
   JOURNAL_NIVEAU = "INFO"
-  # SITE_URL = "https://<domaine>"            # à décommenter une fois le domaine acheté
+  SITE_URL = "https://epreuve-des-dieux.fr"   # domaine retenu (Origin attendu, adresse de retour OAuth)
 
 [http_service]
   internal_port = 8080

@@ -1,0 +1,20 @@
+# Règles de jeu (SPEC §8.1, EX-109). Changer une valeur puis redéployer : aucune modification de code.
+# Les valeurs ci-dessous sont les réponses par défaut d'EXIGENCES.md.
+
+palier:
+  points_par_joueur: 2        # palier = ⌈ m × N × K ÷ 4 ⌉ ; « 5/2 » est accepté (fraction exacte)
+  categorie_vide: ignoree     # T-11 : ignoree (K = catégories non vides) | offerte (point donné à tous, K = 4)
+
+coches:
+  succes_coche_vaincu: true   # T-16 : cocher un succès coche « Vaincre le boss » ; décocher celle-ci décoche les autres
+  pause_peut_cocher: true     # T-13 : un grimpeur en pause peut cocher (ses points comptent à la réintégration)
+
+inscription:
+  liste_officielle_obligatoire: true   # T-19
+
+fiche:
+  classe_obligatoire: false   # T-20
+  afficher_nom_discord: true  # T-20
+
+modules:
+  verrouiller_par_etage: false  # T-08 (lot E)

@@ -80,10 +80,22 @@ def alembic(*args: str) -> subprocess.CompletedProcess:
                           capture_output=True, text=True, check=False)
 
 
+async def _repartir_de_zero() -> None:
+    """Supprime le schéma `epreuve` : la migration 0001 a été réécrite au lot B, une base de test plus
+    ancienne serait sinon vue « à jour » par Alembic avec l'ancien schéma."""
+    moteur = creer_moteur(URL_TEST)
+    try:
+        async with moteur.begin() as c:
+            await c.execute(text("DROP SCHEMA IF EXISTS epreuve CASCADE"))
+    finally:
+        await moteur.dispose()
+
+
 @pytest.fixture(scope="session")
 def url_base() -> str:
     if not _base_joignable():
         pytest.skip(f"Postgres de test injoignable ({URL_TEST}) : voir tests/conftest.py")
+    asyncio.run(_repartir_de_zero())
     resultat = alembic("upgrade", "head")
     assert resultat.returncode == 0, resultat.stderr
     return URL_TEST
@@ -96,34 +108,21 @@ async def moteur(url_base):
     await m.dispose()
 
 
+TABLES_A_VIDER = ("journal", "session", "bilan_etage", "coche_quete", "coche_case", "grimpeur", "liste_officielle",
+                  "fiche_quete", "quete", "case_succes", "donjon", "donjon_disponible", "etage")
+
+
 @pytest.fixture
 async def depot(moteur) -> Depot:
     """Un dépôt sur une base vidée (les identifiants repartent de 1)."""
     async with moteur.begin() as c:
-        await c.execute(text(
-            "TRUNCATE epreuve.journal, epreuve.validation, epreuve.preuve, epreuve.grimpeur, "
-            "epreuve.palier_contenu, epreuve.contenu, epreuve.palier, epreuve.etage RESTART IDENTITY CASCADE"
-        ))
+        await c.execute(text("TRUNCATE " + ", ".join(f"epreuve.{t}" for t in TABLES_A_VIDER)
+                             + " RESTART IDENTITY CASCADE"))
     return Depot(moteur)
-
-
-@pytest.fixture
-async def etage0(depot, moteur) -> Depot:
-    """Le dépôt, avec l'étage 0 importé depuis etage-0.yaml et les réponses DofusDB enregistrées."""
-    import yaml
-
-    from epreuve.dofusdb.client import ClientDofusDB
-    from epreuve.dofusdb.import_etage import developper_etage, ecrire_etage
-
-    config = yaml.safe_load((RACINE / "config/etages/etage-0.yaml").read_text(encoding="utf-8"))
-    async with ClientDofusDB(transport=transport_dofusdb()) as client:
-        prepare = await developper_etage(config, client)
-    await ecrire_etage(moteur, prepare)
-    return depot
 
 
 def pytest_collection_modifyitems(items):
     # Tout test qui utilise la base reçoit le marqueur `db` (pour `pytest -m "not db"`).
     for item in items:
-        if {"url_base", "moteur", "depot", "etage0"} & set(getattr(item, "fixturenames", ())):
+        if {"url_base", "moteur", "depot"} & set(getattr(item, "fixturenames", ())):
             item.add_marker(pytest.mark.db)

@@ -21,7 +21,9 @@ ModeEffectif = Literal["teaser", "ouvert"]
 # connecté revoit le teaser : « /inscription » n'est PAS permise, aucune fiche n'est créée avant l'ouverture.
 CHEMINS_TOUJOURS_PERMIS: frozenset[str] = frozenset({"/", "/sante", "/connexion", "/auth/discord/retour",
                                                      "/deconnexion"})
-PREFIXES_TOUJOURS_PERMIS: tuple[str, ...] = ("/static/",)
+# Seuls les dossiers du teaser : une route à paramètre en tête (`/{x}/…`) ne doit jamais passer pour
+# un fichier statique. La feuille et le script du site ne servent qu'aux admins pendant le teaser.
+PREFIXES_TOUJOURS_PERMIS: tuple[str, ...] = ("/static/teaser/", "/static/fonts/")
 
 
 def mode_effectif(reglage: ReglageMode, ouvert_le: datetime, maintenant: datetime) -> ModeEffectif:
@@ -38,5 +40,8 @@ def mode_effectif(reglage: ReglageMode, ouvert_le: datetime, maintenant: datetim
 
 
 def voit_site_complet(mode: ModeEffectif, est_admin: bool) -> bool:
-    """Vrai en mode ouvert, ou pour un admin. Aucun joueur avant l'ouverture (arbitrage de Marceau)."""
+    """Vrai en mode ouvert, ou pour un admin (qui voit le site derrière le teaser).
+
+    Aucun joueur avant l'ouverture : le statut de « testeur » du lot A a disparu au lot B.
+    """
     return mode == "ouvert" or est_admin
