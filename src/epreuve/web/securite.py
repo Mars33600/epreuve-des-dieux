@@ -40,6 +40,9 @@ ENTETES_SECURITE: dict[str, str] = {
     "X-Robots-Tag": "noindex, nofollow",  # le site n'a rien à faire dans les moteurs de recherche
     "Referrer-Policy": "strict-origin-when-cross-origin",
     "X-Content-Type-Options": "nosniff",
+    # Le cookie de session est `Secure` : on interdit aussi au navigateur de revenir en http. Pas de
+    # includeSubDomains ni de preload, pour ne rien imposer aux autres sous-domaines du domaine.
+    "Strict-Transport-Security": "max-age=31536000",
 }
 
 
