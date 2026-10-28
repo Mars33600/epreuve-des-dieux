@@ -61,11 +61,39 @@ def test_classique_en_premier_puis_duo():
             assert d.cases[1].nom.endswith("(Duo)") and "[challenge," not in d.cases[1].condition
 
 
-def test_nature_non_determinee_sans_supposition():
-    assert all(q.nature == "secondaire" for q in ETAGES[0].quetes)
-    assert any("nature non déterminée" in a for a in ETAGES[0].alertes)
-    forcee = etage(0, forcees={ETAGES[0].quetes[0].duffus_id: "principale"})
-    assert (forcee.quetes[0].nature, forcee.quetes[0].nature_origine) == ("principale", "admin")
+def test_nature_par_les_guides_par_dofus():
+    guides = k.guides_par_dofus(ASPI)
+    assert len(guides["Dofus Argenté"]) == 64 and "Dofus Cacao" in guides and "Dofus Kaliptus" not in guides
+    nb = {n: sum(1 for q in e.quetes if q.nature == "principale") for n, e in ETAGES.items()}
+    assert nb == {0: 26, 1: 37}
+    assert all(q.nature_origine == "duffus" for e in ETAGES.values() for q in e.quetes)
+    assert all(q.dofus for e in ETAGES.values() for q in e.quetes if q.nature == "principale")
+    assert any("sans guide Duffus : Dofus Kaliptus" in a for a in ETAGES[0].alertes)
+    forcee = etage(0, forcees={ETAGES[0].quetes[0].duffus_id: "secondaire"})
+    assert (forcee.quetes[0].nature, forcee.quetes[0].nature_origine) == ("secondaire", "admin")
+
+
+def test_nature_par_le_repli_pour_un_dofus_sans_guide():
+    q = next(x for x in ETAGES[0].quetes if x.nature == "secondaire")
+    e = etage(0, guides_repli={"Dofus Kaliptus": frozenset({int(q.duffus_id)})})
+    r = next(x for x in e.quetes if x.duffus_id == q.duffus_id)
+    assert (r.nature, r.nature_origine, r.dofus) == ("principale", "dofusdb", ("Dofus Kaliptus",))
+
+
+@pytest.mark.parametrize(("note", "jusqu", "lier"), [
+    ("Avancez jusqu'à l'étape du donjon et liez la quête d'en dessous.",
+     "Avancez jusqu'à l'étape du donjon et liez la quête d'en dessous.",
+     "Avancez jusqu'à l'étape du donjon et liez la quête d'en dessous."),
+    ("N'oubliez pas le rocher. Vous pouvez faire X en simultanée.", None, "Vous pouvez faire X en simultanée."),
+    ("Collier de perles.", None, None),
+])
+def test_jusqu_ou_et_a_lier_lus_dans_les_notes(note, jusqu, lier):
+    assert k.jusqu_ou_et_a_lier({"note": note, "note2": note}) == (jusqu, lier)
+
+
+def test_json_liste_tolerant():
+    assert k._json_liste("pas du json") == [] and k._json_liste('{"a": 1}') == [] and k._json_liste('[1, {"a": 2}]') \
+        == [{"a": 2}]
 
 
 def test_donjons_disponibles_pour_l_admin():
@@ -157,12 +185,13 @@ def test_lire_fiche_cas_limites():
             "prereqs": [{"text": "  "}, {"text": "Niveau 20"}], "manual_resources": [{"qty": 2, "label": "Blé"},
                                                                                      {"qty": 1, "label": "Lin"}],
             "rewards": {"items": ["Brut"], "others": [{"label": "Émote"}, "Titre"]}}
-    f = lire_fiche(page, {"note": "N", "note2": "N"}, {}, {})
+    f = lire_fiche(page, {"note": "N", "note2": "N", "lancement": "Parlez à X"}, {}, {}, [{"name": "Orge", "qty": 4}])
     assert [m.nom for m in f.monstres] == ["Bouftou", "Tofu"] and [m.quantite for m in f.monstres] == [3, 2]
-    assert [(o.nom, o.quantite) for o in f.objets] == [("Blé", 1), ("Lin", 1)]
+    assert [(o.nom, o.quantite) for o in f.objets] == [("Blé", 1), ("Lin", 1), ("Orge", 4)]
     assert [p.nom for p in f.prerequis] == ["Niveau 20"] and f.positions == []
     assert f.recompenses == ["Brut", "Émote", "Titre"] and f.etapes[0].texte_html == "N" and f.succes_lie is None
-    assert [e.titre for e in f.etapes] == ["Note du guide", "Combat"]
+    assert [e.titre for e in f.etapes] == ["Note du guide", "Pour la lancer", "Combat"]
+    assert [e.ordre for e in f.etapes] == [1, 2, 3]
 
 
 # --- Configuration et seuils ---------------------------------------------------------------------------------
@@ -252,7 +281,7 @@ async def test_ecrire_etages_0_et_1(depot, moteur):
     c = await depot.contenu_etage(e0.id)
     assert len(c.donjons) == 1 and len(c.cases) == 5 and len(c.quetes) == 27 and all(q.a_une_fiche for q in c.quetes)
     assert [q.nom for q in await depot.quetes_sans_fiche(e1.id)] == ["Quête de classe"]
-    assert any("nature non déterminée" in a for a in await depot.alertes_etage(e0.id))
+    assert any("sans guide Duffus" in a for a in await depot.alertes_etage(e0.id))
     fiche = await depot.fiche_quete(c.quetes[3].id)
     assert fiche.etapes and fiche.source == "duffus" and fiche.prerequis
     assert len(await depot.donjons_disponibles()) == len(ETAGES[0].disponibles)

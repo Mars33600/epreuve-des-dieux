@@ -52,6 +52,7 @@ class QuestListe(_Ligne):
     dungeon_info: str | None
     dungeons: list[dict[str, Any]] | None
     dofus_id: int | None = None  # renseigné sur l'entrée qui fait obtenir un Dofus (dofus_list.id)
+    lancement: str | None = None  # comment lancer la quête (« Parlez à … : "Accepter" »)
 
 
 class QuestePrerequis(_Ligne):
@@ -107,6 +108,29 @@ class DofusListe(_Ligne):
     nom: str
     quest_id: int | None
     advised_level: int | None
+
+
+class GuidePage(_Ligne):
+    """Un guide « par Dofus » (`type_guide = "dofus"`) ou d'événement. `categories` et `prerequis_categories`
+    ont la même forme que les blocs de `guide_ranges` : leurs items `quest` désignent des `quest_list.id`."""
+
+    id: str
+    slug: str
+    title: str
+    type_guide: str | None
+    item: int | None
+    published: bool | None
+    categories: list[dict[str, Any]] | None
+    prerequis_categories: list[dict[str, Any]] | None
+
+
+class QuestRessource(_Ligne):
+    """Une ressource à prévoir pour une quête (`quest_id` → quest_list.id)."""
+
+    id: int
+    quest_id: int | None
+    name: str | None
+    qty: int | None
 
 
 # Les clés de `dungeon_pages.meta` qu'on recopie (pas les images, qui pointent vers le stockage de Duffus).

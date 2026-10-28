@@ -635,20 +635,22 @@ blocs:
 
 ### Addendum B0 : relevé du schéma Duffus (28/10/2026)
 
-**Fait par le dev B1, à valider par l'architecte** (qui fige `duffus/schema.py`). Relevé : `donnees/duffus/schema-2026-10-28.json` (9 requêtes ; l'OpenAPI de PostgREST est fermée, le relevé s'est fait par une ligne de chaque table). Aspiration des étages 0 et 1 : `donnees/duffus/2026-10-28/`, 10 requêtes, aucun refus. Les colonnes retenues sont dans `src/epreuve/duffus/schema.py`. Les images (stockage Duffus) ne sont jamais recopiées.
+**Fait par le dev B1, à valider par l'architecte** (qui fige `duffus/schema.py`). Relevé : `donnees/duffus/schema-2026-10-28.json` (9 requêtes ; l'OpenAPI de PostgREST est fermée, le relevé s'est fait par une ligne de chaque table). Aspiration des étages 0 et 1 : `donnees/duffus/2026-10-28/`, 14 requêtes, aucun refus. Les colonnes retenues sont dans `src/epreuve/duffus/schema.py`. Les images (stockage Duffus) ne sont jamais recopiées.
 
 **Colonnes utiles.**
 
 | Table Duffus | Fichier | Lignes | Colonnes retenues | Rôle |
 |---|---|---|---|---|
 | `guide_ranges` | `guide_ranges.json` | 24 | id, order_index, range_key, label, title, is_active, dungeon_count, **categories** | Les tranches. `categories` = les **blocs** du guide, chacun avec ses `items` dans l'ordre : `quest` (id → `quest_list.id`), `monster_success`, `tip`. |
-| `quest_list` | `quest_list.json` | 1 205 | id, title, url, level, category, Order, **quest_ornot**, own_page, zone, pnj, pos, note, note2, succes, **is_dungeon**, dungeon_info, **dungeons**, **dofus_id** | Les entrées du guide. `url` = `/quete/<slug>` (fiche Duffus), `/guide/<dofus>` ou un site externe. |
+| `quest_list` | `quest_list.json` | 1 205 | id, title, url, level, category, Order, **quest_ornot**, own_page, zone, pnj, pos, note, note2, succes, **is_dungeon**, dungeon_info, **dungeons**, **dofus_id**, lancement | Les entrées du guide. `url` = `/quete/<slug>` (fiche Duffus), `/guide/<dofus>` ou un site externe. |
 | `quest_pages` | `quest_pages.json` (étages 0-1) et `quest_prereqs.json` (toutes, colonnes légères) | 69 / 616 | slug, published, status, meta (titre, niveau, zone, PNJ de départ, coordonnées), prereqs, **prereq_quests**, rewards, manual_resources, steps, **content_html** | Les fiches. Rattachées par `slug` = fin de `quest_list.url`. |
 | `dungeon_pages` | `dungeon_pages.json` | 127 | id, slug, published, meta (title, bossName, level, zone, coords, dofusMonsterId), **successes**, linked_quests | Les donjons. `successes` = `challenge1`, `challenge2`, `special` (nom, règle). |
 | `achievements` | `achievements.json` | 1 017 (sur 2 781) | id, name, description, category_id, level, order | Copie des succès du jeu ; seuls ceux « … dans son donjon … » sont gardés. |
 | `dofus_list` | `dofus_list.json` | 26 | id, nom, quest_id, advised_level | Les Dofus ; `quest_id` → l'entrée `quest_list` qui fait obtenir le Dofus. |
+| `guide_pages` | `guide_pages.json` | 29 | id, slug, title, type_guide, item, published, categories, prerequis_categories | Les guides par Dofus (nature). |
+| `quest_resources` | `quest_resources.json` | 2 049 | id, quest_id, name, qty | Ressources à prévoir par quête. |
 
-Non retenues : `achievement_objectives` (les descriptions de `achievements` suffisent) et `monsters` (ni icône ni lien utiles : les icônes viendront de DofusDB).
+Non retenues : `achievement_objectives` (les descriptions de `achievements` suffisent), `monsters` (les icônes viendront de DofusDB) et `quests` (1 976 quêtes du jeu ; utile au lot E).
 
 **Rattachement aux tranches.** Étage N = la (N+1)-ième tranche active par `order_index` (24 tranches, de « 1-20 » à « 200-7 », donc **étages 0 à 23**, et non 0 à 25). Le contenu d'un étage est la liste des `items` de ses blocs :
 - **quêtes** : les items `quest` dont l'entrée a `quest_ornot` vrai. Les autres entrées sont des **rappels** du guide (« Lancez la quête X », « Allez voir Rathrosk … ») : elles ne sont pas des quêtes à cocher, et leur texte est la meilleure source de « jusqu'où » pour la quête nommée (à valider) ;
@@ -669,11 +671,21 @@ Non retenues : `achievement_objectives` (les descriptions de `achievements` suff
 - couverture sur les 127 donjons : **102 donnent exactement 5**, 7 en donnent 6 (un défi de plus, alerte), 6 n'en donnent qu'un (bossName différent du nom des succès) et 12 n'ont pas de classique au nom exact. Ces 18 derniers passent par le repli DofusDB, avec une alerte. Les 5 donjons des étages 0 et 1 sont tous dans le premier cas.
 - les noms de défi de `dungeon_pages.successes` (« Collant », « Premier ») et la règle du « special » complètent la condition affichée.
 
-**Chaînes vers les Dofus : point bloquant pour la nature.** `dofus_list.quest_id` et `quest_list.dofus_id` ne désignent que l'entrée d'**obtention** (« Allez voir Rathrosk … »), dont l'`url` est `/guide/<dofus>` : le **guide par Dofus lui-même n'est dans aucune des 8 tables connues**, et l'entrée d'obtention n'a pas de fiche, donc pas de prérequis. `quest_pages.prereq_quests` donne bien des prérequis de quête à quête (448 fiches sur 616, 526 liens, 13 hors du guide), ce qui permet la **fermeture** une fois les racines connues. En l'état, **aucune quête des étages 0 et 1 ne peut être classée principale à partir des seules données Duffus**. Trois issues, à trancher par l'architecte et Marceau (DECISIONS-V4 §12 interdit la supposition) :
-1. trouver dans le code public du site la table des guides par Dofus, puis l'ajouter au relevé ;
-2. prendre comme racines les quêtes des blocs « … obtention du Dofus X » (c'est une lecture du guide, pas une donnée explicite) ;
-3. repli DofusDB pour la nature (ARCHITECTURE §6.7), marqué « dofusdb ».
-En attendant, la construction classe tout en secondaire avec l'alerte « nature non déterminée », et l'admin corrige dans la revue.
+**Chaînes vers les Dofus : la nature (mise à jour du 28/10, après le relevé de `guide_pages`).** Le code public du site lit les guides par Dofus dans **`guide_pages`** (29 guides : 25 `dofus`, 4 `event`, dont le Dofus Cacao). Chaque guide a des `categories` et des `prerequis_categories` de même forme que les blocs d'une tranche : leurs items `quest` sont des `quest_list.id`. La règle appliquée (`contenu.construire.guides_par_dofus`), avec les seules données de Duffus :
+- les quêtes d'un guide = les items `quest` de ses blocs et de ses blocs de prérequis ;
+- **fermeture** par les prérequis des fiches (`quest_pages.prereq_quests`, 448 fiches sur 616, 526 liens), en suivant les slugs ;
+- une quête est **principale** si elle est dans le guide d'un Dofus retenu (`config/dofus.yaml`, les 26 de `dofus_list`), sinon secondaire. Les Dofus du résultat sont rangés par ordre alphabétique.
+
+Taille des guides fermés : de 2 (Dofawa) à 144 quêtes (Dofus Sylvestre) ; Dofus Argenté 64, Émeraude 23. **Dofus Kaliptus n'a pas de guide** chez Duffus (alerte ; le repli DofusDB peut le compléter, avec l'origine `dofusdb`).
+
+| | Étage 0 | Étage 1 |
+|---|---|---|
+| Quêtes principales | **26** (toutes pour le Dofus Argenté) | **37** (16 Dofus différents, dont l'Argenté) |
+| Quêtes secondaires | **1** | **6** |
+
+Conséquence à connaître (Marceau, Shadoaze) : sur les deux premiers étages, presque tout le guide sert un Dofus, et la catégorie « secondaires » ne compte que 1 et 6 quêtes.
+
+**« Jusqu'où » et « à lier ».** Aucune colonne dédiée, ni dans `guide_pages`, ni dans `quests` (copie des quêtes du jeu : niveaux, `start_criterion`, étapes), ni dans `quest_list`. Ces consignes sont écrites dans les notes du guide (`quest_list.note`, `note2`) : « Avancez jusqu'à l'étape du donjon et liez la quête d'en dessous ». La construction recopie telles quelles les phrases qui contiennent « jusqu… » (→ `jusqu_ou`) et « liez / lier / simultané » (→ `a_lier`). Sur tout le guide, 156 textes (notes, conseils, titres) en contiennent ; **aucune sur les étages 0 et 1**, dont les deux champs restent vides. La note entière reste en tête de la fiche (« Note du guide »), et la colonne `quest_list.lancement` (139 entrées : « Parlez à Emma Tompouce : "Accepter" ») devient l'étape « Pour la lancer ». `quest_resources` (2 049 lignes, 1 244 remplies) complète les objets à prévoir.
 
 **Contenu des fiches** (69 fiches des étages 0 et 1). L'essentiel est dans `content_html`, structuré par classes CSS stables. Correspondance avec `FicheQuete` :
 
@@ -687,11 +699,32 @@ En attendant, la construction classe tout en secondaire avec l'alerte « nature 
 | prérequis | `prereq_quests` (JSON en texte : titre + `/quete/<slug>`) ; `prereqs` (texte libre) | 18 · 24 |
 | récompenses | `rewards` : xp, kamas, items (qté, nom), others | 27 · 41 |
 | succès lié | `quest_list.succes` (noms) | 25 · 41 |
-| « jusqu'où », « à lier » | aucune colonne dédiée : `note`/`note2` de l'entrée, et les rappels « Lancez la quête … » | — |
+| « jusqu'où », « à lier » | phrases des notes `note`/`note2` (voir ci-dessus) | 0 · 0 |
+| objets (suite) | `quest_resources` (nom, quantité) | — |
 
 Toutes les fiches contiennent des `<img>` (stockage Duffus), et 51 sur 69 des liens internes (`/monstre/…`, `/objet/…`, `/quete/…`, `/donjon/…`) : `nettoyer_fiche` retire les images et les liens, sauf les `/quete/<slug>` d'une quête d'un étage visible, réécrits vers notre fiche.
 
-**Écarts avec la spec.** 24 tranches (étages 0 à 23) au lieu de 26 ; guides par Dofus absents des tables connues (ci-dessus) ; « jusqu'où » et « à lier » sans colonne dédiée ; les fiches complètes ne sont aspirées que pour les étages demandés (`--etages`), les prérequis pour toutes les quêtes.
+**Écarts avec la spec.** 24 tranches (étages 0 à 23) au lieu de 26 ; Dofus Kaliptus sans guide ; « jusqu'où » et « à lier » lus dans les notes du guide ; les fiches complètes ne sont aspirées que pour les étages demandés (`--etages`), les prérequis pour toutes les quêtes.
+
+---
+
+### Addendum E0 : tables Duffus du lot E (relevé du 28/10/2026, sans aspiration)
+
+Relevé : `python -m epreuve.duffus releve --lot-e` (une ligne et le nombre de lignes par table, en une requête chacune ; `donnees/duffus/schema-2026-10-28.json`). Rien n'est aspiré. Exemples abrégés, images de stockage Duffus omises.
+
+| Table | Lignes | Colonnes | Exemple | Pour |
+|---|---|---|---|---|
+| `archimonstres` | 286 | id, nom, etape, zone, image | Blorie l'Assourdissante, étape 25, Lac de Cania | Suivi des archimonstres (T-25) |
+| `wanted2` | 82 | id, slug, nom, lvl, zone, milice, recompense, recompense_type, chasse, dofus_monster_id, resume_html, image_avis, image_zone, image_lancement, old_id, created_at, updated_at | Fouduglen l'Écureuil, « Niv. > 9 », Cité d'Astrub, 120 avitons | Avis de recherche |
+| `items` | 21 554 | 53 colonnes : id, name, typeid, level, description, iconid, itemsetid, recipeids_json, possibleeffects_json, simpleeffects_json, criterions, dropmonsterids_json, price, realweight… | Épée de Boisaille, type 6, niveau 7 | Encyclopédie, stuffs |
+| `recipes` | 4 743 | resultid, resultname, resultlevel, resulttypeid, ingredientids_json, quantities_json, jobid, skillid, created_at, updated_at | Épée de Boisaille : objets 16512 et 303, 3 de chaque, métier 11 | Encyclopédie (recettes) |
+| `effects` | 884 | 29 colonnes : id, description, characteristic, category, bonustype, elementid, isinpercent, useinfight… | 2 : « Téléporte sur la map ciblée » | Lecture des effets d'objets |
+| `spells` | 17 006 | id, name, description, typeid, order, iconid, spelllevels_json, scriptid, boundscript_json, basepreviewzone_json… | Restauration de proximité | Encyclopédie (sorts) |
+| `monster_success` | 150 | id, name, icon_id | 1 : Pious | Les items `monster_success` du guide (non cochables au lot B) |
+| `achievement_categories` | 134 | id, name, parent_id, order, achievement_ids_json, visibility_criterion… | Saison Ocre : Les Trésors du Passé | Encyclopédie (succès) |
+| `builder` | 14 452 | id, user_id, name, classe, level, objets, dofus, caracs_base, caracs_parcho, forgemagie, fm_overrides, tags, note, is_public, short_id, gender, folder_id, og_image_url… | (non recopié) | Builder |
+
+**Attention, `builder`** : ce sont les stuffs **des utilisateurs de Duffus** (avec leur `user_id`), lisibles avec la clé publique. Ce n'est pas du contenu du jeu : on ne l'aspire pas, et un builder du lot E se fera avec nos propres données (`items`, `effects`). À confirmer par Marceau. `items` et `spells` sont gros (21 554 et 17 006 lignes, soit environ 22 et 18 pages) : une aspiration se fera par colonnes utiles, une fois les besoins du lot E fixés.
 
 ---
 

@@ -42,6 +42,8 @@ TABLES: dict[str, Table] = {t.nom: t for t in (
     Table("dungeon_pages", "dungeon_pages", s.DonjonPage),
     Table("achievements", "achievements", s.Succes),
     Table("dofus_list", "dofus_list", s.DofusListe),
+    Table("guide_pages", "guide_pages", s.GuidePage, "slug"),
+    Table("quest_resources", "quest_resources", s.QuestRessource),
 )}  # fmt: skip
 
 

@@ -21,7 +21,7 @@ from pydantic import BaseModel, ConfigDict, ValidationError
 from epreuve.contenu.fiche_duffus import lire_fiche, nettoyer_fiche  # noqa: F401 (interface figée : nettoyer_fiche vit ici)
 from epreuve.db.depot import ContenuFiche
 from epreuve.domaine.modeles import Nature, OrigineNature
-from epreuve.domaine.nature import classer
+from epreuve.domaine.nature import classer, fermeture
 
 RACINE = Path(__file__).resolve().parents[3]
 SEUIL_SANS_FICHE = 0.05  # au-delà, la construction s'arrête sans --forcer (décision de Marceau)
@@ -160,6 +160,9 @@ class Aspiration:
     donjons: dict[str, dict]
     succes: list[dict]
     dofus: list[dict]
+    guides: list[dict]  # guide_pages
+    prerequis: dict[str, list[str]]  # slug → slugs des quêtes prérequises (quest_pages.prereq_quests)
+    ressources: dict[int, list[dict]]  # quest_list.id → ressources à prévoir (quest_resources)
 
     @staticmethod
     def lire(dossier: Path) -> Aspiration:
@@ -169,10 +172,64 @@ class Aspiration:
                 raise ConfigInvalide(f"aspiration incomplète : {f} absent")
             return json.loads(f.read_text(encoding="utf-8"))
 
+        ressources: dict[int, list[dict]] = {}
+        for r in charger("quest_resources"):
+            if r["quest_id"] is not None and r["name"]:
+                ressources.setdefault(r["quest_id"], []).append(r)
+        prerequis = {}
+        for p in charger("quest_prereqs"):
+            liens = [x.get("link") or "" for x in _json_liste(p["prereq_quests"])]
+            prerequis[p["slug"]] = [lien.removeprefix("/quete/").strip("/") for lien in liens
+                                    if lien.startswith("/quete/")]
         return Aspiration(dossier, charger("guide_ranges"), {q["id"]: q for q in charger("quest_list")},
                           {p["slug"]: p for p in charger("quest_pages")},
                           {d["slug"]: d for d in charger("dungeon_pages")}, charger("achievements"),
-                          charger("dofus_list"))
+                          charger("dofus_list"), charger("guide_pages"), prerequis, ressources)
+
+
+def _json_liste(texte: str | None) -> list[dict]:
+    try:
+        valeur = json.loads(texte or "[]")
+    except ValueError:
+        return []
+    return [x for x in valeur if isinstance(x, dict)] if isinstance(valeur, list) else []
+
+
+def guides_par_dofus(aspi: Aspiration) -> dict[str, frozenset[int]]:
+    """Dofus → ids `quest_list` de son guide Duffus (`guide_pages`, blocs et blocs de prérequis), fermé par les
+    prérequis des fiches (`prereq_quests`). Données explicites de Duffus, aucune supposition (addendum B0)."""
+    par_slug: dict[str, set[int]] = {}
+    for q in aspi.quetes.values():
+        if s := slug_quete(q):
+            par_slug.setdefault(s, set()).add(q["id"])
+    guides: dict[str, frozenset[int]] = {}
+    for g in aspi.guides:
+        if g.get("published") is False:
+            continue  # les guides d'événement (Halouine…) restent : seuls les Dofus retenus comptent dans classer
+        ids = {i["id"] for bloc in (g.get("categories") or []) + (g.get("prerequis_categories") or [])
+               for i in bloc.get("items", []) if i.get("type") == "quest" and isinstance(i.get("id"), int)}
+        racines = [s for i in ids if i in aspi.quetes and (s := slug_quete(aspi.quetes[i]))]
+        for s in fermeture(racines, aspi.prerequis):
+            ids |= par_slug.get(s, set())
+        guides[g["title"]] = frozenset(ids)
+    return guides
+
+
+_PHRASES = re.compile(r"(?<=[.!?])\s+|\n+")
+_JUSQU = re.compile(r"\bjusqu", re.I)
+_LIER = re.compile(r"\bli(?:ez|er)\b|simultan", re.I)
+
+
+def jusqu_ou_et_a_lier(entree: Mapping) -> tuple[str | None, str | None]:
+    """Les phrases des notes du guide qui disent jusqu'où avancer la quête, et avec quoi la lier.
+
+    Duffus n'a pas de colonne dédiée : ces consignes sont écrites dans `note`/`note2` (« Avancez jusqu'à
+    l'étape du donjon et liez la quête d'en dessous »). On recopie la phrase telle quelle, sans la réécrire."""
+    phrases = [p.strip() for n in dict.fromkeys(x for x in (entree.get("note"), entree.get("note2")) if x)
+               for p in _PHRASES.split(n) if p.strip()]
+    jusqu = " ".join(p for p in phrases if _JUSQU.search(p)) or None
+    lier = " ".join(p for p in phrases if _LIER.search(p)) or None
+    return jusqu, lier
 
 
 def derniere_aspiration(racine: Path = RACINE / "donnees" / "duffus") -> Path:
@@ -244,7 +301,7 @@ def donjon_prepare(page: Mapping, aspi: Aspiration, ordre: int, bloc: str | None
 
 def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage], dofus_retenus: frozenset[str],
                forcees: Mapping[str, Nature] | None = None, quetes_ouvertes: Mapping[str, str] | None = None,
-               forcer: bool = False) -> EtagePrepare:
+               forcer: bool = False, guides_repli: Mapping[str, frozenset[int]] | None = None) -> EtagePrepare:
     """L'étage `numero`, prêt à écrire. `forcees` : natures choisies par un admin (duffus_id → nature) ;
     `quetes_ouvertes` : slug → notre adresse, pour les quêtes des étages déjà visibles (liens des fiches).
 
@@ -296,23 +353,26 @@ def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage]
     if tranche.get("dungeon_count") is not None and tranche["dungeon_count"] != len(e.donjons):
         e.alertes.append(f"{len(e.donjons)} donjons trouvés, Duffus en annonce {tranche['dungeon_count']}")
 
-    # Nature : guides par Dofus introuvables dans les tables relevées (addendum B0), aucune supposition.
-    guides_duffus: dict[str, frozenset[int]] = {}
+    # Nature : les guides par Dofus de Duffus (guide_pages), fermés par les prérequis des fiches.
+    guides_duffus = guides_par_dofus(aspi)
     forcees_ids = {int(k): v for k, v in (forcees or {}).items()}
-    classement = classer([q["id"] for q, _ in brutes], guides_duffus, {}, dofus_retenus, forcees_ids)
-    if not guides_duffus and brutes:
-        e.alertes.append("nature non déterminée : les guides par Dofus ne sont pas dans les tables Duffus relevées "
-                         "(addendum B0) ; toutes les quêtes sont secondaires sauf choix d'un admin")
+    classement = classer([q["id"] for q, _ in brutes], guides_duffus, guides_repli or {}, dofus_retenus,
+                         forcees_ids)
+    sans_guide = sorted(d for d in dofus_retenus if d not in guides_duffus and d not in (guides_repli or {}))
+    if sans_guide:
+        e.alertes.append(f"Dofus retenus sans guide Duffus : {', '.join(sans_guide)}")
 
     for ordre, (entree, bloc) in enumerate(brutes, 1):
         slug = slug_quete(entree)
         page = aspi.pages.get(slug) if slug else None
-        fiche = lire_fiche(page, entree, slug_vers_id, ouvertes) if page else None
+        fiche = (lire_fiche(page, entree, slug_vers_id, ouvertes, aspi.ressources.get(entree["id"], []))
+                 if page else None)
         if fiche is None:
             e.sans_fiche.append(entree["title"])
         c = classement[entree["id"]]
+        jusqu, lier = jusqu_ou_et_a_lier(entree)
         e.quetes.append(QuetePreparee(str(entree["id"]), entree["title"].strip(), _niveau(entree.get("level")), bloc,
-                                      ordre, c.nature, c.origine, c.dofus, None, None, fiche,
+                                      ordre, c.nature, c.origine, c.dofus, jusqu, lier, fiche,
                                       "duffus" if fiche else None))
     if e.quetes and len(e.sans_fiche) / len(e.quetes) > SEUIL_SANS_FICHE:
         message = (f"{len(e.sans_fiche)} quêtes sur {len(e.quetes)} sans fiche Duffus (plus de 5 %) : "

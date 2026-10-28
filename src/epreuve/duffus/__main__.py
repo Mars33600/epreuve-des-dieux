@@ -35,7 +35,8 @@ async def _principal(args: argparse.Namespace) -> int:
     url, cle = lire_environnement()
     async with ClientDuffus(url, cle) as client:
         if args.commande == "releve":
-            r = await releve.relever(client)
+            tables = releve.TABLES_CONNUES + (releve.TABLES_LOT_E if args.lot_e else ())
+            r = await releve.relever(client, tables)
             f = releve.ecrire_releve(r, DONNEES, date.today())
             print(f"Relevé ({r['source']}) : {len(r['tables'])} tables → {f.relative_to(RACINE)} "
                   f"({client.nb_requetes} requêtes)")
@@ -52,7 +53,8 @@ async def _principal(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="python -m epreuve.duffus")
     sous = p.add_subparsers(dest="commande", required=True)
-    sous.add_parser("releve", help="relever le schéma (tables et colonnes)")
+    rel = sous.add_parser("releve", help="relever le schéma (tables, colonnes, nombre de lignes)")
+    rel.add_argument("--lot-e", action="store_true", help="relever aussi les tables du lot E")
     a = sous.add_parser("aspirer", help="aspirer les tables utiles vers donnees/duffus/AAAA-MM-JJ/")
     a.add_argument("--tables", help="tables à aspirer (par défaut : toutes les tables utiles)")
     a.add_argument("--etages", help="limiter les fiches de quête aux tranches de ces étages, ex. 0,1")

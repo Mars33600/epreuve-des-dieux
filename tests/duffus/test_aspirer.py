@@ -45,6 +45,10 @@ TABLES = {
                      {"id": 1, "name": "Autre", "description": "Finir une quête.", "category_id": 2, "level": 1,
                       "order": 1}],
     "dofus_list": [{"id": 1, "nom": "Dofus Argenté", "quest_id": 11, "advised_level": 30, "image_url": "z"}],
+    "guide_pages": [{"id": "g", "slug": "dofus-argente", "title": "Dofus Argenté", "type_guide": "dofus",
+                     "item": 19629, "published": True, "categories": [{"items": [{"type": "quest", "id": 10}]}],
+                     "prerequis_categories": [], "content_html": "long"}],
+    "quest_resources": [{"id": 1, "quest_id": 10, "name": "Blé", "qty": 3, "quest": "Q10"}],
 }
 
 

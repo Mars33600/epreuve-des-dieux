@@ -124,3 +124,21 @@ def test_lire_environnement(monkeypatch):
     monkeypatch.setenv("DUFFUS_SUPABASE_URL", "https://x.supabase.co/")
     monkeypatch.setenv("DUFFUS_SUPABASE_CLE", "k")
     assert lire_environnement() == ("https://x.supabase.co", "k")
+
+
+async def test_echantillon_donne_une_ligne_et_le_total():
+    reponses = iter([httpx.Response(206, json=[{"id": 1}], headers={"Content-Range": "0-0/286"}),
+                     httpx.Response(200, json=[], headers={"Content-Range": "*/0"}),
+                     httpx.Response(200, json=[{"id": 2}])])
+    vus = []
+
+    def repondre(req):
+        vus.append(req.headers.get("Prefer"))
+        return next(reponses)
+
+    c, _ = client(repondre)
+    async with c:
+        assert await c.echantillon("archimonstres") == ({"id": 1}, 286)
+        assert await c.echantillon("vide") == (None, 0)
+        assert await c.echantillon("sans_total") == ({"id": 2}, None)
+    assert vus == ["count=exact"] * 3

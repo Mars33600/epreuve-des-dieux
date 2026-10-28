@@ -14,7 +14,10 @@ from pathlib import Path
 from epreuve.duffus.client import Absente, ClientDuffus
 
 TABLES_CONNUES = ("guide_ranges", "quest_list", "quest_pages", "dungeon_pages", "achievements",
-                  "achievement_objectives", "monsters", "dofus_list")
+                  "achievement_objectives", "monsters", "dofus_list", "guide_pages", "quests", "quest_resources")
+# Tables du lot E (encyclopédie, avis de recherche, archimonstres, stuffs, builder) : relevé seulement.
+TABLES_LOT_E = ("archimonstres", "wanted2", "items", "recipes", "effects", "spells", "monster_success",
+                "achievement_categories", "builder")
 
 
 def _type(v: object) -> str:
@@ -35,14 +38,16 @@ async def relever(client: ClientDuffus, tables: tuple[str, ...] = TABLES_CONNUES
     if api is not None:
         return {"source": "openapi", "tables": schema_depuis_openapi(api)}
     resultat: dict[str, dict[str, str]] = {}
+    lignes_par_table: dict[str, int | None] = {}
     for table in tables:
         try:
-            lignes = await client.une_ligne(table)
+            ligne, total = await client.echantillon(table)
         except Absente:
             resultat[table] = {}
             continue
-        resultat[table] = {k: _type(v) for k, v in sorted(lignes[0].items())} if lignes else {}
-    return {"source": "une_ligne", "tables": resultat}
+        resultat[table] = {k: _type(v) for k, v in sorted(ligne.items())} if ligne else {}
+        lignes_par_table[table] = total
+    return {"source": "une_ligne", "tables": resultat, "lignes": lignes_par_table}
 
 
 def ecrire_releve(releve: dict, dossier: Path, jour: date) -> Path:

@@ -215,14 +215,17 @@ def prerequis_de(page: Mapping, slug_vers_id: Mapping[str, str]) -> list[Prerequ
 
 
 def lire_fiche(page: Mapping, entree: Mapping, slug_vers_id: Mapping[str, str],
-               ouvertes: Mapping[str, str]) -> ContenuFiche:
-    """La fiche Duffus d'une entrée du guide (`quest_list`) et de sa page (`quest_pages`)."""
+               ouvertes: Mapping[str, str], ressources: list[dict] | None = None) -> ContenuFiche:
+    """La fiche Duffus d'une entrée du guide (`quest_list`), de sa page (`quest_pages`) et de ses ressources
+    à prévoir (`quest_resources`)."""
     racine = arbre(page.get("content_html") or "")
     etapes, positions = _etapes(racine, ouvertes)
+    if (entree.get("lancement") or "").strip():
+        etapes.insert(0, EtapeFiche(0, "Pour la lancer", nettoyer_fiche(escape(entree["lancement"]), ouvertes)))
     note = " ".join(dict.fromkeys(x.strip() for x in (entree.get("note"), entree.get("note2")) if x and x.strip()))
     if note:
         etapes.insert(0, EtapeFiche(0, "Note du guide", nettoyer_fiche(escape(note), ouvertes)))
-        etapes = [EtapeFiche(i, e.titre, e.texte_html, e.objectifs) for i, e in enumerate(etapes, 1)]
+    etapes = [EtapeFiche(i, e.titre, e.texte_html, e.objectifs) for i, e in enumerate(etapes, 1)]
     meta = page.get("meta") or {}
     depart = _coord(meta.get("startCoords") or "")
     if depart:
@@ -232,7 +235,9 @@ def lire_fiche(page: Mapping, entree: Mapping, slug_vers_id: Mapping[str, str],
     positions = [p for p in positions if (p.x, p.y, p.libelle) not in vues and not vues.add((p.x, p.y, p.libelle))]
     succes = entree.get("succes") or []
     return ContenuFiche(
-        prerequis=prerequis_de(page, slug_vers_id), etapes=etapes, objets=_objets(racine, page.get("manual_resources")),
+        prerequis=prerequis_de(page, slug_vers_id), etapes=etapes,
+        objets=_objets(racine, [*(page.get("manual_resources") or []),
+                                *({"label": r["name"], "qty": r["qty"]} for r in ressources or [])]),
         monstres=_monstres(racine), positions=positions, succes_lie=", ".join(succes) or None,
         recompenses=_recompenses(page.get("rewards")),
     )  # fmt: skip

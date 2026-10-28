@@ -111,6 +111,13 @@ class ClientDuffus:
     async def une_ligne(self, table: str) -> list[dict]:
         return (await self._get(f"/{table}", params={"select": "*", "limit": "1"})).json()
 
+    async def echantillon(self, table: str) -> tuple[dict | None, int | None]:
+        """Une ligne et le nombre total de lignes (en-tête Content-Range de PostgREST), en une requête."""
+        r = await self._get(f"/{table}", params={"select": "*", "limit": "1"}, entetes={"Prefer": "count=exact"})
+        total = (r.headers.get("Content-Range") or "").rpartition("/")[2]
+        lignes = r.json()
+        return (lignes[0] if lignes else None), (int(total) if total.isdigit() else None)
+
     async def lire_table(self, table: str, colonnes: str = "*", ordre: str = "id",
                          filtres: dict[str, str] | None = None) -> list[dict]:
         """Toute la table, page par page (en-tête Range), triée par `ordre` pour un résultat stable."""
