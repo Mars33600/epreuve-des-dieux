@@ -50,8 +50,8 @@ Détails : `DECISIONS-V4.md`.
 
 - [x] Guide (cases, fiches, progression)
 - [ ] Tableau de bord
-- [ ] Archimonstres (sans la bourse aux échanges)
-- [ ] Avis de recherche
+- [x] Archimonstres (sans la bourse aux échanges), à fusionner
+- [x] Avis de recherche, à fusionner
 - [ ] Encyclopédie : objets, monstres, recettes faits ; manquent sorts, PNJ, quêtes, page panoplies
 - [ ] Outils (sans les tutoriels)
 - [x] Stuffs (builds PvM de Duffus)
