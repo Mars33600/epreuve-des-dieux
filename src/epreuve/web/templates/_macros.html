@@ -27,25 +27,28 @@
 {%- endif -%}
 {%- endmacro %}
 
-{% macro tour(etages, jauge, nb_scelles) -%}
+{% macro pyramide(etages, jauge, nb_scelles) -%}
+{#- La pyramide : de haut en bas, des scellés décoratifs (jamais comptés ni nommés), puis les étages ouverts ou terminés,
+    cliquables. Le rang depuis le bas (pb-k) donne la largeur par classe CSS (la CSP interdit style=""). -#}
 {%- set ouvert = etages|selectattr("statut", "equalto", "ouvert")|first -%}
-<div class="floors">
+{%- set total = nb_scelles + etages|length -%}
+<nav class="pyramide" aria-label="Les étages de la tour">
   <div class="towermist"></div>
-  <div class="sealedgroup">
   {%- for i in range(nb_scelles, 0, -1) %}
-    {%- if i == 1 and ouvert and jauge and jauge.pleine %}
-    <div class="floor ready w-{{ 7 - i }}"><b>Étage {{ ouvert.numero + 1 }}</b><span>· prêt</span></div>
-    {%- else %}
-    <div class="floor sealed w-{{ 7 - i }}" aria-label="Étage scellé"><span class="seal" aria-hidden="true">?</span></div>
-    {%- endif %}
+  {%- if i == 1 and ouvert and jauge and jauge.pleine %}
+  <div class="etage-p prete pb-{{ total - nb_scelles + i - 1 }}"><b>Étage {{ ouvert.numero + 1 }}</b><span>· prêt</span></div>
+  {%- else %}
+  <div class="etage-p scelle pb-{{ total - nb_scelles + i - 1 }}" aria-label="Étage scellé"><span class="seal" aria-hidden="true">?</span></div>
+  {%- endif %}
   {%- endfor %}
-  </div>
   {%- for e in etages|reverse %}
-  <a class="floor w-full {{ 'current' if e.statut == 'ouvert' else 'done' }}" href="/etages/{{ e.numero }}"><b>Étage {{ e.numero }}</b><span>{{ e.nom }}{% if e.statut == "termine" %} · terminé{% endif %}</span>{% if e.statut == "ouvert" and jauge %}<i class="fill {{ jauge.score|pct(jauge.palier) }}"></i>{% endif %}</a>
+  <a class="etage-p {{ 'courant' if e.statut == 'ouvert' else 'fini' }} pb-{{ loop.revindex0 }}" href="/etages/{{ e.numero }}">
+    <span class="nom"><b>Étage {{ e.numero }}</b> {{ e.nom }}</span>
+    <span class="detail">niv. {{ e.niveau_min }} à {{ e.niveau_max }}{% if e.statut == "termine" %} · terminé{% else %} · ouvert{% endif %}</span>
+    {%- if e.statut == "ouvert" and jauge %}<i class="fill {{ jauge.score|pct(jauge.palier) }}"></i>{% endif %}
+  </a>
   {%- endfor %}
-</div>
-<div class="base"></div>
-<p>Nul ne connaît le nombre d'étages. Chacun se dévoile quand la guilde a descellé le précédent.</p>
+</nav>
 {%- endmacro %}
 
 {% macro jauge_bloc(jauge, encoches, formule, texte, verdict_plein, verdict_pas_plein) -%}
@@ -78,6 +81,9 @@
 {% macro liste_etage(vue, cible, cochable) -%}
 {%- set coches = vue.coches_de(cible.id if cible else none) -%}
 {%- set numero = vue.etage.numero -%}
+{%- if vue.contenu.donjons %}
+<p class="legende-dj">{{ icone("i-donjon") }}<span>Cocher <b>« Vaincre le boss »</b> (la première case, en vert) sur <b>tous les donjons de l'étage</b> rapporte déjà <b>1 point</b>, celui de la catégorie Donjons. Les <b>4 succès en plus</b> de chaque donjon, tous cochés, donnent le point <b>Full succès</b>.</span></p>
+{%- endif %}
 {%- for bloc in vue.blocs() %}
 <section class="bloc">
   {% if bloc.nom %}<h3>{{ bloc.nom }}</h3>{% endif %}
@@ -104,8 +110,8 @@
         <div class="dj-corps">
           <ul class="ticks">
           {%- for c in l.cases %}
-            <li><label class="tick c-{{ 'donjons' if c.est_classique else 'full_succes' }}"><input type="checkbox" data-ref="case:{{ c.id }}"{% if c.id in coches.cases %} checked{% endif %}{% if not cochable %} disabled{% endif %}>
-              <span><b>{{ c.nom }}</b><small>{{ c.condition }}{% if c.est_classique %} · compte pour le point Donjons{% endif %}</small></span></label>{{ compteur(vue, "case:" ~ c.id) }}</li>
+            <li{% if c.est_classique %} class="premiere"{% endif %}><label class="tick c-{{ 'donjons' if c.est_classique else 'full_succes' }}"><input type="checkbox" data-ref="case:{{ c.id }}"{% if c.id in coches.cases %} checked{% endif %}{% if not cochable %} disabled{% endif %}>
+              <span><b>{{ c.nom }}</b><small>{{ c.condition }}{% if c.est_classique %}<em class="pt-dj">1 point Donjons si tous les donjons sont vaincus</em>{% endif %}</small></span></label>{{ compteur(vue, "case:" ~ c.id) }}</li>
           {%- endfor %}
           </ul>
           {% if cochable %}<p><button class="btn" type="button" data-donjon-tout="{{ d.id }}">Tout le donjon (5 cases)</button></p>{% endif %}

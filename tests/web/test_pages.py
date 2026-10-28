@@ -147,16 +147,19 @@ def test_modifier_sa_fiche():
 
 def test_tour_seulement_les_etages_visibles_et_6_scelles_decoratifs():
     html = monde().connecter(ID_BRINDILLE).get("/").text
-    tour = html.split('class="tower"')[1].split("</aside>")[0]
-    assert tour.count('class="floor sealed') == 6 and tour.count('aria-label="Étage scellé"') == 6
+    tour = html.split('class="pyramide"')[1].split("</nav>")[0]
+    assert tour.count('class="etage-p scelle') == 6 and tour.count('aria-label="Étage scellé"') == 6
     assert "Étage 0" in tour and "Étage 1" not in tour and "prêt" not in tour
+    assert 'href="/etages/0"' in tour and tour.count("<a ") == 1  # seul l'étage ouvert est cliquable
+    menu = html.split('<nav class="pyramide"')[0].split('aria-label="Navigation principale"')[1]
+    assert 'href="/etages/0"' not in menu  # plus d'onglet « Étage 0 » : on choisit dans la pyramide
 
 
 def test_tour_etage_suivant_pret_si_la_jauge_est_pleine():
     m = monde()
     m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)
-    tour = m.connecter(ID_BRINDILLE).get("/").text.split('class="tower"')[1].split("</aside>")[0]
-    assert "<b>Étage 1</b><span>· prêt</span>" in tour and tour.count('class="floor sealed') == 5
+    tour = m.connecter(ID_BRINDILLE).get("/").text.split('class="pyramide"')[1].split("</nav>")[0]
+    assert "<b>Étage 1</b><span>· prêt</span>" in tour and tour.count('class="etage-p scelle') == 5
     assert "Champs Murmurants" not in tour
 
 

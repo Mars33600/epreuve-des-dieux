@@ -15,9 +15,9 @@
   <canvas id="stars"></canvas>
   <div class="glow"></div>
   <svg class="ridge" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMax slice">
-    <path fill="#0d1224" d="M0 190 L110 150 L210 178 L320 124 L420 166 L540 132 L660 172 L780 146 L900 184 L1020 140 L1140 170 L1260 128 L1380 168 L1500 140 L1600 160 V300 H0Z"/>
-    <path fill="#070a14" d="M0 240 L160 222 L320 238 L480 216 L640 236 L800 226 L960 238 L1120 218 L1280 236 L1440 224 L1600 236 V300 H0Z"/>
-    <g fill="#070a14"><path d="M1200 232 V130 L1208 122 L1220 128 L1226 112 L1236 120 V232Z"/><path d="M1300 236 V100 H1312 V92 H1372 V100 H1384 V236 H1364 V146 A22 22 0 0 0 1320 146 V236Z"/><path d="M1440 230 V176 L1448 168 L1458 174 L1464 162 L1470 170 V230Z"/></g>
+    <path fill="#2e1850" d="M0 190 L110 150 L210 178 L320 124 L420 166 L540 132 L660 172 L780 146 L900 184 L1020 140 L1140 170 L1260 128 L1380 168 L1500 140 L1600 160 V300 H0Z"/>
+    <path fill="#1e0f3a" d="M0 240 L160 222 L320 238 L480 216 L640 236 L800 226 L960 238 L1120 218 L1280 236 L1440 224 L1600 236 V300 H0Z"/>
+    <g fill="#1e0f3a"><path d="M1200 232 V130 L1208 122 L1220 128 L1226 112 L1236 120 V232Z"/><path d="M1300 236 V100 H1312 V92 H1372 V100 H1384 V236 H1364 V146 A22 22 0 0 0 1320 146 V236Z"/><path d="M1440 230 V176 L1448 168 L1458 174 L1464 162 L1470 170 V230Z"/></g>
   </svg>
   <div class="fog fog-a"></div>
   <div class="fog fog-b"></div>
@@ -55,7 +55,6 @@
   {% if v.connecte and (v.est_admin or v.grimpeur) %}
   <nav class="nav" aria-label="Navigation principale">
     <a href="/" {% if chemin == "/" %}aria-current="page"{% endif %}>La tour</a>
-    {% if numero_ouvert is not none %}<a href="/etages/{{ numero_ouvert }}" {% if chemin.startswith("/etages/") %}aria-current="page"{% endif %}>Étage {{ numero_ouvert }}</a>{% endif %}
     {% if v.grimpeur %}<a href="/tableau-de-bord" {% if chemin == "/tableau-de-bord" %}aria-current="page"{% endif %}>Tableau de bord</a>{% endif %}
     {% if v.grimpeur or v.est_admin %}<a href="/encyclopedie" {% if chemin.startswith("/encyclopedie") %}aria-current="page"{% endif %}>Encyclopédie</a>
     <a href="/stuffs" {% if chemin.startswith("/stuffs") %}aria-current="page"{% endif %}>Stuffs</a>

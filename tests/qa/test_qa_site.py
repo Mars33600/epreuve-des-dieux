@@ -140,7 +140,7 @@ def test_etage_ouvert_sans_aucun_actif():
     assert "Score 0 sur un palier de 0" in html
     assert ">Un admin pourra ouvrir le prochain étage quand la jauge sera pleine.</p>" in html
     assert "aucun grimpeur actif" in c.get("/admin/etages/0").text
-    tour = c.get("/").text.split('class="tower"')[1]
+    tour = c.get("/").text.split('class="pyramide"')[1]
     assert "prêt" not in tour
 
 

@@ -1,12 +1,12 @@
 /* Outils et tableau de bord (E4). S'appuie sur les jetons de style.css ; mobile d'abord, aucun style en ligne. */
 .outil{display:grid;gap:22px;min-width:0}
 .cartes{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.carte-outil{display:grid;gap:4px;min-height:44px;padding:14px;border-radius:10px;border:1px solid var(--line-soft);background:rgba(10,14,27,.75);color:var(--ink);text-decoration:none}
+.carte-outil{display:grid;gap:4px;min-height:44px;padding:14px;border-radius:10px;border:1px solid var(--line-soft);background:rgba(29,21,56,.75);color:var(--ink);text-decoration:none}
 .carte-outil:hover{border-color:var(--gold-line)}
 .carte-outil b{font:700 18px/1.2 var(--f-display)}
 .carte-outil span{color:var(--muted);font-size:15px}
 .onglets{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.onglets a,.onglets button{min-height:44px;display:inline-flex;align-items:center;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(10,13,26,.72);color:var(--ink);text-decoration:none;font:inherit;font-size:15px;cursor:pointer}
+.onglets a,.onglets button{min-height:44px;display:inline-flex;align-items:center;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(29,21,56,.72);color:var(--ink);text-decoration:none;font:inherit;font-size:15px;cursor:pointer}
 .onglets a[aria-current="page"],.onglets button[aria-pressed="true"]{border-color:var(--gold);background:var(--gold-wash)}
 .champs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end;margin:14px 0}
 .champ{display:grid;gap:4px}
@@ -18,7 +18,7 @@
 .resultat{font-size:18px}
 .resultat b{color:var(--gold-hi);font-size:24px}
 .stats{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;text-align:center}
-.stats li{display:grid;gap:2px;padding:10px 4px;border-radius:8px;background:rgba(10,14,27,.75);border:1px solid var(--line-soft)}
+.stats li{display:grid;gap:2px;padding:10px 4px;border-radius:8px;background:rgba(29,21,56,.75);border:1px solid var(--line-soft)}
 .stats b{font-size:20px;color:var(--gold-hi)}
 .stats span{font-size:13px;color:var(--muted)}
 .defile{overflow-x:auto}
@@ -26,7 +26,7 @@
 .tableau th,.tableau td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line-soft)}
 .tableau th{font-weight:500;color:var(--muted);font-size:13px}
 .faits,.dl-faits{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin:12px 0 0}
-dl.faits > div{padding:10px;border-radius:8px;background:rgba(10,14,27,.75);border:1px solid var(--line-soft)}
+dl.faits > div{padding:10px;border-radius:8px;background:rgba(29,21,56,.75);border:1px solid var(--line-soft)}
 dl.faits dt{font-size:13px;color:var(--muted)}
 dl.faits dd{margin:2px 0 0;font-size:18px}
 .pager{display:flex;flex-wrap:wrap;gap:8px;margin:0}
@@ -44,7 +44,7 @@ dl.faits dd{margin:2px 0 0;font-size:18px}
 .gen-titre{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
 .montures{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:2px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
 .montures label{display:flex;gap:10px;align-items:center;min-height:44px;cursor:pointer;padding:0 6px;border-radius:6px}
-.montures label:hover{background:rgba(143,150,173,.07)}
+.montures label:hover{background:rgba(196,180,235,.07)}
 .montures input{width:22px;height:22px;accent-color:var(--gold);flex:none}
 .res-ligne.fait span:first-child{text-decoration:line-through;color:var(--faint)}
 .mini.glob i{--c:var(--gold)}

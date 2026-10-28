@@ -77,7 +77,8 @@ async def tour(request: Request, v: Visiteur):
     etages = etages_visibles(await s.depot.etages(), est_admin=False)  # la tour ne montre jamais un scellé
     ouvert = next((e for e in etages if e.statut == "ouvert"), None)
     grimpeurs = await s.depot.grimpeurs()
-    ctx: dict = {"etages": etages, "ouvert": ouvert, "nb_scelles": NB_SCELLES_DECORATIFS, "vue": None}
+    ctx: dict = {"etages": etages, "ouvert": ouvert, "nb_scelles": NB_SCELLES_DECORATIFS, "vue": None,
+                "ambiance": ouvert.ambiance_url if ouvert else None}
     if ouvert is not None:
         vue = await charger_vue_etage(s.depot, ouvert, s.regles, grimpeurs)
         ctx.update(contexte_etage(request, vue))
