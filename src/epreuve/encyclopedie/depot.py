@@ -16,10 +16,16 @@ from epreuve.encyclopedie import tables as t
 from epreuve.encyclopedie.textes import (
     FAMILLES,
     METIERS,
+    REPETITIONS,
     EffetLu,
+    conditions_en_clair,
     effets_en_clair,
     icone_objet,
+    icone_sort,
+    ids_des_conditions,
+    ids_des_objectifs,
     image_monstre,
+    objectif_en_clair,
     requete_plein_texte,
 )
 
@@ -45,6 +51,7 @@ class Filtres:
     famille: str | None = None
     type_id: int | None = None
     race_id: int | None = None
+    classe_id: int | None = None
     metier: int | None = None
     niveau_min: int | None = None
     niveau_max: int | None = None
@@ -125,6 +132,21 @@ class DepotEncyclopedie:
                 .order_by(t.ency_race.c.nom))).all()
         return [(r.id, r.nom) for r in rangs]
 
+    async def _noms(self, table, ids: set[int], plafond: int | None = None) -> dict[int, str]:
+        """{id: nom} pour des ids cités par une condition ou un objectif (les absents restent « n°… »)."""
+        if not ids:
+            return {}
+        async with self._moteur.connect() as c:
+            rangs = (await c.execute(select(table.c.id, table.c.nom).where(table.c.id.in_(sorted(ids))))).all()
+        return {r.id: r.nom for r in rangs}
+
+    async def _conditions(self, texte: str | None) -> str:
+        if not texte:
+            return ""
+        ids = ids_des_conditions(texte)
+        return conditions_en_clair(texte, await self._noms(t.ency_objet, ids["objets"]),
+                                   await self._noms(t.ency_quete, ids["quetes"]))
+
     # --- Objets et ressources ----------------------------------------------------------------------------
 
     async def chercher_objets(self, f: Filtres, plafond: int | None = None) -> Page:
@@ -182,6 +204,7 @@ class DepotEncyclopedie:
                            *_niveaux(t.ency_monstre.c.niveau_min, Filtres(), plafond))
                     .order_by(t.ency_monstre.c.niveau_min, t.ency_monstre.c.id))).mappings().all()
         fiche["image"] = icone_objet(fiche["icone"])
+        fiche["conditions_lues"] = await self._conditions(fiche["conditions"])
         fiche["effets_lus"] = await self.en_clair(fiche["effets"])
         fiche["recette"] = None
         if recette:
@@ -291,3 +314,134 @@ class DepotEncyclopedie:
     async def objets_de_stuffs(self, stuffs: list[dict]) -> dict[int, dict]:
         ids = sorted({i for st in stuffs for i in [*st["objets"].values(), *st["dofus"]] if isinstance(i, int)})
         return await self._mini_objets(ids, None)
+
+    # --- Panoplies ---------------------------------------------------------------------------------------
+
+    async def chercher_panoplies(self, f: Filtres, plafond: int | None = None) -> Page:
+        p = t.ency_panoplie
+        conds = _niveaux(p.c.niveau, f, plafond)
+        tsq = requete_plein_texte(f.q)
+        if tsq:
+            conds.append(p.c.recherche.op("@@")(func.to_tsquery(text("'simple'"), tsq)))
+        requete = (select(p.c.id, p.c.nom, p.c.niveau, func.cardinality(p.c.objets).label("nb_objets"))
+                   .where(and_(True, *conds))
+                   .order_by(*_tri({"niveau": p.c.niveau, "nom": p.c.nom, "id": p.c.id, "cle": p.c.cle_recherche},
+                                   f.tri)))
+        return await self._paginer(requete, f)
+
+    async def panoplie(self, ident: int, plafond: int | None = None) -> dict | None:
+        p = t.ency_panoplie
+        async with self._moteur.connect() as c:
+            r = (await c.execute(select(p.c.id, p.c.nom, p.c.niveau, p.c.objets, p.c.bonus)
+                                 .where(p.c.id == ident, *_niveaux(p.c.niveau, Filtres(), plafond)))
+                 ).mappings().one_or_none()
+        if r is None:
+            return None
+        membres = await self._mini_objets(list(r["objets"]), None)
+        paliers = sorted(((int(n), e) for n, e in r["bonus"].items() if e), key=lambda x: x[0])
+        return {"id": r["id"], "nom": r["nom"], "niveau": r["niveau"],
+                "objets": sorted(membres.values(), key=lambda x: (x["niveau"] or 0, x["id"])),
+                "bonus": [(n, await self.en_clair(e)) for n, e in paliers]}
+
+    # --- Sorts et classes --------------------------------------------------------------------------------
+
+    async def classes(self) -> list[dict]:
+        c_ = t.ency_classe
+        async with self._moteur.connect() as c:
+            return [dict(r) for r in (await c.execute(select(c_.c.id, c_.c.nom, c_.c.role).order_by(c_.c.nom))
+                                      ).mappings().all()]
+
+    async def chercher_sorts(self, f: Filtres, plafond: int | None = None) -> Page:
+        s, cl = t.ency_sort, t.ency_classe
+        conds = _niveaux(s.c.niveau_min, f, plafond)
+        tsq = requete_plein_texte(f.q)
+        if tsq:
+            conds.append(s.c.recherche.op("@@")(func.to_tsquery(text("'simple'"), tsq)))
+        if f.classe_id is not None:
+            conds.append(s.c.classe_id == f.classe_id)
+        requete = (select(s.c.id, s.c.nom, s.c.icone, s.c.niveau_min.label("niveau"), s.c.description,
+                          cl.c.nom.label("classe"))
+                   .join(cl, cl.c.id == s.c.classe_id, isouter=True).where(and_(True, *conds))
+                   .order_by(*_tri({"niveau": s.c.niveau_min, "nom": s.c.nom, "id": s.c.id,
+                                    "cle": s.c.cle_recherche}, f.tri)))
+        page = await self._paginer(requete, f)
+        for r in page.lignes:
+            r["image"] = icone_sort(r["icone"])
+        return page
+
+    async def sort(self, ident: int, plafond: int | None = None) -> dict | None:
+        s, cl = t.ency_sort, t.ency_classe
+        async with self._moteur.connect() as c:
+            r = (await c.execute(select(s, cl.c.nom.label("classe")).join(cl, cl.c.id == s.c.classe_id, isouter=True)
+                                 .where(s.c.id == ident, *_niveaux(s.c.niveau_min, Filtres(), plafond)))
+                 ).mappings().one_or_none()
+        if r is None:
+            return None
+        fiche = {k: v for k, v in r.items() if k != "recherche"}
+        fiche["image"] = icone_sort(fiche["icone"])
+        for n in fiche["niveaux"]:
+            n["effets_lus"] = await self.en_clair(n["effets"])
+            n["effets_cc_lus"] = await self.en_clair(n["effets_cc"])
+        return fiche
+
+    # --- PNJ ---------------------------------------------------------------------------------------------
+
+    async def chercher_pnj(self, f: Filtres) -> Page:
+        n = t.ency_pnj
+        conds = [n.c.visible.is_(True)]
+        tsq = requete_plein_texte(f.q)
+        if tsq:
+            conds.append(n.c.recherche.op("@@")(func.to_tsquery(text("'simple'"), tsq)))
+        requete = (select(n.c.id, n.c.nom).where(and_(True, *conds))
+                   .order_by(n.c.cle_recherche.desc() if f.tri == "nom_desc" else n.c.cle_recherche, n.c.id))
+        return await self._paginer(requete, f)
+
+    async def pnj(self, ident: int, plafond: int | None = None) -> dict | None:
+        n, q = t.ency_pnj, t.ency_quete
+        async with self._moteur.connect() as c:
+            r = (await c.execute(select(n.c.id, n.c.nom, n.c.genre).where(n.c.id == ident))).mappings().one_or_none()
+            if r is None:
+                return None
+            quetes = (await c.execute(
+                select(q.c.id, q.c.nom, q.c.niveau_min, q.c.niveau_max, q.c.zone)
+                .where(q.c.pnj_ids.contains([ident]), *_niveaux(q.c.niveau_min, Filtres(), plafond))
+                .order_by(q.c.niveau_min, q.c.id))).mappings().all()
+        return {**r, "quetes": [dict(x) for x in quetes]}
+
+    # --- Quêtes ------------------------------------------------------------------------------------------
+
+    async def chercher_quetes(self, f: Filtres, plafond: int | None = None) -> Page:
+        q = t.ency_quete
+        conds = _niveaux(q.c.niveau_min, f, plafond)
+        tsq = requete_plein_texte(f.q)
+        if tsq:
+            conds.append(q.c.recherche.op("@@")(func.to_tsquery(text("'simple'"), tsq)))
+        requete = (select(q.c.id, q.c.nom, q.c.niveau_min, q.c.niveau_max, q.c.zone, q.c.categorie)
+                   .where(and_(True, *conds))
+                   .order_by(*_tri({"niveau": q.c.niveau_min, "nom": q.c.nom, "id": q.c.id,
+                                    "cle": q.c.cle_recherche}, f.tri)))
+        return await self._paginer(requete, f)
+
+    async def quete(self, ident: int, plafond: int | None = None) -> dict | None:
+        q = t.ency_quete
+        async with self._moteur.connect() as c:
+            r = (await c.execute(select(q).where(q.c.id == ident, *_niveaux(q.c.niveau_min, Filtres(), plafond)))
+                 ).mappings().one_or_none()
+        if r is None:
+            return None
+        fiche = {k: v for k, v in r.items() if k != "recherche"}
+        objectifs = [o for e in fiche["etapes"] for o in e["objectifs"]]
+        ids = ids_des_objectifs(objectifs)
+        recompenses = [x for e in fiche["etapes"] for rc in e["recompenses"] for x in rc["objets"]]
+        pnj = await self._noms(t.ency_pnj, ids["pnj"] | {d["pnj"] for d in fiche["depart"] if d.get("pnj")})
+        monstres = await self._noms(t.ency_monstre, ids["monstres"])
+        objets = await self._noms(t.ency_objet, ids["objets"] | {i for i, _ in recompenses})
+        for e in fiche["etapes"]:
+            e["objectifs_lus"] = [objectif_en_clair(o, pnj, objets, monstres) for o in e["objectifs"]]
+            e["recompenses_lues"] = [{"id": i, "nom": objets.get(i, f"Objet {i}"), "qte": qte}
+                                     for rc in e["recompenses"] for i, qte in rc["objets"]]
+        fiche["depart_lu"] = [{"pnj_id": d["pnj"], "pnj": pnj.get(d["pnj"], f"PNJ n°{d['pnj']}")}
+                              for d in fiche["depart"] if d.get("pnj")]
+        fiche["conditions_lues"] = await self._conditions(fiche["condition"])
+        fiche["repetition_lue"] = REPETITIONS.get(fiche["repetition"] or 0, "Non répétable")
+        return fiche

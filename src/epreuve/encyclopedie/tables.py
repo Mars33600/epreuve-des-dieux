@@ -11,7 +11,8 @@ ency_effet = Table("ency_effet", metadata, Column("id", Integer, primary_key=Tru
                    Column("caracteristique", Integer), Column("categorie", Integer), Column("priorite", Integer),
                    Column("element", Integer))
 ency_panoplie = Table("ency_panoplie", metadata, Column("id", Integer, primary_key=True), Column("nom", Text),
-                      Column("objets", ARRAY(Integer)), Column("bonus", JSONB))
+                      Column("objets", ARRAY(Integer)), Column("bonus", JSONB), Column("cle_recherche", Text),
+                      Column("niveau", Integer), Column("recherche", TSVECTOR))
 ency_objet = Table(
     "ency_objet", metadata,
     Column("id", Integer, primary_key=True), Column("nom", Text), Column("cle_recherche", Text),
@@ -38,4 +39,23 @@ ency_stuff = Table(
     Column("id", Text, primary_key=True), Column("nom", Text), Column("classe", Text), Column("niveau", Integer),
     Column("sexe", Text), Column("objets", JSONB), Column("dofus", ARRAY(Integer)), Column("tags", ARRAY(Text)),
     Column("caracs", JSONB), Column("maj_le", DateTime(timezone=True)),
+)  # fmt: skip
+ency_classe = Table("ency_classe", metadata, Column("id", Integer, primary_key=True), Column("nom", Text),
+                    Column("description", Text), Column("role", Text), Column("sorts", ARRAY(Integer)))
+ency_sort = Table(
+    "ency_sort", metadata,
+    Column("id", Integer, primary_key=True), Column("nom", Text), Column("cle_recherche", Text),
+    Column("description", Text), Column("icone", Integer), Column("type_id", Integer), Column("classe_id", Integer),
+    Column("niveau_min", Integer), Column("niveaux", JSONB), Column("recherche", TSVECTOR),
+)  # fmt: skip
+ency_pnj = Table("ency_pnj", metadata, Column("id", Integer, primary_key=True), Column("nom", Text),
+                 Column("cle_recherche", Text), Column("genre", Integer), Column("visible", Boolean),
+                 Column("recherche", TSVECTOR))
+ency_quete = Table(
+    "ency_quete", metadata,
+    Column("id", Integer, primary_key=True), Column("nom", Text), Column("cle_recherche", Text),
+    Column("categorie", Text), Column("zone", Text), Column("niveau_min", Integer), Column("niveau_max", Integer),
+    Column("repetition", Integer), Column("limite", Integer), Column("donjon", Boolean), Column("groupe", Boolean),
+    Column("evenement", Boolean), Column("condition", Text), Column("depart", JSONB),
+    Column("pnj_ids", ARRAY(Integer)), Column("etapes", JSONB), Column("recherche", TSVECTOR),
 )  # fmt: skip

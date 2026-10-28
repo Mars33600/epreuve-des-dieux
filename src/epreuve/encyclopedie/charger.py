@@ -6,6 +6,8 @@ site continue de servir l'ancienne copie ; une erreur laisse la base telle qu'el
 
 from __future__ import annotations
 
+import json
+from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -55,6 +57,74 @@ def _date(v: str | None) -> datetime | None:
         return None
 
 
+def _guide_quetes(dossier: Path) -> dict[str, dict]:
+    """Les quêtes du guide Duffus déjà importées (lot B), par titre sans accents : zone et catégorie.
+
+    Facultatif : sans ce fichier, les fiches n'ont simplement ni zone ni catégorie.
+    """
+    fichiers = sorted((dossier.parent).glob("20*/quest_list.json"))
+    if not fichiers:
+        return {}
+    guide: dict[str, dict] = {}
+    for q in json.loads(fichiers[-1].read_text(encoding="utf-8")):
+        cle = cle_recherche(q.get("title"))
+        if cle and cle not in guide:
+            guide[cle] = q
+    return guide
+
+
+def _sorts(dossier: Path) -> tuple[list[dict], list[dict]]:
+    classes = _lire(dossier, "classes")
+    classe_du_sort = {s: c["id"] for c in classes for s in c["sorts"]}
+    niveaux: dict[int, list[dict]] = defaultdict(list)
+    for n in _lire(dossier, "niveaux_sorts"):
+        niveaux[n["sort"]].append({k: v for k, v in n.items() if k not in ("id", "sort")})
+    sorts = []
+    for s in _lire(dossier, "sorts"):
+        if not s["nom"]:
+            continue
+        liste = sorted(niveaux.get(s["id"], []), key=lambda n: n["grade"] or 0)
+        sorts.append({"id": s["id"], "nom": s["nom"], "cle_recherche": cle_recherche(s["nom"]),
+                      "description": s["description"], "icone": s["icone"], "type_id": s["type"],
+                      "classe_id": classe_du_sort.get(s["id"]),
+                      "niveau_min": min((n["niveau"] for n in liste if n["niveau"] is not None), default=None),
+                      "niveaux": liste})
+    return ([{"id": c["id"], "nom": c["nom"] or f"Classe {c['id']}", "description": c["description"],
+              "role": c["role"], "sorts": c["sorts"]} for c in classes], sorts)
+
+
+def _quetes(dossier: Path) -> list[dict]:
+    guide = _guide_quetes(dossier)
+    objectifs: dict[int, list[dict]] = defaultdict(list)
+    for o in _lire(dossier, "objectifs_quetes"):
+        objectifs[o["etape"]].append(o)
+    recompenses: dict[int, list[dict]] = defaultdict(list)
+    for r in _lire(dossier, "recompenses_quetes"):
+        recompenses[r["etape"]].append({k: v for k, v in r.items() if k not in ("id", "etape")})
+    etapes: dict[int, dict] = {e["id"]: e for e in _lire(dossier, "etapes_quetes")}
+    sortie = []
+    for q in _lire(dossier, "quetes"):
+        if not q["nom"]:
+            continue
+        g = guide.get(cle_recherche(q["nom"]), {})
+        liste = []
+        for ident in q["etapes"]:
+            e = etapes.get(ident)
+            if e:
+                liste.append({"nom": e["nom"], "description": e["description"], "niveau": e["niveau"],
+                              "objectifs": [{k: v for k, v in o.items() if k not in ("id", "etape", "type")}
+                                            for o in objectifs[e["id"]]],
+                              "recompenses": recompenses.get(e["id"], [])})
+        sortie.append({
+            "id": q["id"], "nom": q["nom"], "cle_recherche": cle_recherche(q["nom"]),
+            "categorie": g.get("category") or None, "zone": g.get("zone") or None,
+            "niveau_min": q["niveau_min"], "niveau_max": q["niveau_max"], "repetition": q["repetition"],
+            "limite": q["limite"], "donjon": bool(q["donjon"]), "groupe": bool(q["groupe"]),
+            "evenement": bool(q["evenement"]), "condition": q["condition"], "depart": q["depart"],
+            "pnj_ids": sorted({d["pnj"] for d in q["depart"] if d.get("pnj")}), "etapes": liste})
+    return sortie
+
+
 def preparer(dossier: Path) -> dict[str, list[dict]]:
     """Lit les extraits et produit les lignes de chaque table (sans base : testable à part)."""
     types = _lire(dossier, "types")
@@ -65,8 +135,13 @@ def preparer(dossier: Path) -> dict[str, list[dict]]:
     lignes["ency_effet"] = [{"id": e["id"], "description": e["description"], "caracteristique": e["caracteristique"],
                              "categorie": e["categorie"], "priorite": e["priorite"], "element": e["element"]}
                             for e in _lire(dossier, "effets")]
-    lignes["ency_panoplie"] = [{"id": p["id"], "nom": p["nom"] or f"Panoplie {p['id']}", "objets": p["objets"],
-                                "bonus": p["bonus"]} for p in _lire(dossier, "panoplies")]
+    niveau_objet = {o["id"]: o["niveau"] for o in _lire(dossier, "objets")}
+    lignes["ency_panoplie"] = [
+        {"id": p["id"], "nom": p["nom"] or f"Panoplie {p['id']}", "objets": p["objets"], "bonus": p["bonus"],
+         "cle_recherche": cle_recherche(p["nom"]),
+         "niveau": max((niveau_objet.get(i) or 0 for i in p["objets"]), default=0) or None}
+        for p in _lire(dossier, "panoplies")
+    ]  # fmt: skip
     lignes["ency_objet"] = [
         {"id": o["id"], "nom": o["nom"], "cle_recherche": cle_recherche(o["nom"]), "type_id": o["type"],
          "famille": famille_type.get(o["type"], "autres"), "niveau": o["niveau"], "description": o["description"],
@@ -94,6 +169,11 @@ def preparer(dossier: Path) -> dict[str, list[dict]]:
          "caracs": {"base": s["caracs_base"], "parcho": s["caracs_parcho"]}, "maj_le": _date(s["maj_le"])}
         for s in _lire(dossier, "stuffs") if isinstance(s["niveau"], int) and 1 <= s["niveau"] <= 200
     ]  # fmt: skip
+    lignes["ency_classe"], lignes["ency_sort"] = _sorts(dossier)
+    lignes["ency_pnj"] = [{"id": p["id"], "nom": p["nom"], "cle_recherche": cle_recherche(p["nom"]),
+                           "genre": p["genre"], "visible": bool(p["visible"])}
+                          for p in _lire(dossier, "pnj") if p["nom"]]
+    lignes["ency_quete"] = _quetes(dossier)
     return lignes
 
 

@@ -117,3 +117,19 @@ def test_reductions():
     assert e.drops_compacts([{"objectId": 7, "percentDropForGrade1": 1.234, "percentDropForGrade5": 2,
                               "hasCriterions": 1}, {"dropId": 3}]) == [[7, 1.23, 2.0, 1]]
     assert e.grades_compacts([{"grade": 1, "level": 16, "lifePoints": 90, "inutile": 3}])[0]["pv"] == 90
+
+
+def test_nouvelles_tables_reduites_et_sans_donnees_utilisateur():
+    assert {"sorts", "niveaux_sorts", "classes", "pnj", "quetes", "etapes_quetes", "objectifs_quetes",
+            "recompenses_quetes"} <= set(e.TABLES)
+    # Seule la table `builder` (stuffs de l'auteur) est filtrée ; aucune table de compte ni de progression.
+    sources = {t.source for t in e.TABLES.values()}
+    assert not sources & {"user_quest", "profiles", "craft_plan", "craft_folders"}
+    quete = e.TABLES["quetes"]
+    sortie = e.valider(quete, [{"id": 1, "name": "Q", "type": 2, "level_min": 5, "level_max": 6,
+                                "is_event": 0, "step_ids_json": [9], "quest_json": {"gros": 1},
+                                "start_position_json": [{"mapId": 3, "npcId": 4}]}])[0]
+    assert sortie["depart"] == [{"carte": 3, "pnj": 4}] and sortie["etapes"] == [9] and "quest_json" not in sortie
+    obj = e.TABLES["objectifs_quetes"]
+    assert e.valider(obj, [{"id": 1, "step_id": 2, "type_class": "QuestObjectiveGoToNpcData", "parameter0": 7}]
+                     )[0]["classe"] == "GoToNpc"

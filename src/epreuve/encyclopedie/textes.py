@@ -164,5 +164,130 @@ def icone_objet(icone: int | None) -> str | None:
     return f"https://api.dofusdb.fr/img/items/{icone}.png" if icone else None
 
 
+def icone_sort(icone: int | None) -> str | None:
+    return f"https://api.dofusdb.fr/img/spells/{icone}.png" if icone is not None else None
+
+
 def image_monstre(ident: int | None) -> str | None:
     return f"https://api.dofusdb.fr/img/monsters/{ident}.png" if ident else None
+
+
+# --- Conditions d'objet et de quête ----------------------------------------------------------------------
+
+_ATOME = re.compile(r"([A-Za-z]{2})([=<>!])([^&|()]*)")
+_OPS = {"=": "égal à", "!": "différent de", "<": "inférieur à", ">": "supérieur à"}
+_CARACS = {"s": "Force", "i": "Intelligence", "v": "Vitalité", "a": "Agilité", "c": "Chance", "w": "Sagesse"}
+_AUTRES_CARACS = {"CP": "PA", "CM": "PM"}
+
+
+def ids_des_conditions(texte: str | None) -> dict[str, set[int]]:
+    """Les objets (`PO`) et les quêtes (`Qa`, `Qf`) cités par une condition, pour aller chercher leurs noms."""
+    ids: dict[str, set[int]] = {"objets": set(), "quetes": set()}
+    for code, _, valeur in _ATOME.findall(texte or ""):
+        if valeur.isdigit():
+            if code == "PO":
+                ids["objets"].add(int(valeur))
+            elif code in ("Qa", "Qf", "Qc"):
+                ids["quetes"].add(int(valeur))
+    return ids
+
+
+def _atome(code: str, op: str, valeur: str, objets: dict[int, str], quetes: dict[int, str]) -> str:
+    nombre = int(valeur) if valeur.isdigit() else None
+    nom_quete = f"« {quetes.get(nombre, f'n°{valeur}')} »" if code in ("Qa", "Qf", "Qc") else ""
+    egal, autre = op == "=", op == "!"
+    if code == "PL":
+        return f"Niveau {_OPS[op]} {valeur}"
+    if code[0] in "Cc" and code[1].lower() in _CARACS:
+        base = " de base" if code[0] == "c" else ""
+        return f"{_CARACS[code[1].lower()]}{base} {_OPS[op]} {valeur}"
+    if code in _AUTRES_CARACS:
+        return f"{_AUTRES_CARACS[code]} {_OPS[op]} {valeur}"
+    if code == "Qf" and (egal or autre):
+        return f"Quête {nom_quete} {'terminée' if egal else 'non terminée'}"
+    if code == "Qa" and (egal or autre):
+        return f"Quête {nom_quete} {'en cours' if egal else 'pas en cours'}"
+    if code == "Qc" and (egal or autre):
+        return f"Quête {nom_quete} {'terminable' if egal else 'non terminable'}"
+    if code == "Qo":
+        return f"Objectif de quête {_OPS[op]} n°{valeur}"
+    if code == "PO" and (egal or autre):
+        nom = objets.get(nombre, f"n°{valeur}") if nombre is not None else valeur
+        return f"{'Posséder' if egal else 'Ne pas posséder'} l'objet « {nom} »"
+    if code == "PE" and (egal or autre):
+        return f"{'Avoir' if egal else 'Ne pas avoir'} l'état n°{valeur}"
+    if code == "OA" and (egal or autre):
+        return f"{'Avoir' if egal else 'Ne pas avoir'} le succès n°{valeur}"
+    if code == "PZ" and valeur == "1" and egal:
+        return "Être abonné"
+    return f"{code} {_OPS[op]} {valeur}"
+
+
+def conditions_en_clair(texte: str | None, objets: dict[int, str] | None = None,
+                        quetes: dict[int, str] | None = None) -> str:
+    """« PL>99&(PB=609|PB=610) » → « Niveau supérieur à 99 et (PB égal à 609 ou PB égal à 610) ».
+
+    Les codes connus sont traduits (niveau, caractéristiques, quêtes, objets possédés…). Les autres restent
+    lisibles mais gardent leur code : mieux vaut un code honnête qu'une traduction inventée.
+    """
+    objets, quetes = objets or {}, quetes or {}
+    if not texte:
+        return ""
+    texte = _ATOME.sub(lambda m: "\x00" + _atome(m[1], m[2], m[3].strip(), objets, quetes) + "\x01", texte)
+    texte = texte.replace("&", " et ").replace("|", " ou ")
+    return " ".join(texte.replace("\x00", "").replace("\x01", "").split())
+
+
+# --- Quêtes -------------------------------------------------------------------------------------------------
+
+REPETITIONS = {0: "Non répétable", 1: "Répétable", 2: "Répétable chaque jour", 3: "Répétable chaque semaine",
+               4: "Répétable chaque mois"}
+
+
+def ids_des_objectifs(objectifs: Iterable[dict]) -> dict[str, set[int]]:
+    """PNJ, objets et monstres cités par des objectifs de quête."""
+    ids: dict[str, set[int]] = {"pnj": set(), "objets": set(), "monstres": set()}
+    for o in objectifs:
+        p = [x or 0 for x in o["p"]]
+        match o["classe"]:
+            case "GoToNpc":
+                ids["pnj"].add(p[0])
+            case "BringItemToNpc":
+                ids["pnj"].add(p[0])
+                ids["objets"].add(p[1])
+            case "BringSoulToNpc":
+                ids["monstres"].add(p[0])
+                ids["pnj"].add(p[1])
+            case "FightMonster" | "MultiFightMonster" | "FightMonstersOnMap":
+                ids["monstres"].add(p[0])
+            case "CraftItem":
+                ids["objets"].add(p[0])
+    return ids
+
+
+def objectif_en_clair(o: dict, pnj: dict[int, str], objets: dict[int, str], monstres: dict[int, str]) -> str:
+    """Le texte d'un objectif de quête. Les types inconnus gardent leur texte ou leur nom de type."""
+    p = [x or 0 for x in o["p"]]
+    n_pnj, n_obj, n_mon = (lambda i: pnj.get(i, f"PNJ n°{i}")), (lambda i: objets.get(i, f"objet n°{i}")), (
+        lambda i: monstres.get(i, f"monstre n°{i}"))
+    lieu = f" en [{o['x']}, {o['y']}]" if o.get("x") is not None and o.get("y") is not None else ""
+    match o["classe"]:
+        case "FreeForm":
+            return o["texte"] or "Objectif libre"
+        case "GoToNpc":
+            return f"Parler à {n_pnj(p[0])}"
+        case "BringItemToNpc":
+            return f"Apporter {p[2] or 1} × {n_obj(p[1])} à {n_pnj(p[0])}"
+        case "BringSoulToNpc":
+            return f"Apporter l'âme de {n_mon(p[0])} à {n_pnj(p[1])}"
+        case "DiscoverMap":
+            return f"Découvrir la carte n°{p[0]}"
+        case "DiscoverSubArea":
+            return f"Découvrir la sous-zone n°{p[0]}"
+        case "FightMonster" | "MultiFightMonster":
+            return f"Vaincre {p[1] or 1} × {n_mon(p[0])}{lieu}"
+        case "FightMonstersOnMap":
+            return f"Vaincre {p[1] or 1} × {n_mon(p[0])} sur la carte n°{p[2]}"
+        case "CraftItem":
+            return f"Fabriquer {p[1] or 1} × {n_obj(p[0])}"
+    return o["texte"] or o["classe"] or "Objectif"

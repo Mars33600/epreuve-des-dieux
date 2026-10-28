@@ -66,3 +66,26 @@ def test_images_chez_dofusdb_jamais_chez_duffus():
     assert icone_objet(6007) == "https://api.dofusdb.fr/img/items/6007.png"
     assert image_monstre(31) == "https://api.dofusdb.fr/img/monsters/31.png"
     assert icone_objet(None) is None
+
+
+def test_conditions_en_clair():
+    from epreuve.encyclopedie.textes import conditions_en_clair, ids_des_conditions
+
+    brut = "PL>99&(Qf=5|PO!7)&cs<25&Qo=3&PB=609"
+    assert ids_des_conditions(brut) == {"objets": {7}, "quetes": {5}}
+    lu = conditions_en_clair(brut, {7: "Clef"}, {5: "Le début"})
+    assert lu == ("Niveau supérieur à 99 et (Quête « Le début » terminée ou Ne pas posséder l'objet « Clef ») "
+                  "et Force de base inférieur à 25 et Objectif de quête égal à n°3 et PB égal à 609")
+    assert conditions_en_clair(None) == "" and "n°9" in conditions_en_clair("PO=9")
+
+
+def test_objectifs_en_clair():
+    from epreuve.encyclopedie.textes import ids_des_objectifs, objectif_en_clair
+
+    o = {"classe": "BringItemToNpc", "p": [7, 8, 3], "texte": None, "x": None, "y": None}
+    assert ids_des_objectifs([o]) == {"pnj": {7}, "objets": {8}, "monstres": set()}
+    assert objectif_en_clair(o, {7: "Bob"}, {}, {}) == "Apporter 3 × objet n°8 à Bob"
+    libre = {"classe": "FreeForm", "p": [0, 0, 0], "texte": "Escorter Bob", "x": None, "y": None}
+    assert objectif_en_clair(libre, {}, {}, {}) == "Escorter Bob"
+    inconnu = {"classe": "Nouveau", "p": [1, 0, 0], "texte": None, "x": None, "y": None}
+    assert objectif_en_clair(inconnu, {}, {}, {}) == "Nouveau"
