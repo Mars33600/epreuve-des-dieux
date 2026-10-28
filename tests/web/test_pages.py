@@ -1,0 +1,504 @@
+"""Les pages, pour chaque profil : critères 3 à 5, 8 à 11 bis, 15, 16, 19 à 21 et 34 du lot B.
+
+Profils : visiteur, membre sans fiche, grimpeur, gelé, exclu (voir test_auth), admin sans fiche.
+"""
+
+from __future__ import annotations
+
+import re
+from dataclasses import replace
+from fractions import Fraction
+
+import pytest
+
+from epreuve.domaine.modeles import Regles
+from epreuve.web import pages
+from epreuve.web.demo import ID_HORS_LISTE, ID_MARCEAU, ID_NOUVELLE, DepotDemo
+from tests.web.outils import ID_BRINDILLE, ID_OMBREVIVE, SITE, monde, routes_declarees
+
+PAGES_GRIMPEUR = ["/", "/etages/0", "/etages/0/quetes/101", "/etages/0/quetes/104", "/etages/0/quetes/109",
+                  "/grimpeurs", "/grimpeurs?quoi=categorie:donjons", "/grimpeurs/1", "/grimpeurs/3", "/regles"]
+# Ce que les grimpeurs ne doivent jamais voir : les étages scellés 1 à 3, leur contenu, leurs ids.
+SCELLES = ["Les Champs Murmurants", "La Forêt des Abraknydes", "Le Vallon Interdit", "Repaire des Murmures",
+           "Le Secret des Champs Murmurants", "/etages/1", "/etages/2", "/etages/3", "quetes/201", "case:41"]
+
+
+def pages_de(c, chemins=PAGES_GRIMPEUR):
+    for chemin in chemins:
+        r = c.get(chemin)
+        assert r.status_code == 200, (chemin, r.status_code)
+        yield chemin, r.text
+
+
+# ---------------------------------------------------------------- profils
+
+
+def test_visiteur_voit_l_accueil_et_rien_d_autre():
+    c = monde().client()
+    assert 'href="/connexion"' in c.get("/").text
+    for chemin in PAGES_GRIMPEUR[1:] + ["/admin", "/inscription"]:
+        r = c.get(chemin)
+        assert r.status_code == 303 and r.headers["location"] == "/", chemin
+
+
+def test_membre_sans_fiche_renvoye_vers_sa_fiche():
+    c = monde().connecter(ID_NOUVELLE)
+    for chemin in PAGES_GRIMPEUR:
+        r = c.get(chemin)
+        assert r.status_code == 303 and r.headers["location"] == "/inscription", chemin
+
+
+def test_grimpeur_voit_toutes_ses_pages():
+    c = monde().connecter(ID_BRINDILLE)
+    for chemin, html in pages_de(c):
+        assert "Brindille" in html, chemin
+        assert 'href="/admin"' not in html
+
+
+def test_grimpeur_gele_voit_et_peut_cocher():
+    c = monde().connecter(ID_OMBREVIVE)
+    html = c.get("/etages/0").text
+    assert "Tu es en pause" in html
+    assert re.search(r'data-ref="quete:105"(?: checked)?>', html)  # case active (pas disabled)
+
+
+def test_admin_sans_fiche_consulte_tout_en_lecture_seule():
+    c = monde().connecter(ID_MARCEAU)
+    for chemin, html in pages_de(c):
+        assert 'href="/admin"' in html, chemin
+    html = c.get("/etages/0").text
+    assert "Lecture seule" in html and 'id="maProgression"' not in html
+    assert all("disabled" in m for m in re.findall(r'data-ref="[^"]+"[^>]*>', html))
+
+
+# ---------------------------------------------------------------- inscription (critères 3, 4, 5)
+
+
+def inscrire(m, c, **champs):
+    return c.post("/inscription", data={"csrf": m.csrf(c, "/inscription"), **champs}, headers={"Origin": SITE})
+
+
+def test_inscription_cree_la_fiche_au_statut_de_la_liste():
+    m = monde()
+    m.depot._liste[ID_NOUVELLE] = "pause"
+    c = m.connecter(ID_NOUVELLE)
+    r = inscrire(m, c, pseudo="  Nouvelle  Lune ", classe="", niveau="")
+    assert r.status_code == 303 and r.headers["location"] == "/"
+    g = m.depot._grimpeurs[14]
+    assert (g.pseudo, g.classe, g.niveau_declare, g.statut) == ("Nouvelle Lune", None, None, "pause")
+    assert g.nom_discord == "Nouvelle"
+    assert c.get("/inscription").headers["location"] == "/"  # déjà inscrite
+
+
+@pytest.mark.parametrize(("champs", "statut", "message"), [
+    ({"pseudo": "brindille"}, 409, "déjà pris"),
+    ({"pseudo": "BRINDILLE"}, 409, "déjà pris"),
+    ({"pseudo": "X"}, 422, "entre 2 et 30"),
+    ({"pseudo": "x" * 31}, 422, "entre 2 et 30"),
+    ({"pseudo": "Lune", "classe": "Paladin"}, 422, "Classe inconnue"),
+    ({"pseudo": "Lune", "niveau": "201"}, 422, "de 1 à 200"),
+    ({"pseudo": "Lune", "niveau": "abc"}, 422, "de 1 à 200"),
+])
+def test_inscription_refusee(champs, statut, message):
+    m = monde()
+    c = m.connecter(ID_NOUVELLE)
+    r = inscrire(m, c, **champs)
+    assert r.status_code == statut and message in r.text
+    assert len(m.depot._grimpeurs) == 13
+
+
+def test_inscription_avec_classe_et_niveau():
+    m = monde()
+    c = m.connecter(ID_NOUVELLE)
+    inscrire(m, c, pseudo="Lune", classe="Huppermage", niveau="12")
+    assert (m.depot._grimpeurs[14].classe, m.depot._grimpeurs[14].niveau_declare) == ("Huppermage", 12)
+
+
+def test_classe_obligatoire_si_le_reglage_le_demande():
+    m = monde(regles=Regles(classe_obligatoire=True))
+    c = m.connecter(ID_NOUVELLE)
+    assert inscrire(m, c, pseudo="Lune").status_code == 422
+
+
+def test_hors_liste_ne_peut_pas_creer_de_fiche():
+    m = monde()
+    c = m.connecter(ID_HORS_LISTE)
+    html = c.get("/inscription").text
+    assert "Envoie ta validation en MP à Shadoaze" in html
+    r = c.post("/inscription", data={"csrf": m.csrf(c, "/inscription"), "pseudo": "Passant"}, headers={"Origin": SITE})
+    assert r.status_code == 403 and len(m.depot._grimpeurs) == 13
+
+
+def test_modifier_sa_fiche():
+    m = monde()
+    c = m.connecter(ID_BRINDILLE)
+    t = m.csrf(c)
+    r = c.post("/grimpeurs/moi", data={"csrf": t, "pseudo": "Brindille", "classe": "Iop", "niveau": "21"},
+               headers={"Origin": SITE})
+    assert r.headers["location"] == "/grimpeurs/1?fait=1"
+    assert m.depot._grimpeurs[1].classe == "Iop"
+    r = c.post("/grimpeurs/moi", data={"csrf": t, "pseudo": "kaskarot"}, headers={"Origin": SITE})
+    assert r.headers["location"] == "/grimpeurs/1?erreur=pris"
+    assert "déjà pris" in c.get(r.headers["location"]).text
+
+
+# ---------------------------------------------------------------- tour et brouillard (critère 8)
+
+
+def test_tour_seulement_les_etages_visibles_et_6_scelles_decoratifs():
+    html = monde().connecter(ID_BRINDILLE).get("/").text
+    tour = html.split('class="tower"')[1].split("</aside>")[0]
+    assert tour.count('class="floor sealed') == 6 and tour.count('aria-label="Étage scellé"') == 6
+    assert "Étage 0" in tour and "Étage 1" not in tour and "prêt" not in tour
+
+
+def test_tour_etage_suivant_pret_si_la_jauge_est_pleine():
+    m = monde()
+    m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)
+    tour = m.connecter(ID_BRINDILLE).get("/").text.split('class="tower"')[1].split("</aside>")[0]
+    assert "<b>Étage 1</b><span>· prêt</span>" in tour and tour.count('class="floor sealed') == 5
+    assert "Champs Murmurants" not in tour
+
+
+def test_etage_pret_meme_si_le_suivant_n_existe_pas():
+    m = monde()
+    for i in (2, 3, 4):
+        del m.depot._etages[i]
+    m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)
+    assert "<b>Étage 1</b><span>· prêt</span>" in m.connecter(ID_BRINDILLE).get("/").text
+
+
+def test_brouillard_aucune_trace_d_un_scelle():
+    c = monde().connecter(ID_BRINDILLE)
+    for chemin, html in pages_de(c):
+        for trace in SCELLES:
+            assert trace not in html, (chemin, trace)
+    for chemin in ("/etages/1", "/etages/3", "/etages/1/quetes/201", "/etages/0/quetes/201", "/etages/42"):
+        assert c.get(chemin).status_code == 404, chemin
+    # Un scellé répond exactement comme un étage qui n'existe pas.
+    assert c.get("/etages/1").text == c.get("/etages/42").text
+
+
+def test_admin_voit_un_etage_scelle():
+    c = monde().connecter(ID_MARCEAU)
+    html = c.get("/etages/1").text
+    assert "Les Champs Murmurants" in html and "scellé (vue admin)" in html
+
+
+# ---------------------------------------------------------------- l'étage (critères 9 à 11, 15, 16)
+
+
+def test_liste_dans_l_ordre_du_guide_avec_badges():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
+    liste = html.split('id="liste"')[1]
+    ordre = [liste.index(n) for n in ("Donjon des Champs", "<h3>Incarnam</h3>", "Crypte de Kardorim",
+                                      "L&#39;Appel d&#39;Incarnam", "Le Bouftou égaré", "<h3>Astrub</h3>",
+                                      "La Graine de Mère Cawotte", "Donjon des Bouftous", "Le Vieux Puits")]
+    assert ordre == sorted(ordre)
+    # Badges lisibles sans la couleur : texte et icône.
+    assert liste.count('<span class="badge princ"><svg') == 4 and liste.count(">Principale</span>") == 4
+    assert liste.count('<span class="badge second"><svg') == 5 and liste.count(">Secondaire</span>") == 5
+    assert "Jusqu'où : S&#39;arrêter à l&#39;étape 3" in liste
+
+
+def test_donjon_cinq_sous_cases_classique_en_premier():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
+    bloc = html.split('data-donjon="2"')[1].split("</details>")[0]
+    refs = re.findall(r'data-ref="case:(\d+)"', bloc)
+    assert refs == ["21", "22", "23", "24", "25"]
+    assert bloc.index("Vaincre le boss") < bloc.index("Duo")
+    assert 'data-donjon-tout="2"' in bloc
+    assert '<span class="badge donjon on"' in bloc and '<span class="badge succes on"' in bloc
+
+
+def test_filtre_cumulatif_present_avec_les_4_categories_et_le_reste():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
+    filtre = html.split('id="filtre"')[1].split("</fieldset>")[0]
+    assert re.findall(r'value="(\w+)" checked', filtre) == ["donjons", "full_succes", "principales", "secondaires"]
+    assert "Seulement ce qui me reste" in filtre
+    # Chaque ligne porte ses catégories : le filtre (app.js) n'a qu'à les comparer.
+    assert html.count('data-cats="donjons full_succes"') == 3
+    assert html.count('data-cats="principales"') == 4 and html.count('data-cats="secondaires"') == 5
+
+
+def test_jauge_de_reference_calculee_a_la_main():
+    """Critère 15 : 10 actifs, 2 en pause, 4 catégories → palier 20 ; points comptés à la main sur demo.BRUT.
+
+    Donjons (3 cases classiques) : tous sauf Pépin, Fleur et Torvald… non : les 1res cases → 8 actifs ont les 3.
+    Full succès : Brindille non (13/15), Mirelune, Sélénith, Nalouette → 3. Principales (4/4) : Brindille, Kaskarot,
+    Sélénith, Cliquetis → 4. Secondaires (5/5) : Pépin, Sélénith, Gromolo, Cliquetis → 4. Score 8+3+4+4 = 19.
+    """
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
+    assert "Score 19 sur un palier de 20, il en manque 1. 10 grimpeurs actifs, 2 en pause." in html
+    assert "Palier = 2 × 10 grimpeurs actifs" in html
+    assert re.findall(r'data-jcat="(\w+)">(\d+)<', html) == [("donjons", "8"), ("full_succes", "3"),
+                                                             ("principales", "4"), ("secondaires", "4")]
+    encoches = html.split('id="encoches"')[1].split("</div>")[0]
+    assert encoches.count("<i ") == 20 and encoches.count('class="vide"') == 1
+    assert encoches.count('class="c-donjons"') == 8
+    assert "Maximum possible : <span class=\"num\">40</span>" in html
+
+
+def test_formule_du_palier_suit_les_regles():
+    """Critère 16 : changer points_par_joueur ou une catégorie vide change le calcul et le texte, sans code."""
+    m = monde(regles=Regles(points_par_joueur=Fraction(5, 2)))
+    html = m.connecter(ID_BRINDILLE).get("/etages/0").text
+    assert "Palier = 5/2 × 10 grimpeurs actifs" in html and "sur un palier de 25" in html
+    m = monde()
+    for q in list(m.depot._quetes.values()):
+        if q.nature == "secondaire":
+            m.depot._quetes[q.id] = replace(q, masquee=True)
+    html = m.connecter(ID_BRINDILLE).get("/etages/0").text
+    assert "× 3 catégories sur 4, arrondi au-dessus" in html and "sur un palier de 15" in html
+
+
+def test_palier_manuel_annonce():
+    m = monde()
+    m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=7)
+    html = m.connecter(ID_BRINDILLE).get("/etages/0").text
+    assert "Palier fixé par un admin" in html and "Jauge pleine : un admin va vérifier" in html
+
+
+def test_verdict_avec_la_date_plancher():
+    m = monde(maintenant=pages_horloge_avant_plancher())
+    html = m.connecter(ID_BRINDILLE).get("/etages/0").text
+    assert "et pas avant le vendredi 13 novembre à 17 h" in html
+
+
+def pages_horloge_avant_plancher():
+    from tests.web.outils import AVANT_OUVERTURE
+    return AVANT_OUVERTURE
+
+
+def test_ma_progression():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
+    prog = html.split('id="maProgression"')[1].split("</section>")[0]
+    assert '<span data-moi="points">2</span>' in prog
+    assert re.findall(r'data-moi-cat="(\w+)">([^<]+)<', prog) == [
+        ("donjons", "3/3 ✓"), ("full_succes", "13/15"), ("principales", "4/4 ✓"), ("secondaires", "2/5")]
+    assert 'aria-label="Donjons : point obtenu"' in prog and 'aria-label="Full succès : 13 sur 15"' in prog
+
+
+# ---------------------------------------------------------------- fiche de quête (critère 11 bis)
+
+
+def test_fiche_de_quete_page_complete_et_fragment():
+    c = monde().connecter(ID_BRINDILLE)
+    page = c.get("/etages/0/quetes/102").text
+    frag = c.get("/etages/0/quetes/102", headers={"Accept": "text/html-fragment"}).text
+    assert "<!doctype html>" in page and "Merci Duffus" in page and "<!doctype" not in frag
+    for html in (page, frag):
+        assert 'id="qdTitle"' in html and "La Graine de Mère Cawotte" in html
+        for bloc in ("Jusqu'où la faire", "Prérequis", "Étapes", "Ce dont tu as besoin", "Positions",
+                     "Succès lié", "Récompenses", "Qui ne l'a pas encore faite ?"):
+            assert bloc in html, bloc
+        assert 'href="/etages/0/quetes/101"' in html  # prérequis d'un étage ouvert : un lien vers sa fiche
+        assert "[5,-17]" in html and 'data-copier="/travel 5,-17"' in html
+        assert 'data-ref="quete:102"' in html  # la même case que la liste
+    assert "← Retour à la liste" in page and 'href="/etages/0">← Retour' in page
+
+
+def test_fiche_complete_parite_des_champs():
+    """Chaque champ non vide de la FicheQuete apparaît dans la page (parité, sur les fiches de démonstration)."""
+    m = monde()
+    c = m.connecter(ID_MARCEAU)
+    for qid, f in m.depot._fiches.items():
+        if m.depot._quetes[qid].etage_id != 1:
+            continue
+        html = c.get(f"/etages/0/quetes/{qid}", headers={"Accept": "text/html-fragment"}).text
+        valeurs = [f.jusqu_ou, f.a_lier, f.succes_lie, *f.recompenses, *(e.titre for e in f.etapes),
+                   *(o for e in f.etapes for o in e.objectifs), *(b.nom for b in f.objets + f.monstres),
+                   *(p.libelle for p in f.positions), *(p.nom for p in f.prerequis if p.nom)]
+        for v in filter(None, valeurs):
+            assert v.replace("'", "&#39;").replace("«", "«") in html, (qid, v)
+
+
+def test_prerequis_scelle_sans_nom_ni_id():
+    c = monde().connecter(ID_BRINDILLE)
+    for accept in ("text/html", "text/html-fragment"):
+        html = c.get("/etages/0/quetes/104", headers={"Accept": accept}).text
+        assert "Prérequis d'un étage pas encore ouvert" in html
+        assert "Secret des Champs" not in html and "201" not in html
+
+
+def test_prerequis_hors_guide_en_texte():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0/quetes/101").text
+    assert "Tutoriel d&#39;Incarnam" in html and "hors du guide" in html
+
+
+def test_masquer_prerequis_scelles_appelee_sur_chaque_chemin(monkeypatch):
+    appels = []
+    vraie = pages.masquer_prerequis_scelles
+
+    def espion(*a, **k):
+        appels.append(1)
+        return vraie(*a, **k)
+
+    monkeypatch.setattr(pages, "masquer_prerequis_scelles", espion)
+    c = monde().connecter(ID_BRINDILLE)
+    c.get("/etages/0/quetes/104")
+    c.get("/etages/0/quetes/104", headers={"Accept": "text/html-fragment"})
+    assert len(appels) == 2
+
+
+def test_admin_voit_le_nom_du_prerequis_scelle():
+    html = monde().connecter(ID_MARCEAU).get("/etages/0/quetes/104").text
+    assert "Le Secret des Champs Murmurants" in html
+
+
+def test_quete_sans_fiche_duffus():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0/quetes/109").text
+    assert "Fiche détaillée indisponible" in html and "1 000 XP" in html
+
+
+def test_fiche_completee_avec_dofusdb_et_icone():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0/quetes/103").text
+    assert "Fiche complétée avec DofusDB." in html
+    assert '<img src="https://api.dofusdb.fr/img/monsters/31.png"' in html
+
+
+def test_fiche_sans_duffus_script_style_ni_on():
+    m = monde()
+    c = m.connecter(ID_BRINDILLE)
+    for qid in (101, 102, 103, 104, 105, 106, 107, 108, 109):
+        frag = c.get(f"/etages/0/quetes/{qid}", headers={"Accept": "text/html-fragment"}).text
+        assert "duffus.fr" not in frag and "<script" not in frag and "<style" not in frag
+        assert not re.search(r"\son\w+\s*=", frag), qid
+        assert not re.search(r'<img[^>]+src="(?!https://api\.dofusdb\.fr/)', frag)
+    # Le seul lien vers duffus.fr du site est celui du pied de page.
+    page = c.get("/etages/0/quetes/101").text
+    assert page.count("duffus.fr") == 1 and '<a href="https://duffus.fr" rel="noopener">Merci Duffus</a>' in page
+
+
+def test_quete_masquee_ou_d_un_autre_etage_404():
+    m = monde()
+    m.depot._quetes[107] = replace(m.depot._quetes[107], masquee=True)
+    c = m.connecter(ID_BRINDILLE)
+    assert c.get("/etages/0/quetes/107").status_code == 404
+    assert c.get("/etages/0/quetes/999").status_code == 404
+
+
+# ---------------------------------------------------------------- grimpeurs et fiches (critères 19 à 21)
+
+
+def test_liste_des_grimpeurs_jamais_par_score():
+    html = monde().connecter(ID_BRINDILLE).get("/grimpeurs").text
+    pseudos = re.findall(r'<div class="ptop"><strong>([^<]+)</strong>', html)
+    actifs = ["Brindille", "Cliquetis", "Fleur-de-Bwork", "Gromolo", "Kaskarot", "Mirelune", "Nalouette",
+              "Pépin-Lagrume", "Sélénith", "Torvald"]
+    assert pseudos == actifs + ["Ombrevive", "Vieux-Grain"]
+    assert "Fourbe" not in html
+
+
+def test_admin_voit_les_exclus():
+    html = monde().connecter(ID_MARCEAU).get("/grimpeurs").text
+    assert "Fourbe" in html and "Exclu" in html
+
+
+def test_nom_discord_selon_le_reglage():
+    assert "brindille#discord" in monde().connecter(ID_BRINDILLE).get("/grimpeurs").text
+    m = monde(regles=Regles(afficher_nom_discord=False))
+    c = m.connecter(ID_BRINDILLE)
+    for chemin in ("/grimpeurs", "/grimpeurs/1"):
+        assert "#discord" not in c.get(chemin).text
+
+
+def test_filtre_par_element_sans_javascript():
+    c = monde().connecter(ID_BRINDILLE)
+    html = c.get("/grimpeurs?quoi=quete:101").text
+    rep = html.split('id="answer"')[1].split("</form>")[0]
+    assert "Pas encore fait <small>5 sur 10 · la quête « L&#39;Appel d&#39;Incarnam »" in rep
+    assert "Déjà fait, ils peuvent accompagner" in rep
+    assert html.count("player target") == 5 and len(re.findall(r"class=\"player[^\"]* dim\"", html)) == 5
+    rep = c.get("/grimpeurs?quoi=donjon:3").text.split('id="answer"')[1]
+    assert "vaincre Donjon des Bouftous" in rep
+    rep = c.get("/grimpeurs?quoi=categorie:principales").text.split('id="answer"')[1]
+    assert "Pas encore fait <small>6 sur 10 · le point Quêtes principales" in rep
+
+
+def test_lien_qui_manque_de_chaque_tuile():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
+    for cat in ("donjons", "full_succes", "principales", "secondaires"):
+        assert f'href="/grimpeurs?quoi=categorie:{cat}">Qui manque&nbsp;?</a>' in html
+
+
+def test_fiche_d_un_grimpeur():
+    html = monde().connecter(ID_BRINDILLE).get("/grimpeurs/3").text
+    assert "Mirelune" in html and "Étage 0 · Le Seuil" in html and "Succès de donjon" in html
+    assert "Avancement global" in html and "17/24" in html  # 15 cases + 2 principales sur 24 éléments
+    assert "/4 points · 17/24 (70 %)" in html
+    assert all("disabled" in m for m in re.findall(r'data-ref="[^"]+"[^>]*>', html))  # pas la sienne
+
+
+def test_fiche_exclu_introuvable_pour_un_grimpeur():
+    c = monde().connecter(ID_BRINDILLE)
+    assert c.get("/grimpeurs/13").status_code == 404
+    assert c.get("/grimpeurs/999").status_code == 404
+
+
+def test_mode_edition_reserve_a_l_admin():
+    m = monde()
+    assert "data-cible" not in m.connecter(ID_BRINDILLE).get("/grimpeurs/3?edition=1").text
+    html = m.connecter(ID_MARCEAU).get("/grimpeurs/3?edition=1").text
+    assert 'data-cible="3"' in html and 'id="motif"' in html
+    assert not any("disabled" in x for x in re.findall(r'data-ref="[^"]+"[^>]*>', html))
+
+
+# ---------------------------------------------------------------- règles
+
+
+def test_page_des_regles_lit_la_configuration():
+    html = monde(regles=Regles(points_par_joueur=Fraction(5, 2))).connecter(ID_BRINDILLE).get("/regles").text
+    assert "<b>5/2 × le nombre de grimpeurs actifs</b>" in html
+    assert "le cap est le niveau <b class=\"num\">20</b>" in html
+    for theme in ("tranche", "4 points au maximum", "sans capture d'écran", "sans power-leveling",
+                  "un admin vérifie et ouvre", "mettre en pause", "réintègre"):
+        assert theme in html, theme
+    assert "bonus" not in html.lower()
+    assert "point est offert" in monde(regles=Regles(categorie_vide="offerte")).connecter(ID_BRINDILLE).get(
+        "/regles").text
+
+
+# ---------------------------------------------------------------- transverse (critère 34)
+
+
+def _exemple(chemin: str) -> str:
+    return (chemin.replace("{numero}", "0").replace("{quete_id}", "101").replace("{grimpeur_id}", "1"))
+
+
+def test_pied_de_page_sur_chaque_route_get():
+    m = monde()
+    c = m.connecter(ID_MARCEAU)
+    vues = 0
+    for route in routes_declarees(m.app):
+        if "GET" not in getattr(route, "methods", set()) or route.path.startswith(("/api", "/auth", "/connexion",
+                                                                                     "/sante")):
+            continue
+        r = c.get(_exemple(route.path))
+        if r.status_code == 303:
+            continue  # /inscription pour un admin déjà connecté sans être sur la liste : redirection
+        assert "Projet de fans" in r.text and '<a href="https://duffus.fr" rel="noopener">Merci Duffus</a>' in r.text, \
+            route.path
+        vues += 1
+    assert vues >= 12
+    for chemin in ("/etages/42", "/inconnue"):  # les pages d'erreur aussi
+        assert "Merci Duffus" in c.get(chemin).text
+
+
+def test_aucun_script_ni_style_en_ligne():
+    c = monde().connecter(ID_MARCEAU)
+    for chemin in PAGES_GRIMPEUR + ["/admin", "/admin/grimpeurs", "/admin/etages/0", "/admin/journal"]:
+        html = c.get(chemin).text
+        assert not re.search(r"<script(?![^>]*\bsrc=\"/static/)", html), chemin
+        assert "<style" not in html and not re.search(r'\sstyle="', html), chemin
+        assert not re.search(r"\son[a-z]+\s*=", html), chemin
+
+
+def test_base_vide_et_aucun_etage_ouvert():
+    d = DepotDemo()
+    d._etages = {k: replace(e, statut="scelle") for k, e in d._etages.items()}
+    m = monde(depot=d)
+    c = m.connecter(ID_MARCEAU)
+    assert "La tour se prépare" in c.get("/").text
+    assert c.get("/grimpeurs").status_code == 200 and c.get("/regles").status_code == 200
+    assert "Aucun étage ouvert" in c.get("/grimpeurs/1").text

@@ -79,7 +79,8 @@ def test_jauge_et_points_mis_a_jour():
         d = cocher(c, t, type="quete", id=q, cochee=True).json()
     assert d["moi"]["points"] == 2 and d["moi"]["categories"]["principales"]["acquise"] is True
     assert d["jauge"]["score"] == avant["jauge"]["score"] + 1
-    assert d["jauge"]["points_par_categorie"]["principales"] == avant["jauge"]["points_par_categorie"]["principales"] + 1
+    ppc, ppc_avant = d["jauge"]["points_par_categorie"], avant["jauge"]["points_par_categorie"]
+    assert ppc["principales"] == ppc_avant["principales"] + 1
 
 
 def test_grimpeur_en_pause_coche_sans_compter():

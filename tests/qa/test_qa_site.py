@@ -1,215 +1,170 @@
-"""QA, le site : cohérence des chiffres de /api/etat, échappement d'un pseudo piégé, base vide.
+"""Tests adverses du site (lot B) : XSS, CSRF, Origin, identifiants Discord, base vide, étage sans grimpeur.
 
-La cohérence est vérifiée en recalculant P, S, M à la main à partir des CARTES renvoyées par l'API
-(et non avec les fonctions du domaine), sur des registres tirés au hasard.
+Critères 35 à 37, et l'esprit des tests adverses de la v3, réécrits pour le nouveau modèle.
 """
 
-# ruff: noqa: E402
+from __future__ import annotations
+
+import html as html_mod
+import re
+from dataclasses import replace
+from pathlib import Path
+
 import pytest
 
-# La page v3 (index.html, /api/etat) n'est plus routée depuis le lot A, et creer_app a changé de forme.
-# Ces tests seront réécrits au lot B sur le nouveau modèle (docs/LOTS.md, inventaire) ; leurs idées restent ici.
-pytest.skip("page v3 retirée au lot A, tests réécrits au lot B", allow_module_level=True)
+from epreuve.web.demo import ID_MARCEAU, DepotDemo
+from tests.web.outils import (
+    ID_BRINDILLE,
+    IDS_DISCORD_FABRIQUE,
+    SITE,
+    cocher,
+    monde,
+    routes_declarees,
+)
 
-from datetime import timedelta
-from zoneinfo import ZoneInfo
-
-import httpx
-from fastapi.testclient import TestClient
-from hypothesis import given, settings
-from hypothesis import strategies as st
-
-from epreuve.domaine.modeles import EntreeJournal, Grimpeur, Instantane
-from epreuve.web.app import construire_etat, creer_app
-from epreuve.web.demo import creer_app_demo
-from tests.fabrique import AVANT, CONTENUS, ETAGE0, PALIERS, PENDANT, validation
-
-PARIS = ZoneInfo("Europe/Paris")
 XSS = "<img src=x onerror=alert(1)>"
-XSS2 = "</script><script>alert(2)</script>"
+APP_JS = Path(__file__).resolve().parents[2] / "src/epreuve/web/static/app.js"
+PAGES = ["/", "/etages/0", "/etages/0/quetes/101", "/grimpeurs", "/grimpeurs?quoi=quete:101", "/grimpeurs/2",
+         "/regles"]
 
 
-class Source:
-    def __init__(self, inst):
-        self.inst = inst
-
-    async def charger_instantane(self):
-        return self.inst
-
-    async def ping(self):
-        return True
+def piege():
+    """Un pseudo et un libellé de quête piégés."""
+    m = monde()
+    m.depot._grimpeurs[2] = replace(m.depot._grimpeurs[2], pseudo=XSS, nom_discord=XSS)
+    m.depot._quetes[101] = replace(m.depot._quetes[101], nom=f"Quête {XSS}", jusqu_ou=XSS)
+    return m
 
 
-def inst(grimpeurs, validations=(), journal=(), etages=(ETAGE0,)):
-    return Instantane(tuple(etages), PALIERS, CONTENUS, tuple(grimpeurs), tuple(validations), tuple(journal))
+@pytest.mark.parametrize("profil", [ID_BRINDILLE, ID_MARCEAU])
+def test_xss_par_pseudo_et_libelle_affiches_en_texte(profil):
+    m = piege()
+    c = m.connecter(profil)
+    chemins = PAGES + (["/admin/grimpeurs", "/admin/etages/0", "/admin/journal"] if profil == ID_MARCEAU else [])
+    for chemin in chemins:
+        page = c.get(chemin).text
+        assert XSS not in page, chemin
+        assert "onerror=alert" not in page.replace(html_mod.escape(XSS), ""), chemin
+    assert html_mod.escape(XSS) in c.get("/grimpeurs").text
 
 
-def gr(id_, pseudo, statut="actif", diff="easy", retard=False, niveau=20):
-    return Grimpeur(id_, pseudo, "Iop", diff, statut, niveau, PENDANT if retard else AVANT, None if retard else AVANT)
+def test_xss_dans_le_json_reste_une_donnee():
+    m = piege()
+    c = m.connecter(ID_BRINDILLE)
+    d = c.get("/api/etages/0/manque?type=quete&id=105").json()
+    assert XSS in [g["pseudo"] for g in d["pas_fait"]]  # la donnée brute, que app.js affiche avec textContent
+    assert c.get("/api/etages/0/manque?type=quete&id=105").headers["content-type"].startswith("application/json")
 
 
-# --- Démo : les chiffres attendus, calculés à la main depuis demo.py -----------------------------
+def test_app_js_n_insere_jamais_de_donnee_en_html():
+    js = APP_JS.read_text()
+    # Le seul innerHTML est celui de la fiche de quête, rendue et échappée par le serveur.
+    assert js.count("innerHTML =") == 1 and "t.innerHTML = await r.text()" in js
+    assert "insertAdjacentHTML" not in js and "outerHTML" not in js and "document.write" not in js
+    assert "eval(" not in js and "new Function" not in js
+    assert re.search(r"s\.textContent = g\.pseudo", js)
 
 
-def test_demo_chiffres_calcules_a_la_main():
-    """10 comptés (4 Aventuriers, 3 Éclaireurs, 3 Collectionneurs) → M = 4 + 6 + 9 = 19, S = ⌈14,25⌉ = 15.
-    Points : Brindille 3, Sélénith 2, Mirelune 2, Nalouette 2 (Aventurier au-dessus), Kaskarot, Gromolo,
-    Torvald 1, Cliquetis 1 (quêtes sans full succès), Pépin 0 (annulée), Ombrevive 0 → P = 13."""
-    d = TestClient(creer_app_demo()).get("/api/etat").json()
-    ec = d["etage_courant"]
-    assert ec["jauge"] == {"points": 13, "maximum": 19, "seuil": 15, "pleine": False}
-    assert ec["comptes_par_difficulte"] == {"easy": 4, "med": 3, "hard": 3}
-    assert (ec["n_comptes"], ec["n_pause"], ec["n_retardataires"]) == (10, 1, 1)
-    assert [p["grimpeurs"] for p in ec["paliers"]] == [8, 4, 1]
-    pseudos = {g["pseudo"] for g in d["grimpeurs"]}
-    assert "Fourbenoire" not in pseudos and len(pseudos) == 12
-    assert all("Fourbenoire" not in e["pseudos"] for e in d["fil"])
-    fleur = next(g for g in d["grimpeurs"] if g["pseudo"] == "Fleur-de-Bwork")
-    assert fleur["retardataire"] is True
+@pytest.mark.parametrize("profil", [ID_BRINDILLE, ID_MARCEAU])
+def test_aucun_identifiant_discord_numerique_cote_grimpeurs(profil):
+    """Critère 35 : ni le HTML ni le JSON servis aux grimpeurs ne contiennent un identifiant Discord."""
+    m = monde()
+    c = m.connecter(profil)
+    reponses = [c.get(p).text for p in PAGES + ["/etages/0/quetes/104", "/grimpeurs?quoi=categorie:donjons"]]
+    reponses += [c.get(f"/api/etages/0/manque?type={t}&id={i}").text
+                 for t, i in (("quete", 101), ("case", 22), ("categorie", "donjons"), ("donjon", 1))]
+    if profil == ID_BRINDILLE:
+        reponses.append(cocher(c, m.csrf(c), type="quete", id=107, cochee=True).text)
+    for texte in reponses:
+        for i in IDS_DISCORD_FABRIQUE:
+            assert str(i) not in texte
 
 
-# --- Cohérence sur des registres au hasard -------------------------------------------------------
-
-STATUTS = st.sampled_from(["actif", "actif", "actif", "pause", "exclu"])
-DIFFS = st.sampled_from(["easy", "med", "hard"])
-
-
-@st.composite
-def registres(draw):
-    n = draw(st.integers(0, 14))
-    grimpeurs, validations = [], []
-    for i in range(1, n + 1):
-        grimpeurs.append(
-            gr(
-                i,
-                f"G{i}",
-                draw(STATUTS),
-                draw(DIFFS),
-                draw(st.booleans()),
-                draw(st.one_of(st.none(), st.integers(1, 30))),
-            )
-        )
-        for c in draw(st.sets(st.integers(1, 6))):
-            statut = draw(st.sampled_from(["acceptee", "acceptee", "annulee", "refusee"]))
-            niveau = None if c == 6 else draw(st.integers(10, 23))
-            validations.append(
-                validation(
-                    i,
-                    c,
-                    niveau=niveau,
-                    statut=statut,
-                    forcee=draw(st.booleans()),
-                    source="declaration" if c == 6 else "manuelle",
-                )
-            )
-    return grimpeurs, validations
+def test_identifiants_discord_seulement_dans_l_admin():
+    m = monde()
+    c = m.connecter(ID_MARCEAU)
+    assert "300000000000000050" in c.get("/admin/grimpeurs").text  # « fiche à créer » : il faut bien l'identifier
 
 
-@settings(max_examples=150, deadline=None)
-@given(registres())
-def test_coherence_api(reg):
-    grimpeurs, validations = reg
-    d = construire_etat(inst(grimpeurs, validations), PENDANT, PARIS)
-    ec = d["etage_courant"]
-    cartes = d["grimpeurs"]
-    comptes = [c for c in cartes if c["statut"] == "actif" and not c["retardataire"]]
-    M = sum(c["points_vises"] for c in comptes)
-    P = sum(c["points"] for c in comptes)
-    S = -(-M * 75 // 100)
-    assert ec["jauge"] == {"points": P, "maximum": M, "seuil": S, "pleine": M > 0 and P >= S}
-    assert ec["n_comptes"] == len(comptes) == sum(ec["comptes_par_difficulte"].values())
-    assert ec["n_pause"] == sum(c["statut"] == "pause" for c in cartes)
-    assert ec["n_retardataires"] == sum(c["retardataire"] for c in cartes)
-    assert [p["grimpeurs"] for p in ec["paliers"]] == [sum(c["points"] >= k for c in comptes) for k in (1, 2, 3)]
-    assert all(c["statut"] != "exclu" for c in cartes)
-    assert len(cartes) == sum(g.statut != "exclu" for g in grimpeurs)
-    for c in cartes:
-        k = c["points"]
-        assert all(c["marques"][str(r)] for r in range(1, k + 1))  # points ≥ k ⇒ marques 1..k
-        assert c["au_dessus_du_cap"] == (c["niveau"] is not None and c["niveau"] > 20)
-        if c["statut"] == "pause":
-            assert c["points"] == 0
-    classes = {x["classe"]: x for x in d["classes"]}
-    assert len(d["classes"]) == 19
-    assert classes["Iop"]["actifs"] == sum(c["statut"] == "actif" for c in cartes)
-    assert classes["Iop"]["en_pause"] == ec["n_pause"]
+def test_post_sans_csrf_ou_d_origine_etrangere_refuse_partout():
+    """Critère 37 : chaque POST déclaré refuse un jeton absent ou faux et une origine étrangère (403)."""
+    m = monde()
+    c = m.connecter(ID_MARCEAU)
+    t = m.csrf(c)
+    posts = [re.sub(r"\{[^}]+\}", "1", r.path) for r in routes_declarees(m.app) if "POST" in getattr(r, "methods", ())]
+    assert len(posts) >= 14
+    journal_avant = len(m.depot._journal)
+    for chemin in posts:
+        for donnees, entetes in (({}, {"Origin": SITE}), ({"csrf": "faux"}, {"Origin": SITE}),
+                                 ({"csrf": t}, {"Origin": "https://pirate.example"})):
+            r = c.post(chemin, data=donnees, headers=entetes)
+            assert r.status_code == 403, (chemin, donnees, entetes)
+    assert len(m.depot._journal) == journal_avant and len(m.depot._sessions) == 1
 
 
-# --- Échappement HTML -----------------------------------------------------------------------------
+def test_csrf_d_une_autre_session_refuse():
+    m = monde()
+    a = m.connecter(ID_BRINDILLE)
+    b = m.connecter(ID_MARCEAU)
+    assert cocher(a, m.csrf(b), type="quete", id=107, cochee=True).status_code == 403
 
 
-def test_pseudo_piege_jamais_interprete():
-    g1, g2 = gr(1, XSS), gr(2, XSS2)
-    vs = [validation(1, 1), validation(2, 1)]
-    j = [
-        EntreeJournal(
-            1,
-            PENDANT,
-            "validation",
-            True,
-            None,
-            {
-                "validations": [
-                    {"id": vs[0].id, "grimpeur_id": 1, "niveau": 20, "contenu": XSS},
-                    {"id": vs[1].id, "grimpeur_id": 2, "niveau": 20, "contenu": "x"},
-                ]
-            },
-        )
-    ]
-    client = TestClient(creer_app(Source(inst([g1, g2], vs, j)), lambda: True, horloge=lambda: PENDANT))
-    html = client.get("/").text
-    assert "<img src=x" not in html and "<script>alert(2)" not in html
-    assert html.count("</script>") == html.count("<script")  # aucune balise script fermée en avance
-    api = client.get("/api/etat").json()
-    assert {g["pseudo"] for g in api["grimpeurs"]} == {XSS, XSS2}  # le texte est rendu tel quel
-    assert api["fil"][0]["pseudos"] == [XSS, XSS2]
+def test_cookie_de_session_falsifie():
+    m = monde()
+    c = m.client()
+    c.cookies.set("__Host-session", "nimporte-quoi", domain="epreuve.test")
+    assert "Se connecter avec Discord" in c.get("/").text
+    assert c.get("/admin").status_code == 303
 
 
-def test_horloge_piegee_en_demo():
-    html = TestClient(creer_app_demo()).get('/?horloge="><script>alert(3)</script>').text
-    assert "alert(3)" not in html
+def test_base_sans_etage_ni_grimpeur():
+    d = DepotDemo()
+    d._etages, d._donjons, d._cases, d._quetes, d._grimpeurs = {}, {}, {}, {}, {}
+    d._coches_cases, d._coches_quetes = {}, {}
+    m = monde(depot=d)
+    c = m.connecter(ID_MARCEAU)
+    for chemin in ("/", "/grimpeurs", "/regles", "/admin", "/admin/grimpeurs", "/admin/etages", "/admin/journal"):
+        assert c.get(chemin).status_code == 200, chemin
+    assert c.get("/etages/0").status_code == 404
+    assert cocher(c, m.csrf(c), type="quete", id=101, cochee=True).status_code == 409
 
 
-# --- Base vide ------------------------------------------------------------------------------------
+def test_etage_ouvert_sans_aucun_actif():
+    m = monde()
+    for g in list(m.depot._grimpeurs.values()):
+        m.depot._grimpeurs[g.id] = replace(g, statut="pause")
+    c = m.connecter(ID_MARCEAU)
+    html = c.get("/etages/0").text
+    assert "Score 0 sur un palier de 0" in html and ">Un admin pourra ouvrir le prochain étage quand la jauge sera pleine.</p>" in html
+    assert "aucun grimpeur actif" in c.get("/admin/etages/0").text
+    tour = c.get("/").text.split('class="tower"')[1]
+    assert "prêt" not in tour
 
 
-def test_aucun_etage_aucun_grimpeur():
-    client = TestClient(creer_app(Source(inst([], etages=())), lambda: True, horloge=lambda: PENDANT))
-    r = client.get("/api/etat")
-    assert r.status_code == 200
-    d = r.json()
-    assert d["etage_courant"] is None and d["grimpeurs"] == [] and d["fil"] == []
-    assert d["tour"] == [{"numero": 0, "nom": None, "statut": "scelle"}]
-    assert d["ouverture_etage0"] is None and len(d["classes"]) == 19
-    assert client.get("/").status_code == 200
+def test_etage_sans_contenu():
+    m = monde()
+    m.depot._quetes = {k: q for k, q in m.depot._quetes.items() if q.etage_id != 1}
+    m.depot._donjons = {k: d for k, d in m.depot._donjons.items() if d.etage_id != 1}
+    c = m.connecter(ID_BRINDILLE)
+    assert c.get("/etages/0").status_code == 200 and c.get("/grimpeurs").status_code == 200
 
 
-def test_etage_ouvert_sans_grimpeur_apres_la_date_plancher():
-    apres = ETAGE0.date_plancher_suivant + timedelta(days=1)
-    d = construire_etat(inst([]), apres, PARIS)
-    ec = d["etage_courant"]
-    assert ec["jauge"] == {"points": 0, "maximum": 0, "seuil": 0, "pleine": False}
-    assert ec["deblocable"] is False
+def test_numero_negatif_ou_enorme():
+    c = monde().connecter(ID_BRINDILLE)
+    for chemin in ("/etages/-1", "/etages/99999999999999999999", "/etages/0/quetes/-5", "/grimpeurs/0"):
+        assert c.get(chemin).status_code in (404, 422), chemin
 
 
-def client_async(source):
-    """Même boucle d'événements que le moteur Postgres (TestClient en ouvrirait une autre)."""
-    app = creer_app(source, lambda: True, horloge=lambda: PENDANT)
-    return httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://test")
+def test_erreur_interne_sans_trace():
+    m = monde()
+    c = m.connecter(ID_BRINDILLE)
 
+    async def panne(*_a, **_k):
+        raise RuntimeError("secret interne")
 
-async def test_base_postgres_vide(depot):
-    async with client_async(depot) as client:
-        r = await client.get("/api/etat")
-        assert r.status_code == 200 and r.json()["etage_courant"] is None
-        assert r.json()["grimpeurs"] == [] and len(r.json()["classes"]) == 19
-        assert (await client.get("/")).status_code == 200
-        assert (await client.get("/sante")).json() == {"discord": "ok", "base": "ok"}
+    m.depot.contenu_etage = panne
+    from fastapi.testclient import TestClient
 
-
-async def test_base_postgres_etage_importe_sans_grimpeur(etage0):
-    async with client_async(etage0) as client:
-        d = (await client.get("/api/etat")).json()
-    assert d["etage_courant"]["jauge"] == {"points": 0, "maximum": 0, "seuil": 0, "pleine": False}
-    assert d["etage_courant"]["ouvert_le"] == "2026-10-30T17:00:00+01:00"
-    assert d["etage_courant"]["date_plancher_suivant"] == "2026-11-13T17:00:00+01:00"
+    r = TestClient(m.app, base_url=SITE, cookies=c.cookies, raise_server_exceptions=False).get("/etages/0")
+    assert r.status_code == 500 and "secret interne" not in r.text
+    assert r.headers["content-security-policy"].startswith("default-src 'self'")
