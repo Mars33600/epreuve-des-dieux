@@ -1,5 +1,6 @@
 """Aspiration du lot E2 : pagination par clé, reprise après coupure, réduction, filtre des stuffs."""
 
+import gzip
 import json
 
 import httpx
@@ -63,7 +64,7 @@ async def test_reprise_apres_coupure(tmp_path):
         with pytest.raises(ErreurDuffus):
             await e.aspirer_table(c, e.TABLES["objets"], tmp_path, taille=10)
     assert len(list((tmp_path / ".en-cours" / "objets").glob("*.jsonl"))) == 2
-    assert not (tmp_path / "objets.jsonl").exists()
+    assert not (tmp_path / "objets.jsonl.gz").exists()
     reprise = FauxDuffus(donnees)
     async with client(reprise) as c:
         n, reprises = await e.aspirer_table(c, e.TABLES["objets"], tmp_path, taille=10)
@@ -93,7 +94,7 @@ async def test_stuffs_du_seul_compte_de_l_auteur_sans_son_identifiant(tmp_path):
     params = faux.requetes[0].url.params
     assert params["user_id"] == f"eq.{e.COMPTE_STUFFS}" and params["is_public"] == "eq.true"
     assert "user_id" not in params["select"]
-    texte = (tmp_path / "stuffs.jsonl").read_text(encoding="utf-8")
+    texte = gzip.decompress((tmp_path / "stuffs.jsonl.gz").read_bytes()).decode("utf-8")
     assert "secret" not in texte and e.COMPTE_STUFFS not in texte
     ligne = json.loads(texte)
     assert ligne["objets"] == {"arme": 44} and ligne["dofus"] == [972]
@@ -104,7 +105,7 @@ async def test_colonne_manquante_arrete_tout(tmp_path):
     async with client(faux) as c:
         with pytest.raises(ErreurDuffus, match="quantities_json"):
             await e.aspirer(c, tmp_path, ("recettes",))
-    assert not (tmp_path / "recettes.jsonl").exists()
+    assert not (tmp_path / "recettes.jsonl.gz").exists()
 
 
 async def test_table_inconnue(tmp_path):
@@ -133,3 +134,10 @@ def test_nouvelles_tables_reduites_et_sans_donnees_utilisateur():
     obj = e.TABLES["objectifs_quetes"]
     assert e.valider(obj, [{"id": 1, "step_id": 2, "type_class": "QuestObjectiveGoToNpcData", "parameter0": 7}]
                      )[0]["classe"] == "GoToNpc"
+
+
+def test_lire_jsonl_accepte_le_gzip_et_le_brut(tmp_path):
+    (tmp_path / "a.jsonl.gz").write_bytes(gzip.compress(b'{"id":1}\n{"id":2}\n'))
+    (tmp_path / "b.jsonl").write_text('{"id":3}\n', encoding="utf-8")
+    assert [r["id"] for r in e.lire_jsonl(tmp_path / "a.jsonl")] == [1, 2]  # le nom sans .gz suffit
+    assert [r["id"] for r in e.lire_jsonl(tmp_path / "b.jsonl")] == [3]

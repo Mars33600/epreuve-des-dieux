@@ -20,6 +20,7 @@ aucun stuff d'utilisateur n'est lu, et l'identifiant du compte n'est pas recopi�
 
 from __future__ import annotations
 
+import gzip
 import json
 import shutil
 from collections.abc import Callable
@@ -397,8 +398,16 @@ def _jsonl(lignes: list[dict]) -> str:
     return "".join(json.dumps(r, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n" for r in lignes)
 
 
+def chemin_jsonl(f: Path) -> Path:
+    """Les extraits finaux sont compressés (`x.jsonl.gz`) pour alléger le dépôt ; `x.jsonl` reste lisible."""
+    gz = f.with_name(f.name + ".gz")
+    return gz if gz.exists() else f
+
+
 def lire_jsonl(f: Path) -> list[dict]:
-    return [json.loads(x) for x in f.read_text(encoding="utf-8").splitlines() if x.strip()]
+    f = chemin_jsonl(f)
+    texte = gzip.decompress(f.read_bytes()).decode("utf-8") if f.suffix == ".gz" else f.read_text(encoding="utf-8")
+    return [json.loads(x) for x in texte.splitlines() if x.strip()]
 
 
 def _ecrire(f: Path, contenu: str) -> None:
@@ -427,9 +436,9 @@ class RapportE2:
 async def aspirer_table(client: ClientDuffus, table: TableE2, dossier: Path, refaire: bool = False,
                         taille: int = TAILLE_PAGE) -> tuple[int, int] | None:
     """Aspire une table avec reprise. Renvoie (lignes, pages reprises), ou None si elle était déjà complète."""
-    final = dossier / f"{table.nom}.jsonl"
+    final = dossier / f"{table.nom}.jsonl.gz"
     partiel = dossier / ".en-cours" / table.nom
-    if final.exists() and not refaire and not partiel.exists():
+    if chemin_jsonl(final.with_suffix('')).exists() and not refaire and not partiel.exists():
         return None
     partiel.mkdir(parents=True, exist_ok=True)
     pages = sorted(partiel.glob("*.jsonl"))
@@ -461,7 +470,10 @@ async def aspirer_table(client: ClientDuffus, table: TableE2, dossier: Path, ref
         for r in lire_jsonl(f):
             toutes[r[table.cle_sortie]] = r
     lignes = [toutes[k] for k in sorted(toutes)]
-    _ecrire(final, _jsonl(lignes))
+    tmp = final.with_suffix(final.suffix + ".tmp")  # mtime=0 : même contenu, mêmes octets
+    tmp.write_bytes(gzip.compress(_jsonl(lignes).encode("utf-8"), mtime=0))
+    tmp.replace(final)
+    final.with_suffix('').unlink(missing_ok=True)
     shutil.rmtree(partiel)
     return len(lignes), reprises
 

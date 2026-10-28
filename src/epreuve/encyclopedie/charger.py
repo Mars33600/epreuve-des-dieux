@@ -15,7 +15,7 @@ from pathlib import Path
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncConnection, AsyncEngine
 
-from epreuve.duffus.encyclopedie import lire_jsonl
+from epreuve.duffus.encyclopedie import chemin_jsonl, lire_jsonl
 from epreuve.encyclopedie import tables as t
 from epreuve.encyclopedie.textes import cle_recherche, famille_du_super_type
 
@@ -38,7 +38,7 @@ class RapportChargement:
 
 def _lire(dossier: Path, nom: str) -> list[dict]:
     f = dossier / f"{nom}.jsonl"
-    if not f.exists():
+    if not chemin_jsonl(f).exists():
         raise ExtraitManquant(f"{f.name} absent : lancer d'abord `python -m epreuve.duffus encyclopedie`")
     return lire_jsonl(f)
 
