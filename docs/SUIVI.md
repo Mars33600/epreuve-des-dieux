@@ -29,7 +29,7 @@ Détails : `DECISIONS-V4.md`.
 
 - [x] Étages = tranches du guide Duffus (24 étages, 0 à 23), cap = haut de la tranche
 - [x] Étages 0 et 1 importés (quêtes, fiches, donjons et leurs succès)
-- [x] Étages 2 à 23 importés (base de test ; la base de production reste à créer). Fiches absentes chez Duffus prises sur DofusDB : il ne manque que 2 fiches sur 1 010 quêtes
+- [x] Étages 2 à 23 importés (base de production remplie le 28/10). Fiches absentes chez Duffus prises sur DofusDB : il ne manque que 2 fiches sur 1 010 quêtes
 - [x] Quêtes principales et secondaires classées d'après les guides par Dofus (sans supposition)
 - [x] Images des étages récupérées sur le Discord (étages 0 à 10)
 - [x] Images affichées sur le site, chacune seulement une fois son étage ouvert
