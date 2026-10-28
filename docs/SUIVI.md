@@ -30,7 +30,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] Étages = tranches du guide Duffus (24 étages, 0 à 23), cap = haut de la tranche
 - [x] Étages 0 et 1 importés (quêtes, fiches, donjons et leurs succès)
 - [ ] Étages 2 à 23 importés
-- [ ] Quêtes principales et secondaires classées d'après les guides par Dofus (sans supposition)
+- [x] Quêtes principales et secondaires classées d'après les guides par Dofus (sans supposition)
 - [x] Images des étages récupérées sur le Discord (étages 0 à 10)
 - [ ] Images affichées sur le site, chacune seulement une fois son étage ouvert
 
