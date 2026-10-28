@@ -217,6 +217,11 @@ class FauxBuilds:
     async def de_grimpeur(self, grimpeur_id):
         return [b for b in self.lignes.values() if b.grimpeur_id == grimpeur_id]
 
+    async def sorts_de_classe(self, classe):
+        from tests.builder.test_sorts import PRESSION
+
+        return [PRESSION] if classe == "Iop" else []
+
     async def partages(self, sauf_grimpeur=None, limite=200):
         return [b for b in self.lignes.values() if b.contenu.partage and b.grimpeur_id != sauf_grimpeur]
 
@@ -325,3 +330,17 @@ def test_calcul_arme_dans_l_api():
     assert feu["libelle"] == "dommages Feu" and feu["normal"] == [18, 36]  # (300 + 50 + 100) / 100 × 4 et × 8
     assert client().post("/api/builder/calcul", json={"objets": {}}).json()["arme"] is None
     assert client().post("/api/builder/calcul", json={"mode_arme": "lancer"}).status_code == 422
+
+
+def test_sorts_de_la_classe():
+    corps = {"niveau": 200, "classe": "Iop", "caracs_base": {"Force": 100}}
+    d = client(builds=FauxBuilds()).post("/api/builder/sorts", json=corps).json()
+    [pression] = d["sorts"]
+    assert pression["nom"] == "Pression" and pression["grade"] == 3
+    assert pression["icone"] == "https://api.dofusdb.fr/img/spells/11830.png"
+    assert pression["normal"][0]["jet"] == [52, 60]  # (100 + 100) / 100 × 26 et × 30
+    feca = client(builds=FauxBuilds()).post("/api/builder/sorts", json={**corps, "classe": "Féca"}).json()
+    assert feca["sorts"] == []
+    assert client().post("/api/builder/sorts", json=corps).json()["sorts"] == []  # sans base
+    assert client(builds=FauxBuilds()).post("/api/builder/sorts", json={"classe": "Druide"}).status_code == 422
+    assert client(None).post("/api/builder/sorts", json=corps).status_code == 401

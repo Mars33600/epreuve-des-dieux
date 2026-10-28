@@ -14,6 +14,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from epreuve.db import tables as t
+from epreuve.encyclopedie import tables as ency
 
 build = Table(
     "build", t.metadata,
@@ -111,3 +112,16 @@ class DepotBuilds:
         async with self._moteur.connect() as c:
             lignes = await c.execute(q.order_by(build.c.maj_le.desc(), build.c.id.desc()).limit(limite))
             return [self._ligne(r) for r in lignes]
+
+    async def sorts_de_classe(self, classe: str) -> list[dict]:
+        """Les sorts d'une classe (tables de l'encyclopédie), dans l'ordre du jeu ; [] si la classe est inconnue."""
+        async with self._moteur.connect() as c:
+            ids = (await c.execute(select(ency.ency_classe.c.sorts).where(ency.ency_classe.c.nom == classe))
+                   ).scalar_one_or_none()
+            if not ids:
+                return []
+            s = ency.ency_sort
+            lignes = (await c.execute(select(s.c.id, s.c.nom, s.c.icone, s.c.niveaux).where(s.c.id.in_(ids)))
+                      ).mappings().all()
+        par_id = {r["id"]: dict(r) for r in lignes}
+        return [par_id[i] for i in ids if i in par_id]

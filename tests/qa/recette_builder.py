@@ -69,6 +69,9 @@ async def recette_a(navigateur, largeur: int, sortie: Path) -> list[str]:
     await choisir(page, 9, "bouftou", "Marteau du Bouftou", niveau_max="20")
     await page.wait_for_selector("#b-arme table")
     await page.click("[data-buff='base']")
+    await page.select_option("#b-classe", "Iop")
+    await page.click("#b-sorts-zone summary")
+    await page.wait_for_selector(".b-sort")
     champ = "#b-base tbody tr:nth-child(3) td:nth-child(4) input"
     await page.fill(champ, "100")
     await page.press(champ, "Tab")

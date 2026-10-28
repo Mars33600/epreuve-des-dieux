@@ -313,6 +313,42 @@
     $("b-detail").showModal();
   }
 
+  // --- Sorts (chargés seulement quand la section est ouverte) ---------------------------------------------------
+
+  let numeroSorts = 0;
+
+  async function chargerSorts() {
+    const zone = $("b-sorts");
+    if (!$("b-sorts-zone").open) return;
+    const numero = ++numeroSorts;
+    try {
+      const r = await fetch("/api/builder/sorts", {
+        method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ ...corpsBuild(), classe: etat.classe }),
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.message || "Erreur");
+      if (numero !== numeroSorts) return;
+      zone.replaceChildren();
+      if (!d.sorts.length) zone.append(el("li", { classe: "b-vide", texte: "Aucun sort de dégâts connu pour cette classe à ce niveau." }));
+      const texte = (ls) => ls.map((l) => l.libelle + " " + jet(l.jet)).join(" · ");
+      for (const s of d.sorts) {
+        zone.append(el("li", { classe: "b-sort" }, [
+          s.icone ? el("img", { src: s.icone, alt: "", loading: "lazy" }) : el("span"),
+          el("div", {}, [
+            el("p", {}, [el("span", { classe: "b-objet-nom", texte: s.nom }), " ",
+              el("span", { classe: "b-objet-meta", texte: "grade " + s.grade + " · " + s.pa + " PA · PO " + s.po[0] + "–" + s.po[1] +
+                (s.cc ? " · critique " + s.taux_critique + " %" : "") })]),
+            el("p", { texte: texte(s.normal) || "—" }),
+            s.critique.length ? el("p", { texte: "Critique : " + texte(s.critique) }) : null,
+          ]),
+        ]));
+      }
+    } catch (err) {
+      if (numero === numeroSorts) zone.replaceChildren(el("li", { classe: "b-vide", texte: "Calcul impossible : " + err.message }));
+    }
+  }
+
   // --- Cycle de mise à jour -----------------------------------------------------------------------------------
 
   const extensions = []; // fonctions appelées à chaque changement (sauvegarde…)
@@ -320,7 +356,7 @@
   function changement() {
     dessinerEmplacements(etat.resultat && etat.resultat.alertes);
     clearTimeout(minuteurCalcul);
-    minuteurCalcul = setTimeout(calculer, 150);
+    minuteurCalcul = setTimeout(() => { calculer(); chargerSorts(); }, 150);
     for (const f of extensions) f();
   }
 
@@ -420,6 +456,7 @@
   }
 
   brancherFormulaire();
+  $("b-sorts-zone").addEventListener("toggle", chargerSorts);
   if ($("b-dupliquer")) $("b-dupliquer").addEventListener("click", dupliquer);
   $("b-note").addEventListener("input", (ev) => { etat.note = ev.target.value; });
   if ($("b-enregistrer")) {

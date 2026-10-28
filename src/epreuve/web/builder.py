@@ -3,6 +3,7 @@
     GET  /builder                         mes builds et ceux de la guilde, et « Nouveau build »
     GET  /builder/nouveau                 l'éditeur, sur un build vierge
     GET  /api/builder/objets              la fenêtre de choix d'un emplacement (filtres de Duffus)
+    POST /api/builder/sorts               les sorts de la classe au niveau du build (tables de l'encyclopédie)
     POST /api/builder/calcul              totaux, panoplies, conditions, base, parchemins, dérivés (sans effet de bord)
     GET  /builder/{id}                    un build : éditeur pour l'auteur, lecture seule s'il est partagé
     POST /api/builder/builds              enregistrer un nouveau build (grimpeur, jeton CSRF)
@@ -45,7 +46,9 @@ from epreuve.builder.effets import (
     TYPES_DOFUS,
     TYPES_FAMILIERS,
 )
+from epreuve.builder.sorts import calculer_sort
 from epreuve.domaine.classes import CLASSES
+from epreuve.encyclopedie.textes import icone_sort
 
 ICI = Path(__file__).parent
 COOKIE_SESSION = "__Host-session"
@@ -302,6 +305,30 @@ async def api_calcul(request: Request) -> Response:
         return _erreur(422, "Réglage d'arme inconnu.")
     resultat = resultat_json(corps.build(), _services(request).catalogue(), corps.mode_arme, corps.buff_arme)
     return JSONResponse({"ok": True, **resultat})
+
+
+class CorpsSorts(CorpsBuild):
+    classe: str
+
+
+@routeur.post("/api/builder/sorts")
+async def api_sorts(request: Request) -> Response:
+    if await _visiteur(request) is None:
+        return _erreur(401, MESSAGE_CONNEXION)
+    corps = await _lire_corps(request, CorpsSorts)
+    if corps is None or corps.classe not in CLASSES or corps.mode_arme not in MODES:
+        return _erreur(422, "Classe ou réglage inconnu.")
+    s = _services(request)
+    if s.builds is None:
+        return JSONResponse({"ok": True, "sorts": []})
+    b = nettoyer(corps.build())
+    totaux = calculer(b, s.catalogue()).totaux
+    sorts = []
+    for sort in await s.builds.sorts_de_classe(corps.classe):
+        r = calculer_sort(sort, totaux, b.niveau, corps.mode_arme)
+        if r is not None and (r["normal"] or r["critique"]):
+            sorts.append({**r, "icone": icone_sort(r["icone"])})
+    return JSONResponse({"ok": True, "sorts": sorts})
 
 
 # --- Enregistrement -------------------------------------------------------------------------------------------
