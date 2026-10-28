@@ -18,47 +18,47 @@ Détails : `DECISIONS-V4.md`.
 - [x] Full succès : 5 cases par donjon (vaincre le boss + 4 succès), point quand tout l'étage est coché
 - [x] Palier pour ouvrir un étage = 2 × joueurs actifs
 - [x] Seuls les donjons et quêtes de la tranche de l'étage comptent
-- [ ] Ouverture d'étage manuelle par un admin, après vérification
-- [ ] Étages non ouverts cachés (tour et guide)
-- [ ] Pause d'un joueur par un admin : il ne compte plus dans le palier
-- [ ] Réintégration des retardataires et des joueurs en pause, à la main par un admin
-- [ ] Page « Règles » sur le site
+- [x] Ouverture d'étage manuelle par un admin, après vérification
+- [x] Étages non ouverts cachés (tour et guide)
+- [x] Pause d'un joueur par un admin : il ne compte plus dans le palier
+- [x] Réintégration des retardataires et des joueurs en pause, à la main par un admin
+- [x] Page « Règles » sur le site
 - [x] Pas de points bonus
 
 ## Contenu (Duffus, source unique)
 
 - [x] Étages = tranches du guide Duffus (24 étages, 0 à 23), cap = haut de la tranche
 - [x] Étages 0 et 1 importés (quêtes, fiches, donjons et leurs succès)
-- [ ] Étages 2 à 23 importés
+- [x] Étages 2 à 23 importés (base de test ; la base de production reste à créer). ⚠️ Étages 12 et 14 à 23 : Duffus n'a souvent pas de fiche de quête
 - [x] Quêtes principales et secondaires classées d'après les guides par Dofus (sans supposition)
 - [x] Images des étages récupérées sur le Discord (étages 0 à 10)
-- [ ] Images affichées sur le site, chacune seulement une fois son étage ouvert
+- [x] Images affichées sur le site, chacune seulement une fois son étage ouvert
 
 ## Site
 
-- [ ] Un compte par joueur (connexion Discord)
-- [ ] Les joueurs cochent eux-mêmes, en confiance, sans screen
-- [ ] Fiches joueurs visibles par tous
-- [ ] Filtre « qui n'a pas fait… ? » par quête ou succès
-- [ ] Un seul guide avec code couleur et filtre principales / secondaires
-- [ ] Fiche de quête complète comme sur Duffus (étapes, besoins, prérequis, succès lié)
+- [ ] Un compte par joueur (connexion Discord) : codé et testé, reste l'essai avec le vrai Discord
+- [x] Les joueurs cochent eux-mêmes, en confiance, sans screen
+- [x] Fiches joueurs visibles par tous
+- [x] Filtre « qui n'a pas fait… ? » par quête ou succès
+- [x] Un seul guide avec code couleur et filtre principales / secondaires
+- [x] Fiche de quête complète comme sur Duffus (étapes, besoins, prérequis, succès lié)
 - [ ] Onglet de validation des succès de donjon, dans la progression du tableau de bord
-- [ ] Tour en pyramide et ambiance de la maquette
-- [ ] Accès réservé aux participants
+- [x] Tour en pyramide et ambiance de la maquette
+- [x] Accès réservé aux participants
 
 ## Modules de Duffus « à l'identique »
 
-- [ ] Guide (cases, fiches, progression)
+- [x] Guide (cases, fiches, progression)
 - [ ] Tableau de bord
 - [ ] Archimonstres (sans la bourse aux échanges)
 - [ ] Avis de recherche
-- [ ] Encyclopédie
+- [ ] Encyclopédie : objets, monstres, recettes faits ; manquent sorts, PNJ, quêtes, page panoplies
 - [ ] Outils (sans les tutoriels)
-- [ ] Stuffs
+- [x] Stuffs (builds PvM de Duffus)
 - [ ] Builder
-- [ ] Rien ne renvoie à Duffus (en-têtes, Twitch, Discord, soutien), sauf « Merci Duffus »
+- [x] Rien ne renvoie à Duffus (en-têtes, Twitch, Discord, soutien), sauf « Merci Duffus »
 
 ## Crédit
 
 - [x] « Merci Duffus » avec lien en pied de page (teaser)
-- [ ] « Merci Duffus » sur toutes les pages du site
+- [x] « Merci Duffus » sur toutes les pages du site
