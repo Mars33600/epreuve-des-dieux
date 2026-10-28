@@ -285,6 +285,13 @@ def _niveau(texte: object) -> int | None:
     return int(m.group()) if m else None
 
 
+def niveau_quete(entree: Mapping, page: Mapping | None) -> int | None:
+    """Le vrai niveau de la quête : `meta.level` de sa page Duffus. Le `level` de `quest_list` n'est qu'un
+    palier arrondi (10, 25, 55…) ; il ne sert que de repli quand la page n'a pas de niveau (0 ou absent)."""
+    vrai = _niveau(((page or {}).get("meta") or {}).get("level"))
+    return vrai if vrai else _niveau(entree.get("level"))
+
+
 def bornes(range_key: str) -> tuple[int, int]:
     """« 1-20 » → (1, 20) ; « 200-3 » (tranches après le niveau 200) → (200, 200)."""
     a, _, b = range_key.partition("-")
@@ -419,7 +426,7 @@ def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage]
                     e.alertes.append(repli.alerte)
         c = classement[entree["id"]]
         jusqu, lier = jusqu_ou_et_a_lier(entree)
-        e.quetes.append(QuetePreparee(str(entree["id"]), entree["title"].strip(), _niveau(entree.get("level")), bloc,
+        e.quetes.append(QuetePreparee(str(entree["id"]), entree["title"].strip(), niveau_quete(entree, page), bloc,
                                       ordre, c.nature, c.origine, c.dofus, jusqu, lier, fiche,
                                       source))
     if e.quetes and len(e.sans_fiche) / len(e.quetes) > SEUIL_SANS_FICHE:

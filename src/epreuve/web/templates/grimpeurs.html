@@ -9,7 +9,7 @@
   </div>
   {% if vue %}
   <form class="card ask" method="get" action="/grimpeurs" id="ask" data-etage="{{ ouvert.numero }}">
-    <label for="askSel">Qui n'a pas fait… ? <span class="muted">(étage {{ ouvert.numero }})</span></label>
+    <label for="askSel">Qui a fait, qui n'a pas fait… ? <span class="muted">(étage {{ ouvert.numero }})</span></label>
     <div class="askrow">
       <select id="askSel" name="quoi">
         <option value="">Choisir une catégorie, un donjon, un succès ou une quête…</option>
@@ -24,11 +24,11 @@
     </div>
     <div class="answer" id="answer" aria-live="polite">
       {% if reponse %}{% set libelle, pas_fait, fait = reponse %}
-      <h3>Pas encore fait <small>{{ pas_fait|length }} sur {{ vue.jauge.actifs }} · {{ libelle }}</small></h3>
+      <h3>Qui ne l'a pas fait <small>{{ pas_fait|length }} sur {{ vue.jauge.actifs }} · {{ libelle }}</small></h3>
       {% if pas_fait %}{{ personnes(pas_fait, "miss") }}{% else %}<p class="muted">Tout le monde l'a fait.</p>{% endif %}
-      <h3>Déjà fait, ils peuvent accompagner <small>{{ fait|length }}</small></h3>
+      <h3>Qui l'a fait (peut accompagner) <small>{{ fait|length }}</small></h3>
       {% if fait %}{{ personnes(fait, "done") }}{% else %}<p class="muted">Personne pour l'instant.</p>{% endif %}
-      {% else %}<p class="muted">Choisis un objectif pour voir qui ne l'a pas encore fait, et qui pourrait l'accompagner.</p>{% endif %}
+      {% else %}<p class="muted">Choisis un objectif pour voir qui l'a fait et qui ne l'a pas encore fait.</p>{% endif %}
     </div>
   </form>
   {% endif %}

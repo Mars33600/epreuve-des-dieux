@@ -189,7 +189,11 @@ def _monstres(racine: Noeud) -> list[Besoin]:
 
 def _recompenses(r: Mapping | None) -> list[str]:
     r = r or {}
-    sortie = [str(r[k]) for k in ("xp", "kamas") if r.get(k)]
+    sortie = []
+    if r.get("xp"):
+        sortie.append(re.sub(r"\s*xp$", " XP", str(r["xp"]).replace("\xa0", " "), flags=re.I))
+    if r.get("kamas"):
+        sortie.append(re.sub(r"\s*k(amas)?$", " kamas", str(r["kamas"]).replace("\xa0", " "), flags=re.I))
     for item in r.get("items") or []:
         sortie.append(f"{item.get('qty', 1)} × {item.get('label', '?')}" if isinstance(item, dict) else str(item))
     for autre in r.get("others") or []:

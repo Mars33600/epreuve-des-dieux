@@ -494,3 +494,10 @@ article.card > .qd-sec{padding-top:4px}
 
 .recherche-globale { margin: .4rem 0; }
 .recherche-globale input { width: 100%; max-width: 22rem; box-sizing: border-box; padding: .4rem .6rem; font: inherit; }
+
+/* Fiche de quête : tableau récapitulatif */
+.recap{width:100%;border-collapse:collapse;font-size:15px}
+.recap th,.recap td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line-soft)}
+.recap th{width:38%;font:500 12px/1.4 var(--f-data);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:normal}
+.recap td{overflow-wrap:anywhere}
+.recap-list{margin:0;padding:0;list-style:none;display:grid;gap:4px}

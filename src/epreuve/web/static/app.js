@@ -248,7 +248,7 @@ async function demander(quoi){
   roster.forEach(p => p.classList.remove("target", "dim"));
   history.replaceState(null, "", quoi ? `/grimpeurs?quoi=${encodeURIComponent(quoi)}` : "/grimpeurs");
   ans.textContent = "";
-  if (!quoi){ const p = document.createElement("p"); p.className = "muted"; p.textContent = "Choisis un objectif pour voir qui ne l'a pas encore fait, et qui pourrait l'accompagner."; ans.append(p); return; }
+  if (!quoi){ const p = document.createElement("p"); p.className = "muted"; p.textContent = "Choisis un objectif pour voir qui l'a fait et qui ne l'a pas encore fait."; ans.append(p); return; }
   const [type, id] = quoi.split(":");
   try{
     const r = await fetch(`/api/etages/${encodeURIComponent(form.dataset.etage)}/manque?type=${encodeURIComponent(type)}&id=${encodeURIComponent(id)}`, {credentials:"same-origin"});
@@ -258,8 +258,8 @@ async function demander(quoi){
     if (!d.pas_fait.length) l1.textContent = "Tout le monde l'a fait.";
     const l2 = document.createElement("div"); l2.className = "people"; d.fait.forEach(g => l2.append(puce(g, "done")));
     if (!d.fait.length) l2.textContent = "Personne pour l'instant.";
-    ans.append(titre("Pas encore fait", `${d.pas_fait.length} sur ${d.pas_fait.length + d.fait.length} · ${libelle}`), l1,
-               titre("Déjà fait, ils peuvent accompagner", String(d.fait.length)), l2);
+    ans.append(titre("Qui ne l'a pas fait", `${d.pas_fait.length} sur ${d.pas_fait.length + d.fait.length} · ${libelle}`), l1,
+               titre("Qui l'a fait (peut accompagner)", String(d.fait.length)), l2);
     const manque = new Set(d.pas_fait.map(g => g.id)), fait = new Set(d.fait.map(g => g.id));
     roster.forEach(p => { const n = Number(p.dataset.gid);
       if (manque.has(n)) p.classList.add("target"); else if (fait.has(n)) p.classList.add("dim"); });

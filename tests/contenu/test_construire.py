@@ -45,6 +45,17 @@ def test_etage_0_complet():
     assert {q.bloc for q in e.quetes} == {"Quêtes du tutoriel", "Quêtes d'Incarnam"}
 
 
+def test_niveau_reel_de_la_quete_et_non_le_palier_de_quest_list():
+    """Régression : quest_list.level est un palier arrondi (« 10 » pour tout le tutoriel) ; le vrai niveau est
+    meta.level de la page Duffus (quête 1 : niveau 1, « Ça sent le gaz » : niveau 20 au lieu de 25)."""
+    e = ETAGES[0]
+    assert ASPI.quetes[1]["level"] == "10" and e.quetes[0].niveau == 1
+    assert [q.niveau for q in e.quetes if q.nom == "Sous le regard des dieux"] == [2]
+    assert len({q.niveau for q in e.quetes}) > 3
+    assert k.niveau_quete({"level": "25"}, {"meta": {"level": 0}}) == 25  # repli si la page n'a pas de niveau
+    assert k.niveau_quete({"level": "25"}, None) == 25
+
+
 def test_etage_1_donjons_rappels_et_quete_sans_fiche():
     e = ETAGES[1]
     assert [d.nom for d in e.donjons] == ["Grange du Tournesol Affamé", "Château Ensablé", "Cour du Bouftou Royal",
@@ -141,7 +152,8 @@ def test_parite_des_fiches(n):
         r = page["rewards"] or {}
         for cle in ("xp", "kamas"):
             if r.get(cle):
-                assert str(r[cle]) in f.recompenses, q.nom
+                chiffres = re.sub(r"\D", "", str(r[cle]))
+                assert any(re.sub(r"\D", "", x) == chiffres for x in f.recompenses), q.nom
         assert len(f.recompenses) >= len(r.get("items") or [])
         if entree.get("succes"):
             assert all(s in f.succes_lie for s in entree["succes"])

@@ -290,7 +290,7 @@ def test_fiche_de_quete_page_complete_et_fragment():
     for html in (page, frag):
         assert 'id="qdTitle"' in html and "La Graine de Mère Cawotte" in html
         for bloc in ("Jusqu'où la faire", "Prérequis", "Étapes", "Ce dont tu as besoin", "Positions",
-                     "Succès lié", "Récompenses", "Qui ne l'a pas encore faite ?"):
+                     "Succès lié", "Récompenses", "En bref", "Qui l'a faite", "Qui ne l'a pas encore faite"):
             assert bloc in html, bloc
         assert 'href="/etages/0/quetes/101"' in html  # prérequis d'un étage ouvert : un lien vers sa fiche
         assert "[5,-17]" in html and 'data-copier="/travel 5,-17"' in html
@@ -407,13 +407,13 @@ def test_filtre_par_element_sans_javascript():
     c = monde().connecter(ID_BRINDILLE)
     html = c.get("/grimpeurs?quoi=quete:101").text
     rep = html.split('id="answer"')[1].split("</form>")[0]
-    assert "Pas encore fait <small>5 sur 10 · la quête « L&#39;Appel d&#39;Incarnam »" in rep
-    assert "Déjà fait, ils peuvent accompagner" in rep
+    assert "Qui ne l'a pas fait <small>5 sur 10 · la quête « L&#39;Appel d&#39;Incarnam »" in rep
+    assert "Qui l'a fait (peut accompagner)" in rep
     assert html.count("player target") == 5 and len(re.findall(r"class=\"player[^\"]* dim\"", html)) == 5
     rep = c.get("/grimpeurs?quoi=donjon:3").text.split('id="answer"')[1]
     assert "vaincre Donjon des Bouftous" in rep
     rep = c.get("/grimpeurs?quoi=categorie:principales").text.split('id="answer"')[1]
-    assert "Pas encore fait <small>6 sur 10 · le point Quêtes principales" in rep
+    assert "Qui ne l'a pas fait <small>6 sur 10 · le point Quêtes principales" in rep
 
 
 def test_lien_qui_manque_de_chaque_tuile():
