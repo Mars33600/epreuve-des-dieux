@@ -3,6 +3,7 @@
     GET  /builder                         mes builds et ceux de la guilde, et « Nouveau build »
     GET  /builder/nouveau                 l'éditeur, sur un build vierge
     GET  /api/builder/objets              la fenêtre de choix d'un emplacement (filtres de Duffus)
+    POST /api/builder/sorts               les sorts de la classe au niveau du build (tables de l'encyclopédie)
     POST /api/builder/calcul              totaux, panoplies, conditions, base, parchemins, dérivés (sans effet de bord)
     GET  /builder/{id}                    un build : éditeur pour l'auteur, lecture seule s'il est partagé
     POST /api/builder/builds              enregistrer un nouveau build (grimpeur, jeton CSRF)
@@ -37,6 +38,7 @@ from epreuve.builder.catalogue import Catalogue, catalogue_par_defaut
 from epreuve.builder.depot import BuildEnregistre, Contenu, DepotBuilds
 from epreuve.builder.effets import (
     CARACS_PRINCIPALES,
+    EFFET_POSITIF,
     EMPLACEMENTS,
     GROUPES,
     NOMS_EMPLACEMENTS,
@@ -45,7 +47,9 @@ from epreuve.builder.effets import (
     TYPES_DOFUS,
     TYPES_FAMILIERS,
 )
+from epreuve.builder.sorts import calculer_sort
 from epreuve.domaine.classes import CLASSES
+from epreuve.encyclopedie.textes import icone_sort
 
 ICI = Path(__file__).parent
 COOKIE_SESSION = "__Host-session"
@@ -129,7 +133,8 @@ def _contexte_editeur() -> dict:
         "dofus": [[t, nom] for nom, t in TYPES_DOFUS.items()],
     }
     return {"emplacements": [[e, NOMS_EMPLACEMENTS[e]] for e in EMPLACEMENTS], "familles": familles,
-            "caracs": list(ORDRE_CARACS), "classes": list(CLASSES), "principales": list(CARACS_PRINCIPALES),
+            "caracs": list(ORDRE_CARACS), "classes": list(CLASSES), "effet_positif": EFFET_POSITIF,
+            "principales": list(CARACS_PRINCIPALES),
             "groupes": [[nom, list(c)] for nom, c in GROUPES]}
 
 
@@ -168,7 +173,8 @@ def _enregistrable(request: Request, v: Visiteur) -> bool:
 def _build_json(b: BuildEnregistre) -> dict:
     c = b.contenu
     return {"id": b.id, "auteur": b.auteur, "nom": c.nom, "classe": c.classe, "niveau": c.niveau, "objets": c.objets,
-            "caracs_base": c.caracs_base, "caracs_parcho": c.caracs_parcho, "note": c.note, "partage": c.partage}
+            "caracs_base": c.caracs_base, "caracs_parcho": c.caracs_parcho, "note": c.note, "partage": c.partage,
+            "fm": c.fm}
 
 
 @routeur.get("/builder/{build_id:int}", response_class=HTMLResponse)
@@ -213,7 +219,8 @@ async def page_comparer(request: Request, a: int | None = None, b: int | None = 
             colonnes.append(None)
             continue
         c = x.contenu
-        r = calculer(Build(c.niveau, c.objets, c.caracs_base, c.caracs_parcho), s.catalogue())
+        fm = {e: {int(k): v for k, v in f.items()} for e, f in c.fm.items()}
+        r = calculer(Build(c.niveau, c.objets, c.caracs_base, c.caracs_parcho, fm), s.catalogue())
         colonnes.append({"build": x, "r": r})
     lignes = []
     if all(colonnes):
@@ -261,12 +268,14 @@ class CorpsBuild(BaseModel):
     objets: dict[str, int | None] = Field(default_factory=dict, max_length=32)
     caracs_base: dict[str, int] = Field(default_factory=dict, max_length=12)
     caracs_parcho: dict[str, int] = Field(default_factory=dict, max_length=12)
+    fm: dict[str, dict[int, int]] = Field(default_factory=dict, max_length=16)
     mode_arme: str = "melee"
     buff_arme: str = ""
 
     def build(self) -> Build:
         bornes = lambda d: {k: max(-10_000, min(10_000, v)) for k, v in d.items()}  # noqa: E731
-        return Build(self.niveau, dict(self.objets), bornes(self.caracs_base), bornes(self.caracs_parcho))
+        fm = {e: bornes(dict(list(effets.items())[:32])) for e, effets in self.fm.items()}
+        return Build(self.niveau, dict(self.objets), bornes(self.caracs_base), bornes(self.caracs_parcho), fm)
 
 
 def resultat_json(build: Build, catalogue: Catalogue, mode_arme: str = "melee", buff_arme: str = "") -> dict:
@@ -304,6 +313,30 @@ async def api_calcul(request: Request) -> Response:
     return JSONResponse({"ok": True, **resultat})
 
 
+class CorpsSorts(CorpsBuild):
+    classe: str
+
+
+@routeur.post("/api/builder/sorts")
+async def api_sorts(request: Request) -> Response:
+    if await _visiteur(request) is None:
+        return _erreur(401, MESSAGE_CONNEXION)
+    corps = await _lire_corps(request, CorpsSorts)
+    if corps is None or corps.classe not in CLASSES or corps.mode_arme not in MODES:
+        return _erreur(422, "Classe ou réglage inconnu.")
+    s = _services(request)
+    if s.builds is None:
+        return JSONResponse({"ok": True, "sorts": []})
+    b = nettoyer(corps.build())
+    totaux = calculer(b, s.catalogue()).totaux
+    sorts = []
+    for sort in await s.builds.sorts_de_classe(corps.classe):
+        r = calculer_sort(sort, totaux, b.niveau, corps.mode_arme)
+        if r is not None and (r["normal"] or r["critique"]):
+            sorts.append({**r, "icone": icone_sort(r["icone"])})
+    return JSONResponse({"ok": True, "sorts": sorts})
+
+
 # --- Enregistrement -------------------------------------------------------------------------------------------
 
 
@@ -318,7 +351,8 @@ class CorpsEnregistre(CorpsBuild):
             return None
         b = nettoyer(self.build())
         return Contenu(self.nom.strip(), self.classe, b.niveau, {k: v for k, v in b.objets.items() if v is not None},
-                       b.caracs_base, b.caracs_parcho, self.note, self.partage)
+                       b.caracs_base, b.caracs_parcho, self.note, self.partage,
+                       {e: {str(k): v for k, v in f.items()} for e, f in b.fm.items()})
 
 
 def _origine_permise(request: Request) -> bool:
@@ -392,7 +426,7 @@ async def api_dupliquer(request: Request, build_id: int) -> Response:
         return _erreur(404, "Build introuvable.")
     c = source.contenu
     copie = Contenu(f"Copie de {c.nom}"[:80], c.classe, c.niveau, c.objets, c.caracs_base, c.caracs_parcho, c.note,
-                    partage=False)
+                    partage=False, fm=c.fm)
     s = _services(request)
     return JSONResponse({"ok": True, "id": await s.builds.creer(v.grimpeur_id, copie, s.horloge())},
                         status_code=201)

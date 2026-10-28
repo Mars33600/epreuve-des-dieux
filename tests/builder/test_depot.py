@@ -8,7 +8,8 @@ from sqlalchemy.exc import IntegrityError
 from epreuve.builder.depot import Contenu, DepotBuilds
 from tests.fabrique import PENDANT
 
-BUILD = Contenu("Iop Bouftou", "Iop", 50, {"coiffe": 2411}, {"Force": 100}, {"Force": 100}, "note", False)
+BUILD = Contenu("Iop Bouftou", "Iop", 50, {"coiffe": 2411}, {"Force": 100}, {"Force": 100}, "note", False,
+                {"coiffe": {"118": 25}})
 
 
 @pytest.fixture
@@ -51,3 +52,27 @@ async def test_contraintes(builds):
         await d.creer(g1, Contenu("", "Iop", 50, {}, {}, {}), PENDANT)
     with pytest.raises(IntegrityError):
         await d.creer(g1, Contenu("x", "Iop", 201, {}, {}, {}), PENDANT)
+
+
+async def test_sorts_de_classe_depuis_l_encyclopedie(builds, moteur):
+    from sqlalchemy import delete, insert
+
+    from epreuve.encyclopedie import tables as ency
+
+    d, _, _ = builds
+    async with moteur.begin() as c:
+        await c.execute(delete(ency.ency_classe).where(ency.ency_classe.c.id == 999))
+        await c.execute(delete(ency.ency_sort).where(ency.ency_sort.c.id.in_([9001, 9002])))
+        await c.execute(insert(ency.ency_classe).values(id=999, nom="Classe test", sorts=[9002, 9001, 9003]))
+        await c.execute(insert(ency.ency_sort), [
+            {"id": 9001, "nom": "Un", "cle_recherche": "un", "icone": 1, "niveaux": [{"grade": 1}]},
+            {"id": 9002, "nom": "Deux", "cle_recherche": "deux", "icone": 2, "niveaux": []}])
+    try:
+        sorts = await d.sorts_de_classe("Classe test")
+        assert [s["nom"] for s in sorts] == ["Deux", "Un"]  # ordre de la classe ; 9003 absent ignoré
+        assert sorts[1]["niveaux"] == [{"grade": 1}]
+        assert await d.sorts_de_classe("Inconnue") == []
+    finally:
+        async with moteur.begin() as c:
+            await c.execute(delete(ency.ency_classe).where(ency.ency_classe.c.id == 999))
+            await c.execute(delete(ency.ency_sort).where(ency.ency_sort.c.id.in_([9001, 9002])))

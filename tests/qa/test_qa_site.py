@@ -91,8 +91,9 @@ def test_post_sans_csrf_ou_d_origine_etrangere_refuse_partout():
     m = monde()
     c = m.connecter(ID_MARCEAU)
     t = m.csrf(c)
+    CALCULS_PURS = ("/api/builder/calcul", "/api/builder/sorts")  # sans écriture : pas de CSRF
     posts = [re.sub(r"\{[^}]+\}", "1", r.path) for r in routes_declarees(m.app) if "POST" in getattr(r, "methods", ())
-             if r.path != "/api/builder/calcul"]  # calcul pur, sans écriture : pas de CSRF
+             if r.path not in CALCULS_PURS]
     assert len(posts) >= 14
     journal_avant = len(m.depot._journal)
     for chemin in posts:

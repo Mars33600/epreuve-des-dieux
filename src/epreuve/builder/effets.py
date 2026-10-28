@@ -39,6 +39,11 @@ ORDRE_CARACS: tuple[str, ...] = (
     "% Do Dist", "% Do Mélée", "% Do Armes",
 )  # fmt: skip
 assert set(EFFET_CARAC.values()) == set(ORDRE_CARACS)
+# Pour un exo de forgemagie : l'effet positif de chaque caractéristique (le premier de la table).
+EFFET_POSITIF: dict[str, int] = {}
+for _eid, _carac in EFFET_CARAC.items():
+    EFFET_POSITIF.setdefault(_carac, _eid)
+EFFET_POSITIF["% Res Dist"] = 2807  # 2806 est le malus (bonustype -1 dans la table `effects`)
 
 # Les 6 caractéristiques qui reçoivent des points de base et des parchemins (`$s`).
 CARACS_PRINCIPALES: tuple[str, ...] = ("Vitalité", "Sagesse", "Force", "Intelligence", "Chance", "Agilité")

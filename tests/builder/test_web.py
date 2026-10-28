@@ -217,6 +217,11 @@ class FauxBuilds:
     async def de_grimpeur(self, grimpeur_id):
         return [b for b in self.lignes.values() if b.grimpeur_id == grimpeur_id]
 
+    async def sorts_de_classe(self, classe):
+        from tests.builder.test_sorts import PRESSION
+
+        return [PRESSION] if classe == "Iop" else []
+
     async def partages(self, sauf_grimpeur=None, limite=200):
         return [b for b in self.lignes.values() if b.contenu.partage and b.grimpeur_id != sauf_grimpeur]
 
@@ -325,3 +330,33 @@ def test_calcul_arme_dans_l_api():
     assert feu["libelle"] == "dommages Feu" and feu["normal"] == [18, 36]  # (300 + 50 + 100) / 100 × 4 et × 8
     assert client().post("/api/builder/calcul", json={"objets": {}}).json()["arme"] is None
     assert client().post("/api/builder/calcul", json={"mode_arme": "lancer"}).status_code == 422
+
+
+def test_sorts_de_la_classe():
+    corps = {"niveau": 200, "classe": "Iop", "caracs_base": {"Force": 100}}
+    d = client(builds=FauxBuilds()).post("/api/builder/sorts", json=corps).json()
+    [pression] = d["sorts"]
+    assert pression["nom"] == "Pression" and pression["grade"] == 3
+    assert pression["icone"] == "https://api.dofusdb.fr/img/spells/11830.png"
+    assert pression["normal"][0]["jet"] == [52, 60]  # (100 + 100) / 100 × 26 et × 30
+    feca = client(builds=FauxBuilds()).post("/api/builder/sorts", json={**corps, "classe": "Féca"}).json()
+    assert feca["sorts"] == []
+    assert client().post("/api/builder/sorts", json=corps).json()["sorts"] == []  # sans base
+    assert client(builds=FauxBuilds()).post("/api/builder/sorts", json={"classe": "Druide"}).status_code == 422
+    assert client(None).post("/api/builder/sorts", json=corps).status_code == 401
+
+
+def test_forgemagie_dans_l_api_et_enregistree():
+    builds = FauxBuilds()
+    moi = client(MOI, builds=builds)
+    fm = {"coiffe": {"118": 25, "111": 1}}
+    d = moi.post("/api/builder/calcul", json={"objets": {"coiffe": 2411}, "fm": fm}).json()
+    assert d["totaux"]["Force"] == 25 and d["affichage"]["PA"] == 8
+    assert d["objets"]["coiffe"]["effets"] == [[118, 16, 20, "Force", 20], [126, 16, 20, "Intelligence", 20]]
+    corps = {**CORPS, "fm": {"coiffe": {"118": 25}, "cape": {"118": 9}}}
+    bid = moi.post("/api/builder/builds", json=corps, headers=CSRF).json()["id"]
+    assert builds.lignes[bid].contenu.fm == {"coiffe": {"118": 25}}  # pas d'objet en cape : ignorée
+    assert '"fm": {"coiffe": {"118": 25}}' in moi.get(f"/builder/{bid}").text
+    trop = {"objets": {"coiffe": 2411}, "fm": {"coiffe": {str(i): 1 for i in range(40)}}}
+    assert moi.post("/api/builder/calcul", json=trop).status_code == 200  # 32 effets au plus par emplacement
+    assert moi.post("/api/builder/calcul", json={"fm": {"coiffe": {"x": 1}}}).status_code == 422

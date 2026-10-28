@@ -66,6 +66,14 @@
   <div id="b-arme"><p class="b-vide">Aucune arme équipée.</p></div>
 </section>
 
+<section class="b-carte" aria-labelledby="t-sorts">
+  <details id="b-sorts-zone">
+    <summary><h2 id="t-sorts">Dégâts des sorts</h2></summary>
+    <p class="b-aide">Les sorts de la classe au niveau du build, au grade le plus haut appris, avec les caractéristiques du build (mêlée ou distance comme pour l'arme).</p>
+    <ul class="b-sorts" id="b-sorts"></ul>
+  </details>
+</section>
+
 <section class="b-carte" aria-labelledby="t-panoplies">
   <h2 id="t-panoplies">Bonus de panoplie</h2>
   <div id="b-panoplies"><p class="b-vide">Aucune panoplie active (il faut au moins 2 objets d'une même panoplie).</p></div>
@@ -98,6 +106,16 @@
   </div>
   <p class="b-choix-compte" id="b-choix-compte" aria-live="polite"></p>
   <button type="button" class="b-bouton b-retirer" id="b-retirer" hidden>Retirer l'objet</button>
+  <section class="b-fm" id="b-fm" hidden aria-labelledby="b-fm-titre">
+    <h3 id="b-fm-titre" class="b-surtitre">Forgemagie de l'objet porté</h3>
+    <p class="b-aide">Par défaut, le jet maximal. Change une valeur, ou ajoute un exo.</p>
+    <div class="b-fm-lignes" id="b-fm-lignes"></div>
+    <div class="b-fm-exo">
+      <select id="b-fm-carac" aria-label="Caractéristique de l'exo"></select>
+      <input id="b-fm-valeur" type="number" inputmode="numeric" value="1" aria-label="Valeur de l'exo">
+      <button type="button" class="b-bouton" id="b-fm-ajouter">Ajouter l'exo</button>
+    </div>
+  </section>
   <ul class="b-resultats" id="b-resultats"></ul>
   <button type="button" class="b-bouton" id="b-plus" hidden>Plus de résultats</button>
 </dialog>
