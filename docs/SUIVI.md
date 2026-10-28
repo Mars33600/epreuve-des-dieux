@@ -55,7 +55,7 @@ Détails : `DECISIONS-V4.md`.
 - [ ] Encyclopédie : objets, monstres, recettes faits ; manquent sorts, PNJ, quêtes, page panoplies
 - [ ] Outils (sans les tutoriels)
 - [x] Stuffs (builds PvM de Duffus)
-- [ ] Builder
+- [ ] Builder : base faite (objets, panoplies, conditions, totaux, builds partagés) ; manquent forgemagie, calculateurs d'arme et de sorts, comparaison, variantes
 - [x] Rien ne renvoie à Duffus (en-têtes, Twitch, Discord, soutien), sauf « Merci Duffus »
 
 ## Crédit
