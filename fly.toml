@@ -4,10 +4,9 @@ primary_region = "cdg"            # Paris
 
 [build]
 
-# Lot A : pas de schéma à migrer. Le lot B remet la commande de release :
-# les migrations passent AVANT la bascule vers la nouvelle version.
-# [deploy]
-#   release_command = "alembic upgrade head"
+# Les migrations passent AVANT la bascule vers la nouvelle version.
+[deploy]
+  release_command = "alembic upgrade head"
 
 [env]
   # Réglages publics du mode (ARCHITECTURE §11). Les secrets passent par `fly secrets set`.
