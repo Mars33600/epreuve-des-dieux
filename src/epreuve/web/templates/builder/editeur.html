@@ -1,0 +1,52 @@
+{% extends "builder/_cadre.html" %}
+{% block titre %}{% if config.build %}{{ config.build.nom }} · {% endif %}Builder · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<script type="application/json" id="config-builder">{{ config|tojson }}</script>
+
+<section class="b-carte b-identite" aria-label="Le build">
+  <label class="b-champ b-champ-nom">Nom
+    <input id="b-nom" type="text" maxlength="80" autocomplete="off" placeholder="Mon build" {% if not config.modifiable %}disabled{% endif %}>
+  </label>
+  <label class="b-champ">Classe
+    <select id="b-classe" {% if not config.modifiable %}disabled{% endif %}>
+      {% for c in config.classes %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+    </select>
+  </label>
+  <label class="b-champ b-champ-niveau">Niveau
+    <input id="b-niveau" type="number" inputmode="numeric" min="1" max="200" value="200" {% if not config.modifiable %}disabled{% endif %}>
+  </label>
+  <p class="b-etat" id="b-etat" role="status" aria-live="polite"></p>
+</section>
+
+<section class="b-carte" aria-labelledby="t-equipement">
+  <h2 id="t-equipement">Équipement</h2>
+  <ul class="b-emplacements" id="b-emplacements"></ul>
+  <div class="b-alertes" id="b-alertes" aria-live="polite"></div>
+</section>
+
+{% block sections_calcul %}{% endblock %}
+
+<dialog class="b-choix" id="b-choix" aria-labelledby="b-choix-titre">
+  <form method="dialog" class="b-choix-tete">
+    <h2 id="b-choix-titre">Choisir</h2>
+    <button class="b-fermer" value="fermer" aria-label="Fermer">×</button>
+  </form>
+  <div class="b-filtres">
+    <input id="f-texte" type="search" placeholder="Nom de l'objet" autocomplete="off" aria-label="Nom de l'objet">
+    <div class="b-filtres-ligne">
+      <label>Niveau min <input id="f-min" type="number" inputmode="numeric" min="1" max="200"></label>
+      <label>max <input id="f-max" type="number" inputmode="numeric" min="1" max="200"></label>
+    </div>
+    <div class="b-puces" id="f-types" aria-label="Types"></div>
+    <label class="b-filtre-carac">Caractéristique
+      <select id="f-carac"><option value="">Ajouter…</option></select>
+    </label>
+    <div class="b-puces" id="f-caracs" aria-label="Caractéristiques demandées"></div>
+  </div>
+  <p class="b-choix-compte" id="b-choix-compte" aria-live="polite"></p>
+  <button type="button" class="b-bouton b-retirer" id="b-retirer" hidden>Retirer l'objet</button>
+  <ul class="b-resultats" id="b-resultats"></ul>
+  <button type="button" class="b-bouton" id="b-plus" hidden>Plus de résultats</button>
+</dialog>
+{% endblock %}
+{% block scripts %}<script src="/static/builder/builder.js" defer></script>{% endblock %}

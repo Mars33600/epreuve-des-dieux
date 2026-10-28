@@ -29,6 +29,7 @@ from fastapi.templating import Jinja2Templates
 
 from epreuve.config import Config
 from epreuve.domaine.mode_site import mode_effectif
+from epreuve.web import builder
 from epreuve.web.securite import ENTETES_SECURITE, EntetesSecurite, FiltreMode
 
 journal = logging.getLogger("epreuve.web")
@@ -65,6 +66,7 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
     app.add_middleware(FiltreMode, reglage=config.site_mode, ouvert_le=config.site_ouvert_le, horloge=horloge)
     app.add_middleware(EntetesSecurite)
     gabarits = Jinja2Templates(directory=ICI / "templates")
+    builder.brancher(app, source)  # lot E3 : le builder (/builder, /api/builder/…), sur connexion
     ouverture = config.site_ouvert_le.astimezone(ZoneInfo(config.fuseau))  # pour la date écrite en clair
 
     def mode():
