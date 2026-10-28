@@ -55,7 +55,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] Encyclopédie (objets, monstres, recettes, panoplies, sorts, PNJ, quêtes), à fusionner ; manquent les cartes et les variantes de sorts
 - [ ] Outils (sans les tutoriels) : 6 sur 7 faits (Almanax, drop, classes et sorts, élevage, craft, XP des métiers) ; manque la carte interactive
 - [x] Stuffs (builds PvM de Duffus)
-- [ ] Builder : base faite (objets, panoplies, conditions, totaux, builds partagés) ; manquent forgemagie, calculateurs d'arme et de sorts, comparaison, variantes
+- [ ] Builder : objets, panoplies, conditions, totaux, builds partagés, comparaison, duplication et dégâts d'arme faits ; manquent le calculateur de sorts, la forgemagie et les variantes (environ 7 jours)
 - [x] Rien ne renvoie à Duffus (en-têtes, Twitch, Discord, soutien), sauf « Merci Duffus »
 
 ## Crédit
