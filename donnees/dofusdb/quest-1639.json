@@ -1,0 +1,14 @@
+{
+ "id": 1639,
+ "levelMax": 3,
+ "levelMin": 3,
+ "name": {
+  "de": "Ungewöhnliche Verkehrsmittel",
+  "en": "Uncommon Transport",
+  "es": "Transporte único",
+  "fr": "Transport peu commun",
+  "id": "554201",
+  "pt": "Transporte incomum"
+ },
+ "startCriterion": "BT=1"
+}

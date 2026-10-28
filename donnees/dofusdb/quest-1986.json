@@ -1,0 +1,14 @@
+{
+ "id": 1986,
+ "levelMax": 25,
+ "levelMin": 25,
+ "name": {
+  "de": "Sparringspartner",
+  "en": "Golemelder",
+  "es": "Golemante",
+  "fr": "Golémancien",
+  "id": "749102",
+  "pt": "Golemante"
+ },
+ "startCriterion": "Qf=1985"
+}

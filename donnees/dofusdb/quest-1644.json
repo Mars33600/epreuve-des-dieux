@@ -1,0 +1,14 @@
+{
+ "id": 1644,
+ "levelMax": 6,
+ "levelMin": 6,
+ "name": {
+  "de": "Schlag ins Wasser",
+  "en": "Water Cutter",
+  "es": "Fiesta del agua",
+  "fr": "Coups d'épée dans l'eau",
+  "id": "554194",
+  "pt": "Por água abaixo"
+ },
+ "startCriterion": "Qf=1643"
+}

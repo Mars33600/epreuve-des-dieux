@@ -1,0 +1,14 @@
+{
+ "id": 1989,
+ "levelMax": 30,
+ "levelMin": 30,
+ "name": {
+  "de": "Rasche Restaurierung",
+  "en": "Quick Recovery",
+  "es": "Restauración rápida",
+  "fr": "Restauration rapide",
+  "id": "753356",
+  "pt": "Restauração rápida"
+ },
+ "startCriterion": "Qf=1988"
+}

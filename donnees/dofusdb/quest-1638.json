@@ -1,0 +1,14 @@
+{
+ "id": 1638,
+ "levelMax": 10,
+ "levelMin": 10,
+ "name": {
+  "de": "Kryptologie",
+  "en": "Cryptology",
+  "es": "Criptología",
+  "fr": "Cryptologie",
+  "id": "554202",
+  "pt": "Criptologia"
+ },
+ "startCriterion": "BT=1"
+}

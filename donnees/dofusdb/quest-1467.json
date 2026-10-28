@@ -1,0 +1,14 @@
+{
+ "id": 1467,
+ "levelMax": 100,
+ "levelMin": 100,
+ "name": {
+  "de": "Die Geburt einer Mission",
+  "en": "The Birth of a Mission",
+  "es": "Nacimiento de una vocación",
+  "fr": "Naissance d'une vocation",
+  "id": "421745",
+  "pt": "Assim nasce uma vocação"
+ },
+ "startCriterion": "Qf=1466"
+}

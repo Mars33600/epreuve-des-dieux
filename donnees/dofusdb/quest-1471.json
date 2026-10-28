@@ -1,0 +1,14 @@
+{
+ "id": 1471,
+ "levelMax": 120,
+ "levelMin": 120,
+ "name": {
+  "de": "In Erinnerungen schwelgen",
+  "en": "A Trip Back in Time",
+  "es": "Destinación final",
+  "fr": "Ultime réminiscence",
+  "id": "421722",
+  "pt": "Última reminiscência"
+ },
+ "startCriterion": "Qf=1470&PL>79"
+}

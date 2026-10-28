@@ -1,0 +1,14 @@
+{
+ "id": 1641,
+ "levelMax": 6,
+ "levelMin": 6,
+ "name": {
+  "de": "Von oben",
+  "en": "Bird's-eye",
+  "es": "Vistas celestes",
+  "fr": "Vu du ciel",
+  "id": "554187",
+  "pt": "Visto do céu"
+ },
+ "startCriterion": "Qf=1640"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1841,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Eine tierisch harte Ausbildung",
+  "en": "A Militiamutt's Life",
+  "es": "Recibimiento de wauwaus",
+  "fr": "Une vie de milichien",
+  "id": "720604",
+  "pt": "Uma vida de milicianino"
+ },
+ "startCriterion": "Qf=2009&PG=18"
+}

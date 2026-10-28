@@ -1,0 +1,62 @@
+{
+ "categoryId": 40,
+ "description": {
+  "de": "Die Questen des Smaragd-Dofus beenden.",
+  "en": "Complete all the Emerald Dofus quests.",
+  "es": "Terminar la serie de misiones del dofus Esmeralda.",
+  "fr": "Terminer la série des quêtes du Dofus Émeraude.",
+  "id": "373176",
+  "pt": "Terminar a série de missões do Dofus Esmeralda."
+ },
+ "id": 1048,
+ "name": {
+  "de": "Smaragdgrün",
+  "en": "Green Emerald",
+  "es": "Verde esmeralda",
+  "fr": "Vert émeraude",
+  "id": "373175",
+  "pt": "Verde-esmeralda"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1463)",
+   "id": 3193,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1464)",
+   "id": 3194,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=1465)",
+   "id": 3195,
+   "order": 2
+  },
+  {
+   "criterion": "(Qf=1466)",
+   "id": 3196,
+   "order": 3
+  },
+  {
+   "criterion": "(Qf=1467)",
+   "id": 3197,
+   "order": 4
+  },
+  {
+   "criterion": "(Qf=1469)",
+   "id": 3198,
+   "order": 5
+  },
+  {
+   "criterion": "(Qf=1470)",
+   "id": 3199,
+   "order": 6
+  },
+  {
+   "criterion": "(Qf=1471)",
+   "id": 3200,
+   "order": 7
+  }
+ ]
+}

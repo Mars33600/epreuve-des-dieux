@@ -1,0 +1,14 @@
+{
+ "id": 2195,
+ "levelMax": 40,
+ "levelMin": 40,
+ "name": {
+  "de": "Dark Vlad sehen und sterben ... oder auch nicht",
+  "en": "See Dark Vlad and Die... or Not",
+  "es": "Ver a Dark Vlad y morir... o no",
+  "fr": "Voir le Dark Vlad et mourir... ou pas",
+  "id": "842105",
+  "pt": "Ver o Dark Vlad morrer... ou não"
+ },
+ "startCriterion": "Qf=2194"
+}

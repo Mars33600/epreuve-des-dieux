@@ -1,0 +1,14 @@
+{
+ "id": 1987,
+ "levelMax": 30,
+ "levelMin": 30,
+ "name": {
+  "de": "Rebell aus dem Wald",
+  "en": "Things We Lost in the Forest",
+  "es": "El rebelde del bosque",
+  "fr": "Le rebelle de la forêt",
+  "id": "754685",
+  "pt": "O rebelde da floresta"
+ },
+ "startCriterion": "Qf=1986"
+}

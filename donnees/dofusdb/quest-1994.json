@@ -1,0 +1,14 @@
+{
+ "id": 1994,
+ "levelMax": 30,
+ "levelMin": 30,
+ "name": {
+  "de": "Ungleich und Ungleich gesellt sich nicht gern",
+  "en": "An Odd Pair",
+  "es": "Vaya par",
+  "fr": "Les deux font l'impair",
+  "id": "748652",
+  "pt": "Meu melhor inimigo"
+ },
+ "startCriterion": "PL>19"
+}

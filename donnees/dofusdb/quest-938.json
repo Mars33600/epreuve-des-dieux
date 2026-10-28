@@ -1,0 +1,14 @@
+{
+ "id": 938,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Die mysteriöse Kreatur aus dem blauen See",
+  "en": "Creature from the Blue Lagoon",
+  "es": "El monstruo de la laguna azul",
+  "fr": "L'étrange créature de l'étang bleu",
+  "id": "421988",
+  "pt": "O monstro da lagoa azul"
+ },
+ "startCriterion": "Qf=2009&PG=15"
+}

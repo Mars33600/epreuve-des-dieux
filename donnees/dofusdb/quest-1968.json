@@ -1,0 +1,14 @@
+{
+ "id": 1968,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Auf gut Unglück",
+  "en": "I Should Be So Unlucky",
+  "es": "No hay bien que por mal no venga",
+  "fr": "Au petit malheur la chance",
+  "id": "756036",
+  "pt": "Sete anos de sorte"
+ },
+ "startCriterion": "Qf=2009&PG=6"
+}

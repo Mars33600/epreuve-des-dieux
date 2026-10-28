@@ -1,0 +1,14 @@
+{
+ "id": 2470,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Der banale Alltag eines Ritters der Stadt",
+  "en": "Another Quiet Knight in the City",
+  "es": "La rutina anodina del caballero de ciudad",
+  "fr": "La routine anodine du chevalier citadin",
+  "id": "972154",
+  "pt": "A rotina anódina do cavaleiro citadino"
+ },
+ "startCriterion": "Qf=2009&PG=20"
+}

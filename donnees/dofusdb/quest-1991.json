@@ -1,0 +1,14 @@
+{
+ "id": 1991,
+ "levelMax": 40,
+ "levelMin": 40,
+ "name": {
+  "de": "Herbstlegende",
+  "en": "Legend of Autumn",
+  "es": "Leyenda del otoño",
+  "fr": "Légende d'automne",
+  "id": "753362",
+  "pt": "Lenda do outono"
+ },
+ "startCriterion": "Qf=1990"
+}

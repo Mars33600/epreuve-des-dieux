@@ -1,0 +1,14 @@
+{
+ "id": 1990,
+ "levelMax": 35,
+ "levelMin": 35,
+ "name": {
+  "de": "Echte Leseratten",
+  "en": "Real Library Rats",
+  "es": "Verdaderas ratas de biblioteca",
+  "fr": "De vrais rats de bibliothèque",
+  "id": "753359",
+  "pt": "Verdadeiros ratos de biblioteca"
+ },
+ "startCriterion": "Qf=1989"
+}

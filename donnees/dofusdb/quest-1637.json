@@ -1,0 +1,14 @@
+{
+ "id": 1637,
+ "levelMax": 7,
+ "levelMin": 7,
+ "name": {
+  "de": "Das geheimnisvolle Fladenbrot",
+  "en": "Secret Pancake",
+  "es": "La torta secreta",
+  "fr": "La galette secrète",
+  "id": "554204",
+  "pt": "A torta secreta"
+ },
+ "startCriterion": "BT=1"
+}

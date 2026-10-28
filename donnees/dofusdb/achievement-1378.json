@@ -1,0 +1,47 @@
+{
+ "categoryId": 53,
+ "description": {
+  "de": "Alle Hauptquesten von Incarnam vollenden",
+  "en": "Complete all Incarnam's main quests.",
+  "es": "Terminar la serie de misiones principales de Incarnam.",
+  "fr": "Terminer la série des quêtes principales d'Incarnam.",
+  "id": "554110",
+  "pt": "Terminar a série de missões principais de Incarnam."
+ },
+ "id": 1378,
+ "name": {
+  "de": "Auf geht's ins Abenteuer!",
+  "en": "Adventure Time",
+  "es": "En marcha hacia la aventura",
+  "fr": "En route pour l'aventure",
+  "id": "888675",
+  "pt": "A caminho da aventura"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1631)",
+   "id": 4124,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1632)",
+   "id": 4125,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=1634)",
+   "id": 4126,
+   "order": 2
+  },
+  {
+   "criterion": "(Qf=1635)",
+   "id": 4127,
+   "order": 3
+  },
+  {
+   "criterion": "(Qf=2004)",
+   "id": 4128,
+   "order": 4
+  }
+ ]
+}

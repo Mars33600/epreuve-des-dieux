@@ -1,0 +1,14 @@
+{
+ "id": 1975,
+ "levelMax": 15,
+ "levelMin": 15,
+ "name": {
+  "de": "Ins Wasser gefallen",
+  "en": "Down the Drain",
+  "es": "Esto hace aguas",
+  "fr": "Ça tombe à l'eau",
+  "id": "752368",
+  "pt": "Burros n'água"
+ },
+ "startCriterion": "Qf=1958"
+}

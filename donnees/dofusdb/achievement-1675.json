@@ -1,0 +1,37 @@
+{
+ "categoryId": 45,
+ "description": {
+  "de": "Folgende Questen absolvieren",
+  "en": "Complete the following quests.",
+  "es": "Terminar las siguientes misiones.",
+  "fr": "Terminer les quêtes suivantes.",
+  "id": "754693",
+  "pt": "Completar as seguintes missões."
+ },
+ "id": 1675,
+ "name": {
+  "de": "Städtische Wohngebiete",
+  "en": "Urban Living",
+  "es": "El hábitat urbano",
+  "fr": "L'habitat urbain",
+  "id": "754830",
+  "pt": "O habitat urbano"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1992)",
+   "id": 5353,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1994)",
+   "id": 5355,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=718)",
+   "id": 17882,
+   "order": 2
+  }
+ ]
+}

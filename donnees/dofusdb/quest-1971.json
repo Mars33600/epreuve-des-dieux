@@ -1,0 +1,14 @@
+{
+ "id": 1971,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Apfelmus",
+  "en": "An Api a Day",
+  "es": "No hay cosa más sana que una manzana",
+  "fr": "C'est pour ta pomme",
+  "id": "754817",
+  "pt": "Ao vencedor as maçãs"
+ },
+ "startCriterion": "Qf=2009&PG=9"
+}

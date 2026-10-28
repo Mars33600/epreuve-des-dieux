@@ -1,0 +1,14 @@
+{
+ "id": 1983,
+ "levelMax": 40,
+ "levelMin": 40,
+ "name": {
+  "de": "Meisterdiebe",
+  "en": "Burglareal",
+  "es": "Los ases del hurto",
+  "fr": "Les as de la cambriole",
+  "id": "748633",
+  "pt": "Invasão de domicílio"
+ },
+ "startCriterion": "Qa=1979&PL>29"
+}

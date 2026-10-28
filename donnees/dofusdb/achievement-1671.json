@@ -1,0 +1,37 @@
+{
+ "categoryId": 45,
+ "description": {
+  "de": "Die Erkundungsquesten beenden",
+  "en": "Complete all the exploration quests.",
+  "es": "Terminar la serie de misiones relacionadas con la exploración.",
+  "fr": "Terminer la série des quêtes liées à l'exploration.",
+  "id": "754649",
+  "pt": "Completar a série de missões relacionadas à exploração."
+ },
+ "id": 1671,
+ "name": {
+  "de": "Gelegenheit macht Diebe",
+  "en": "Opportunity Makes a Thief",
+  "es": "La ocasión hace al ladrón",
+  "fr": "L'occasion fait le larron",
+  "id": "754851",
+  "pt": "A ocasião faz o ladrão"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1975)",
+   "id": 5336,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1976)",
+   "id": 5337,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=1977)",
+   "id": 5338,
+   "order": 2
+  }
+ ]
+}

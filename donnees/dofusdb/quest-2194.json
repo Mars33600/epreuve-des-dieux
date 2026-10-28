@@ -1,0 +1,14 @@
+{
+ "id": 2194,
+ "levelMax": 40,
+ "levelMin": 40,
+ "name": {
+  "de": "Göttlicher Schutz",
+  "en": "Divine Protection",
+  "es": "Protección divina",
+  "fr": "Protection divine",
+  "id": "842110",
+  "pt": "Proteção divina"
+ },
+ "startCriterion": "Qf=2193"
+}

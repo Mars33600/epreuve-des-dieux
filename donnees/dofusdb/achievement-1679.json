@@ -1,0 +1,47 @@
+{
+ "categoryId": 45,
+ "description": {
+  "de": "Folgende Erfolge erringen",
+  "en": "Complete the following achievements:",
+  "es": "Conseguir los siguientes logros.",
+  "fr": "Obtenir les succès suivants.",
+  "id": "754765",
+  "pt": "Obter os seguintes sucessos."
+ },
+ "id": 1679,
+ "name": {
+  "de": "Von Incarnam bis Astrub",
+  "en": "From Incarnam to Astrub",
+  "es": "De Incarnam a Astrub",
+  "fr": "D'Incarnam à Astrub",
+  "id": "754822",
+  "pt": "De Incarnam a Astrub"
+ },
+ "objectives": [
+  {
+   "criterion": "(OA=1378)",
+   "id": 5375,
+   "order": 0
+  },
+  {
+   "criterion": "(OA=644)",
+   "id": 5376,
+   "order": 1
+  },
+  {
+   "criterion": "(OA=1678)",
+   "id": 5377,
+   "order": 2
+  },
+  {
+   "criterion": "(OA=1677)",
+   "id": 5378,
+   "order": 3
+  },
+  {
+   "criterion": "(BI=1)",
+   "id": 5379,
+   "order": 4
+  }
+ ]
+}

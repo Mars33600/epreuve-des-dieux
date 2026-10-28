@@ -1,0 +1,14 @@
+{
+ "id": 1677,
+ "levelMax": 12,
+ "levelMin": 12,
+ "name": {
+  "de": "Gesprochenes vergeht, Verbitterung bleibt",
+  "en": "The Words Fly Away, the Bitter Ones Stay",
+  "es": "Las palabras se las lleva el desaire",
+  "fr": "Les paroles s'envolent, les aigris restent",
+  "id": "591523",
+  "pt": "Mais vale uma bigorna na mão..."
+ },
+ "startCriterion": "Qf=2009&PG=17"
+}

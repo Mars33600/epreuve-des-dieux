@@ -1,0 +1,14 @@
+{
+ "id": 1981,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Gabelfrühstück",
+  "en": "Bottomless Fork",
+  "es": "Comer con tenedor",
+  "fr": "Déjeuner à la fourchette",
+  "id": "748575",
+  "pt": "Lanchinho leve"
+ },
+ "startCriterion": "Qa=1979&PL>14"
+}

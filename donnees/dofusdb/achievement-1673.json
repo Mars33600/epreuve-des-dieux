@@ -1,0 +1,52 @@
+{
+ "categoryId": 45,
+ "description": {
+  "de": "Die Kampfquesten beenden",
+  "en": "Complete all the battle quests.",
+  "es": "Terminar la serie de misiones asociadas a los combates.",
+  "fr": "Terminer la série des quêtes liées au combat.",
+  "id": "754668",
+  "pt": "Completar a série de missões relacionadas ao combate."
+ },
+ "id": 1673,
+ "name": {
+  "de": "Söldner aus Stahl",
+  "en": "Mercenary of Steel",
+  "es": "Mercenario de acero",
+  "fr": "Mercenaire d'acier",
+  "id": "754825",
+  "pt": "Mercenário de aço"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1978)",
+   "id": 5343,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1979)",
+   "id": 5344,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=1980)",
+   "id": 5345,
+   "order": 2
+  },
+  {
+   "criterion": "(Qf=1981)",
+   "id": 5346,
+   "order": 3
+  },
+  {
+   "criterion": "(Qf=1982)",
+   "id": 5347,
+   "order": 4
+  },
+  {
+   "criterion": "(Qf=1983)",
+   "id": 5348,
+   "order": 5
+  }
+ ]
+}

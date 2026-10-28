@@ -1,0 +1,14 @@
+{
+ "id": 1999,
+ "levelMax": 30,
+ "levelMin": 30,
+ "name": {
+  "de": "Ein Genie bei der Arbeit",
+  "en": "Shake, Shake Your Genius",
+  "es": "Genio en movimiento",
+  "fr": "Le génie se meut",
+  "id": "748891",
+  "pt": "Gênio em ação"
+ },
+ "startCriterion": "PL>19"
+}

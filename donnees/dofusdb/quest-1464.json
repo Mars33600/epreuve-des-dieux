@@ -1,0 +1,14 @@
+{
+ "id": 1464,
+ "levelMax": 50,
+ "levelMin": 50,
+ "name": {
+  "de": "Wer tritt die Allerwertesten Treter in den Allerwertesten?",
+  "en": "Who Kicks the Kicked Ass's Ass?",
+  "es": "¿Quién patea el culo de los Culo Pateado?",
+  "fr": "Qui botte le cul des Culs Bottés ?",
+  "id": "421748",
+  "pt": "Quem bota fora os Bota-Fora?"
+ },
+ "startCriterion": "Qf=1463"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1958,
+ "levelMax": 15,
+ "levelMin": 15,
+ "name": {
+  "de": "Der Beraterin guter Rat",
+  "en": "Arky's Principles Help Me",
+  "es": "Archi y sus principios",
+  "fr": "Les principes d'Archie m'aident",
+  "id": "753078",
+  "pt": "Arkya se faz, Arkya se paga"
+ },
+ "startCriterion": "BT=1"
+}

@@ -9,8 +9,9 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from collections.abc import Mapping
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime
 from pathlib import Path
 from typing import Literal
@@ -358,9 +359,10 @@ def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage]
     forcees_ids = {int(k): v for k, v in (forcees or {}).items()}
     classement = classer([q["id"] for q, _ in brutes], guides_duffus, guides_repli or {}, dofus_retenus,
                          forcees_ids)
-    sans_guide = sorted(d for d in dofus_retenus if d not in guides_duffus and d not in (guides_repli or {}))
+    sans_guide = sorted(d for d in dofus_retenus if d not in guides_duffus)
     if sans_guide:
-        e.alertes.append(f"Dofus retenus sans guide Duffus : {', '.join(sans_guide)}")
+        details = [f"{d} (repli DofusDB : {len((guides_repli or {}).get(d, ()))} quêtes)" for d in sans_guide]
+        e.alertes.append(f"Dofus retenus sans guide Duffus : {', '.join(details)}")
 
     for ordre, (entree, bloc) in enumerate(brutes, 1):
         slug = slug_quete(entree)
@@ -387,4 +389,51 @@ def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage]
         d, _ = donjon_prepare(page, aspi, 0, None)
         if d.cases:
             e.disponibles.append(d)
+    return e
+
+
+# --- Replis DofusDB (cache d'abord, réseau seulement si une réponse manque) -----------------------------------
+
+
+def _normaliser(nom: str) -> str:
+    sans_accent = "".join(c for c in unicodedata.normalize("NFD", nom) if not unicodedata.combining(c))
+    return " ".join(re.sub(r"[^\w]+", " ", sans_accent.casefold()).split())
+
+
+def guides_repli_vers_duffus(guides: Mapping[str, Mapping[int, str]], aspi: Aspiration) -> dict[str, frozenset[int]]:
+    """Les guides DofusDB (id DofusDB → nom de quête) traduits en ids `quest_list`, par le nom de la quête.
+
+    C'est le seul rapprochement par nom du projet : il ne sert qu'au repli, marqué « dofusdb » dans la revue."""
+    par_nom: dict[str, set[int]] = {}
+    for q in aspi.quetes.values():
+        par_nom.setdefault(_normaliser(q["title"]), set()).add(q["id"])
+    return {dofus: frozenset(i for nom in quetes.values() for i in par_nom.get(_normaliser(nom), ()))
+            for dofus, quetes in guides.items()}
+
+
+async def completer_par_dofusdb(e: EtagePrepare, client) -> EtagePrepare:
+    """Repli T-02 : les donjons sans succès Duffus prennent ceux de DofusDB (`dofusdb.repli`), source notée."""
+    from epreuve.dofusdb.repli import id_du_donjon, succes_du_donjon
+
+    async def completer(d: DonjonPrepare) -> tuple[DonjonPrepare, str | None]:
+        if d.cases:
+            return d, None
+        dofusdb_id = d.dofusdb_id or await id_du_donjon(client, d.nom)
+        if dofusdb_id is None:
+            return d, f"donjon « {d.nom} » : introuvable chez DofusDB, aucune case"
+        cases = tuple(CasePreparee(i, n, nom, cond, cl)
+                      for n, (i, nom, cond, cl) in enumerate(await succes_du_donjon(client, dofusdb_id), 1))
+        alerte = f"donjon « {d.nom} » : succès pris chez DofusDB (repli)"
+        if len(cases) != 5:
+            alerte += f", {len(cases)} succès au lieu de 5"
+        return replace(d, dofusdb_id=dofusdb_id, succes_source="dofusdb", cases=cases), alerte
+
+    donjons = []
+    for d in e.donjons:
+        nouveau, alerte = await completer(d)
+        donjons.append(nouveau)
+        if alerte:
+            e.alertes = [a for a in e.alertes if not a.startswith(f"donjon « {d.nom} » : succès introuvables")]
+            e.alertes.append(alerte)
+    e.donjons = donjons
     return e

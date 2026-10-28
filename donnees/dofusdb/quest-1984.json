@@ -1,0 +1,14 @@
+{
+ "id": 1984,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Krankenvertretung",
+  "en": "Health Crisis",
+  "es": "Crisis sanitaria",
+  "fr": "Crise sanitaire",
+  "id": "749027",
+  "pt": "Crise sanitária"
+ },
+ "startCriterion": "(Qa=1960&Qo>13932)|Qf=1960"
+}

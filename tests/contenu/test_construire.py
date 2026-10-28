@@ -355,15 +355,15 @@ async def test_reconstruction_met_a_jour_les_libelles(depot, moteur):
 
 def test_commande_a_blanc(capsys, monkeypatch):
     monkeypatch.delenv("DATABASE_URL", raising=False)
-    assert main(["construire", "--etage", "1", "--a-blanc"]) == 0
+    assert main(["construire", "--etage", "1", "--a-blanc", "--sans-reseau"]) == 0
     sortie = capsys.readouterr().out
     assert "tranche 20-40" in sortie and "Rien n'a été écrit" in sortie
 
 
 def test_commande_sans_base_ou_hors_guide(capsys, monkeypatch):
     monkeypatch.delenv("DATABASE_URL", raising=False)
-    assert main(["construire", "--etage", "0"]) == 1
-    assert main(["construire", "--etage", "40", "--a-blanc"]) == 1
+    assert main(["construire", "--etage", "0", "--sans-reseau"]) == 1
+    assert main(["construire", "--etage", "40", "--a-blanc", "--sans-reseau"]) == 1
     assert "Arrêt" in capsys.readouterr().err
 
 
@@ -371,6 +371,7 @@ async def test_commande_ecrit_en_base(depot, moteur, monkeypatch, url_base, caps
     import asyncio
 
     monkeypatch.setenv("DATABASE_URL", url_base)
-    resultat = await asyncio.to_thread(main, ["construire", "--etage", "0", "--aspiration", "2026-10-28"])
+    commande = ["construire", "--etage", "0", "--aspiration", "2026-10-28", "--sans-reseau"]
+    resultat = await asyncio.to_thread(main, commande)
     assert resultat == 0 and "Étage créé" in capsys.readouterr().out
     assert len(await depot.etages()) == 1

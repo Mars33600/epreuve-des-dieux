@@ -1,0 +1,14 @@
+{
+ "id": 1655,
+ "levelMax": 6,
+ "levelMin": 6,
+ "name": {
+  "de": "Ein bisschen Würze",
+  "en": "A Bit of Pigment",
+  "es": "Me importa un pigmento",
+  "fr": "Un peu de pigment",
+  "id": "554206",
+  "pt": "Um pouco de pigmento"
+ },
+ "startCriterion": "BT=1"
+}

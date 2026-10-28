@@ -1,0 +1,14 @@
+{
+ "id": 2192,
+ "levelMax": 30,
+ "levelMin": 30,
+ "name": {
+  "de": "Der Dofus-Behälter",
+  "en": "The Dofus Receptacle",
+  "es": "El receptáculo de los dofus",
+  "fr": "Le réceptacle des Dofus",
+  "id": "845296",
+  "pt": "Receptáculo dos Dofus"
+ },
+ "startCriterion": "Qf=1962&PZ=1"
+}

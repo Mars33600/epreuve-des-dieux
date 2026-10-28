@@ -1,0 +1,14 @@
+{
+ "id": 1462,
+ "levelMax": 40,
+ "levelMin": 40,
+ "name": {
+  "de": "Die alte Magierin und das Moor",
+  "en": "The Sorceress from the Swamps",
+  "es": "La hechicera de los pantanos",
+  "fr": "La magicienne des marécages",
+  "id": "421742",
+  "pt": "A feiticeira dos pântanos"
+ },
+ "startCriterion": "Qf=2195"
+}

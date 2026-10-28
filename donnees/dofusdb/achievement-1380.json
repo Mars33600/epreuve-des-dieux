@@ -1,0 +1,57 @@
+{
+ "categoryId": 53,
+ "description": {
+  "de": "Alle Kampfquesten von Incarnam vollenden",
+  "en": "Complete all the battle quests.",
+  "es": "Terminar la serie de misiones asociadas a los combates.",
+  "fr": "Terminer la série des quêtes liées au combat.",
+  "id": "551073",
+  "pt": "Completar a série de missões relacionadas ao combate."
+ },
+ "id": 1380,
+ "name": {
+  "de": "Milizendienst",
+  "en": "Service in the Militia",
+  "es": "La milicia te inicia",
+  "fr": "Service dans la milice",
+  "id": "551072",
+  "pt": "Serviço na milícia"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1642)",
+   "id": 4132,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1643)",
+   "id": 4133,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=1644)",
+   "id": 4134,
+   "order": 2
+  },
+  {
+   "criterion": "(Qf=1645)",
+   "id": 4135,
+   "order": 3
+  },
+  {
+   "criterion": "(Qf=1646)",
+   "id": 4136,
+   "order": 4
+  },
+  {
+   "criterion": "(Qf=1647)",
+   "id": 4137,
+   "order": 5
+  },
+  {
+   "criterion": "(Qf=1648)",
+   "id": 4138,
+   "order": 6
+  }
+ ]
+}

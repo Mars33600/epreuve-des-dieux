@@ -1,0 +1,14 @@
+{
+ "id": 1634,
+ "levelMax": 5,
+ "levelMin": 5,
+ "name": {
+  "de": "Hoffnung und Tragödie",
+  "en": "Hope and Tragedy",
+  "es": "La esperanza y la tragedia",
+  "fr": "Espoirs et tragédies",
+  "id": "554199",
+  "pt": "A esperança e a tragédia"
+ },
+ "startCriterion": "Qf=1632"
+}

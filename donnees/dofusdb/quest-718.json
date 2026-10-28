@@ -1,0 +1,14 @@
+{
+ "id": 718,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Achtung! Ein Biest!",
+  "en": "Beware of the Beast!",
+  "es": "¡Cuidado con la bestia!",
+  "fr": "Attention à la Bête !",
+  "id": "54422",
+  "pt": "Cuidado com a Besta!"
+ },
+ "startCriterion": "BT=1&(PO=12401|Sc=811)"
+}

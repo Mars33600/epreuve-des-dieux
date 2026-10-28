@@ -1,0 +1,14 @@
+{
+ "id": 1643,
+ "levelMax": 5,
+ "levelMin": 5,
+ "name": {
+  "de": "Schlachtfelder",
+  "en": "Battlefields",
+  "es": "Campos de batalla",
+  "fr": "Champs de bataille",
+  "id": "554185",
+  "pt": "Campos de batalha"
+ },
+ "startCriterion": "Qf=1642"
+}

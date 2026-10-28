@@ -1,0 +1,14 @@
+{
+ "id": 2512,
+ "levelMax": 6,
+ "levelMin": 6,
+ "name": {
+  "de": "Der Beruf der Abenteurer",
+  "en": "The Adventurer Profession",
+  "es": "El oficio de los aventureros",
+  "fr": "Le métier des aventuriers",
+  "id": "1115854",
+  "pt": "A profissão dos aventureiros"
+ },
+ "startCriterion": "Qf=1649"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1648,
+ "levelMax": 9,
+ "levelMin": 9,
+ "name": {
+  "de": "Laufende Chafer",
+  "en": "March of the Chafers",
+  "es": "Como chafer por su casa",
+  "fr": "Des chafers qui marchent",
+  "id": "545119",
+  "pt": "Faxina macabra"
+ },
+ "startCriterion": "Qf=1647"
+}

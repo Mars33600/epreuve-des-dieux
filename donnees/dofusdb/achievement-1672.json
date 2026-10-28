@@ -1,0 +1,42 @@
+{
+ "categoryId": 45,
+ "description": {
+  "de": "Die Geschichtsquesten beenden",
+  "en": "Complete all the historical quests.",
+  "es": "Terminar la serie de misiones relacionadas con la historia.",
+  "fr": "Terminer la série des quêtes liées à l'histoire.",
+  "id": "754660",
+  "pt": "Completar a série de missões relacionadas à história."
+ },
+ "id": 1672,
+ "name": {
+  "de": "Die Große BiblioQuest",
+  "en": "The Great Librariddle",
+  "es": "La gran biblioteca",
+  "fr": "La grande biblioquête",
+  "id": "754659",
+  "pt": "A grande biblioteca"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1988)",
+   "id": 5339,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1989)",
+   "id": 5340,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=1990)",
+   "id": 5341,
+   "order": 2
+  },
+  {
+   "criterion": "(Qf=1991)",
+   "id": 5342,
+   "order": 3
+  }
+ ]
+}

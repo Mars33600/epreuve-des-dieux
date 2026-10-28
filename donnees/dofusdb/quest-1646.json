@@ -1,0 +1,14 @@
+{
+ "id": 1646,
+ "levelMax": 8,
+ "levelMin": 8,
+ "name": {
+  "de": "Mopsmiezjagd",
+  "en": "Spiritabby Hunt",
+  "es": "Caza de miaufianes",
+  "fr": "Chasse aux chapardams",
+  "id": "554192",
+  "pt": "Caça aos Galmatunos"
+ },
+ "startCriterion": "Qf=1645"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 2009,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Klassentreffen",
+  "en": "Class Council",
+  "es": "Consejo de clase",
+  "fr": "Conseil de classe",
+  "id": "752935",
+  "pt": "Conselho de classe"
+ },
+ "startCriterion": "Qf=1959"
+}

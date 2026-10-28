@@ -1,0 +1,14 @@
+{
+ "id": 1969,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Spritzenmäßige Lösung",
+  "en": "A Prickly Solution",
+  "es": "La inyección es la solución",
+  "fr": "Piques de solution",
+  "id": "756065",
+  "pt": "Até injeção na testa"
+ },
+ "startCriterion": "Qf=2009&PG=7"
+}

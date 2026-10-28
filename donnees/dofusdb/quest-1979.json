@@ -1,0 +1,14 @@
+{
+ "id": 1979,
+ "levelMax": 40,
+ "levelMin": 20,
+ "name": {
+  "de": "Straßenkampf",
+  "en": "Street Fight",
+  "es": "Combate de calle",
+  "fr": "Combat de rue",
+  "id": "748532",
+  "pt": "Briga de rua"
+ },
+ "startCriterion": "Qf=1978"
+}

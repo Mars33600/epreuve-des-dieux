@@ -1,0 +1,14 @@
+{
+ "id": 1964,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Tierversuche",
+  "en": "It Shouldn't Happen to a Pet",
+  "es": "Serie animalista",
+  "fr": "Série animalière",
+  "id": "755764",
+  "pt": "Série animal"
+ },
+ "startCriterion": "Qf=2009&PG=2"
+}

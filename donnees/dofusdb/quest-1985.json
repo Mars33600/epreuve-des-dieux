@@ -1,0 +1,14 @@
+{
+ "id": 1985,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Aushilfsweise Lieferung",
+  "en": "Interim Delivery",
+  "es": "Entrega por suplencia",
+  "fr": "Livraison par intérim",
+  "id": "752371",
+  "pt": "Entregador substituto"
+ },
+ "startCriterion": "Qf=1984"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1998,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Wer Wind sät, wird Donner ernten",
+  "en": "Sow the Wind and Reap Artempeth",
+  "es": "Quien siembra vientos recoge Artempestad",
+  "fr": "Qui sème le vent récolte l'Artempeth",
+  "id": "749351",
+  "pt": "Quem semeia vento colhe Artempestad"
+ },
+ "startCriterion": "PL>9"
+}

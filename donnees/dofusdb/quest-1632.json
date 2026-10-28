@@ -1,0 +1,14 @@
+{
+ "id": 1632,
+ "levelMax": 3,
+ "levelMin": 3,
+ "name": {
+  "de": "Das Dorf in den Wolken",
+  "en": "Village in the Clouds",
+  "es": "Un pueblo sobre las nubes",
+  "fr": "Le village dans les nuages",
+  "id": "554207",
+  "pt": "O vilarejo nas nuvens"
+ },
+ "startCriterion": "BT=1"
+}

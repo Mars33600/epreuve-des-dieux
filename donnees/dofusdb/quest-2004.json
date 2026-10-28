@@ -1,0 +1,14 @@
+{
+ "id": 2004,
+ "levelMax": 10,
+ "levelMin": 10,
+ "name": {
+  "de": "Endstation Astrub",
+  "en": "Destination: Astrub",
+  "es": "Destino Astrub",
+  "fr": "Destination Astrub",
+  "id": "748425",
+  "pt": "Próxima parada: Astrub"
+ },
+ "startCriterion": "Qf=1635"
+}

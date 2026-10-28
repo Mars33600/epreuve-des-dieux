@@ -1,0 +1,14 @@
+{
+ "id": 1976,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Unter der Erde",
+  "en": "Six Feet Under",
+  "es": "Seis pies bajo tierra",
+  "fr": "Six pieds sous terre",
+  "id": "751052",
+  "pt": "A sete palmos"
+ },
+ "startCriterion": "Qf=1975"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 716,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Blabliblabla und die 40 Halsabschneider",
+  "en": "Masqueraider Babali and the 40 Rogues",
+  "es": "Zobal Hibabá y los 40 tymadores",
+  "fr": "Zobal Hibaba et les 40 Roublards",
+  "id": "750582",
+  "pt": "Zobal Hibabá e os 40 Ladinos"
+ },
+ "startCriterion": "Qf=2009&PG=14"
+}

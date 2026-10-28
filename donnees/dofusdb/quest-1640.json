@@ -1,0 +1,14 @@
+{
+ "id": 1640,
+ "levelMax": 5,
+ "levelMin": 5,
+ "name": {
+  "de": "Die legendären Relikte",
+  "en": "Vestiges of Legends",
+  "es": "Vestigios de leyenda",
+  "fr": "Des vestiges de légende",
+  "id": "554188",
+  "pt": "Vestígios dos deuses"
+ },
+ "startCriterion": "Qf=1639"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 2513,
+ "levelMax": 8,
+ "levelMin": 8,
+ "name": {
+  "de": "Vorbereitung auf den Kampf",
+  "en": "Getting Ready to Fight",
+  "es": "Preparación para el combate",
+  "fr": "Préparation au combat",
+  "id": "1115853",
+  "pt": "Preparação para o combate"
+ },
+ "startCriterion": "Qf=1651"
+}

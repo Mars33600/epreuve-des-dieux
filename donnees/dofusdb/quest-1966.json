@@ -1,0 +1,14 @@
+{
+ "id": 1966,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Schuld und Sühne",
+  "en": "Crime and Punishment",
+  "es": "Crimen y castigo",
+  "fr": "Crime et châtiment",
+  "id": "754495",
+  "pt": "Crime e castigo"
+ },
+ "startCriterion": "Qf=2009&PG=4"
+}

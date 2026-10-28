@@ -1,0 +1,14 @@
+{
+ "id": 1978,
+ "levelMax": 15,
+ "levelMin": 15,
+ "name": {
+  "de": "Nur fließendes Bier wird nicht schal",
+  "en": "Always a Bitter, Never a Lager",
+  "es": "La cerveza compartida sabe mucho mejor",
+  "fr": "Bière qui roule n'amasse pas mousse",
+  "id": "748502",
+  "pt": "Muita espuma pra pouco chope"
+ },
+ "startCriterion": "(Qa=1959&Qo>13855)|Qf=1959"
+}

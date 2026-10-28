@@ -1,0 +1,14 @@
+{
+ "id": 1645,
+ "levelMax": 7,
+ "levelMin": 7,
+ "name": {
+  "de": "Weg mit den Fresssäcken",
+  "en": "Gobball Decimation",
+  "es": "Ejecútame un jalató",
+  "fr": "Décime-moi des bouftous",
+  "id": "545121",
+  "pt": "Dizimando Papatudos"
+ },
+ "startCriterion": "Qf=1644"
+}

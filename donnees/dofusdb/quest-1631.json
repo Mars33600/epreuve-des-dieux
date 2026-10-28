@@ -1,0 +1,14 @@
+{
+ "id": 1631,
+ "levelMax": 2,
+ "levelMin": 2,
+ "name": {
+  "de": "Nie um eine Antwort verlegen",
+  "en": "All the Answers",
+  "es": "Respuestas para todo",
+  "fr": "Réponses à tout",
+  "id": "554205",
+  "pt": "Respostas para tudo"
+ },
+ "startCriterion": "BT=1"
+}

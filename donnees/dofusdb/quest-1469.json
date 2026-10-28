@@ -1,0 +1,14 @@
+{
+ "id": 1469,
+ "levelMax": 100,
+ "levelMin": 100,
+ "name": {
+  "de": "Die Cania-Banditen",
+  "en": "The Cania Bandits",
+  "es": "Los bandidos de Cania",
+  "fr": "Les bandits de Cania",
+  "id": "421730",
+  "pt": "Os bandidos de Cania"
+ },
+ "startCriterion": "Qf=1467&PL>79"
+}

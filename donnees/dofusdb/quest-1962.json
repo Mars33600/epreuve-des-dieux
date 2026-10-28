@@ -1,0 +1,14 @@
+{
+ "id": 1962,
+ "levelMax": 30,
+ "levelMin": 30,
+ "name": {
+  "de": "Waldspaziergang",
+  "en": "Forest Walk",
+  "es": "Paseo por el bosque",
+  "fr": "Balade en forêt",
+  "id": "753153",
+  "pt": "Passeio na floresta"
+ },
+ "startCriterion": "Qf=1960"
+}

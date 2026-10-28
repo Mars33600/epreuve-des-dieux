@@ -1,0 +1,14 @@
+{
+ "id": 1465,
+ "levelMax": 80,
+ "levelMin": 50,
+ "name": {
+  "de": "Der Seelenfänger",
+  "en": "The Soul Stealer",
+  "es": "El ladrón de almas",
+  "fr": "Le voleur d'âmes",
+  "id": "421747",
+  "pt": "O ladrão de almas"
+ },
+ "startCriterion": "Qf=1464"
+}

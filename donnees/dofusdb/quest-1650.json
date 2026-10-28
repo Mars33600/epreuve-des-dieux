@@ -1,0 +1,14 @@
+{
+ "id": 1650,
+ "levelMax": 6,
+ "levelMin": 6,
+ "name": {
+  "de": "Axt und Pickel",
+  "en": "Hatchet and Pick",
+  "es": "A pico y hacha",
+  "fr": "La hache et la pioche",
+  "id": "554203",
+  "pt": "O machado e a picareta"
+ },
+ "startCriterion": "Qf=2512"
+}

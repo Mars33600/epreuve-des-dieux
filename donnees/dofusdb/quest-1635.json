@@ -1,0 +1,14 @@
+{
+ "id": 1635,
+ "levelMax": 8,
+ "levelMin": 8,
+ "name": {
+  "de": "In der Höhle des WullyWuStruppi",
+  "en": "The Snoowolf's Snout",
+  "es": "En la boca del Minilubo Albino",
+  "fr": "Dans la gueule du Milimilou",
+  "id": "554197",
+  "pt": "Na boca do Milimilobo"
+ },
+ "startCriterion": "Qf=1634"
+}

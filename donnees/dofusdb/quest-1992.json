@@ -1,0 +1,14 @@
+{
+ "id": 1992,
+ "levelMax": 15,
+ "levelMin": 15,
+ "name": {
+  "de": "Maunzmiez-Blues",
+  "en": "Bow Meow Blues",
+  "es": "El blues del miaumiau",
+  "fr": "Chacha Blues",
+  "id": "754771",
+  "pt": "Miaw Blues"
+ },
+ "startCriterion": "PL>9"
+}

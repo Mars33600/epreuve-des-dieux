@@ -1,0 +1,14 @@
+{
+ "id": 1470,
+ "levelMax": 100,
+ "levelMin": 100,
+ "name": {
+  "de": "Drachanthrophie",
+  "en": "Draconthropy",
+  "es": "Draconantropía",
+  "fr": "Draconanthropie",
+  "id": "421721",
+  "pt": "Draconatropia"
+ },
+ "startCriterion": "Qf=1469&PL>79"
+}

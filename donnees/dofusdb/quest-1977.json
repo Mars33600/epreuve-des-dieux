@@ -1,0 +1,14 @@
+{
+ "id": 1977,
+ "levelMax": 25,
+ "levelMin": 25,
+ "name": {
+  "de": "Wer anderen eine Grube gräbt",
+  "en": "It's a Case of the Biter Bit",
+  "es": "El cazador cazado",
+  "fr": "Tel est pris qui croyait prendre",
+  "id": "753382",
+  "pt": "O feitiço se volta contra o feiticeiro"
+ },
+ "startCriterion": "Qf=1976"
+}

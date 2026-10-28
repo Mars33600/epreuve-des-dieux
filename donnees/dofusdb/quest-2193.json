@@ -1,0 +1,14 @@
+{
+ "id": 2193,
+ "levelMax": 40,
+ "levelMin": 40,
+ "name": {
+  "de": "Ein Weiser unter Weisen",
+  "en": "Wise and Wiser",
+  "es": "Un sabio entre los sabios",
+  "fr": "Un sage parmi les sages",
+  "id": "842116",
+  "pt": "Um sábio dentre os sábios"
+ },
+ "startCriterion": "Qf=2192"
+}

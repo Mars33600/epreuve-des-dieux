@@ -1,0 +1,14 @@
+{
+ "id": 1647,
+ "levelMax": 8,
+ "levelMin": 8,
+ "name": {
+  "de": "Lektion in Demut",
+  "en": "Lesson in Humility",
+  "es": "Lección de humildad",
+  "fr": "Leçon d'humilité",
+  "id": "554193",
+  "pt": "Lição de humildade"
+ },
+ "startCriterion": "Qf=1646"
+}

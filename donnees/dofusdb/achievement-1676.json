@@ -1,0 +1,52 @@
+{
+ "categoryId": 45,
+ "description": {
+  "de": "Folgende Questen absolvieren",
+  "en": "Complete the following quests.",
+  "es": "Terminar las siguientes misiones.",
+  "fr": "Terminer les quêtes suivantes.",
+  "id": "754702",
+  "pt": "Completar as seguintes missões."
+ },
+ "id": 1676,
+ "name": {
+  "de": "Eskapaden und Hinterhalte",
+  "en": "Getaways and Ambushes",
+  "es": "Escapadas y emboscadas",
+  "fr": "Escapades et embuscades",
+  "id": "754832",
+  "pt": "Fugas e emboscadas"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1996)",
+   "id": 5356,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1998)",
+   "id": 5357,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=2000)",
+   "id": 5358,
+   "order": 2
+  },
+  {
+   "criterion": "(Qf=1999)",
+   "id": 5359,
+   "order": 3
+  },
+  {
+   "criterion": "(Qf=2007)",
+   "id": 5360,
+   "order": 4
+  },
+  {
+   "criterion": "(Qf=2008)",
+   "id": 5361,
+   "order": 5
+  }
+ ]
+}

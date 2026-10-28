@@ -1,0 +1,52 @@
+{
+ "categoryId": 45,
+ "description": {
+  "de": "Folgende Erfolge erringen",
+  "en": "Complete the following achievements:",
+  "es": "Conseguir los siguientes logros.",
+  "fr": "Obtenir les succès suivants.",
+  "id": "754710",
+  "pt": "Obter os seguintes sucessos."
+ },
+ "id": 1677,
+ "name": {
+  "de": "Tour durch Astrub",
+  "en": "Astrubian Trek",
+  "es": "Periplo astrubiense",
+  "fr": "Périple astrubien",
+  "id": "754842",
+  "pt": "Périplo astrubiano"
+ },
+ "objectives": [
+  {
+   "criterion": "(OA=1671)",
+   "id": 5362,
+   "order": 0
+  },
+  {
+   "criterion": "(OA=1672)",
+   "id": 5363,
+   "order": 1
+  },
+  {
+   "criterion": "(OA=1673)",
+   "id": 5364,
+   "order": 2
+  },
+  {
+   "criterion": "(OA=1674)",
+   "id": 5365,
+   "order": 3
+  },
+  {
+   "criterion": "(OA=1675)",
+   "id": 5366,
+   "order": 4
+  },
+  {
+   "criterion": "(OA=1676)",
+   "id": 5367,
+   "order": 5
+  }
+ ]
+}

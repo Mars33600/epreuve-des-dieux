@@ -1,0 +1,14 @@
+{
+ "id": 1960,
+ "levelMax": 25,
+ "levelMin": 25,
+ "name": {
+  "de": "Da liegt was in der Luft",
+  "en": "Uprising Damp",
+  "es": "Aquí huele a gas",
+  "fr": "Ça sent le gaz",
+  "id": "753122",
+  "pt": "Cheirinho de problema"
+ },
+ "startCriterion": "(Qf=1841&PG=18&Pm=83886090)|(Qf=1677&PG=17&Pm=191106052)|(Qf=1615&PG=16&Pm=192414724)|(Qf=938&PG=15&Pm=188743681)|(Qf=716&PG=14&Pm=188746759)|(Qf=704&PG=13&Pm=192414728)|(Qf=1974&PG=12&Pm=191106050)|(Qf=1973&PG=11&Pm=192939018)|(Qf=1972&PG=10&Pm=188743686)|(Qf=1971&PG=9&Pm=188744198)|(Qf=1970&PG=8&Pm=191105024)|(Qf=1969&PG=7&Pm=192417798)|(Qf=1968&PG=6&Pm=192413696)|(Qf=1967&PG=5&Pm=191104000)|(Qf=1966&PG=4&Pm=188744710)|(Qf=1965&PG=3&Pm=188743685)|(Qf=1964&PG=2&Pm=188744199)|(Qf=1963&PG=1&Pm=188745223)|(Qf=2470&PG=20&Pm=224920576)"
+}

@@ -1,0 +1,42 @@
+{
+ "categoryId": 53,
+ "description": {
+  "de": "Folgende Erfolge erringen:",
+  "en": "Complete the following achievements:",
+  "es": "Conseguir los siguientes logros.",
+  "fr": "Obtenir les succès suivants.",
+  "id": "531871",
+  "pt": "Obter os seguintes sucessos."
+ },
+ "id": 644,
+ "name": {
+  "de": "Astreiner Anfang",
+  "en": "Setting A Good Example",
+  "es": "Un comienzo ejemplar",
+  "fr": "Des débuts exemplaires",
+  "id": "531870",
+  "pt": "Um começo exemplar"
+ },
+ "objectives": [
+  {
+   "criterion": "(OA=1379)",
+   "id": 1707,
+   "order": 0
+  },
+  {
+   "criterion": "(OA=1380)",
+   "id": 1708,
+   "order": 1
+  },
+  {
+   "criterion": "(OA=649)",
+   "id": 1711,
+   "order": 2
+  },
+  {
+   "criterion": "(OA=1381)",
+   "id": 1712,
+   "order": 3
+  }
+ ]
+}

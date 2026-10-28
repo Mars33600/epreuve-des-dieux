@@ -1,0 +1,14 @@
+{
+ "id": 1988,
+ "levelMax": 25,
+ "levelMin": 25,
+ "name": {
+  "de": "Geschichte in Bewegung",
+  "en": "History in Motion",
+  "es": "La Historia en movimiento",
+  "fr": "L'histoire en mouvement",
+  "id": "753353",
+  "pt": "História em movimento"
+ },
+ "startCriterion": "(Qa=1960&Qo>13945)|Qf=1960"
+}

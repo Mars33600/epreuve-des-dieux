@@ -1,0 +1,14 @@
+{
+ "id": 1980,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Wie ein Dichs-Fischlein an Land",
+  "en": "Like a Snapper out of Water",
+  "es": "Como un pischis fuera del agua",
+  "fr": "Comme un pichon hors de l'eau",
+  "id": "748549",
+  "pt": "Feito Pesk fora d'água"
+ },
+ "startCriterion": "Qa=1979&PL>14"
+}

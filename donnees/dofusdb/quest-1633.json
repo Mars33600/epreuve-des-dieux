@@ -1,0 +1,14 @@
+{
+ "id": 1633,
+ "levelMax": 7,
+ "levelMin": 7,
+ "name": {
+  "de": "Nieder mit der Ratte!",
+  "en": "Death to the Rat!",
+  "es": "Matarratas",
+  "fr": "Mort au rat !",
+  "id": "554200",
+  "pt": "Morte ao rato!"
+ },
+ "startCriterion": "BT=1"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1615,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Ein Sonnenstrahl",
+  "en": "A Ray of Sunshine",
+  "es": "Un rayo de sol",
+  "fr": "Un rayon de soleil",
+  "id": "506277",
+  "pt": "Um raio de sol"
+ },
+ "startCriterion": "Qf=2009&PG=16"
+}

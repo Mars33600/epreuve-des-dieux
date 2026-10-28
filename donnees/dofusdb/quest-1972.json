@@ -1,0 +1,14 @@
+{
+ "id": 1972,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Das ist doch ganz natürlich",
+  "en": "It's Actually Very Natural",
+  "es": "Cien por cien natural",
+  "fr": "C'est pourtant naturel",
+  "id": "753473",
+  "pt": "Nada mais natural"
+ },
+ "startCriterion": "Qf=2009&PG=10"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1963,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Inspektionsrundgang",
+  "en": "Inspection Round",
+  "es": "Visita de inspección",
+  "fr": "Tournée d'inspection",
+  "id": "754606",
+  "pt": "Fazendo a ronda"
+ },
+ "startCriterion": "Qf=2009&PG=1"
+}

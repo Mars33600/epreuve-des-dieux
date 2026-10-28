@@ -1,0 +1,14 @@
+{
+ "id": 1970,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Iop und Hopp",
+  "en": "Iop and Hop",
+  "es": "Yop y hop",
+  "fr": "Iop et hop",
+  "id": "753722",
+  "pt": "Iop hurra"
+ },
+ "startCriterion": "Qf=2009&PG=8"
+}

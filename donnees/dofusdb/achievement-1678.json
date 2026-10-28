@@ -1,0 +1,52 @@
+{
+ "categoryId": 45,
+ "description": {
+  "de": "Die Hauptquesten von Astrub beenden",
+  "en": "Complete all of Astrub's main quests.",
+  "es": "Terminar la serie de misiones principales de Astrub.",
+  "fr": "Terminer la série des quêtes principales d'Astrub.",
+  "id": "754722",
+  "pt": "Completar a série de missões principais de Astrub."
+ },
+ "id": 1678,
+ "name": {
+  "de": "Musterbürger",
+  "en": "A Model Citizen",
+  "es": "Un ciudadano modelo",
+  "fr": "Un citoyen modèle",
+  "id": "754821",
+  "pt": "Um cidadão modelo"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1958)",
+   "id": 5368,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1959)",
+   "id": 5369,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=2009)",
+   "id": 5370,
+   "order": 2
+  },
+  {
+   "criterion": "(Qf=1841|Qf=1677|Qf=1615|Qf=938|Qf=716|Qf=704|Qf=1974|Qf=1973|Qf=1972|Qf=1971|Qf=1970|Qf=1969|Qf=1968|Qf=1967|Qf=1966|Qf=1965|Qf=1964|Qf=1963|Qf=2470)",
+   "id": 5371,
+   "order": 3
+  },
+  {
+   "criterion": "(Qf=1960)",
+   "id": 5372,
+   "order": 4
+  },
+  {
+   "criterion": "(Qf=1962)",
+   "id": 5373,
+   "order": 5
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1466,
+ "levelMax": 90,
+ "levelMin": 90,
+ "name": {
+  "de": "Meister Naburs verlorene Liebe",
+  "en": "Nabur's Lost Love",
+  "es": "El amor perdido de Nabur",
+  "fr": "L'amour perdu de Nabur",
+  "id": "421746",
+  "pt": "O amor perdido de Nabur"
+ },
+ "startCriterion": "Qf=1465"
+}

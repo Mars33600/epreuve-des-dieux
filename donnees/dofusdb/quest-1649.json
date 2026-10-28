@@ -1,0 +1,14 @@
+{
+ "id": 1649,
+ "levelMax": 5,
+ "levelMin": 5,
+ "name": {
+  "de": "Naturprodukte",
+  "en": "Natural Products",
+  "es": "Productos naturales",
+  "fr": "Produits naturels",
+  "id": "554191",
+  "pt": "Produtos naturais"
+ },
+ "startCriterion": "BT=1"
+}

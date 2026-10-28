@@ -1,0 +1,14 @@
+{
+ "id": 704,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Einbruch nach Halsabschneiderart",
+  "en": "Bank Robbing, Rogue Style",
+  "es": "The Tymador Job",
+  "fr": "Braquage à la Roublard",
+  "id": "750583",
+  "pt": "Roubo no estilo Ladino"
+ },
+ "startCriterion": "Qf=2009&PG=13"
+}

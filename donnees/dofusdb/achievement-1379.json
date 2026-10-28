@@ -1,0 +1,37 @@
+{
+ "categoryId": 53,
+ "description": {
+  "de": "Alle Erkundungsquesten von Incarnam vollenden",
+  "en": "Complete all the exploration quests.",
+  "es": "Terminar la serie de misiones relacionadas con la exploración.",
+  "fr": "Terminer la série des quêtes liées à l'exploration.",
+  "id": "551067",
+  "pt": "Completar a série de missões relacionadas à exploração."
+ },
+ "id": 1379,
+ "name": {
+  "de": "Hart im Wind",
+  "en": "High on Discovery",
+  "es": "Al partir",
+  "fr": "Poussé par le vent",
+  "id": "551066",
+  "pt": "O grande explorador"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1639)",
+   "id": 4129,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1640)",
+   "id": 4130,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=1641)",
+   "id": 4131,
+   "order": 2
+  }
+ ]
+}

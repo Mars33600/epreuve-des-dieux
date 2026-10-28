@@ -1,0 +1,14 @@
+{
+ "id": 1974,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Wie ein Schluck Wasser in der Kurve",
+  "en": "Paddle in a Teapot",
+  "es": "Nadar en un vaso de agua",
+  "fr": "Trempette dans un verre d'eau",
+  "id": "755521",
+  "pt": "Água que Piu bebe"
+ },
+ "startCriterion": "Qf=2009&PG=12"
+}

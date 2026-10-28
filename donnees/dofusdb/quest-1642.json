@@ -1,0 +1,14 @@
+{
+ "id": 1642,
+ "levelMax": 3,
+ "levelMin": 3,
+ "name": {
+  "de": "Bewährung",
+  "en": "Put to the Test",
+  "es": "La prueba",
+  "fr": "Mise à l'épreuve",
+  "id": "554186",
+  "pt": "Posto à prova"
+ },
+ "startCriterion": "BT=1"
+}

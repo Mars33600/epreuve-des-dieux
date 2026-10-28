@@ -1,0 +1,14 @@
+{
+ "id": 1982,
+ "levelMax": 30,
+ "levelMin": 30,
+ "name": {
+  "de": "Davids Kappe",
+  "en": "Day Viss Cup",
+  "es": "La copa de vicios",
+  "fr": "La coupe des vices",
+  "id": "748616",
+  "pt": "Jogo cruel"
+ },
+ "startCriterion": "Qa=1979&PL>19"
+}

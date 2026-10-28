@@ -1,0 +1,14 @@
+{
+ "id": 2000,
+ "levelMax": 30,
+ "levelMin": 30,
+ "name": {
+  "de": "Holzfäller in Not",
+  "en": "Lumberjacks in Distress",
+  "es": "Leñadores en peligro",
+  "fr": "Bûcherons en détresse",
+  "id": "753352",
+  "pt": "Lenhadores em apuros"
+ },
+ "startCriterion": "PL>19"
+}

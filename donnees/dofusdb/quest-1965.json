@@ -1,0 +1,14 @@
+{
+ "id": 1965,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Schokonugget-Fest",
+  "en": "The Chocochip Festival",
+  "es": "Fiesta de la chocopepita",
+  "fr": "La fête de la chocopépite",
+  "id": "754512",
+  "pt": "Festa da chocopepita"
+ },
+ "startCriterion": "Qf=2009&PG=3"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1959,
+ "levelMax": 15,
+ "levelMin": 15,
+ "name": {
+  "de": "Wie auf Eiern gehen",
+  "en": "Treading on Eggshells",
+  "es": "Eso va a costar un huevo",
+  "fr": "On marche sur des œufs",
+  "id": "752937",
+  "pt": "Pisando em ovos"
+ },
+ "startCriterion": "Qf=1958&PL>9"
+}

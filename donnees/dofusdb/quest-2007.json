@@ -1,0 +1,14 @@
+{
+ "id": 2007,
+ "levelMax": 40,
+ "levelMin": 40,
+ "name": {
+  "de": "Invasion der Grabschänder",
+  "en": "Invasion of the Tomb Pillagers",
+  "es": "La invasión de profanadores de sepulturas",
+  "fr": "L'invasion des profanateurs de sépultures",
+  "id": "749345",
+  "pt": "A invasão dos profanadores de sepulturas"
+ },
+ "startCriterion": "PL>29"
+}

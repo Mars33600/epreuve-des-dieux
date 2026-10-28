@@ -1,0 +1,14 @@
+{
+ "id": 1967,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Die Macht des Tarots",
+  "en": "Tarot Trumps 'em All",
+  "es": "Tarot, cuéntamelo",
+  "fr": "Tarot, t'es très fort",
+  "id": "753463",
+  "pt": "Tara no tarô"
+ },
+ "startCriterion": "Qf=2009&PG=5"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1973,
+ "levelMax": 20,
+ "levelMin": 20,
+ "name": {
+  "de": "Prügelknabe",
+  "en": "Butt Ugly",
+  "es": "Cabeza de turco",
+  "fr": "Souffre-douleur",
+  "id": "753467",
+  "pt": "Bode expiatório"
+ },
+ "startCriterion": "Qf=2009&PG=11"
+}

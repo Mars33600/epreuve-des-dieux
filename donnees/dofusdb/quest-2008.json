@@ -1,0 +1,14 @@
+{
+ "id": 2008,
+ "levelMax": 40,
+ "levelMin": 40,
+ "name": {
+  "de": "In der Ruhe liegt die Kraft",
+  "en": "Field of Dreams",
+  "es": "Eterno descanso",
+  "fr": "Le repos est dans le champ",
+  "id": "749350",
+  "pt": "O descanso está no campo"
+ },
+ "startCriterion": "PL>29"
+}

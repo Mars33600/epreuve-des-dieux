@@ -1,0 +1,42 @@
+{
+ "categoryId": 53,
+ "description": {
+  "de": "Folgende Questen beenden:",
+  "en": "Complete the following quests:",
+  "es": "Terminar las siguientes misiones.",
+  "fr": "Terminer les quêtes suivantes.",
+  "id": "551071",
+  "pt": "Completar as seguintes missões."
+ },
+ "id": 1381,
+ "name": {
+  "de": "Remmidemmi auf Incarnam",
+  "en": "Incarnoob",
+  "es": "Incarnacción",
+  "fr": "Ramdam sur Incarnam",
+  "id": "551070",
+  "pt": "Confusão em Incarnam"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1637)",
+   "id": 4143,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=1633)",
+   "id": 4144,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=1638)",
+   "id": 4145,
+   "order": 2
+  },
+  {
+   "criterion": "(Qf=1655)",
+   "id": 4146,
+   "order": 3
+  }
+ ]
+}

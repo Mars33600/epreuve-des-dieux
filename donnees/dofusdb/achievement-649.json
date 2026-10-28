@@ -1,0 +1,47 @@
+{
+ "categoryId": 53,
+ "description": {
+  "de": "Die Berufsquesten beenden.",
+  "en": "Complete all the profession quests.",
+  "es": "Terminar la serie de misiones asociadas a los oficios.",
+  "fr": "Terminer la série des quêtes liées aux métiers.",
+  "id": "531873",
+  "pt": "Completar a série de missões relacionadas às profissões."
+ },
+ "id": 649,
+ "name": {
+  "de": "Übung macht den Meister",
+  "en": "Harvest Time",
+  "es": "Nadie nace enseñado",
+  "fr": "C'est le métier qui rentre",
+  "id": "531872",
+  "pt": "Profissional qualificado"
+ },
+ "objectives": [
+  {
+   "criterion": "(Qf=1649)",
+   "id": 4139,
+   "order": 0
+  },
+  {
+   "criterion": "(Qf=2512)",
+   "id": 17668,
+   "order": 1
+  },
+  {
+   "criterion": "(Qf=1650)",
+   "id": 4140,
+   "order": 2
+  },
+  {
+   "criterion": "(Qf=1651)",
+   "id": 4141,
+   "order": 3
+  },
+  {
+   "criterion": "(Qf=2513)",
+   "id": 17669,
+   "order": 4
+  }
+ ]
+}

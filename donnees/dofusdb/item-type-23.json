@@ -1,0 +1,562 @@
+[
+ {
+  "achievementsThatReward": [
+   1101
+  ],
+  "id": 694,
+  "img": "https://api.dofusdb.fr/img/items/23001.png",
+  "name": {
+   "de": "Purpur-Dofus",
+   "en": "Crimson Dofus",
+   "es": "Dofus Púrpura",
+   "fr": "Dofus Pourpre",
+   "id": "39487",
+   "pt": "Dofus Púrpura"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1048
+  ],
+  "id": 737,
+  "img": "https://api.dofusdb.fr/img/items/23002.png",
+  "name": {
+   "de": "Smaragd-Dofus",
+   "en": "Emerald Dofus",
+   "es": "Dofus Esmeralda",
+   "fr": "Dofus Émeraude",
+   "id": "292605",
+   "pt": "Dofus Esmeralda"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1385
+  ],
+  "id": 739,
+  "img": "https://api.dofusdb.fr/img/items/23003.png",
+  "name": {
+   "de": "Türkis-Dofus",
+   "en": "Turquoise Dofus",
+   "es": "Dofus Turquesa",
+   "fr": "Dofus Turquoise",
+   "id": "42795",
+   "pt": "Dofus Turquesa"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   992
+  ],
+  "id": 972,
+  "img": "https://api.dofusdb.fr/img/items/23006.png",
+  "name": {
+   "de": "Kawott-Dofus",
+   "en": "Cawwot Dofus",
+   "es": "Dofus zanahowia",
+   "fr": "Dofus Cawotte",
+   "id": "37913",
+   "pt": "Dofus Cenouwa"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   2198
+  ],
+  "id": 6980,
+  "img": "https://api.dofusdb.fr/img/items/23004.png",
+  "name": {
+   "de": "Dofus Vulbis",
+   "en": "Vulbis Dofus",
+   "es": "Dofus vulbis",
+   "fr": "Dofus Vulbis",
+   "id": "53869",
+   "pt": "Dofus Vulbis"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   922
+  ],
+  "id": 7043,
+  "img": "https://api.dofusdb.fr/img/items/23005.png",
+  "name": {
+   "de": "Eisdofus",
+   "en": "Ice Dofus",
+   "es": "Dofus de los hielos",
+   "fr": "Dofus des Glaces",
+   "id": "29871",
+   "pt": "Dofus do Gelo"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   3082
+  ],
+  "id": 7112,
+  "img": "https://api.dofusdb.fr/img/items/23008.png",
+  "name": {
+   "de": "Scheckiger Dofus",
+   "en": "Black-Spotted Dofus",
+   "es": "Dofus moteado",
+   "fr": "Dofus Tacheté",
+   "id": "394296",
+   "pt": "Dofus Pintado"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 7113,
+  "img": "https://api.dofusdb.fr/img/items/23009.png",
+  "name": {
+   "de": "Dofawa",
+   "en": "Dofawa",
+   "es": "Dofawa",
+   "fr": "Dofawa",
+   "id": "49463",
+   "pt": "Dofawa"
+  },
+  "questsThatReward": [
+   1959
+  ],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1704
+  ],
+  "id": 7114,
+  "img": "https://api.dofusdb.fr/img/items/23007.png",
+  "name": {
+   "de": "Ebenholz-Dofus",
+   "en": "Ebony Dofus",
+   "es": "Dofus Ébano",
+   "fr": "Dofus Ébène",
+   "id": "292607",
+   "pt": "Dofus Ébano"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1622
+  ],
+  "id": 7115,
+  "img": "https://api.dofusdb.fr/img/items/23011.png",
+  "name": {
+   "de": "Elfenbein-Dofus",
+   "en": "Ivory Dofus",
+   "es": "Dofus Marfil",
+   "fr": "Dofus Ivoire",
+   "id": "49353",
+   "pt": "Dofus Marfim"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 7754,
+  "img": "https://api.dofusdb.fr/img/items/23012.png",
+  "name": {
+   "de": "Ocker-Dofus",
+   "en": "Ochre Dofus",
+   "es": "Dofus Ocre",
+   "fr": "Dofus Ocre",
+   "id": "30635",
+   "pt": "Dofus Ocre"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 8072,
+  "img": "https://api.dofusdb.fr/img/items/23010.png",
+  "name": {
+   "de": "Kalyptus-Dofus",
+   "en": "Kaliptus Dofus",
+   "es": "Dofus kalipto",
+   "fr": "Dofus Kaliptus",
+   "id": "48119",
+   "pt": "Dofus Kaliptus"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1188
+  ],
+  "id": 8698,
+  "img": "https://api.dofusdb.fr/img/items/23016.png",
+  "name": {
+   "de": "Nebel-Dofus",
+   "en": "Cloudy Dofus",
+   "es": "Dofus nebuloso",
+   "fr": "Dofus Nébuleux",
+   "id": "487135",
+   "pt": "Dofus Nebuloso"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   980
+  ],
+  "id": 10907,
+  "img": "https://api.dofusdb.fr/img/items/23017.png",
+  "name": {
+   "de": "Schockerqual",
+   "en": "Grofus",
+   "es": "Dosaurio",
+   "fr": "Dokille",
+   "id": "442449",
+   "pt": "Kaskofus"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   568
+  ],
+  "id": 13344,
+  "img": "https://api.dofusdb.fr/img/items/23018.png",
+  "name": {
+   "de": "Dolmanax",
+   "en": "Dolmanax",
+   "es": "Dolmanax",
+   "fr": "Dolmanax",
+   "id": "241235",
+   "pt": "Dolmanax"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 15235,
+  "img": "https://api.dofusdb.fr/img/items/23019.png",
+  "name": {
+   "de": "Domelspatz",
+   "en": "Dotrich",
+   "es": "Dotruz",
+   "fr": "Dotruche",
+   "id": "419130",
+   "pt": "Dotruz"
+  },
+  "questsThatReward": [
+   1517
+  ],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1187
+  ],
+  "id": 16061,
+  "img": "https://api.dofusdb.fr/img/items/23020.png",
+  "name": {
+   "de": "Dofus der Wachenden",
+   "en": "Watchers Dofus",
+   "es": "Dofus de los vigilantes",
+   "fr": "Dofus des Veilleurs",
+   "id": "501998",
+   "pt": "Dofus dos Vigilantes"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1397
+  ],
+  "id": 17078,
+  "img": "https://api.dofusdb.fr/img/items/23022.png",
+  "name": {
+   "de": "Dokoko",
+   "en": "Dokoko",
+   "es": "Dokoko",
+   "fr": "Dokoko",
+   "id": "576452",
+   "pt": "Dokoko"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1498
+  ],
+  "id": 18043,
+  "img": "https://api.dofusdb.fr/img/items/23023.png",
+  "name": {
+   "de": "Tiefsee-Dofus",
+   "en": "Abyssal Dofus",
+   "es": "Dofus abisal",
+   "fr": "Dofus Abyssal",
+   "id": "656827",
+   "pt": "Dofus Abissal"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1656
+  ],
+  "id": 19398,
+  "img": "https://api.dofusdb.fr/img/items/23024.png",
+  "name": {
+   "de": "Lavaschmied-Dofus",
+   "en": "Lavasmith Dofus",
+   "es": "Dofus forjalava",
+   "fr": "Dofus Forgelave",
+   "id": "741185",
+   "pt": "Dofus Forjalava"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   1679
+  ],
+  "id": 19629,
+  "img": "https://api.dofusdb.fr/img/items/23025.png",
+  "name": {
+   "de": "Silberdofus",
+   "en": "Silver Dofus",
+   "es": "Dofus plateado",
+   "fr": "Dofus Argenté",
+   "id": "748592",
+   "pt": "Dofus Prateado"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 20286,
+  "img": "https://api.dofusdb.fr/img/items/23027.png",
+  "name": {
+   "de": "Glänzender Silberdofus",
+   "en": "Sparkling Silver Dofus",
+   "es": "Dofus plateado centelleante",
+   "fr": "Dofus Argenté Scintillant",
+   "id": "778703",
+   "pt": "Dofus Prateado Cintilante"
+  },
+  "questsThatReward": [
+   2051
+  ],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 20833,
+  "img": "https://api.dofusdb.fr/img/items/23029.png",
+  "name": {
+   "de": "Kakao-Dofus",
+   "en": "Cocoa Dofus",
+   "es": "Dofus cacao",
+   "fr": "Dofus Cacao",
+   "id": "785154",
+   "pt": "Dofus Cacau"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 20987,
+  "img": "https://api.dofusdb.fr/img/items/23029.png",
+  "name": {
+   "de": "Kakao-Dofus",
+   "en": "Cocoa Dofus",
+   "es": "Dofus cacao",
+   "fr": "Dofus Cacao",
+   "id": "789954",
+   "pt": "Dofus Cacau"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 21186,
+  "img": "https://api.dofusdb.fr/img/items/23004.png",
+  "name": {
+   "de": "Dofus Vulbis",
+   "en": "Vulbis Dofus",
+   "es": "Dofus vulbis",
+   "fr": "Dofus Vulbis",
+   "id": "801534",
+   "pt": "Dofus Vulbis"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   3034
+  ],
+  "id": 23237,
+  "img": "https://api.dofusdb.fr/img/items/23032.png",
+  "name": {
+   "de": "Domakuro",
+   "en": "Domakuro",
+   "es": "Domakuro",
+   "fr": "Domakuro",
+   "id": "842429",
+   "pt": "Domakuro"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   3078
+  ],
+  "id": 23408,
+  "img": "https://api.dofusdb.fr/img/items/23033.png",
+  "name": {
+   "de": "Dorigami",
+   "en": "Dorigami",
+   "es": "Dorigami",
+   "fr": "Dorigami",
+   "id": "845982",
+   "pt": "Dorigami"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   5162
+  ],
+  "id": 26066,
+  "img": "https://api.dofusdb.fr/img/items/23034.png",
+  "name": {
+   "de": "Dofus des Alptraums",
+   "en": "Nightmare Dofus",
+   "es": "Dofus de pesadilla",
+   "fr": "Dofus du Cauchemar",
+   "id": "925125",
+   "pt": "Dofus do Pesadelo"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 27803,
+  "img": "https://api.dofusdb.fr/img/items/23035.png",
+  "name": {
+   "de": "Dannenzapfen",
+   "en": "Pine Done",
+   "es": "Piñata de pino",
+   "fr": "Dom de Pin",
+   "id": "984838",
+   "pt": "Dinha"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 29134,
+  "img": "https://api.dofusdb.fr/img/items/23036.png",
+  "name": {
+   "de": "Wald-Dofus",
+   "en": "Sylvan Dofus",
+   "es": "Dofus silvestre",
+   "fr": "Dofus Sylvestre",
+   "id": "1034895",
+   "pt": "Dofus Silvestre"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 29135,
+  "img": "https://api.dofusdb.fr/img/items/23037.png",
+  "name": {
+   "de": "Grüner Dofus",
+   "en": "Verdant Dofus",
+   "es": "Dofus verdecido",
+   "fr": "Dofus Verdoyant",
+   "id": "1034897",
+   "pt": "Dofus Esverdeado"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   7761
+  ],
+  "id": 29136,
+  "img": "https://api.dofusdb.fr/img/items/23036.png",
+  "name": {
+   "de": "Wald-Dofus",
+   "en": "Sylvan Dofus",
+   "es": "Dofus silvestre",
+   "fr": "Dofus Sylvestre",
+   "id": "1035058",
+   "pt": "Dofus Silvestre"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [],
+  "id": 30356,
+  "img": "https://api.dofusdb.fr/img/items/23038.png",
+  "name": {
+   "de": "Jyfus",
+   "en": "Aiwuztheya Dofus",
+   "es": "Jyfus",
+   "fr": "Jyfus",
+   "id": "1091578",
+   "pt": "Dofui"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ },
+ {
+  "achievementsThatReward": [
+   8855
+  ],
+  "id": 31794,
+  "img": "https://api.dofusdb.fr/img/items/23039.png",
+  "name": {
+   "de": "Dsfssbs",
+   "en": "Dofzzbz",
+   "es": "Dofzzbz",
+   "fr": "Dofoozbz",
+   "id": "1138909",
+   "pt": "Dofzzbz"
+  },
+  "questsThatReward": [],
+  "typeId": 23
+ }
+]

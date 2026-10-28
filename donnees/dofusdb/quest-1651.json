@@ -1,0 +1,14 @@
+{
+ "id": 1651,
+ "levelMax": 7,
+ "levelMin": 7,
+ "name": {
+  "de": "Buhn forever",
+  "en": "Boon Today, Boon Tomorrow",
+  "es": "Bun empieza lo que Bun acaba",
+  "fr": "Boune un jour, boune toujours",
+  "id": "554198",
+  "pt": "Tudo do Boon e do melhor"
+ },
+ "startCriterion": "Qf=1650"
+}

@@ -1,0 +1,14 @@
+{
+ "id": 1463,
+ "levelMax": 45,
+ "levelMin": 45,
+ "name": {
+  "de": "Dark Vlad nochmal sehen und immer noch (nicht) sterben",
+  "en": "See Dark Vlad Again and Still Live",
+  "es": "Volver a ver a Dark Vlad, y seguir sin morirse",
+  "fr": "Retourner voir le Dark Vlad, toujours sans mourir",
+  "id": "421741",
+  "pt": "Rever o Dark Vlad e ainda não morrer"
+ },
+ "startCriterion": "Qf=1462&PL>39"
+}
