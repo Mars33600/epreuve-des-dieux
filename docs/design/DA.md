@@ -4,24 +4,24 @@ Référence pour le site et le teaser. Les exemples vivants sont `teaser.html` e
 
 ## Intention
 
-La nuit au pied d'une tour bâtie par les Dieux. La lumière vient **d'en haut** : une lueur dorée au sommet, qui se perd dans les nuées. Tout le reste est sombre, froid et brumeux. L'or est **rare**, il signale le divin et le progrès : l'étage en cours, le seuil, un point obtenu. Le ton est mystérieux et aventureux, jamais gadget.
+Le **crépuscule** au pied d'une tour bâtie par les Dieux. La lumière vient **d'en haut** (lueur dorée au sommet) et **d'en bas** (horizon chaud, rose et ambre). Le ciel est violet et pourpre, les cartes sont des pierres violettes plus claires que le décor, l'or signale le divin et le progrès : l'étage en cours, le seuil, un point obtenu. Le ton reste mystérieux et aventureux, jamais gadget. Le thème reste **sombre** : aucun fond blanc.
 
 ## Tokens
 
 | Rôle | Token | Valeur | Usage |
 |---|---|---|---|
-| Nuit | `--night-0/1/2`, `--horizon` | `#05070e` `#0a0e1c` `#141a30` `#2a2240` | Ciel, du zénith à l'horizon violacé |
-| Surface | `--surface`, `--surface-2`, `--sunken` | `#0f1426` `#161c33` `#0a0e1b` | Cartes, éléments surélevés, creux (jauge, champs) |
-| Traits | `--line`, `--line-soft` | `#283050`, gris à 18 % | Bordures |
-| Texte | `--ink`, `--muted`, `--faint` | `#efe8d8` `#aeb3c6` `#959cb3` | Principal, secondaire, mentions |
-| Or | `--gold`, `--gold-hi`, `--gold-wash`, `--gold-line` | `#e3b552` `#f6d58a`, or à 12 %, or à 32 % | Accent, chiffres clés, liseré haut des cartes |
-| Donjons | `--c-donjon` | `#63c7a0` jade | Catégorie 1 |
-| Full succès | `--c-succes` | `#b99af5` améthyste | Catégorie 2 |
-| Quêtes principales | `--c-princ` | `#74aef2` azur | Catégorie 3 |
-| Quêtes secondaires | `--c-second` | `#ef9a7a` corail | Catégorie 4 |
-| Alerte | `--warn` | `#f08a5d` | Hors cap, « pas encore fait » |
+| Ciel | `--night-0/1/2`, `--horizon` | `#1b1033` `#2d1a4f` `#4a2257` `#8e3d5e` | Du zénith indigo à l'horizon pourpre ; un halo ambre `rgba(255,150,104,.5)` monte du bas |
+| Surface | `--surface`, `--surface-2`, `--sunken` | `#2c2250` `#3a2d66` `#1d1538` | Cartes, éléments surélevés, creux (jauge, champs) |
+| Traits | `--line`, `--line-soft` | `#6a56a0`, lavande à 18 % | Bordures |
+| Texte | `--ink`, `--muted`, `--faint` | `#fbf3e4` `#d6cdea` `#bcb1da` | Principal, secondaire, mentions |
+| Or | `--gold`, `--gold-hi`, `--gold-wash`, `--gold-line` | `#f2bf5c` `#ffdd94`, or à 12 %, or à 32 % | Accent, chiffres clés, liseré haut des cartes, focus |
+| Donjons | `--c-donjon` | `#72e0b6` jade | Catégorie 1 |
+| Full succès | `--c-succes` | `#cdb0ff` améthyste | Catégorie 2 |
+| Quêtes principales | `--c-princ` | `#86beff` azur | Catégorie 3 |
+| Quêtes secondaires | `--c-second` | `#ffa684` corail | Catégorie 4 |
+| Alerte | `--warn` | `#ff9d68` | Hors cap, « pas encore fait » |
 
-Contraste mesuré sur `--surface` : texte 15:1, `--muted` 8,8:1, `--faint` supérieur à 6:1, couleurs de catégorie entre 7,4 et 9:1. Sur la brume la plus claire du décor, tout reste au-dessus de 4,5:1. Le thème est **sombre uniquement** (`color-scheme: dark`).
+Contraste (WCAG AA minimum) sur une carte (`--surface-2`) : texte supérieur à 12:1, `--muted` supérieur à 8:1, `--faint` supérieur à 5,5:1, or et couleurs de catégorie supérieurs à 6,5:1. Le **focus** est un contour de 3 px en `--gold-hi`, décalé de 3 px, sur tous les éléments. Le thème est **sombre uniquement** (`color-scheme: dark`).
 
 ## Typographie
 
@@ -43,16 +43,17 @@ Du fond vers l'avant, dans un conteneur `position: fixed` en `aria-hidden` et `p
 8. **Poussières d'or** : canvas, 24 à 46 particules qui montent lentement. Un sprite pré-rendu, 25 à 30 images par seconde.
 9. **Voile** : vignette et assombrissement léger, pour la lisibilité.
 
-**Image d'ambiance par étage.** L'URL est réglée par étage (`AMBIANCES[n]` dans la maquette, `AMBIANCE` dans le teaser, et `?ambiance=URL` pour tester). Elle est chargée en JavaScript avec `new Image()`. Elle n'apparaît qu'une fois chargée (fondu de 1,6 s), filtrée (`saturate(.65) brightness(.5)`, opacité de 45 à 55 %). En cas d'échec, rien ne change : le décor généré reste. Format conseillé : paysage, 2400 × 1350, WebP de moins de 400 Ko, sombre, sans texte. **Pas de capture du jeu ni d'artwork d'Ankama** : il faut une création originale ou une image libre de droits.
+**Image d'ambiance par étage.** L'URL est réglée par étage (`AMBIANCES[n]` dans la maquette, `AMBIANCE` dans le teaser, et `?ambiance=URL` pour tester). Elle est chargée en JavaScript avec `new Image()`. Elle n'apparaît qu'une fois chargée (fondu de 1,6 s), à peine filtrée (`saturate(1.05) brightness(.9)`, opacité de 85 %) : on doit la voir. La lisibilité vient de **voiles locaux** derrière le texte posé sur le décor (titre, horloge, menu, pied de page), jamais d'un voile global. La page « La Tour » porte l'image de l'étage ouvert. En cas d'échec, rien ne change : le décor généré reste. Format conseillé : paysage, 2400 × 1350, WebP de moins de 400 Ko, sombre, sans texte. **Pas de capture du jeu ni d'artwork d'Ankama** : il faut une création originale ou une image libre de droits.
 
 ## Composants
 
 - **Carte** : pierre sombre presque opaque (dégradé de `rgba(22,28,51,.92)` à `rgba(13,17,33,.94)`), rayon de 10 px, liseré or de 1 px en haut (`inset 0 1px 0 var(--gold-line)`). Elle est opaque pour garantir le contraste, quel que soit le décor derrière.
-- **Tour (colonne de gauche)** : même principe que la v1. Ce sont des blocs empilés en pyramide : l'étage en cours en bas, en pleine largeur, et 6 étages scellés au-dessus, de plus en plus étroits. Un scellé est un bloc de pierre portant un sceau « ? » cerclé d'or. Les scellés s'effacent vers le haut (masque) sous une brume qui respire. L'étage en cours a une bordure or, un halo et un filet doré en bas, rempli selon la jauge. Le premier scellé devient « Étage 1 · prêt » quand le seuil est atteint. Sur mobile, la tour passe au-dessus du contenu et ne garde que 3 étages scellés.
+- **Pyramide d'accueil** : elle occupe la moitié de la page d'accueil, la jauge de l'étage en cours à côté (dessous sur mobile). Les blocs sont empilés, du plus étroit (haut) au plus large (bas, étage le plus ancien), largeur par classes `pb-k`. Chaque étage ouvert ou terminé est un lien vers sa page ; un scellé n'est ni cliquable ni nommé. Il n'y a plus d'onglet « Étage N » dans le menu : on choisit dans la pyramide. Le reste de ce paragraphe décrit l'ancienne colonne latérale, remplacée.
+- **Ancienne tour (colonne de gauche)** : même principe que la v1. Ce sont des blocs empilés en pyramide : l'étage en cours en bas, en pleine largeur, et 6 étages scellés au-dessus, de plus en plus étroits. Un scellé est un bloc de pierre portant un sceau « ? » cerclé d'or. Les scellés s'effacent vers le haut (masque) sous une brume qui respire. L'étage en cours a une bordure or, un halo et un filet doré en bas, rempli selon la jauge. Le premier scellé devient « Étage 1 · prêt » quand le seuil est atteint. Sur mobile, la tour passe au-dessus du contenu et ne garde que 3 étages scellés.
 - **Jauge d'étage** : une seule jauge, **une encoche par point requis** (le seuil vaut 2 × le nombre de grimpeurs actifs). Les encoches se remplissent dans l'ordre des catégories, chacune de sa couleur. Au-dessus : un grand chiffre « 20 / 22 points » et la formule du seuil. Au-dessous : ce qui manque et le maximum possible. Seuil atteint : bordure or. Ensuite viennent **4 tuiles de catégorie** : icône, nom, définition en une phrase, « x / N grimpeurs », mini-barre et lien « Qui manque ? ».
 - **Pastille de catégorie** : un disque de 36 px (48 px dans la fiche) avec l'icône de la catégorie. L'**anneau** (`conic-gradient`) montre la progression ; le **disque plein** signifie que le point est obtenu. On lit la forme sans la couleur, et un `aria-label` donne « Donjons : 2 sur 3 ».
 - **Icônes** (trait de 1,8, SVG `<symbol>`) : porte en arche pour les donjons, étoile pour le full succès, œuf (le Dofus) pour les quêtes principales, parchemin pour les quêtes secondaires.
-- **Case à cocher** : la case native, restylée (`appearance: none`). C'est un carré gravé de 22 px, rayon 5 px, qui se remplit de la couleur de sa catégorie avec une coche sombre. La ligne entière (libellé et explication) est cliquable, sur 44 px de haut minimum. La première case d'un donjon (« Vaincre le boss ») est en jade ; les 4 autres succès sont en améthyste. Une case désactivée signale une fiche en lecture seule.
+- **Case à cocher** : la case native, restylée (`appearance: none`). C'est un carré gravé de 22 px, rayon 5 px, qui se remplit de la couleur de sa catégorie avec une coche sombre. La ligne entière (libellé et explication) est cliquable, sur 44 px de haut minimum. La première case d'un donjon (« Vaincre le boss ») est en jade, **mise en surbrillance** (liseré épais, fond jade, mention « 1 point Donjons »), avec une légende au-dessus de la liste : cocher le boss de tous les donjons de l'étage rapporte déjà le point Donjons ; les 4 autres succès sont en améthyste. Une case désactivée signale une fiche en lecture seule.
 - **Badge principal / secondaire** : une pilule mono de 12 px. **Principale** : fond azur teinté, bordure pleine, icône œuf. **Secondaire** : contour corail **en pointillés**, icône parchemin. Le trait plein ou pointillé distingue les deux sans la couleur.
 - **Filtre « qui n'a pas fait… ? »** : un `select` groupé (catégories, donjons, succès, quêtes). Il affiche deux listes de pastilles : « Pas encore fait » (✗, bordure alerte) et « Déjà fait, ils peuvent accompagner » (✓). Les cartes concernées sont entourées, les autres estompées.
 - **Fiche de quête** : on touche le nom d'une quête (un bouton souligné d'or, distinct de sa case de 44 px) pour l'ouvrir. C'est un `<dialog>` ouvert par `showModal()`, avec `aria-modal` et `aria-labelledby`. Sur ordinateur, c'est un panneau latéral à droite (560 px, liseré or à gauche) ; sous 640 px, il passe en plein écran. Le fond est assombri à 66 %. Il se ferme par la croix (44 px), par Échap ou par un clic sur le fond. Le focus va au titre, reste piégé dans le panneau, puis revient au déclencheur. L'en-tête est collant : sur-titre, nom, badge, niveau, zone, PNJ de départ avec sa position en mono or `[x,y]`, et la case « Faite », synchronisée avec la liste et en lecture seule sur la fiche d'un autre grimpeur. Le corps est découpé en sections à sur-titre mono or :
@@ -70,7 +71,7 @@ Du fond vers l'avant, dans un conteneur `position: fixed` en `aria-hidden` et `p
 - On n'anime que `transform` et `opacity`. Les canvas plafonnent le DPR à 2 et à 30 images par seconde, et se mettent en pause quand l'onglet est caché (`visibilitychange`).
 - `prefers-reduced-motion: reduce` fige la brume, la lueur et les particules (dessinées une fois), et retire les transitions. Le compte à rebours continue.
 - Ni `backdrop-filter` ni filtre SVG animé : c'est coûteux sur mobile.
-- Vérifié à 360 px : aucun défilement horizontal (`overflow-x: clip` sur `html`). Les cibles tactiles font au moins 44 px.
+- **Aucun défilement horizontal, nulle part** (360, 768, 1440 px) : les bandes d'onglets et d'étages passent à la ligne (`flex-wrap`), les grilles utilisent `minmax(0,1fr)`, `overflow-x: clip` sur `html`. Les cibles tactiles font au moins 44 px.
 
 ## À ne pas faire
 

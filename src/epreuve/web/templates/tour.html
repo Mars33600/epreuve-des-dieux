@@ -1,10 +1,15 @@
 {% extends "site.html" %}
-{% from "_macros.html" import tour as dessiner_tour, jauge_bloc %}
+{% from "_macros.html" import pyramide, jauge_bloc %}
 {% block titre %}La tour · L'Épreuve des Dieux{% endblock %}
 {% block page %}
-<div class="layout">
-  <aside class="tower" aria-label="La tour">{{ dessiner_tour(etages, jauge, nb_scelles) }}</aside>
-  <main>
+<section class="accueil-tour" aria-labelledby="tourTitre">
+  <div class="pyramide-zone">
+    <div class="pyramide-note"><div class="eyebrow">La tour</div>
+      <h2 id="tourTitre">Choisis ton étage</h2>
+      <p class="muted">Touche un étage ouvert pour y entrer. Nul ne connaît le nombre d'étages&nbsp;: chacun se dévoile quand la guilde a descellé le précédent.</p></div>
+    {{ pyramide(etages, jauge, nb_scelles) }}
+  </div>
+  <div class="pyramide-jauge">
     {% if ouvert %}
     <section class="card" aria-labelledby="floorTitle">
       <div class="row">
@@ -22,7 +27,9 @@
     {% else %}
     <section class="card"><h2>La tour se prépare</h2><p class="muted">Aucun étage n'est ouvert pour l'instant.</p></section>
     {% endif %}
-
+  </div>
+</section>
+<main>
     <section class="card" aria-labelledby="classesTitle">
       <div class="row">
         <h2 id="classesTitle">Répartition des classes</h2>
@@ -34,6 +41,5 @@
         {%- endfor %}
       </div>
     </section>
-  </main>
-</div>
+</main>
 {% endblock %}
