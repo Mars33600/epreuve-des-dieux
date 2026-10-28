@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
 
+from epreuve.builder.arme import Arme
 from epreuve.builder.effets import EFFET_CARAC, EMPLACEMENTS, EXCLUS, TYPES_DOFUS, valeur_effet
 
 DOSSIER = Path(__file__).resolve().parents[3] / "donnees" / "duffus" / "builder"
@@ -47,6 +48,7 @@ class Objet:
     panoplie: int | None
     conditions: str | None
     effets: tuple[Effet, ...]
+    arme: Arme | None = None
 
     def caracs(self) -> dict[str, int]:
         return caracs_des_effets(self.effets)
@@ -77,7 +79,8 @@ class Catalogue:
     def depuis_json(cls, objets: list[dict], panoplies: list[dict]) -> Catalogue:
         return cls(
             [Objet(o["id"], o["nom"], o["niveau"], o["type"], o.get("icone"), o.get("panoplie"),
-                   o.get("conditions"), tuple(tuple(e) for e in o.get("effets", []))) for o in objets],
+                   o.get("conditions"), tuple(tuple(e) for e in o.get("effets", [])), _arme(o.get("arme")))
+             for o in objets],
             [Panoplie(p["id"], p["nom"], tuple(p.get("objets", [])),
                       {int(k): tuple(tuple(e) for e in v) for k, v in p.get("bonus", {}).items()})
              for p in panoplies],
@@ -126,6 +129,13 @@ class Catalogue:
         else:
             trouves.sort(key=lambda o: (-o.niveau, -o.id))
         return len(trouves), trouves[decalage:decalage + limite]
+
+
+def _arme(d: dict | None) -> Arme | None:
+    if not d:
+        return None
+    return Arme(d["pa"], d["po_min"], d["po"], d["cc"], d["bonus_cc"], d["lancers"],
+                tuple(tuple(e) for e in d["effets"]))
 
 
 @cache

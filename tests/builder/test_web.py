@@ -315,3 +315,13 @@ def test_comparer_deux_builds():
     assert autre.status_code == 200 and "pas partagé" in autre.text and "Écarts" not in autre.text
     assert client(None, builds=builds).get("/builder/comparer").status_code == 303
     assert "Choisir un build" in moi.get("/builder/comparer").text
+
+
+def test_calcul_arme_dans_l_api():
+    corps = {"niveau": 50, "objets": {"arme": 2416}, "caracs_base": {"Intelligence": 50}, "mode_arme": "distance",
+             "buff_arme": "base"}
+    d = client().post("/api/builder/calcul", json=corps).json()
+    feu = d["arme"]["lignes"][0]
+    assert feu["libelle"] == "dommages Feu" and feu["normal"] == [18, 36]  # (300 + 50 + 100) / 100 × 4 et × 8
+    assert client().post("/api/builder/calcul", json={"objets": {}}).json()["arme"] is None
+    assert client().post("/api/builder/calcul", json={"mode_arme": "lancer"}).status_code == 422

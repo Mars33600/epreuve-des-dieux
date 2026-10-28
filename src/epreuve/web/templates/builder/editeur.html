@@ -55,6 +55,17 @@
   <div class="b-groupes" id="b-groupes"></div>
 </section>
 
+<section class="b-carte" aria-labelledby="t-arme">
+  <h2 id="t-arme">Dégâts de l'arme</h2>
+  <div class="b-puces" role="group" aria-label="Portée">
+    <button type="button" class="b-puce" data-mode="melee" aria-pressed="true">Mêlée</button>
+    <button type="button" class="b-puce" data-mode="distance" aria-pressed="false">Distance</button>
+    <button type="button" class="b-puce" data-buff="base" aria-pressed="false">+300 Puissance</button>
+    <button type="button" class="b-puce" data-buff="crit" aria-pressed="false">+360 Puissance</button>
+  </div>
+  <div id="b-arme"><p class="b-vide">Aucune arme équipée.</p></div>
+</section>
+
 <section class="b-carte" aria-labelledby="t-panoplies">
   <h2 id="t-panoplies">Bonus de panoplie</h2>
   <div id="b-panoplies"><p class="b-vide">Aucune panoplie active (il faut au moins 2 objets d'une même panoplie).</p></div>

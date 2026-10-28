@@ -2,9 +2,10 @@
 
     uv run --with playwright python tests/qa/recette_builder.py <dossier des captures>
 
-À 360 et 1440 px : compose un build (Coiffe du Bouftou, Cape Bouffante, 100 Force de base, parchemins à 100),
-vérifie le total de Force (20 + 5 de panoplie + 100 + 100 = 225), l'enregistre, puis contrôle l'absence de
-défilement horizontal et d'erreur JavaScript. Sans base : un faux visiteur et un faux dépôt de builds.
+À 360 et 1440 px : compose un build (Coiffe du Bouftou, Cape Bouffante, Marteau du Bouftou, 100 Force de base,
+parchemins à 100), vérifie le total de Force (20 + 10 de panoplie 3/8 + 100 + 100 = 230) et les dégâts d'arme,
+l'enregistre, puis contrôle l'absence de défilement horizontal et d'erreur JavaScript.
+Sans base : un faux visiteur et un faux dépôt de builds.
 """
 
 import asyncio
@@ -65,14 +66,17 @@ async def recette_a(navigateur, largeur: int, sortie: Path) -> list[str]:
     await page.click(".b-objet >> text='Coiffe du Bouftou'")
     await choisir(page, 2, "bouffante", "Cape Bouffante", niveau_max="20")
     await page.wait_for_selector(".b-panoplie")
+    await choisir(page, 9, "bouftou", "Marteau du Bouftou", niveau_max="20")
+    await page.wait_for_selector("#b-arme table")
+    await page.click("[data-buff='base']")
     champ = "#b-base tbody tr:nth-child(3) td:nth-child(4) input"
     await page.fill(champ, "100")
     await page.press(champ, "Tab")
     await page.click("#b-parcho-tout")
     await page.wait_for_timeout(600)
     force = await page.text_content("#b-base tbody tr:nth-child(3) td:nth-child(2)")
-    if force != "225":
-        problemes.append(f"{largeur} px : Force {force} au lieu de 225")
+    if force != "230":
+        problemes.append(f"{largeur} px : Force {force} au lieu de 230")
     await page.fill("#b-nom", "Recette")
     await page.click("#b-enregistrer")
     await page.wait_for_url(lambda u: u.rstrip("/").split("/")[-1].isdigit())

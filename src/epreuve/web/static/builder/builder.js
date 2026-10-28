@@ -11,7 +11,7 @@
   const etat = {
     nom: "", classe: config.classes[0], niveau: 200,
     objets: {}, // emplacement → résumé d'objet (id, nom, niveau, icone, caracs…)
-    base: {}, parcho: {}, note: "",
+    base: {}, parcho: {}, note: "", modeArme: "melee", buffArme: "",
     resultat: null,
   };
 
@@ -182,7 +182,8 @@
   function corpsBuild() {
     const objets = {};
     for (const [e, o] of Object.entries(etat.objets)) if (o) objets[e] = o.id;
-    return { niveau: etat.niveau, objets, caracs_base: etat.base, caracs_parcho: etat.parcho };
+    return { niveau: etat.niveau, objets, caracs_base: etat.base, caracs_parcho: etat.parcho,
+      mode_arme: etat.modeArme, buff_arme: etat.buffArme };
   }
 
   function message(texte, erreur) {
@@ -235,6 +236,7 @@
       }
       groupes.append(el("div", { classe: "b-groupe" }, [el("h3", { texte: nom }), ul]));
     }
+    dessinerArme(d.arme);
     const zone = $("b-panoplies");
     zone.replaceChildren();
     if (!d.panoplies.length) zone.append(el("p", { classe: "b-vide", texte: "Aucune panoplie active (il faut au moins 2 objets d'une même panoplie)." }));
@@ -245,6 +247,29 @@
       ]));
     }
     message("");
+  }
+
+  function jet(j) { return j ? (j[0] === j[1] ? String(j[0]) : j[0] + " à " + j[1]) : "—"; }
+
+  function dessinerArme(a) {
+    const zone = $("b-arme");
+    zone.replaceChildren();
+    for (const b of document.querySelectorAll("[data-mode]")) b.setAttribute("aria-pressed", String(b.dataset.mode === etat.modeArme));
+    for (const b of document.querySelectorAll("[data-buff]")) b.setAttribute("aria-pressed", String(b.dataset.buff === etat.buffArme));
+    if (!a) { zone.append(el("p", { classe: "b-vide", texte: "Aucune arme équipée." })); return; }
+    zone.append(el("p", { classe: "b-arme-meta", texte: a.pa + " PA · PO " + a.po[0] + "–" + a.po[1] + " · critique " +
+      a.cc + " % (+" + a.bonus_cc + ") · " + a.lancers + " par tour · taux de critique " + a.taux_critique + " %" }));
+    const corps = el("tbody");
+    for (const l of a.lignes) {
+      corps.append(el("tr", {}, [el("th", { scope: "row", texte: l.libelle }), el("td", { texte: jet(l.normal) }), el("td", { texte: jet(l.critique) })]));
+    }
+    corps.append(el("tr", {}, [el("th", { scope: "row", texte: "Total dégâts" }), el("td", { texte: jet(a.degats) }), el("td", { texte: a.cc ? jet(a.degats_critique) : "—" })]));
+    if (a.vol) corps.append(el("tr", {}, [el("th", { scope: "row", texte: "Vol de vie (moitié des dégâts volés)" }), el("td", { texte: jet(a.vol) }), el("td", { texte: jet(a.vol_critique) })]));
+    if (a.soins[0] || a.soins[1]) corps.append(el("tr", {}, [el("th", { scope: "row", texte: "Soins" }), el("td", { texte: jet(a.soins) }), el("td", { texte: a.cc ? jet(a.soins_critique) : "—" })]));
+    zone.append(el("div", { classe: "b-base-defile" }, [el("table", { classe: "b-comparaison" }, [
+      el("thead", {}, [el("tr", {}, [el("th", { scope: "col", texte: "Ligne" }), el("th", { scope: "col", texte: "Normal" }), el("th", { scope: "col", texte: "Critique" })])]), corps])]));
+    const tuile = (v, nom) => el("div", { classe: "b-bulle" }, [el("strong", { texte: v === null ? "—" : String(v).replace(".", ",") }), el("span", { texte: nom })]);
+    zone.append(el("div", { classe: "b-arme-resume" }, [tuile(a.par_coup, "par coup"), tuile(a.par_tour, "par tour"), tuile(a.par_pa, "par PA")]));
   }
 
   function dessinerBase() {
@@ -323,6 +348,11 @@
     $("b-retirer").addEventListener("click", () => equiper(choix.emplacement, null));
     $("b-choix").addEventListener("click", (ev) => { if (ev.target === $("b-choix")) $("b-choix").close(); });
     $("b-detail").addEventListener("click", (ev) => { if (ev.target === $("b-detail")) $("b-detail").close(); });
+    for (const b of document.querySelectorAll("[data-mode]")) b.addEventListener("click", () => { etat.modeArme = b.dataset.mode; changement(); });
+    for (const b of document.querySelectorAll("[data-buff]")) b.addEventListener("click", () => {
+      etat.buffArme = etat.buffArme === b.dataset.buff ? "" : b.dataset.buff;
+      changement();
+    });
     const tout = $("b-parcho-tout");
     if (tout) tout.addEventListener("click", () => {
       const plein = config.principales.every((c) => etat.parcho[c] === 100);

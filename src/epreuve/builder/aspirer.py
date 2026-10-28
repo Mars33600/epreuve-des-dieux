@@ -14,10 +14,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from epreuve.builder.effets import EFFET_CARAC, TOUS_LES_TYPES
+from epreuve.builder.effets import EFFET_CARAC, EFFETS_ARME, TOUS_LES_TYPES, TYPES_ARMES
 from epreuve.duffus.client import ClientDuffus, ErreurDuffus
 
-COLONNES_OBJETS = "id,name,level,typeid,iconid,itemsetid,simpleeffects_json,criterions"
+COLONNES_OBJETS = ("id,name,level,typeid,iconid,itemsetid,simpleeffects_json,criterions,"
+                   "apcost,minrange,range,criticalhitprobability,criticalhitbonus,maxcastperturn")
 COLONNES_PANOPLIES = "id,name,items_json,simple_effectsbycount_json"
 
 
@@ -43,7 +44,23 @@ def reduire_objet(brut: dict) -> dict:
             raise ErreurDuffus(f"items : colonne {col} absente, le schéma de Duffus a changé")
     return {"id": int(brut["id"]), "nom": brut["name"] or "", "niveau": int(brut["level"] or 1),
             "type": int(brut["typeid"]), "icone": brut.get("iconid"), "panoplie": _panoplie(brut.get("itemsetid")),
-            "conditions": brut.get("criterions") or None, "effets": _effets(brut.get("simpleeffects_json"))}
+            "conditions": brut.get("criterions") or None, "effets": _effets(brut.get("simpleeffects_json")),
+            **({"arme": a} if (a := _arme(brut)) else {})}
+
+
+def _arme(brut: dict) -> dict | None:
+    """Les caractéristiques d'arme et ses lignes de dégâts (effets de `characteristic` -1, table `_` de Duffus)."""
+    if brut.get("typeid") not in TYPES_ARMES:
+        return None
+    lignes = []
+    for e in brut.get("simpleeffects_json") or []:
+        eid = int(e.get("effectId", 0))
+        if eid in EFFETS_ARME and int(e.get("characteristic", -1)) == -1:
+            lignes.append([eid, *(int(v) if isinstance(v, int | float) else 0 for v in (e.get("from"), e.get("to")))])
+    entier = lambda col: int(brut.get(col) or 0)  # noqa: E731
+    return {"pa": entier("apcost"), "po_min": entier("minrange"), "po": entier("range"),
+            "cc": entier("criticalhitprobability"), "bonus_cc": entier("criticalhitbonus"),
+            "lancers": entier("maxcastperturn"), "effets": lignes}
 
 
 def reduire_panoplie(brut: dict) -> dict:
