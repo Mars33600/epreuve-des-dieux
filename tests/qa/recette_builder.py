@@ -76,9 +76,10 @@ async def recette_a(navigateur, largeur: int, sortie: Path) -> list[str]:
     await page.fill("#b-nom", "Recette")
     await page.click("#b-enregistrer")
     await page.wait_for_url(lambda u: u.rstrip("/").split("/")[-1].isdigit())
-    for nom in ("éditeur", "liste"):
-        if nom == "liste":
-            await page.goto(f"{ADRESSE}/builder")
+    pages = {"liste": "/builder", "comparaison": "/builder/comparer?a=1&b=1"}
+    for nom in ("éditeur", "liste", "comparaison"):
+        if nom in pages:
+            await page.goto(ADRESSE + pages[nom])
         defile, visible = await page.evaluate(LARGEUR_PAGE)
         if defile > visible:
             problemes.append(f"{largeur} px : défilement horizontal sur la page {nom}")

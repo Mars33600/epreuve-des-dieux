@@ -379,7 +379,18 @@
     else message("Suppression impossible.", true);
   }
 
+  async function dupliquer() {
+    const csrf = document.querySelector('meta[name="csrf"]');
+    message("Duplication…");
+    const r = await fetch("/api/builder/builds/" + config.build.id + "/dupliquer", { method: "POST",
+      headers: { Accept: "application/json", "X-CSRF-Token": csrf ? csrf.content : "" } });
+    const d = await r.json().catch(() => ({}));
+    if (r.ok) window.location.assign("/builder/" + d.id);
+    else message("Duplication impossible : " + (d.message || r.status), true);
+  }
+
   brancherFormulaire();
+  if ($("b-dupliquer")) $("b-dupliquer").addEventListener("click", dupliquer);
   $("b-note").addEventListener("input", (ev) => { etat.note = ev.target.value; });
   if ($("b-enregistrer")) {
     $("b-enregistrer").addEventListener("click", enregistrer);

@@ -13,6 +13,7 @@
   <p class="b-aide">Choisis tes objets emplacement par emplacement : le builder fait le total des caractéristiques,
     des bonus de panoplie et vérifie les conditions d'équipement, avec les mêmes calculs que celui de Duffus.</p>
   <a class="b-bouton b-bouton-or" href="/builder/nouveau">Nouveau build</a>
+  {% if avec_base %}<a class="b-bouton" href="/builder/comparer">Comparer deux builds</a>{% endif %}
 </section>
 {% if avec_base %}
 {% if v.grimpeur_id %}

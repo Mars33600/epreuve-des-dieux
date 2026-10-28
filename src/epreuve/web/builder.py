@@ -7,6 +7,8 @@
     GET  /builder/{id}                    un build : éditeur pour l'auteur, lecture seule s'il est partagé
     POST /api/builder/builds              enregistrer un nouveau build (grimpeur, jeton CSRF)
     PUT|DELETE /api/builder/builds/{id}   le modifier ou le supprimer (auteur seul, jeton CSRF)
+    POST /api/builder/builds/{id}/dupliquer   copie d'un build à soi ou partagé, privée, au nom du grimpeur
+    GET  /builder/comparer?a=…&b=…        deux builds côte à côte, écart par caractéristique
     GET  /static/builder/<fichier>        la feuille et le script de l'éditeur
 
 Le module se branche sur l'application par `brancher(app, source)` : un routeur et l'état dont il a besoin.
@@ -173,16 +175,55 @@ async def page_build(request: Request, build_id: int) -> Response:
     v = await _visiteur(request)
     if v is None:
         return RedirectResponse("/", status_code=303)
-    builds = _services(request).builds
-    b = await builds.lire(build_id) if builds is not None else None
-    a_moi = b is not None and b.grimpeur_id == v.grimpeur_id
-    if b is None or not (a_moi or b.contenu.partage):
+    b = await _lisible(request, v, build_id)
+    if b is None:
         return gabarits.TemplateResponse(request, "builder/liste.html", {
             "v": v, "mes": [], "guilde": [], "avec_base": False, "introuvable": True}, status_code=404)  # fmt: skip
+    a_moi = b.grimpeur_id == v.grimpeur_id
     return gabarits.TemplateResponse(request, "builder/editeur.html", {
         "v": v, "config": {**_contexte_editeur(), "build": _build_json(b), "modifiable": a_moi,
-                           "enregistrable": a_moi},
+                           "enregistrable": a_moi, "duplicable": _enregistrable(request, v)},
     })  # fmt: skip
+
+
+async def _lisible(request: Request, v: Visiteur, build_id: int) -> BuildEnregistre | None:
+    """Le build s'il est à ce visiteur ou partagé dans la guilde, sinon None."""
+    builds = _services(request).builds
+    b = await builds.lire(build_id) if builds is not None else None
+    if b is None or not (b.grimpeur_id == v.grimpeur_id or b.contenu.partage):
+        return None
+    return b
+
+
+@routeur.get("/builder/comparer", response_class=HTMLResponse)
+async def page_comparer(request: Request, a: int | None = None, b: int | None = None) -> Response:
+    v = await _visiteur(request)
+    if v is None:
+        return RedirectResponse("/", status_code=303)
+    s = _services(request)
+    choix: list[BuildEnregistre] = []
+    if s.builds is not None:
+        choix = (await s.builds.de_grimpeur(v.grimpeur_id) if v.grimpeur_id else []) + \
+            await s.builds.partages(sauf_grimpeur=v.grimpeur_id)
+    builds = [await _lisible(request, v, x) if x is not None else None for x in (a, b)]
+    colonnes = []
+    for x in builds:
+        if x is None:
+            colonnes.append(None)
+            continue
+        c = x.contenu
+        r = calculer(Build(c.niveau, c.objets, c.caracs_base, c.caracs_parcho), s.catalogue())
+        colonnes.append({"build": x, "r": r})
+    lignes = []
+    if all(colonnes):
+        va, vb = (col["r"].affichage for col in colonnes)
+        for groupe, caracs in GROUPES:
+            rangs = [(c, va.get(c, 0), vb.get(c, 0)) for c in caracs if va.get(c, 0) or vb.get(c, 0)]
+            if rangs:
+                lignes.append((groupe, rangs))
+    return gabarits.TemplateResponse(request, "builder/comparer.html", {
+        "v": v, "choix": choix, "a": a, "b": b, "colonnes": colonnes, "lignes": lignes,
+        "introuvable": any(x is not None and c is None for x, c in zip((a, b), colonnes, strict=True))})  # fmt: skip
 
 
 @routeur.get("/static/builder/{fichier}")
@@ -328,3 +369,20 @@ async def api_supprimer(request: Request, build_id: int) -> Response:
     if not await _services(request).builds.supprimer(build_id, v.grimpeur_id):
         return _erreur(404, "Build introuvable.")
     return JSONResponse({"ok": True})
+
+
+@routeur.post("/api/builder/builds/{build_id:int}/dupliquer")
+async def api_dupliquer(request: Request, build_id: int) -> Response:
+    """Comme « Dupliquer » chez Duffus : « Copie de <nom> », au nom du visiteur ; la copie est privée."""
+    v, refus = await _ecrivain(request)
+    if refus:
+        return refus
+    source = await _lisible(request, v, build_id)
+    if source is None:
+        return _erreur(404, "Build introuvable.")
+    c = source.contenu
+    copie = Contenu(f"Copie de {c.nom}"[:80], c.classe, c.niveau, c.objets, c.caracs_base, c.caracs_parcho, c.note,
+                    partage=False)
+    s = _services(request)
+    return JSONResponse({"ok": True, "id": await s.builds.creer(v.grimpeur_id, copie, s.horloge())},
+                        status_code=201)

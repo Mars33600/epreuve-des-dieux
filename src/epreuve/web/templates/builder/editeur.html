@@ -25,7 +25,11 @@
     <button type="button" class="b-bouton b-bouton-or" id="b-enregistrer">Enregistrer</button>
     <button type="button" class="b-bouton" id="b-supprimer" {% if not config.build %}hidden{% endif %}>Supprimer</button>
   </div>
-  {% elif config.modifiable %}<p class="b-aide b-champ-nom">Sans fiche de grimpeur, le build se compose mais ne s'enregistre pas.</p>{% endif %}
+  {% endif %}
+  {% if config.duplicable and config.build %}
+  <div class="b-actions"><button type="button" class="b-bouton" id="b-dupliquer">Dupliquer</button></div>
+  {% endif %}
+  {% if not config.enregistrable and config.modifiable %}<p class="b-aide b-champ-nom">Sans fiche de grimpeur, le build se compose mais ne s'enregistre pas.</p>{% endif %}
   <p class="b-etat" id="b-etat" role="status" aria-live="polite"></p>
 </section>
 

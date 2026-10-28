@@ -273,3 +273,45 @@ def test_enregistrement_refus():
 def test_page_liste_sans_base_et_build_introuvable():
     assert "Mes builds" not in client().get("/builder").text
     assert client().get("/builder/3").status_code == 404
+
+
+# --- Duplication et comparaison -------------------------------------------------------------------------------
+
+
+def test_dupliquer_un_build_partage_ou_a_soi():
+    builds = FauxBuilds()
+    moi, autre = client(MOI, builds=builds), client(AUTRE, builds=builds)
+    bid = moi.post("/api/builder/builds", json=CORPS, headers=CSRF).json()["id"]
+    ecrit = {"X-CSRF-Token": "autre-csrf"}
+    assert autre.post(f"/api/builder/builds/{bid}/dupliquer", headers=ecrit).status_code == 404  # privé
+    assert moi.post(f"/api/builder/builds/{bid}/dupliquer").status_code == 403  # sans jeton
+    moi.put(f"/api/builder/builds/{bid}", json={**CORPS, "partage": True}, headers=CSRF)
+    r = autre.post(f"/api/builder/builds/{bid}/dupliquer", headers=ecrit)
+    assert r.status_code == 201
+    copie = builds.lignes[r.json()["id"]]
+    assert copie.grimpeur_id == 2 and copie.contenu.nom == "Copie de Iop <b>terre</b>"
+    assert copie.contenu.partage is False and copie.contenu.objets == {"coiffe": 2411}
+    assert 'id="b-dupliquer"' in autre.get(f"/builder/{bid}").text
+    long = moi.post("/api/builder/builds", json={**CORPS, "nom": "x" * 80}, headers=CSRF).json()["id"]
+    r = moi.post(f"/api/builder/builds/{long}/dupliquer", headers=CSRF)
+    assert len(builds.lignes[r.json()["id"]].contenu.nom) == 80
+
+
+def test_comparer_deux_builds():
+    builds = FauxBuilds()
+    moi = client(MOI, builds=builds)
+    a = moi.post("/api/builder/builds", json={**CORPS, "nom": "Seul", "niveau": 50}, headers=CSRF).json()["id"]
+    b = moi.post("/api/builder/builds", json={**CORPS, "nom": "Deux", "niveau": 50,
+                                               "objets": {"coiffe": 2411, "cape": 2414}}, headers=CSRF).json()["id"]
+    page = moi.get("/builder/comparer", params={"a": a, "b": b})
+    assert page.status_code == 200
+    html = page.text
+    # Force : A = 20 + 100 + 100 = 220 ; B = 225 avec le bonus 2/8 du Bouftou. Vitalité : 300 (A), puis + 40 + 5.
+    assert "<th scope=\"row\">Force</th><td>220</td><td>225</td>" in html and "▲ +5" in html
+    assert "<th scope=\"row\">Vitalité</th><td>300</td><td>345</td>" in html
+    assert "Panoplie du Bouftou" in html
+    assert "<th scope=\"row\">Dommages</th>" not in html  # nulle des deux côtés : masquée
+    autre = client(AUTRE, builds=builds).get("/builder/comparer", params={"a": a, "b": b})
+    assert autre.status_code == 200 and "pas partagé" in autre.text and "Écarts" not in autre.text
+    assert client(None, builds=builds).get("/builder/comparer").status_code == 303
+    assert "Choisir un build" in moi.get("/builder/comparer").text

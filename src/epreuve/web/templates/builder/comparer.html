@@ -1,0 +1,46 @@
+{% extends "builder/_cadre.html" %}
+{% block titre %}Comparer des builds · Builder · L'Épreuve des Dieux{% endblock %}
+{% macro option(x, choisi) -%}
+<option value="{{ x.id }}" {% if x.id == choisi %}selected{% endif %}>{{ x.contenu.nom }} ({{ x.auteur }}, niv. {{ x.contenu.niveau }})</option>
+{%- endmacro %}
+{% block page %}
+<section class="b-carte">
+  <h2>Comparer des builds</h2>
+  {% if introuvable %}<p class="b-alerte" role="alert">Un des builds n'existe pas, ou n'est pas partagé.</p>{% endif %}
+  {% if choix %}
+  <form class="b-comparer-choix" method="get" action="/builder/comparer">
+    <label class="b-champ">Build A
+      <select name="a" required><option value="">Choisir un build…</option>{% for x in choix %}{{ option(x, a) }}{% endfor %}</select>
+    </label>
+    <label class="b-champ">Build B
+      <select name="b" required><option value="">Choisir un build…</option>{% for x in choix %}{{ option(x, b) }}{% endfor %}</select>
+    </label>
+    <button class="b-bouton b-bouton-or" type="submit">Comparer</button>
+  </form>
+  {% else %}<p class="b-vide">Enregistre ou fais-toi partager au moins deux builds pour les comparer.</p>{% endif %}
+</section>
+{% if lignes %}
+{% set ca, cb = colonnes[0], colonnes[1] %}
+<section class="b-carte" aria-labelledby="t-comparaison">
+  <h2 id="t-comparaison">Écarts</h2>
+  <div class="b-base-defile">
+  <table class="b-comparaison">
+    <thead><tr><th scope="col">Caractéristique</th>
+      <th scope="col"><a href="/builder/{{ ca.build.id }}">A · {{ ca.build.contenu.nom }}</a></th>
+      <th scope="col"><a href="/builder/{{ cb.build.id }}">B · {{ cb.build.contenu.nom }}</a></th>
+      <th scope="col">B − A</th></tr></thead>
+    {% for groupe, rangs in lignes %}
+    <tbody>
+      <tr><th scope="rowgroup" colspan="4" class="b-comparaison-groupe">{{ groupe }}</th></tr>
+      {% for c, va, vb in rangs %}{% set d = vb - va %}
+      <tr><th scope="row">{{ c }}</th><td>{{ va }}</td><td>{{ vb }}</td>
+        <td class="{% if d > 0 %}plus{% elif d < 0 %}moins{% endif %}">{% if d > 0 %}▲ +{{ d }}{% elif d < 0 %}▼ {{ d }}{% else %}={% endif %}</td></tr>
+      {% endfor %}
+    </tbody>
+    {% endfor %}
+  </table>
+  </div>
+  <p class="b-aide">Panoplies : A {{ ca.r.panoplies|map(attribute="nom")|join(", ") or "aucune" }} ; B {{ cb.r.panoplies|map(attribute="nom")|join(", ") or "aucune" }}.</p>
+</section>
+{% endif %}
+{% endblock %}
