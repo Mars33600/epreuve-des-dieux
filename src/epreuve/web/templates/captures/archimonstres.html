@@ -1,0 +1,99 @@
+{% extends "site.html" %}
+{% from "captures/_cp.html" import tete_captures, onglets, barre, sans_fiche, panneau_qui %}
+{% block titre %}{{ "Boss du Dofus Ocre" if genre == "boss" else "Archimonstres" }} · L'Épreuve des Dieux{% endblock %}
+{% block tete %}{{ super() }}{{ tete_captures() }}{% endblock %}
+{% set base = "/archimonstres" ~ ("?" ~ retour if retour else "") %}
+
+{% macro carte(i) -%}
+{%- set n = nombres.get(i.id, 0) -%}
+<li class="cp-carte{% if n >= personnages %} complet{% elif n > 0 %} entame{% endif %}"{% if tri != "zone" %} id="{{ genre }}-{{ i.id }}"{% endif %} data-id="{{ i.id }}" data-nom="{{ normaliser(i.nom) }}" data-zones="{{ normaliser(i.zone_texte) }}" data-nombre="{{ n }}"{% if i.niveau_max is not none %} data-niveau="{{ i.niveau_max }}"{% endif %}{% if i.id not in visibles %} hidden{% endif %}>
+{%- if i.icone %}<img class="cp-icone" src="{{ i.icone }}" alt="" loading="lazy" width="64" height="64">{% else %}<span class="cp-icone vide" aria-hidden="true">?</span>{% endif -%}
+<div class="cp-corps"><h3 class="cp-nom">{{ i.nom }}</h3><p class="cp-meta">{% if i.etape is not none %}<span class="tag">Étape {{ i.etape }}</span>{% endif %}{% if i.niveaux %} <span class="num">{{ i.niveaux }}</span>{% endif %}</p>{% if i.zone_texte %}<p class="cp-zone">{{ i.zone_texte }}</p>{% endif %}</div>
+<div class="cp-pied"><span class="cp-etat" data-etat>{% if n >= personnages %}✓ Complet{% elif n > 0 %}Capturé{% else %}Manquant{% endif %}</span><a class="cp-quibtn" href="{{ base }}{{ '&' if retour else '?' }}qui={{ i.id }}#qui" data-qui>Qui l'a&nbsp;?</a>
+{%- if peut_suivre %}<span class="cp-compteur"><button form="cpF" formaction="/archimonstres/{{ genre }}/{{ i.id }}" name="delta" value="-1" aria-label="Retirer un exemplaire de {{ i.nom }}"{% if n == 0 %} disabled{% endif %}>−</button><output class="num" data-nombre aria-live="polite">{{ n }}</output><button form="cpF" formaction="/archimonstres/{{ genre }}/{{ i.id }}" name="delta" value="1" aria-label="Ajouter un exemplaire de {{ i.nom }}">+</button></span>{% endif -%}
+</div></li>
+{%- endmacro %}
+
+{% block page %}
+<main class="cp" data-genre="{{ genre }}" data-qui-nombre="1">
+  {% if peut_suivre %}<form id="cpF" method="post" action="/archimonstres" data-cp hidden><input type="hidden" name="csrf" value="{{ v.csrf }}"><input type="hidden" name="retour" value="{{ retour }}"></form>{% endif %}
+  <section class="card cp-tete" aria-labelledby="cpTitre">
+    {{ onglets(genre) }}
+    <div>
+      <div class="eyebrow">Quête du Dofus Ocre</div>
+      <h2 id="cpTitre">{{ "Boss" if genre == "boss" else "Archimonstres" }}</h2>
+      <p class="muted">Suis tes captures {{ "de boss" if genre == "boss" else "d'archimonstres" }}, et regarde qui de la guilde les a déjà pour t'entraider.</p>
+    </div>
+    {{ sans_fiche(peut_suivre) }}
+    {{ barre(progression, "Captures complètes") }}
+
+    <div class="cp-pierres" data-pierres data-personnages="{{ personnages }}">
+      <h3 class="cp-sous-titre">Pierres d'âme à prévoir</h3>
+      <ul class="cp-pierres-liste">
+        {% for p in pierres.pierres %}<li data-pierre="{{ p.cle }}" data-cap="{{ p.cap }}"><b class="num" data-pierre-n>{{ p.a_prevoir }}</b> {{ p.nom }} <small class="muted">(jusqu'au niv. {{ p.cap }})</small></li>{% endfor %}
+      </ul>
+      {% if pierres.hors_bornes %}<p class="cp-alerte">{{ pierres.hors_bornes }} au-dessus du niveau 190 : il faut une Gigantesque pierre d'âme.</p>{% endif %}
+      {% if peut_suivre %}
+      <form class="cp-persos" method="post" action="/archimonstres/personnages">
+        <input type="hidden" name="csrf" value="{{ v.csrf }}"><input type="hidden" name="retour" value="{{ retour }}">
+        <span id="persosLabel">Personnages</span>
+        <div class="cp-seg" role="group" aria-labelledby="persosLabel">
+          {% for k in range(1, PERSONNAGES_MAX + 1) %}<button type="submit" name="nombre" value="{{ k }}" aria-pressed="{{ 'true' if k == personnages else 'false' }}" title="Viser {{ k }} exemplaire{{ 's' if k > 1 }} de chaque capture">{{ k }}</button>{% endfor %}
+        </div>
+      </form>
+      {% endif %}
+    </div>
+  </section>
+
+  {{ panneau_qui(panneau, base, true) }}
+
+  <section class="card cp-liste" aria-label="Liste">
+    <form class="cp-filtres" method="get" action="/archimonstres" id="cpFiltres" role="search">
+      {% if genre == "boss" %}<input type="hidden" name="onglet" value="boss">{% endif %}
+      <input type="hidden" name="tri" value="{{ tri }}">
+      <label class="cp-recherche"><span class="sr-only">Rechercher</span>
+        <input type="search" name="q" value="{{ q }}" placeholder="{{ 'Rechercher un boss…' if genre == 'boss' else 'Rechercher par nom ou zone…' }}" data-filtre-q autocomplete="off"></label>
+      <fieldset class="cp-seg" data-filtre-etat><legend class="sr-only">État</legend>
+        {% for val, lib in (("tous", "Tous"), ("captures", "Capturés"), ("manquants", "Manquants")) %}
+        <label><input type="radio" name="etat" value="{{ val }}"{% if etat == val %} checked{% endif %}><span>{{ lib }}</span></label>
+        {% endfor %}
+      </fieldset>
+      {% if genre == "archi" %}
+      <label class="cp-min">Exemplaires
+        <select name="min" data-filtre-min>
+          <option value="">Tous</option>
+          {% for k in range(2, PERSONNAGES_MAX + 1) %}<option value="{{ k }}"{% if minimum == k %} selected{% endif %}>{{ k }} ou +</option>{% endfor %}
+        </select></label>
+      {% endif %}
+      <button class="btn" type="submit" data-sans-js>Filtrer</button>
+      <span class="muted cp-affiches"><b class="num" data-affiches>{{ visibles|length }}</b> affiché{{ "s" if visibles|length > 1 }}</span>
+    </form>
+    <nav class="cp-seg cp-tris" aria-label="Tri">
+      {% for t, libelle, lien in liens_tri %}<a href="{{ lien }}"{% if t == tri %} aria-current="true"{% endif %}>{{ libelle }}</a>{% endfor %}
+    </nav>
+
+    {% for g in groupes %}
+      {% if g.sous %}
+      <details class="cp-groupe cp-aire" open data-groupe>
+        <summary><span class="cp-groupe-titre">{{ g.titre }}</span> <span class="cp-groupe-compte num" data-compte>{{ g.faits }} / {{ g.total }}</span>{% if g.complet %} <span class="tag me">✓</span>{% endif %}</summary>
+        {% for z in g.sous %}
+        <details class="cp-groupe cp-zone" open data-groupe>
+          <summary><span class="cp-groupe-titre">{{ z.titre }}</span> <span class="cp-groupe-compte num" data-compte>{{ z.faits }} / {{ z.total }}</span>{% if z.complet %} <span class="tag me">✓</span>{% endif %}</summary>
+          <ul class="cp-grille">{% for i in z.items %}{{ carte(i) }}{% endfor %}</ul>
+        </details>
+        {% endfor %}
+      </details>
+      {% elif g.titre %}
+      <details class="cp-groupe" open data-groupe>
+        <summary><span class="cp-groupe-titre">{{ g.titre }}</span> <span class="cp-groupe-compte num" data-compte>{{ g.faits }} / {{ g.total }}</span>{% if g.complet %} <span class="tag me">✓</span>{% endif %}</summary>
+        <ul class="cp-grille">{% for i in g.items %}{{ carte(i) }}{% endfor %}</ul>
+      </details>
+      {% else %}
+      <ul class="cp-grille" data-groupe>{% for i in g.items %}{{ carte(i) }}{% endfor %}</ul>
+      {% endif %}
+    {% endfor %}
+    <p class="muted cp-vide" data-vide{% if visibles %} hidden{% endif %}>{{ "Aucun boss ne correspond." if genre == "boss" else "Aucun archimonstre ne correspond." }}</p>
+  </section>
+</main>
+{% endblock %}
+{% block scripts %}{{ super() }}<script src="/static/captures.js"></script>{% endblock %}

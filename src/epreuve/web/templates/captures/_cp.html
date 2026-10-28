@@ -1,0 +1,42 @@
+{#- Morceaux communs du module E1 (archimonstres, avis de recherche). Aucun script ni style en ligne (CSP). -#}
+{% from "_macros.html" import personnes %}
+
+{% macro tete_captures() -%}
+<link rel="stylesheet" href="/static/captures.css">
+{%- endmacro %}
+
+{% macro onglets(actif) -%}
+<nav class="cp-onglets" aria-label="Suivi des captures">
+  <a href="/archimonstres"{% if actif == "archi" %} aria-current="page"{% endif %}>Archimonstres</a>
+  <a href="/archimonstres?onglet=boss"{% if actif == "boss" %} aria-current="page"{% endif %}>Boss</a>
+  <a href="/avis-de-recherche"{% if actif == "avis" %} aria-current="page"{% endif %}>Avis de recherche</a>
+</nav>
+{%- endmacro %}
+
+{% macro barre(prog, libelle) -%}
+<div class="cp-prog" data-prog>
+  <div class="cp-barre" role="progressbar" aria-label="{{ libelle }}" aria-valuemin="0" aria-valuemax="{{ prog.total }}" aria-valuenow="{{ prog.faits }}"><span class="p-{{ prog.cran }}" data-prog-barre></span></div>
+  <span class="cp-compte num"><b data-prog-faits>{{ prog.faits }}</b> / <span data-prog-total>{{ prog.total }}</span> · <span data-prog-pct>{{ prog.pct }}</span>&nbsp;%</span>
+</div>
+{%- endmacro %}
+
+{% macro sans_fiche(peut_suivre) -%}
+{% if not peut_suivre %}<p class="cp-notice" role="note">Tu n'as pas de fiche de grimpeur : tu consultes sans suivre tes captures.</p>{% endif %}
+{%- endmacro %}
+
+{# Le panneau « qui l'a ? » sans JavaScript (avec JavaScript, captures.js le montre dans le panneau latéral). #}
+{% macro panneau_qui(panneau, fermer, avec_nombre) -%}
+{% if panneau %}{% set element, ont, pas = panneau %}
+<section class="card cp-qui" id="qui" aria-labelledby="quiTitre">
+  <div class="row"><h2 id="quiTitre">Qui a {{ element.nom }}&nbsp;?</h2><a class="btn" href="{{ fermer }}">Fermer</a></div>
+  {{ liste_qui(ont, pas, avec_nombre) }}
+</section>
+{% endif %}
+{%- endmacro %}
+
+{% macro liste_qui(ont, pas, avec_nombre) -%}
+<h3 class="cp-qui-h">L'ont déjà <small class="muted">{{ ont|length }}</small></h3>
+{% if ont %}<div class="people">{% for g in ont %}<span class="person done">{{ g.pseudo }}{% if g.classe %} <span class="muted">{{ g.classe }}</span>{% endif %}{% if avec_nombre %} <span class="num">×{{ g.nombre }}</span>{% endif %}</span>{% endfor %}</div>{% else %}<p class="muted">Personne pour l'instant.</p>{% endif %}
+<h3 class="cp-qui-h">Ne l'ont pas encore <small class="muted">{{ pas|length }}</small></h3>
+{% if pas %}{{ personnes(pas, "miss") }}{% else %}<p class="muted">Tout le monde l'a.</p>{% endif %}
+{%- endmacro %}

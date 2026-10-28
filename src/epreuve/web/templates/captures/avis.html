@@ -1,0 +1,56 @@
+{% extends "site.html" %}
+{% from "captures/_cp.html" import tete_captures, onglets, barre, sans_fiche, panneau_qui %}
+{% block titre %}Avis de recherche · L'Épreuve des Dieux{% endblock %}
+{% block tete %}{{ super() }}{{ tete_captures() }}{% endblock %}
+{% set base = "/avis-de-recherche" ~ ("?" ~ retour if retour else "") %}
+{% block page %}
+<main class="cp" data-genre="avis">
+  {% if peut_suivre %}<form id="cpF" method="post" action="/avis-de-recherche" data-cp hidden><input type="hidden" name="csrf" value="{{ v.csrf }}"><input type="hidden" name="retour" value="{{ retour }}"></form>{% endif %}
+  <section class="card cp-tete" aria-labelledby="cpTitre">
+    {{ onglets("avis") }}
+    <div>
+      <div class="eyebrow">Milices</div>
+      <h2 id="cpTitre">Avis de recherche</h2>
+      <p class="muted">Tous les avis de recherche : niveau, milice, récompense. Coche ceux que tu as capturés.</p>
+    </div>
+    {{ sans_fiche(peut_suivre) }}
+    {{ barre(progression, "Avis capturés") }}
+    <p class="cp-reste">Disponible&nbsp;: <b class="num" data-reste="aviton">{{ "{:,}".format(reste.aviton).replace(",", " ") }}</b> avitons · <b class="num" data-reste="aliton">{{ "{:,}".format(reste.aliton).replace(",", " ") }}</b> alitons</p>
+  </section>
+
+  {{ panneau_qui(panneau, base, false) }}
+
+  <section class="card cp-liste" aria-label="Liste des avis">
+    <form class="cp-filtres" method="get" action="/avis-de-recherche" id="cpFiltres" role="search" data-avis>
+      <label class="cp-recherche"><span class="sr-only">Rechercher un avis de recherche</span>
+        <input type="search" name="q" value="{{ q }}" placeholder="Rechercher par nom…" data-filtre-q autocomplete="off"></label>
+      <label class="cp-min"><span class="sr-only">Milice</span>
+        <select name="milice" data-filtre-milice>
+          <option value="">Toutes les milices</option>
+          {% for m in milices %}<option value="{{ m }}"{% if m == milice %} selected{% endif %}>{{ m }}</option>{% endfor %}
+        </select></label>
+      <label class="cp-case"><input type="checkbox" name="emeraude" value="1" data-filtre-emeraude{% if emeraude %} checked{% endif %}><span>Émeraude <small class="muted">(niv. ≤ {{ NIVEAU_EMERAUDE }})</small></span></label>
+      <fieldset class="cp-seg" data-filtre-etat><legend class="sr-only">État</legend>
+        {% for val, lib in (("tous", "Tous"), ("captures", "Capturé"), ("manquants", "Non capturé")) %}
+        <label><input type="radio" name="etat" value="{{ val }}"{% if etat == val %} checked{% endif %}><span>{{ lib }}</span></label>
+        {% endfor %}
+      </fieldset>
+      <button class="btn" type="submit" data-sans-js>Filtrer</button>
+      <span class="muted cp-affiches"><b class="num" data-affiches>{{ visibles|length }}</b> / {{ avis|length }}</span>
+    </form>
+
+    <ul class="cp-grille" data-groupe>
+      {% for a in avis %}{% set pris = a.id in captures %}
+      <li class="cp-carte cp-avis{% if pris %} complet{% endif %}" id="avis-{{ a.id }}" data-id="{{ a.id }}" data-nom="{{ normaliser(a.nom) }}" data-milice="{{ a.milice or '' }}" data-niveau="{{ a.niveau_tri }}" data-nombre="{{ 1 if pris else 0 }}" data-recompense="{{ a.recompense or 0 }}" data-type="{{ a.recompense_type }}"{% if a.id not in visibles %} hidden{% endif %}>
+      {%- if a.icone %}<img class="cp-icone" src="{{ a.icone }}" alt="" loading="lazy" width="64" height="64">{% else %}<span class="cp-icone vide" aria-hidden="true">?</span>{% endif -%}
+      <div class="cp-corps"><h3 class="cp-nom"><a href="/avis-de-recherche/{{ a.slug }}">{{ a.nom }}</a></h3><p class="cp-meta">{% if a.niveau_texte %}<span class="tag">{{ a.niveau_texte }}</span>{% endif %}{% if a.recompense %} <span class="tag">{{ a.recompense }} {{ a.recompense_type }}{{ "s" if a.recompense > 1 }}</span>{% endif %}</p>{% if a.milice %}<p class="cp-zone">Milice&nbsp;: {{ a.milice }}</p>{% endif %}</div>
+      <div class="cp-pied"><a class="cp-quibtn" href="{{ base }}{{ '&' if retour else '?' }}qui={{ a.id }}#qui" data-qui>Qui l'a&nbsp;?</a>
+      {%- if peut_suivre %}<span class="cp-capture"><button form="cpF" formaction="/avis-de-recherche/{{ a.id }}" name="capture" value="{{ 0 if pris else 1 }}" aria-pressed="{{ 'true' if pris else 'false' }}" aria-label="{{ a.nom }} capturé"><span class="cp-coche" aria-hidden="true"></span><span data-etat>{{ "Capturé" if pris else "Pas capturé" }}</span></button></span>
+      {%- else %}<span class="cp-etat">{{ "Capturé" if pris else "Pas capturé" }}</span>{% endif %}</div></li>
+      {% endfor %}
+    </ul>
+    <p class="muted cp-vide" data-vide{% if visibles %} hidden{% endif %}>Aucun avis de recherche trouvé.</p>
+  </section>
+</main>
+{% endblock %}
+{% block scripts %}{{ super() }}<script src="/static/captures.js"></script>{% endblock %}

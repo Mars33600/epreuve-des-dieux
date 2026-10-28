@@ -1,0 +1,128 @@
+/* L'Épreuve des Dieux · module E1 : archimonstres, boss du Dofus Ocre, avis de recherche.
+   Tokens et règles de docs/design/DA.md (thème sombre seulement, cartes opaques, or réservé au progrès,
+   cibles de 44 px, mobile d'abord). Classes préfixées « cp- ». Aucun style en ligne (CSP). */
+
+.cp{display:grid;gap:18px;min-width:0}
+.cp-tete{display:grid;gap:14px}
+.cp-tete h2{font-size:clamp(26px,4vw,34px)}
+.cp-sous-titre{font:500 12px/1.3 var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.cp-notice{border:1px dashed var(--line);border-radius:8px;padding:10px 12px;color:var(--muted);font-size:15px}
+.cp-alerte{color:var(--warn);font-size:14px}
+.cp-alerte::before{content:"⚠ "}
+
+/* Onglets : archimonstres, boss, avis */
+.cp-onglets{display:flex;flex-wrap:wrap;gap:6px}
+.cp-onglets a{min-height:44px;display:inline-flex;align-items:center;padding:6px 14px;border-radius:999px;border:1px solid var(--line);
+  background:var(--sunken);color:var(--ink);text-decoration:none;font-size:15px}
+.cp-onglets a[aria-current="page"]{border-color:var(--gold);background:var(--gold-wash)}
+
+/* Progression */
+.cp-prog{display:flex;align-items:center;gap:14px}
+.cp-barre{flex:1;height:10px;border-radius:999px;background:var(--sunken);border:1px solid var(--line-soft);overflow:hidden}
+.cp-barre > span{display:block;height:100%;width:var(--p,0%);background:linear-gradient(90deg,var(--gold-deep),var(--gold))}
+.cp-compte{font-size:15px;white-space:nowrap;color:var(--muted)}
+.cp-compte b{color:var(--ink);font-weight:500}
+.cp-reste{font-size:15px;color:var(--muted)}
+.cp-reste b{color:var(--ink);font-weight:500}
+
+/* Pierres d'âme et personnages */
+.cp-pierres{display:grid;gap:10px;padding:12px;border-radius:8px;background:var(--sunken);border:1px solid var(--line-soft)}
+.cp-pierres-liste{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px;font-size:15px}
+.cp-persos{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:15px}
+
+/* Contrôles segmentés (radios, liens, boutons) */
+.cp-seg{display:inline-flex;flex-wrap:wrap;gap:4px;border:0;margin:0;padding:0;min-width:0}
+.cp-seg label,.cp-seg a,.cp-seg button{position:relative;min-height:44px;min-width:44px;display:inline-flex;align-items:center;justify-content:center;
+  padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);text-decoration:none;font-size:15px;cursor:pointer}
+.cp-seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.cp-seg label:has(input:checked),.cp-seg a[aria-current],.cp-seg button[aria-pressed="true"]{border-color:var(--gold);background:var(--gold-wash)}
+.cp-seg label:has(input:focus-visible){outline:2px solid var(--gold-hi);outline-offset:2px}
+.cp-tris{margin:4px 0 6px}
+
+/* Filtres */
+.cp-liste{display:grid;gap:12px;min-width:0}
+.cp-filtres{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.cp-recherche{flex:1 1 240px;min-width:0}
+.cp-recherche input,.cp-min select{width:100%;min-height:44px;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--sunken);color:var(--ink);font-size:16px}
+.cp-min{display:inline-flex;align-items:center;gap:8px;font-size:15px}
+.cp-min select{width:auto}
+.cp-case{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer;font-size:15px}
+.cp-case input{width:20px;height:20px;accent-color:var(--gold)}
+.cp-case:has(input:checked){border-color:var(--gold);background:var(--gold-wash)}
+.cp-affiches{font-size:14px}
+.cp-js [data-sans-js]{display:none}
+
+/* Volets : étape, aire, sous-zone */
+.cp-groupe{border-top:1px solid var(--line-soft);padding-top:8px}
+.cp-groupe > summary{min-height:44px;display:flex;align-items:center;gap:10px;cursor:pointer;list-style:none;font-family:var(--f-display);font-size:20px}
+.cp-groupe > summary::-webkit-details-marker{display:none}
+.cp-groupe > summary::before{content:"▸";color:var(--gold);font-size:14px;transition:transform .2s ease}
+.cp-groupe[open] > summary::before{transform:rotate(90deg)}
+.cp-groupe-compte{font-family:var(--f-data);font-size:14px;color:var(--muted)}
+.cp-zone{margin-left:12px}
+.cp-zone > summary{font-size:17px}
+.cp-vide{padding:16px 0}
+
+/* Cartes */
+.cp-grille{list-style:none;margin:0;padding:6px 0;display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+@media (min-width:600px){.cp-grille{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:960px){.cp-grille{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cp-carte{display:grid;grid-template-columns:64px minmax(0,1fr);grid-template-areas:"icone corps" "pied pied";gap:8px 12px;padding:12px;border-radius:var(--r);
+  background:var(--surface);border:1px solid var(--line-soft);box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+.cp-carte[hidden]{display:none}
+.cp-carte.entame{border-color:var(--line)}
+.cp-carte.complet{border-color:var(--gold-line);box-shadow:inset 0 1px 0 var(--gold-line)}
+.cp-icone{grid-area:icone;width:64px;height:64px;object-fit:contain;border-radius:8px;background:var(--sunken)}
+.cp-icone.vide{display:grid;place-items:center;color:var(--faint);font:700 22px var(--f-display)}
+.cp-icone.grand{width:96px;height:96px}
+.cp-corps{grid-area:corps;min-width:0;display:grid;gap:4px;align-content:start}
+.cp-nom{font-size:18px;overflow-wrap:anywhere}
+.cp-nom a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold-line);text-underline-offset:3px}
+.cp-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:14px;color:var(--muted)}
+.cp-zone{font-size:14px;color:var(--muted);overflow-wrap:anywhere}
+.cp-carte .cp-zone{margin-left:0}
+.cp-pied{grid-area:pied;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.cp-etat{font:500 12px/1 var(--f-data);letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.cp-carte.complet .cp-etat{color:var(--gold-hi)}
+.cp-carte.entame .cp-etat{color:var(--ink)}
+.cp-quibtn{min-height:44px;display:inline-flex;align-items:center;padding:0 4px;color:var(--gold-hi);font-size:14px;text-underline-offset:3px}
+
+/* Compteur − n + */
+.cp-compteur{display:inline-flex;align-items:center;gap:4px;margin-left:auto}
+.cp-compteur button{width:44px;height:44px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);font-size:22px;line-height:1}
+.cp-compteur button:hover:not(:disabled){border-color:var(--gold-line)}
+.cp-compteur button:disabled{opacity:.4;cursor:default}
+.cp-compteur output{min-width:34px;text-align:center;font-size:18px}
+
+/* Case « capturé » d'un avis : un bouton à bascule, lisible sans la couleur (coche + texte) */
+.cp-capture{margin-left:auto}
+.cp-capture button{min-height:44px;display:inline-flex;align-items:center;gap:10px;padding:0 14px 0 10px;border-radius:8px;border:1px solid var(--line);background:var(--sunken);font-weight:700}
+.cp-coche{width:22px;height:22px;border-radius:5px;border:1.5px solid var(--line);background:var(--night-1);display:grid;place-items:center}
+.cp-capture button[aria-pressed="true"]{border-color:var(--gold)}
+.cp-capture button[aria-pressed="true"] .cp-coche{background:var(--gold);border-color:var(--gold)}
+.cp-capture button[aria-pressed="true"] .cp-coche::after{content:"✓";color:var(--night-0);font-size:15px;line-height:1}
+.cp-capture[aria-busy="true"] button,.cp-compteur[aria-busy="true"] button{opacity:.6}
+
+/* « Qui l'a ? » */
+.cp-qui{display:grid;gap:10px}
+.cp-qui-h{font:500 12px/1.3 var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:6px}
+.cp-qui-h small{letter-spacing:0}
+
+/* Fiche d'un avis */
+.cp-fiche{display:grid;gap:16px}
+.cp-fiche-tete{display:flex;gap:16px;align-items:center}
+.cp-fiche-tete h2{font-size:clamp(26px,5vw,34px)}
+.cp-fiche .retour{color:var(--gold-hi);min-height:44px;display:inline-flex;align-items:center}
+.cp-sec{display:grid;gap:10px}
+.cp-sec > h3{font:500 12px/1.3 var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.cp-resume{font-size:16px;color:var(--ink)}
+.cp-resume ul{padding-left:20px;margin:6px 0}
+.cp-table-defile{overflow-x:auto;max-width:100%}
+.cp-table{border-collapse:collapse;font-size:14px;min-width:100%}
+.cp-table th,.cp-table td{padding:6px 8px;border-bottom:1px solid var(--line-soft);text-align:right;white-space:nowrap}
+.cp-table thead th{color:var(--muted);font-weight:500}
+.cp-table th[scope="row"]{text-align:left}
+.cp-liens{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.cp-liens a{min-height:44px;display:inline-flex;align-items:center;color:var(--ink)}
+
+@media (prefers-reduced-motion: reduce){.cp-groupe > summary::before{transition:none}}

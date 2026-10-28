@@ -33,7 +33,7 @@ from epreuve.config import Config
 from epreuve.discord.oauth import ClientOAuth
 from epreuve.domaine.mode_site import mode_effectif
 from epreuve.domaine.modeles import Regles
-from epreuve.web import admin, api, auth, pages
+from epreuve.web import admin, api, auth, captures, pages
 from epreuve.web.auth import Refus, admin_pour_le_filtre, visiteur
 from epreuve.web.rendu import creer_gabarits, rendre
 from epreuve.web.securite import ENTETES_SECURITE, EntetesSecurite, FiltreMode
@@ -144,4 +144,5 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
     app.include_router(pages.routeur)
     app.include_router(api.routeur)
     app.include_router(admin.routeur)
+    app.include_router(captures.routeur)  # module E1 : archimonstres et avis de recherche
     return app
