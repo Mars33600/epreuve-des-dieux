@@ -14,7 +14,7 @@ servent la recherche par début de mots (« epee boi » → « Épée de Boisail
 from alembic import op
 
 revision = "e2_encyclopedie"
-down_revision = "0001_initial"
+down_revision = "e1_captures"
 branch_labels = None
 depends_on = None
 

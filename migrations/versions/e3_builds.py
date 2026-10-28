@@ -6,7 +6,7 @@ Révision : e3_builds, après 0001_initial. Référence : docs/lots/E3.md §5.
 from alembic import op
 
 revision = "e3_builds"
-down_revision = "0001_initial"
+down_revision = "e2_encyclopedie_suite"
 branch_labels = None
 depends_on = None
 
