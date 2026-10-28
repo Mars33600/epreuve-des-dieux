@@ -91,3 +91,8 @@ Les salons Discord `étage-X` de Shadoaze n'étaient qu'une aide provisoire pour
 - **Q3 et Q4** : aucune supposition. Le contenu de chaque étage (catégories, quêtes principales, Dofus) se déduit **uniquement des données de duffus.fr**. La règle du palier pour une catégorie vide ne s'applique que si Duffus ne donne effectivement rien.
 - **Q8 (images des étages)** : à récupérer depuis le Discord, en lecture seule.
 - **Duffus** : le projet est autonome. On ne sollicite pas l'auteur. L'import passe par les points d'accès publics du site, de façon polie et mise en cache, avec « Merci Duffus » en pied de page.
+- **Q5 (points bonus)** : **abandonnés, à aucun lot**. Ils n'ont pas été discutés avec Shadoaze dans la conversation.
+- **Q6 (encyclopédie, stuffs, builder, outils)** : à reprendre **comme Shadoaze l'a demandé** (§7), c'est-à-dire à l'identique de duffus.fr, sans lien vers Duffus. Le lot E les construit après le 13/11 : ils ne sont pas nécessaires à l'ouverture.
+- **Q7 (règlement Discord)** : sans objet. Les règles sont publiées **sur le site**, dans une page « Règles », écrite à partir de la conversation. Cette page fait partie du lot B.
+- **Questions à Shadoaze** : il n'en reste aucune.
+- **Fiches de quête absentes de Duffus** (étages 12 à 23 surtout) : on les prend sur DofusDB, **seulement quand Duffus n'a rien**, par nom exact. Au moindre doute, pas de fiche et une alerte. La source de chaque fiche est indiquée dans la revue admin.
