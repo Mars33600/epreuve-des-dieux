@@ -1,4 +1,5 @@
 """python -m epreuve.duffus releve | aspirer [--tables t1,t2] [--etages 0,1] [--a-blanc]
+                         | encyclopedie [--tables objets,monstres] [--refaire]   (lot E2, avec reprise)
 
 Lancé à la main par un admin, jamais automatiquement. L'adresse et la clé viennent de l'environnement
 (DUFFUS_SUPABASE_URL, DUFFUS_SUPABASE_CLE), lues dans `.env` si elles n'y sont pas déjà.
@@ -34,6 +35,14 @@ async def _principal(args: argparse.Namespace) -> int:
 
     url, cle = lire_environnement()
     async with ClientDuffus(url, cle) as client:
+        if args.commande == "encyclopedie":
+            from epreuve.duffus import encyclopedie
+
+            tables = tuple(args.tables.split(",")) if args.tables else None
+            rapport = await encyclopedie.aspirer(client, DONNEES / "encyclopedie", tables, args.refaire)
+            print(rapport.texte())
+            print(f"({client.nb_requetes} requêtes)")
+            return 0
         if args.commande == "releve":
             tables = releve.TABLES_CONNUES + (releve.TABLES_LOT_E if args.lot_e else ())
             r = await releve.relever(client, tables)
@@ -59,6 +68,9 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--tables", help="tables à aspirer (par défaut : toutes les tables utiles)")
     a.add_argument("--etages", help="limiter les fiches de quête aux tranches de ces étages, ex. 0,1")
     a.add_argument("--a-blanc", action="store_true", help="afficher le rapport sans rien écrire")
+    e = sous.add_parser("encyclopedie", help="aspirer l'encyclopédie et les stuffs (lot E2), avec reprise")
+    e.add_argument("--tables", help="tables à aspirer (par défaut : toutes)")
+    e.add_argument("--refaire", action="store_true", help="relire aussi les tables déjà complètes")
     args = p.parse_args(argv)
     _charger_env(RACINE / ".env")
     try:

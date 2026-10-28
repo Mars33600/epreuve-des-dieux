@@ -35,6 +35,7 @@ from epreuve.domaine.mode_site import mode_effectif
 from epreuve.domaine.modeles import Regles
 from epreuve.web import admin, api, auth, captures, pages
 from epreuve.web.auth import Refus, admin_pour_le_filtre, visiteur
+from epreuve.web.encyclopedie import brancher as brancher_encyclopedie
 from epreuve.web.rendu import creer_gabarits, rendre
 from epreuve.web.securite import ENTETES_SECURITE, EntetesSecurite, FiltreMode
 
@@ -145,4 +146,5 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
     app.include_router(api.routeur)
     app.include_router(admin.routeur)
     app.include_router(captures.routeur)  # module E1 : archimonstres et avis de recherche
+    brancher_encyclopedie(app, source, gabarits, horloge, app.state.regles)  # module E2 : encyclopédie et stuffs
     return app

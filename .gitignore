@@ -25,3 +25,6 @@ docs/discord/
 
 # Images brutes des étages (Discord de Shadoaze, 20 Mo) : sources locales, converties en WebP pour le site
 docs/design/etages/
+
+# Pages d'une aspiration de l'encyclopédie en cours (reprise) : seuls les extraits fusionnés sont suivis
+donnees/duffus/encyclopedie/.en-cours/

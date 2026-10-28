@@ -1,0 +1,22 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}PNJ · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte">
+  <span class="eyebrow">Encyclopédie</span>
+  <h1>PNJ</h1>
+  <form class="filtres" action="/encyclopedie/pnj" method="get" role="search" data-filtres>
+    <label class="large">Nom <input type="search" name="q" value="{{ f.q or '' }}" placeholder="Rechercher" autocomplete="off" data-focus></label>
+    <label>Trier par
+      <select name="tri">
+        <option value="nom_asc"{% if f.tri != "nom_desc" %} selected{% endif %}>Nom (A → Z)</option>
+        <option value="nom_desc"{% if f.tri == "nom_desc" %} selected{% endif %}>Nom (Z → A)</option>
+      </select>
+    </label>
+    <div class="actions"><span class="compte">{{ page.total }} résultat{{ "s" if page.total > 1 }}</span><button class="bouton" type="submit">Filtrer</button></div>
+  </form>
+</section>
+{% if page.lignes %}
+<ul class="grille">{% for n in page.lignes %}<li><a class="ligne" href="/encyclopedie/pnj/{{ n.id }}"><span class="nom">{{ n.nom }}</span></a></li>{% endfor %}</ul>
+{% include "encyclopedie/_pagination.html" %}
+{% else %}<p class="vide carte">Aucun résultat.</p>{% endif %}
+{% endblock %}

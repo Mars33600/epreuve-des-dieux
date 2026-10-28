@@ -1,0 +1,26 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}{{ p.nom }} · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte fiche-tete">
+  <div>
+    <span class="eyebrow">Panoplie</span>
+    <h1>{{ p.nom }}</h1>
+    <div class="etiquettes">{% if p.niveau %}<span class="etiquette or">Niveau {{ p.niveau }}</span>{% endif %}<span class="etiquette">{{ p.objets|length }} objet{{ "s" if p.objets|length > 1 }}</span></div>
+  </div>
+</section>
+<div class="colonnes">
+  <section class="carte" aria-labelledby="t-objets">
+    <h2 id="t-objets">Objets de la panoplie</h2>
+    <ul class="liste-simple">{% for x in p.objets %}
+      <li><a class="ligne" href="/encyclopedie/objets/{{ x.id }}">{% if x.image %}<img class="vignette petite" src="{{ x.image }}" alt="" loading="lazy" width="32" height="32">{% endif %}<span class="nom">{{ x.nom }}</span>{% if x.niveau %}<span class="niv">Niv. {{ x.niveau }}</span>{% endif %}</a></li>
+    {% endfor %}</ul>
+  </section>
+  <section class="carte" aria-labelledby="t-bonus">
+    <h2 id="t-bonus">Bonus de panoplie</h2>
+    {% for n, effets in p.bonus %}
+    <h3 class="eyebrow">{{ n }} objets</h3>
+    <ul class="effets">{% for e in effets %}<li{% if e.negatif %} class="negatif"{% endif %}>{{ e.texte }}</li>{% endfor %}</ul>
+    {% else %}<p class="vide">Aucun bonus.</p>{% endfor %}
+  </section>
+</div>
+{% endblock %}

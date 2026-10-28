@@ -1,0 +1,39 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}{{ s.nom }} · Stuffs{% endblock %}
+{% block page %}
+<section class="carte">
+  <span class="eyebrow">Stuff recommandé · Étage {{ s.etage.numero }}</span>
+  <h1>{{ s.nom }}</h1>
+  <div class="etiquettes"><span class="etiquette or">Niveau {{ s.niveau }}</span>{% if s.classe %}<span class="etiquette">{{ s.classe }}</span>{% endif %}{% for t in s.tags %}<span class="etiquette">{{ t }}</span>{% endfor %}</div>
+  <p><a href="/stuffs?etage={{ s.etage.numero }}">← Les stuffs de l'étage {{ s.etage.numero }}</a></p>
+</section>
+<div class="colonnes">
+  <section class="carte" aria-labelledby="t-objets">
+    <h2 id="t-objets">Équipement</h2>
+    <ul class="liste-simple">{% for cle, libelle in emplacements %}{% set o = objets.get(s.objets.get(cle)) %}{% if o %}
+      <li>
+        <a class="ligne" href="/encyclopedie/objets/{{ o.id }}">{% if o.image %}<img class="vignette" src="{{ o.image }}" alt="" loading="lazy" width="48" height="48">{% endif %}<span><span class="nom">{{ o.nom }}</span><br><span class="meta">{{ libelle }}</span></span>{% if o.niveau %}<span class="niv">Niv. {{ o.niveau }}</span>{% endif %}</a>
+        {% if effets.get(o.id) %}<details><summary class="note">Effets</summary><ul class="effets">{% for e in effets[o.id] %}<li{% if e.negatif %} class="negatif"{% endif %}>{{ e.texte }}</li>{% endfor %}</ul></details>{% endif %}
+      </li>
+    {% endif %}{% endfor %}</ul>
+  </section>
+  <div class="pile">
+    {% if s.dofus %}
+    <section class="carte" aria-labelledby="t-dofus">
+      <h2 id="t-dofus">Dofus et trophées</h2>
+      <ul class="liste-simple">{% for d in s.dofus %}{% set o = objets.get(d) %}{% if o %}
+        <li><a class="ligne" href="/encyclopedie/objets/{{ o.id }}">{% if o.image %}<img class="vignette petite" src="{{ o.image }}" alt="" loading="lazy" width="32" height="32">{% endif %}<span class="nom">{{ o.nom }}</span></a></li>
+      {% endif %}{% endfor %}</ul>
+    </section>
+    {% endif %}
+    {% if s.caracs.base or s.caracs.parcho %}
+    <section class="carte" aria-labelledby="t-caracs">
+      <h2 id="t-caracs">Caractéristiques</h2>
+      <table class="tableau"><thead><tr><th scope="col">Carac.</th><th scope="col">Base</th><th scope="col">Parchemins</th></tr></thead>
+        <tbody>{% for nom in (s.caracs.base.keys()|list + s.caracs.parcho.keys()|list)|unique %}<tr><th scope="row">{{ nom }}</th><td>{{ s.caracs.base.get(nom, 0) }}</td><td>{{ s.caracs.parcho.get(nom, 0) }}</td></tr>{% endfor %}</tbody>
+      </table>
+    </section>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

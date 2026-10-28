@@ -1,0 +1,18 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}{{ n.nom }} · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte fiche-tete">
+  <div>
+    <span class="eyebrow">PNJ</span>
+    <h1>{{ n.nom }}</h1>
+  </div>
+</section>
+<section class="carte" aria-labelledby="t-quetes">
+  <h2 id="t-quetes">Quêtes proposées <span class="compte">{{ n.quetes|length }}</span></h2>
+  {% if n.quetes %}
+  <ul class="liste-simple">{% for q in n.quetes %}
+    <li><a class="ligne" href="/encyclopedie/quetes/{{ q.id }}"><span><span class="nom">{{ q.nom }}</span>{% if q.zone %}<br><span class="meta">{{ q.zone }}</span>{% endif %}</span>{% if q.niveau_min %}<span class="niv">Niv. {{ q.niveau_min }}{% if q.niveau_max != q.niveau_min %}–{{ q.niveau_max }}{% endif %}</span>{% endif %}</a></li>
+  {% endfor %}</ul>
+  {% else %}<p class="vide">Aucune quête connue ne commence chez ce PNJ.</p>{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}{{ s.nom }} · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte fiche-tete">
+  {% if s.image %}<img class="vignette grande" src="{{ s.image }}" alt="" width="96" height="96">{% endif %}
+  <div>
+    <span class="eyebrow">{{ s.classe or "Sort" }}</span>
+    <h1>{{ s.nom }}</h1>
+    {% if s.description %}<p class="muted">{{ s.description }}</p>{% endif %}
+  </div>
+</section>
+{% for n in s.niveaux %}
+<section class="carte" aria-labelledby="t-grade-{{ n.grade }}">
+  <h2 id="t-grade-{{ n.grade }}">Niveau {{ n.grade }}{% if n.niveau %} <span class="compte">à partir du niveau {{ n.niveau }}</span>{% endif %}</h2>
+  <div class="etiquettes">
+    <span class="etiquette or">{{ n.pa }} PA</span>
+    <span class="etiquette">Portée {{ n.po_min }}{% if n.po_max != n.po_min %} à {{ n.po_max }}{% endif %}</span>
+    {% if n.cc %}<span class="etiquette">Critique 1/{{ n.cc }}</span>{% endif %}
+    {% if n.par_tour %}<span class="etiquette">{{ n.par_tour }} par tour</span>{% endif %}
+    {% if n.par_cible %}<span class="etiquette">{{ n.par_cible }} par cible</span>{% endif %}
+    {% if n.relance %}<span class="etiquette">Relance : {{ n.relance }} tour{{ "s" if n.relance > 1 }}</span>{% endif %}
+    {% if n.relance_init %}<span class="etiquette">Délai initial : {{ n.relance_init }}</span>{% endif %}
+    {% if n.ligne %}<span class="etiquette">Lancer en ligne</span>{% endif %}
+    {% if n.diagonale %}<span class="etiquette">Lancer en diagonale</span>{% endif %}
+    {% if n.ldv %}<span class="etiquette">Ligne de vue</span>{% endif %}
+    {% if n.po_modifiable %}<span class="etiquette">Portée modifiable</span>{% endif %}
+  </div>
+  {% if n.effets_lus %}<ul class="effets">{% for e in n.effets_lus %}<li{% if e.negatif %} class="negatif"{% endif %}>{{ e.texte }}</li>{% endfor %}</ul>{% endif %}
+  {% if n.effets_cc_lus %}<h3 class="eyebrow">Coup critique</h3><ul class="effets">{% for e in n.effets_cc_lus %}<li{% if e.negatif %} class="negatif"{% endif %}>{{ e.texte }}</li>{% endfor %}</ul>{% endif %}
+</section>
+{% else %}<p class="vide carte">Aucun niveau connu pour ce sort.</p>{% endfor %}
+{% endblock %}

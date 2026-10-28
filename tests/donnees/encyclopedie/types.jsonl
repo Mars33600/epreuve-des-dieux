@@ -1,0 +1,236 @@
+{"categorie":0,"id":1,"nom":"Amulette","super_type":1}
+{"categorie":0,"id":2,"nom":"Arc","super_type":2}
+{"categorie":0,"id":3,"nom":"Baguette","super_type":2}
+{"categorie":0,"id":4,"nom":"Bâton","super_type":2}
+{"categorie":0,"id":5,"nom":"Dague","super_type":2}
+{"categorie":0,"id":6,"nom":"Épée","super_type":2}
+{"categorie":0,"id":7,"nom":"Marteau","super_type":2}
+{"categorie":0,"id":8,"nom":"Pelle","super_type":2}
+{"categorie":0,"id":9,"nom":"Anneau","super_type":3}
+{"categorie":0,"id":10,"nom":"Ceinture","super_type":4}
+{"categorie":0,"id":11,"nom":"Bottes","super_type":5}
+{"categorie":1,"id":12,"nom":"Potion","super_type":6}
+{"categorie":1,"id":13,"nom":"Parchemin d'expérience","super_type":6}
+{"categorie":1,"id":14,"nom":"Objet de dons","super_type":6}
+{"categorie":2,"id":15,"nom":"Ressource diverse","super_type":9}
+{"categorie":0,"id":16,"nom":"Chapeau","super_type":10}
+{"categorie":0,"id":17,"nom":"Cape","super_type":11}
+{"categorie":0,"id":18,"nom":"Familier","super_type":12}
+{"categorie":0,"id":19,"nom":"Hache","super_type":2}
+{"categorie":0,"id":20,"nom":"Outil","super_type":2}
+{"categorie":0,"id":21,"nom":"Pioche","super_type":2}
+{"categorie":0,"id":22,"nom":"Faux","super_type":2}
+{"categorie":0,"id":23,"nom":"Dofus","super_type":13}
+{"categorie":3,"id":24,"nom":"Divers","super_type":14}
+{"categorie":1,"id":25,"nom":"Document","super_type":6}
+{"categorie":2,"id":26,"nom":"Potion de forgemagie","super_type":9}
+{"categorie":4,"id":27,"nom":"Objet de Mutation","super_type":15}
+{"categorie":4,"id":28,"nom":"Nourriture boost","super_type":16}
+{"categorie":4,"id":29,"nom":"Bénédiction","super_type":17}
+{"categorie":4,"id":30,"nom":"Malédiction","super_type":18}
+{"categorie":4,"id":31,"nom":"Roleplay Buffs","super_type":19}
+{"categorie":4,"id":32,"nom":"Personnage suiveur","super_type":20}
+{"categorie":1,"id":33,"nom":"Pain","super_type":6}
+{"categorie":2,"id":34,"nom":"Céréale","super_type":9}
+{"categorie":2,"id":35,"nom":"Fleur","super_type":9}
+{"categorie":2,"id":36,"nom":"Plante","super_type":9}
+{"categorie":1,"id":37,"nom":"Bière","super_type":6}
+{"categorie":2,"id":38,"nom":"Bois","super_type":9}
+{"categorie":2,"id":39,"nom":"Minerai","super_type":9}
+{"categorie":2,"id":40,"nom":"Alliage","super_type":9}
+{"categorie":2,"id":41,"nom":"Poisson","super_type":9}
+{"categorie":1,"id":42,"nom":"Friandise","super_type":6}
+{"categorie":1,"id":43,"nom":"Potion de téléportation","super_type":6}
+{"categorie":2,"id":46,"nom":"Fruit","super_type":9}
+{"categorie":2,"id":47,"nom":"Os","super_type":9}
+{"categorie":2,"id":48,"nom":"Poudre","super_type":9}
+{"categorie":1,"id":49,"nom":"Poisson comestible","super_type":6}
+{"categorie":2,"id":50,"nom":"Pierre précieuse","super_type":9}
+{"categorie":2,"id":51,"nom":"Pierre brute","super_type":9}
+{"categorie":2,"id":53,"nom":"Plume","super_type":9}
+{"categorie":2,"id":54,"nom":"Poil","super_type":9}
+{"categorie":2,"id":55,"nom":"Étoffe","super_type":9}
+{"categorie":2,"id":56,"nom":"Cuir","super_type":9}
+{"categorie":2,"id":57,"nom":"Laine","super_type":9}
+{"categorie":2,"id":58,"nom":"Graine","super_type":9}
+{"categorie":2,"id":59,"nom":"Peau","super_type":9}
+{"categorie":2,"id":60,"nom":"Huile","super_type":9}
+{"categorie":2,"id":61,"nom":"Peluche","super_type":9}
+{"categorie":2,"id":63,"nom":"Viande","super_type":9}
+{"categorie":2,"id":65,"nom":"Queue","super_type":9}
+{"categorie":2,"id":66,"nom":"Métaria","super_type":9}
+{"categorie":2,"id":68,"nom":"Légume","super_type":9}
+{"categorie":1,"id":69,"nom":"Viande comestible","super_type":6}
+{"categorie":2,"id":70,"nom":"Teinture","super_type":9}
+{"categorie":2,"id":71,"nom":"Matériel d'alchimie","super_type":9}
+{"categorie":1,"id":74,"nom":"Fée d'artifice","super_type":6}
+{"categorie":1,"id":75,"nom":"Parchemin de sortilège","super_type":6}
+{"categorie":1,"id":76,"nom":"Parchemin de caractéristique","super_type":6}
+{"categorie":2,"id":78,"nom":"Rune de forgemagie","super_type":9}
+{"categorie":1,"id":79,"nom":"Boisson","super_type":6}
+{"categorie":1,"id":80,"nom":"Objet de mission","super_type":6}
+{"categorie":0,"id":82,"nom":"Bouclier","super_type":7}
+{"categorie":1,"id":83,"nom":"Pierre d'âme","super_type":70}
+{"categorie":2,"id":84,"nom":"Clef","super_type":9}
+{"categorie":1,"id":85,"nom":"Pierre d'âme pleine","super_type":6}
+{"categorie":1,"id":89,"nom":"Cadeau","super_type":6}
+{"categorie":1,"id":94,"nom":"Objet utilisable","super_type":6}
+{"categorie":2,"id":95,"nom":"Planche","super_type":9}
+{"categorie":2,"id":96,"nom":"Écorce","super_type":9}
+{"categorie":2,"id":98,"nom":"Racine","super_type":9}
+{"categorie":1,"id":99,"nom":"Filet de capture","super_type":70}
+{"categorie":1,"id":100,"nom":"Sac de ressources","super_type":6}
+{"categorie":2,"id":103,"nom":"Patte","super_type":9}
+{"categorie":2,"id":104,"nom":"Aile","super_type":9}
+{"categorie":2,"id":105,"nom":"Œuf","super_type":9}
+{"categorie":2,"id":106,"nom":"Oreille","super_type":9}
+{"categorie":2,"id":107,"nom":"Carapace","super_type":9}
+{"categorie":2,"id":108,"nom":"Bourgeon","super_type":9}
+{"categorie":2,"id":109,"nom":"Œil","super_type":9}
+{"categorie":2,"id":110,"nom":"Gelée","super_type":9}
+{"categorie":2,"id":111,"nom":"Coquille","super_type":9}
+{"categorie":1,"id":112,"nom":"Prisme","super_type":6}
+{"categorie":5,"id":113,"nom":"Objet vivant","super_type":22}
+{"categorie":0,"id":114,"nom":"Arme magique","super_type":2}
+{"categorie":2,"id":119,"nom":"Champignon","super_type":9}
+{"categorie":0,"id":121,"nom":"Montilier","super_type":12}
+{"categorie":2,"id":125,"nom":"Souvenir","super_type":9}
+{"categorie":3,"id":126,"nom":"Quêtes mondiales","super_type":14}
+{"categorie":3,"id":127,"nom":"Quêtes de temple","super_type":14}
+{"categorie":3,"id":128,"nom":"Avis de recherche","super_type":14}
+{"categorie":3,"id":129,"nom":"Alignement","super_type":14}
+{"categorie":3,"id":131,"nom":"Événements","super_type":14}
+{"categorie":3,"id":132,"nom":"Archipel de Vulkania","super_type":14}
+{"categorie":3,"id":133,"nom":"Astrub","super_type":14}
+{"categorie":3,"id":136,"nom":"Camps des Bworks et des Gobelins","super_type":14}
+{"categorie":3,"id":137,"nom":"Cania","super_type":14}
+{"categorie":3,"id":139,"nom":"Île de Frigost","super_type":14}
+{"categorie":3,"id":140,"nom":"Île d'Otomaï","super_type":14}
+{"categorie":3,"id":141,"nom":"Île de Nowel","super_type":14}
+{"categorie":3,"id":142,"nom":"Incarnam","super_type":14}
+{"categorie":3,"id":143,"nom":"Montagne des Koalaks","super_type":14}
+{"categorie":3,"id":144,"nom":"Pandala","super_type":14}
+{"categorie":3,"id":146,"nom":"Royaume d'Amakna","super_type":14}
+{"categorie":3,"id":147,"nom":"Krosmoz","super_type":14}
+{"categorie":3,"id":148,"nom":"Jetons","super_type":14}
+{"categorie":3,"id":149,"nom":"Île de Moon","super_type":14}
+{"categorie":3,"id":150,"nom":"Îles des Wabbits","super_type":14}
+{"categorie":0,"id":151,"nom":"Trophée","super_type":13}
+{"categorie":2,"id":152,"nom":"Galet","super_type":9}
+{"categorie":2,"id":153,"nom":"Nowel","super_type":9}
+{"categorie":2,"id":154,"nom":"Emballage","super_type":9}
+{"categorie":3,"id":155,"nom":"Sufokia","super_type":14}
+{"categorie":3,"id":156,"nom":"Almanax","super_type":14}
+{"categorie":1,"id":157,"nom":"Figurine","super_type":6}
+{"categorie":2,"id":164,"nom":"Vêtement","super_type":9}
+{"categorie":1,"id":165,"nom":"Potion de conquête","super_type":6}
+{"categorie":1,"id":166,"nom":"Mimibiote","super_type":6}
+{"categorie":1,"id":167,"nom":"Essence de gardien de donjon","super_type":6}
+{"categorie":3,"id":168,"nom":"Justiciers","super_type":14}
+{"categorie":0,"id":169,"nom":"Compagnon","super_type":23}
+{"categorie":3,"id":171,"nom":"Dimensions Divines","super_type":14}
+{"categorie":1,"id":172,"nom":"Coffre","super_type":6}
+{"categorie":1,"id":173,"nom":"Parchemin d'attitude","super_type":6}
+{"categorie":2,"id":174,"nom":"Carte","super_type":9}
+{"categorie":2,"id":175,"nom":"Fragment de carte","super_type":9}
+{"categorie":1,"id":176,"nom":"Boîte de fragments","super_type":6}
+{"categorie":2,"id":179,"nom":"Préparation","super_type":9}
+{"categorie":2,"id":183,"nom":"Substrat","super_type":9}
+{"categorie":1,"id":184,"nom":"Conteneur","super_type":6}
+{"categorie":2,"id":185,"nom":"Sève","super_type":9}
+{"categorie":1,"id":187,"nom":"Viande primitive","super_type":6}
+{"categorie":1,"id":188,"nom":"Parchemin d'émoticônes","super_type":6}
+{"categorie":2,"id":189,"nom":"Orbe de forgemagie","super_type":9}
+{"categorie":2,"id":195,"nom":"Matériel d'exploration","super_type":9}
+{"categorie":2,"id":197,"nom":"Caution","super_type":9}
+{"categorie":3,"id":198,"nom":"Saharach","super_type":14}
+{"categorie":5,"id":199,"nom":"Costume","super_type":25}
+{"categorie":1,"id":200,"nom":"Parchemin de titre","super_type":6}
+{"categorie":3,"id":201,"nom":"Nimotopia","super_type":14}
+{"categorie":3,"id":202,"nom":"Sidimote","super_type":14}
+{"categorie":4,"id":203,"nom":"Objet invisible","super_type":26}
+{"categorie":3,"id":205,"nom":"Tours de la Fratrie","super_type":14}
+{"categorie":1,"id":206,"nom":"Potion de monture","super_type":6}
+{"categorie":2,"id":209,"nom":"Nourriture pour familier","super_type":9}
+{"categorie":2,"id":211,"nom":"Rune de transcendance","super_type":9}
+{"categorie":3,"id":213,"nom":"Île de Pwâk","super_type":14}
+{"categorie":1,"id":214,"nom":"Potion d'attitude","super_type":6}
+{"categorie":3,"id":215,"nom":"Archipel des Écailles","super_type":14}
+{"categorie":1,"id":216,"nom":"Bourse","super_type":6}
+{"categorie":0,"id":217,"nom":"Prysmaradite","super_type":13}
+{"categorie":1,"id":218,"nom":"Popoche de Havre-Sac","super_type":6}
+{"categorie":2,"id":219,"nom":"Ressource des Songes","super_type":9}
+{"categorie":3,"id":220,"nom":"Eliocalypse","super_type":14}
+{"categorie":1,"id":222,"nom":"Parchemin d'ornement","super_type":6}
+{"categorie":3,"id":225,"nom":"Temporis","super_type":14}
+{"categorie":1,"id":226,"nom":"Objet utilisable de Temporis","super_type":6}
+{"categorie":2,"id":228,"nom":"Liquide","super_type":9}
+{"categorie":2,"id":229,"nom":"Ressource de combat","super_type":9}
+{"categorie":2,"id":230,"nom":"Obsolète","super_type":9}
+{"categorie":2,"id":231,"nom":"Rabmablague","super_type":9}
+{"categorie":2,"id":232,"nom":"Haïku","super_type":9}
+{"categorie":2,"id":233,"nom":"Rune astrale","super_type":9}
+{"categorie":1,"id":236,"nom":"Mots de haïku","super_type":6}
+{"categorie":2,"id":241,"nom":"Ressource de Temporis","super_type":9}
+{"categorie":3,"id":242,"nom":"Atoll des Possédés","super_type":14}
+{"categorie":1,"id":245,"nom":"Ressource obsolète","super_type":6}
+{"categorie":5,"id":246,"nom":"Chapeau d'apparat","super_type":22}
+{"categorie":5,"id":247,"nom":"Cape d'apparat","super_type":22}
+{"categorie":5,"id":248,"nom":"Bouclier d'apparat","super_type":22}
+{"categorie":5,"id":249,"nom":"Familier d'apparat","super_type":22}
+{"categorie":5,"id":250,"nom":"Montilier d'apparat","super_type":22}
+{"categorie":5,"id":251,"nom":"Arme d'apparat","super_type":22}
+{"categorie":5,"id":252,"nom":"Objet divers d'apparat","super_type":22}
+{"categorie":3,"id":253,"nom":"Cauchemar des Ravageurs","super_type":14}
+{"categorie":3,"id":254,"nom":"Bonta & Brakmar","super_type":14}
+{"categorie":2,"id":258,"nom":"Gravure de forgemagie","super_type":9}
+{"categorie":1,"id":259,"nom":"Bouataklône","super_type":6}
+{"categorie":3,"id":260,"nom":"Forêt Maléfique","super_type":14}
+{"categorie":2,"id":262,"nom":"Matériel de mégaltération","super_type":9}
+{"categorie":2,"id":266,"nom":"Ressource des Anomalies Temporelles","super_type":9}
+{"categorie":3,"id":268,"nom":"Expéditions","super_type":14}
+{"categorie":0,"id":271,"nom":"Lance","super_type":2}
+{"categorie":3,"id":272,"nom":"Archipel de Valonia","super_type":14}
+{"categorie":0,"id":273,"nom":"Fers de Percepteur","super_type":69}
+{"categorie":0,"id":274,"nom":"Cuirasses de Percepteur","super_type":69}
+{"categorie":0,"id":275,"nom":"Bannière de Percepteur","super_type":69}
+{"categorie":0,"id":276,"nom":"Poignards de Percepteur","super_type":69}
+{"categorie":0,"id":277,"nom":"Tunique de Percepteur","super_type":69}
+{"categorie":2,"id":278,"nom":"Ressource de Percepteur","super_type":9}
+{"categorie":0,"id":279,"nom":"Coffres de Percepteur","super_type":69}
+{"categorie":0,"id":280,"nom":"Sacoches de Percepteur","super_type":69}
+{"categorie":1,"id":284,"nom":"Relique d'Incarnation","super_type":6}
+{"categorie":3,"id":287,"nom":"Porte-signe de Compagnon","super_type":14}
+{"categorie":3,"id":289,"nom":"Idoles de Quêtes","super_type":14}
+{"categorie":1,"id":297,"nom":"Globe de lumière","super_type":6}
+{"categorie":5,"id":299,"nom":"Épaulière","super_type":25}
+{"categorie":5,"id":300,"nom":"Ailes","super_type":25}
+{"categorie":1,"id":301,"nom":"Monture domptée","super_type":6}
+{"categorie":1,"id":302,"nom":"Tatouage de la Foire du Trool","super_type":6}
+{"categorie":1,"id":303,"nom":"Ballon","super_type":6}
+{"categorie":1,"id":304,"nom":"Panoplie d'apparat","super_type":6}
+{"categorie":3,"id":305,"nom":"Foire du Trool","super_type":14}
+{"categorie":1,"id":306,"nom":"Visage","super_type":6}
+{"categorie":3,"id":307,"nom":"Pierre d'âme spéciale","super_type":14}
+{"categorie":3,"id":308,"nom":"Pierre d'âme spéciale pleine","super_type":14}
+{"categorie":2,"id":309,"nom":"Pierre d'âme spéciale non transformée","super_type":9}
+{"categorie":1,"id":310,"nom":"Éklâme","super_type":6}
+{"categorie":2,"id":312,"nom":"Ressource de quête","super_type":9}
+{"categorie":2,"id":315,"nom":"Ressource de raid","super_type":9}
+{"categorie":1,"id":322,"nom":"Éclat","super_type":6}
+{"categorie":2,"id":323,"nom":"Makina","super_type":9}
+{"categorie":5,"id":324,"nom":"Monture d'apparat","super_type":22}
+{"categorie":3,"id":325,"nom":"La source - l'héritage des Dofus","super_type":14}
+{"categorie":2,"id":326,"nom":"Carburant d'enclos","super_type":9}
+{"categorie":1,"id":327,"nom":"Âme de gardien de donjon","super_type":6}
+{"categorie":1,"id":328,"nom":"Âme d'archimonstre","super_type":6}
+{"categorie":1,"id":329,"nom":"Corps","super_type":6}
+{"categorie":1,"id":330,"nom":"Poses","super_type":6}
+{"categorie":0,"id":331,"nom":"Dragodinde","super_type":12}
+{"categorie":0,"id":332,"nom":"Muldo","super_type":12}
+{"categorie":0,"id":333,"nom":"Volkorne","super_type":12}
+{"categorie":3,"id":334,"nom":"Jetons événementiels","super_type":14}
+{"categorie":2,"id":335,"nom":"Éclat de forgemagie","super_type":9}
+{"categorie":2,"id":336,"nom":"Gemme de forgemagie","super_type":9}
+{"categorie":3,"id":338,"nom":"La Source","super_type":14}
+{"categorie":1,"id":339,"nom":"Nourriture évènementielle","super_type":6}

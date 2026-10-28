@@ -118,6 +118,10 @@ class ClientDuffus:
         lignes = r.json()
         return (lignes[0] if lignes else None), (int(total) if total.isdigit() else None)
 
+    async def lire_page(self, table: str, params: dict[str, str]) -> list[dict]:
+        """Une seule requête, paramètres PostgREST donnés tels quels (pagination par clé du lot E2)."""
+        return (await self._get(f"/{table}", params=params)).json()
+
     async def lire_table(self, table: str, colonnes: str = "*", ordre: str = "id",
                          filtres: dict[str, str] | None = None) -> list[dict]:
         """Toute la table, page par page (en-tête Range), triée par `ordre` pour un résultat stable."""

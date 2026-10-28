@@ -1,0 +1,39 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}Stuffs · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<section class="carte">
+  <span class="eyebrow">Stuffs recommandés</span>
+  <h1>Les stuffs de l'étage</h1>
+  <p class="muted">Des équipements PvM proposés pour chaque tranche de niveau, rangés par étage de la tour.</p>
+  {% if tranches %}
+  <nav class="etages" aria-label="Étages">
+    {% for t in tranches %}<a href="/stuffs?etage={{ t.numero }}"{% if choisi and t.numero == choisi.numero %} aria-current="page"{% endif %}><strong>Étage {{ t.numero }}</strong><span class="num">Niv. {{ t.niveau_min }}–{{ t.niveau_max }}</span></a>{% endfor %}
+  </nav>
+  {% endif %}
+</section>
+{% if not choisi %}
+<p class="vide carte">Aucun étage n'est encore ouvert : les stuffs apparaîtront avec le premier.</p>
+{% else %}
+<form class="filtres carte" action="/stuffs" method="get" data-filtres>
+  <input type="hidden" name="etage" value="{{ choisi.numero }}">
+  <label>Classe
+    <select name="classe"><option value="">Toutes</option>{% for c in classes %}<option{% if classe == c %} selected{% endif %}>{{ c }}</option>{% endfor %}</select>
+  </label>
+  <label>Élément
+    <select name="element"><option value="">Tous</option>{% for e in elements %}<option{% if element == e %} selected{% endif %}>{{ e }}</option>{% endfor %}</select>
+  </label>
+  <div class="actions"><span class="compte">{{ stuffs|length }} stuff{{ "s" if stuffs|length > 1 }}</span><button class="bouton" type="submit">Filtrer</button></div>
+</form>
+{% if stuffs %}
+<div class="stuffs">{% for s in stuffs %}
+  <article class="carte stuff">
+    <h3><a href="/stuffs/{{ s.id }}">{{ s.nom }}</a></h3>
+    <div class="etiquettes"><span class="etiquette or">Niveau {{ s.niveau }}</span>{% if s.classe %}<span class="etiquette">{{ s.classe }}</span>{% endif %}{% for t in s.tags %}<span class="etiquette">{{ t }}</span>{% endfor %}</div>
+    <div class="emplacements">{% for cle, libelle in emplacements %}{% set o = objets.get(s.objets.get(cle)) %}
+      {% if o %}<a href="/encyclopedie/objets/{{ o.id }}" title="{{ libelle }} : {{ o.nom }}" aria-label="{{ libelle }} : {{ o.nom }}">{% if o.image %}<img src="{{ o.image }}" alt="" loading="lazy" width="40" height="40">{% endif %}</a>{% else %}<span title="{{ libelle }} : vide" aria-label="{{ libelle }} : vide"></span>{% endif %}
+    {% endfor %}</div>
+  </article>
+{% endfor %}</div>
+{% else %}<p class="vide carte">Aucun stuff pour ces filtres sur cet étage.</p>{% endif %}
+{% endif %}
+{% endblock %}
