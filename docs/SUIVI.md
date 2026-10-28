@@ -52,7 +52,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] Tableau de bord, à fusionner
 - [x] Archimonstres (sans la bourse aux échanges), à fusionner
 - [x] Avis de recherche, à fusionner
-- [ ] Encyclopédie : objets, monstres, recettes faits ; manquent sorts, PNJ, quêtes, page panoplies
+- [x] Encyclopédie (objets, monstres, recettes, panoplies, sorts, PNJ, quêtes), à fusionner ; manquent les cartes et les variantes de sorts
 - [ ] Outils (sans les tutoriels) : 6 sur 7 faits (Almanax, drop, classes et sorts, élevage, craft, XP des métiers) ; manque la carte interactive
 - [x] Stuffs (builds PvM de Duffus)
 - [ ] Builder : base faite (objets, panoplies, conditions, totaux, builds partagés) ; manquent forgemagie, calculateurs d'arme et de sorts, comparaison, variantes
