@@ -21,8 +21,12 @@ ModeEffectif = Literal["teaser", "ouvert"]
 # connecté revoit le teaser : « /inscription » n'est PAS permise, aucune fiche n'est créée avant l'ouverture.
 CHEMINS_TOUJOURS_PERMIS: frozenset[str] = frozenset({"/", "/sante", "/connexion", "/auth/discord/retour",
                                                      "/deconnexion"})
+# Fichiers statiques du site, permis par chemin exact : la feuille et le script commun, sans aucune donnée
+# d'étage. Sans eux, les pages servies à un visiteur (erreur de connexion, etc.) s'afficheraient sans style.
+# Les icônes du site sont en ligne dans les gabarits : aucun fichier d'icône à permettre.
+CHEMINS_STATIQUES_SITE_PERMIS: frozenset[str] = frozenset({"/static/style.css", "/static/app.js"})
 # Seuls les dossiers du teaser : une route à paramètre en tête (`/{x}/…`) ne doit jamais passer pour
-# un fichier statique. La feuille et le script du site ne servent qu'aux admins pendant le teaser.
+# un fichier statique. Jamais de préfixe large « /static/ ».
 PREFIXES_TOUJOURS_PERMIS: tuple[str, ...] = ("/static/teaser/", "/static/fonts/")
 
 

@@ -202,10 +202,25 @@ def test_statiques_permis_pendant_le_teaser():
     c = client()
     assert c.get("/static/teaser/teaser.css").status_code == 200
     assert c.get("/static/teaser/teaser.js").status_code == 200
-    # Pendant le teaser, seuls les dossiers du teaser sont permis : la feuille et le script du site
-    # ne servent qu'aux admins (redirigés vers / pour un visiteur).
-    assert c.get("/static/app.js").status_code == 303
-    assert c.get("/static/style.css").status_code == 303
+    # La feuille et le script communs du site sont permis par chemin exact (pages d'erreur et de connexion).
+    assert c.get("/static/app.js").status_code == 200
+    assert c.get("/static/style.css").status_code == 200
+
+
+def test_prefixe_large_static_toujours_refuse_pendant_le_teaser():
+    c = client()
+    for chemin in ("/static/outils.css", "/static/captures.js", "/static/builder/builder.js",
+                   "/static/encyclopedie/encyclopedie.js", "/static/fuite", "/static/style.css/x"):
+        assert c.get(chemin).status_code == 303, chemin
+    assert not chemin_permis("/static/") and not chemin_permis("/static/fuite")
+
+
+def test_page_d_erreur_stylee_pendant_le_teaser_et_horloge_juste():
+    r = client().get("/auth/discord/retour?error=access_denied&state=x")
+    assert r.status_code == 400
+    assert 'href="/static/style.css"' in r.text and 'src="/static/app.js"' in r.text
+    assert "depuis le vendredi 13 novembre" not in r.text
+    assert "heure de Paris" in r.text
 
 
 # --- La bascule (critère 7) -------------------------------------------------------------------------------

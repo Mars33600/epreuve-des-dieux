@@ -25,6 +25,7 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 from starlette.websockets import WebSocketClose
 
 from epreuve.domaine.mode_site import (
+    CHEMINS_STATIQUES_SITE_PERMIS,
     CHEMINS_TOUJOURS_PERMIS,
     PREFIXES_TOUJOURS_PERMIS,
     ReglageMode,
@@ -56,7 +57,8 @@ def chemin_permis(chemin: str) -> bool:
     segments = chemin.split("/")[1:]
     if any(s in (".", "..") for s in segments) or "" in segments[:-1]:
         return False
-    return chemin in CHEMINS_TOUJOURS_PERMIS or chemin.startswith(PREFIXES_TOUJOURS_PERMIS)
+    return (chemin in CHEMINS_TOUJOURS_PERMIS or chemin in CHEMINS_STATIQUES_SITE_PERMIS
+            or chemin.startswith(PREFIXES_TOUJOURS_PERMIS))
 
 
 async def _personne(_scope: Scope) -> bool:
