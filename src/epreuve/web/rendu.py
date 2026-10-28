@@ -35,7 +35,7 @@ def _lien_interne(balise: str, attribut: str, valeur: str) -> str | None:
 
 def fiche_propre(html: str | None) -> Markup:
     """Le texte d'une étape, renettoyé : liste blanche de `nettoyer_fiche`, liens limités à nos fiches."""
-    return Markup(nh3.clean(html or "", tags=BALISES, clean_content_tags={"script", "style", "svg", "button"},
+    return Markup(nh3.clean(html or "", tags=BALISES, clean_content_tags={"script", "style", "svg", "button"},  # noqa: S704
                             attributes={"a": {"href"}}, attribute_filter=_lien_interne, link_rel=None,
                             url_schemes=set()))
 
