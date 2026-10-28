@@ -4,6 +4,9 @@
     GET  /builder/nouveau                 l'éditeur, sur un build vierge
     GET  /api/builder/objets              la fenêtre de choix d'un emplacement (filtres de Duffus)
     POST /api/builder/calcul              totaux, panoplies, conditions, base, parchemins, dérivés (sans effet de bord)
+    GET  /builder/{id}                    un build : éditeur pour l'auteur, lecture seule s'il est partagé
+    POST /api/builder/builds              enregistrer un nouveau build (grimpeur, jeton CSRF)
+    PUT|DELETE /api/builder/builds/{id}   le modifier ou le supprimer (auteur seul, jeton CSRF)
     GET  /static/builder/<fichier>        la feuille et le script de l'éditeur
 
 Le module se branche sur l'application par `brancher(app, source)` : un routeur et l'état dont il a besoin.
@@ -14,6 +17,7 @@ le cookie est celui du lot B (`__Host-session`, empreinte SHA-256 en base).
 from __future__ import annotations
 
 import hashlib
+import hmac
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -25,8 +29,9 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Redirect
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field, ValidationError
 
-from epreuve.builder.calcul import Build, calculer, puissance_par_element
+from epreuve.builder.calcul import Build, calculer, nettoyer, puissance_par_element
 from epreuve.builder.catalogue import Catalogue, catalogue_par_defaut
+from epreuve.builder.depot import BuildEnregistre, Contenu, DepotBuilds
 from epreuve.builder.effets import (
     CARACS_PRINCIPALES,
     EMPLACEMENTS,
@@ -65,7 +70,8 @@ Identifier = Callable[[Request], Awaitable[Visiteur | None]]
 class ServicesBuilder:
     identifier: Identifier
     catalogue: Callable[[], Catalogue] = catalogue_par_defaut
-    builds: Any = None  # DepotBuilds (incrément 4), None sans base
+    builds: DepotBuilds | None = None  # None sans base : on compose, sans enregistrer
+    horloge: Callable[[], datetime] = lambda: datetime.now(UTC)
 
 
 def identifier_par_session(depot: Any, horloge: Callable[[], datetime] = lambda: datetime.now(UTC)) -> Identifier:
@@ -91,7 +97,10 @@ def identifier_par_session(depot: Any, horloge: Callable[[], datetime] = lambda:
 
 def brancher(app: FastAPI, source: Any = None, services: ServicesBuilder | None = None) -> None:
     """Ajoute le builder à l'application : son routeur et ses services (`app.state.builder`)."""
-    app.state.builder = services or ServicesBuilder(identifier_par_session(source))
+    if services is None:
+        moteur = getattr(source, "_moteur", None)  # le dépôt commun porte le moteur de la base
+        services = ServicesBuilder(identifier_par_session(source), builds=DepotBuilds(moteur) if moteur else None)
+    app.state.builder = services
     # Les routes sont ajoutées une à une (et non par `include_router`, qui les enveloppe) : chacune reste visible
     # telle quelle dans `app.routes`, où le test du teaser vérifie que toutes sont fermées avant l'ouverture.
     app.router.routes.extend(routeur.routes)
@@ -129,7 +138,13 @@ async def page_liste(request: Request) -> Response:
     v = await _visiteur(request)
     if v is None:
         return RedirectResponse("/", status_code=303)
-    return gabarits.TemplateResponse(request, "builder/liste.html", {"v": v})
+    builds = _services(request).builds
+    mes, guilde = [], []
+    if builds is not None:
+        mes = await builds.de_grimpeur(v.grimpeur_id) if v.grimpeur_id else []
+        guilde = await builds.partages(sauf_grimpeur=v.grimpeur_id)
+    return gabarits.TemplateResponse(request, "builder/liste.html", {
+        "v": v, "mes": mes, "guilde": guilde, "avec_base": builds is not None})  # fmt: skip
 
 
 @routeur.get("/builder/nouveau", response_class=HTMLResponse)
@@ -138,7 +153,35 @@ async def page_nouveau(request: Request) -> Response:
     if v is None:
         return RedirectResponse("/", status_code=303)
     return gabarits.TemplateResponse(request, "builder/editeur.html", {
-        "v": v, "config": {**_contexte_editeur(), "build": None, "modifiable": True},
+        "v": v, "config": {**_contexte_editeur(), "build": None, "modifiable": True,
+                           "enregistrable": _enregistrable(request, v)},
+    })  # fmt: skip
+
+
+def _enregistrable(request: Request, v: Visiteur) -> bool:
+    return _services(request).builds is not None and v.grimpeur_id is not None
+
+
+def _build_json(b: BuildEnregistre) -> dict:
+    c = b.contenu
+    return {"id": b.id, "auteur": b.auteur, "nom": c.nom, "classe": c.classe, "niveau": c.niveau, "objets": c.objets,
+            "caracs_base": c.caracs_base, "caracs_parcho": c.caracs_parcho, "note": c.note, "partage": c.partage}
+
+
+@routeur.get("/builder/{build_id:int}", response_class=HTMLResponse)
+async def page_build(request: Request, build_id: int) -> Response:
+    v = await _visiteur(request)
+    if v is None:
+        return RedirectResponse("/", status_code=303)
+    builds = _services(request).builds
+    b = await builds.lire(build_id) if builds is not None else None
+    a_moi = b is not None and b.grimpeur_id == v.grimpeur_id
+    if b is None or not (a_moi or b.contenu.partage):
+        return gabarits.TemplateResponse(request, "builder/liste.html", {
+            "v": v, "mes": [], "guilde": [], "avec_base": False, "introuvable": True}, status_code=404)  # fmt: skip
+    return gabarits.TemplateResponse(request, "builder/editeur.html", {
+        "v": v, "config": {**_contexte_editeur(), "build": _build_json(b), "modifiable": a_moi,
+                           "enregistrable": a_moi},
     })  # fmt: skip
 
 
@@ -208,3 +251,80 @@ async def api_calcul(request: Request) -> Response:
     if corps is None:
         return _erreur(422, "Build illisible.")
     return JSONResponse({"ok": True, **resultat_json(corps.build(), _services(request).catalogue())})
+
+
+# --- Enregistrement -------------------------------------------------------------------------------------------
+
+
+class CorpsEnregistre(CorpsBuild):
+    nom: str = Field(min_length=1, max_length=80)
+    classe: str
+    note: str = Field("", max_length=2000)
+    partage: bool = False
+
+    def contenu(self) -> Contenu | None:
+        if self.classe not in CLASSES or not self.nom.strip():
+            return None
+        b = nettoyer(self.build())
+        return Contenu(self.nom.strip(), self.classe, b.niveau, {k: v for k, v in b.objets.items() if v is not None},
+                       b.caracs_base, b.caracs_parcho, self.note, self.partage)
+
+
+def _origine_permise(request: Request) -> bool:
+    origine = request.headers.get("origin")
+    return origine is None or origine == f"{request.url.scheme}://{request.url.netloc}"
+
+
+async def _ecrivain(request: Request) -> tuple[Visiteur | None, JSONResponse | None]:
+    """Le grimpeur qui écrit, ou la réponse d'erreur : 401 sans session, 403 CSRF ou Origin, 409 sans fiche."""
+    v = await _visiteur(request)
+    if v is None:
+        return None, _erreur(401, MESSAGE_CONNEXION)
+    jeton = request.headers.get("x-csrf-token", "")
+    if not v.csrf or not hmac.compare_digest(jeton, v.csrf) or not _origine_permise(request):
+        return None, _erreur(403, "Requête refusée. Recharge la page.")
+    if v.grimpeur_id is None or _services(request).builds is None:
+        return None, _erreur(409, "Il faut une fiche de grimpeur pour enregistrer un build.")
+    return v, None
+
+
+async def _contenu(request: Request) -> Contenu | None:
+    corps = await _lire_corps(request, CorpsEnregistre)
+    return corps.contenu() if corps is not None else None
+
+
+@routeur.post("/api/builder/builds")
+async def api_creer(request: Request) -> Response:
+    v, refus = await _ecrivain(request)
+    if refus:
+        return refus
+    contenu = await _contenu(request)
+    if contenu is None:
+        return _erreur(422, "Build invalide : nom (1 à 80 caractères), classe et niveau sont demandés.")
+    s = _services(request)
+    return JSONResponse({"ok": True, "id": await s.builds.creer(v.grimpeur_id, contenu, s.horloge())},
+                        status_code=201)
+
+
+@routeur.put("/api/builder/builds/{build_id:int}")
+async def api_modifier(request: Request, build_id: int) -> Response:
+    v, refus = await _ecrivain(request)
+    if refus:
+        return refus
+    contenu = await _contenu(request)
+    if contenu is None:
+        return _erreur(422, "Build invalide : nom (1 à 80 caractères), classe et niveau sont demandés.")
+    s = _services(request)
+    if not await s.builds.modifier(build_id, v.grimpeur_id, contenu, s.horloge()):
+        return _erreur(404, "Build introuvable.")
+    return JSONResponse({"ok": True, "id": build_id})
+
+
+@routeur.delete("/api/builder/builds/{build_id:int}")
+async def api_supprimer(request: Request, build_id: int) -> Response:
+    v, refus = await _ecrivain(request)
+    if refus:
+        return refus
+    if not await _services(request).builds.supprimer(build_id, v.grimpeur_id):
+        return _erreur(404, "Build introuvable.")
+    return JSONResponse({"ok": True})

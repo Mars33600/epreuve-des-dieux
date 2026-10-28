@@ -300,7 +300,7 @@
   }
 
   function brancherFormulaire() {
-    $("b-nom").addEventListener("input", (ev) => { etat.nom = ev.target.value; changement(); });
+    $("b-nom").addEventListener("input", (ev) => { etat.nom = ev.target.value; });
     $("b-classe").addEventListener("change", (ev) => { etat.classe = ev.target.value; changement(); });
     $("b-niveau").addEventListener("change", (ev) => {
       const n = Math.min(200, Math.max(1, parseInt(ev.target.value, 10) || 1));
@@ -331,7 +331,61 @@
     });
   }
 
+  // --- Enregistrement (incrément 4) ---------------------------------------------------------------------------
+
+  let buildId = config.build ? config.build.id : null;
+
+  function charger(b) {
+    etat.nom = b.nom; etat.classe = b.classe; etat.niveau = b.niveau; etat.note = b.note || "";
+    etat.base = { ...b.caracs_base }; etat.parcho = { ...b.caracs_parcho };
+    for (const [e, id] of Object.entries(b.objets)) etat.objets[e] = { id, nom: "…", niveau: 0, icone: null, caracs: [] };
+    $("b-nom").value = b.nom; $("b-classe").value = b.classe; $("b-niveau").value = String(b.niveau);
+    $("b-note").value = etat.note;
+    const partage = $("b-partage");
+    if (partage) partage.checked = !!b.partage;
+  }
+
+  async function enregistrer() {
+    const csrf = document.querySelector('meta[name="csrf"]');
+    const corps = { ...corpsBuild(), nom: etat.nom.trim() || "Mon build", classe: etat.classe, note: etat.note,
+      partage: $("b-partage").checked };
+    if (!etat.nom.trim()) { etat.nom = corps.nom; $("b-nom").value = corps.nom; }
+    message("Enregistrement…");
+    try {
+      const r = await fetch(buildId ? "/api/builder/builds/" + buildId : "/api/builder/builds", {
+        method: buildId ? "PUT" : "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json", "X-CSRF-Token": csrf ? csrf.content : "" },
+        body: JSON.stringify(corps),
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.message || "Erreur");
+      if (!buildId) {
+        buildId = d.id;
+        history.replaceState(null, "", "/builder/" + buildId);
+        $("b-supprimer").hidden = false;
+      }
+      message("Enregistré.");
+    } catch (err) {
+      message("Enregistrement impossible : " + err.message, true);
+    }
+  }
+
+  async function supprimer() {
+    if (!buildId || !window.confirm("Supprimer ce build ?")) return;
+    const csrf = document.querySelector('meta[name="csrf"]');
+    const r = await fetch("/api/builder/builds/" + buildId, { method: "DELETE",
+      headers: { Accept: "application/json", "X-CSRF-Token": csrf ? csrf.content : "" } });
+    if (r.ok) window.location.assign("/builder");
+    else message("Suppression impossible.", true);
+  }
+
   brancherFormulaire();
+  $("b-note").addEventListener("input", (ev) => { etat.note = ev.target.value; });
+  if ($("b-enregistrer")) {
+    $("b-enregistrer").addEventListener("click", enregistrer);
+    $("b-supprimer").addEventListener("click", supprimer);
+  }
+  if (config.build) charger(config.build);
   dessinerEmplacements();
   calculer();
 })();

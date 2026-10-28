@@ -178,3 +178,98 @@ def test_calcul_refus():
     assert c.post("/api/builder/calcul", json={"niveau": "x"}).status_code == 422
     assert c.post("/api/builder/calcul", json={"objets": {str(i): 1 for i in range(40)}}).status_code == 422
     assert c.post("/api/builder/calcul", json={}).json()["affichage"]["PA"] == 7  # build vierge, niveau 200
+
+
+# --- Enregistrement et partage --------------------------------------------------------------------------------
+
+
+class FauxBuilds:
+    """Le dépôt des builds en mémoire (le vrai est testé contre Postgres dans test_depot.py)."""
+
+    def __init__(self):
+        from epreuve.builder.depot import BuildEnregistre
+
+        self.Build = BuildEnregistre
+        self.lignes: dict[int, object] = {}
+
+    async def creer(self, grimpeur_id, contenu, maintenant):
+        bid = len(self.lignes) + 1
+        self.lignes[bid] = self.Build(bid, grimpeur_id, f"G{grimpeur_id}", contenu, maintenant)
+        return bid
+
+    async def modifier(self, bid, grimpeur_id, contenu, maintenant):
+        b = self.lignes.get(bid)
+        if b is None or b.grimpeur_id != grimpeur_id:
+            return False
+        self.lignes[bid] = self.Build(bid, grimpeur_id, b.auteur, contenu, maintenant)
+        return True
+
+    async def supprimer(self, bid, grimpeur_id):
+        b = self.lignes.get(bid)
+        if b is None or b.grimpeur_id != grimpeur_id:
+            return False
+        del self.lignes[bid]
+        return True
+
+    async def lire(self, bid):
+        return self.lignes.get(bid)
+
+    async def de_grimpeur(self, grimpeur_id):
+        return [b for b in self.lignes.values() if b.grimpeur_id == grimpeur_id]
+
+    async def partages(self, sauf_grimpeur=None, limite=200):
+        return [b for b in self.lignes.values() if b.contenu.partage and b.grimpeur_id != sauf_grimpeur]
+
+
+AUTRE = Visiteur(discord_id=22, est_admin=False, csrf="autre-csrf", grimpeur_id=2, pseudo="Mirelune")
+CORPS = {"nom": "Iop <b>terre</b>", "classe": "Iop", "niveau": 250, "objets": {"coiffe": 2411, "chapeau": 1},
+         "caracs_base": {"Force": 100}, "caracs_parcho": {"Force": 300}, "note": "n", "partage": False}
+CSRF = {"X-CSRF-Token": "jeton-csrf"}
+
+
+def test_enregistrer_modifier_partager_supprimer():
+    builds = FauxBuilds()
+    moi, autre = client(MOI, builds=builds), client(AUTRE, builds=builds)
+    r = moi.post("/api/builder/builds", json=CORPS, headers=CSRF)
+    assert r.status_code == 201
+    bid = r.json()["id"]
+    c = builds.lignes[bid].contenu
+    assert (c.nom, c.niveau, c.objets, c.caracs_parcho) == ("Iop <b>terre</b>", 200, {"coiffe": 2411}, {"Force": 100})
+    page = moi.get(f"/builder/{bid}")
+    assert page.status_code == 200 and "<b>terre</b>" not in page.text  # échappé, y compris dans le JSON
+    assert autre.get(f"/builder/{bid}").status_code == 404  # privé
+    assert "Iop &lt;b&gt;terre&lt;/b&gt;" in moi.get("/builder").text
+    r = moi.put(f"/api/builder/builds/{bid}", json={**CORPS, "partage": True}, headers=CSRF)
+    assert r.status_code == 200
+    page = autre.get(f"/builder/{bid}")
+    assert page.status_code == 200 and "lecture seule" in page.text and 'id="b-enregistrer"' not in page.text
+    assert "G1" in autre.get("/builder").text  # dans « Partagés dans la guilde »
+    assert autre.put(f"/api/builder/builds/{bid}", json=CORPS,
+                     headers={"X-CSRF-Token": "autre-csrf"}).status_code == 404
+    assert autre.delete(f"/api/builder/builds/{bid}", headers={"X-CSRF-Token": "autre-csrf"}).status_code == 404
+    assert moi.delete(f"/api/builder/builds/{bid}", headers=CSRF).status_code == 200
+    assert moi.get(f"/builder/{bid}").status_code == 404
+
+
+def test_enregistrement_refus():
+    builds = FauxBuilds()
+    c = client(MOI, builds=builds)
+    assert client(None, builds=builds).post("/api/builder/builds", json=CORPS, headers=CSRF).status_code == 401
+    assert c.post("/api/builder/builds", json=CORPS).status_code == 403  # sans jeton
+    assert c.post("/api/builder/builds", json=CORPS, headers={"X-CSRF-Token": "faux"}).status_code == 403
+    assert c.post("/api/builder/builds", json=CORPS,
+                  headers={**CSRF, "Origin": "https://ailleurs.example"}).status_code == 403
+    assert c.post("/api/builder/builds", json={**CORPS, "classe": "Druide"}, headers=CSRF).status_code == 422
+    assert c.post("/api/builder/builds", json={**CORPS, "nom": "  "}, headers=CSRF).status_code == 422
+    assert c.post("/api/builder/builds", json={**CORPS, "note": "x" * 2001}, headers=CSRF).status_code == 422
+    admin = Visiteur(discord_id=9, est_admin=True, csrf="a")
+    assert client(admin, builds=builds).post("/api/builder/builds", json=CORPS,
+                                             headers={"X-CSRF-Token": "a"}).status_code == 409  # pas de fiche
+    assert c.put("/api/builder/builds/99", json=CORPS, headers=CSRF).status_code == 404
+    assert client(MOI).post("/api/builder/builds", json=CORPS, headers=CSRF).status_code == 409  # sans base
+    assert builds.lignes == {}
+
+
+def test_page_liste_sans_base_et_build_introuvable():
+    assert "Mes builds" not in client().get("/builder").text
+    assert client().get("/builder/3").status_code == 404

@@ -94,6 +94,17 @@ footer{max-width:1200px;margin:2rem auto;padding:0 16px;color:var(--faint);font-
 .b-objet-caracs .neg{color:var(--warn)}
 #b-plus{margin:8px 16px 24px}
 
+/* Builds enregistrés */
+.b-builds{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.b-build{display:grid;gap:2px;padding:10px 12px;min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);color:var(--ink);text-decoration:none}
+.b-build:hover,.b-build:focus-visible{border-color:var(--gold-line)}
+.b-build-nom{font-weight:500}
+.b-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.b-partage{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-right:auto;color:var(--muted)}
+.b-partage input{width:22px;height:22px;accent-color:var(--gold)}
+.b-lecture{grid-column:1/-1;margin:0;color:var(--gold-hi)}
+.b-champ textarea{width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--sunken);color:var(--ink);font:inherit;resize:vertical}
+
 /* Caractéristiques */
 .b-bulles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
 .b-bulle{display:grid;justify-items:center;padding:10px 4px;border:1px solid var(--line);border-radius:8px;background:var(--sunken)}

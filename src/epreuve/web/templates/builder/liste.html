@@ -1,11 +1,31 @@
 {% extends "builder/_cadre.html" %}
 {% block titre %}Builder · L'Épreuve des Dieux{% endblock %}
+{% macro ligne(b, avec_auteur) -%}
+<li><a class="b-build" href="/builder/{{ b.id }}">
+  <span class="b-build-nom">{{ b.contenu.nom }}</span>
+  <span class="b-objet-meta">{{ b.contenu.classe }} · niv. {{ b.contenu.niveau }}{% if avec_auteur %} · {{ b.auteur }}{% elif b.contenu.partage %} · partagé{% endif %}</span>
+</a></li>
+{%- endmacro %}
 {% block page %}
+{% if introuvable %}<p class="b-alerte" role="alert">Ce build n'existe pas, ou son auteur ne l'a pas partagé.</p>{% endif %}
 <section class="b-carte">
   <h2>Composer un stuff</h2>
   <p class="b-aide">Choisis tes objets emplacement par emplacement : le builder fait le total des caractéristiques,
     des bonus de panoplie et vérifie les conditions d'équipement, avec les mêmes calculs que celui de Duffus.</p>
   <a class="b-bouton b-bouton-or" href="/builder/nouveau">Nouveau build</a>
 </section>
-{% block listes %}{% endblock %}
+{% if avec_base %}
+{% if v.grimpeur_id %}
+<section class="b-carte" aria-labelledby="t-mes">
+  <h2 id="t-mes">Mes builds</h2>
+  {% if mes %}<ul class="b-builds">{% for b in mes %}{{ ligne(b, false) }}{% endfor %}</ul>
+  {% else %}<p class="b-vide">Aucun build enregistré pour l'instant.</p>{% endif %}
+</section>
+{% endif %}
+<section class="b-carte" aria-labelledby="t-guilde">
+  <h2 id="t-guilde">Partagés dans la guilde</h2>
+  {% if guilde %}<ul class="b-builds">{% for b in guilde %}{{ ligne(b, true) }}{% endfor %}</ul>
+  {% else %}<p class="b-vide">Personne n'a encore partagé de build.</p>{% endif %}
+</section>
+{% endif %}
 {% endblock %}

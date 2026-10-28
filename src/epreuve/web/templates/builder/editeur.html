@@ -15,6 +15,17 @@
   <label class="b-champ b-champ-niveau">Niveau
     <input id="b-niveau" type="number" inputmode="numeric" min="1" max="200" value="200" {% if not config.modifiable %}disabled{% endif %}>
   </label>
+  {% if config.build and not config.modifiable %}<p class="b-lecture">Build de {{ config.build.auteur }}, en lecture seule.</p>{% endif %}
+  <label class="b-champ b-champ-nom">Note
+    <textarea id="b-note" maxlength="2000" rows="2" {% if not config.modifiable %}disabled{% endif %}></textarea>
+  </label>
+  {% if config.enregistrable %}
+  <div class="b-actions">
+    <label class="b-partage"><input type="checkbox" id="b-partage"> Partager dans la guilde</label>
+    <button type="button" class="b-bouton b-bouton-or" id="b-enregistrer">Enregistrer</button>
+    <button type="button" class="b-bouton" id="b-supprimer" {% if not config.build %}hidden{% endif %}>Supprimer</button>
+  </div>
+  {% elif config.modifiable %}<p class="b-aide b-champ-nom">Sans fiche de grimpeur, le build se compose mais ne s'enregistre pas.</p>{% endif %}
   <p class="b-etat" id="b-etat" role="status" aria-live="polite"></p>
 </section>
 
