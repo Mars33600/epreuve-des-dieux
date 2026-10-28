@@ -66,6 +66,12 @@ async def recette_a(navigateur, largeur: int, sortie: Path) -> list[str]:
     await page.click(".b-objet >> text='Coiffe du Bouftou'")
     await choisir(page, 2, "bouffante", "Cape Bouffante", niveau_max="20")
     await page.wait_for_selector(".b-panoplie")
+    await page.click(".b-emplacement:nth-child(1) .b-case")  # forgemagie de la coiffe : exo +1 PA
+    await page.select_option("#b-fm-carac", label="PA")
+    await page.fill("#b-fm-valeur", "1")
+    await page.click("#b-fm-ajouter")
+    await page.wait_for_selector(".b-fm-ligne.exo")
+    await page.click("#b-choix .b-fermer")
     await choisir(page, 9, "bouftou", "Marteau du Bouftou", niveau_max="20")
     await page.wait_for_selector("#b-arme table")
     await page.click("[data-buff='base']")
@@ -78,6 +84,9 @@ async def recette_a(navigateur, largeur: int, sortie: Path) -> list[str]:
     await page.click("#b-parcho-tout")
     await page.wait_for_timeout(600)
     force = await page.text_content("#b-base tbody tr:nth-child(3) td:nth-child(2)")
+    pa = await page.text_content(".b-bulle strong")
+    if pa != "7":  # 6 au niveau 50, + 1 PA d'exo
+        problemes.append(f"{largeur} px : {pa} PA au lieu de 7")
     if force != "230":
         problemes.append(f"{largeur} px : Force {force} au lieu de 230")
     await page.fill("#b-nom", "Recette")

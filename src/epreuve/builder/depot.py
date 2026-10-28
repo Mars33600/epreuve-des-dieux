@@ -6,7 +6,7 @@ la connexion). Les objets sont gardés par identifiant : une nouvelle aspiration
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, Table, Text, delete, insert, select, update
@@ -27,6 +27,7 @@ build = Table(
     Column("caracs_base", JSONB, nullable=False),
     Column("caracs_parcho", JSONB, nullable=False),
     Column("note", Text, nullable=False),
+    Column("fm", JSONB, nullable=False),
     Column("partage", Boolean, nullable=False),
     Column("cree_le", DateTime(timezone=True), nullable=False),
     Column("maj_le", DateTime(timezone=True), nullable=False),
@@ -45,6 +46,7 @@ class Contenu:
     caracs_parcho: dict[str, int]
     note: str = ""
     partage: bool = False
+    fm: dict[str, dict[str, int]] = field(default_factory=dict)  # emplacement → effectId (texte) → valeur
 
 
 @dataclass(frozen=True)
@@ -63,7 +65,8 @@ class DepotBuilds:
     @staticmethod
     def _valeurs(c: Contenu) -> dict:
         return {"nom": c.nom, "classe": c.classe, "niveau": c.niveau, "objets": c.objets,
-                "caracs_base": c.caracs_base, "caracs_parcho": c.caracs_parcho, "note": c.note, "partage": c.partage}
+                "caracs_base": c.caracs_base, "caracs_parcho": c.caracs_parcho, "note": c.note, "partage": c.partage,
+                "fm": c.fm}
 
     def _requete(self):
         return (select(build, t.grimpeur.c.pseudo_ig.label("pseudo"))
@@ -73,7 +76,7 @@ class DepotBuilds:
     def _ligne(r) -> BuildEnregistre:
         return BuildEnregistre(r.id, r.grimpeur_id, r.pseudo,
                                Contenu(r.nom, r.classe, r.niveau, dict(r.objets), dict(r.caracs_base),
-                                       dict(r.caracs_parcho), r.note, r.partage), r.maj_le)
+                                       dict(r.caracs_parcho), r.note, r.partage, dict(r.fm)), r.maj_le)
 
     async def creer(self, grimpeur_id: int, contenu: Contenu, maintenant: datetime) -> int:
         async with self._moteur.begin() as c:

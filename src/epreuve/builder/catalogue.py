@@ -27,13 +27,24 @@ def normaliser(texte: str) -> str:
     return t.replace("œ", "oe").replace("æ", "ae")
 
 
-def caracs_des_effets(effets: tuple[Effet, ...]) -> dict[str, int]:
-    """Somme des effets par caractéristique (fonction `Nn` de Duffus, sans forgemagie)."""
+def caracs_des_effets(effets: tuple[Effet, ...], fm: dict[int, int] | None = None) -> dict[str, int]:
+    """Somme des effets par caractéristique (fonction `Nn` de Duffus).
+
+    `fm` (forgemagie, `fm_overrides` chez Duffus) : effectId → valeur choisie. Elle remplace le jet de l'effet
+    de l'objet ; un effet absent de l'objet est un exo, ajouté en plus.
+    """
+    fm = fm or {}
     total: dict[str, int] = {}
+    vus: set[int] = set()
     for eid, de, a in effets:
         carac = EFFET_CARAC.get(eid)
-        v = valeur_effet(de, a)
+        v = fm[eid] if eid in fm else valeur_effet(de, a)
         if carac and v != 0:
+            vus.add(eid)
+            total[carac] = total.get(carac, 0) + v
+    for eid, v in fm.items():
+        carac = EFFET_CARAC.get(eid)
+        if eid not in vus and carac and v != 0:
             total[carac] = total.get(carac, 0) + v
     return total
 
@@ -50,15 +61,16 @@ class Objet:
     effets: tuple[Effet, ...]
     arme: Arme | None = None
 
-    def caracs(self) -> dict[str, int]:
-        return caracs_des_effets(self.effets)
+    def caracs(self, fm: dict[int, int] | None = None) -> dict[str, int]:
+        return caracs_des_effets(self.effets, fm)
 
     def resume(self) -> dict:
         """Ce que la page affiche d'un objet."""
         return {"id": self.id, "nom": self.nom, "niveau": self.niveau, "type": self.type,
                 "icone": URL_ICONE.format(self.icone) if self.icone else None, "panoplie": self.panoplie,
                 "conditions": self.conditions,
-                "caracs": [[k, v] for k, v in self.caracs().items()]}
+                "caracs": [[k, v] for k, v in self.caracs().items()],
+                "effets": [[e, de, a, EFFET_CARAC[e], valeur_effet(de, a)] for e, de, a in self.effets]}
 
 
 @dataclass(frozen=True)

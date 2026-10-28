@@ -199,6 +199,7 @@ class Build:
     objets: dict[str, int | None] = field(default_factory=dict)  # emplacement → id d'objet
     caracs_base: dict[str, int] = field(default_factory=dict)
     caracs_parcho: dict[str, int] = field(default_factory=dict)
+    fm: dict[str, dict[int, int]] = field(default_factory=dict)  # emplacement → effectId → valeur (forgemagie)
 
 
 @dataclass(frozen=True)
@@ -219,14 +220,16 @@ def nettoyer(build: Build) -> Build:
     parcho = {c: v for c in CARACS_PRINCIPALES
               if (v := min(PARCHO_MAX, max(0, int(build.caracs_parcho.get(c) or 0))))}
     objets = {e: build.objets.get(e) for e in EMPLACEMENTS_ORDRE if build.objets.get(e) is not None}
-    return Build(niveau, objets, base, parcho)
+    fm = {e: {int(k): int(v) for k, v in effets.items() if int(k) in EFFET_CARAC}
+          for e, effets in build.fm.items() if e in objets}
+    return Build(niveau, objets, base, parcho, {e: f for e, f in fm.items() if f})
 
 
 def calculer(build: Build, catalogue: Catalogue) -> Resultat:
     b = nettoyer(build)
     portes: list[tuple[str, Objet]] = [(e, o) for e in EMPLACEMENTS_ORDRE
                                        if (o := catalogue.objet(b.objets.get(e))) is not None]
-    caracs_objets = {e: o.caracs() for e, o in portes}
+    caracs_objets = {e: o.caracs(b.fm.get(e)) for e, o in portes}
     actives = panoplies_actives([o for _, o in portes], catalogue.panoplies)
     bonus_panoplies: dict[str, int] = {}
     for a in actives:

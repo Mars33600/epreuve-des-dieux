@@ -111,6 +111,17 @@ footer{max-width:1200px;margin:2rem auto;padding:0 16px;color:var(--faint);font-
 .b-arme-meta{margin:0 0 8px;color:var(--muted);font:500 12px "IBM Plex Mono",monospace}
 .b-arme-resume{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
 
+/* Forgemagie */
+.b-fm{margin:8px 16px;padding:12px;border:1px solid var(--gold-line);border-radius:8px;background:var(--surface-2)}
+.b-fm .b-aide{margin:4px 0 8px;font-size:.9rem}
+.b-fm-lignes{display:grid;gap:6px}
+.b-fm-ligne{display:grid;grid-template-columns:1fr 90px 44px;gap:6px;align-items:center}
+.b-fm-ligne input,.b-fm-exo input,.b-fm-exo select{min-height:44px;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:var(--sunken);color:var(--ink);font:inherit;min-width:0}
+.b-fm-ligne .b-fermer{font-size:1rem}
+.b-fm-ligne.exo span::after{content:" (exo)";color:var(--gold)}
+.b-fm-exo{display:grid;grid-template-columns:1fr 80px;gap:6px;margin-top:8px}
+.b-fm-exo .b-bouton{grid-column:1/-1}
+
 /* Sorts */
 #b-sorts-zone summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
 #b-sorts-zone summary h2{display:inline;margin:0}

@@ -12,6 +12,7 @@
     nom: "", classe: config.classes[0], niveau: 200,
     objets: {}, // emplacement → résumé d'objet (id, nom, niveau, icone, caracs…)
     base: {}, parcho: {}, note: "", modeArme: "melee", buffArme: "",
+    fm: {}, // emplacement → { effectId: valeur } (forgemagie : jets choisis et exos)
     resultat: null,
   };
 
@@ -80,6 +81,7 @@
     $("f-min").value = "";
     $("f-max").value = String(etat.niveau);
     $("b-retirer").hidden = !etat.objets[emplacement];
+    dessinerFm();
     dessinerTypes();
     dessinerCaracs();
     $("b-choix").showModal();
@@ -170,9 +172,45 @@
   }
 
   function equiper(emplacement, objet) {
+    const avant = etat.objets[emplacement];
+    if (!objet || !avant || avant.id !== objet.id) delete etat.fm[emplacement]; // nouvel objet : jets par défaut
     if (objet) etat.objets[emplacement] = objet; else delete etat.objets[emplacement];
     $("b-choix").close();
     changement();
+  }
+
+  // --- Forgemagie de l'objet porté --------------------------------------------------------------------------------
+
+  function regler(emplacement, eid, valeur, defaut) {
+    const fm = { ...(etat.fm[emplacement] || {}) };
+    if (valeur === null || valeur === defaut) delete fm[eid]; else fm[eid] = valeur;
+    if (Object.keys(fm).length) etat.fm[emplacement] = fm; else delete etat.fm[emplacement];
+    changement();
+    dessinerFm();
+  }
+
+  function dessinerFm() {
+    const e = choix.emplacement, o = etat.objets[e];
+    const zone = $("b-fm");
+    zone.hidden = !o || !o.effets;
+    if (zone.hidden) return;
+    const lignes = $("b-fm-lignes");
+    lignes.replaceChildren();
+    const fm = etat.fm[e] || {};
+    const surObjet = new Set();
+    const ligne = (eid, carac, valeur, defaut, exo) => {
+      const champ = el("input", { type: "number", inputmode: "numeric", value: String(valeur), "aria-label": carac + (exo ? " (exo)" : "") });
+      champ.addEventListener("change", () => regler(e, String(eid), parseInt(champ.value, 10) || 0, defaut));
+      const effacer = el("button", { type: "button", classe: "b-fermer", "aria-label": exo ? "Retirer l'exo " + carac : "Jet maximal pour " + carac, texte: exo ? "×" : "↺" });
+      effacer.addEventListener("click", () => regler(e, String(eid), null, defaut));
+      lignes.append(el("div", { classe: "b-fm-ligne" + (exo ? " exo" : "") }, [el("span", { texte: carac }), champ, effacer]));
+    };
+    for (const [eid, , , carac, defaut] of o.effets) {
+      surObjet.add(String(eid));
+      ligne(eid, carac, String(eid) in fm ? fm[eid] : defaut, defaut, false);
+    }
+    const nomDe = Object.fromEntries(Object.entries(config.effet_positif).map(([c, id]) => [String(id), c]));
+    for (const [eid, v] of Object.entries(fm)) if (!surObjet.has(eid)) ligne(eid, nomDe[eid] || "Effet " + eid, v, null, true);
   }
 
   // --- Calcul (serveur : une seule source des formules) -------------------------------------------------------
@@ -183,7 +221,7 @@
     const objets = {};
     for (const [e, o] of Object.entries(etat.objets)) if (o) objets[e] = o.id;
     return { niveau: etat.niveau, objets, caracs_base: etat.base, caracs_parcho: etat.parcho,
-      mode_arme: etat.modeArme, buff_arme: etat.buffArme };
+      mode_arme: etat.modeArme, buff_arme: etat.buffArme, fm: etat.fm };
   }
 
   function message(texte, erreur) {
@@ -381,6 +419,11 @@
     $("f-min").addEventListener("input", relancer);
     $("f-max").addEventListener("input", relancer);
     $("b-plus").addEventListener("click", () => chercher(false));
+    for (const c of config.caracs) $("b-fm-carac").append(el("option", { value: String(config.effet_positif[c]), texte: c }));
+    $("b-fm-ajouter").addEventListener("click", () => {
+      const v = parseInt($("b-fm-valeur").value, 10) || 0;
+      if (v) regler(choix.emplacement, $("b-fm-carac").value, v, null);
+    });
     $("b-retirer").addEventListener("click", () => equiper(choix.emplacement, null));
     $("b-choix").addEventListener("click", (ev) => { if (ev.target === $("b-choix")) $("b-choix").close(); });
     $("b-detail").addEventListener("click", (ev) => { if (ev.target === $("b-detail")) $("b-detail").close(); });
@@ -403,7 +446,7 @@
 
   function charger(b) {
     etat.nom = b.nom; etat.classe = b.classe; etat.niveau = b.niveau; etat.note = b.note || "";
-    etat.base = { ...b.caracs_base }; etat.parcho = { ...b.caracs_parcho };
+    etat.base = { ...b.caracs_base }; etat.parcho = { ...b.caracs_parcho }; etat.fm = JSON.parse(JSON.stringify(b.fm || {}));
     for (const [e, id] of Object.entries(b.objets)) etat.objets[e] = { id, nom: "…", niveau: 0, icone: null, caracs: [] };
     $("b-nom").value = b.nom; $("b-classe").value = b.classe; $("b-niveau").value = String(b.niveau);
     $("b-note").value = etat.note;

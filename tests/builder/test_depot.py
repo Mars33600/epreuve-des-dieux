@@ -8,7 +8,8 @@ from sqlalchemy.exc import IntegrityError
 from epreuve.builder.depot import Contenu, DepotBuilds
 from tests.fabrique import PENDANT
 
-BUILD = Contenu("Iop Bouftou", "Iop", 50, {"coiffe": 2411}, {"Force": 100}, {"Force": 100}, "note", False)
+BUILD = Contenu("Iop Bouftou", "Iop", 50, {"coiffe": 2411}, {"Force": 100}, {"Force": 100}, "note", False,
+                {"coiffe": {"118": 25}})
 
 
 @pytest.fixture

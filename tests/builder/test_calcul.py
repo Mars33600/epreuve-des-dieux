@@ -150,3 +150,25 @@ def test_conditions_comptent_base_parchemins_et_panoplie():
     assert r.alertes == {"coiffe": ["Conditions non remplies"]}  # 140 : pas assez ; le familier n'est pas contrôlé
     r = calculer(Build(200, {"coiffe": 1}, {"Force": 41}, {"Force": 100}), cat)
     assert r.alertes == {}
+
+
+def test_forgemagie_jets_choisis_et_exo():
+    """Coiffe du Bouftou (Force 20, Intelligence 20) : Force forgée à 25, Intelligence à 0, exo +1 PA (111)."""
+    cat = catalogue_par_defaut()
+    fm = {"coiffe": {118: 25, 126: 0, 111: 1}}
+    r = calculer(Build(200, {"coiffe": 2411}, fm=fm), cat)
+    assert (r.totaux["Force"], r.totaux["Intelligence"], r.totaux["PA"]) == (25, 0, 1)
+    assert r.affichage["PA"] == 8
+    assert r.detail["Force"]["objets"] == [["Coiffe du Bouftou", 25]]
+    # forgemagie d'un emplacement vide, effet inconnu : ignorés
+    r = calculer(Build(200, {"coiffe": 2411}, fm={"cape": {118: 50}, "coiffe": {99999: 5}}), cat)
+    assert r.totaux["Force"] == 20
+    assert nettoyer(Build(200, {"coiffe": 2411}, fm={"coiffe": {99999: 5}})).fm == {}
+
+
+def test_forgemagie_compte_dans_les_conditions():
+    cat = Catalogue.depuis_json(
+        [{"id": 1, "nom": "Exigeant", "niveau": 1, "type": 16, "conditions": "CS>140", "effets": []},
+         {"id": 2, "nom": "Cape", "niveau": 1, "type": 17, "effets": [[118, 10, 0]]}], [])
+    assert calculer(Build(200, {"coiffe": 1, "cape": 2}, {"Force": 130}), cat).alertes
+    assert not calculer(Build(200, {"coiffe": 1, "cape": 2}, {"Force": 130}, fm={"cape": {118: 11}}), cat).alertes

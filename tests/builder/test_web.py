@@ -344,3 +344,19 @@ def test_sorts_de_la_classe():
     assert client().post("/api/builder/sorts", json=corps).json()["sorts"] == []  # sans base
     assert client(builds=FauxBuilds()).post("/api/builder/sorts", json={"classe": "Druide"}).status_code == 422
     assert client(None).post("/api/builder/sorts", json=corps).status_code == 401
+
+
+def test_forgemagie_dans_l_api_et_enregistree():
+    builds = FauxBuilds()
+    moi = client(MOI, builds=builds)
+    fm = {"coiffe": {"118": 25, "111": 1}}
+    d = moi.post("/api/builder/calcul", json={"objets": {"coiffe": 2411}, "fm": fm}).json()
+    assert d["totaux"]["Force"] == 25 and d["affichage"]["PA"] == 8
+    assert d["objets"]["coiffe"]["effets"] == [[118, 16, 20, "Force", 20], [126, 16, 20, "Intelligence", 20]]
+    corps = {**CORPS, "fm": {"coiffe": {"118": 25}, "cape": {"118": 9}}}
+    bid = moi.post("/api/builder/builds", json=corps, headers=CSRF).json()["id"]
+    assert builds.lignes[bid].contenu.fm == {"coiffe": {"118": 25}}  # pas d'objet en cape : ignorée
+    assert '"fm": {"coiffe": {"118": 25}}' in moi.get(f"/builder/{bid}").text
+    trop = {"objets": {"coiffe": 2411}, "fm": {"coiffe": {str(i): 1 for i in range(40)}}}
+    assert moi.post("/api/builder/calcul", json=trop).status_code == 200  # 32 effets au plus par emplacement
+    assert moi.post("/api/builder/calcul", json={"fm": {"coiffe": {"x": 1}}}).status_code == 422
