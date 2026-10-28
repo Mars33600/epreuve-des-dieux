@@ -102,12 +102,8 @@ async def page_etage(request: Request, numero: int):
 
 
 async def etage_de_quete(depot) -> dict[int, int]:
-    """Quête → numéro de son étage, pour savoir si un prérequis est scellé."""
-    carte: dict[int, int] = {}
-    for e in await depot.etages():
-        _, _, _, quetes = await depot.contenu_brut(e.id)
-        carte.update({q.id: e.numero for q in quetes})
-    return carte
+    """Quête → numéro de son étage, pour savoir si un prérequis est scellé (une seule requête en base)."""
+    return await depot.etage_des_quetes()
 
 
 async def fiche_pour(request: Request, v: Visiteur, etage: Etage, quete_id: int) -> tuple[FicheQuete | None, dict]:
@@ -278,8 +274,8 @@ async def _inscription_permise(request: Request) -> Visiteur:
 @routeur.get("/inscription")
 async def inscription(request: Request):
     v = await _inscription_permise(request)
-    liste = await _s(request).depot.liste_officielle()
-    if v.discord_id not in liste:
+    s = _s(request)
+    if s.regles.liste_officielle_obligatoire and v.discord_id not in await s.depot.liste_officielle():
         return await rendre(request, "inscription.html", {"hors_liste": True})
     return await rendre(request, "inscription.html", {"hors_liste": False, "classes": CLASSES, "valeurs": {}})
 
@@ -293,7 +289,8 @@ async def inscrire(request: Request):
     valeurs = {k: str(form.get(k, "")) for k in ("pseudo", "classe", "niveau")}
     try:
         pseudo, classe, niveau = lire_fiche(form, s.regles)
-        await s.depot.creer_grimpeur(v.discord_id, v.session.nom_discord, pseudo, classe, niveau, s.horloge())
+        await s.depot.creer_grimpeur(v.discord_id, v.session.nom_discord, pseudo, classe, niveau, s.horloge(),
+                                     liste_obligatoire=s.regles.liste_officielle_obligatoire)
     except ValueError as e:
         return await rendre(request, "inscription.html", {"hors_liste": False, "classes": CLASSES,
                                                           "valeurs": valeurs, "erreur": MESSAGES_FICHE[e.args[0]]}, 422)

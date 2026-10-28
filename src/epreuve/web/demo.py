@@ -324,6 +324,9 @@ class DepotDemo:
             return None
         return replace(f, etage_numero=self._etages[q.etage_id].numero)
 
+    async def etage_des_quetes(self) -> dict[int, int]:
+        return {q.id: self._etages[q.etage_id].numero for q in self._quetes.values()}
+
     async def quetes_sans_fiche(self, etage_id: int) -> list[Quete]:
         return [q for q in self._quetes.values() if q.etage_id == etage_id and not q.a_une_fiche]
 
@@ -336,14 +339,16 @@ class DepotDemo:
                                            details, public))
 
     # ------------------------------------------------------------------ écriture grimpeur
-    async def creer_grimpeur(self, discord_user_id, nom_discord, pseudo, classe, niveau_declare, maintenant):
-        if discord_user_id not in self._liste:
+    async def creer_grimpeur(self, discord_user_id, nom_discord, pseudo, classe, niveau_declare, maintenant, *,
+                             liste_obligatoire: bool = True):
+        if discord_user_id not in self._liste and liste_obligatoire:
             raise PasSurLaListe("pas sur la liste officielle")
         if await self.grimpeur_par_discord(discord_user_id) is not None:
             raise DejaInscrit("déjà inscrit")
         self._pseudo_libre(pseudo)
         id_ = max(self._grimpeurs, default=0) + 1
-        g = Grimpeur(id_, discord_user_id, nom_discord, pseudo, classe, self._liste[discord_user_id], niveau_declare,
+        g = Grimpeur(id_, discord_user_id, nom_discord, pseudo, classe, self._liste.get(discord_user_id, "actif"),
+                     niveau_declare,
                      maintenant)
         self._grimpeurs[id_] = g
         self._journaliser(discord_user_id, maintenant, "inscription", grimpeur_id=id_, pseudo=pseudo)

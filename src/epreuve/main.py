@@ -10,12 +10,28 @@ Au lot A, la base est facultative : sans `DATABASE_URL`, le teaser tourne et `/s
 from __future__ import annotations
 
 import asyncio
+import contextlib
 import logging
+from datetime import UTC, datetime
 
 import uvicorn
 
 from epreuve.config import Config
 from epreuve.web.app import creer_app
+
+journal = logging.getLogger("epreuve")
+UN_JOUR = 24 * 3600
+
+
+async def purger_chaque_jour(depot, horloge=lambda: datetime.now(UTC), attendre=asyncio.sleep) -> None:
+    """Supprime les sessions expirées au démarrage, puis une fois par jour (ARCHITECTURE §5)."""
+    while True:
+        try:
+            n = await depot.purger_sessions(horloge())
+            journal.info("sessions expirées supprimées : %d", n)
+        except Exception:  # noqa: BLE001 — une base indisponible ne doit pas arrêter le site
+            journal.exception("purge des sessions impossible")
+        await attendre(UN_JOUR)
 
 
 async def lancer(config: Config) -> None:
@@ -39,9 +55,14 @@ async def lancer(config: Config) -> None:
     app = creer_app(config, source=source, oauth=oauth, regles=lire_regles())  # regles.yaml lu au démarrage
     serveur = uvicorn.Server(uvicorn.Config(app, host="0.0.0.0", port=config.site_port,  # noqa: S104
                                             log_level=config.journal_niveau.lower(), proxy_headers=True))
+    purge = asyncio.create_task(purger_chaque_jour(source)) if source is not None else None
     try:
         await serveur.serve()
     finally:
+        if purge is not None:
+            purge.cancel()
+            with contextlib.suppress(asyncio.CancelledError):
+                await purge
         if moteur is not None:
             await moteur.dispose()
 
