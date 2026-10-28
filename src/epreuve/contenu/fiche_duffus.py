@@ -162,7 +162,7 @@ def _objets(racine: Noeud, manuels: list[dict]) -> list[Besoin]:
         if nom:
             objets[nom] = objets.get(nom, 0) + qte
     for m in manuels or []:
-        if m.get("label"):
+        if isinstance(m, dict) and m.get("label"):
             objets.setdefault(str(m["label"]), int(m.get("qty") or 1))
     return [Besoin(n, q) for n, q in objets.items()]
 
@@ -209,8 +209,9 @@ def prerequis_de(page: Mapping, slug_vers_id: Mapping[str, str]) -> list[Prerequ
         sortie.append(PrerequisBrut(duffus_id=slug_vers_id.get(m.group(1)) if m else None,
                                     nom=lien.get("title") or "Quête"))
     for p in page.get("prereqs") or []:
-        if (p.get("text") or "").strip():
-            sortie.append(PrerequisBrut(nom=p["text"].strip()))
+        texte = (p.get("text") or "") if isinstance(p, dict) else str(p or "")
+        if texte.strip():
+            sortie.append(PrerequisBrut(nom=texte.strip()))
     return sortie
 
 

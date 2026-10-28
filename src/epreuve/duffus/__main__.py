@@ -41,8 +41,8 @@ async def _principal(args: argparse.Namespace) -> int:
             print(f"Relevé ({r['source']}) : {len(r['tables'])} tables → {f.relative_to(RACINE)} "
                   f"({client.nb_requetes} requêtes)")
             return 0
-        tables = tuple(args.tables.split(",")) if args.tables else None
-        etages = tuple(int(x) for x in args.etages.split(",")) if args.etages else None
+        tables = tuple(x for x in args.tables.split(",") if x) if args.tables else None
+        etages = tuple(int(x) for x in args.etages.split(",") if x.strip()) if args.etages else None
         rapport = await aspirer.aspirer(client, DONNEES, date.today(), tables=tables, etages=etages,
                                         a_blanc=args.a_blanc)
         print(rapport.texte())

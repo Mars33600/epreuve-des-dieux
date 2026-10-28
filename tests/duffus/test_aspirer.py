@@ -210,3 +210,20 @@ def test_charger_env_ne_lit_que_duffus(tmp_path, monkeypatch):
     _charger_env(tmp_path / "absent")
     import os
     assert os.environ["DUFFUS_SUPABASE_URL"] == "https://x" and "DISCORD_TOKEN" not in os.environ
+
+
+async def test_fiches_lues_par_paquets_de_slugs(tmp_path, monkeypatch):
+    monkeypatch.setattr(a, "PAQUET_SLUGS", 1)
+    appels = []
+    async with client(faux_duffus(appels=appels)) as c:
+        await a.aspirer(c, tmp_path, JOUR, tables=("quest_pages",), etages=(0, 1))
+    assert [p.get("slug") for t, p in appels if t == "quest_pages"] == ["in.(a)", "in.(b)"]
+    assert len(json.loads((tmp_path / "2026-10-29" / "quest_pages.json").read_text())) == 2
+
+
+async def test_builder_jamais_lue():
+    from epreuve.duffus.releve import TABLES_CONNUES, TABLES_LOT_E
+    assert "builder" not in a.TABLES and "builder" not in TABLES_CONNUES + TABLES_LOT_E
+    async with client(faux_duffus()) as c:
+        with pytest.raises(ValueError, match="interdites"):
+            await relever(c, ("quest_list", "builder"))

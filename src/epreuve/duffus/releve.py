@@ -16,8 +16,10 @@ from epreuve.duffus.client import Absente, ClientDuffus
 TABLES_CONNUES = ("guide_ranges", "quest_list", "quest_pages", "dungeon_pages", "achievements",
                   "achievement_objectives", "monsters", "dofus_list", "guide_pages", "quests", "quest_resources")
 # Tables du lot E (encyclopédie, avis de recherche, archimonstres, stuffs, builder) : relevé seulement.
+# `builder` n'y est pas, et ne doit jamais être lue : ce sont les builds des utilisateurs de Duffus.
+TABLES_INTERDITES = frozenset({"builder"})
 TABLES_LOT_E = ("archimonstres", "wanted2", "items", "recipes", "effects", "spells", "monster_success",
-                "achievement_categories", "builder")
+                "achievement_categories")
 
 
 def _type(v: object) -> str:
@@ -34,6 +36,8 @@ def schema_depuis_openapi(api: dict) -> dict[str, dict[str, str]]:
 
 
 async def relever(client: ClientDuffus, tables: tuple[str, ...] = TABLES_CONNUES) -> dict:
+    if TABLES_INTERDITES & set(tables):
+        raise ValueError(f"tables interdites : {', '.join(sorted(TABLES_INTERDITES & set(tables)))}")
     api = await client.openapi()
     if api is not None:
         return {"source": "openapi", "tables": schema_depuis_openapi(api)}

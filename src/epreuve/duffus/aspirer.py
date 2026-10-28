@@ -47,6 +47,9 @@ TABLES: dict[str, Table] = {t.nom: t for t in (
 )}  # fmt: skip
 
 
+PAQUET_SLUGS = 80
+
+
 def _colonnes(modele: type[BaseModel]) -> str:
     return ",".join(f'"{c}"' if not c.islower() else c for c in modele.model_fields)
 
@@ -129,14 +132,16 @@ def _differences(table: Table, avant: list[dict], apres: list[dict]) -> tuple[in
 async def lire(client: ClientDuffus, noms: tuple[str, ...], etages: tuple[int, ...] | None) -> dict[str, list[dict]]:
     """Lit et valide les tables demandées ; rien n'est écrit ici."""
     extraits: dict[str, list[dict]] = {}
-    filtre_fiches: dict[str, str] | None = None
+    filtres_fiches: list[dict[str, str]] | None = None
     if "quest_pages" in noms and etages is not None:
         ranges = extraits.get("guide_ranges") or valider(TABLES["guide_ranges"], await client.lire_table(
             "guide_ranges", _colonnes(s.GuideRange)))
         quetes = {q["id"]: q for q in (extraits.get("quest_list") or valider(TABLES["quest_list"],
                                        await client.lire_table("quest_list", _colonnes(s.QuestListe))))}
         slugs = slugs_des_tranches(tranches_des_etages(ranges, etages), quetes)
-        filtre_fiches = {"slug": f"in.({','.join(slugs)})"}
+        # Par paquets : une adresse avec 600 slugs dépasserait la longueur qu'acceptent les serveurs.
+        filtres_fiches = [{"slug": f"in.({','.join(slugs[i:i + PAQUET_SLUGS])})"}
+                          for i in range(0, len(slugs), PAQUET_SLUGS)]
         if "guide_ranges" in noms:
             extraits["guide_ranges"] = ranges
         if "quest_list" in noms:
@@ -145,8 +150,9 @@ async def lire(client: ClientDuffus, noms: tuple[str, ...], etages: tuple[int, .
         if nom in extraits:
             continue
         t = TABLES[nom]
-        brutes = await client.lire_table(t.source, _colonnes(t.modele), t.cle,
-                                         filtre_fiches if nom == "quest_pages" else None)
+        brutes = []
+        for filtre in (filtres_fiches if nom == "quest_pages" and filtres_fiches is not None else [None]):
+            brutes += await client.lire_table(t.source, _colonnes(t.modele), t.cle, filtre)
         lignes = valider(t, brutes)
         if nom == "achievements":
             lignes = [r for r in lignes if s.MARQUE_SUCCES_DONJON in (r["description"] or "")]

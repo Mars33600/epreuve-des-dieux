@@ -71,10 +71,10 @@ class QuestePage(_Ligne):
     published: bool | None
     status: str | None
     meta: dict[str, Any]
-    prereqs: list[dict[str, Any]] | None
+    prereqs: list[Any] | None  # objets {"text", "icon"} ou simples textes
     prereq_quests: str | None
     rewards: dict[str, Any] | None
-    manual_resources: list[dict[str, Any]] | None
+    manual_resources: list[Any] | None
     steps: list[Any] | None
     content_html: str | None
 
