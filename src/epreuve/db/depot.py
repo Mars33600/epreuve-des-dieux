@@ -167,6 +167,11 @@ class Depot:
     def __init__(self, moteur: AsyncEngine) -> None:
         self._moteur = moteur
 
+    @property
+    def moteur(self) -> AsyncEngine:
+        """Pour les modules du lot E, qui ont leur propre dépôt de lecture sur la même base."""
+        return self._moteur
+
     # --- Santé ------------------------------------------------------------------------------------------
 
     async def ping(self) -> bool:
