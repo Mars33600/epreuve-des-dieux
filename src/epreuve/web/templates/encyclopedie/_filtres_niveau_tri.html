@@ -1,0 +1,7 @@
+<label>Niveau min <input type="number" name="nmin" min="1" max="200" inputmode="numeric" value="{{ f.niveau_min or '' }}"></label>
+<label>Niveau max <input type="number" name="nmax" min="1" max="200" inputmode="numeric" value="{{ f.niveau_max or '' }}"></label>
+<label>Trier par
+  <select name="tri">
+    {% for cle, libelle in tris.items() %}<option value="{{ cle }}"{% if f.tri == cle %} selected{% endif %}>{{ libelle }}</option>{% endfor %}
+  </select>
+</label>

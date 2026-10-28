@@ -1,0 +1,83 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}{{ o.nom }} · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte fiche-tete">
+  {% if o.image %}<img class="vignette grande" src="{{ o.image }}" alt="" width="96" height="96">{% endif %}
+  <div>
+    <span class="eyebrow">{{ o.type or "Objet" }}</span>
+    <h1>{{ o.nom }}</h1>
+    <div class="etiquettes">
+      {% if o.niveau %}<span class="etiquette or">Niveau {{ o.niveau }}</span>{% endif %}
+      {% if o.panoplie %}<a class="etiquette" href="#panoplie">{{ o.panoplie.nom }}</a>{% endif %}
+      {% if o.legendaire %}<span class="etiquette">Légendaire</span>{% endif %}
+      {% if o.echangeable == false %}<span class="etiquette">Non échangeable</span>{% endif %}
+      {% if o.poids %}<span class="etiquette">{{ o.poids }} pod{{ "s" if o.poids > 1 }}</span>{% endif %}
+    </div>
+    {% if o.description %}<p class="muted">{{ o.description }}</p>{% endif %}
+  </div>
+</section>
+<div class="colonnes">
+  <div class="pile">
+    {% if o.arme %}
+    <section class="carte" aria-labelledby="t-arme">
+      <h2 id="t-arme">Caractéristiques</h2>
+      <ul class="effets">
+        <li>{{ o.arme.pa }} PA{% if o.arme.par_tour %} · {{ o.arme.par_tour }} fois par tour{% endif %}</li>
+        <li>Portée {{ o.arme.po_min }}{% if o.arme.po_max != o.arme.po_min %} à {{ o.arme.po_max }}{% endif %}</li>
+        {% if o.arme.cc %}<li>Critique : 1/{{ o.arme.cc }}{% if o.arme.bonus_cc %} (+{{ o.arme.bonus_cc }}){% endif %}</li>{% endif %}
+        {% if o.arme.deux_mains %}<li>Arme à deux mains</li>{% endif %}
+      </ul>
+    </section>
+    {% endif %}
+    <section class="carte" aria-labelledby="t-effets">
+      <h2 id="t-effets">Effets</h2>
+      {% if o.effets_lus %}
+      <ul class="effets">{% for e in o.effets_lus %}<li{% if e.negatif %} class="negatif"{% endif %}>{{ e.texte }}</li>{% endfor %}</ul>
+      {% else %}<p class="vide">Aucun effet.</p>{% endif %}
+      {% if o.conditions %}<p class="note">Conditions : <span class="num">{{ o.conditions }}</span></p>{% endif %}
+    </section>
+    {% if o.panoplie %}
+    <section class="carte" id="panoplie" aria-labelledby="t-panoplie">
+      <span class="eyebrow">Panoplie</span>
+      <h2 id="t-panoplie">{{ o.panoplie.nom }}</h2>
+      <ul class="liste-simple">{% for x in o.panoplie.objets %}
+        <li><a class="ligne" href="/encyclopedie/objets/{{ x.id }}">{% if x.image %}<img class="vignette petite" src="{{ x.image }}" alt="" loading="lazy" width="32" height="32">{% endif %}<span class="nom">{{ x.nom }}</span>{% if x.niveau %}<span class="niv">Niv. {{ x.niveau }}</span>{% endif %}</a></li>
+      {% endfor %}</ul>
+      {% for n, effets in o.panoplie.bonus %}
+      <h3 class="eyebrow">{{ n }} objets</h3>
+      <ul class="effets">{% for e in effets %}<li{% if e.negatif %} class="negatif"{% endif %}>{{ e.texte }}</li>{% endfor %}</ul>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </div>
+  <div class="pile">
+    <section class="carte" aria-labelledby="t-recette">
+      <h2 id="t-recette">Recette</h2>
+      {% if o.recette %}
+      <p class="muted">{{ o.recette.metier or "Métier inconnu" }}{% if o.recette.niveau %} · niveau {{ o.recette.niveau }}{% endif %}</p>
+      <ul class="liste-simple">{% for x in o.recette.ingredients %}
+        <li><a class="ligne" href="/encyclopedie/objets/{{ x.id }}">{% if x.image %}<img class="vignette petite" src="{{ x.image }}" alt="" loading="lazy" width="32" height="32">{% endif %}<span class="nom">{{ x.nom }}</span><span class="qte">× {{ x.qte }}</span></a></li>
+      {% endfor %}</ul>
+      {% else %}<p class="vide">Aucune recette enregistrée pour cet objet.</p>{% endif %}
+    </section>
+    <section class="carte" aria-labelledby="t-drop">
+      <h2 id="t-drop">Drop</h2>
+      {% if o.monstres %}
+      <ul class="liste-simple">{% for m in o.monstres %}
+        <li><a class="ligne" href="/encyclopedie/monstres/{{ m.id }}"><img class="vignette petite" src="{{ m.image }}" alt="" loading="lazy" width="32" height="32"><span><span class="nom">{{ m.nom }}</span>{% if m.niveau_min %}<br><span class="meta">Niv. {{ m.niveau_min }}{% if m.niveau_max != m.niveau_min %}–{{ m.niveau_max }}{% endif %}</span>{% endif %}</span>{% if m.taux %}<span class="qte">{{ m.taux[0] }}{% if m.taux[1] != m.taux[0] %}–{{ m.taux[1] }}{% endif %} %{% if m.condition %} *{% endif %}</span>{% endif %}</a></li>
+      {% endfor %}</ul>
+      {% if o.monstres|selectattr("condition")|list %}<p class="note">* sous condition (quête, niveau…)</p>{% endif %}
+      {% else %}<p class="vide">Aucun monstre ne le laisse tomber.</p>{% endif %}
+    </section>
+    {% if o.utilise_dans %}
+    <section class="carte" aria-labelledby="t-utilise">
+      <h2 id="t-utilise">Utilisé dans <span class="compte">{{ o.utilise_dans_total }}</span></h2>
+      <ul class="liste-simple">{% for x in o.utilise_dans %}
+        <li><a class="ligne" href="/encyclopedie/objets/{{ x.id }}">{% if x.image %}<img class="vignette petite" src="{{ x.image }}" alt="" loading="lazy" width="32" height="32">{% endif %}<span class="nom">{{ x.nom }}</span>{% if x.niveau %}<span class="niv">Niv. {{ x.niveau }}</span>{% endif %}</a></li>
+      {% endfor %}</ul>
+      {% if o.utilise_dans_total > o.utilise_dans|length %}<p class="note">Les {{ o.utilise_dans|length }} premières recettes, par niveau.</p>{% endif %}
+    </section>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

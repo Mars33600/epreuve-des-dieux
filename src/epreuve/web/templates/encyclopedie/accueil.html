@@ -1,0 +1,36 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}Encyclopédie · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<section class="carte">
+  <span class="eyebrow">Encyclopédie</span>
+  <h1>Chercher dans le Monde des Douze</h1>
+  <p class="muted">Objets, ressources, monstres et recettes. La recherche porte sur le début des mots : « epee boi » trouve l'Épée de Boisaille.</p>
+  <form class="filtres" action="/encyclopedie" method="get" role="search" data-filtres>
+    <label class="large">Nom <input type="search" name="q" value="{{ f.q or '' }}" placeholder="Un objet, un monstre…" autocomplete="off" data-focus></label>
+    <div class="actions"><button class="bouton" type="submit">Chercher</button></div>
+  </form>
+</section>
+{% if f.q %}
+<section class="carte" aria-labelledby="t-objets">
+  <h2 id="t-objets">Objets et ressources <span class="compte">{{ objets.total }}</span></h2>
+  {% if objets.lignes %}
+  <ul class="grille">{% for o in objets.lignes[:12] %}{% include "encyclopedie/_ligne_objet.html" %}{% endfor %}</ul>
+  {% if objets.total > 12 %}<p><a href="/encyclopedie/objets?q={{ f.q|urlencode }}&amp;tri=niveau_asc">Voir les {{ objets.total }} objets</a></p>{% endif %}
+  {% else %}<p class="vide">Aucun objet.</p>{% endif %}
+</section>
+<section class="carte" aria-labelledby="t-monstres">
+  <h2 id="t-monstres">Monstres <span class="compte">{{ monstres.total }}</span></h2>
+  {% if monstres.lignes %}
+  <ul class="grille">{% for m in monstres.lignes[:12] %}{% include "encyclopedie/_ligne_monstre.html" %}{% endfor %}</ul>
+  {% if monstres.total > 12 %}<p><a href="/encyclopedie/monstres?q={{ f.q|urlencode }}&amp;tri=niveau_asc">Voir les {{ monstres.total }} monstres</a></p>{% endif %}
+  {% else %}<p class="vide">Aucun monstre.</p>{% endif %}
+</section>
+{% else %}
+<ul class="grille">
+  <li><a class="ligne" href="/encyclopedie/objets"><span><span class="nom">Objets</span><br><span class="meta">Équipements, armes, familiers, consommables…</span></span></a></li>
+  <li><a class="ligne" href="/encyclopedie/ressources"><span><span class="nom">Ressources</span><br><span class="meta">Récoltes, drops et alliages</span></span></a></li>
+  <li><a class="ligne" href="/encyclopedie/monstres"><span><span class="nom">Monstres</span><br><span class="meta">Caractéristiques par grade et butin</span></span></a></li>
+  <li><a class="ligne" href="/encyclopedie/recettes"><span><span class="nom">Recettes</span><br><span class="meta">Par métier et par niveau</span></span></a></li>
+</ul>
+{% endif %}
+{% endblock %}

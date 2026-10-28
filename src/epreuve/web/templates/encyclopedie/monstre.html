@@ -1,0 +1,30 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}{{ m.nom }} · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte fiche-tete">
+  <img class="vignette grande" src="{{ m.image }}" alt="" width="96" height="96">
+  <div>
+    <span class="eyebrow">{{ m.race or "Monstre" }}</span>
+    <h1>{{ m.nom }}</h1>
+    {% if m.niveau_min %}<div class="etiquettes"><span class="etiquette or">Niveau {{ m.niveau_min }}{% if m.niveau_max != m.niveau_min %} à {{ m.niveau_max }}{% endif %}</span></div>{% endif %}
+  </div>
+</section>
+<section class="carte" aria-labelledby="t-grades">
+  <h2 id="t-grades">Caractéristiques par grade</h2>
+  {% if m.grades %}
+  <div class="defile"><table class="tableau">
+    <thead><tr><th scope="col">Grade</th><th scope="col">Niv.</th><th scope="col">PV</th><th scope="col">PA</th><th scope="col">PM</th><th scope="col">Neutre</th><th scope="col">Terre</th><th scope="col">Feu</th><th scope="col">Eau</th><th scope="col">Air</th><th scope="col">XP</th></tr></thead>
+    <tbody>{% for g in m.grades %}<tr><th scope="row">{{ g.grade }}</th><td>{{ g.niveau }}</td><td>{{ g.pv }}</td><td>{{ g.pa }}</td><td>{{ g.pm }}</td><td>{{ g.res_neutre }} %</td><td>{{ g.res_terre }} %</td><td>{{ g.res_feu }} %</td><td>{{ g.res_eau }} %</td><td>{{ g.res_air }} %</td><td>{{ g.xp }}</td></tr>{% endfor %}</tbody>
+  </table></div>
+  {% else %}<p class="vide">Pas de caractéristiques connues.</p>{% endif %}
+</section>
+<section class="carte" aria-labelledby="t-butin">
+  <h2 id="t-butin">Butin</h2>
+  {% if m.butin %}
+  <ul class="grille">{% for x in m.butin %}
+    <li><a class="ligne" href="/encyclopedie/objets/{{ x.id }}">{% if x.image %}<img class="vignette petite" src="{{ x.image }}" alt="" loading="lazy" width="32" height="32">{% endif %}<span class="nom">{{ x.nom }}</span><span class="qte">{{ x.taux[0] }}{% if x.taux[1] != x.taux[0] %}–{{ x.taux[1] }}{% endif %} %{% if x.condition %} *{% endif %}</span></a></li>
+  {% endfor %}</ul>
+  {% if m.butin|selectattr("condition")|list %}<p class="note">* sous condition (quête, niveau…)</p>{% endif %}
+  {% else %}<p class="vide">Aucun butin connu.</p>{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}Monstres · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte">
+  <span class="eyebrow">Encyclopédie</span>
+  <h1>Monstres</h1>
+  <form class="filtres" action="/encyclopedie/monstres" method="get" role="search" data-filtres>
+    <label class="large">Nom <input type="search" name="q" value="{{ f.q or '' }}" placeholder="Rechercher" autocomplete="off" data-focus></label>
+    <label>Famille
+      <select name="race">
+        <option value="">Toutes</option>
+        {% for id, nom in races %}<option value="{{ id }}"{% if f.race_id == id %} selected{% endif %}>{{ nom }}</option>{% endfor %}
+      </select>
+    </label>
+    {% include "encyclopedie/_filtres_niveau_tri.html" %}
+    <div class="actions"><span class="compte">{{ page.total }} résultat{{ "s" if page.total > 1 }}</span><button class="bouton" type="submit">Filtrer</button></div>
+  </form>
+</section>
+{% if page.lignes %}
+<ul class="grille">{% for m in page.lignes %}{% include "encyclopedie/_ligne_monstre.html" %}{% endfor %}</ul>
+{% include "encyclopedie/_pagination.html" %}
+{% else %}<p class="vide carte">Aucun résultat. Essaie un autre nom ou retire un filtre.</p>{% endif %}
+{% endblock %}

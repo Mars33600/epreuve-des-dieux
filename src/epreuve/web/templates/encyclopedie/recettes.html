@@ -1,0 +1,30 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}Recettes · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte">
+  <span class="eyebrow">Encyclopédie</span>
+  <h1>Recettes</h1>
+  <form class="filtres" action="/encyclopedie/recettes" method="get" role="search" data-filtres>
+    <label class="large">Objet fabriqué <input type="search" name="q" value="{{ f.q or '' }}" placeholder="Rechercher" autocomplete="off" data-focus></label>
+    <label>Métier
+      <select name="metier">
+        <option value="">Tous</option>
+        {% for id, nom in metiers|dictsort(by="value") %}<option value="{{ id }}"{% if f.metier == id %} selected{% endif %}>{{ nom }}</option>{% endfor %}
+      </select>
+    </label>
+    {% include "encyclopedie/_filtres_niveau_tri.html" %}
+    <div class="actions"><span class="compte">{{ page.total }} recette{{ "s" if page.total > 1 }}</span><button class="bouton" type="submit">Filtrer</button></div>
+  </form>
+</section>
+{% if page.lignes %}
+<div class="stuffs">{% for x in page.lignes %}
+  <article class="carte">
+    <a class="ligne" href="/encyclopedie/objets/{{ x.id }}">{% if x.image %}<img class="vignette" src="{{ x.image }}" alt="" loading="lazy" width="48" height="48">{% endif %}<span><span class="nom">{{ x.nom }}</span>{% if x.metier_nom %}<br><span class="meta">{{ x.metier_nom }}</span>{% endif %}</span>{% if x.niveau %}<span class="niv">Niv. {{ x.niveau }}</span>{% endif %}</a>
+    <ul class="liste-simple">{% for i in x.ingredients %}
+      <li><a class="ligne" href="/encyclopedie/objets/{{ i.id }}">{% if i.image %}<img class="vignette petite" src="{{ i.image }}" alt="" loading="lazy" width="32" height="32">{% endif %}<span class="nom">{{ i.nom }}</span><span class="qte">× {{ i.qte }}</span></a></li>
+    {% endfor %}</ul>
+  </article>
+{% endfor %}</div>
+{% include "encyclopedie/_pagination.html" %}
+{% else %}<p class="vide carte">Aucune recette. Essaie un autre nom ou retire un filtre.</p>{% endif %}
+{% endblock %}

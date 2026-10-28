@@ -1,0 +1,5 @@
+<li><a class="ligne" href="/encyclopedie/objets/{{ o.id }}">
+  {% if o.image %}<img class="vignette" src="{{ o.image }}" alt="" loading="lazy" width="48" height="48">{% else %}<span class="vignette" aria-hidden="true"></span>{% endif %}
+  <span><span class="nom">{{ o.nom }}</span>{% if o.type %}<br><span class="meta">{{ o.type }}</span>{% endif %}</span>
+  {% if o.niveau %}<span class="niv">Niv. {{ o.niveau }}</span>{% endif %}
+</a></li>

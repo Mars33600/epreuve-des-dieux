@@ -1,0 +1,13 @@
+{# Pagination : précédente, quelques numéros autour de la page courante, suivante. #}
+{% if page.pages > 1 %}
+<nav class="pagination" aria-label="Pages">
+  {% if page.page > 1 %}<a href="{{ lien_page(page.page - 1) }}" rel="prev" aria-label="Page précédente">‹</a>{% endif %}
+  {% set debut = [1, page.page - 2]|max %}{% set fin = [page.pages, page.page + 2]|min %}
+  {% if debut > 1 %}<a href="{{ lien_page(1) }}">1</a>{% if debut > 2 %}<span aria-hidden="true">…</span>{% endif %}{% endif %}
+  {% for n in range(debut, fin + 1) %}
+    {% if n == page.page %}<span aria-current="page">{{ n }}</span>{% else %}<a href="{{ lien_page(n) }}">{{ n }}</a>{% endif %}
+  {% endfor %}
+  {% if fin < page.pages %}{% if fin < page.pages - 1 %}<span aria-hidden="true">…</span>{% endif %}<a href="{{ lien_page(page.pages) }}">{{ page.pages }}</a>{% endif %}
+  {% if page.page < page.pages %}<a href="{{ lien_page(page.page + 1) }}" rel="next" aria-label="Page suivante">›</a>{% endif %}
+</nav>
+{% endif %}

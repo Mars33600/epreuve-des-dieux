@@ -1,0 +1,34 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% set titre = "Ressources" if rubrique == "ressources" else "Objets" %}
+{% block titre %}{{ titre }} · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte">
+  <span class="eyebrow">Encyclopédie</span>
+  <h1>{{ titre }}</h1>
+  <form class="filtres" action="/encyclopedie/{{ rubrique }}" method="get" role="search" data-filtres>
+    <label class="large">Nom <input type="search" name="q" value="{{ f.q or '' }}" placeholder="Rechercher" autocomplete="off" data-focus></label>
+    {% if rubrique == "objets" %}
+    <label>Catégorie
+      <select name="famille">
+        <option value="">Toutes</option>
+        {% for cle, libelle in familles.items() %}<option value="{{ cle }}"{% if f.famille == cle %} selected{% endif %}>{{ libelle }}</option>{% endfor %}
+      </select>
+    </label>
+    {% endif %}
+    <label>Type
+      <select name="type">
+        <option value="">Tous</option>
+        {% for cle, libelle, liste in types %}{% if rubrique == "objets" or cle == "ressources" %}
+        <optgroup label="{{ libelle }}">{% for id, nom in liste %}<option value="{{ id }}"{% if f.type_id == id %} selected{% endif %}>{{ nom }}</option>{% endfor %}</optgroup>
+        {% endif %}{% endfor %}
+      </select>
+    </label>
+    {% include "encyclopedie/_filtres_niveau_tri.html" %}
+    <div class="actions"><span class="compte">{{ page.total }} résultat{{ "s" if page.total > 1 }}</span><button class="bouton" type="submit">Filtrer</button></div>
+  </form>
+</section>
+{% if page.lignes %}
+<ul class="grille">{% for o in page.lignes %}{% include "encyclopedie/_ligne_objet.html" %}{% endfor %}</ul>
+{% include "encyclopedie/_pagination.html" %}
+{% else %}<p class="vide carte">Aucun résultat. Essaie un autre nom ou retire un filtre.</p>{% endif %}
+{% endblock %}

@@ -1,0 +1,5 @@
+<li><a class="ligne" href="/encyclopedie/monstres/{{ m.id }}">
+  <img class="vignette" src="{{ m.image }}" alt="" loading="lazy" width="48" height="48">
+  <span><span class="nom">{{ m.nom }}</span>{% if m.race %}<br><span class="meta">{{ m.race }}</span>{% endif %}</span>
+  {% if m.niveau_min %}<span class="niv">Niv. {{ m.niveau_min }}{% if m.niveau_max and m.niveau_max != m.niveau_min %}–{{ m.niveau_max }}{% endif %}</span>{% endif %}
+</a></li>
