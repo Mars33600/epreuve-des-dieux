@@ -1,0 +1,32 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}{{ q.nom }} · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte fiche-tete">
+  <div>
+    <span class="eyebrow">{{ q.categorie or "Quête" }}</span>
+    <h1>{{ q.nom }}</h1>
+    <div class="etiquettes">
+      {% if q.niveau_min %}<span class="etiquette or">Niveau {{ q.niveau_min }}{% if q.niveau_max != q.niveau_min %} à {{ q.niveau_max }}{% endif %}</span>{% endif %}
+      {% if q.zone %}<span class="etiquette">{{ q.zone }}</span>{% endif %}
+      <span class="etiquette">{{ q.repetition_lue }}</span>
+      {% if q.donjon %}<span class="etiquette">Donjon</span>{% endif %}
+      {% if q.groupe %}<span class="etiquette">En groupe</span>{% endif %}
+      {% if q.evenement %}<span class="etiquette">Évènement</span>{% endif %}
+    </div>
+    {% if q.depart_lu %}<p class="muted">Départ : {% for d in q.depart_lu %}<a href="/encyclopedie/pnj/{{ d.pnj_id }}">{{ d.pnj }}</a>{{ ", " if not loop.last }}{% endfor %}</p>{% endif %}
+    {% if q.conditions_lues %}<p class="note">Conditions : {{ q.conditions_lues }}</p>{% endif %}
+  </div>
+</section>
+{% for e in q.etapes %}
+<section class="carte" aria-labelledby="t-etape-{{ loop.index }}">
+  <span class="eyebrow">Étape {{ loop.index }}{% if e.niveau %} · niveau conseillé {{ e.niveau }}{% endif %}</span>
+  <h2 id="t-etape-{{ loop.index }}">{{ e.nom or "Étape" }}</h2>
+  {% if e.description %}<p class="muted">{{ e.description }}</p>{% endif %}
+  {% if e.objectifs_lus %}<ul class="effets">{% for o in e.objectifs_lus %}<li>{{ o }}</li>{% endfor %}</ul>{% endif %}
+  {% if e.recompenses_lues %}
+  <h3 class="eyebrow">Récompenses</h3>
+  <ul class="liste-simple">{% for x in e.recompenses_lues %}<li><a class="ligne" href="/encyclopedie/objets/{{ x.id }}"><span class="nom">{{ x.nom }}</span><span class="qte">× {{ x.qte }}</span></a></li>{% endfor %}</ul>
+  {% endif %}
+</section>
+{% else %}<p class="vide carte">Aucune étape connue.</p>{% endfor %}
+{% endblock %}

@@ -71,6 +71,7 @@ def _filtres(request: Request, **fixes) -> Filtres:
         "q": (p.get("q") or "").strip()[:80] or None,
         "famille": p.get("famille") if p.get("famille") in FAMILLES else None,
         "type_id": _entier(p.get("type")), "race_id": _entier(p.get("race")), "metier": _entier(p.get("metier")),
+        "classe_id": _entier(p.get("classe")),
         "niveau_min": _entier(p.get("nmin"), 1, 200), "niveau_max": _entier(p.get("nmax"), 1, 200),
         "tri": tri if tri in TRIS else "recents", "page": _entier(p.get("page"), 1, 10_000) or 1,
     }  # fmt: skip
@@ -179,6 +180,72 @@ def routeur_encyclopedie(depot, ency: DepotEncyclopedie, gabarits: Jinja2Templat
         page = await ency.chercher_recettes(f, await plafond(v))
         return rendre(request, "recettes.html", v, "recettes", f=f, page=page,
                       lien_page=lambda n: _lien_page(request, n))
+
+    # --- Sorts, panoplies, PNJ, quêtes ---------------------------------------------------------------------
+
+    @r.get("/encyclopedie/sorts", response_class=HTMLResponse)
+    async def sorts(request: Request):
+        v = await visiteur(request)
+        f = _filtres(request)
+        page = await ency.chercher_sorts(f, await plafond(v))
+        return rendre(request, "sorts.html", v, "sorts", f=f, page=page, classes=await ency.classes(),
+                      lien_page=lambda n: _lien_page(request, n))
+
+    @r.get("/encyclopedie/sorts/{ident}", response_class=HTMLResponse)
+    async def sort(request: Request, ident: int):
+        v = await visiteur(request)
+        fiche = await ency.sort(ident, await plafond(v))
+        if fiche is None:
+            raise HTTPException(404)
+        return rendre(request, "sort.html", v, "sorts", s=fiche)
+
+    @r.get("/encyclopedie/panoplies", response_class=HTMLResponse)
+    async def panoplies(request: Request):
+        v = await visiteur(request)
+        f = _filtres(request)
+        page = await ency.chercher_panoplies(f, await plafond(v))
+        return rendre(request, "panoplies.html", v, "panoplies", f=f, page=page,
+                      lien_page=lambda n: _lien_page(request, n))
+
+    @r.get("/encyclopedie/panoplies/{ident}", response_class=HTMLResponse)
+    async def panoplie(request: Request, ident: int):
+        v = await visiteur(request)
+        fiche = await ency.panoplie(ident, await plafond(v))
+        if fiche is None:
+            raise HTTPException(404)
+        return rendre(request, "panoplie.html", v, "panoplies", p=fiche)
+
+    @r.get("/encyclopedie/pnj", response_class=HTMLResponse)
+    async def liste_pnj(request: Request):
+        v = await visiteur(request)
+        f = _filtres(request)
+        page = await ency.chercher_pnj(f)
+        return rendre(request, "pnj_liste.html", v, "pnj", f=f, page=page,
+                      lien_page=lambda n: _lien_page(request, n))
+
+    @r.get("/encyclopedie/pnj/{ident}", response_class=HTMLResponse)
+    async def pnj(request: Request, ident: int):
+        v = await visiteur(request)
+        fiche = await ency.pnj(ident, await plafond(v))
+        if fiche is None:
+            raise HTTPException(404)
+        return rendre(request, "pnj.html", v, "pnj", n=fiche)
+
+    @r.get("/encyclopedie/quetes", response_class=HTMLResponse)
+    async def quetes(request: Request):
+        v = await visiteur(request)
+        f = _filtres(request)
+        page = await ency.chercher_quetes(f, await plafond(v))
+        return rendre(request, "quetes.html", v, "quetes", f=f, page=page,
+                      lien_page=lambda n: _lien_page(request, n))
+
+    @r.get("/encyclopedie/quetes/{ident}", response_class=HTMLResponse)
+    async def quete(request: Request, ident: int):
+        v = await visiteur(request)
+        fiche = await ency.quete(ident, await plafond(v))
+        if fiche is None:
+            raise HTTPException(404)
+        return rendre(request, "quete.html", v, "quetes", q=fiche)
 
     # --- Stuffs recommandés, par étage --------------------------------------------------------------------
 

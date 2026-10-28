@@ -11,7 +11,7 @@
   </header>
   {% if rubrique != "stuffs" %}
   <nav class="onglets" aria-label="Encyclopédie">
-    {% for cle, libelle in (("accueil", "Recherche"), ("objets", "Objets"), ("ressources", "Ressources"), ("monstres", "Monstres"), ("recettes", "Recettes")) %}
+    {% for cle, libelle in (("accueil", "Recherche"), ("objets", "Objets"), ("ressources", "Ressources"), ("monstres", "Monstres"), ("recettes", "Recettes"), ("panoplies", "Panoplies"), ("sorts", "Sorts"), ("pnj", "PNJ"), ("quetes", "Quêtes")) %}
     <a href="/encyclopedie{% if cle != 'accueil' %}/{{ cle }}{% endif %}"{% if rubrique == cle %} aria-current="page"{% endif %}>{{ libelle }}</a>
     {% endfor %}
   </nav>

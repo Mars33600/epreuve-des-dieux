@@ -59,7 +59,9 @@ def client(app, qui: int | None = GRIMPEUR) -> httpx.AsyncClient:
 
 PAGES = ["/encyclopedie", "/encyclopedie?q=larve", "/encyclopedie/objets", "/encyclopedie/ressources",
          "/encyclopedie/objets/44", "/encyclopedie/monstres", "/encyclopedie/monstres/31", "/encyclopedie/recettes",
-         "/stuffs"]
+         "/stuffs", "/encyclopedie/sorts", "/encyclopedie/sorts/12983", "/encyclopedie/panoplies",
+         "/encyclopedie/panoplies/2", "/encyclopedie/pnj", "/encyclopedie/pnj/740", "/encyclopedie/quetes",
+         "/encyclopedie/quetes/139"]
 
 
 async def test_connexion_requise_sur_chaque_page(site):
@@ -178,3 +180,21 @@ async def test_statiques_servis(site):
     async with client(site) as c:
         for f in ("encyclopedie.css", "encyclopedie.js"):
             assert (await c.get(f"/static/encyclopedie/{f}")).status_code == 200
+
+
+async def test_sorts_panoplies_pnj_quetes(site):
+    async with client(site) as c:
+        r = await c.get("/encyclopedie/sorts", params={"classe": "1"})
+        assert "Féca" in r.text and "api.dofusdb.fr/img/spells/" in r.text
+        r = await c.get("/encyclopedie/sorts/12983")
+        assert "Niveau 1" in r.text and " PA" in r.text
+        r = await c.get("/encyclopedie/panoplies/2")
+        assert "Bonus de panoplie" in r.text and "2 objets" in r.text
+        r = await c.get("/encyclopedie/pnj", params={"q": "haraq"})
+        assert "Haraquiri" in r.text and "1 résultat" in r.text
+        r = await c.get("/encyclopedie/pnj/740")
+        assert "De la viande pour la tablée d&#39;Allister" in r.text
+        r = await c.get("/encyclopedie/quetes/139")
+        assert "Niveau supérieur à 49" in r.text and "Apporter 10 ×" in r.text and "Haraquiri" in r.text
+        for p in ("sorts", "panoplies", "pnj", "quetes"):
+            assert (await c.get(f"/encyclopedie/{p}/999999")).status_code == 404

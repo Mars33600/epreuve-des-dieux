@@ -1,0 +1,29 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}Sorts · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte">
+  <span class="eyebrow">Encyclopédie</span>
+  <h1>Sorts</h1>
+  <form class="filtres" action="/encyclopedie/sorts" method="get" role="search" data-filtres>
+    <label class="large">Nom <input type="search" name="q" value="{{ f.q or '' }}" placeholder="Rechercher" autocomplete="off" data-focus></label>
+    <label>Classe
+      <select name="classe">
+        <option value="">Toutes</option>
+        {% for c in classes %}<option value="{{ c.id }}"{% if f.classe_id == c.id %} selected{% endif %}>{{ c.nom }}</option>{% endfor %}
+      </select>
+    </label>
+    {% include "encyclopedie/_filtres_niveau_tri.html" %}
+    <div class="actions"><span class="compte">{{ page.total }} résultat{{ "s" if page.total > 1 }}</span><button class="bouton" type="submit">Filtrer</button></div>
+  </form>
+</section>
+{% if page.lignes %}
+<ul class="grille">{% for s in page.lignes %}
+  <li><a class="ligne" href="/encyclopedie/sorts/{{ s.id }}">
+    {% if s.image %}<img class="vignette" src="{{ s.image }}" alt="" loading="lazy" width="48" height="48">{% else %}<span class="vignette" aria-hidden="true"></span>{% endif %}
+    <span><span class="nom">{{ s.nom }}</span>{% if s.classe %}<br><span class="meta">{{ s.classe }}</span>{% endif %}</span>
+    {% if s.niveau %}<span class="niv">Niv. {{ s.niveau }}</span>{% endif %}
+  </a></li>
+{% endfor %}</ul>
+{% include "encyclopedie/_pagination.html" %}
+{% else %}<p class="vide carte">Aucun résultat. Essaie un autre nom ou retire un filtre.</p>{% endif %}
+{% endblock %}

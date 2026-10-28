@@ -1,0 +1,19 @@
+{% extends "encyclopedie/_cadre.html" %}
+{% block titre %}Panoplies · Encyclopédie{% endblock %}
+{% block page %}
+<section class="carte">
+  <span class="eyebrow">Encyclopédie</span>
+  <h1>Panoplies</h1>
+  <form class="filtres" action="/encyclopedie/panoplies" method="get" role="search" data-filtres>
+    <label class="large">Nom <input type="search" name="q" value="{{ f.q or '' }}" placeholder="Rechercher" autocomplete="off" data-focus></label>
+    {% include "encyclopedie/_filtres_niveau_tri.html" %}
+    <div class="actions"><span class="compte">{{ page.total }} résultat{{ "s" if page.total > 1 }}</span><button class="bouton" type="submit">Filtrer</button></div>
+  </form>
+</section>
+{% if page.lignes %}
+<ul class="grille">{% for p in page.lignes %}
+  <li><a class="ligne" href="/encyclopedie/panoplies/{{ p.id }}"><span><span class="nom">{{ p.nom }}</span><br><span class="meta">{{ p.nb_objets }} objet{{ "s" if p.nb_objets > 1 }}</span></span>{% if p.niveau %}<span class="niv">Niv. {{ p.niveau }}</span>{% endif %}</a></li>
+{% endfor %}</ul>
+{% include "encyclopedie/_pagination.html" %}
+{% else %}<p class="vide carte">Aucun résultat. Essaie un autre nom ou retire un filtre.</p>{% endif %}
+{% endblock %}

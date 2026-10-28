@@ -34,12 +34,12 @@
       {% if o.effets_lus %}
       <ul class="effets">{% for e in o.effets_lus %}<li{% if e.negatif %} class="negatif"{% endif %}>{{ e.texte }}</li>{% endfor %}</ul>
       {% else %}<p class="vide">Aucun effet.</p>{% endif %}
-      {% if o.conditions %}<p class="note">Conditions : <span class="num">{{ o.conditions }}</span></p>{% endif %}
+      {% if o.conditions %}<p class="note">Conditions : {{ o.conditions_lues }}</p>{% endif %}
     </section>
     {% if o.panoplie %}
     <section class="carte" id="panoplie" aria-labelledby="t-panoplie">
       <span class="eyebrow">Panoplie</span>
-      <h2 id="t-panoplie">{{ o.panoplie.nom }}</h2>
+      <h2 id="t-panoplie"><a href="/encyclopedie/panoplies/{{ o.panoplie.id }}">{{ o.panoplie.nom }}</a></h2>
       <ul class="liste-simple">{% for x in o.panoplie.objets %}
         <li><a class="ligne" href="/encyclopedie/objets/{{ x.id }}">{% if x.image %}<img class="vignette petite" src="{{ x.image }}" alt="" loading="lazy" width="32" height="32">{% endif %}<span class="nom">{{ x.nom }}</span>{% if x.niveau %}<span class="niv">Niv. {{ x.niveau }}</span>{% endif %}</a></li>
       {% endfor %}</ul>
