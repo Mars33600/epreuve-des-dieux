@@ -53,7 +53,7 @@
     <section class="qd-sec"><h3>Étapes</h3>
       <ol class="steps">
       {%- for e in fiche.etapes %}
-        <li><b>{{ e.titre }}</b><div class="etape-texte">{{ e.texte_html|safe }}</div>
+        <li><b>{{ e.titre }}</b><div class="etape-texte">{{ e.texte_html|fiche_propre }}</div>
           {% if e.objectifs %}<ul class="objectifs">{% for o in e.objectifs %}<li>{{ o }}</li>{% endfor %}</ul>{% endif %}</li>
       {%- endfor %}
       </ol>
