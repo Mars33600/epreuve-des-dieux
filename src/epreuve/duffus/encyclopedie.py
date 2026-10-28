@@ -113,6 +113,101 @@ class Race(_Ligne):
     superraceid: int | None = None
 
 
+class Sort(_Ligne):
+    id: int
+    name: str | None
+    description: str | None = None
+    iconid: int | None = None
+    typeid: int | None = None
+
+
+class NiveauSort(_Ligne):
+    id: int
+    spellid: int
+    grade: int | None = None
+    apcost: int | None = None
+    minrange: int | None = None
+    range: int | None = None
+    criticalhitprobability: int | None = None
+    maxcastperturn: int | None = None
+    maxcastpertarget: int | None = None
+    mincastinterval: int | None = None
+    initialcooldown: int | None = None
+    globalcooldown: int | None = None
+    minplayerlevel: int | None = None
+    islinear: bool | None = None
+    castindiagonal: bool | None = None
+    needlos: bool | None = None
+    modifiablerange: bool | None = None
+    effects_json: list[dict[str, Any]] | None = None
+    criticaleffect_json: list[dict[str, Any]] | None = None
+
+
+class Classe(_Ligne):
+    id: int
+    shortname: str | None
+    description: str | None = None
+    gameplaydescription: str | None = None
+    breedspellsid_json: list[int] | None = None
+
+
+class Pnj(_Ligne):
+    id: int
+    name: str | None
+    gender: int | None = None
+    tooltipvisible: int | None = None
+
+
+class Quete(_Ligne):
+    id: int
+    name: str | None
+    category_id: int | None = None
+    type: int | None = None
+    level_min: int | None = None
+    level_max: int | None = None
+    repeat_type: int | None = None
+    repeat_limit: int | None = None
+    is_dungeon_quest: bool | int | None = None
+    is_party_quest: bool | int | None = None
+    is_event: bool | int | None = None
+    start_criterion: str | None = None
+    step_ids_json: list[int] | None = None
+    start_position_json: list[dict[str, Any]] | None = None
+
+
+class EtapeQuete(_Ligne):
+    id: int
+    quest_id: int
+    name: str | None = None
+    description: str | None = None
+    optimal_level: int | None = None
+    objective_ids_json: list[int] | None = None
+
+
+class ObjectifQuete(_Ligne):
+    id: int
+    step_id: int
+    type_id: int | None = None
+    type_class: str | None = None
+    text: str | None = None
+    parameter0: int | None = None
+    parameter1: int | None = None
+    parameter2: int | None = None
+    x: int | None = None
+    y: int | None = None
+
+
+class RecompenseQuete(_Ligne):
+    id: int
+    step_id: int
+    kamas_ratio: float | None = None
+    experience_ratio: float | None = None
+    items_reward_json: list[dict[str, Any]] | None = None
+    titles_reward_json: list[Any] | None = None
+    spells_reward_json: list[Any] | None = None
+    emotes_reward_json: list[Any] | None = None
+
+
 class Stuff(_Ligne):
     id: str
     name: str | None
@@ -190,6 +285,49 @@ def _stuff(s: Stuff) -> dict:
             "caracs_base": s.caracs_base or {}, "caracs_parcho": s.caracs_parcho or {}, "maj_le": s.updated_at}
 
 
+def _bool(v: Any) -> int:
+    return 1 if v and v not in ("0", "False") else 0
+
+
+def _sort(x: Sort) -> dict:
+    return {"id": x.id, "nom": x.name, "description": x.description or None, "icone": x.iconid, "type": x.typeid}
+
+
+def _niveau_sort(n: NiveauSort) -> dict:
+    return {"id": n.id, "sort": n.spellid, "grade": n.grade, "pa": n.apcost, "po_min": n.minrange, "po_max": n.range,
+            "cc": n.criticalhitprobability, "par_tour": n.maxcastperturn, "par_cible": n.maxcastpertarget,
+            "relance": n.mincastinterval, "relance_init": n.initialcooldown, "relance_globale": n.globalcooldown,
+            "niveau": n.minplayerlevel, "ligne": _bool(n.islinear), "diagonale": _bool(n.castindiagonal),
+            "ldv": _bool(n.needlos), "po_modifiable": _bool(n.modifiablerange),
+            "effets": effets_compacts(n.effects_json), "effets_cc": effets_compacts(n.criticaleffect_json)}
+
+
+def _quete(q: Quete) -> dict:
+    return {"id": q.id, "nom": q.name, "categorie": q.category_id, "type": q.type, "niveau_min": q.level_min,
+            "niveau_max": q.level_max, "repetition": q.repeat_type, "limite": q.repeat_limit,
+            "donjon": _bool(q.is_dungeon_quest), "groupe": _bool(q.is_party_quest), "evenement": _bool(q.is_event),
+            "condition": q.start_criterion or None, "etapes": q.step_ids_json or [],
+            "depart": [{"carte": d.get("mapId"), "pnj": d.get("npcId")} for d in q.start_position_json or []]}
+
+
+def _etape(e: EtapeQuete) -> dict:
+    return {"id": e.id, "quete": e.quest_id, "nom": e.name, "description": e.description or None,
+            "niveau": e.optimal_level, "objectifs": e.objective_ids_json or []}
+
+
+def _objectif(o: ObjectifQuete) -> dict:
+    return {"id": o.id, "etape": o.step_id, "type": o.type_id, "classe": (o.type_class or "").removeprefix(
+        "QuestObjective").removesuffix("Data") or None, "texte": o.text or None,
+            "p": [o.parameter0, o.parameter1, o.parameter2], "x": o.x, "y": o.y}
+
+
+def _recompense(r: RecompenseQuete) -> dict:
+    return {"id": r.id, "etape": r.step_id, "kamas": r.kamas_ratio, "xp": r.experience_ratio,
+            "objets": [[i["itemId"], i.get("quantity", 1)] for i in r.items_reward_json or [] if "itemId" in i],
+            "titres": r.titles_reward_json or [], "sorts": r.spells_reward_json or [],
+            "emotes": r.emotes_reward_json or []}
+
+
 @dataclass(frozen=True)
 class TableE2:
     nom: str  # nom du fichier écrit
@@ -199,6 +337,7 @@ class TableE2:
     cle: str = "id"  # clé de pagination côté Duffus
     cle_sortie: str = "id"  # clé de tri de l'extrait
     filtres: dict[str, str] = field(default_factory=dict)
+    taille: int = TAILLE_PAGE
 
 
 TABLES: dict[str, TableE2] = {t.nom: t for t in (
@@ -218,6 +357,17 @@ TABLES: dict[str, TableE2] = {t.nom: t for t in (
             lambda m: {"id": m.id, "nom": m.name, "race": m.race, "gfx": m.gfxid,
                        "grades": grades_compacts(m.grades_json), "drops": drops_compacts(m.drops_json)}),
     TableE2("objets", "items", Objet, _objet),
+    TableE2("sorts", "spells", Sort, _sort),
+    TableE2("niveaux_sorts", "spell_levels", NiveauSort, _niveau_sort, taille=500),
+    TableE2("classes", "breeds", Classe,
+            lambda c: {"id": c.id, "nom": c.shortname, "description": c.description, "role": c.gameplaydescription,
+                       "sorts": c.breedspellsid_json or []}),
+    TableE2("pnj", "npcs", Pnj,
+            lambda p: {"id": p.id, "nom": p.name, "genre": p.gender, "visible": _bool(p.tooltipvisible)}),
+    TableE2("quetes", "quests", Quete, _quete),
+    TableE2("etapes_quetes", "quest_steps", EtapeQuete, _etape),
+    TableE2("objectifs_quetes", "quest_objectives", ObjectifQuete, _objectif),
+    TableE2("recompenses_quetes", "quest_step_rewards", RecompenseQuete, _recompense),
     TableE2("stuffs", "builder", Stuff, _stuff,
             filtres={"user_id": f"eq.{COMPTE_STUFFS}", "is_public": "eq.true"}),
 )}  # fmt: skip
@@ -325,7 +475,7 @@ async def aspirer(client: ClientDuffus, dossier: Path, tables: tuple[str, ...] |
     dossier.mkdir(parents=True, exist_ok=True)
     rapport = RapportE2()
     for nom in noms:
-        r = await aspirer_table(client, TABLES[nom], dossier, refaire)
+        r = await aspirer_table(client, TABLES[nom], dossier, refaire, TABLES[nom].taille)
         if r is None:
             rapport.deja_completes.append(nom)
         else:
