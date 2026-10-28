@@ -98,3 +98,14 @@ def valeur_effet(de: int | float, a: int | float) -> int:
     if a == 0 or abs(de) >= abs(a):
         return int(de)
     return int(a)
+
+
+# Lignes de dégâts d'arme (table `_` du calculateur d'arme de Duffus) : effectId → (libellé, élément).
+EFFETS_ARME: dict[int, tuple[str, str]] = {
+    95: ("vol Neutre", "neutre"), 92: ("vol Terre", "terre"), 94: ("vol Feu", "feu"), 91: ("vol Eau", "eau"),
+    93: ("vol Air", "air"), 100: ("dommages Neutre", "neutre"), 97: ("dommages Terre", "terre"),
+    99: ("dommages Feu", "feu"), 96: ("dommages Eau", "eau"), 98: ("dommages Air", "air"),
+    108: ("soins Feu", "feu"), 2998: ("soins Eau", "eau"), 2999: ("soins Air", "air"), 3000: ("soins Terre", "terre"),
+    3001: ("soins Neutre", "neutre"), 2822: ("do. meilleur élément", "meilleur"),
+    2828: ("vol meilleur élément", "meilleur"), 5: ("Repousse", "poussee"),
+}  # fmt: skip

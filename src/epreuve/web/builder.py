@@ -31,6 +31,7 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Redirect
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field, ValidationError
 
+from epreuve.builder.arme import BUFFS_PUISSANCE, MODES, calculer_arme
 from epreuve.builder.calcul import Build, calculer, nettoyer, puissance_par_element
 from epreuve.builder.catalogue import Catalogue, catalogue_par_defaut
 from epreuve.builder.depot import BuildEnregistre, Contenu, DepotBuilds
@@ -260,21 +261,27 @@ class CorpsBuild(BaseModel):
     objets: dict[str, int | None] = Field(default_factory=dict, max_length=32)
     caracs_base: dict[str, int] = Field(default_factory=dict, max_length=12)
     caracs_parcho: dict[str, int] = Field(default_factory=dict, max_length=12)
+    mode_arme: str = "melee"
+    buff_arme: str = ""
 
     def build(self) -> Build:
         bornes = lambda d: {k: max(-10_000, min(10_000, v)) for k, v in d.items()}  # noqa: E731
         return Build(self.niveau, dict(self.objets), bornes(self.caracs_base), bornes(self.caracs_parcho))
 
 
-def resultat_json(build: Build, catalogue: Catalogue) -> dict:
+def resultat_json(build: Build, catalogue: Catalogue, mode_arme: str = "melee", buff_arme: str = "") -> dict:
     r = calculer(build, catalogue)
+    arme = catalogue.objet(build.objets.get("arme"))
+    calcul_arme = None
+    if arme is not None and arme.arme is not None and mode_arme in MODES and buff_arme in BUFFS_PUISSANCE:
+        calcul_arme = calculer_arme(arme.arme, r.totaux, mode_arme, buff_arme)
     objets = {e: o.resume() for e, oid in build.objets.items() if e in EMPLACEMENTS and (o := catalogue.objet(oid))}
     return {"objets": objets, "totaux": r.totaux, "affichage": r.affichage, "alertes": r.alertes,
             "panoplies": [{"id": p.id, "nom": p.nom, "nb": p.nb, "max": p.max_nb, "caracs": [list(c) for c in p.caracs]}
                           for p in r.panoplies],
             "points": {"total": r.points_total, "depenses": r.points_depenses,
                        "restants": r.points_total - r.points_depenses},
-            "puissance": puissance_par_element(r.totaux), "detail": r.detail}
+            "puissance": puissance_par_element(r.totaux), "detail": r.detail, "arme": calcul_arme}
 
 
 async def _lire_corps(request: Request, modele: type[BaseModel]) -> BaseModel | None:
@@ -291,7 +298,10 @@ async def api_calcul(request: Request) -> Response:
     corps = await _lire_corps(request, CorpsBuild)
     if corps is None:
         return _erreur(422, "Build illisible.")
-    return JSONResponse({"ok": True, **resultat_json(corps.build(), _services(request).catalogue())})
+    if corps.mode_arme not in MODES or corps.buff_arme not in BUFFS_PUISSANCE:
+        return _erreur(422, "Réglage d'arme inconnu.")
+    resultat = resultat_json(corps.build(), _services(request).catalogue(), corps.mode_arme, corps.buff_arme)
+    return JSONResponse({"ok": True, **resultat})
 
 
 # --- Enregistrement -------------------------------------------------------------------------------------------
