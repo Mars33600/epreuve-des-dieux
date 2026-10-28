@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{# Cadre commun des pages du builder : feuille dédiée, en-tête simple avec retour à la tour.
+   Aucun script ni style en ligne (CSP) ; les données de la page passent par un bloc JSON non exécuté. -#}
+{% block tete %}
+<link rel="stylesheet" href="/static/builder/builder.css">
+{% if v and v.csrf %}<meta name="csrf" content="{{ v.csrf }}">{% endif %}
+{% endblock %}
+{% block attributs_body %} class="page-builder"{% endblock %}
+{% block contenu %}
+<header class="b-entete">
+  <a class="b-retour" href="/">← La tour</a>
+  <p class="b-surtitre">Outils</p>
+  <h1><a href="/builder">Builder</a></h1>
+</header>
+<main class="b-page">
+{% block page %}{% endblock %}
+</main>
+{% endblock %}
