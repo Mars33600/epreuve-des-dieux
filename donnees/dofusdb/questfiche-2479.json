@@ -1,0 +1,460 @@
+{
+ "depart": [
+  {
+   "mapId": 226494979,
+   "npcId": 6843
+  },
+  {
+   "mapId": 226494979,
+   "npcId": 6922
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les Lances du Serment doivent être réunies, mais pour ce faire, il faut convaincre les Forgelances qui en sont les gardiens.",
+   "id": 3136,
+   "nom": "Par l'héritage qui vous lie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6842,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -77
+     ],
+     "texte": "Aller voir {npc,6842}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984644,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre Ofsi"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6802,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -84
+     ],
+     "texte": "Aller voir {npc,6802}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985345,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -84
+     ],
+     "texte": "Vaincre les envoyés de Corruption"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984653,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -84
+     ],
+     "texte": "Faire le point avec Gidrud et Thorbjarn"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      986729,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -77
+     ],
+     "texte": "Assister au débat dans la hutte du Ginth"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6839,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Aller voir {npc,6839}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4325,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Aller voir {npc,4325}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985347,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les Chevaliers d'Astrub"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984656,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire la note froissée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984657,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -10
+     ],
+     "texte": "Se rendre sur le lieu de rendez-vous"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4325,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -10
+     ],
+     "texte": "Aller voir {npc,4325}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985348,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer Godefon de Bouilloire dans le fortin abandonné"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984659,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Trouver les documents cachés dans la salle de l'ordre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984660,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Prévenir Fallanster de votre découverte"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984661,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      -10
+     ],
+     "texte": "Libérer le Chevalier du Soleil"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      7264,
+      1,
+      0
+     ],
+     "position": [
+      13,
+      -10
+     ],
+     "texte": "Vaincre x1 {monster,7264} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985349,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      -10
+     ],
+     "texte": "Discuter avec le Forgelance vaincu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984663,
+      0,
+      0
+     ],
+     "position": [
+      -37,
+      -55
+     ],
+     "texte": "Réquisitionner un navire dans le port de Bonta"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985350,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver Edgard Cœur de Dragon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985351,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -70
+     ],
+     "texte": "Interrompre le rituel des Possédés"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      7266,
+      1,
+      0
+     ],
+     "position": [
+      -32,
+      -70
+     ],
+     "texte": "Vaincre x1 {monster,7266} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6841,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6841}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984666,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver l'apothicaire albueran à Bonta"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6974,
+      27793,
+      1
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6974} : x1 {item,27793}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6974,
+      27794,
+      1
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6974} : x1 {item,27794}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6974,
+      27795,
+      1
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6974} : x1 {item,27795}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6974,
+      425,
+      10
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6974} : x10 {item,425}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6974,
+      428,
+      10
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6974} : x10 {item,428}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1004633,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Mettre Amayiro au courant des événements"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6841,
+      27796,
+      1
+     ],
+     "position": [
+      -38,
+      -56
+     ],
+     "texte": "Ramener à {npc,6841} : x1 {item,27796}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984683,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Retourner faire le point avec Nascherite"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       25182,
+       3
+      ],
+      [
+       22203,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2479,
+ "nom": "Par l'héritage qui vous lie",
+ "objets": [
+  [
+   425,
+   10
+  ],
+  [
+   428,
+   10
+  ]
+ ],
+ "prerequis": [
+  2478
+ ]
+}

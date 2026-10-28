@@ -1,0 +1,343 @@
+{
+ "depart": [
+  {
+   "mapId": 183768078,
+   "npcId": 43
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Maître des boutures file un mauvais coton... Cela risque d'empirer avec le temps. Simple a payé le prix fort pour s'être dressé contre lui. Allez-vous vous retirer du jeu et laisser Corruption agir à sa guise par le biais de Silvosse ? Ce n'est pas votre genre. Seul, vous n'avez aucune chance de vaincre le gardien de flovor, mais avec l'aide des autres Protecteurs... Tout devient possible.",
+   "id": 3145,
+   "nom": "Qui nous protège du Protecteur ?",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      37,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Aller voir {npc,37}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007750,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Ouvrir le livre des Protecteurs dans le temple de Xélor"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6354,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Aller voir {npc,6354}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007751,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Obtenir le sigil de Jiva"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007752,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      18
+     ],
+     "texte": "Obtenir le sigil de Silvosse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007753,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      -41
+     ],
+     "texte": "Obtenir le sigil d'Ulgrude"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007754,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      -34
+     ],
+     "texte": "Obtenir le sigil de Silouate"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007755,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -29
+     ],
+     "texte": "Obtenir le sigil de Rosal"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007756,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Obtenir le sigil de Sumens"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007757,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      19
+     ],
+     "texte": "Obtenir le sigil d'Hécate"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007758,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      -13
+     ],
+     "texte": "Obtenir le sigil de Pouchecot"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007759,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Obtenir le sigil de Raval"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007760,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -47
+     ],
+     "texte": "Obtenir le sigil de Brumaire"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007761,
+      0,
+      0
+     ],
+     "position": [
+      -22,
+      33
+     ],
+     "texte": "Obtenir le sigil de Djaul"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1053927,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Reforger le Ménologium dans l'Horloge de Xélor et parler à Maïmane"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007798,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      -24
+     ],
+     "texte": "Prier dans les salles des saisons du Bibliotemple pour bénir le bouclier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007765,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      1
+     ],
+     "texte": "Se rendre au temple d'Eniripsa et parler à Elya Wood"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007766,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      1
+     ],
+     "texte": "Entrer en possession du Dofus capable de guérir Silvosse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007810,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      1
+     ],
+     "texte": "Plonger le Dofus dans le chaudron"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007775,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -13
+     ],
+     "texte": "Retrouver Maïmane dans la clairière de la Forêt Sombre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007776,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -13
+     ],
+     "texte": "Affronter le Protecteur de flovor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007777,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -13
+     ],
+     "texte": "Constater l'état de Silvosse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007778,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -13
+     ],
+     "texte": "Être témoin de l'ultime choix de Simple"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2854,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -13
+     ],
+     "texte": "Aller voir {npc,2854}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2488,
+ "nom": "Qui nous protège du Protecteur ?",
+ "objets": [],
+ "prerequis": [
+  2487,
+  2423
+ ]
+}

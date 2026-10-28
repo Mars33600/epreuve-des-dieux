@@ -1,0 +1,178 @@
+{
+ "depart": [
+  {
+   "mapId": 207619080,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207621128,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207623176,
+   "npcId": 6167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Une prêtresse des Douze s'inquiète de la disparition de nombreux disciples ; les Ravageurs seraient responsables. Forment-ils l'avant-garde d'une horde démoniaque ? Draconiros semble suggérer qu'ils représentent une sérieuse menace pour le monde... et qu'ils pourraient anéantir tous vos efforts de préserver l'avenir.",
+   "id": 3068,
+   "nom": "Toute possession dépossède",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4806,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      3
+     ],
+     "texte": "Aller voir {npc,4806}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897274,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Enquêter sur les disparitions du côté des Bworks"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897275,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Enquêter sur les disparitions du côté des Gobelins"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897276,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Enquêter sur les disparitions du côté des Porkass"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4806,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      3
+     ],
+     "texte": "Retourner voir {npc,4806}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897277,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre sur Grobe pour rejoindre le port des Ravageurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897278,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver des traces des trois Porkass"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6658,
+      1,
+      0
+     ],
+     "position": [
+      39,
+      -54
+     ],
+     "texte": "Vaincre x1 {monster,6658} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897284,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir ce qu'est devenue la Bworkette"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897360,
+      0,
+      0
+     ],
+     "position": [
+      40,
+      -55
+     ],
+     "texte": "Tenter de raisonner Ver'Trüd et ses alliées"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897286,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Mettre la main sur le Gobelin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6219,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -53
+     ],
+     "texte": "Aller voir {npc,6219}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       25182,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2411,
+ "nom": "Toute possession dépossède",
+ "objets": [],
+ "prerequis": [
+  2406
+ ]
+}

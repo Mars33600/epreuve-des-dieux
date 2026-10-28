@@ -1,0 +1,235 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Pour vous montrer sa reconnaissance, Oynop a décidé d'améliorer votre Amulette Ementaire.",
+   "id": 1254,
+   "nom": "Le dernier maître des éléments",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1260,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1260}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      176,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,176}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous devez vous procurer une fiole à élément et une corde d'escalade avant d'entamer l'ascension des massifs de Cania.",
+   "id": 1255,
+   "nom": "Oh hisse, la saucisse",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      1081239,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -27
+     ],
+     "texte": "Découvrir la carte : Là où souffle la brise quadramentale"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885704,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -27
+     ],
+     "texte": "Récupérer de la brise quadramentale"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1338,
+      11845,
+      1
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Ramener à {npc,1338} : x1 {item,11845}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Apporter à Oynop les dernières ressources dont elle a besoin.",
+   "id": 1256,
+   "nom": "Larmes aux poings",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1338,
+      11323,
+      5
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Ramener à {npc,1338} : x5 {item,11323}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1338,
+      11324,
+      1
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Ramener à {npc,1338} : x1 {item,11324}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1338,
+      11327,
+      5
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Ramener à {npc,1338} : x5 {item,11327}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1338,
+      11328,
+      1
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Ramener à {npc,1338} : x1 {item,11328}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1338,
+      11325,
+      5
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Ramener à {npc,1338} : x5 {item,11325}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1338,
+      11326,
+      1
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Ramener à {npc,1338} : x1 {item,11326}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1338,
+      11563,
+      1
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Ramener à {npc,1338} : x1 {item,11563}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11792,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 676,
+ "nom": "Et l'emmental ?",
+ "objets": [
+  [
+   11323,
+   5
+  ],
+  [
+   11324,
+   1
+  ],
+  [
+   11327,
+   5
+  ],
+  [
+   11328,
+   1
+  ],
+  [
+   11325,
+   5
+  ],
+  [
+   11326,
+   1
+  ],
+  [
+   11563,
+   1
+  ]
+ ],
+ "prerequis": []
+}

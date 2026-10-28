@@ -1,0 +1,230 @@
+{
+ "depart": [
+  {
+   "mapId": 172492290,
+   "npcId": 3876
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez enquêter sur des individus qui pratiqueraient des rituels maléfiques dans le village de Gisgoul.",
+   "id": 2502,
+   "nom": "L'entrée des artistes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886791,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver des informations sur les gens qui fréquentent le village"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886792,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      20
+     ],
+     "texte": "Trouver le premier indice"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886793,
+      0,
+      0
+     ],
+     "position": [
+      -15,
+      18
+     ],
+     "texte": "Trouver le deuxième indice"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886794,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      18
+     ],
+     "texte": "Trouver le troisième indice"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886795,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Rapporter les morceaux de message à l'Inspecteur Gad Jayte"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886797,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver des indices permettant de suivre une piste vers le « passage »"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886798,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer de suivre la piste vers le « passage » au sud"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886799,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer de suivre la piste vers le « passage » à l'est"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3878,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3878}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726672,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      21
+     ],
+     "texte": "Découvrir la carte : Entrée du passage"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726673,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      15
+     ],
+     "texte": "Découvrir la carte : Sortie du passage"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726674,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Découvrir la carte : Porte d'entrée de la Tour"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3876,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Aller voir {npc,3876}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725597,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver où se cachent les sectateurs à l'intérieur de la Tour de Gisgoul."
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3879,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3879}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886800,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Arrêter les sectateurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3876,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Aller voir {npc,3876}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       13737,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1862,
+ "nom": "L'entrée des artistes",
+ "objets": [],
+ "prerequis": []
+}

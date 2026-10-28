@@ -1,0 +1,64 @@
+{
+ "depart": [
+  {
+   "mapId": 62129672,
+   "npcId": 1394
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le mont est la dernière étape à franchir. Qu'y trouverez-vous ?",
+   "id": 1277,
+   "nom": "Au sommet, la gloire ?",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56282,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Une exploration sucrée."
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2864,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,2864} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56280,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Sortir de la ruche."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 626,
+ "nom": "Le pic qui glace",
+ "objets": [],
+ "prerequis": []
+}

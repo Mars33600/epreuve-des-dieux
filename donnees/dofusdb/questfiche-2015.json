@@ -1,0 +1,122 @@
+{
+ "depart": [
+  {
+   "mapId": 194777094,
+   "npcId": 4505
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Lamoria a mauvaise mine : depuis que des Gobelins des glaces rôdent dans les environs, elle ne dort plus la nuit. Aidez-la à retrouver le sommeil en patrouillant dans le royaume des Martegel.",
+   "id": 2665,
+   "nom": "Lâches de glace",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761711,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Patrouiller dans les mines des Nimbos"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761712,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Patrouiller près de la vieille forge"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759569,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Patrouiller près de la piste d'envol"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759570,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Patrouiller près de l'enclos gelé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759575,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Patrouiller près de la salle du marteau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759574,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Patrouiller près de la porte de Ferfroid"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759573,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Patrouiller près du Bateau ivre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4505,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -68
+     ],
+     "texte": "Retourner voir {npc,4505}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19971,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2015,
+ "nom": "Lâches de glace",
+ "objets": [],
+ "prerequis": [
+  2010
+ ]
+}

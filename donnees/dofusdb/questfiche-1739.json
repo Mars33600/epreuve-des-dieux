@@ -1,0 +1,78 @@
+{
+ "depart": [
+  {
+   "mapId": 168822786,
+   "npcId": 3269
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez combattre des Trithons en compagnie du lieutenant Trenne afin de lui montrer leurs tactiques.",
+   "id": 2376,
+   "nom": "Stratégie en Triton Réel",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886838,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Vaincre un duo de Trithons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886839,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Vaincre un duo de Trithons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886840,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Vaincre un quatuor de Trithons"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17975,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1739,
+ "nom": "Stratégie en Trithon Réel",
+ "objets": [],
+ "prerequis": [
+  1738
+ ]
+}

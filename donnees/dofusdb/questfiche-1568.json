@@ -1,0 +1,275 @@
+{
+ "depart": [
+  {
+   "mapId": 140509187,
+   "npcId": 2634
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Jangakuq a besoin de votre aide pour apaiser les souffrances de Kidibom.",
+   "id": 2188,
+   "nom": "Qui dit baume",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886016,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer 1 Déchet toxique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886017,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer 1 Déchet toxique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886018,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer 1 Déchet toxique"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2634,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -57
+     ],
+     "texte": "Aller voir {npc,2634}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886019,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -58
+     ],
+     "texte": "Fabriquer une paire de Couteaux sacrés et l'apporter à Otto Ktone"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886020,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -57
+     ],
+     "texte": "Invoquer l'esprit Mansot"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2637,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -57
+     ],
+     "texte": "Aller voir {npc,2637}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886023,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -78
+     ],
+     "texte": "Invoquer l'esprit Givrefoux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2638,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -78
+     ],
+     "texte": "Aller voir {npc,2638}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886024,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -68
+     ],
+     "texte": "Invoquer l'esprit Sylvain"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2639,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -68
+     ],
+     "texte": "Aller voir {npc,2639}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886025,
+      0,
+      0
+     ],
+     "position": [
+      -71,
+      -75
+     ],
+     "texte": "Invoquer l'esprit Glourson"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2640,
+      0,
+      0
+     ],
+     "position": [
+      -71,
+      -75
+     ],
+     "texte": "Aller voir {npc,2640}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2634,
+      15660,
+      1
+     ],
+     "position": [
+      -84,
+      -57
+     ],
+     "texte": "Ramener à {npc,2634} : x1 {item,15660}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3828,
+      1,
+      0
+     ],
+     "position": [
+      -85,
+      -59
+     ],
+     "texte": "Vaincre x1 {monster,3828} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      460939,
+      0,
+      0
+     ],
+     "position": [
+      -85,
+      -59
+     ],
+     "texte": "Découvrir la carte : Ventre de la Baleine - Sortie"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2635,
+      0,
+      0
+     ],
+     "position": [
+      -85,
+      -59
+     ],
+     "texte": "Aller voir {npc,2635}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2634,
+      15669,
+      1
+     ],
+     "position": [
+      -84,
+      -57
+     ],
+     "texte": "Ramener à {npc,2634} : x1 {item,15669}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15688,
+       2
+      ],
+      [
+       15689,
+       2
+      ],
+      [
+       15691,
+       1
+      ],
+      [
+       11196,
+       6
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1568,
+ "nom": "Qui dit baume",
+ "objets": [
+  [
+   15660,
+   1
+  ]
+ ],
+ "prerequis": []
+}

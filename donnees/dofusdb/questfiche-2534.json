@@ -1,0 +1,73 @@
+{
+ "depart": [
+  {
+   "mapId": 234751491,
+   "npcId": 7640
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous pourriez tenter de négocier avec la horde de Rhoarims qui menacent l'avant-poste, mais quelque chose vous dit que ça ne mènerait à rien. De toute façon, vous préférez parler avec les poings, ou avec la première arme qui vous tombe sous la main.\nUn conseil tout de même : vos chances de survie seront augmentées de manière significative si vous évitez de vous la jouer en solo.",
+   "id": 3215,
+   "nom": "Quarante rugissants",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1140147,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      17
+     ],
+     "texte": "Vaincre les vagues de Rhoarims qui attaquent l'avant-poste"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7640,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      17
+     ],
+     "texte": "Retourner voir {npc,7640}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31629,
+       2
+      ],
+      [
+       31630,
+       2
+      ],
+      [
+       31624,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2534,
+ "nom": "Quarante rugissants",
+ "objets": [],
+ "prerequis": [
+  2515
+ ]
+}

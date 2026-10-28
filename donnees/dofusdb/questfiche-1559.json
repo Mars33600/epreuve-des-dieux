@@ -1,0 +1,133 @@
+{
+ "depart": [
+  {
+   "mapId": 137363456,
+   "npcId": 2571
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'ombre de plusieurs Douziens a mystérieusement disparu. Comme ce phénomène s'étend aux Voyageurs Dimensionnels, Volron Dumhaz vous a demandé d'enquêter.",
+   "id": 2172,
+   "nom": "Courir après des ombres",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885312,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des informations au bazar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885313,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Déambuler dans les Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2571,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2571}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452756,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Découvrir la carte : Entrée de la Dimension Obscure"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885314,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Créer un Déguisement d'Obscurantus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885315,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les voleurs d'ombre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885316,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      7
+     ],
+     "texte": "Écouter les voleurs d'ombre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885317,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      7
+     ],
+     "texte": "Interrompre le rituel"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15444,
+       1
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1559,
+ "nom": "Courir après des ombres",
+ "objets": [],
+ "prerequis": []
+}

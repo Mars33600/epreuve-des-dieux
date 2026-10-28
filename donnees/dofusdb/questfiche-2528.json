@@ -1,0 +1,407 @@
+{
+ "depart": [
+  {
+   "mapId": 234619137,
+   "npcId": 7768
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le chasseur-mangeur semble avoir traîné ses guêtres dans la dimension. Du moins suffisamment longtemps pour vous concocter des plats saisonniers réputés comme succulents.",
+   "id": 3206,
+   "nom": "Le gourmet solitaire",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31822,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31822}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31829,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31829}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31869,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31869}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31830,
+      5
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 5 {item,31830}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31828,
+      2
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 2 {item,31828}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      1730,
+      10
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 10 {item,1730}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31825,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31825}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31823,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31823}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31820,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31820}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31826,
+      5
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 5 {item,31826}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31827,
+      2
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 2 {item,31827}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      1977,
+      10
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 10 {item,1977}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31831,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31831}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31834,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31834}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31821,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31821}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31832,
+      5
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 5 {item,31832}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      31819,
+      1
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 1 {item,31819}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7768,
+      1974,
+      10
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Montrer à {npc,7768} : 10 {item,1974}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      31870,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Fabriquer 1 {item,31870} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      31871,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Fabriquer 1 {item,31871} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      31872,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Fabriquer 1 {item,31872} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1140913,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Goûter le plat que vous avez cuisiné"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7768,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      13
+     ],
+     "texte": "Aller voir {npc,7768}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       20
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2528,
+ "nom": "Le gourmet solitaire",
+ "objets": [
+  [
+   31822,
+   2
+  ],
+  [
+   31829,
+   2
+  ],
+  [
+   31869,
+   2
+  ],
+  [
+   31830,
+   10
+  ],
+  [
+   31828,
+   4
+  ],
+  [
+   1730,
+   20
+  ],
+  [
+   31825,
+   2
+  ],
+  [
+   31823,
+   2
+  ],
+  [
+   31820,
+   2
+  ],
+  [
+   31826,
+   10
+  ],
+  [
+   31827,
+   4
+  ],
+  [
+   1977,
+   20
+  ],
+  [
+   31831,
+   2
+  ],
+  [
+   31834,
+   2
+  ],
+  [
+   31821,
+   2
+  ],
+  [
+   31832,
+   10
+  ],
+  [
+   31819,
+   2
+  ],
+  [
+   1974,
+   20
+  ]
+ ],
+ "prerequis": [
+  2515
+ ]
+}

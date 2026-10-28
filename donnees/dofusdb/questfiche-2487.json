@@ -1,0 +1,334 @@
+{
+ "depart": [
+  {
+   "mapId": 95684097,
+   "npcId": 2014
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les troubles qui agitent les frondaisons de plusieurs forêts du Monde des Douze ont-ils fini par menacer la tranquillité des champs d'Amakna ? C'est ce que craint Emmie Nansgriz, la plus éminente conseillère du roi Allister. Après votre petite escapade avec Cornelia, que diriez-vous d'une promenade champêtre ?",
+   "id": 3144,
+   "nom": "Cultures et turpitudes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      43,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      9
+     ],
+     "texte": "Aller voir {npc,43}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007335,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rejoindre Simple dans les champs des Ingalsse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1012425,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      5
+     ],
+     "texte": "Aider Simple à se défendre contre les esprits du champ de citwouilles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1012457,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      6
+     ],
+     "texte": "Escorter Simple jusqu'au champ d'orge"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007338,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      6
+     ],
+     "texte": "Protéger Simple le temps qu'il bénisse le champ"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007339,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      14
+     ],
+     "texte": "Accompagner Simple jusqu'au potager"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007340,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      14
+     ],
+     "texte": "Laisser Simple bénir le potager"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1013005,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver la propriétaire du potager"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007368,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre sur Grobe pour rencontrer le jardinier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1014501,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Fouiller la cabane de jardinage"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5895,
+      28437,
+      20
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Ramener à {npc,5895} : x20 {item,28437}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5895,
+      28438,
+      20
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Ramener à {npc,5895} : x20 {item,28438}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5895,
+      28439,
+      20
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Ramener à {npc,5895} : x20 {item,28439}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5895,
+      28440,
+      20
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Ramener à {npc,5895} : x20 {item,28440}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5895,
+      28441,
+      20
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Ramener à {npc,5895} : x20 {item,28441}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5895,
+      28442,
+      20
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Ramener à {npc,5895} : x20 {item,28442}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007730,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Récupérer du terreau grobelin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1015540,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      5
+     ],
+     "texte": "Répandre le terreau dans le premier champ avec l'aide de Simple"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007732,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      5
+     ],
+     "texte": "Rendre visible la créature qui hante le champ de citwouilles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007736,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      5
+     ],
+     "texte": "Parlementer avec le gnome des jardins"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007737,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      5
+     ],
+     "texte": "Vaincre le gnome des jardins"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2854,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      5
+     ],
+     "texte": "Aller voir {npc,2854}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1016407,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      5
+     ],
+     "texte": "Subir le jugement de Silvosse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007739,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      9
+     ],
+     "texte": "Prévenir Epuop Tik"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2487,
+ "nom": "Cultures et turpitudes",
+ "objets": [],
+ "prerequis": [
+  2486,
+  2408
+ ]
+}

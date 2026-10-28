@@ -1,0 +1,176 @@
+{
+ "depart": [
+  {
+   "mapId": 186385920,
+   "npcId": 4246
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Jean-Pierre Pekno est blessé et affamé. Il a besoin de votre aide pour se rétablir.",
+   "id": 2586,
+   "nom": "Krobe en bourg",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4246,
+      11503,
+      1
+     ],
+     "position": [
+      -47,
+      -82
+     ],
+     "texte": "Ramener à {npc,4246} : x1 {item,11503}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4211,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4211}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741260,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -58
+     ],
+     "texte": "Chercher des informations sur les Krobes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4211,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4211}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4215,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4215}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4211,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4211}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741261,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les Krobes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741262,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les Krobes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741263,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les Krobes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741264,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -84
+     ],
+     "texte": "Vaincre les Nékrobes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4211,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4211}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19406,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1947,
+ "nom": "Krobe en bourg",
+ "objets": [
+  [
+   11503,
+   1
+  ]
+ ],
+ "prerequis": [
+  1942,
+  1945,
+  1946
+ ]
+}

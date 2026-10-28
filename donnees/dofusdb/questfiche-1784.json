@@ -1,0 +1,413 @@
+{
+ "depart": [
+  {
+   "mapId": 88604676,
+   "npcId": 914
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Capturer l'âme d'Ombre n'est pas une mince affaire : pour réussir, vous allez devoir apprendre un nouveau sortilège.",
+   "id": 2421,
+   "nom": "Les coûts du sort",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5561,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Aller voir {npc,5561}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699789,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le parchemin dans la bibliothèque de Pandala"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5561,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Retourner voir {npc,5561}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      1159,
+      1,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Vaincre x1 {monster,1159} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5561,
+      18243,
+      1
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Ramener à {npc,5561} : x1 {item,18243}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699669,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher un ermite koalak dans les marécages sans fond"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699805,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le boomerang de Bivoak"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4632,
+      1,
+      0
+     ],
+     "position": [
+      -10,
+      3
+     ],
+     "texte": "Vaincre x1 {monster,4632} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3436,
+      18244,
+      1
+     ],
+     "position": [
+      -8,
+      5
+     ],
+     "texte": "Ramener à {npc,3436} : x1 {item,18244}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3439,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      8
+     ],
+     "texte": "Aller voir {npc,3439}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699794,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      8
+     ],
+     "texte": "Cueillir 4 racines marécageuses et les montrer à Yado"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699717,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      8
+     ],
+     "texte": "Plonger les racines dans la marmite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699779,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      8
+     ],
+     "texte": "Partager la soupe avec Bivoak et Maître Yado"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3439,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      8
+     ],
+     "texte": "Aller voir {npc,3439}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699751,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      10
+     ],
+     "texte": "Cueillir la première fleur de kaliptus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699760,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      13
+     ],
+     "texte": "Cueillir la deuxième fleur de kaliptus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      845680,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Donner les deux fleurs de kaliptus séculaire à Surivitna"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5561,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Aller voir {npc,5561}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      845299,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Découvrir la carte : Statue du Réceptacle des Dofus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699671,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Respirer les fumées de l'encens ancestral"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699821,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Méditer devant la statue en se concentrant sur les Dofus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699703,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Se concentrer sur les quatre lumières émises par la statue"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699658,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Tenter de communiquer avec les élémentaires"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699677,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Demander conseil à Rimanda sur l'île de Rok"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3046,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Aller voir {npc,3046}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3080,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -21
+     ],
+     "texte": "Aller voir {npc,3080}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699802,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -21
+     ],
+     "texte": "Récupérer les orbes avalés par Lebagag"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699777,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Transformer les orbes élémentaires et les jeter dans les flammes"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4635,
+      1,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Vaincre x1 {monster,4635} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3428,
+      18254,
+      1
+     ],
+     "position": [
+      38,
+      -21
+     ],
+     "texte": "Ramener à {npc,3428} : x1 {item,18254}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       9281,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1784,
+ "nom": "Les coûts du sort",
+ "objets": [],
+ "prerequis": [
+  1782
+ ]
+}

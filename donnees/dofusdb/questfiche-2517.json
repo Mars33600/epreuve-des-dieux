@@ -1,0 +1,248 @@
+{
+ "depart": [
+  {
+   "mapId": 234750978,
+   "npcId": 7641
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Après les Kabombz, c'est au tour des zarbivores de répondre à toutes vos questions ! Bon, hormis des « brâââ » et des « gnoof ? », la communication risque d'être limitée. Marlyze devrait avoir un peu plus de conversation.",
+   "id": 3198,
+   "nom": "La proie des vérités",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7657,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Aller voir {npc,7657}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1131088,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Étudier le comportement des différentes espèces de zarbivores"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1131140,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer à chercher la cause du changement chez les zarbivores"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1131141,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à l'esprit animal"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1131154,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Aller voir le Nimbos à l'avant-poste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1133465,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se procurer une pomme bleue"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1134503,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Montrer le trognon de pomme à l'esprit animal en espérant qu'il pourra en faire quelque chose"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1134511,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      11
+     ],
+     "texte": "Prier pour qu'un miracle se produise"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1134640,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Pousser le Vénérable à croquer dans la pomme bleue"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6743,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Aller voir {npc,6743}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1131162,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Assister à la discussion entre Crâ et l'esprit animal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7718,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Aller voir {npc,7718}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1134911,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Se soumettre à l'ordalie demandée par le dieu Kroketh"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6743,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Aller voir {npc,6743}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7657,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Aller voir {npc,7657}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7641,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Retourner voir {npc,7641}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31673,
+       1
+      ],
+      [
+       31674,
+       1
+      ],
+      [
+       31675,
+       1
+      ],
+      [
+       31676,
+       1
+      ],
+      [
+       31677,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2517,
+ "nom": "La proie des vérités",
+ "objets": [],
+ "prerequis": [
+  2516
+ ]
+}

@@ -1,0 +1,166 @@
+{
+ "depart": [
+  {
+   "mapId": 168822786,
+   "npcId": 3268
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il est important d'en apprendre plus sur le conflit entre les Trithons et les serviteurs de l'indicible.",
+   "id": 2378,
+   "nom": "Risquer un œil",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886835,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Poulpallas dans la faille des Trithons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886836,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      29
+     ],
+     "texte": "Apporter 5 Échantillons d'algues à Poulpallas"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3286,
+      17945,
+      1
+     ],
+     "position": [
+      20,
+      29
+     ],
+     "texte": "Ramener à {npc,3286} : x1 {item,17945}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3287,
+      17950,
+      1
+     ],
+     "position": [
+      20,
+      31
+     ],
+     "texte": "Ramener à {npc,3287} : x1 {item,17950}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3268,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Aller voir {npc,3268}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3288,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Aller voir {npc,3288}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      644083,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      28
+     ],
+     "texte": "Découvrir la carte : Chapelle d'Ansôh"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3289,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      28
+     ],
+     "texte": "Aller voir {npc,3289}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886837,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      28
+     ],
+     "texte": "Vaincre le Chapelain d'Ansôh pour lui dérober l'œil"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3268,
+      18097,
+      1
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Montrer à {npc,3268} : 1 {item,18097}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17977,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1741,
+ "nom": "Risquer un œil",
+ "objets": [],
+ "prerequis": [
+  1740
+ ]
+}

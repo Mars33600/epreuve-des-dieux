@@ -1,0 +1,324 @@
+{
+ "depart": [
+  {
+   "mapId": 168559624,
+   "npcId": 3350
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez l'occasion d'approcher de nouveau l'Astre Noir pour tenter de délivrer Markaris.",
+   "id": 2403,
+   "nom": "L'effet Paula Rice",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      649696,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      31
+     ],
+     "texte": "Découvrir la carte : Agent de l'Astre Noir égaré"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3351,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      31
+     ],
+     "texte": "Aller voir {npc,3351}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886814,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      26
+     ],
+     "texte": "Emmener la plongeuse jusqu'à l'entrée du temple de Koutoulou"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3351,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      26
+     ],
+     "texte": "Aller voir {npc,3351}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3345,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      21
+     ],
+     "texte": "Aller voir {npc,3345}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      649681,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      12
+     ],
+     "texte": "Découvrir la carte : Plage de la Tortue"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3352,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      12
+     ],
+     "texte": "Aller voir {npc,3352}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3350,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      30
+     ],
+     "texte": "Aller voir {npc,3350}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      652190,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      29
+     ],
+     "texte": "Découvrir la carte : Zone de nage du Li-Fo"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3305,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      29
+     ],
+     "texte": "Aller voir {npc,3305}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      18113,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,18113} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886815,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      26
+     ],
+     "texte": "Appâter une mite de Koutoulou"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3305,
+      18114,
+      1
+     ],
+     "position": [
+      25,
+      29
+     ],
+     "texte": "Ramener à {npc,3305} : x1 {item,18114}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3350,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      30
+     ],
+     "texte": "Aller voir {npc,3350}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3353,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3353}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886816,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      8
+     ],
+     "texte": "Se protéger contre les gardes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3354,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      8
+     ],
+     "texte": "Aller voir {npc,3354}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886817,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Sauver Markaris des griffes de Paula Rice"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3291,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      6
+     ],
+     "texte": "Aller voir {npc,3291}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3350,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      30
+     ],
+     "texte": "Aller voir {npc,3350}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3305,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      29
+     ],
+     "texte": "Aller voir {npc,3305}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17985,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1766,
+ "nom": "L'effet Paula Rice",
+ "objets": [
+  [
+   17983,
+   1
+  ],
+  [
+   17984,
+   1
+  ],
+  [
+   17986,
+   1
+  ],
+  [
+   17981,
+   1
+  ],
+  [
+   17974,
+   1
+  ]
+ ],
+ "prerequis": [
+  1757
+ ]
+}

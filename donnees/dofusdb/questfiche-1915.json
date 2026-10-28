@@ -1,0 +1,192 @@
+{
+ "depart": [
+  {
+   "mapId": 183501836,
+   "npcId": 4086
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le petit jeu d'Hyrkul n'a que trop duré : le moment est venu de le renvoyer dans sa tombe, cette fois-ci définitivement. Pour cela, vous devez parler à une nécromancienne d'exception.",
+   "id": 2553,
+   "nom": "Il est temps de mourir",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732751,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Agonie en Externam"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732754,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Entrer dans le transporteur de Sylargh"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3409,
+      1,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Vaincre x1 {monster,3409} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732755,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Détruire l'automate et son phylactère"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4101,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Aller voir {npc,4101}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732757,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer de la terre provenant de la tombe d'Hyrkul"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733786,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une vieille étoffe de Fauchalak"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732774,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Localiser l'emplacement du phylactère d'Hyrkul"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      732775,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      38
+     ],
+     "texte": "Découvrir la carte : Caverne du Tendancieux"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4974,
+      1,
+      0
+     ],
+     "position": [
+      -33,
+      38
+     ],
+     "texte": "Vaincre x1 {monster,4974} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4076,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      15
+     ],
+     "texte": "Aller voir {npc,4076}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4054,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Retourner voir {npc,4054}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      736153,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Prendre le Dofus Ivoire"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       13983,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1915,
+ "nom": "Il est temps de mourir",
+ "objets": [],
+ "prerequis": [
+  1909
+ ]
+}

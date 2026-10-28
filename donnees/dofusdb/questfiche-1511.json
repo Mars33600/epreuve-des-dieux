@@ -1,0 +1,160 @@
+{
+ "depart": [
+  {
+   "mapId": 131862020,
+   "npcId": 2430
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Démasqué, René a préféré prendre des Enutrofors en otages que de se rendre. Le gardien Paspartou vous a demandé un coup de main pour arranger la situation.",
+   "id": 2136,
+   "nom": "Prise d'otages",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885095,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un démineur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2424,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2424}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2431,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2431}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1150151,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre les Enutrofors voulant lyncher l'Orpailleur clandestin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2424,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2424}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2430,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2430}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453521,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Découvrir la carte : Salle des otages"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2429,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2429}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3714,
+      1,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Vaincre x1 {monster,3714} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2430,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2430}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15178,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1511,
+ "nom": "Prise d'otages",
+ "objets": [],
+ "prerequis": [
+  1510
+ ]
+}

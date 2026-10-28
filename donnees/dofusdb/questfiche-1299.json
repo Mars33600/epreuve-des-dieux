@@ -1,0 +1,38 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous devez trouver qui serait intéressé par une Bouteille de Cocalane dans les environs du château de Harebourg.",
+   "id": 1912,
+   "nom": "Passer du Cocalane",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885974,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver à qui remettre la Bouteille de Cocalane"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18652,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1299,
+ "nom": "Passer du Cocalane",
+ "objets": [],
+ "prerequis": []
+}

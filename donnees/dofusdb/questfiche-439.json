@@ -1,0 +1,4681 @@
+{
+ "depart": [
+  {
+   "mapId": 88604676,
+   "npcId": 914
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 863,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      928,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,928} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      147,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,147} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      799,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,799} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      58,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,58} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      457,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,457} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      7197,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,7197} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      797,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,797} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      792,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,792} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      113,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,113} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      4860,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,4860} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      3996,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,3996} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      85,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,85} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      382,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,382} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1184,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1184} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1185,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1185} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1186,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1186} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1187,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1187} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      939,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,939} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      940,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,940} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      121,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,121} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 864,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      107,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,107} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      6218,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,6218} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      669,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,669} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      6326,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,6326} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      86,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,86} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      289,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,289} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1188,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1188} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1027,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1027} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1051,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1051} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      232,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,232} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      180,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,180} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      226,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,226} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      670,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,670} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      780,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,780} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      173,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,173} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      6212,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,6212} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1087,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1087} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1072,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1072} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1085,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1085} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1086,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1086} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 865,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      430,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,430} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      6249,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,6249} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      478,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,478} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      943,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,943} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      827,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,827} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1071,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1071} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      854,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,854} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      3618,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,3618} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      257,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,257} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1159,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1159} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      1045,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,1045} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 866,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2354,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2354} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2336,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2336} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2310,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2310} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2315,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2315} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2316,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2316} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2357,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2357} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2312,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2312} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2341,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2341} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2342,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2342} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2344,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2344} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2345,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2345} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2347,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2347} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2327,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2327} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2574,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2574} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2343,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2343} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2355,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2355} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2356,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2356} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2323,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2323} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2348,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2348} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2393,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2393} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 867,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2313,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2313} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2352,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2352} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2487,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2487} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2522,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2522} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2332,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2332} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2317,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2317} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2520,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2520} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2371,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2371} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2331,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2331} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2286,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2286} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2402,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2402} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2318,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2318} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2293,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2293} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2294,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2294} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2358,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2358} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2314,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2314} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2494,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2494} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2541,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2541} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2292,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2292} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2301,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2301} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 868,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2353,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2353} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2427,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2427} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2431,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2431} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2302,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2302} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2399,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2399} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2400,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2400} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2396,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2396} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2401,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2401} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2430,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2430} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2334,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2334} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2549,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2549} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2349,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2349} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2325,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2325} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2298,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2298} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2304,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2304} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2397,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2397} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2411,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2411} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2324,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2324} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2378,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2378} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2295,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2295} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 869,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2548,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2548} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2437,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2437} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2346,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2346} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2338,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2338} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2340,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2340} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2272,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2272} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2297,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2297} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2532,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2532} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2413,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2413} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2484,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2484} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2333,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2333} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2533,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2533} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2542,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2542} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2296,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2296} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2418,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2418} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2403,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2403} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2440,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2440} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2277,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2277} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2335,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2335} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2417,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2417} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 870,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2424,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2424} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2425,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2425} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2426,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2426} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2326,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2326} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2529,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2529} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2329,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2329} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2486,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2486} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2379,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2379} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2376,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2376} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2305,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2305} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2321,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2321} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2436,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2436} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2416,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2416} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2309,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2309} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2521,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2521} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2280,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2280} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2281,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2281} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2282,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2282} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2283,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2283} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2276,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2276} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 871,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2404,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2404} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2405,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2405} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2406,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2406} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2407,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2407} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2408,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2408} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2432,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2432} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2615,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2615} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2421,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2421} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2339,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2339} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2299,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2299} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2385,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2385} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2319,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2319} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2439,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2439} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2350,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2350} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2285,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2285} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2465,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2465} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2415,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2415} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2557,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2557} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2558,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2558} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2559,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2559} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 872,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2560,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2560} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2328,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2328} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2392,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2392} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2311,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2311} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2498,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2498} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2308,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2308} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2420,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2420} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2384,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2384} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2391,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2391} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2433,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2433} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2493,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2493} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2508,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2508} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2525,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2525} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2539,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2539} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2540,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2540} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2585,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2585} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2289,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2289} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2573,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2573} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2320,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2320} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2322,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2322} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 873,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2423,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2423} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2442,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2442} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2568,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2568} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2517,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2517} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2616,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2616} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2524,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2524} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2575,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2575} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2582,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2582} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2583,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2583} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2584,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2584} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2279,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2279} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2389,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2389} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2438,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2438} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2592,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2592} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2422,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2422} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2556,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2556} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2359,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2359} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2593,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2593} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2502,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2502} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2507,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2507} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 874,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2505,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2505} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2506,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2506} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2590,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2590} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2581,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2581} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2273,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2273} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2589,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2589} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2555,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2555} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2369,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2369} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2368,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2368} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2367,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2367} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2451,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2451} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2453,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2453} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2459,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2459} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2455,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2455} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2457,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2457} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2527,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2527} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2287,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2287} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2510,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2510} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2591,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2591} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2351,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2351} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 875,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2419,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2419} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2434,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2434} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2538,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2538} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2554,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2554} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2377,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2377} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2372,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2372} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2450,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2450} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2449,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2449} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2513,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2513} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2516,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2516} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2509,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2509} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2518,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2518} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2275,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2275} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2588,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2588} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2466,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2466} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2467,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2467} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2563,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2563} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2468,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2468} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2545,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2545} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2579,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2579} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 876,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2428,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2428} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2547,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2547} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2561,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2561} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2472,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2472} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2474,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2474} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2476,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2476} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2473,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2473} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2475,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2475} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2503,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2503} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2580,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2580} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2337,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2337} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2598,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2598} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2571,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2571} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2572,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2572} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2448,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2448} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2447,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2447} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2446,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2446} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2445,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2445} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2461,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2461} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2497,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2497} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 877,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2412,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2412} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2543,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2543} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2306,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2306} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2511,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2511} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2388,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2388} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2414,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2414} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2482,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2482} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2495,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2495} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2515,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2515} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2271,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2271} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2270,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2270} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2386,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2386} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2429,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2429} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2577,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2577} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2398,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2398} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2464,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2464} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2452,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2452} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2562,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2562} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2550,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2550} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2546,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2546} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 878,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2360,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2360} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2565,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2565} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2519,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2519} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2514,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2514} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2528,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2528} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2534,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2534} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2363,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2363} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2307,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2307} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2566,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2566} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2569,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2569} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2361,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2361} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2544,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2544} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2454,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2454} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2460,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2460} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2456,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2456} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2458,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2458} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2512,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2512} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2278,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2278} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2462,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2462} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2567,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2567} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 879,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2526,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2526} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2531,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2531} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2383,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2383} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2300,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2300} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2587,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2587} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2570,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2570} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2382,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2382} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2381,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2381} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2578,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2578} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2553,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2553} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2303,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2303} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2601,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2601} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2552,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2552} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2370,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2370} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2469,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2469} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2373,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2373} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2551,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2551} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2600,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2600} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2471,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2471} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2374,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2374} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 880,
+   "nom": "L'éternelle moisson",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2597,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2597} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2614,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2614} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2564,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2564} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2483,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2483} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2470,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2470} à {npc,6693}."
+    },
+    {
+     "genre": "QuestObjectiveBringSoulToNpcData",
+     "parametres": [
+      6693,
+      2477,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Rapporter 1 âme de {monster,2477} à {npc,6693}."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez la liste des créatures, reste à les trouver.",
+   "id": 881,
+   "nom": "L'ultime Epreuve",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      914,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,914}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      914,
+      9720,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,914} : x1 {item,9720}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 439,
+ "nom": "L'éternelle moisson",
+ "objets": [],
+ "prerequis": []
+}

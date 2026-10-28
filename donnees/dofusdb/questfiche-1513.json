@@ -1,0 +1,130 @@
+{
+ "depart": [
+  {
+   "mapId": 131597312,
+   "npcId": 2341
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Un accident se serait produit dans les profondeurs d'Enutrosor. Le Sergent Frinklan vous a chargé de l'enquête.",
+   "id": 2138,
+   "nom": "Malle des profondeurs",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2401,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -5
+     ],
+     "texte": "Aller voir {npc,2401}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2397,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -4
+     ],
+     "texte": "Aller voir {npc,2397}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2424,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2424}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2395,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -2
+     ],
+     "texte": "Aller voir {npc,2395}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3715,
+      1,
+      0
+     ],
+     "position": [
+      -6,
+      -2
+     ],
+     "texte": "Vaincre x1 {monster,3715} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2395,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -2
+     ],
+     "texte": "Aller voir {npc,2395}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2341,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Aller voir {npc,2341}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15182,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1513,
+ "nom": "Malle des profondeurs",
+ "objets": [],
+ "prerequis": [
+  1512
+ ]
+}

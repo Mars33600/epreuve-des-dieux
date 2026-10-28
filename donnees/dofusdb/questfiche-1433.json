@@ -1,0 +1,41 @@
+{
+ "depart": [
+  {
+   "mapId": 90708227,
+   "npcId": 2186
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Capitaine Grog est intéressé par le rhum consommé par les Mercemers : il vous a donc demandé de descendre dans la base abyssale pour récupérer une petite cargaison de bouteilles. D'après le capitaine, ce rhum a une grande valeur auprès des connaisseurs... vous le croyez sur parole, puisqu'à l'instar de la plupart des aventuriers, vous ne buvez que du lailait à la fraise.",
+   "id": 2053,
+   "nom": "L'ivresse des profondeurs",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2186,
+      14808,
+      10
+     ],
+     "position": [
+      22,
+      22
+     ],
+     "texte": "Ramener à {npc,2186} : x10 {item,14808}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1433,
+ "nom": "L'ivresse des profondeurs",
+ "objets": [],
+ "prerequis": []
+}

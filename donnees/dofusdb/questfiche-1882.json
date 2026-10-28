@@ -1,0 +1,90 @@
+{
+ "depart": [
+  {
+   "mapId": 172754443,
+   "npcId": 3988
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La chasse est ouverte ! Voilà l'occasion de casser la goule aux goules de manière officielle.",
+   "id": 2519,
+   "nom": "Les goules à zéro",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4878,
+      10,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x10 {monster,4878}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4879,
+      10,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x10 {monster,4879}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4880,
+      10,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x10 {monster,4880}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4881,
+      10,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x10 {monster,4881}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3988,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      33
+     ],
+     "texte": "Retourner voir {npc,3988}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19073,
+       3
+      ],
+      [
+       19072,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1882,
+ "nom": "Les goules à zéro",
+ "objets": [],
+ "prerequis": []
+}

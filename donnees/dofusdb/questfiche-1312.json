@@ -1,0 +1,41 @@
+{
+ "depart": [
+  {
+   "mapId": 108793118,
+   "npcId": 2005
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre Sylargh et sortir vivant de son transporteur.",
+   "id": 1918,
+   "nom": "Porte, Sylargh, trésor",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453335,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Découvrir la carte : Transporteur de Sylargh - Sortie"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1312,
+ "nom": "Porte, Sylargh, trésor",
+ "objets": [],
+ "prerequis": []
+}

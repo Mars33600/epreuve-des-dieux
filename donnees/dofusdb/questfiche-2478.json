@@ -1,0 +1,274 @@
+{
+ "depart": [
+  {
+   "mapId": 226492929,
+   "npcId": 6843
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Nascherite semble soucieuse et vous a convoqué pour discuter d'un sujet autour de la Lance Originelle. Y aurait-il un problème avec le monumental artefact des Forgelances ? Quoi qu'il en soit, cela semble suffisamment grave pour que la Forgelance prenne ses précautions.",
+   "id": 3135,
+   "nom": "La graine de la révolte",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6843,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Aller voir {npc,6843}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      984264,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -83
+     ],
+     "texte": "Découvrir la carte : Archives des Forgelances"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6909,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -83
+     ],
+     "texte": "Aller voir {npc,6909}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      981551,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -83
+     ],
+     "texte": "Examiner les documents des archives"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      981552,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -83
+     ],
+     "texte": "Faire part de votre découverte à Hyurianger"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984697,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Faire votre rapport à Nascherite devant la Lance Originelle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984371,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -88
+     ],
+     "texte": "Déposer le livre sur l'un des pupitres enchantés de la bibliothèque d'Ephedrya"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      981555,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -88
+     ],
+     "texte": "Vaincre les sentinelles de Belladone"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984394,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -88
+     ],
+     "texte": "Accéder à l'Imaginarium par « La Légende d'Arthodan »"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      981557,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -88
+     ],
+     "texte": "Assister à la fin du roi Arthodan"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      981561,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Clarifier la situation avec Rathrosk"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      981562,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -69
+     ],
+     "texte": "Amener Rathrosk sur l'île d'Ereboria pour raviver ses souvenirs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      981563,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -69
+     ],
+     "texte": "Parler au dragon gris"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984279,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -69
+     ],
+     "texte": "Protéger Rathrosk des morts-brûlés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      981565,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -69
+     ],
+     "texte": "Demander au dragon s'il se souvient de quelque chose"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984153,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le Trépasseur dans un lieu de Pandala lié aux morts"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5824,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -47
+     ],
+     "texte": "Aller voir {npc,5824}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984698,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Partager vos découvertes avec Nascherite près de la Lance Originelle"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27718,
+       1
+      ],
+      [
+       27397,
+       5
+      ],
+      [
+       27399,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2478,
+ "nom": "La graine de la révolte",
+ "objets": [],
+ "prerequis": [
+  2475
+ ]
+}

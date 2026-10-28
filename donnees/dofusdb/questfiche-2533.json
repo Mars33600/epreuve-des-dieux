@@ -1,0 +1,97 @@
+{
+ "depart": [
+  {
+   "mapId": 235929600,
+   "npcId": 7762
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez trouver des esprits afin de leur donner des marques spirituelles. Ces offrandes permettront aux Rhoarims de renouer des liens qui ont été rompus.\nSi vous vous sentez perdu dans l'immensité - toute relative - d'Osavora, les marques vous guideront.",
+   "id": 3214,
+   "nom": "L'union sacrée",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135924,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Renouer le lien avec les Kabombz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135925,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Renouer le lien avec les zarbivores"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135926,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Renouer le lien entre les Léosas et les Léodas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135930,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Nouer un nouveau lien avec les Voyageurs et les Douziens"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135931,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Renouer le lien avec Gargandyas"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31629,
+       2
+      ],
+      [
+       31630,
+       2
+      ],
+      [
+       31624,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2533,
+ "nom": "L'union sacrée",
+ "objets": [],
+ "prerequis": [
+  2518
+ ]
+}

@@ -1,0 +1,74 @@
+{
+ "depart": [
+  {
+   "mapId": 90704898,
+   "npcId": 1581
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez inspecter le Temple du Grand Ougah.",
+   "id": 1532,
+   "nom": "Tour de force",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      1159,
+      1,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Vaincre x1 {monster,1159} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726890,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Découvrir la carte : Sortie du Temple du Grand Ougah"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1581,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      27
+     ],
+     "texte": "Aller voir {npc,1581}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       9281,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 916,
+ "nom": "Tour de force",
+ "objets": [],
+ "prerequis": [
+  915
+ ]
+}

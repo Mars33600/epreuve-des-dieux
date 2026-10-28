@@ -1,0 +1,228 @@
+{
+ "depart": [
+  {
+   "mapId": 203688196,
+   "npcId": 4822
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Maisial a besoin des volontés des quatre Cavaliers de l'Eliocalypse pour voir de quoi le futur sera fait. Vous avez l'habitude de partir à l'aventure afin de vous procurer toutes sortes d'objets étranges, mais celle-là, on ne vous l'avait jamais faite... Voilà un challenge à la mesure de votre ténacité.",
+   "id": 2777,
+   "nom": "Les quatre volontés",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821532,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Trouver des informations sur les mondes des Cavaliers dans le sanctuaire"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      823627,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Empêcher Guerre de mettre le Krosmoz à feu et à sang"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821538,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Déjouer les noirs desseins de Corruption"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821539,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir ce que cache Misère"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821541,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Contrecarrer les plans de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821543,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Montrer les quatre volontés à Maisial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825089,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire la transcription de la prophétie"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Aller voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825138,
+      0,
+      0
+     ],
+     "position": [
+      -15,
+      -62
+     ],
+     "texte": "Parler au responsable chargé d'organiser les visites du labyrinthe du Maître Corbac"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825186,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rejoindre Hiboukin dans l'une des salles au centre de la bibliothèque du Maître Corbac"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5372,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5372}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825197,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se débarrasser des aventuriers qui importunent Maître Hiboukin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5372,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retourner voir {npc,5372}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825213,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'information mentionnée dans l'Opuscule du Crépuscule"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5372,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5372}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825339,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver Maisial près de la tour des Chants Pétrifiés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825340,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -30
+     ],
+     "texte": "Partager la vision de Maisial"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -31
+     ],
+     "texte": "Aller voir {npc,5377}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2122,
+ "nom": "Les quatre volontés",
+ "objets": [],
+ "prerequis": [
+  2121
+ ]
+}

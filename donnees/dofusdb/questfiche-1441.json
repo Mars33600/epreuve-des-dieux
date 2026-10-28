@@ -1,0 +1,46 @@
+{
+ "depart": [
+  {
+   "mapId": 117705226,
+   "npcId": 2190
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous voulez utiliser l'ascenseur qui se trouve dans les salles des courants ? Il va vous falloir convaincre Kralab Rah de la pertinence de vos exigences. En d'autres termes, montrez-lui qui est le patron.",
+   "id": 2061,
+   "nom": "À bas Kralab Rah",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3541,
+      1,
+      0
+     ],
+     "position": [
+      23,
+      26
+     ],
+     "texte": "Vaincre x1 {monster,3541} en un seul combat"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       14795,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1441,
+ "nom": "À bas Kralab Rah",
+ "objets": [],
+ "prerequis": []
+}

@@ -1,0 +1,171 @@
+{
+ "depart": [
+  {
+   "mapId": 144442628,
+   "npcId": 2650
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez accepté d'aider Florin à retrouver son ami Haël.",
+   "id": 2220,
+   "nom": "Les visiteurs du futur",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885422,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces du passage d'Haël"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885423,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces du passage d'Haël"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2650,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -4
+     ],
+     "texte": "Aller voir {npc,2650}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885424,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces du passage d'Haël"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2650,
+      15908,
+      1
+     ],
+     "position": [
+      2,
+      -3
+     ],
+     "texte": "Ramener à {npc,2650} : x1 {item,15908}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      475936,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Découvrir la carte : Présent"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3876,
+      8,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Vaincre x8 {monster,3876} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2649,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2649}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2650,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2650}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2698,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2698}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2651,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2651}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15716,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1600,
+ "nom": "Les visiteurs du futur",
+ "objets": [],
+ "prerequis": []
+}

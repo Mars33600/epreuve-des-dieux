@@ -1,0 +1,226 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 1999
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La trahison d'un membre de la Garde du jour sans fin et l'enlèvement d'Emma Sculai sont des coups durs pour le Baron d'Ouillard. Vous devez finir l'enquête que vous avez commencé.",
+   "id": 1951,
+   "nom": "Crise d'ex-Emma",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2003,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,2003}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1260,
+      14251,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1260} : x1 {item,14251}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1260,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1260}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2003,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,2003}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885653,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Idrissa Boteur entre les crocs de verre et la forêt pétrifiée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,1999}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2002,
+      0,
+      0
+     ],
+     "position": [
+      -67,
+      -77
+     ],
+     "texte": "Aller voir {npc,2002}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2000,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -76
+     ],
+     "texte": "Aller voir {npc,2000}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2001,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -76
+     ],
+     "texte": "Aller voir {npc,2001}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,1999}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885654,
+      0,
+      0
+     ],
+     "position": [
+      -58,
+      -86
+     ],
+     "texte": "Fouiller la Tour de la Clepsydre à la recherche d'Emma Sculai"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885655,
+      0,
+      0
+     ],
+     "position": [
+      -60,
+      -88
+     ],
+     "texte": "Continuer les fouilles dans la Tour de la Clepsydre"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3440,
+      1,
+      0
+     ],
+     "position": [
+      -60,
+      -88
+     ],
+     "texte": "Vaincre x1 {monster,3440} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2034,
+      0,
+      0
+     ],
+     "position": [
+      -60,
+      -88
+     ],
+     "texte": "Aller voir {npc,2034}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,1999}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       6
+      ],
+      [
+       13987,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1324,
+ "nom": "Crise d'ex-Emma",
+ "objets": [],
+ "prerequis": [
+  1325,
+  1323
+ ]
+}

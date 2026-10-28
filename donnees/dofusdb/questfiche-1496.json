@@ -1,0 +1,143 @@
+{
+ "depart": [
+  {
+   "mapId": 129499136,
+   "npcId": 2364
+  }
+ ],
+ "etapes": [
+  {
+   "description": "À force de travailler pour Richard le Trésorier, vous êtes parvenu à vous faire remarquer. Résultat : le roi Nidas veut vous voir. Espérons qu'il ne vous en veut pas de lui avoir tiré les poils du nez.",
+   "id": 2116,
+   "nom": "Prime de Lèche-Majesté",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2351,
+      15293,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Montrer à {npc,2351} : 1 {item,15293}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2369,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Aller voir {npc,2369}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2370,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -4
+     ],
+     "texte": "Aller voir {npc,2370}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2371,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -2
+     ],
+     "texte": "Aller voir {npc,2371}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2372,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -4
+     ],
+     "texte": "Aller voir {npc,2372}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2373,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -2
+     ],
+     "texte": "Aller voir {npc,2373}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2369,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Retourner voir {npc,2369}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2342,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Retourner voir {npc,2342}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15178,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1496,
+ "nom": "Prime de Lèche-Majesté",
+ "objets": [],
+ "prerequis": [
+  1495
+ ]
+}

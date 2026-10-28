@@ -1,0 +1,41 @@
+{
+ "depart": [
+  {
+   "mapId": 108794630,
+   "npcId": 2004
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre Nileza et sortir vivant de son laboratoire.",
+   "id": 1917,
+   "nom": "Porte, Nileza, trésor",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453336,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Laboratoire de Nileza - Sortie"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1311,
+ "nom": "Porte, Nileza, trésor",
+ "objets": [],
+ "prerequis": []
+}

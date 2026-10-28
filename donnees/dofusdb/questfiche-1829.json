@@ -1,0 +1,282 @@
+{
+ "depart": [
+  {
+   "mapId": 173277701,
+   "npcId": 3511
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Eole Suk souhaite que vous poursuiviez vos investigations concernant les activités de la Corporation sur Saharach. Il vous a demandé de rencontrer Obermar Chand dans la Gorge des Vents Hurlants afin d'en savoir plus sur l'Épice récoltée là-bas.",
+   "id": 2468,
+   "nom": "Un ver ça va, trop de vers, bonjour les dégâts",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3674,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -68
+     ],
+     "texte": "Aller voir {npc,3674}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3673,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -68
+     ],
+     "texte": "Aller voir {npc,3673}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712122,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -68
+     ],
+     "texte": "Défendre le tamiseur contre la vague de vers des sables"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3683,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -68
+     ],
+     "texte": "Aller voir {npc,3683}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712152,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -67
+     ],
+     "texte": "Récupérer des pièces détachées sur le premier tamiseur endommagé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712060,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -69
+     ],
+     "texte": "Récupérer des pièces détachées sur le deuxième tamiseur endommagé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712781,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -69
+     ],
+     "texte": "Récupérer des pièces détachées sur le troisième tamiseur endommagé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712066,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Rapporter les pièces détachées à Subelba"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712142,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -67
+     ],
+     "texte": "Installer le prototype de tamiseur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712056,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -67
+     ],
+     "texte": "Tester le prototype de tamiseur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3683,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Retourner voir {npc,3683}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712148,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -69
+     ],
+     "texte": "Installer le nouveau prototype de tamiseur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712130,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -69
+     ],
+     "texte": "Tester le nouveau prototype de tamiseur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3683,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Retourner voir {npc,3683}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712058,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -69
+     ],
+     "texte": "Installer le dernier prototype de tamiseur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712146,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -69
+     ],
+     "texte": "Tester le dernier prototype de tamiseur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3683,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Retourner voir {npc,3683}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3674,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -68
+     ],
+     "texte": "Aller voir {npc,3674}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3678,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -66
+     ],
+     "texte": "Aller voir {npc,3678}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18562,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1829,
+ "nom": "Un ver ça va, trop de vers, bonjour les dégâts",
+ "objets": [],
+ "prerequis": [
+  1807
+ ]
+}

@@ -1,0 +1,318 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il est temps de rendre visite à l'archevêque Erazal pour contrecarrer ses plans.",
+   "id": 2554,
+   "nom": "L'exorciste",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      733770,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Découvrir la carte : Entrée de Srambad"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4118,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,4118}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2489,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Aller voir {npc,2489}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2489,
+      19274,
+      10
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Ramener à {npc,2489} : x10 {item,19274}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2584,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      4
+     ],
+     "texte": "Aller voir {npc,2584}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2566,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      4
+     ],
+     "texte": "Aller voir {npc,2566}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733773,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Astiquer une bitte"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733774,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Astiquer une bitte"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733775,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Astiquer une bitte"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2489,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Aller voir {npc,2489}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      733776,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Découvrir la carte : Catacombres des maux osselets"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4119,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Aller voir {npc,4119}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      733777,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      8
+     ],
+     "texte": "Découvrir la carte : Catacombres des maux osselets"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4120,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      8
+     ],
+     "texte": "Aller voir {npc,4120}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      733778,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Découvrir la carte : Catacombres des maux osselets"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4121,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Aller voir {npc,4121}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      733779,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      8
+     ],
+     "texte": "Découvrir la carte : Puits de pouvoir de Srambad"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4123,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      8
+     ],
+     "texte": "Aller voir {npc,4123}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733780,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      8
+     ],
+     "texte": "Arrêter Erazal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4123,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      8
+     ],
+     "texte": "Aller voir {npc,4123}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733781,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      8
+     ],
+     "texte": "Récupérer des documents"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      19278,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Ramener à {npc,6309} : x1 {item,19278}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [
+      167
+     ],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1903,
+ "nom": "L'exorciste",
+ "objets": [],
+ "prerequis": [
+  1901
+ ]
+}

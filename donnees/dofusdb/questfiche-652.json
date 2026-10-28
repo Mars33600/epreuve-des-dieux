@@ -1,0 +1,59 @@
+{
+ "depart": [
+  {
+   "mapId": 54534167,
+   "npcId": 1246
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Lucette Brifian vous a prévenu que les paysans peuvent avoir besoin de votre aide. Renseignez-vous auprès de Cassiopée Hisane ou Bisale Vinlenta.",
+   "id": 1211,
+   "nom": "Cultures biologiques",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      887888,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aider les paysans de Frigost"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1246,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1246}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       2
+      ],
+      [
+       11510,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 652,
+ "nom": "Développement durable",
+ "objets": [],
+ "prerequis": [
+  650
+ ]
+}

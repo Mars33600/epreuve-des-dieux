@@ -1,0 +1,251 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous cherchez un sens aux visions apparues dans le domaine des Fungus.",
+   "id": 2503,
+   "nom": "Champallucination",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886790,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des explications sur la vision"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3884,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Aller voir {npc,3884}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      724450,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      34
+     ],
+     "texte": "Obtenir 20 Restes de Fungus"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3884,
+      18812,
+      20
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Ramener à {npc,3884} : x20 {item,18812}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      724467,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les chercheurs de champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      724468,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les chercheurs de champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      724469,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les chercheurs de champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      724470,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les chercheurs de champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      724471,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les chercheurs de champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      724472,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les chercheurs de champignons"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3886,
+      18850,
+      1
+     ],
+     "position": [
+      -10,
+      29
+     ],
+     "texte": "Ramener à {npc,3886} : x1 {item,18850}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3887,
+      18850,
+      2
+     ],
+     "position": [
+      -14,
+      32
+     ],
+     "texte": "Ramener à {npc,3887} : x2 {item,18850}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3888,
+      18850,
+      1
+     ],
+     "position": [
+      -12,
+      30
+     ],
+     "texte": "Ramener à {npc,3888} : x1 {item,18850}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3889,
+      18851,
+      2
+     ],
+     "position": [
+      -9,
+      34
+     ],
+     "texte": "Ramener à {npc,3889} : x2 {item,18851}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3890,
+      18850,
+      2
+     ],
+     "position": [
+      -14,
+      31
+     ],
+     "texte": "Ramener à {npc,3890} : x2 {item,18850}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      727512,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Village champignon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      727513,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      34
+     ],
+     "texte": "Jeter la salsepareille dans le puits"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3892,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      34
+     ],
+     "texte": "Aller voir {npc,3892}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3891,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      34
+     ],
+     "texte": "Aller voir {npc,3891}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       9267,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1863,
+ "nom": "Champallucination",
+ "objets": [],
+ "prerequis": []
+}

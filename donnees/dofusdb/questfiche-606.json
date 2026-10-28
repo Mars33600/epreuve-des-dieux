@@ -1,0 +1,48 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous devez trouver une utilité à l'oeuf de larve dans la ruche des gloursons.",
+   "id": 1282,
+   "nom": "Visite de l'hexagone",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885729,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'utilité de l'oeuf de larve"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885730,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver les résidus gastriques du Serlecc"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18652,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 606,
+ "nom": "Glourmandise",
+ "objets": [],
+ "prerequis": []
+}

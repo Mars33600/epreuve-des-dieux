@@ -1,0 +1,221 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 2003
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Mina Spirite compte sur vous pour assurer la réussite d'un exorcisme.",
+   "id": 1949,
+   "nom": "Mutinerie chez les Armutins",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2041,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -85
+     ],
+     "texte": "Aller voir {npc,2041}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2001,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -76
+     ],
+     "texte": "Aller voir {npc,2001}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885954,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -89
+     ],
+     "texte": "Utiliser la bougie magique pour libérer la Statuette de Pashushu de la glace"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2041,
+      14217,
+      1
+     ],
+     "position": [
+      -69,
+      -85
+     ],
+     "texte": "Montrer à {npc,2041} : 1 {item,14217}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1355,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -85
+     ],
+     "texte": "Aller voir {npc,1355}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2041,
+      14217,
+      1
+     ],
+     "position": [
+      -69,
+      -85
+     ],
+     "texte": "Ramener à {npc,2041} : x1 {item,14217}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885955,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -85
+     ],
+     "texte": "Aider Merrin Lencastré à accomplir l'exorcisme"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2044,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -85
+     ],
+     "texte": "Aller voir {npc,2044}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2043,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      -10
+     ],
+     "texte": "Aller voir {npc,2043}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452706,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -85
+     ],
+     "texte": "Découvrir la carte : Lieu de l'exorcisme"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2043,
+      14217,
+      1
+     ],
+     "position": [
+      -69,
+      -85
+     ],
+     "texte": "Ramener à {npc,2043} : x1 {item,14217}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3432,
+      1,
+      0
+     ],
+     "position": [
+      -69,
+      -85
+     ],
+     "texte": "Vaincre x1 {monster,3432} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2043,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -85
+     ],
+     "texte": "Aller voir {npc,2043}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2003,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,2003}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       6
+      ],
+      [
+       13934,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1322,
+ "nom": "Mutinerie chez les Armutins",
+ "objets": [],
+ "prerequis": [
+  1325
+ ]
+}

@@ -1,0 +1,191 @@
+{
+ "depart": [
+  {
+   "mapId": 235799552,
+   "npcId": 7698
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Afin de prendre sur le fait ceux qui ont placé une machine bourdonnante à l'intérieur de la thermosonde, le caporal Gobastol a eu l'idée d'une ruse : se déguiser en Kabombz, puis attendre que les fauteurs de trouble débarquent, alertés par une balise de détresse. Comme d'habitude dans ce genre de situation, c'est vous qui serez aux premières loges.\nPour mener cette mission à bien, vous aurez besoin d'un voile eidolonique de Balebz.",
+   "id": 3204,
+   "nom": "Dérive insectaire",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128752,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Passer inaperçu pour surprendre le propriétaire de la machine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128753,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Interroger la technomage"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      8068,
+      1,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Vaincre x1 {monster,8068} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128784,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Montrer le symbole religieux à la prêtresse d'Osamodas"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7675,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Aller voir {npc,7675}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7659,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Retourner voir {npc,7659}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1130429,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      26
+     ],
+     "texte": "Observer ce qui se passe dans la toorbz de la Réserve Touffue"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128901,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre les Kabombz influencés par la machine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128903,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      11
+     ],
+     "texte": "Disperser les Kabombz agglutinés près du lac"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128906,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      11
+     ],
+     "texte": "Plonger dans le lac pour découvrir ce que cache la secte"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128905,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      11
+     ],
+     "texte": "Détruire l'idole technomagique de la secte"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       31524,
+       2
+      ],
+      [
+       31525,
+       2
+      ],
+      [
+       31526,
+       2
+      ],
+      [
+       31527,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2523,
+ "nom": "Dérive insectaire",
+ "objets": [],
+ "prerequis": [
+  2516
+ ]
+}

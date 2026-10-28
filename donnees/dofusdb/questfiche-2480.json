@@ -1,0 +1,349 @@
+{
+ "depart": [
+  {
+   "mapId": 226494979,
+   "npcId": 6922
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Namuna et Ilyzaelle sont les deux dernières Forgelances du serment à se rallier autour de la table ronde. Il semble toutefois qu'elles apportent, elles aussi, leur lot de complications entre dimension spirituelle et loyauté indéfectible.",
+   "id": 3137,
+   "nom": "Une dernière volonté",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984172,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer Namuna en Aerdala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984963,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Rejoindre Namuna à la Forge Astrale"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6982,
+      27769,
+      1
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Ramener à {npc,6982} : x1 {item,27769}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6982,
+      23902,
+      10
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Ramener à {npc,6982} : x10 {item,23902}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6982,
+      27767,
+      1
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Ramener à {npc,6982} : x1 {item,27767}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6982,
+      27770,
+      1
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Ramener à {npc,6982} : x1 {item,27770}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6982,
+      23903,
+      10
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Ramener à {npc,6982} : x10 {item,23903}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6982,
+      27768,
+      1
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Ramener à {npc,6982} : x1 {item,27768}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6982,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Aller voir {npc,6982}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985116,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Aider Namuna à rassembler les deux parties de Jormun"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984176,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Vous frayer un chemin jusqu'à Ilyzaelle"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4057,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Aller voir {npc,4057}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984177,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Demander conseil au roi de Bonta"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985216,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Annoncer à Ilyzaelle que le roi se porte volontaire"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984180,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Prouver à la championne de Jiva que le roi peut repousser les Brûlâmes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4057,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Aller voir {npc,4057}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984203,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Retourner à la Table du Serment"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984212,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Commencer la cérémonie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985316,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Entrer dans la brèche spirituelle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985417,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Protéger la Volonté persistante"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985318,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Utiliser le pouvoir des sept lances pour sauver la Volonté persistante d'Heimër"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984257,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Examiner la Volonté persistante d'Heimër"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985319,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Faire le point avec les Forgelances du Serment"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27717,
+       1
+      ],
+      [
+       19233,
+       3
+      ],
+      [
+       23965,
+       3
+      ],
+      [
+       23957,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2480,
+ "nom": "Une dernière volonté",
+ "objets": [
+  [
+   23902,
+   10
+  ],
+  [
+   23903,
+   10
+  ]
+ ],
+ "prerequis": [
+  2479
+ ]
+}

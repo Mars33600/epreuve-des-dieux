@@ -1,0 +1,182 @@
+{
+ "depart": [
+  {
+   "mapId": 170131458,
+   "npcId": 3266
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vous assurer que les installations sous-marines des Steamers ne sont pas menacées par des mantazes survoltées.",
+   "id": 2370,
+   "nom": "Il y a de l'électricité dans l'eau",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3252,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Aller voir {npc,3252}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      647820,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      28
+     ],
+     "texte": "Contrôler les installations"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649715,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Contrôler les installations"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      4477,
+      1,
+      169083906
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Vaincre x1 {monster,4477} sur la carte {map,169083906::Installations des Steamers} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649717,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      27
+     ],
+     "texte": "Contrôler les installations"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649722,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      26
+     ],
+     "texte": "Contrôler les installations"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      4477,
+      1,
+      169082880
+     ],
+     "position": [
+      22,
+      26
+     ],
+     "texte": "Vaincre x1 {monster,4477} sur la carte {map,169082880::Installations des Steamers} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3252,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Retourner voir {npc,3252}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3253,
+      17862,
+      1
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3253} : 1 {item,17862}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3250,
+      17862,
+      1
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3250} : 1 {item,17862}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3252,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Retourner voir {npc,3252}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17970,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1733,
+ "nom": "Il y a de l'électricité dans l'eau",
+ "objets": [],
+ "prerequis": [
+  1731
+ ]
+}

@@ -1,0 +1,123 @@
+{
+ "depart": [
+  {
+   "mapId": 88081686,
+   "npcId": 2804
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez rencontré un étrange personnage qui semble hanté par des visions provenant du Xélorium... Si vous l'aidez, peut-être obtiendrez-vous quelques éclaircissements sur certains événements auxquels vous avez été mêlé.",
+   "id": 2234,
+   "nom": "La quête de l'oiseau du temps",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2804,
+      16061,
+      1
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Montrer à {npc,2804} : 1 {item,16061}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      502620,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Khelebragon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      502622,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Combattre l'Oiseau du Temps pour libérer Khelebragon"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2807,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Aller voir {npc,2807}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2804,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Aller voir {npc,2804}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      502636,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Rencontrer le dieu Xélor"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2804,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -7
+     ],
+     "texte": "Aller voir {npc,2804}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1614,
+ "nom": "La quête de l'oiseau du temps",
+ "objets": [
+  [
+   16061,
+   1
+  ]
+ ],
+ "prerequis": [
+  1613
+ ]
+}

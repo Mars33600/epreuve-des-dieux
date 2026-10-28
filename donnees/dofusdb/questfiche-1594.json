@@ -1,0 +1,284 @@
+{
+ "depart": [
+  {
+   "mapId": 145491968,
+   "npcId": 2763
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous vous êtes donné comme défi de rendre un Hordémon romantique.",
+   "id": 2214,
+   "nom": "C'est quoi ton 06 ?",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885391,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Réfléchir à comment éduquer un Hordémon amoureux puis parler à Trezz énamouré"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2707,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2707}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2690,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2690}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2648,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2648}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2763,
+      15971,
+      1
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Ramener à {npc,2763} : x1 {item,15971}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2690,
+      15972,
+      1
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Ramener à {npc,2690} : x1 {item,15972}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2688,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2688}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2647,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2647}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2763,
+      15973,
+      1
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Ramener à {npc,2763} : x1 {item,15973}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885392,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      5
+     ],
+     "texte": "Ramasser des fleurs exotiques dans les chemins d'hier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885393,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -4
+     ],
+     "texte": "Ramasser des fleurs exotiques dans les lendemains incertains"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2763,
+      15974,
+      1
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Ramener à {npc,2763} : x1 {item,15974}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2763,
+      15975,
+      1
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Ramener à {npc,2763} : x1 {item,15975}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2757,
+      15976,
+      1
+     ],
+     "position": [
+      3,
+      -4
+     ],
+     "texte": "Ramener à {npc,2757} : x1 {item,15976}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2757,
+      15977,
+      1
+     ],
+     "position": [
+      3,
+      -4
+     ],
+     "texte": "Ramener à {npc,2757} : x1 {item,15977}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2648,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2648}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2763,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,2763}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3928,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Vaincre x1 {monster,3928} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2763,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,2763}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       15722,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1594,
+ "nom": "C'est quoi ton 06 ?",
+ "objets": [],
+ "prerequis": []
+}

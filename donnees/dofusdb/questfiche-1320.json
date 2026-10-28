@@ -1,0 +1,189 @@
+{
+ "depart": [
+  {
+   "mapId": 108791296,
+   "npcId": 2001
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pour vous rendre utile, Karla Shnikoff vous a demandé de rejoindre Idrissa Boteur.",
+   "id": 1932,
+   "nom": "Moteur à explosion",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2033,
+      0,
+      0
+     ],
+     "position": [
+      -51,
+      -78
+     ],
+     "texte": "Aller voir {npc,2033}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885949,
+      0,
+      0
+     ],
+     "position": [
+      -49,
+      -82
+     ],
+     "texte": "Escorter Idrissa Boteur jusqu'au lieu de la diversion"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885950,
+      0,
+      0
+     ],
+     "position": [
+      -49,
+      -82
+     ],
+     "texte": "Fouiller le lieu de l'embuscade"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3425,
+      3,
+      0
+     ],
+     "position": [
+      -53,
+      -84
+     ],
+     "texte": "Vaincre x3 {monster,3425} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2033,
+      0,
+      0
+     ],
+     "position": [
+      -53,
+      -84
+     ],
+     "texte": "Aller voir {npc,2033}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885951,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer la caisse d'explosifs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885952,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer la caisse d'outils"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2033,
+      14179,
+      1
+     ],
+     "position": [
+      -53,
+      -84
+     ],
+     "texte": "Ramener à {npc,2033} : x1 {item,14179}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2033,
+      14180,
+      1
+     ],
+     "position": [
+      -53,
+      -84
+     ],
+     "texte": "Ramener à {npc,2033} : x1 {item,14180}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453769,
+      0,
+      0
+     ],
+     "position": [
+      -51,
+      -86
+     ],
+     "texte": "Escorter Idrissa Boteur jusqu'au point de ravitaillement du transporteur de Sylargh"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885953,
+      0,
+      0
+     ],
+     "position": [
+      -51,
+      -86
+     ],
+     "texte": "Faire diversion pour couvrir les agissements d'Idrissa Boteur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2001,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -76
+     ],
+     "texte": "Aller voir {npc,2001}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       6
+      ],
+      [
+       13972,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1320,
+ "nom": "Moteur à explosion",
+ "objets": [],
+ "prerequis": [
+  1325
+ ]
+}

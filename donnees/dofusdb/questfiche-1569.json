@@ -1,0 +1,178 @@
+{
+ "depart": [
+  {
+   "mapId": 140510209,
+   "npcId": 2632
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez proposé au capitaine Pol Ouatnos de l'aider à nettoyer le Roc des Salbatroces.",
+   "id": 2189,
+   "nom": "Grand corps malade",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885734,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -59
+     ],
+     "texte": "Nettoyer le Roc des Salbatroces"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885735,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -59
+     ],
+     "texte": "Nettoyer le Roc des Salbatroces"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885736,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -61
+     ],
+     "texte": "Nettoyer le Roc des Salbatroces"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2632,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -58
+     ],
+     "texte": "Aller voir {npc,2632}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2633,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Aller voir {npc,2633}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885737,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer 1 Plante Ureuse dans les serres des Jardins d'Hiver"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885738,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer 1 Herbe Usse dans les serres des Jardins d'Hiver"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      15670,
+      1
+     ],
+     "position": [
+      -80,
+      -45
+     ],
+     "texte": "Ramener à {npc,1251} : x1 {item,15670}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      15671,
+      1
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x1 {item,15671}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2641,
+      15672,
+      1
+     ],
+     "position": [
+      -85,
+      -59
+     ],
+     "texte": "Ramener à {npc,2641} : x1 {item,15672}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2632,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -58
+     ],
+     "texte": "Aller voir {npc,2632}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15686,
+       5
+      ],
+      [
+       15687,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1569,
+ "nom": "Grand corps malade",
+ "objets": [],
+ "prerequis": []
+}

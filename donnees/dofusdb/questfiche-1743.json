@@ -1,0 +1,117 @@
+{
+ "depart": [
+  {
+   "mapId": 170131458,
+   "npcId": 3266
+  }
+ ],
+ "etapes": [
+  {
+   "description": "D'après Prosper Meraimée, une clef est nécessaire pour explorer le sanctuaire de Leanor. Le maître bricoleur Roukerol devrait être capable de la fabriquer, mais il aura besoin de certains ingrédients... Devinez qui va les lui procurer ? Vous avez trouvé. Pensez à vous munir d'un volant hydraulique, sans quoi vous ne pourrez visiter les vestiges engloutis.",
+   "id": 2380,
+   "nom": "La clef de l'énigme",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644118,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      32
+     ],
+     "texte": "Entrer dans le temple des Eliotropes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644085,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      32
+     ],
+     "texte": "Obtenir des informations sur le sable de Wakfu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644033,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      31
+     ],
+     "texte": "Utiliser un volant hydraulique pour actionner l'ascenseur menant aux vestiges engloutis"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      17952,
+      10
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Ramener à {npc,1599} : x10 {item,17952}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      17954,
+      6
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Ramener à {npc,1599} : x6 {item,17954}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3266,
+      17955,
+      1
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Montrer à {npc,3266} : 1 {item,17955}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17990,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1743,
+ "nom": "La clef de l'énigme",
+ "objets": [],
+ "prerequis": [
+  1736
+ ]
+}

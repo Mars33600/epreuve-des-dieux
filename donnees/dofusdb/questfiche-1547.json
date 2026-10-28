@@ -1,0 +1,251 @@
+{
+ "depart": [
+  {
+   "mapId": 137363456,
+   "npcId": 2438
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des Voyageurs sont atteints d'une maladie inconnue et vous êtes chargé d'en découvrir la cause.",
+   "id": 2167,
+   "nom": "L'art me ment",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2530,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2530}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2531,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2531}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2509,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2509}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2437,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2437}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2532,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2532}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2438,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2438}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2511,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Aller voir {npc,2511}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2533,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Aller voir {npc,2533}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885349,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Vaincre la Serpentine des Fosses 110 et ses hommes de main"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2533,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Aller voir {npc,2533}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2555,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      8
+     ],
+     "texte": "Aller voir {npc,2555}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3752,
+      1,
+      0
+     ],
+     "position": [
+      8,
+      8
+     ],
+     "texte": "Vaincre x1 {monster,3752} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      454049,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      8
+     ],
+     "texte": "Découvrir la carte : Cave du Toxoliath - Sortie"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2445,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      8
+     ],
+     "texte": "Aller voir {npc,2445}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2438,
+      15553,
+      1
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Ramener à {npc,2438} : x1 {item,15553}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2532,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2532}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       40
+      ],
+      [
+       15456,
+       3
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1547,
+ "nom": "L'art me ment",
+ "objets": [],
+ "prerequis": [
+  1546
+ ]
+}

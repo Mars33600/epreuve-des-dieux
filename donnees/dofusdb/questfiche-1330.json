@@ -1,0 +1,78 @@
+{
+ "depart": [
+  {
+   "mapId": 54172488,
+   "npcId": 1369
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Subjugué par votre prestance, votre démarche noble et votre visage aux traits altiers, Grobidet s'est agenouillé devant vous et vous a supplié d'aider les habitants du Village Enseveli. Bon, les choses ne se sont peut-être pas passées exactement de cette façon, mais c'est ainsi qu'elles seront racontées dans votre biographie.",
+   "id": 1931,
+   "nom": "Les rescapés du Village Enseveli",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452570,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aider les habitants du village Enseveli"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452699,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aider les habitants du Village Enseveli"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452700,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aider les habitants du Village Enseveli"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1369,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -72
+     ],
+     "texte": "Aller voir {npc,1369}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1330,
+ "nom": "Les rescapés du Village Enseveli",
+ "objets": [],
+ "prerequis": [
+  651
+ ]
+}

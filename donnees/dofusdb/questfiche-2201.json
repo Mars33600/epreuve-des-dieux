@@ -1,0 +1,513 @@
+{
+ "depart": [
+  {
+   "mapId": 211294208,
+   "npcId": 5796
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les deux souffles habitent toujours les dragons, mais ils sont affaiblis, altérés. Chacun des dragons est conscient d'avoir perdu une partie de lui-même et de son histoire. Les souffles sont plus intenses dans les royaumes célestes d'encre et de papier, situés dans le Plan Astral, car les mots-esprits qui constituent l'essence de ces dimensions portent en eux la mémoire d'Imagirorukam...",
+   "id": 2859,
+   "nom": "Deux souffles, une inspiration",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5995,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Aller voir {npc,5995}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871065,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -27
+     ],
+     "texte": "Se rendre à la bibliothèque pour parler à Chochi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871098,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le possesseur du dernier manuscrit de Myamowa Musashwan"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871188,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -40
+     ],
+     "texte": "Vaincre les spectres terrassés par Musashwan"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6013,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -40
+     ],
+     "texte": "Aller voir {npc,6013}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871189,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer Terrdala à la recherche d'une œuvre de Tanukang Jei"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880779,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -24
+     ],
+     "texte": "Éloigner les Tsukumogami du vase antique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871239,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -24
+     ],
+     "texte": "Examiner le vase antique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871244,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -24
+     ],
+     "texte": "Survivre à l'embuscade des shinobi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875857,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -24
+     ],
+     "texte": "Recopier le caractère tracé sur un vase antique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871341,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Montrer les deux caractères à Shufamukin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5560,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Aller voir {npc,5560}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871458,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir l'un des temples du Wukin et du Wukang sur l'île de Pandala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875882,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à Daoh et quitter l'un des temples pour entrer dans les Royaumes célestes d'encre et de papier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871344,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer la Mémoire d'Orukam"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6472,
+      1,
+      0
+     ],
+     "position": [
+      -3,
+      -1
+     ],
+     "texte": "Vaincre x1 {monster,6472} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871350,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      -1
+     ],
+     "texte": "Décrypter le sens des mots-esprits dans la dernière salle de la Mémoire d'Orukam"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871365,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le Yokianzhi du Wukin dans le Royaume d'encre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      876320,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -3
+     ],
+     "texte": "Survivre à l'attaque de la Paume du chtigre pour obtenir la silhouette du Wukin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871367,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler au dragon Orukam dans sa caverne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871435,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer le Souvenir d'Imagiro"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6478,
+      1,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Vaincre x1 {monster,6478} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871436,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Décrypter le sens des mots-esprits dans la dernière salle du Souvenir d'Imagiro"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871437,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le Yokianzhi du Wukang dans le royaume de papier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871438,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler au dragon Imagiro dans sa caverne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871440,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre au pied du Mont Noir et Blanc"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871441,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Vaincre les chtigres de papier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871443,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Faire des offrandes aux éléments sur le Mont Noir et Blanc"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871444,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Calmer les esprits"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871445,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Parler aux trois Kozaru"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      876917,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Explorer le rêve du taciturne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871447,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Rompre le silence pour obtenir l'héritage de Kian Zhi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871451,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Parler au maître des rêves"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5995,
+      24067,
+      1
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Montrer à {npc,5995} : 1 {item,24067}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871455,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Se rendre au Palais de bambou pour s'entretenir avec la Daimya"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871530,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Vaincre l'exécuteur de la Paume avec l'aide de Wulan"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5560,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Aller voir {npc,5560}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871457,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Retourner voir le Grandapan dans le temple de la Taverne interdite"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       23962,
+       3
+      ],
+      [
+       23970,
+       3
+      ],
+      [
+       24044,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2201,
+ "nom": "Deux souffles, une inspiration",
+ "objets": [
+  [
+   23237,
+   1
+  ],
+  [
+   23408,
+   1
+  ]
+ ],
+ "prerequis": [
+  2200
+ ]
+}

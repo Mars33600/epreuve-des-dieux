@@ -1,0 +1,343 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Bowisse doit déchiffrer le document codé découvert dans la cathédrale de Triste Âme.",
+   "id": 2535,
+   "nom": "Enigma",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      57,
+      19129,
+      1
+     ],
+     "position": [
+      5,
+      1
+     ],
+     "texte": "Ramener à {npc,57} : x1 {item,19129}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4046,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -28
+     ],
+     "texte": "Aller voir {npc,4046}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3046,
+      7223,
+      1
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Ramener à {npc,3046} : x1 {item,7223}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3046,
+      7222,
+      1
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Ramener à {npc,3046} : x1 {item,7222}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3046,
+      7225,
+      1
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Ramener à {npc,3046} : x1 {item,7225}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3046,
+      7224,
+      1
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Ramener à {npc,3046} : x1 {item,7224}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733406,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      -5
+     ],
+     "texte": "Plonger la boule d'Eugaicha Ementaire dans les eaux enchantées"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733467,
+      0,
+      0
+     ],
+     "position": [
+      -24,
+      -26
+     ],
+     "texte": "Jeter la boule d'Eugaicha Ementaire dans la brise quadramentale"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733471,
+      0,
+      0
+     ],
+     "position": [
+      -26,
+      -27
+     ],
+     "texte": "Récupérer la boule d'Eugaicha Ementaire portée par la brise quadramentale"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733473,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Plonger la boule d'Eugaicha Ementaire dans les flammes funéraires de la pyramide maudite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733477,
+      0,
+      0
+     ],
+     "position": [
+      35,
+      -43
+     ],
+     "texte": "Éparpiller les cendres de la boule d'Eugaicha Ementaire sur la terre des anciens"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733482,
+      0,
+      0
+     ],
+     "position": [
+      35,
+      -43
+     ],
+     "texte": "Boire du Bojawa et verser le reste sur les cendres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4047,
+      0,
+      0
+     ],
+     "position": [
+      35,
+      -43
+     ],
+     "texte": "Aller voir {npc,4047}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4046,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -28
+     ],
+     "texte": "Aller voir {npc,4046}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      57,
+      19134,
+      1
+     ],
+     "position": [
+      5,
+      1
+     ],
+     "texte": "Montrer à {npc,57} : 1 {item,19134}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733486,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      1
+     ],
+     "texte": "Ramasser des pétales de Sutol dans la cave de Bowisse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733495,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Mélanger les pétales de Sutol avec le jus de céréale sacré"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      730449,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      5
+     ],
+     "texte": "Découvrir la carte : Totem de Maimane"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733503,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      5
+     ],
+     "texte": "Boire le jus de céréale altéré"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733505,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      5
+     ],
+     "texte": "Activer le totem de Maimane"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733515,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      5
+     ],
+     "texte": "Vaincre les gardiens d'ossements"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730452,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      5
+     ],
+     "texte": "Lire le message magique du totem de Maimane"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1895,
+ "nom": "Enigma",
+ "objets": [
+  [
+   7223,
+   1
+  ],
+  [
+   7222,
+   1
+  ],
+  [
+   7225,
+   1
+  ],
+  [
+   7224,
+   1
+  ]
+ ],
+ "prerequis": [
+  1893
+ ]
+}

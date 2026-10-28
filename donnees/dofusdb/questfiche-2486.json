@@ -1,0 +1,233 @@
+{
+ "depart": [
+  {
+   "mapId": 147850754,
+   "npcId": 2853
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le familier emplumé de Cornelia Granpa a l'air inquiet. Sa maîtresse serait-elle en difficulté ? Mieux vaut vous assurer qu'elle va bien, sans quoi votre conscience ne vous laissera pas en paix, et vous risquez de faire des insomnies.",
+   "id": 3143,
+   "nom": "Les derniers d'entre nous",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007274,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      -12
+     ],
+     "texte": "Trouver Cornelia Granpa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007277,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      -12
+     ],
+     "texte": "Libérer Cornelia"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7120,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      -12
+     ],
+     "texte": "Aller voir {npc,7120}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1009214,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -37
+     ],
+     "texte": "Traverser la mer Kantil jusqu'aux quais du Port de givre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1009204,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -62
+     ],
+     "texte": "Pister le mystérieux inconnu avec l'aide de Cornelia et de Kroa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1052854,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -62
+     ],
+     "texte": "Débusquer les animaux enragés et les combattre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007280,
+      0,
+      0
+     ],
+     "position": [
+      -58,
+      -69
+     ],
+     "texte": "Continuer la traque"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007322,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer la Forêt Pétrifiée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1009580,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      -73
+     ],
+     "texte": "Assister à la cérémonie sans se faire repérer"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1009581,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      -73
+     ],
+     "texte": "Vaincre le colosse et les autres infectés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1009613,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Poursuivre la disciple"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1052856,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Affronter le Korriandre et les Sylvesprits pour se frayer un chemin dans l'antre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1010136,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Neutraliser la disciple"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1010728,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Purifier le temple mystifié"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1011010,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "S'entretenir avec les dieux de la forêt"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7120,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Aller voir {npc,7120}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2486,
+ "nom": "Les derniers d'entre nous",
+ "objets": [],
+ "prerequis": [
+  2445,
+  1621
+ ]
+}

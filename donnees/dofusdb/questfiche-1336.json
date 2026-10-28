@@ -1,0 +1,224 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 1999
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Baron d'Ouillard souhaite mettre vos talents de combattant à l'épreuve. Vous allez pouvoir ajouter de nouvelles victimes à la longue liste des créatures qui figurent sur votre tableau de chasse.",
+   "id": 1940,
+   "nom": "Guerre froide",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3379,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3379}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3380,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3380}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3382,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3382}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3383,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3383}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3385,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3385}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3386,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3386}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3387,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3387}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3389,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3389}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3392,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3392}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3393,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3393}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3394,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3394}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3396,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3396}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3404,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3404}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3406,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3406}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3407,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3407}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      3408,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,3408}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Retourner voir {npc,1999}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ],
+      [
+       13913,
+       10
+      ],
+      [
+       13925,
+       10
+      ],
+      [
+       13937,
+       10
+      ],
+      [
+       13949,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1336,
+ "nom": "Guerre froide",
+ "objets": [],
+ "prerequis": [
+  1335
+ ]
+}

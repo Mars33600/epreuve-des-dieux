@@ -1,0 +1,189 @@
+{
+ "depart": [
+  {
+   "mapId": 224790533,
+   "npcId": 6954
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Régulièrement, des escouades de Nimbos sont dépêchées sur l'île d'Ephedrya afin de récupérer de la belladone et des débris de Protecteurs. Leur objectif ? Fournir de quoi fabriquer les fleurs de Cendrepierre nécessaires à leurs tentatives de mise à mort de Cire Momore. Mais tout ne se passe pas toujours comme prévu...",
+   "id": 3139,
+   "nom": "Les risques du métier",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982737,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver la Serpyn membre de l'escouade"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6951,
+      27745,
+      1
+     ],
+     "position": [
+      26,
+      -86
+     ],
+     "texte": "Ramener à {npc,6951} : x1 {item,27745}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      983076,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -80
+     ],
+     "texte": "Escorter la Serpyn auprès de son capitaine d'escouade"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982749,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le Sanglirok membre de l'escouade"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      983077,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -82
+     ],
+     "texte": "Exterminer les bourdards pour permettre au Sanglirok de s'enfuir"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982753,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le Marthos membre de l'escouade"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6954,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -80
+     ],
+     "texte": "Aller voir {npc,6954}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      27746,
+      1,
+      0
+     ],
+     "position": [
+      22,
+      -80
+     ],
+     "texte": "Fabriquer 1 {item,27746} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982755,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -81
+     ],
+     "texte": "Aider le Marthos à sortir du puits à l'aide de la corde"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6953,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -81
+     ],
+     "texte": "Aller voir {npc,6953}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      983078,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -80
+     ],
+     "texte": "Escorter le Marthos auprès du capitaine d'escouade"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6954,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -80
+     ],
+     "texte": "Aller voir {npc,6954}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27398,
+       5
+      ],
+      [
+       27400,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2482,
+ "nom": "Les risques du métier",
+ "objets": [
+  [
+   27748,
+   10
+  ]
+ ],
+ "prerequis": []
+}

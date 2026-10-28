@@ -1,0 +1,157 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez trouver comment desceller l'entrée du temple maudit où Qu'Tan attend son maître.",
+   "id": 2358,
+   "nom": "L'ascension de Qu'Tan",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2348,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -36
+     ],
+     "texte": "Aller voir {npc,2348}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2347,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -36
+     ],
+     "texte": "Aller voir {npc,2347}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891136,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Utiliser le mode d'emploi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891137,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      22
+     ],
+     "texte": "Desceller l'entrée du temple maudit"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      625601,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      22
+     ],
+     "texte": "Découvrir la carte : Entrée du temple maudit"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3211,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      22
+     ],
+     "texte": "Aller voir {npc,3211}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3212,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      22
+     ],
+     "texte": "Aller voir {npc,3212}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      1195,
+      1,
+      182455296
+     ],
+     "position": [
+      -10,
+      22
+     ],
+     "texte": "Vaincre x1 {monster,1195} sur la carte {map,182455296::} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3225,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      22
+     ],
+     "texte": "Aller voir {npc,3225}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      17786,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Ramener à {npc,6309} : x1 {item,17786}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1721,
+ "nom": "L'ascension de Qu'Tan",
+ "objets": [],
+ "prerequis": [
+  1719
+ ]
+}

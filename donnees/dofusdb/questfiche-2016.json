@@ -1,0 +1,141 @@
+{
+ "depart": [
+  {
+   "mapId": 194774022,
+   "npcId": 4503
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Lili Crindacier vous a demandé de démasquer des disciples des Douze qui se font passer pour des Nimbos. Ces vils nimposteurs mériteraient d'être tondus en place publique, mais vous vous contenterez de leur flanquer une bonne rouste.",
+   "id": 2666,
+   "nom": "Le gang des postiches",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      762121,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ninterroger le premier suspect"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      762122,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ninterroger la deuxième suspecte"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5344,
+      1,
+      0
+     ],
+     "position": [
+      -67,
+      -71
+     ],
+     "texte": "Vaincre x1 {monster,5344} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      762123,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ninterroger le troisième suspect"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5345,
+      1,
+      0
+     ],
+     "position": [
+      -67,
+      -72
+     ],
+     "texte": "Vaincre x1 {monster,5345} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      762124,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ninterroger la quatrième suspecte"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      762125,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ninterroger le cinquième suspect"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5346,
+      1,
+      0
+     ],
+     "position": [
+      -64,
+      -70
+     ],
+     "texte": "Vaincre x1 {monster,5346} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4503,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -70
+     ],
+     "texte": "Retourner voir {npc,4503}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19972,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2016,
+ "nom": "Le gang des postiches",
+ "objets": [],
+ "prerequis": [
+  2010
+ ]
+}

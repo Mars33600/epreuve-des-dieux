@@ -1,0 +1,41 @@
+{
+ "depart": [
+  {
+   "mapId": 91752967,
+   "npcId": 2187
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Votre mission : cogner sur les Mercemers présents dans les salles de la base abyssale jusqu'à ce qu'ils lâchent leurs boîtes à outils. Voilà un travail qui vous convient parfaitement ; lorsque vous bricolez, vous préférez jouer le rôle du marteau plutôt que celui des petits clous.",
+   "id": 2054,
+   "nom": "Les Mercemers sont bien outillés",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2187,
+      14818,
+      5
+     ],
+     "position": [
+      22,
+      14
+     ],
+     "texte": "Ramener à {npc,2187} : x5 {item,14818}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1438,
+ "nom": "Les Mercemers sont bien outillés",
+ "objets": [],
+ "prerequis": []
+}

@@ -1,0 +1,187 @@
+{
+ "depart": [
+  {
+   "mapId": 194775044,
+   "npcId": 4513
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La pauvre Planche-Neige s'est fait voler son stock de skis par sept Nimbos. Comme vous tenez davantage du prince charmant que de la méchante reine, vous avez accepté de l'aider à retrouver sa marchandise.",
+   "id": 2668,
+   "nom": "Planche-Neige et les Sept Nimb'",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759531,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Localiser l'un des voleurs de skis souples"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4513,
+      19956,
+      1
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Ramener à {npc,4513} : x1 {item,19956}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759548,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Localiser l'un des voleurs de skis sombres"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759554,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -55
+     ],
+     "texte": "Vaincre les Nimbos enrubé et ronchon"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4513,
+      19957,
+      1
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Ramener à {npc,4513} : x1 {item,19957}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759550,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Localiser l'un des voleurs de skis rustiques"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759555,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -36
+     ],
+     "texte": "Vaincre les Nimbos guilleret, réservé et somnolent"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4513,
+      19958,
+      1
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Ramener à {npc,4513} : x1 {item,19958}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759552,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Localiser l'un des voleurs de skis glissants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759556,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -48
+     ],
+     "texte": "Vaincre le Nimbos ninstruit"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4513,
+      19959,
+      1
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Ramener à {npc,4513} : x1 {item,19959}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11997,
+       10
+      ],
+      [
+       11996,
+       10
+      ],
+      [
+       11994,
+       10
+      ],
+      [
+       11995,
+       10
+      ],
+      [
+       19974,
+       5
+      ],
+      [
+       11196,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2018,
+ "nom": "Planche-Neige et les Sept Nimb'",
+ "objets": [],
+ "prerequis": [
+  2010,
+  646
+ ]
+}

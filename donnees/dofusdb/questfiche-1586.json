@@ -1,0 +1,82 @@
+{
+ "depart": [
+  {
+   "mapId": 145229323,
+   "npcId": 2652
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Comment XLII et ses Hordémons ont-ils pu revenir dans le Xélorium malgré l'intervention d'Henual ? Le mieux est de poser gentiment la question au chef des envahisseurs... enfin, pas si gentiment que ça.",
+   "id": 2206,
+   "nom": "La Vie, l'Hormonde et le Reste",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2660,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2660}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3849,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,3849} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2658,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2658}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2652,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Retourner voir {npc,2652}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       15726,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1586,
+ "nom": "La Vie, l'Hormonde et le Reste",
+ "objets": [],
+ "prerequis": [
+  1585
+ ]
+}

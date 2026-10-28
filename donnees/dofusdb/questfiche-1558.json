@@ -1,0 +1,321 @@
+{
+ "depart": [
+  {
+   "mapId": 134225924,
+   "npcId": 2565
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'organisation d'Al Capote est persuadée de votre culpabilité. Cependant, elle vous laisse une dernière chance de prouver votre innocence si vous lui apportez l'assassin.",
+   "id": 2171,
+   "nom": "Depuis l'enfer",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2565,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      4
+     ],
+     "texte": "Aller voir {npc,2565}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2566,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      4
+     ],
+     "texte": "Aller voir {npc,2566}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2567,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Aller voir {npc,2567}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2566,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      4
+     ],
+     "texte": "Aller voir {npc,2566}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2568,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      3
+     ],
+     "texte": "Aller voir {npc,2568}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2442,
+      15621,
+      1
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Ramener à {npc,2442} : x1 {item,15621}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2568,
+      15571,
+      1
+     ],
+     "position": [
+      8,
+      3
+     ],
+     "texte": "Ramener à {npc,2568} : x1 {item,15571}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452548,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Découvrir la carte : Quartier de la chapelle noire"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885318,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Utiliser le déguisement en se plaçant devant le panneau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885320,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Attendre la visite du tueur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885321,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Attendre la visite du tueur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885322,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Attendre la visite du tueur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885323,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Attendre la visite du tueur"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3798,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Vaincre x1 {monster,3798} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2570,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,2570}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452738,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -2
+     ],
+     "texte": "Découvrir la carte : Entrée de la chapelle noire"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2569,
+      15573,
+      1
+     ],
+     "position": [
+      5,
+      -2
+     ],
+     "texte": "Ramener à {npc,2569} : x1 {item,15573}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452741,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -2
+     ],
+     "texte": "Découvrir la carte : Fosse des Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2537,
+      15574,
+      1
+     ],
+     "position": [
+      6,
+      -2
+     ],
+     "texte": "Ramener à {npc,2537} : x1 {item,15574}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452755,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      4
+     ],
+     "texte": "Découvrir la carte : Bas-fonds de Srambad"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2565,
+      15573,
+      1
+     ],
+     "position": [
+      10,
+      4
+     ],
+     "texte": "Ramener à {npc,2565} : x1 {item,15573}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15446,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1558,
+ "nom": "Depuis l'enfer",
+ "objets": [
+  [
+   15574,
+   1
+  ]
+ ],
+ "prerequis": [
+  1557
+ ]
+}

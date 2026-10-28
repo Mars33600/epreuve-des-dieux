@@ -1,0 +1,272 @@
+{
+ "depart": [
+  {
+   "mapId": 88087297,
+   "npcId": 3244
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Comme vous êtes un aventurier au grand cœur, vous avez accepté d'aider Sered à retrouver son vieil ami Rykke Zane : rendre service à l'un des troubadours les plus talentueux du Monde des Douze est un vrai plaisir.",
+   "id": 2369,
+   "nom": "La musique de Rykke Zane",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644038,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Rykke Zane dans les environs de Sufokia"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3244,
+      17860,
+      1
+     ],
+     "position": [
+      14,
+      22
+     ],
+     "texte": "Montrer à {npc,3244} : 1 {item,17860}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644120,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver la Sram"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3272,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      20
+     ],
+     "texte": "Aller voir {npc,3272}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4430,
+      1,
+      0
+     ],
+     "position": [
+      11,
+      20
+     ],
+     "texte": "Vaincre x1 {monster,4430} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3272,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      20
+     ],
+     "texte": "Aller voir {npc,3272}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3274,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3274}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4428,
+      1,
+      0
+     ],
+     "position": [
+      15,
+      18
+     ],
+     "texte": "Vaincre x1 {monster,4428} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3274,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      18
+     ],
+     "texte": "Aller voir {npc,3274}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3244,
+      0,
+      0
+     ],
+     "position": [
+      14,
+      22
+     ],
+     "texte": "Retourner voir {npc,3244}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      644059,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Découvrir la carte : Accès aux profondeurs sous-marines"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3244,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3244}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644134,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      26
+     ],
+     "texte": "Retrouver Sered à R'lyugluglu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3244,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      26
+     ],
+     "texte": "Aller voir {npc,3244}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644084,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer en contact avec l'âme de Rykke Zane"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644112,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      27
+     ],
+     "texte": "Utiliser la fée d'artifice pour prévenir Sered"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3244,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      27
+     ],
+     "texte": "Aller voir {npc,3244}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644082,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      27
+     ],
+     "texte": "Vaincre le joueur de flûte avec l'aide de Sered"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644023,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      27
+     ],
+     "texte": "Parler une dernière fois à Sered"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17983,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1732,
+ "nom": "La musique de Rykke Zane",
+ "objets": [],
+ "prerequis": []
+}

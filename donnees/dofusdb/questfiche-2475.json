@@ -1,0 +1,294 @@
+{
+ "depart": [
+  {
+   "mapId": 225968897,
+   "npcId": 6842
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La rumeur court que de jeunes enfants sont enlevés par la sorcière d'Ephedrya. Pour enquêter, un Forgelance a été envoyé sur son île. Qu'a-t-il découvert ?",
+   "id": 3132,
+   "nom": "La sorcière exilée",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984389,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -76
+     ],
+     "texte": "Prendre le bateau pour Ephedrya"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984504,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver Grenn... ou ce qu'il en reste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1041291,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -81
+     ],
+     "texte": "Récupérer l'arme du Forgelance, puis discuter avec lui"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985097,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      -84
+     ],
+     "texte": "Se rendre à l'entrée du château avec Grenn"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      7210,
+      1,
+      223875072
+     ],
+     "position": [
+      29,
+      -88
+     ],
+     "texte": "Vaincre x1 {monster,7210} sur la carte {map,223875072} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6946,
+      0,
+      0
+     ],
+     "position": [
+      29,
+      -88
+     ],
+     "texte": "Aller voir {npc,6946}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984525,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver les ouvrages à déposer sur les pupitres enchantés de la bibliothèque"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984531,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -88
+     ],
+     "texte": "Se plonger dans « Les aventures de Bobby Glourson »"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6985,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6985}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984527,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aider Koko Wapin à chasser les Inouifes de son potager"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984528,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Convaincre Kristoff de quitter le livre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984532,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -88
+     ],
+     "texte": "Se plonger dans « Le conte de Nissun Shibo »"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985453,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à Frida"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6990,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6990}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985443,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre les dévoreurs de mots"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984534,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Convaincre Duim et Frida de quitter le livre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985798,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -88
+     ],
+     "texte": "Se plonger dans « Promenons-nous dans les bois »"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985799,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Empêcher les mulous de dévorer les enfants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984537,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Convaincre Lizbeth et Frida de quitter le livre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984541,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -88
+     ],
+     "texte": "Faire un point sur la situation des enfants avec Grenn"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984542,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -88
+     ],
+     "texte": "Faire ses adieux à Kristoff"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      984543,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -77
+     ],
+     "texte": "S'assurer que les disparus restants ont bien été reconduits auprès de Gidrud"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27401,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2475,
+ "nom": "La sorcière exilée",
+ "objets": [],
+ "prerequis": [
+  2474
+ ]
+}

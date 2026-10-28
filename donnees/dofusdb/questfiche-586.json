@@ -1,0 +1,46 @@
+{
+ "depart": [
+  {
+   "mapId": 54171466,
+   "npcId": 1281
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Baka Laïve vous a demandé d'exterminer des Sylvesprits dans la Forêt pétrifiée ou dans l'Antre du Korriandre et de lui apporter une preuve.",
+   "id": 1239,
+   "nom": "Chasse aux Sylvesprits",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1281,
+      11130,
+      50
+     ],
+     "position": [
+      -75,
+      -74
+     ],
+     "texte": "Ramener à {npc,1281} : x50 {item,11130}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 586,
+ "nom": "L'appel de la forêt",
+ "objets": [],
+ "prerequis": []
+}

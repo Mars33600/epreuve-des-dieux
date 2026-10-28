@@ -1,0 +1,191 @@
+{
+ "depart": [
+  {
+   "mapId": 180486661,
+   "npcId": 3891
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez besoin de l'épée langue de feu pour affronter l'avatar Champignon Surru.",
+   "id": 2504,
+   "nom": "Le baptême du feu",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3895,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      34
+     ],
+     "texte": "Aller voir {npc,3895}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3885,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      34
+     ],
+     "texte": "Aller voir {npc,3885}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3885,
+      18850,
+      2
+     ],
+     "position": [
+      -12,
+      34
+     ],
+     "texte": "Ramener à {npc,3885} : x2 {item,18850}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726288,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      34
+     ],
+     "texte": "Découvrir la carte : Eaux de l'épée langue de feu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726289,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      34
+     ],
+     "texte": "Pêcher l'épée langue de feu"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3895,
+      18852,
+      1
+     ],
+     "position": [
+      -10,
+      34
+     ],
+     "texte": "Montrer à {npc,3895} : 1 {item,18852}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726290,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      25
+     ],
+     "texte": "Interroger la tribu des Pagneuls"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726349,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Fournaise du volcan"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4899,
+      1,
+      0
+     ],
+     "position": [
+      -24,
+      21
+     ],
+     "texte": "Vaincre x1 {monster,4899}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726351,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Champignon dunepipe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726352,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      29
+     ],
+     "texte": "Plonger l'épée langue de feu dans un champignon dunepipe"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3895,
+      18853,
+      1
+     ],
+     "position": [
+      -10,
+      34
+     ],
+     "texte": "Montrer à {npc,3895} : 1 {item,18853}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       9263,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1864,
+ "nom": "Le baptême du feu",
+ "objets": [
+  [
+   18853,
+   1
+  ]
+ ],
+ "prerequis": [
+  1863,
+  1860
+ ]
+}

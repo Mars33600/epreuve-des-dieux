@@ -1,0 +1,216 @@
+{
+ "depart": [
+  {
+   "mapId": 219153408,
+   "npcId": 6364
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez trouver les Larmes de Sacrieur et les apporter à Danathor pour forger l'Éclat de l'Aube.",
+   "id": 974,
+   "nom": "L'Éclat de l'Aube",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      384,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      -4
+     ],
+     "texte": "Aller voir {npc,384}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891039,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      40
+     ],
+     "texte": "Trouver les Larmes de Sacrieur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1161,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -27
+     ],
+     "texte": "Aller voir {npc,1161}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891040,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      44
+     ],
+     "texte": "Se procurer un Masque à Zag et partir chercher les Larmes de Sacrieur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6364,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Aller voir {npc,6364}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3046,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Aller voir {npc,3046}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      770,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,770}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891041,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -10
+     ],
+     "texte": "Chercher des notes de Nileza sur l'îlot Estitch"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891042,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Écouter ce que la créature chuchote"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891043,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher le maître de la créature sur l'îlot Estitch"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      590797,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -69
+     ],
+     "texte": "Découvrir la carte : Caverne de l'îlot Estitch"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3085,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -69
+     ],
+     "texte": "Aller voir {npc,3085}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4246,
+      1,
+      0
+     ],
+     "position": [
+      -47,
+      -69
+     ],
+     "texte": "Vaincre x1 {monster,4246} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3085,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -69
+     ],
+     "texte": "Aller voir {npc,3085}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6364,
+      10283,
+      1
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Ramener à {npc,6364} : x1 {item,10283}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 457,
+ "nom": "L'Éclat de l'Aube",
+ "objets": [],
+ "prerequis": [
+  456
+ ]
+}

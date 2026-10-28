@@ -1,0 +1,130 @@
+{
+ "depart": [
+  {
+   "mapId": 170133512,
+   "npcId": 3246
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le moment tant attendu est arrivé ! Entrez dans le temple de Koutoulou et neutralisez le Prêtre en jaune avant que l'infâme rejeton d'Hulhu ne pose son gros pied palmé sur le Monde des Douze.",
+   "id": 2396,
+   "nom": "De mal en impie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649709,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      26
+     ],
+     "texte": "Entrer dans le temple de Koutoulou"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4453,
+      1,
+      0
+     ],
+     "position": [
+      27,
+      26
+     ],
+     "texte": "Vaincre x1 {monster,4453} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3265,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      26
+     ],
+     "texte": "Aller voir {npc,3265}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4501,
+      1,
+      0
+     ],
+     "position": [
+      27,
+      26
+     ],
+     "texte": "Vaincre x1 {monster,4501} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3238,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      26
+     ],
+     "texte": "Aller voir {npc,3238}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3265,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      26
+     ],
+     "texte": "Aller voir {npc,3265}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3246,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3246}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17987,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1759,
+ "nom": "De mal en impie",
+ "objets": [],
+ "prerequis": [
+  1758
+ ]
+}

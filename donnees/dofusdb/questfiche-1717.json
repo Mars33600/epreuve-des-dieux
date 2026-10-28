@@ -1,0 +1,245 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous faites partie des miliciens chargés de récupérer les quatre Pierres Sacrées d'Araknas manquantes.",
+   "id": 2354,
+   "nom": "Le plateau de Leng",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2186,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      22
+     ],
+     "texte": "Aller voir {npc,2186}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891088,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Lao dans Srambad"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6405,
+      0,
+      0
+     ],
+     "position": [
+      -35,
+      -57
+     ],
+     "texte": "Aller voir {npc,6405}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3199,
+      0,
+      0
+     ],
+     "position": [
+      -35,
+      -57
+     ],
+     "texte": "Aller voir {npc,3199}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      625523,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Entrée du caveau royal"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      625596,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      -59
+     ],
+     "texte": "Découvrir la carte : Caveau royal"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4383,
+      1,
+      0
+     ],
+     "position": [
+      -18,
+      -59
+     ],
+     "texte": "Vaincre x1 {monster,4383} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891089,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      -59
+     ],
+     "texte": "Fouiller le caveau du roi Léorictus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891090,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      -59
+     ],
+     "texte": "Prendre l'urne"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3198,
+      17775,
+      1
+     ],
+     "position": [
+      5,
+      2
+     ],
+     "texte": "Ramener à {npc,3198} : x1 {item,17775}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3205,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -15
+     ],
+     "texte": "Aller voir {npc,3205}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3206,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -15
+     ],
+     "texte": "Aller voir {npc,3206}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891091,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -15
+     ],
+     "texte": "Chercher un moyen de s'évader"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891092,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -15
+     ],
+     "texte": "Échapper aux Araknes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891093,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -15
+     ],
+     "texte": "Échapper aux hommes de Leng"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891094,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -15
+     ],
+     "texte": "Voler la pierre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      17757,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Montrer à {npc,6309} : 1 {item,17757}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1717,
+ "nom": "Le plateau de Leng",
+ "objets": [],
+ "prerequis": [
+  1715
+ ]
+}

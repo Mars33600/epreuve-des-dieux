@@ -1,0 +1,207 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez enquêter sur la disparition d'une patrouille et des espions partis à sa recherche.",
+   "id": 2531,
+   "nom": "L'aube des morts-vivants",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2220,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      -58
+     ],
+     "texte": "Aller voir {npc,2220}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730377,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces des miliciens"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730378,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces des miliciens"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730379,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces des miliciens"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4026,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      -61
+     ],
+     "texte": "Aller voir {npc,4026}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730380,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      -61
+     ],
+     "texte": "Vaincre les geôliers Chafers"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4026,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      -61
+     ],
+     "texte": "Aller voir {npc,4026}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730381,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces de l'individu encapuchonné"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730382,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces de l'individu encapuchonné"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730383,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces de l'individu encapuchonné"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4043,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      -57
+     ],
+     "texte": "Aller voir {npc,4043}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5018,
+      1,
+      0
+     ],
+     "position": [
+      -18,
+      -57
+     ],
+     "texte": "Vaincre x1 {monster,5018} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4043,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      -57
+     ],
+     "texte": "Aller voir {npc,4043}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730385,
+      0,
+      0
+     ],
+     "position": [
+      -35,
+      -57
+     ],
+     "texte": "Se renseigner à la bibliothèque sur les occupants des tombes profanées"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1891,
+ "nom": "L'aube des morts-vivants",
+ "objets": [],
+ "prerequis": [
+  1889
+ ]
+}

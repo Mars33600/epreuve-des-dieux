@@ -1,0 +1,52 @@
+{
+ "depart": [
+  {
+   "mapId": 168558596,
+   "npcId": 3301
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il semblerait qu'aider Umra Tawil fut une erreur. Vous vous êtes engagé à la réparer.",
+   "id": 2391,
+   "nom": "Aux grands mots les grands remèdes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3301,
+      18075,
+      40
+     ],
+     "position": [
+      25,
+      28
+     ],
+     "texte": "Ramener à {npc,3301} : x40 {item,18075}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17984,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1754,
+ "nom": "Aux grands mots les grands remèdes",
+ "objets": [],
+ "prerequis": [
+  1751
+ ]
+}

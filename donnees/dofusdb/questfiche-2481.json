@@ -1,0 +1,232 @@
+{
+ "depart": [
+  {
+   "mapId": 223217171,
+   "npcId": 6947
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'esprit d'un Nimbos du Clan Blanchebière s'est manifesté. D'après lui, le Roi des rois Skori Blanchebière reposerait à Ereboria mais ne trouverait la paix que lorsque sa dernière arme lui sera restituée. Serait-ce un hasard que cette arme soit une lance et que le nom de Nascherite ait été prononcé ?",
+   "id": 3138,
+   "nom": "L'heure des adieux",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6843,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Aller voir {npc,6843}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982207,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -63
+     ],
+     "texte": "Escorter Nascherite auprès de l'esprit Blanchebière"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982843,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -63
+     ],
+     "texte": "Écouter Nascherite indiquer à Pashir où se trouve Gnugnir, la lance de Skori"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6948,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -63
+     ],
+     "texte": "Aller voir {npc,6948}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5824,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -63
+     ],
+     "texte": "Aller voir {npc,5824}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      982209,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -71
+     ],
+     "texte": "Découvrir la carte : Caverne de Cire Momore"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      7222,
+      1,
+      227280130
+     ],
+     "position": [
+      36,
+      -71
+     ],
+     "texte": "Vaincre x1 {monster,7222} sur la carte {map,227280130} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982218,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -70
+     ],
+     "texte": "Demander à Karon si le plan s'est déroulé sans encombres"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1004769,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -63
+     ],
+     "texte": "Trouver l'entrée du tombeau du clan Blanchebière"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      982213,
+      0,
+      0
+     ],
+     "position": [
+      30,
+      -63
+     ],
+     "texte": "Découvrir la carte : Tombeau du roi Skori Blanchebière"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982225,
+      0,
+      0
+     ],
+     "position": [
+      30,
+      -63
+     ],
+     "texte": "Écouter l'éloge funèbre de Nascherite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982704,
+      0,
+      0
+     ],
+     "position": [
+      30,
+      -63
+     ],
+     "texte": "Honorer le défunt Roi des rois Skori Blanchebière"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982705,
+      0,
+      0
+     ],
+     "position": [
+      30,
+      -63
+     ],
+     "texte": "Assister au départ des esprits Blanchebière, guidés par Karon le Trépasseur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      982217,
+      0,
+      0
+     ],
+     "position": [
+      30,
+      -63
+     ],
+     "texte": "Être témoin des adieux de Skori par l'intermédiaire de Karon"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6843,
+      0,
+      0
+     ],
+     "position": [
+      30,
+      -63
+     ],
+     "texte": "Aller voir {npc,6843}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27518,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2481,
+ "nom": "L'heure des adieux",
+ "objets": [],
+ "prerequis": [
+  2480,
+  2477,
+  2477
+ ]
+}

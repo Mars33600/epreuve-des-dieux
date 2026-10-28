@@ -1,0 +1,166 @@
+{
+ "depart": [
+  {
+   "mapId": 172754442,
+   "npcId": 3953
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le chef des adorateurs de goules est parti pour le bourg des Katrepat dans le but de rencontrer Anerice la Shushess. Rendez-vous là-bas et trouvez l'espion au service de Vanelle Sings, il pourra vous aider à mettre la main sur le Comte d'Ourlette.",
+   "id": 2515,
+   "nom": "Entretien avec une Vampyre",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725652,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Discuter avec des habitants du bourg pour trouver le Brâkmarien infiltré"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3961,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      26
+     ],
+     "texte": "Aller voir {npc,3961}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725656,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans le manoir des Katrepat"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4882,
+      1,
+      0
+     ],
+     "position": [
+      -14,
+      25
+     ],
+     "texte": "Vaincre x1 {monster,4882} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3963,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      25
+     ],
+     "texte": "Aller voir {npc,3963}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725659,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Débusquer le vieux vampire qui se cache dans les Terres Désacrées"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3964,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      25
+     ],
+     "texte": "Aller voir {npc,3964}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725664,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre à la vieille église des Terres Désacrées"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3965,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      24
+     ],
+     "texte": "Aller voir {npc,3965}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725665,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      24
+     ],
+     "texte": "Capturer le Comte d'Ourlette"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      729118,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      32
+     ],
+     "texte": "Ramener le Comte d'Ourlette au camp des chasseurs de goules"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19069,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1875,
+ "nom": "Entretien avec une Vampyre",
+ "objets": [],
+ "prerequis": [
+  1874
+ ]
+}

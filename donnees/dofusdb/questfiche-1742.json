@@ -1,0 +1,187 @@
+{
+ "depart": [
+  {
+   "mapId": 168822786,
+   "npcId": 3269
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez neutraliser le Léviathon avant l'attaque prévue contre le camp frontalier des Steamers.",
+   "id": 2379,
+   "nom": "La gueule de l'enfer",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1604,
+      17205,
+      5
+     ],
+     "position": [
+      22,
+      19
+     ],
+     "texte": "Ramener à {npc,1604} : x5 {item,17205}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      644130,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      32
+     ],
+     "texte": "Découvrir la carte : Léviathon"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3271,
+      18097,
+      1
+     ],
+     "position": [
+      19,
+      32
+     ],
+     "texte": "Montrer à {npc,3271} : 1 {item,18097}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3304,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      32
+     ],
+     "texte": "Aller voir {npc,3304}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4505,
+      1,
+      0
+     ],
+     "position": [
+      19,
+      32
+     ],
+     "texte": "Vaincre x1 {monster,4505} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3269,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Aller voir {npc,3269}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886810,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Vaincre la première vague puis parler au Lieutenant Trenne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886811,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Vaincre la deuxième vague puis parler au Lieutenant Trenne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886812,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Vaincre la troisième vague puis parler au Lieutenant Trenne"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3268,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Aller voir {npc,3268}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3246,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3246}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17980,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1742,
+ "nom": "La gueule de l'enfer",
+ "objets": [
+  [
+   17205,
+   5
+  ]
+ ],
+ "prerequis": [
+  1741
+ ]
+}

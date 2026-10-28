@@ -1,0 +1,354 @@
+{
+ "depart": [
+  {
+   "mapId": 122421248,
+   "npcId": 2205
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous savez que Crocoburio s'est réincarné... mais où se trouve-t-il ? Le Monde des Douze est vaste. Autant chercher un reptile dans un bassin rempli de crocodailles.",
+   "id": 2690,
+   "nom": "À la recherche de Crocoburio",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      765762,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Sramsara"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4566,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4566}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768596,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -82
+     ],
+     "texte": "Affronter Bethel dans sa tour"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4566,
+      20078,
+      1
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Ramener à {npc,4566} : x1 {item,20078}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      766152,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Chasser le fantôme crocodaille"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4566,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4566}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767442,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le parchemin magique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      766160,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'endroit où Crocoburio s'est réincarné"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767443,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir des informations sur la famille de Crocoburio réincarné"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767444,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le parchemin magique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767447,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'endroit où a déménagé la famille de bûcherons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767448,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir de nouvelles informations sur la famille de Crocoburio réincarné"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767449,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le parchemin magique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767450,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver qui a recueilli les trois orphelins"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767451,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à l'aîné des orphelins"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767453,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le plus jeune des orphelins"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767454,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -63
+     ],
+     "texte": "Se débarrasser des créatures qui importunent le jeune garçon"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4615,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -63
+     ],
+     "texte": "Aller voir {npc,4615}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4616,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -60
+     ],
+     "texte": "Retourner voir {npc,4616}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767459,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -60
+     ],
+     "texte": "Donner une bonne leçon à Bruce Epett"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767460,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le parchemin magique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767461,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver quelqu'un qui aurait aperçu la petite fille"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767462,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le parchemin magique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767464,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'endroit où s'est réfugiée la petite fille"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      770275,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -23
+     ],
+     "texte": "Se débarrasser des boiboites de Yan Chenap"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4617,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -23
+     ],
+     "texte": "Aller voir {npc,4617}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767477,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Escorter la petite fille jusqu'à Mériana"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Aller voir {npc,2205}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19412,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2038,
+ "nom": "À la recherche de Crocoburio",
+ "objets": [],
+ "prerequis": [
+  2037
+ ]
+}

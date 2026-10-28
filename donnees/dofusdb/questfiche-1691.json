@@ -1,0 +1,182 @@
+{
+ "depart": [
+  {
+   "mapId": 161218564,
+   "npcId": 3093
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez mettre l'agent Kull aux arrêts.",
+   "id": 2327,
+   "nom": "Le conquérant",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3130,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -22
+     ],
+     "texte": "Aller voir {npc,3130}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885009,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -22
+     ],
+     "texte": "Protéger Kull pour qu'il puisse être jugé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885010,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Remettre Kull entre les mains du Sergent Baste"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3109,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Aller voir {npc,3109}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3095,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Aller voir {npc,3095}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885011,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -18
+     ],
+     "texte": "Se cacher en attendant le passage de l'Agent Pascal Ante"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3131,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -18
+     ],
+     "texte": "Aller voir {npc,3131}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885012,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Remettre l'Agent Pascal Ante entre les mains du Sergent Baste"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      608439,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -21
+     ],
+     "texte": "Découvrir la carte : Emplacement de l'appareil"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3132,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -21
+     ],
+     "texte": "Aller voir {npc,3132}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885013,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Remettre l'Agent Pizzareta entre les mains du Sergent Baste"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17621,
+       5
+      ],
+      [
+       15206,
+       50
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1691,
+ "nom": "Le conquérant",
+ "objets": [],
+ "prerequis": [
+  1690
+ ]
+}

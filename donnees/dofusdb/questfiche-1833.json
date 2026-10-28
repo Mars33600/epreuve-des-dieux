@@ -1,0 +1,266 @@
+{
+ "depart": [
+  {
+   "mapId": 173936128,
+   "npcId": 3555
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Idarfen Madjika vous a demandé d'entrer dans la Chambre sacrée de la pyramide pour que Chanisa puisse rencontrer Tal Kasha. Comme vous n'avez pas été officiellement invité, il est probable que les Maudits ne vous réservent pas un très bon accueil.",
+   "id": 2473,
+   "nom": "Le secret de la pyramide",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3676,
+      0,
+      0
+     ],
+     "position": [
+      14,
+      -75
+     ],
+     "texte": "Aller voir {npc,3676}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712072,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -77
+     ],
+     "texte": "Entrer dans la Chambre de Tal Kasha avec Chanisa"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4744,
+      1,
+      0
+     ],
+     "position": [
+      12,
+      -77
+     ],
+     "texte": "Vaincre x1 {monster,4744} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3685,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -77
+     ],
+     "texte": "Aller voir {npc,3685}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3677,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -77
+     ],
+     "texte": "Aller voir {npc,3677}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3678,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -66
+     ],
+     "texte": "Retourner voir {npc,3678}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3428,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -21
+     ],
+     "texte": "Aller voir {npc,3428}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712076,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Utiliser le parchemin de Rimanda près du point d'équilibre mystique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712174,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Entrer dans la salle du portail"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712118,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Examiner le portail"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3680,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Aller voir {npc,3680}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712124,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Emprunter le portail vers l'Éther"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3681,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Aller voir {npc,3681}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3680,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Aller voir {npc,3680}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712062,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Retourner dans la salle du portail"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712068,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Sceller le portail"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3596,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -76
+     ],
+     "texte": "Aller voir {npc,3596}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3678,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -66
+     ],
+     "texte": "Retourner voir {npc,3678}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18541,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1833,
+ "nom": "Le secret de la pyramide",
+ "objets": [],
+ "prerequis": [
+  1832
+ ]
+}

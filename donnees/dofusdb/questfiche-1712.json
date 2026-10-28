@@ -1,0 +1,304 @@
+{
+ "depart": [
+  {
+   "mapId": 161481988,
+   "npcId": 3167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez récupérer le Chaldor, un bien Enutrof caché dans le temple de Kerubim Crépin.",
+   "id": 2343,
+   "nom": "Il s'en est fallu d'un poil",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3168,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -19
+     ],
+     "texte": "Aller voir {npc,3168}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      608403,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -19
+     ],
+     "texte": "Découvrir la carte : Salle cachée"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4337,
+      1,
+      0
+     ],
+     "position": [
+      -13,
+      -19
+     ],
+     "texte": "Vaincre x1 {monster,4337} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      608494,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -19
+     ],
+     "texte": "Découvrir la carte : Salle du butin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885006,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher le Chaldor"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3167,
+      17654,
+      1
+     ],
+     "position": [
+      -13,
+      -19
+     ],
+     "texte": "Ramener à {npc,3167} : x1 {item,17654}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3169,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,3169}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3167,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -19
+     ],
+     "texte": "Aller voir {npc,3167}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3109,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Aller voir {npc,3109}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      608424,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -18
+     ],
+     "texte": "Découvrir la carte : Rejoindre le Chacha de Groschinder"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3116,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -18
+     ],
+     "texte": "Aller voir {npc,3116}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      608472,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -18
+     ],
+     "texte": "Découvrir la carte : Rejoindre le Chacha de Groschinder"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3116,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -18
+     ],
+     "texte": "Aller voir {npc,3116}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      608452,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -19
+     ],
+     "texte": "Découvrir la carte : Rejoindre le Chacha de Groschinder"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3116,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -19
+     ],
+     "texte": "Aller voir {npc,3116}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885007,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -19
+     ],
+     "texte": "Utiliser la poudre d'apparition à proximité du chacha"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3170,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -19
+     ],
+     "texte": "Aller voir {npc,3170}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4321,
+      1,
+      0
+     ],
+     "position": [
+      -12,
+      -19
+     ],
+     "texte": "Vaincre x1 {monster,4321} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3172,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -19
+     ],
+     "texte": "Aller voir {npc,3172}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885008,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Arracher le Chaldor de la main de Larry Slim"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3169,
+      17656,
+      1
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Ramener à {npc,3169} : x1 {item,17656}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17623,
+       5
+      ],
+      [
+       15206,
+       50
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1712,
+ "nom": "Il s'en est fallu d'un poil",
+ "objets": [],
+ "prerequis": []
+}

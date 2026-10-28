@@ -1,0 +1,189 @@
+{
+ "depart": [
+  {
+   "mapId": 88081174,
+   "npcId": 4820
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'Envoyée de Xélor vous a chargé d'enquêter sur une nouvelle anomalie temporelle. Qu'allez-vous découvrir ? Mystère.",
+   "id": 2734,
+   "nom": "Amaknanomalie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      921239,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      24
+     ],
+     "texte": "Entrer dans l'anomalie signalée par l'Envoyée de Xélor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801523,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      25
+     ],
+     "texte": "Vaincre les gardiens de l'anomalie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802056,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      24
+     ],
+     "texte": "Explorer l'anomalie du village incendié"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801527,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Affronter le chef du village"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802057,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Équiper le Dofus et quitter l'anomalie"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4820,
+      21186,
+      1
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Montrer à {npc,4820} : 1 {item,21186}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801587,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Vaincre les assaillants dragoeufs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4820,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Aller voir {npc,4820}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801588,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre dans la dimension du Xélorium"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2652,
+      21186,
+      1
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Montrer à {npc,2652} : 1 {item,21186}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801599,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Capturer la première boule d'énergie dans l'avant-poste des Voyageurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801600,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Capturer la seconde boule d'énergie dans l'avant-poste des Voyageurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2652,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Retourner voir {npc,2652}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2078,
+ "nom": "Amaknanomalie",
+ "objets": [
+  [
+   21186,
+   2
+  ]
+ ],
+ "prerequis": [
+  2064
+ ]
+}

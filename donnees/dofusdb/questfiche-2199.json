@@ -1,0 +1,210 @@
+{
+ "depart": [
+  {
+   "mapId": 204998145,
+   "npcId": 6067
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Au bord des eaux d'Akwadala, vous avez rencontré une Pandawa muette qui tentait de plier des figures en papier, mais sans grand résultat. Désireux de l'aider à surmonter sa tristesse, vous êtes parti en quête d'un maître de l'origami. Peut-être avez-vous déjà rencontré l'un d'entre eux ? Les plus célèbres travaillent dans des ateliers dédiés à leur art.",
+   "id": 2856,
+   "nom": "Pour que son cœur batte comme des ailes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875078,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre dans un atelier fréquenté par un maître du pliage de papier"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5643,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -34
+     ],
+     "texte": "Aller voir {npc,5643}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5643,
+      23936,
+      1
+     ],
+     "position": [
+      18,
+      -34
+     ],
+     "texte": "Ramener à {npc,5643} : x1 {item,23936}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875244,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -22
+     ],
+     "texte": "Remettre le diagramme et les feuilles de papier à la Pandawa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880113,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'origine des ennuis de la Pandawa dans un lieu de mort"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880008,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -40
+     ],
+     "texte": "Vaincre les spectres des noyés sur le rivage de Grobe"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6068,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -40
+     ],
+     "texte": "Aller voir {npc,6068}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875259,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -22
+     ],
+     "texte": "Retourner voir la Pandawa mélancolique"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5643,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -22
+     ],
+     "texte": "Aller voir {npc,5643}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880527,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -22
+     ],
+     "texte": "Plier la millième cygrue et la montrer à Pandako"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      875261,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Lac des cygrues"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880014,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      0
+     ],
+     "texte": "Libérer les cygrues de papier au bord du lac"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875263,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      0
+     ],
+     "texte": "Détruire l'esprit de la malédiction"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875265,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -22
+     ],
+     "texte": "Annoncer la bonne nouvelle à la Pandawa mélancolique"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       23946,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2199,
+ "nom": "Pour que son cœur batte comme des ailes",
+ "objets": [],
+ "prerequis": [
+  2149,
+  2154,
+  2154
+ ]
+}

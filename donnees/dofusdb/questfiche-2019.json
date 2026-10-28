@@ -1,0 +1,189 @@
+{
+ "depart": [
+  {
+   "mapId": 194775300,
+   "npcId": 4501
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Brikke est débordée de travail à cause d'une commande urgente faite par un officier nimbos. Allez donc voir le général Boll pour essayer d'obtenir un délai, vous serez alors en mesure de discuter sereinement avec la forgeronne.",
+   "id": 2669,
+   "nom": "Les ennemis de mes ennemis sont mes ennemis",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4506,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4506}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759019,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Discuter avec le chef des éclaireurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4506,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Retourner voir {npc,4506}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759072,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un moyen pour que les éclaireurs et les Nimbos cessent de se battre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2003,
+      19936,
+      8
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Ramener à {npc,2003} : x8 {item,19936}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4520,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,4520}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5323,
+      1,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Vaincre x1 {monster,5323} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759071,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Retourner sur les lieux de l'affrontement entre les éclaireurs et les Nimbos"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761353,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Placer le métal maudit pour provoquer une attaque d'Armutins"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759080,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Combattre les Armutins avec l'aide des éclaireurs et des Nimbos"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4522,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Aller voir {npc,4522}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4506,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -69
+     ],
+     "texte": "Aller voir {npc,4506}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19973,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2019,
+ "nom": "Les ennemis de mes ennemis sont mes ennemis",
+ "objets": [],
+ "prerequis": [
+  2011
+ ]
+}

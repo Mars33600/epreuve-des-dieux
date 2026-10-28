@@ -1,0 +1,270 @@
+{
+ "depart": [
+  {
+   "mapId": 109577731,
+   "npcId": 2028
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous voilà prêt à explorer le donjon du château Harebourg. Au bout du chemin : le Comte, sa Clepsydre, et peut-être plus encore. Mais quelque chose vous dit que quelques détours seront nécessaires avant d'arriver à destination.",
+   "id": 1928,
+   "nom": "Le givre des révélations",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452679,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -82
+     ],
+     "texte": "Entrer dans la Tour de la Clepsydre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453009,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -81
+     ],
+     "texte": "Faire le premier relevé de température"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452997,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Faire le second relevé de température"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2028,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Retourner voir {npc,2028}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2025,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Aller voir {npc,2025}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452992,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'ancien site d'exploitation du Taroudium"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2025,
+      14147,
+      1
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Ramener à {npc,2025} : x1 {item,14147}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2028,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Retourner voir {npc,2028}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452991,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Parler aux 3 Nordes"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3416,
+      1,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Vaincre x1 {monster,3416} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2047,
+      14018,
+      1
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Montrer à {npc,2047} : 1 {item,14018}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452990,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Remplir la fiole avec le liquide de la Clepsydre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2047,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Aller voir {npc,2047}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452979,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Se prosterner devant Djaul"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452989,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Interroger Djaul à propos des origines de l'hiver éternel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452974,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Parler à Djaul et donner votre opinion sur la malédiction"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452978,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Se prosterner devant Jiva"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2051,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Aller voir {npc,2051}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       10
+      ],
+      [
+       13994,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1327,
+ "nom": "Le givre des révélations",
+ "objets": [],
+ "prerequis": [
+  1326
+ ]
+}

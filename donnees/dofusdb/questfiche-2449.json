@@ -1,0 +1,196 @@
+{
+ "depart": [
+  {
+   "mapId": 207623176,
+   "npcId": 6167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Depuis que vous avez condamné la Reine cornue à rester prisonnière de son bloc d'ambre, une question vous taraude : comment la démone s'est-elle retrouvée dans cette situation ? Qui est-elle, et quel est son lien avec Terrakourial ? Bon certes, cela fait plusieurs mystères à résoudre. Raison de plus pour chercher à comprendre ce qui s'est passé si vous voulez éviter les insomnies.",
+   "id": 3105,
+   "nom": "La bête au bois dormant",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933508,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Entrer dans le rêve de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3499,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Aller voir {npc,3499}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933510,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "S'entretenir avec le maître du temple de Crâ"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      938667,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Passer l'épreuve de la baliste de Crâ"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933512,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Parler à la Grande Chasseresse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933513,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer la Forêt Maléfique à la recherche d'une créature qui se souvient de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933514,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      19
+     ],
+     "texte": "Faire face au vieux moussu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6687,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      19
+     ],
+     "texte": "Aller voir {npc,6687}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933518,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      19
+     ],
+     "texte": "Pénétrer dans le bloc d'ambre caché sous le tumulus"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6689,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      19
+     ],
+     "texte": "Aller voir {npc,6689}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6742,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      19
+     ],
+     "texte": "Aller voir {npc,6742}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2449,
+ "nom": "La bête au bois dormant",
+ "objets": [
+  [
+   737,
+   1
+  ],
+  [
+   694,
+   1
+  ],
+  [
+   739,
+   1
+  ],
+  [
+   7754,
+   1
+  ],
+  [
+   7115,
+   1
+  ],
+  [
+   7114,
+   1
+  ]
+ ],
+ "prerequis": [
+  2420,
+  2448
+ ]
+}

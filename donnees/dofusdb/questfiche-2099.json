@@ -1,0 +1,205 @@
+{
+ "depart": [
+  {
+   "mapId": 200804356,
+   "npcId": 5130
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Draconiros vous a demandé de capturer les quatre Horlemars : il se chargera lui-même de les détruire. Afin de rééquilibrer les forces en présence, vous allez utiliser des leurres qui vous permettront d'affronter chacun de vos adversaires séparément.",
+   "id": 2752,
+   "nom": "Quatre contre un",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      21878,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,21878} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816418,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer l'adepte d'Eiwech"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      817867,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Poser une marque de cauchemar là où rêve un roi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      817961,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Poser une marque de cauchemar là où un dieu fait la sieste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      817869,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Poser une marque de cauchemar là où dort un alchimiste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      817870,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Poser une marque de cauchemar là où songe une prisonnière du temps"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5294,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5294}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816462,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Capturer le premier Horlemar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816465,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Capturer le deuxième Horlemar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816466,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -42
+     ],
+     "texte": "Capturer le troisième Horlemar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816467,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      9
+     ],
+     "texte": "Capturer le dernier Horlemar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5130,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retourner voir {npc,5130}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      817981,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger Draconiros sur la vision apparue dans la fumée du creuset"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2099,
+ "nom": "Quatre contre un",
+ "objets": [
+  [
+   476,
+   20
+  ],
+  [
+   643,
+   6
+  ],
+  [
+   547,
+   1
+  ],
+  [
+   545,
+   1
+  ],
+  [
+   21948,
+   1
+  ],
+  [
+   544,
+   1
+  ],
+  [
+   546,
+   1
+  ],
+  [
+   14635,
+   100
+  ]
+ ],
+ "prerequis": [
+  2098
+ ]
+}

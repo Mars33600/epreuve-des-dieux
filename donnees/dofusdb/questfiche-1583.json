@@ -1,0 +1,92 @@
+{
+ "depart": [
+  {
+   "mapId": 145229323,
+   "npcId": 2652
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Doc Emiette Borgne veut en savoir plus sur les Hordémons qui hantent le Jour présent. Connaissant votre sens aigu de la diplomatie, il vous a demandé d'aller interroger quelques-uns d'entre eux.",
+   "id": 2203,
+   "nom": "Les démons de midi",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481296,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger un Hordémon Seith"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481274,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger un Hordémon Trezz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481273,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger un Hordémon Vindeux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481275,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger un Hordémon Trantroa"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2652,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Retourner voir {npc,2652}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       15724,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1583,
+ "nom": "Les démons de midi",
+ "objets": [],
+ "prerequis": [
+  1593
+ ]
+}

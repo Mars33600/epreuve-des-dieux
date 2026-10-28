@@ -1,0 +1,240 @@
+{
+ "depart": [
+  {
+   "mapId": 202900996,
+   "npcId": 5316
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Après avoir libéré Draconiros, il dévoile le plan secret de Servitude : mettre la main sur la boite du projet Méthée afin d'asservir les Douze. Il faut absolument récupérer la boite avant lui et la mettre en lieu sûr.",
+   "id": 2769,
+   "nom": "Une boite pour les asservir tous",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818507,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un veilleur qui saura vous renseigner sur la boite à 12 faces"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818888,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Trouver un objet ayant appartenu à Pandora et l'amener à Martalo"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818512,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Utiliser la montre de Martalo pour voyager dans le temps jusqu'à Pandora"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5320,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5320}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818514,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre Bavdur accompagné des sbires de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5320,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5320}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5320,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5320}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818515,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Utiliser la montre de Martalo pour retourner à l'époque de l'Eliocalypse"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5319,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Aller voir {npc,5319}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825100,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver comment créer un problème au niveau d'un des ponts inférieurs de la galère"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818517,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -2
+     ],
+     "texte": "Trouver une clé pour libérer le gobelin de ses entraves"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818520,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -2
+     ],
+     "texte": "Ramasser les entraves détachées du gobelin"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5319,
+      22032,
+      1
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Ramener à {npc,5319} : x1 {item,22032}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5318,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Aller voir {npc,5318}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818525,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Mener Servitude dans le passé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818526,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre les 5 Chaines de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5320,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5320}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5318,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Aller voir {npc,5318}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22222,
+       3
+      ],
+      [
+       22217,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2114,
+ "nom": "Une boite pour les asservir tous",
+ "objets": [],
+ "prerequis": [
+  2113
+ ]
+}

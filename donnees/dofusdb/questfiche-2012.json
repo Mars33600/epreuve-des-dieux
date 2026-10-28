@@ -1,0 +1,163 @@
+{
+ "depart": [
+  {
+   "mapId": 194778114,
+   "npcId": 4508
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le général Dourak est retenu contre son gré par des Ninsoumis : vous devez apaiser la situation pour obtenir la libération du doyen afin de pouvoir vous entretenir avec lui et obtenir des précisions sur l'histoire de Gulnimborstik.",
+   "id": 2662,
+   "nom": "Les Ninsoumis",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759149,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre sur la piste d'envol pour rencontrer les Ninsoumis"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759152,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -70
+     ],
+     "texte": "Parler au chef des Ninsoumis"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759157,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'endroit où les Nimbos conservent la nourriture"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759158,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -72
+     ],
+     "texte": "Implorer le cuisinier de nourrir les Ninsoumis"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759265,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -70
+     ],
+     "texte": "Rapporter les pains de viande avant qu'ils ne refroidissent"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759242,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -70
+     ],
+     "texte": "Rapporter des couvertures aux Ninsoumis"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759243,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -70
+     ],
+     "texte": "Discuter brièvement avec le général Dourak"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4526,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -70
+     ],
+     "texte": "Aller voir {npc,4526}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759249,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -70
+     ],
+     "texte": "Obtenir la libération du général grâce à la parole boxée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4526,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -70
+     ],
+     "texte": "Aller voir {npc,4526}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19974,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2012,
+ "nom": "Les Ninsoumis",
+ "objets": [],
+ "prerequis": [
+  2011
+ ]
+}

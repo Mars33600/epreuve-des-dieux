@@ -1,0 +1,476 @@
+{
+ "depart": [
+  {
+   "mapId": 54535191,
+   "npcId": 1237
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Madame le maire Cantile se pose une question cruciale : existe-t-il un moyen de lever la malédiction de Djaul ? Vous allez explorer les trois pistes qu'elle vous a indiquées, et voir si elles vous mènent quelque part. Encore quelques crapahutages dans la neige en perspective.",
+   "id": 1924,
+   "nom": "Mission Solution",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1369,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -72
+     ],
+     "texte": "Aller voir {npc,1369}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453856,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir quelle est la secte active au village enseveli"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453857,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Se vêtir d'un Slip Iholo et rencontrer Surlah Taite de nuit dans l'Hypogée de l'Obsidiantre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1377,
+      14023,
+      10
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Ramener à {npc,1377} : x10 {item,14023}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1272,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -45
+     ],
+     "texte": "Aller voir {npc,1272}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453851,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -38
+     ],
+     "texte": "Parler à Joey Skro à la nuit tombée"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1377,
+      14024,
+      1
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Ramener à {npc,1377} : x1 {item,14024}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453850,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Invoquer le S.L.I.P."
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3419,
+      1,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Vaincre x1 {monster,3419} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1377,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Aller voir {npc,1377}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1248,
+      0,
+      0
+     ],
+     "position": [
+      -78,
+      -43
+     ],
+     "texte": "Aller voir {npc,1248}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453846,
+      0,
+      0
+     ],
+     "position": [
+      -78,
+      -43
+     ],
+     "texte": "Lire le registre dans la tour des archives"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453847,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -39
+     ],
+     "texte": "Découvrir la carte : Champ d'Ed Othnas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453844,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -39
+     ],
+     "texte": "Fouiller les environs à la recherche d'un indice"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3420,
+      2,
+      0
+     ],
+     "position": [
+      -68,
+      -39
+     ],
+     "texte": "Vaincre x2 {monster,3420} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453840,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -39
+     ],
+     "texte": "Fouiller la charrette"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2016,
+      0,
+      0
+     ],
+     "position": [
+      -22,
+      33
+     ],
+     "texte": "Aller voir {npc,2016}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2015,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,2015}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2014,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Aller voir {npc,2014}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1042,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -21
+     ],
+     "texte": "Aller voir {npc,1042}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2022,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      -73
+     ],
+     "texte": "Aller voir {npc,2022}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3421,
+      1,
+      0
+     ],
+     "position": [
+      -82,
+      -73
+     ],
+     "texte": "Vaincre x1 {monster,3421} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2022,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      -73
+     ],
+     "texte": "Aller voir {npc,2022}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453822,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Judas Sticau"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1355,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -85
+     ],
+     "texte": "Aller voir {npc,1355}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1355,
+      14026,
+      1
+     ],
+     "position": [
+      -68,
+      -85
+     ],
+     "texte": "Ramener à {npc,1355} : x1 {item,14026}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1355,
+      14027,
+      1
+     ],
+     "position": [
+      -68,
+      -85
+     ],
+     "texte": "Ramener à {npc,1355} : x1 {item,14027}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453814,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer la forêt Pétrifiée à la recherche de quelque chose laissé par Djaul."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453815,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -73
+     ],
+     "texte": "Escorter le Djaulien Perdu jusqu'au zaap du Village Enseveli"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2027,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -73
+     ],
+     "texte": "Aller voir {npc,2027}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3422,
+      1,
+      0
+     ],
+     "position": [
+      -77,
+      -73
+     ],
+     "texte": "Vaincre x1 {monster,3422} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1355,
+      14028,
+      1
+     ],
+     "position": [
+      -68,
+      -85
+     ],
+     "texte": "Ramener à {npc,1355} : x1 {item,14028}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453799,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -85
+     ],
+     "texte": "Assister Judas Sticau pendant le rituel de désenvoûtement."
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1237,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -42
+     ],
+     "texte": "Retourner voir {npc,1237}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       7
+      ],
+      [
+       11333,
+       2
+      ],
+      [
+       11943,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1318,
+ "nom": "Mission Solution",
+ "objets": [],
+ "prerequis": [
+  1317
+ ]
+}

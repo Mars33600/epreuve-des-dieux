@@ -1,0 +1,146 @@
+{
+ "depart": [
+  {
+   "mapId": 108794630,
+   "npcId": 2004
+  },
+  {
+   "mapId": 108927238,
+   "npcId": 2007
+  },
+  {
+   "mapId": 108925717,
+   "npcId": 2006
+  },
+  {
+   "mapId": 108793118,
+   "npcId": 2005
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez décidé de rendre visite aux maîtres-artisans du château de Harebourg pour leur botter les fesses. Vous ignorez comment vous est venue cette idée, sûrement que cette petite voix dans votre tête qui vous pousse à massacrer tout ce qui se trouve sur votre passage n'y est pas étrangère.",
+   "id": 1906,
+   "nom": "Il faut mettre un terme aux maîtres",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3397,
+      1,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Vaincre x1 {monster,3397} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453350,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Découvrir la carte : Laboratoire de Nileza - Sortie"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3409,
+      1,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Vaincre x1 {monster,3409} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453352,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Découvrir la carte : Transporteur de Sylargh - Sortie"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3384,
+      1,
+      0
+     ],
+     "position": [
+      -63,
+      -93
+     ],
+     "texte": "Vaincre x1 {monster,3384} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453353,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -93
+     ],
+     "texte": "Découvrir la carte : Salons privés de Klime - Sortie"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3391,
+      1,
+      0
+     ],
+     "position": [
+      -71,
+      -88
+     ],
+     "texte": "Vaincre x1 {monster,3391} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453337,
+      0,
+      0
+     ],
+     "position": [
+      -71,
+      -88
+     ],
+     "texte": "Découvrir la carte : Forgefroide de Missiz Frizz - Sortie"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1309,
+ "nom": "Il faut mettre un terme aux maîtres",
+ "objets": [],
+ "prerequis": [
+  626
+ ]
+}

@@ -1,0 +1,136 @@
+{
+ "depart": [
+  {
+   "mapId": 234751491,
+   "npcId": 7640
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des secousses agitent régulièrement l'avant-poste des voyageurs, semant l'inquiétude : Gargandyas semble changer de comportement. Le capitaine Blair vous a chargé d'enquêter sur ce phénomène et de le résoudre pour empêcher le Graogarm de s'ébrouer ou pire encore : d'éternuer. Cela pourrait déclencher une onde de choc d'une ampleur inédite dans cette dimension...",
+   "id": 3210,
+   "nom": "Une petite démangeaison",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139353,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      27
+     ],
+     "texte": "Inspecter la queue de Gargandyas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139354,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      27
+     ],
+     "texte": "Éliminer les pupuces géantes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139355,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      27
+     ],
+     "texte": "Refermer la faille menant à Ecaflipus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139356,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      17
+     ],
+     "texte": "Faire votre rapport au Capitaine Blair"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1146133,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Éradiquer les trois groupes de pupuces restantes dans la brousse-poil de l'Osavane"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139360,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Récupérer de la nourriture auprès de Marlyze"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139652,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      7
+     ],
+     "texte": "Suivre les instructions du redimensionneur à croquette"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7640,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      17
+     ],
+     "texte": "Retourner voir {npc,7640}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       20
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2529,
+ "nom": "Une petite démangeaison",
+ "objets": [],
+ "prerequis": [
+  2515
+ ]
+}

@@ -1,0 +1,365 @@
+{
+ "depart": [
+  {
+   "mapId": 213910788,
+   "npcId": 6312
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Suite à votre victoire sur l'archevêque Erazal, votre Ordre souhaite prendre certaines dispositions.",
+   "id": 2557,
+   "nom": "Apprentissage : Gardien du Savoir",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734268,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Découvrir la carte : Salle des Protecteurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4110,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,4110}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734269,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Découvrir la carte : Entrée de l'aquadôme de Merkator"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      3534,
+      1,
+      119277059
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Vaincre x1 {monster,3534} sur la carte {map,119277059} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2197,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Aller voir {npc,2197}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734271,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      29
+     ],
+     "texte": "Découvrir la carte : Entrée du puits de pouvoir sous-marin"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734272,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      29
+     ],
+     "texte": "Découvrir la carte : Passage du puits de pouvoir"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      734273,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      29
+     ],
+     "texte": "Vaincre les gardiens"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734274,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      29
+     ],
+     "texte": "Découvrir la carte : Puits de pouvoir sous-marin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4129,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      29
+     ],
+     "texte": "Aller voir {npc,4129}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734275,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      -60
+     ],
+     "texte": "Découvrir la carte : Entrée du puits de pouvoir du cimetière des Héros"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734276,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      -60
+     ],
+     "texte": "Découvrir la carte : Passage du puits de pouvoir"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      734277,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      -60
+     ],
+     "texte": "Vaincre les gardiens"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734278,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Puits de pouvoir du cimetière des Héros"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4130,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      -60
+     ],
+     "texte": "Aller voir {npc,4130}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4960,
+      1,
+      0
+     ],
+     "position": [
+      -21,
+      -60
+     ],
+     "texte": "Vaincre x1 {monster,4960} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4130,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      -60
+     ],
+     "texte": "Aller voir {npc,4130}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734279,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Découvrir la carte : Entrée du puits de pouvoir du cimetière des Torturés"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734280,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Découvrir la carte : Passage du puits de pouvoir"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      734281,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Vaincre les gardiens"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734282,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Découvrir la carte : Puits de pouvoir du cimetière des Torturés"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4131,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Aller voir {npc,4131}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      734283,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Vaincre les héros d'antan"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4131,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Aller voir {npc,4131}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4110,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,4110}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6312,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,6312}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1917,
+ "nom": "Apprentissage : Gardien du Savoir",
+ "objets": [],
+ "prerequis": [
+  423
+ ]
+}

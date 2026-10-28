@@ -1,0 +1,262 @@
+{
+ "depart": [
+  {
+   "mapId": 173017095,
+   "npcId": 4285
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Berklé a besoin de votre aide pour contenir l'expansion des Calcinés.",
+   "id": 2595,
+   "nom": "Battre le fer tant qu'il est chaud",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4285,
+      11503,
+      2
+     ],
+     "position": [
+      -26,
+      23
+     ],
+     "texte": "Ramener à {npc,4285} : x2 {item,11503}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4285,
+      11510,
+      2
+     ],
+     "position": [
+      -26,
+      23
+     ],
+     "texte": "Ramener à {npc,4285} : x2 {item,11510}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4285,
+      17205,
+      2
+     ],
+     "position": [
+      -26,
+      23
+     ],
+     "texte": "Ramener à {npc,4285} : x2 {item,17205}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4285,
+      11505,
+      2
+     ],
+     "position": [
+      -26,
+      23
+     ],
+     "texte": "Ramener à {npc,4285} : x2 {item,11505}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4285,
+      2044,
+      10
+     ],
+     "position": [
+      -26,
+      23
+     ],
+     "texte": "Ramener à {npc,4285} : x10 {item,2044}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      743823,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      26
+     ],
+     "texte": "Découvrir la carte : Traces de Yamamoto Kacapoté"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4286,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      26
+     ],
+     "texte": "Aller voir {npc,4286}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      743824,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      27
+     ],
+     "texte": "Fouiller le lieu indiqué"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      746670,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      27
+     ],
+     "texte": "Continuer à fouiller à proximité du minerai"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4286,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      26
+     ],
+     "texte": "Aller voir {npc,4286}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4285,
+      19542,
+      1
+     ],
+     "position": [
+      -26,
+      23
+     ],
+     "texte": "Ramener à {npc,4285} : x1 {item,19542}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      825,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -1
+     ],
+     "texte": "Aller voir {npc,825}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      81,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Aller voir {npc,81}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      62,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      0
+     ],
+     "texte": "Aller voir {npc,62}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1412,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      16
+     ],
+     "texte": "Aller voir {npc,1412}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4285,
+      0,
+      0
+     ],
+     "position": [
+      -26,
+      23
+     ],
+     "texte": "Aller voir {npc,4285}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19403,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1953,
+ "nom": "Battre le fer tant qu'il est chaud",
+ "objets": [
+  [
+   11503,
+   2
+  ],
+  [
+   11510,
+   2
+  ],
+  [
+   17205,
+   2
+  ],
+  [
+   11505,
+   2
+  ],
+  [
+   2044,
+   10
+  ]
+ ],
+ "prerequis": []
+}

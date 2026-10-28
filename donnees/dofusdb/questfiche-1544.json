@@ -1,0 +1,197 @@
+{
+ "depart": [
+  {
+   "mapId": 137363456,
+   "npcId": 2438
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Kathy Brennan a besoin d'étudier les Nécrotiques pour déterminer les origines de leur agressivité.",
+   "id": 2164,
+   "nom": "Épidémiologie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2438,
+      15509,
+      1
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Ramener à {npc,2438} : x1 {item,15509}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2438,
+      15511,
+      1
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Ramener à {npc,2438} : x1 {item,15511}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2438,
+      15513,
+      1
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Ramener à {npc,2438} : x1 {item,15513}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2438,
+      15517,
+      1
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Ramener à {npc,2438} : x1 {item,15517}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885374,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Effectuer des prélèvements sur des œufs de Nécrotiques"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885375,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Apporter les prélèvements d'œufs de Nécrotiques à Kathy Brennan"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2437,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2437}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      454076,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Découvrir la carte : Zone à sécuriser"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2509,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Aller voir {npc,2509}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885376,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Se servir du combustible pour éloigner les Nécrotiques"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2510,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Aller voir {npc,2510}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2437,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2437}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       40
+      ],
+      [
+       15444,
+       1
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1544,
+ "nom": "Épidémiologie",
+ "objets": [],
+ "prerequis": [
+  1539,
+  1543
+ ]
+}

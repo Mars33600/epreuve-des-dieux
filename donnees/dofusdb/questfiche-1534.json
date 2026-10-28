@@ -1,0 +1,105 @@
+{
+ "depart": [
+  {
+   "mapId": 130024963,
+   "npcId": 2338
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Docteur Gaw vous a demandé de capturer quelques nécrotiques dans les Catacombres. Il ne vous reste plus qu'à vous en aller à Srambad, tout simplement, aventurier pauvre et chantant, avec votre filet à la main.",
+   "id": 2154,
+   "nom": "Nécrotiques, tiques, tiques",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453344,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Capturer un scoliopode affaibli et le ramener à l'avant-poste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453756,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Capturer un lucrane affaibli et le ramener à l'avant-poste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453754,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Capturer une puceronde affaiblie et la ramener à l'avant-poste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453755,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Capturer une éperfide affaiblie et la ramener à l'avant-poste"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2550,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2550}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       40
+      ],
+      [
+       15453,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1534,
+ "nom": "Nécrotiques, tiques, tiques",
+ "objets": [],
+ "prerequis": [
+  1484,
+  1484
+ ]
+}

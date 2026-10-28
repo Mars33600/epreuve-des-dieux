@@ -1,0 +1,363 @@
+{
+ "depart": [
+  {
+   "mapId": 183242244,
+   "npcId": 4053
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le dragon blanc semble résigné à accepter la décision de Thanatena, mais il n'en est pas de même pour vous. Vous avez donc décidé de changer son destin, ni plus, ni moins. Direction la caverne des Nordes, vous allez dire deux mots aux trois sœurs qui veillent sur la tapisserie.",
+   "id": 2547,
+   "nom": "Nordalie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      732406,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Caverne du Destin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732407,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Parler aux Nordes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732414,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir des informations sur le Frigostien qui a défié le destin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732415,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre au port de Sarakech pour en apprendre plus sur Hem"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732416,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer la Pyramide Maudite à la recherche de Hem"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732413,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -77
+     ],
+     "texte": "Entrer dans la Chambre de Tal Kasha"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4744,
+      1,
+      0
+     ],
+     "position": [
+      12,
+      -77
+     ],
+     "texte": "Vaincre x1 {monster,4744} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4078,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -77
+     ],
+     "texte": "Aller voir {npc,4078}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732419,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un chef ouginak qui lutte contre le destin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3907,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      -3
+     ],
+     "texte": "Aller voir {npc,3907}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732420,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      -3
+     ],
+     "texte": "Méditer devant le feu sacré"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      736772,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer un oracle amateur de mansots"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      732423,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Radeau de Galaethiel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732434,
+      0,
+      0
+     ],
+     "position": [
+      -74,
+      -53
+     ],
+     "texte": "Offrir un poisskaille fantôme au mansot sacré pour partir en radeau"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      732435,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Rocher des mouettes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4080,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4080}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4082,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4082}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732440,
+      0,
+      0
+     ],
+     "position": [
+      -87,
+      -86
+     ],
+     "texte": "Parler aux deux déesses"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      734964,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Retourner voir Atroskulda"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732443,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Obtenir l'accord de Clothurde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732444,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Obtenir l'accord de Lachandi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732445,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Obtenir l'accord d'Atroskulda"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732675,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "En apprendre davantage sur Hyrkul le Tendancieux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732446,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Placer le fil de Dardondakal sur le métier à tisser"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732449,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Reprendre le chemin du Belvédère d'Ilyzaelle"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4085,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Aller voir {npc,4085}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732452,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Tenter de se défendre contre l'attaque d'Hyrkul"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4086,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Aller voir {npc,4086}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18542,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1909,
+ "nom": "Nordalie",
+ "objets": [],
+ "prerequis": [
+  1908
+ ]
+}

@@ -1,0 +1,287 @@
+{
+ "depart": [
+  {
+   "mapId": 223346946,
+   "npcId": 6802
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Albuera et Ereboria entretiennent une relation commerciale, mais quand une des livraisons ne se passe pas comme prévu, il y a un risque pour que tous les contrats prennent fin.",
+   "id": 3128,
+   "nom": "Un événement inattendu",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6842,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -77
+     ],
+     "texte": "Aller voir {npc,6842}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      973507,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -77
+     ],
+     "texte": "Découvrir la carte : Maison de Viggö"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6845,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -77
+     ],
+     "texte": "Aller voir {npc,6845}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6846,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -77
+     ],
+     "texte": "Aller voir {npc,6846}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973148,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -77
+     ],
+     "texte": "Lancer une flamiche dans l'âtre pour allumer un feu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973149,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -77
+     ],
+     "texte": "Interroger Viggö pour découvrir ce qu'il s'est passé à Ereboria"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6842,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -77
+     ],
+     "texte": "Aller voir {npc,6842}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973153,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Remettre la lettre de Gidrud à Nascherite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6843,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Aller voir {npc,6843}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973155,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Retrouver Nascherite sur le terrain d'entraînement spécial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973156,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Prouver votre valeur à Nascherite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6843,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Aller voir {npc,6843}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973157,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -77
+     ],
+     "texte": "Prévenir Hönger Lébaï qu'une nouvelle livraison pour Ereboria doit être préparée dans les plus brefs délais"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6843,
+      12728,
+      1
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Ramener à {npc,6843} : x1 {item,12728}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      973158,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Découvrir la carte : Forge runique"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6843,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Aller voir {npc,6843}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      976335,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Visiter la forge pendant que Nascherite travaille"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      985778,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "S'assurer que le travail de Nascherite à la Forge Runique se déroule bien"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973508,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -76
+     ],
+     "texte": "Prendre le bateau à destination d'Ereboria"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27433,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2471,
+ "nom": "Un événement inattendu",
+ "objets": [
+  [
+   12728,
+   1
+  ]
+ ],
+ "prerequis": [
+  2468
+ ]
+}

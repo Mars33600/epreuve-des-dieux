@@ -1,0 +1,275 @@
+{
+ "depart": [
+  {
+   "mapId": 212732163,
+   "npcId": 2978
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'Huppermage Jed Reivrepel est à la recherche d'une apprentie qui a disparu après le vol de l'Œil de Grougalorasalar. Joris vous a confié la mission de la retrouver.",
+   "id": 2291,
+   "nom": "L'ombre et la proie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2935,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Aller voir {npc,2935}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      569119,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver la tante de l'apprentie dans le quartier des pêcheurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3003,
+      0,
+      0
+     ],
+     "position": [
+      -35,
+      -54
+     ],
+     "texte": "Aller voir {npc,3003}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      564805,
+      0,
+      0
+     ],
+     "position": [
+      -35,
+      -54
+     ],
+     "texte": "Récupérer le tofu en peluche de Nabrisa"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2935,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Retourner voir {npc,2935}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      564794,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger un agent de voyage sur l'île de Moon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      564832,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger un touriste esseulé sur l'île de Moon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      564834,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger un gentil indigène sur l'île de Moon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      564828,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger un pirate à la masse sur l'île de Moon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      564830,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer le centre de l'île de Moon"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3007,
+      0,
+      0
+     ],
+     "position": [
+      29,
+      6
+     ],
+     "texte": "Aller voir {npc,3007}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      564825,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      6
+     ],
+     "texte": "Entrer dans la clairière obscure"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4164,
+      1,
+      0
+     ],
+     "position": [
+      31,
+      6
+     ],
+     "texte": "Vaincre x1 {monster,4164} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3004,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      6
+     ],
+     "texte": "Aller voir {npc,3004}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      564818,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Escorter Nabrisa jusqu'au palais de Bonta"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2935,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Aller voir {npc,2935}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      564811,
+      0,
+      0
+     ],
+     "position": [
+      -37,
+      -61
+     ],
+     "texte": "Découvrir la carte : Salle de conjuration"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      564808,
+      0,
+      0
+     ],
+     "position": [
+      -37,
+      -61
+     ],
+     "texte": "Assister l'Huppermage durant l'exorcisme"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4165,
+      1,
+      0
+     ],
+     "position": [
+      -37,
+      -61
+     ],
+     "texte": "Vaincre x1 {monster,4165} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2935,
+      0,
+      0
+     ],
+     "position": [
+      -37,
+      -61
+     ],
+     "texte": "Aller voir {npc,2935}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": [
+      200
+     ]
+    }
+   ]
+  }
+ ],
+ "id": 1665,
+ "nom": "L'ombre et la proie",
+ "objets": [],
+ "prerequis": [
+  1656,
+  1656
+ ]
+}

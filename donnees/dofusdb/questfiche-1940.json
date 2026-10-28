@@ -1,0 +1,252 @@
+{
+ "depart": [
+  {
+   "mapId": 188219392,
+   "npcId": 4247
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Apprenez-en davantage sur l'histoire des Marches Magmatiques : la guerre qui a eu lieu dans la région vous fournira peut-être une arme contre les Trépamorts.",
+   "id": 2580,
+   "nom": "La guerre des Marches",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741248,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler au bibliothécaire de Brâkmar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741250,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire l'ouvrage sur la guerre des marches"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      746168,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le premier panneau du parcours des Marches Magmatiques"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      746169,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le deuxième panneau du parcours des Marches Magmatiques"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      746170,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le troisième panneau du parcours des Marches Magmatiques"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      746171,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le quatrième panneau du parcours des Marches Magmatiques"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741265,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Examiner l'œil vitrifié"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741266,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Enquêter du côté du temple démoniaque"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741267,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "En apprendre davantage sur le Tueur de mort"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4247,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Retourner voir {npc,4247}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741269,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver comment éveiller le démon du puits"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4248,
+      19438,
+      4
+     ],
+     "position": [
+      -36,
+      23
+     ],
+     "texte": "Montrer à {npc,4248} : 4 {item,19438}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741281,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      23
+     ],
+     "texte": "Faire l'offrande à l'arbre pour obtenir du sang"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741280,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      22
+     ],
+     "texte": "Vider le sang dans le puits"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741282,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      22
+     ],
+     "texte": "Prier devant le tombeau du tueur de mort"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4238,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      22
+     ],
+     "texte": "Aller voir {npc,4238}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741283,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      22
+     ],
+     "texte": "Vaincre le démon du puits"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4238,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      22
+     ],
+     "texte": "Retourner voir {npc,4238}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4247,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,4247}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19405,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1940,
+ "nom": "La guerre des Marches",
+ "objets": [],
+ "prerequis": [
+  1954
+ ]
+}

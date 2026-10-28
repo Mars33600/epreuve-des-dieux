@@ -1,0 +1,260 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Après avoir jeté un coup d'œil au livre du roi Dazak, vous avez sélectionné trois affronts pour lesquels vous devez obtenir réparation. Les fautifs sont le conseil municipal de la Bourgade, Sylargh et ses Brikoléreux, ainsi que le Nimbos Ystrion Bannisterre. Faites le nécessaire, et le souverain des Martegel sera mieux disposé à votre égard.",
+   "id": 2663,
+   "nom": "La bible des rancunes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4500,
+      19942,
+      20
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Ramener à {npc,4500} : x20 {item,19942}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759268,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -71
+     ],
+     "texte": "Évoquer avec Plénie la question des dédommagements envers le clan Martegel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1237,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -42
+     ],
+     "texte": "Aller voir {npc,1237}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759269,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -41
+     ],
+     "texte": "Récupérer l'argent auprès du banquier de la Bourgade"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4531,
+      19943,
+      1
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Ramener à {npc,4531} : x1 {item,19943}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4502,
+      11510,
+      20
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Ramener à {npc,4502} : x20 {item,11510}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4502,
+      11503,
+      20
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Ramener à {npc,4502} : x20 {item,11503}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4502,
+      11568,
+      20
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Ramener à {npc,4502} : x20 {item,11568}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4502,
+      11370,
+      20
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Ramener à {npc,4502} : x20 {item,11370}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759274,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Ystrion Bannisterre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4529,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -71
+     ],
+     "texte": "Aller voir {npc,4529}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4530,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4530}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4529,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -71
+     ],
+     "texte": "Retourner voir {npc,4529}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761581,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver une caisse à la taille idéale pour un Nimbos"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761590,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une boîte à outils afin de percer des trous dans la caisse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759307,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -71
+     ],
+     "texte": "Assommer Ystrion et l'enfermer dans la caisse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759308,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -71
+     ],
+     "texte": "Remettre Ystrion à Deor Morfont"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19971,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2013,
+ "nom": "La bible des rancunes",
+ "objets": [
+  [
+   11510,
+   20
+  ],
+  [
+   11503,
+   20
+  ],
+  [
+   11568,
+   20
+  ],
+  [
+   11370,
+   20
+  ]
+ ],
+ "prerequis": [
+  2011
+ ]
+}

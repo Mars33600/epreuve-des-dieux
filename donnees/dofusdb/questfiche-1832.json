@@ -1,0 +1,176 @@
+{
+ "depart": [
+  {
+   "mapId": 174854152,
+   "npcId": 3678
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Partez à la rencontre de Chanisa Yadina, une archéologue au service de la Corporation, et découvrez une partie de l'histoire de la Cité Oubliée.",
+   "id": 2472,
+   "nom": "Momies en folie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3676,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -73
+     ],
+     "texte": "Aller voir {npc,3676}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712104,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver où vivait Ahon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712094,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le journal écrit par Ahon"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3676,
+      18547,
+      1
+     ],
+     "position": [
+      7,
+      -73
+     ],
+     "texte": "Montrer à {npc,3676} : 1 {item,18547}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712052,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -72
+     ],
+     "texte": "Entrer dans la pyramide maudite avec Chanisa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712090,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir des informations sur Ahon en interrogeant des Maudits"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712168,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Passer les portes élémentaires et interroger d'autres maudits à propos d'Ahon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712126,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans l'alcôve des sarcophages avec Chanisa"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3684,
+      0,
+      0
+     ],
+     "position": [
+      14,
+      -75
+     ],
+     "texte": "Aller voir {npc,3684}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4753,
+      1,
+      0
+     ],
+     "position": [
+      14,
+      -75
+     ],
+     "texte": "Vaincre x1 {monster,4753} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3676,
+      18548,
+      1
+     ],
+     "position": [
+      14,
+      -75
+     ],
+     "texte": "Montrer à {npc,3676} : 1 {item,18548}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3555,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -57
+     ],
+     "texte": "Aller voir {npc,3555}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18539,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1832,
+ "nom": "Momies en folie",
+ "objets": [],
+ "prerequis": [
+  1831
+ ]
+}

@@ -1,0 +1,258 @@
+{
+ "depart": [
+  {
+   "mapId": 188219392,
+   "npcId": 4197
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La Voix des Douze espère que vous trouverez le moyen de détruire les cœurs livides, les puissants artefacts qui ont permis de créer les Trépamorts.",
+   "id": 2587,
+   "nom": "Les cœurs livides",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4247,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,4247}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741292,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Remplir la mission confiée par la prêtresse d'Ouginak"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4249,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Aller voir {npc,4249}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      745739,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Confirmer le lien entre les forces élémentaires et les cœurs livides"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4250,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,4250}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744167,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Faire battre le cœur d'un craqueleur ancestral"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4197,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Retourner voir {npc,4197}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744195,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans la Tour de Solar"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5100,
+      1,
+      0
+     ],
+     "position": [
+      -31,
+      15
+     ],
+     "texte": "Vaincre x1 {monster,5100} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744179,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      15
+     ],
+     "texte": "Découvrir la carte : Sommet de la tour de Solar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744194,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      15
+     ],
+     "texte": "Se concentrer sur les battements du cœur des Calcinés"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4296,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      15
+     ],
+     "texte": "Aller voir {npc,4296}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744197,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans la Tour de Bethel"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5110,
+      1,
+      0
+     ],
+     "position": [
+      -48,
+      -82
+     ],
+     "texte": "Vaincre x1 {monster,5110} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744198,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -82
+     ],
+     "texte": "Découvrir la carte : Sommet de la tour de Bethel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744199,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -82
+     ],
+     "texte": "Se concentrer sur les battements du cœur des Submergés"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4292,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -82
+     ],
+     "texte": "Aller voir {npc,4292}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4197,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Retourner voir {npc,4197}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19405,
+       1
+      ],
+      [
+       19412,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1954,
+ "nom": "Les cœurs livides",
+ "objets": [],
+ "prerequis": [
+  1938
+ ]
+}

@@ -1,0 +1,290 @@
+{
+ "depart": [
+  {
+   "mapId": 195297288,
+   "npcId": 4621
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Une voix résonne dans le temple de la Mère Écailleuse... Ses accents déchirants sont l'écho d'un souvenir tragique nourri par un sombre désir de vengeance.",
+   "id": 2694,
+   "nom": "La vengeance du dernier empereur",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768422,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver d'où vient la voix sépulcrale qui murmure votre nom"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4623,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      6
+     ],
+     "texte": "Aller voir {npc,4623}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4626,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      6
+     ],
+     "texte": "Aller voir {npc,4626}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768506,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer les marécages près de la montagne des Koalaks"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      781607,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un dictionnaire pour mieux comprendre le langage de l'étranger masqué"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4627,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      2
+     ],
+     "texte": "Aller voir {npc,4627}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      778884,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      3
+     ],
+     "texte": "Chercher des traces de l'aventurier près de la porte des marais"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      780923,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir des informations sur l'aventurier assoiffé de sang à Brâkmar"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      768529,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Découvrir la carte : Tour de Gisgoul"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768530,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Trouver les Brâkmariens"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4628,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Aller voir {npc,4628}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768546,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre la piste des shushus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768547,
+      0,
+      0
+     ],
+     "position": [
+      -24,
+      -4
+     ],
+     "texte": "Tenter de parlementer avec les shushus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768548,
+      0,
+      0
+     ],
+     "position": [
+      -24,
+      -4
+     ],
+     "texte": "Apprendre la politesse aux shushus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768549,
+      0,
+      0
+     ],
+     "position": [
+      -24,
+      -4
+     ],
+     "texte": "Discuter un peu plus calmement avec les shushus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768550,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer la baie de Cania à la recherche du possédé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4629,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -10
+     ],
+     "texte": "Aller voir {npc,4629}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768551,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -10
+     ],
+     "texte": "Vaincre Bulak"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4626,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      6
+     ],
+     "texte": "Retourner voir {npc,4626}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4623,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      6
+     ],
+     "texte": "Aller voir {npc,4623}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Retourner voir {npc,2205}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       20452,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2042,
+ "nom": "La vengeance du dernier empereur",
+ "objets": [],
+ "prerequis": [
+  2041
+ ]
+}

@@ -1,0 +1,359 @@
+{
+ "depart": [
+  {
+   "mapId": 168558594,
+   "npcId": 3291
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Markaris a perdu la mémoire et demande votre aide pour la recouvrer.",
+   "id": 2386,
+   "nom": "Mémoires d'un amnésique",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886819,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Discuter avec les Steamers du camp"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1601,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      25
+     ],
+     "texte": "Aller voir {npc,1601}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886820,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      28
+     ],
+     "texte": "Inspecter le gouffre de Yug à la recherche de minerai de toklium"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886821,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      28
+     ],
+     "texte": "Vaincre les gardiens du minerai de toklium"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886822,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      28
+     ],
+     "texte": "Prendre le minerai de toklium"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886823,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir 8 cerveaux de Trithons et les déposer dans la grotte des déments"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3305,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      28
+     ],
+     "texte": "Aller voir {npc,3305}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      649719,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -41
+     ],
+     "texte": "Découvrir la carte : Taverne de Lisa Kaya"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886824,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -41
+     ],
+     "texte": "Interroger les habitués"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3292,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -41
+     ],
+     "texte": "Aller voir {npc,3292}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3294,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      26
+     ],
+     "texte": "Aller voir {npc,3294}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886825,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      28
+     ],
+     "texte": "Escorter Narouto Hicsixikse jusqu'à Mi-To"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3291,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      27
+     ],
+     "texte": "Aller voir {npc,3291}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3305,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      28
+     ],
+     "texte": "Aller voir {npc,3305}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3291,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      28
+     ],
+     "texte": "Aller voir {npc,3291}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3305,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      28
+     ],
+     "texte": "Aller voir {npc,3305}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3291,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      28
+     ],
+     "texte": "Aller voir {npc,3291}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886826,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Accompagner Markaris au camp des archéologues"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3295,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Aller voir {npc,3295}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3296,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Aller voir {npc,3296}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3296,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      27
+     ],
+     "texte": "Aller voir {npc,3296}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886827,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      27
+     ],
+     "texte": "Protéger le siphon"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3296,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      27
+     ],
+     "texte": "Aller voir {npc,3296}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3295,
+      18072,
+      6
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Ramener à {npc,3295} : x6 {item,18072}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3291,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Aller voir {npc,3291}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17988,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1749,
+ "nom": "Mémoires d'un amnésique",
+ "objets": [],
+ "prerequis": []
+}

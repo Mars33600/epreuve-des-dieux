@@ -1,0 +1,77 @@
+{
+ "depart": [
+  {
+   "mapId": 130025985,
+   "npcId": 2340
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'ultime combat contre le Terminutor n'aura pas lieu dans le futur : il sera livré dans le présent.",
+   "id": 2197,
+   "nom": "Terminutor : le jugement de la machine",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481300,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le Terminutor"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3846,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Vaincre x1 {monster,3846} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2646,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2646}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       15725,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1577,
+ "nom": "Terminutor : le jugement de la machine",
+ "objets": [],
+ "prerequis": [
+  1484,
+  1485,
+  1485
+ ]
+}

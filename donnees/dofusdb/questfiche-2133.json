@@ -1,0 +1,259 @@
+{
+ "depart": [
+  {
+   "mapId": 203688196,
+   "npcId": 4822
+  }
+ ],
+ "etapes": [
+  {
+   "description": "le Veilleur Joullier serait détenu par les Cavaliers de l'Eliocalypse. Martalo veut tenter d'établir le contact avec lui en se servant d'un Chronoglob, une machine étrange qui permet de communiquer à travers l'espace et le temps.",
+   "id": 2788,
+   "nom": "Veilleur sous surveillance",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824446,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Entrer dans le domaine de Misère en utilisant le portail"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824483,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le Miséreux décrit par Martalo"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5441,
+      22287,
+      5
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Ramener à {npc,5441} : x5 {item,22287}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4822,
+      22293,
+      1
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Ramener à {npc,4822} : x1 {item,22293}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824549,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Tenter de communiquer avec Joullier à l'aide du Chronoglob"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4822,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Aller voir {npc,4822}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824638,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Entrer dans le domaine de Guerre en utilisant le portail"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824639,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer l'aiguille auprès d'une recrue sanguinaire"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4822,
+      22306,
+      1
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Montrer à {npc,4822} : 1 {item,22306}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824676,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Entrer dans le domaine de Servitude en utilisant le portail"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824678,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Joullier"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5428,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Aller voir {npc,5428}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824682,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Entrer dans le domaine de Corruption en utilisant le portail"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824686,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Identifier une substance capable de ronger le métal de la cage de Joullier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824695,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer 3 pétales de rouille corrosive dans le Royaume Corrompu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5428,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Retourner voir {npc,5428}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824722,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Vaincre les laquais de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824723,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Libérer Joullier"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4821,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4821}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2133,
+ "nom": "Veilleur sous surveillance",
+ "objets": [],
+ "prerequis": [
+  2120
+ ]
+}

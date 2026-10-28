@@ -1,0 +1,142 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Ereboria est une île inhospitalière. S'y déplacer et y enquêter n'est pas chose aisée quand on est un Douzien.",
+   "id": 3130,
+   "nom": "L'île maudite",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      977013,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un Marteau-Aigri qui aurait des informations à propos de la dernière livraison de minerai"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      977016,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -70
+     ],
+     "texte": "Repousser l'assaut des Marteaux-Aigris"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973187,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "S'éloigner de la menace des morts-brûlés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      980838,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retourner dans les Galeries d'Ereboria"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1004194,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher un moyen de descendre dans les profondeurs de la cité de façon discrète"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973927,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer discrètement les lieux jusqu'à l'étage inférieur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      974125,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre là où se trouve Barbéryl Clochecuivre, en faisant toujours preuve de discrétion"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      977017,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Se faufiler dans le Bastion des Marteaux-Aigris"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      7219,
+      1,
+      225185792
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Vaincre x1 {monster,7219} sur la carte {map,225185792} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6847,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Aller voir {npc,6847}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27438,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2472,
+ "nom": "L'île maudite",
+ "objets": [],
+ "prerequis": [
+  2471
+ ]
+}

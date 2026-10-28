@@ -1,0 +1,245 @@
+{
+ "depart": [
+  {
+   "mapId": 234750978,
+   "npcId": 7641
+  }
+ ],
+ "etapes": [
+  {
+   "description": "N'avez-vous jamais rêvé d'avoir la taille d'un insecte pour aller observer ce qui se passe dans l'un de ces nids grouillant d'activité ? Grâce aux Voyageurs, le songe est devenu réalité. Mais prenez garde à ne pas vous faire piétiner par ces mille et une pattes.",
+   "id": 3197,
+   "nom": "Le vol des bourdons",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128190,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans un nid de Kabombz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128649,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer le plus grand nid à la recherche d'un élément perturbateur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128650,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Tenter de communiquer avec le Quadrabz curieux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128729,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Apprendre le langage des Kabombz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128677,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Discuter avec le Quadrabz curieux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128684,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Retourner à l'avant-poste pour tirer les choses au clair"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129523,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Couper le champ protecteur de la thermosonde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129524,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Identifier l'origine du bourdonnement"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129555,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Affronter les gardes Kabombz"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7666,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Aller voir {npc,7666}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129822,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      23
+     ],
+     "texte": "Convaincre les reines des Kabombz du danger potentiel représenté par la machine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128745,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Neutraliser la machine bourdonnante"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1145233,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Discuter avec le caporal Gobastol par l'intermédiaire de son Krosmoglob"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129525,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "En apprendre plus sur les constructeurs de la machine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128907,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Mettre fin aux agissements de la secte dans la dimension"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7641,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Retourner voir {npc,7641}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       31529,
+       1
+      ],
+      [
+       31530,
+       1
+      ],
+      [
+       31531,
+       1
+      ],
+      [
+       31532,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2516,
+ "nom": "Le vol des bourdons",
+ "objets": [],
+ "prerequis": [
+  2515,
+  2520
+ ]
+}

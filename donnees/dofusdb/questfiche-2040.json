@@ -1,0 +1,305 @@
+{
+ "depart": [
+  {
+   "mapId": 122421248,
+   "npcId": 2205
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pendant que Mériana et Léane se préparent, faites une reconnaissance près de la cité de Bonta afin de vous assurer que le rituel se passera dans les meilleures conditions. Évidemment, un vieux routard comme vous se doute qu'il y aura quelques surprises...",
+   "id": 2692,
+   "nom": "Une douloureuse séparation",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768247,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'accès aux larmes de Grougalorasalar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768248,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Descendre dans la crevasse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768295,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Explorer la caverne des larmes de Grougalorasalar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768249,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Purifier la caverne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      893542,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Sortir de la caverne pour découvrir d'où viennent les éclats de voix"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768274,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Parler aux miliciens bontariens"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768276,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Tenter de s'expliquer auprès du capitaine bontarien"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768277,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Faire comprendre à Strig que vous avez besoin d'aide"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768278,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Inspecter la cellule pour passer le temps"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768279,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Parler au capitaine bontarien"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768280,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Se renseigner sur les formalités à remplir pour ne plus être inquiété"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768281,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Vaincre les miliciens avec l'aide de Joris"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768282,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Parler à Joris dans la salle de la milice"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1200056,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Retrouver Joris dans la salle du trône de Bonta"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2933,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Aller voir {npc,2933}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768294,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Retourner dans la caverne des larmes de Grougalorasalar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Aller voir {npc,2205}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768296,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Accomplir le rituel avec l'aide de Mériana"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768298,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Vaincre l'âme de Crocoburio"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4617,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Aller voir {npc,4617}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -52
+     ],
+     "texte": "Aller voir {npc,2205}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       20704,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2040,
+ "nom": "Une douloureuse séparation",
+ "objets": [],
+ "prerequis": [
+  2039
+ ]
+}

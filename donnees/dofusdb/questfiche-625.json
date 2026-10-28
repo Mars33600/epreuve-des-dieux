@@ -1,0 +1,67 @@
+{
+ "depart": [
+  {
+   "mapId": 54164293,
+   "npcId": 1393
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous puisez dans vos dernières ressources pour atteindre le sommet.",
+   "id": 1276,
+   "nom": "La face Nord",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55269,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -69
+     ],
+     "texte": "Découvrir la carte : Aller au plus profond des choses."
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2986,
+      1,
+      0
+     ],
+     "position": [
+      -61,
+      -69
+     ],
+     "texte": "Vaincre x1 {monster,2986} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56281,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -69
+     ],
+     "texte": "Découvrir la carte : Et en revenir."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 625,
+ "nom": "Là-haut sur la montagne",
+ "objets": [],
+ "prerequis": []
+}

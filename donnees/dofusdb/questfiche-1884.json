@@ -1,0 +1,212 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous enquêtez sur une des nombreuses cérémonies ayant mal tourné dans la tour de Gisgoul.",
+   "id": 2524,
+   "nom": "Rituel oblige",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      729235,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Découvrir la carte : Entrée du passage secret"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      729236,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Examiner le livre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      729247,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Fouiller la pièce"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4005,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Aller voir {npc,4005}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3877,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      21
+     ],
+     "texte": "Aller voir {npc,3877}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4001,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      21
+     ],
+     "texte": "Aller voir {npc,4001}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      729259,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      38
+     ],
+     "texte": "Escorter Moctar Chitekt jusqu'à la taverne du Chabrulé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4004,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      38
+     ],
+     "texte": "Aller voir {npc,4004}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      729260,
+      0,
+      0
+     ],
+     "position": [
+      -26,
+      37
+     ],
+     "texte": "Découvrir la carte : Zaap de Brâkmar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4006,
+      0,
+      0
+     ],
+     "position": [
+      -26,
+      37
+     ],
+     "texte": "Aller voir {npc,4006}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4937,
+      1,
+      0
+     ],
+     "position": [
+      -26,
+      37
+     ],
+     "texte": "Vaincre x1 {monster,4937} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4001,
+      0,
+      0
+     ],
+     "position": [
+      -26,
+      37
+     ],
+     "texte": "Aller voir {npc,4001}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4938,
+      1,
+      0
+     ],
+     "position": [
+      -26,
+      37
+     ],
+     "texte": "Vaincre x1 {monster,4938} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4007,
+      0,
+      0
+     ],
+     "position": [
+      -26,
+      37
+     ],
+     "texte": "Aller voir {npc,4007}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       13740,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1884,
+ "nom": "Rituel oblige",
+ "objets": [],
+ "prerequis": [
+  1883
+ ]
+}

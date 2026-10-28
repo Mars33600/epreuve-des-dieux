@@ -1,0 +1,252 @@
+{
+ "depart": [
+  {
+   "mapId": 54171466,
+   "npcId": 1281
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Selon Baka Laïve, Francis est décédé quelque part dans les crocs de verre. Vous devez le prouver.",
+   "id": 1285,
+   "nom": "Mort-vivant",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886097,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher le cadavre de Francis dans les crocs de verre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1371,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1371}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1371,
+      11107,
+      35
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1371} : x35 {item,11107}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1371,
+      12047,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1371} : x10 {item,12047}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1373,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1373}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1372,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Aller voir {npc,1372}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      12048,
+      10
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Ramener à {npc,1372} : x10 {item,12048}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      12049,
+      10
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Ramener à {npc,1372} : x10 {item,12049}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      12050,
+      10
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Ramener à {npc,1372} : x10 {item,12050}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      12051,
+      10
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Ramener à {npc,1372} : x10 {item,12051}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      12052,
+      10
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Ramener à {npc,1372} : x10 {item,12052}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      12053,
+      10
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Ramener à {npc,1372} : x10 {item,12053}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez tout en main pour mener à bien votre mission de sauvetage.",
+   "id": 1286,
+   "nom": "Médicoptère",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55401,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -70
+     ],
+     "texte": "Découvrir la carte : Cache de Francis."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886099,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -70
+     ],
+     "texte": "Aider Francis à sortir des cavernes sain et sauf"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1403,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -71
+     ],
+     "texte": "Aller voir {npc,1403}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1369,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -72
+     ],
+     "texte": "Aller voir {npc,1369}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       5
+      ],
+      [
+       11925,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 597,
+ "nom": "Un ami qui ne vous veut pas que du bien",
+ "objets": [
+  [
+   11107,
+   35
+  ]
+ ],
+ "prerequis": [
+  596,
+  624
+ ]
+}

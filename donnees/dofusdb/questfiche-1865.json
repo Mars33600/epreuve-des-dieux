@@ -1,0 +1,172 @@
+{
+ "depart": [
+  {
+   "mapId": 181145610,
+   "npcId": 3895
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez purifier votre corps et votre âme afin de recevoir la bénédiction d'Ougah.",
+   "id": 2505,
+   "nom": "Passe le fungus autour de toi",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726291,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Repaire de Carter le Pillard"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3105,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      29
+     ],
+     "texte": "Aller voir {npc,3105}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726292,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      29
+     ],
+     "texte": "Découvrir la carte : Chapelle d'Ougah"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3896,
+      18987,
+      1
+     ],
+     "position": [
+      -14,
+      29
+     ],
+     "texte": "Ramener à {npc,3896} : x1 {item,18987}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726408,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      29
+     ],
+     "texte": "Manger un champignon béni"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726409,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      29
+     ],
+     "texte": "Manger un champignon béni"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726410,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      29
+     ],
+     "texte": "Manger un champignon béni"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3896,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      29
+     ],
+     "texte": "Aller voir {npc,3896}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3892,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      34
+     ],
+     "texte": "Aller voir {npc,3892}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4900,
+      1,
+      0
+     ],
+     "position": [
+      -14,
+      34
+     ],
+     "texte": "Vaincre x1 {monster,4900} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3891,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3891}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       9269,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1865,
+ "nom": "Passe le fungus autour de toi",
+ "objets": [],
+ "prerequis": [
+  1864
+ ]
+}

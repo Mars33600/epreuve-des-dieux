@@ -1,0 +1,143 @@
+{
+ "depart": [
+  {
+   "mapId": 169874432,
+   "npcId": 3258
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Capitaine Meno ne semble pas porter les Steamers dans son cœur... Vous aimeriez en apprendre un peu plus sur ce mystérieux personnage dont vous êtes l'émissaire. La curiosité n'est pas toujours un vilain défaut.",
+   "id": 2373,
+   "nom": "Son nom est Personne",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3250,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3250}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      644056,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      25
+     ],
+     "texte": "Découvrir la carte : Bibliothèque de Sufokia"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1590,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      25
+     ],
+     "texte": "Aller voir {npc,1590}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1593,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      22
+     ],
+     "texte": "Aller voir {npc,1593}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3258,
+      17940,
+      1
+     ],
+     "position": [
+      24,
+      27
+     ],
+     "texte": "Ramener à {npc,3258} : x1 {item,17940}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3281,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      27
+     ],
+     "texte": "Aller voir {npc,3281}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4433,
+      1,
+      0
+     ],
+     "position": [
+      24,
+      27
+     ],
+     "texte": "Vaincre x1 {monster,4433} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3266,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Retourner voir {npc,3266}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17971,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1736,
+ "nom": "Son nom est Personne",
+ "objets": [],
+ "prerequis": [
+  1735
+ ]
+}

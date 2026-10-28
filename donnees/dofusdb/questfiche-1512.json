@@ -1,0 +1,169 @@
+{
+ "depart": [
+  {
+   "mapId": 131863044,
+   "npcId": 2432
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Suite aux récents incidents, de nombreux membres de la Koffrérie se sont mis en grève et ont fait de vous leur médiateur.",
+   "id": 2137,
+   "nom": "La grève de la fin",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2433,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2433}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885074,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Convaincre Vieunuque de vous prendre au sérieux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2428,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2428}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885075,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Convaincre Vieurêka de vous prendre au sérieux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2427,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2427}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885076,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Convaincre Fripépé de vous prendre au sérieux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2424,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2424}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2341,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Aller voir {npc,2341}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2424,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2424}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2432,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2432}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15179,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1512,
+ "nom": "La grève de la fin",
+ "objets": [],
+ "prerequis": [
+  1511
+ ]
+}

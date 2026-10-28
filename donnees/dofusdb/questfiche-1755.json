@@ -1,0 +1,50 @@
+{
+ "depart": [
+  {
+   "mapId": 169082884,
+   "npcId": 3252
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez accepté de prendre en charge la régulation de certaines populations pour assouvir votre soif de carnage.",
+   "id": 2392,
+   "nom": "Nos chairs voisines",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3252,
+      18076,
+      40
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Ramener à {npc,3252} : x40 {item,18076}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17971,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1755,
+ "nom": "Nos chairs voisines",
+ "objets": [],
+ "prerequis": []
+}

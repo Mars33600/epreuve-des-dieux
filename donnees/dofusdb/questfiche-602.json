@@ -1,0 +1,38 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous pouvez donner le livre scellé à Hugo Frais l'archiviste ou Hyppolite Tairmy le bibliothécaire.",
+   "id": 1164,
+   "nom": "Livre à domicile",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885963,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Apporter le livre scellé à un professionnel"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18652,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 602,
+ "nom": "Obscurantisme",
+ "objets": [],
+ "prerequis": []
+}

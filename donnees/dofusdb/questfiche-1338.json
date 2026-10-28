@@ -1,0 +1,78 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 1999
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Klime le Cordonnier est impliqué dans les projets de conquête de Missiz Frizz. Montrez-lui qu'il n'est pas de taille en le battant à plate couture.",
+   "id": 1942,
+   "nom": "Vous avez demandé la peau lisse ?",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452586,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -93
+     ],
+     "texte": "Trouver la peau magique tannée par Klime"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2045,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -93
+     ],
+     "texte": "Aller voir {npc,2045}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Retourner voir {npc,1999}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ],
+      [
+       13923,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1338,
+ "nom": "Vous avez demandé la peau lisse ?",
+ "objets": [],
+ "prerequis": [
+  1337
+ ]
+}

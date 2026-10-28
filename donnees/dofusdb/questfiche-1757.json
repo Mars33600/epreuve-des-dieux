@@ -1,0 +1,222 @@
+{
+ "depart": [
+  {
+   "mapId": 168820748,
+   "npcId": 3291
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Markaris a encore besoin de vous.",
+   "id": 2394,
+   "nom": "Demain, j'arête",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4511,
+      2,
+      0
+     ],
+     "position": [
+      19,
+      32
+     ],
+     "texte": "Vaincre x2 {monster,4511} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3291,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      32
+     ],
+     "texte": "Aller voir {npc,3291}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3342,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      32
+     ],
+     "texte": "Aller voir {npc,3342}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3343,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      34
+     ],
+     "texte": "Aller voir {npc,3343}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      649679,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      33
+     ],
+     "texte": "Découvrir la carte : Regroupement des plongeurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3344,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      33
+     ],
+     "texte": "Aller voir {npc,3344}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      649682,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      31
+     ],
+     "texte": "Découvrir la carte : Camp de l'Astre Noir"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3345,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      31
+     ],
+     "texte": "Aller voir {npc,3345}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3347,
+      18105,
+      1
+     ],
+     "position": [
+      21,
+      31
+     ],
+     "texte": "Ramener à {npc,3347} : x1 {item,18105}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3345,
+      18106,
+      1
+     ],
+     "position": [
+      9,
+      28
+     ],
+     "texte": "Ramener à {npc,3345} : x1 {item,18106}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3343,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      34
+     ],
+     "texte": "Aller voir {npc,3343}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      649734,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      34
+     ],
+     "texte": "Découvrir la carte : Vers la caverne de Neptoon"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4512,
+      2,
+      0
+     ],
+     "position": [
+      19,
+      34
+     ],
+     "texte": "Vaincre x2 {monster,4512} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3343,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      34
+     ],
+     "texte": "Aller voir {npc,3343}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17979,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1757,
+ "nom": "Demain, j'arête",
+ "objets": [],
+ "prerequis": [
+  1748,
+  1749
+ ]
+}

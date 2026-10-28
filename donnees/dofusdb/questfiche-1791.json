@@ -1,0 +1,327 @@
+{
+ "depart": [
+  {
+   "mapId": 171180032,
+   "npcId": 3456
+  },
+  {
+   "mapId": 164103168,
+   "npcId": 3456
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez convaincre Terrakourial de vous donner un peu de son sang.",
+   "id": 2428,
+   "nom": "Le dragon des forêts",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      914,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Aller voir {npc,914}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2218,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2218}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699813,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Escorter Toungousa jusqu'au crâne de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699788,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Se projeter dans le rêve de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699757,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Entrer dans la lumière"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699807,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Pénétrer à l'intérieur de l'arbre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3498,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Aller voir {npc,3498}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      914,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Aller voir {npc,914}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699810,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Offrir le Dofus créé par Otomaï au Gardien Polter"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3498,
+      18307,
+      1
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Ramener à {npc,3498} : x1 {item,18307}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3498,
+      18308,
+      1
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Ramener à {npc,3498} : x1 {item,18308}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699695,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Répondre aux questions du Gardien Polter"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      699665,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Découvrir la carte : Forêt de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3499,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Aller voir {npc,3499}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3498,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Retourner voir {npc,3498}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3456,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Aller voir {npc,3456}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699728,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Planter un arbre verdoyant dans le désert"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4658,
+      1,
+      0
+     ],
+     "position": [
+      16,
+      -62
+     ],
+     "texte": "Vaincre x1 {monster,4658} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699746,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Planter un arbre verdoyant dans une forêt pétrifiée par le gel"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4659,
+      1,
+      0
+     ],
+     "position": [
+      -76,
+      -69
+     ],
+     "texte": "Vaincre x1 {monster,4659} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699741,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Planter un arbre verdoyant sur des terres impies et stériles"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4660,
+      1,
+      0
+     ],
+     "position": [
+      -17,
+      23
+     ],
+     "texte": "Vaincre x1 {monster,4660} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3499,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Retourner voir {npc,3499}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       8813,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1791,
+ "nom": "Le dragon des forêts",
+ "objets": [],
+ "prerequis": [
+  1785,
+  1786
+ ]
+}

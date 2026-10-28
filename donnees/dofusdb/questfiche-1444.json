@@ -1,0 +1,312 @@
+{
+ "depart": [
+  {
+   "mapId": 88212247,
+   "npcId": 2167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Une catastrophe écologique menace le royaume d'Allister : les eaux de la rivière ont été polluées ! Selon le Captain Amakna, le coupable serait Merkator, un super-vilain qui ourdit des plans machiavéliques dans les abysses sufokiennes. En tant que défenseur de la justice, il est de votre devoir d'intervenir. Enfilez votre slip moulant, chaussez vos bottes cirées, ajustez votre cape et volez au secours de la Kawaii !",
+   "id": 2064,
+   "nom": "Pollution, je dis non",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4315,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -21
+     ],
+     "texte": "Aller voir {npc,4315}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453138,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -2
+     ],
+     "texte": "Activer la pikosonde près du temple pandawa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453144,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      1
+     ],
+     "texte": "Rejoindre la position indiquée par la pikosonde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453141,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      1
+     ],
+     "texte": "Rejoindre la position indiquée par la pikosonde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453149,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Rejoindre la position indiquée par la pikosonde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453147,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Utiliser la pikosonde pour faire un prélèvement dans l'eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453152,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Examiner le bord pour voir si vous pouvez récupérer la pikosonde"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3545,
+      1,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Vaincre x1 {monster,3545} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2171,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Aller voir {npc,2171}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453131,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Battre les Mercemers avec l'aide de Beurky"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2171,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Aller voir {npc,2171}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1597,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      13
+     ],
+     "texte": "Aller voir {npc,1597}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1596,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      14
+     ],
+     "texte": "Aller voir {npc,1596}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453121,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Découvrir la carte : Entrée de l'Aquadôme"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2196,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Aller voir {npc,2196}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3534,
+      1,
+      0
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Vaincre x1 {monster,3534} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2197,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2197}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454022,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'Osamodas au sud de Madrestam"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2198,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Aller voir {npc,2198}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3549,
+      1,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Vaincre x1 {monster,3549} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      119,
+      14814,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,119} : x1 {item,14814}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2167,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Retourner voir {npc,2167}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       14868,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1444,
+ "nom": "Pollution, je dis non",
+ "objets": [],
+ "prerequis": [
+  1425
+ ]
+}

@@ -1,0 +1,194 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Cet ouvrage est-il un roman à l'eau de rose ? Un grimoire antédiluvien ? Le livre de bord d'un pirate malchanceux ? Pour le savoir, vous avez besoin d'un lettré capable de déchiffrer ses pages illisibles.",
+   "id": 2382,
+   "nom": "Celle qui glougloutait dans les ténèbres",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644062,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à un spécialiste des livres illisibles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644104,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      25
+     ],
+     "texte": "Lire un extrait des œuvres de Lavecroft"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1590,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      25
+     ],
+     "texte": "Retourner voir {npc,1590}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644098,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver la maison de Justine Smousse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644105,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Ouvrir la porte de la maison de Justine Smousse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644116,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Fouiller la maison"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644069,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver quelqu'un qui vous indiquera le moyen de vaincre votre peur des eaux profondes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644041,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Descendre dans le bassin en se protégeant avec un attrape-peur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3267,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Aller voir {npc,3267}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4463,
+      1,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Vaincre x1 {monster,4463} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4464,
+      1,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Vaincre x1 {monster,4464} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1590,
+      18027,
+      1
+     ],
+     "position": [
+      20,
+      25
+     ],
+     "texte": "Montrer à {npc,1590} : 1 {item,18027}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3265,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3265}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17983,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1745,
+ "nom": "Celle qui glougloutait dans les ténèbres",
+ "objets": [],
+ "prerequis": [
+  1731
+ ]
+}

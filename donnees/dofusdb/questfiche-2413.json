@@ -1,0 +1,164 @@
+{
+ "depart": [
+  {
+   "mapId": 207619080,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207621128,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207623176,
+   "npcId": 6167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Draconiros vous a conseillé de vérifier s'il ne resterait pas une prophétie de Senga Egrab dont vous n'auriez pas pris connaissance, ou qui serait apparue après les récents événements de Pandala. Enfin, « récents » n'est peut-être pas le terme approprié... Lorsque l'on parle de l'Eliocalypse, les fils du temps et du destin s'entremêlent.",
+   "id": 3070,
+   "nom": "Le début de la fin",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      902282,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Décrypter une autre page translucide dans le temple des Eliotropes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      902435,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger le Protecteur de descendre du côté de Brâkmar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897380,
+      0,
+      0
+     ],
+     "position": [
+      -22,
+      33
+     ],
+     "texte": "Se débarrasser des gardes du Cœur Saignant"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3229,
+      0,
+      0
+     ],
+     "position": [
+      -22,
+      33
+     ],
+     "texte": "Aller voir {npc,3229}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897305,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire l'Abecedarius à la bibliothèque de Brâkmar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6383,
+      0,
+      0
+     ],
+     "position": [
+      -24,
+      39
+     ],
+     "texte": "Aller voir {npc,6383}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897306,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le démonologiste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897313,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -14
+     ],
+     "texte": "Neutraliser les chasseurs de démons"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6302,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -14
+     ],
+     "texte": "Aller voir {npc,6302}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897321,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Révéler le nom du démon à Draconiros"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       25182,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2413,
+ "nom": "Le début de la fin",
+ "objets": [],
+ "prerequis": [
+  2412
+ ]
+}

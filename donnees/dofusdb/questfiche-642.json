@@ -1,0 +1,106 @@
+{
+ "depart": [
+  {
+   "mapId": 54171983,
+   "npcId": 1331
+  }
+ ],
+ "etapes": [
+  {
+   "description": "le petit Nico et ses amis font un concours dont vous êtes le jury. Il vous faut choisir lequel des bonmonstres de neige est le plus affreux.",
+   "id": 1182,
+   "nom": "Concours d'affreux bonmonstres",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1149330,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -78
+     ],
+     "texte": "Évaluer les bonmonstres de Sufur et Elcaste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1149329,
+      0,
+      0
+     ],
+     "position": [
+      -75,
+      -83
+     ],
+     "texte": "Évaluer le bonmonstre de Nico"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1149331,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -78
+     ],
+     "texte": "Évaluer le bonmonstre de Joe Froid"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1149332,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -82
+     ],
+     "texte": "Évaluer le bonmonstre de Jojo Akim"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1149334,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -77
+     ],
+     "texte": "Évaluer le bonmonstre de Klétor"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1331,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -79
+     ],
+     "texte": "Aller voir {npc,1331}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 642,
+ "nom": "Bonmonstres de neige",
+ "objets": [],
+ "prerequis": []
+}

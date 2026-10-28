@@ -1,0 +1,132 @@
+{
+ "depart": [
+  {
+   "mapId": 136185090,
+   "npcId": 2462
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Un crâne vous a accusé de meurtre. Vous devez sauver votre peau.",
+   "id": 2170,
+   "nom": "La chapelle noire",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885327,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un endroit où vous cacher"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2538,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Aller voir {npc,2538}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      899145,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Découvrir la carte : Salon de Baal Hans"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      899146,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Découvrir la carte : Chambre de Baal Hans"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2539,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2539}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885328,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre la bande de Vauriens pour les interroger"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2538,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Aller voir {npc,2538}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15449,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1556,
+ "nom": "La chapelle noire",
+ "objets": [
+  [
+   15555,
+   1
+  ],
+  [
+   15556,
+   1
+  ]
+ ],
+ "prerequis": []
+}

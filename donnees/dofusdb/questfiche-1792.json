@@ -1,0 +1,199 @@
+{
+ "depart": [
+  {
+   "mapId": 88604676,
+   "npcId": 914
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Maintenant que vous êtes guéri, vous avez un compte à régler avec les deux Miss à la solde de Kalisthe.",
+   "id": 2429,
+   "nom": "Mississitudes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Aller voir {npc,2205}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699801,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer la voyageuse venue de Srambad"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699699,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un membre de l'association secrète de lutteurs sufokiens"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4661,
+      1,
+      0
+     ],
+     "position": [
+      17,
+      27
+     ],
+     "texte": "Vaincre x1 {monster,4661} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3503,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      27
+     ],
+     "texte": "Aller voir {npc,3503}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699696,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      24
+     ],
+     "texte": "Rencontrer le chef de l'association"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699706,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Entrer dans le palais de Dantinéa"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4444,
+      1,
+      0
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Vaincre x1 {monster,4444} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3505,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Aller voir {npc,3505}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      699714,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      -6
+     ],
+     "texte": "Découvrir la carte : Ecaflipus, les Pierres de l'élévation"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699786,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver les deux Miss"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699749,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Vaincre Miss Teigne et Miss Tique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699765,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Interroger les Miss pour en apprendre plus sur Kalisthe"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17982,
+       1
+      ],
+      [
+       17981,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1792,
+ "nom": "Mississitudes",
+ "objets": [],
+ "prerequis": [
+  1786
+ ]
+}

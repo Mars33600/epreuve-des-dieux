@@ -1,0 +1,230 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vous rendre sur le Roc des Salbatroces pour enrayer l'épidémie qui menace de se propager dans Bonta.",
+   "id": 2529,
+   "nom": "Je panse donc j'essuie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2633,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Aller voir {npc,2633}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      15684,
+      5
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x5 {item,15684}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      15686,
+      5
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x5 {item,15686}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      170,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      31
+     ],
+     "texte": "Aller voir {npc,170}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      170,
+      11102,
+      3
+     ],
+     "position": [
+      1,
+      31
+     ],
+     "texte": "Ramener à {npc,170} : x3 {item,11102}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1599,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Aller voir {npc,1599}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      17995,
+      3
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Ramener à {npc,1599} : x3 {item,17995}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      19124,
+      1
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x1 {item,19124}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      19125,
+      1
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x1 {item,19125}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730365,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les Krobes altérés par le feu noir à l'aide de l'oscillateur de Ninae Charpe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730366,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      -59
+     ],
+     "texte": "Prélever des cellules souches sur les Krobes altérés"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      19127,
+      6
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x6 {item,19127}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      15691,
+      1
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x1 {item,15691}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      19128,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Ramener à {npc,6309} : x1 {item,19128}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1889,
+ "nom": "Je panse donc j'essuie",
+ "objets": [
+  [
+   15684,
+   5
+  ],
+  [
+   15686,
+   5
+  ],
+  [
+   11102,
+   3
+  ],
+  [
+   17995,
+   3
+  ],
+  [
+   15691,
+   1
+  ]
+ ],
+ "prerequis": [
+  1887
+ ]
+}

@@ -1,0 +1,154 @@
+{
+ "depart": [
+  {
+   "mapId": 91752967,
+   "npcId": 1596
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des sabotages ont été rapportés à Sufokia et vous avez décidé d'enquêter dessus.",
+   "id": 2385,
+   "nom": "Les sept Mercemers",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1597,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      13
+     ],
+     "texte": "Aller voir {npc,1597}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1604,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      19
+     ],
+     "texte": "Aller voir {npc,1604}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3290,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      29
+     ],
+     "texte": "Aller voir {npc,3290}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1597,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      13
+     ],
+     "texte": "Aller voir {npc,1597}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3266,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Aller voir {npc,3266}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3252,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Aller voir {npc,3252}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      649694,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Découvrir la carte : Salle de plongée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1151430,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Affronter les saboteurs et veiller à ce qu'ils soient arrêtés"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3252,
+      18063,
+      1
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Ramener à {npc,3252} : x1 {item,18063}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17970,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1748,
+ "nom": "Les sept Mercemers",
+ "objets": [],
+ "prerequis": []
+}

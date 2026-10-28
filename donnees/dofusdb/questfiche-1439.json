@@ -1,0 +1,46 @@
+{
+ "depart": [
+  {
+   "mapId": 91752967,
+   "npcId": 1596
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Estave Guiffel vous a demandé de capturer quelques spécimens de krabouilleurs, ces crabes mécaniques qui se promènent dans les Salles des Courants et des Abîmes. Pour amadouer les automates, vous allez recourir à la bonne vieille méthode : leur taper dessus avec enthousiasme et conviction.",
+   "id": 2059,
+   "nom": "Pêche aux krabouilleurs",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1596,
+      14816,
+      4
+     ],
+     "position": [
+      22,
+      14
+     ],
+     "texte": "Ramener à {npc,1596} : x4 {item,14816}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       14795,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1439,
+ "nom": "Pêche aux krabouilleurs",
+ "objets": [],
+ "prerequis": []
+}

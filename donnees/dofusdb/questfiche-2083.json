@@ -1,0 +1,254 @@
+{
+ "depart": [
+  {
+   "mapId": 88081174,
+   "npcId": 4820
+  },
+  {
+   "mapId": 197921026,
+   "npcId": 4948
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Terrakourial cache un secret, mais lequel ? Pour le découvrir, il vous faudra explorer les méandres du temps...",
+   "id": 2739,
+   "nom": "Le temps des secrets",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4820,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Aller voir {npc,4820}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801775,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      -24
+     ],
+     "texte": "Découvrir la date de la mort du fils de Tylezia"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4820,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Retourner voir {npc,4820}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801805,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rejoindre le lieu où vous devez rencontrer Martalo"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801806,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -60
+     ],
+     "texte": "Se débarrasser des chronomorphes qui perturbent le point de rendez-vous"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4822,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -60
+     ],
+     "texte": "Aller voir {npc,4822}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801850,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Entrer dans l'Horloge de Xélor"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4960,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4960}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4960,
+      8365,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,4960} : x1 {item,8365}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4960,
+      21205,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,4960} : x1 {item,21205}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801858,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Veiller à ce que Fraouctor ne soit pas dérangé pendant qu'il consulte les archives"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801859,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Voyager dans le passé avec Fraouctor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801876,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Écouter la discussion entre Osamodas et le fils de Tylezia"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4960,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4960}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4948,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Retourner voir {npc,4948}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4958,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4958}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801877,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Affronter l'invocation du dieu Osamodas"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4958,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4958}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4948,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4948}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2083,
+ "nom": "Le temps des secrets",
+ "objets": [
+  [
+   8365,
+   1
+  ],
+  [
+   21205,
+   1
+  ]
+ ],
+ "prerequis": [
+  2082
+ ]
+}

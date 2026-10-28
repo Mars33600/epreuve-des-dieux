@@ -1,0 +1,350 @@
+{
+ "depart": [
+  {
+   "mapId": 195298312,
+   "npcId": 4639
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Rathrosk a besoin de votre aide car il souhaite retrouver Aure, une phénix qu'il n'a pas revue depuis très longtemps. Parviendrez-vous à réunir ces deux âmes qui ont emprunté des chemins différents ? Pour cela, vous allez devoir en apprendre un peu plus sur leur histoire...",
+   "id": 2704,
+   "nom": "Le silence est d'Aure",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772905,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Discuter des phénix avec un aigle céleste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772906,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -3
+     ],
+     "texte": "Lire le premier tome des Souvenirs d'entre les mondes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772907,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Discuter des phénix avec un hibou archiviste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772908,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Lire le second tome des Souvenirs d'entre les mondes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772909,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un document contant la légende d'une Enutrof et d'une phénix"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772910,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -4
+     ],
+     "texte": "Lire le document trouvé dans le temple enutrof"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772917,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à une sorcière que vous connaissez bien"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772918,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Barda Yaga"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772920,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -45
+     ],
+     "texte": "Aider Barda Yaga à se débarrasser de la truche hystérique"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4695,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -45
+     ],
+     "texte": "Aller voir {npc,4695}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772924,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Espionner les chasseurs d'étoiles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772925,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Entrer en Externam"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772926,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre ou convaincre le chasseur d'étoiles"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4076,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      14
+     ],
+     "texte": "Aller voir {npc,4076}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772927,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      28
+     ],
+     "texte": "Se faire passer pour un fantôme auprès des chasseurs d'étoiles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      774119,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Attirer l'oiseau de feu aux alentours de la statue du phénix d'Astrub"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772929,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -13
+     ],
+     "texte": "Vaincre les chasseurs d'étoiles avec l'aide de Chazatot et de l'oiseau de feu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4697,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -13
+     ],
+     "texte": "Aller voir {npc,4697}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4695,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -13
+     ],
+     "texte": "Aller voir {npc,4695}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772931,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Convaincre le dieu Enutrof de dissoudre la confrérie des chasseurs d'étoiles"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4697,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -13
+     ],
+     "texte": "Retourner voir {npc,4697}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772932,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -9
+     ],
+     "texte": "Guider Aure jusqu'à Rathrosk"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772933,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -9
+     ],
+     "texte": "Assister aux retrouvailles entre Aure et Rathrosk"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4698,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -9
+     ],
+     "texte": "Aller voir {npc,4698}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      772935,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -9
+     ],
+     "texte": "Observer la réaction de Rathrosk"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       20286,
+       1
+      ],
+      [
+       20206,
+       1
+      ],
+      [
+       20240,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2051,
+ "nom": "Le silence est d'Aure",
+ "objets": [
+  [
+   19629,
+   1
+  ]
+ ],
+ "prerequis": [
+  2048,
+  2048
+ ]
+}

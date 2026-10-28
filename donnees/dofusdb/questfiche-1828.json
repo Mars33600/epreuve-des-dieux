@@ -1,0 +1,144 @@
+{
+ "depart": [
+  {
+   "mapId": 174588673,
+   "npcId": 3671
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le célèbre archéologue Luc Asart souhaite explorer certains bâtiments de la ville détruite. Il vous demande de l'aide pour le défendre contre les terribles dangers qui peuplent ces salles oubliées de tous.",
+   "id": 2467,
+   "nom": "L'archéologie, c'est facile",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886728,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver de la dynamite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886729,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un détonateur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3671,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -73
+     ],
+     "texte": "Aller voir {npc,3671}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886730,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -71
+     ],
+     "texte": "Libérer le chemin vers le bâtiment"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886731,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -72
+     ],
+     "texte": "S'assurer que la salle est sécurisée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3671,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -72
+     ],
+     "texte": "Aller voir {npc,3671}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3671,
+      18545,
+      10
+     ],
+     "position": [
+      8,
+      -73
+     ],
+     "texte": "Ramener à {npc,3671} : x10 {item,18545}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886732,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -73
+     ],
+     "texte": "S'assurer que la salle est sécurisée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3671,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -73
+     ],
+     "texte": "Aller voir {npc,3671}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18537,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1828,
+ "nom": "L'archéologie, c'est facile",
+ "objets": [],
+ "prerequis": []
+}

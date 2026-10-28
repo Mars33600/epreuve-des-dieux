@@ -1,0 +1,366 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "La Main de Pandawa est la clé pour ouvrir le jardin secret du dragon de Pandala. Pour la reconstituer, les griffes élémentaires ne suffisent pas. Il faudra récupérer les souffles des dragons et obtenir l'accord de la déesse.",
+   "id": 2857,
+   "nom": "Main dans la main",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5570,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5570}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      875558,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -31
+     ],
+     "texte": "Découvrir la carte : Intérieur de la Taverne interdite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      866683,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir le Grandapan pour dialoguer avec la déesse Pandawa par son intermédiaire"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5955,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Aller voir {npc,5955}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5570,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Aller voir {npc,5570}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      869270,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Convaincre les prêtres de Pandawa d'administrer de la limonade de Grobe au Grandapan"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5796,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Aller voir {npc,5796}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      872054,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir la recette de la bière forte auprès d'un prêtre de Pandawa"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      880744,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Découvrir la carte : Brasserie"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6515,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,6515} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      881268,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Essayer de fabriquer de la bière forte dans la brasserie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      866687,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des indices pour localiser Sumowa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      872623,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre la tortue sur les traces de Sumowa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      872625,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer à suivre la tortue sur les traces de Sumowa"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5957,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -32
+     ],
+     "texte": "Aller voir {npc,5957}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      872205,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -32
+     ],
+     "texte": "Débusquer la tierce personne et la forcer à se dévoiler"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      876090,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -32
+     ],
+     "texte": "Découvrir ce que cache l'individu suspect"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6516,
+      1,
+      0
+     ],
+     "position": [
+      21,
+      -32
+     ],
+     "texte": "Vaincre x1 {monster,6516} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871040,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Réparer la machine de la brasserie"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      23733,
+      1,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Fabriquer 1 {item,23733} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5796,
+      23733,
+      1
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Ramener à {npc,5796} : x1 {item,23733}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      866693,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "S'entretenir avec la déesse Pandawa par l'intermédiaire du Grandapan"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875322,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver les deux souffles du Wukin et du Wukang pour amener Pandawa à se manifester"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5962,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Aller voir {npc,5962}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875310,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Écouter l'argumentaire de Keltra Ekazumi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      878158,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Convaincre Pandawa de vous confier sa Main"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       24090,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2200,
+ "nom": "Main dans la main",
+ "objets": [
+  [
+   23179,
+   2
+  ],
+  [
+   7055,
+   2
+  ],
+  [
+   1977,
+   2
+  ],
+  [
+   23482,
+   2
+  ],
+  [
+   23237,
+   1
+  ],
+  [
+   23408,
+   1
+  ]
+ ],
+ "prerequis": [
+  2180
+ ]
+}

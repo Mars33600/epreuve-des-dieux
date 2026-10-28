@@ -1,0 +1,431 @@
+{
+ "depart": [
+  {
+   "mapId": 202379266,
+   "npcId": 5317
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Guerre attend de vous que vous lui rameniez un guerrier immortel capable de lui tenir tête. Si vous avez d'autres idées lumineuses dans le même genre, n'hésite pas à les noter sur un bout de papier... En attendant, il vous faut trouver ce fameux guerrier. Peut-être obtiendrez-vous des informations au temple Iop, après tout quand ça parle de baston c'est eux les spécialistes de la question !",
+   "id": 2770,
+   "nom": "Au-delà de la gloire",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      38,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      3
+     ],
+     "texte": "Aller voir {npc,38}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6009,
+      1,
+      0
+     ],
+     "position": [
+      1,
+      3
+     ],
+     "texte": "Vaincre x1 {monster,6009} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820964,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Reparler à Rish Claymore"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818926,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      3
+     ],
+     "texte": "Consulter le Kikimaîtreur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      819115,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Tenter de recruter Goultard"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890563,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      3
+     ],
+     "texte": "Questionner Rish Claymore sur la numéro deux de la liste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      819108,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Chercher des informations sur Sigrid d'Astirite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1198956,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le registre des naissances d'avant l'Horloge"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      127,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Retourner voir {npc,127}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      21983,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Fabriquer 1 {item,21983} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      127,
+      21983,
+      1
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Ramener à {npc,127} : x1 {item,21983}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1512,
+      22054,
+      1
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Montrer à {npc,1512} : 1 {item,22054}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      819107,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Trouver un livre évoquant Sigrid d'Astirite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4310,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Aller voir {npc,4310}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      819123,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer le cimetière d'Astrub à la recherche de la bonne sépulture"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4310,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Retourner voir {npc,4310}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4353,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Aller voir {npc,4353}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      822583,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Apporter la fleur de Rosette à la doyenne d'Astrub"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      822584,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Fouiller la cave en quête de réponses"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      822570,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Raconter l'histoire de Lady Oskarina à Aisling"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4354,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Retourner voir {npc,4354}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      822649,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -19
+     ],
+     "texte": "Demander des informations sur le maître d'armes à Badufron"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2847,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -6
+     ],
+     "texte": "Aller voir {npc,2847}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      823319,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -6
+     ],
+     "texte": "Examiner l'épée fixée sur le pilier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      822654,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Faire le point avec Aisling"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4443,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Aller voir {npc,4443}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      822656,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Demander conseil à Euph le Nécromant"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      914,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Aller voir {npc,914}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      822657,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -2
+     ],
+     "texte": "Retourner voir Filco Norse dans la dimension de Guerre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      822751,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Questionner Filco Norse"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22247,
+       5
+      ],
+      [
+       22248,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2115,
+ "nom": "Au-delà de la gloire",
+ "objets": [
+  [
+   21982,
+   2
+  ],
+  [
+   8364,
+   20
+  ],
+  [
+   11497,
+   10
+  ],
+  [
+   425,
+   100
+  ]
+ ],
+ "prerequis": [
+  2111
+ ]
+}

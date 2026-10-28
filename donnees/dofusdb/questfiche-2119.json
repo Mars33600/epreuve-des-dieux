@@ -1,0 +1,278 @@
+{
+ "depart": [
+  {
+   "mapId": 201852929,
+   "npcId": 5354
+  },
+  {
+   "mapId": 201852416,
+   "npcId": 5354
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Mazaithe veut quitter l'Oasis sans se faire repérer afin de retourner auprès de sa sœur Cozaithe. Aidez-le à s'échapper de cet endroit qui n'est pas aussi idyllique qu'il en a l'air.",
+   "id": 2774,
+   "nom": "Avis de tempête",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820926,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Étudier la muraille pour sortir de l'Oasis sans passer par l'entrée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5354,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Aller voir {npc,5354}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820928,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Sortir de l'Oasis avec Mazaithe sans passer par l'entrée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820929,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      4
+     ],
+     "texte": "Ramener Mazaithe chez sa soeur Cozaithe"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5354,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      4
+     ],
+     "texte": "Aller voir {npc,5354}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820930,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      4
+     ],
+     "texte": "Fouiller la maison de Cozaithe pour découvrir la raison de son absence"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820931,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire la lettre trouvée chez Cozaithe"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5354,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      4
+     ],
+     "texte": "Aller voir {npc,5354}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5990,
+      1,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Vaincre x1 {monster,5990} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5352,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Aller voir {npc,5352}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5354,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      4
+     ],
+     "texte": "Retourner voir {npc,5354}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884825,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les collecteurs d'impôts présents dans l'Oasis pour recueillir des informations sur la voleuse de Misère"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820939,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des indices à propos de la voleuse de Misère dans le désert"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5360,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Aller voir {npc,5360}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5360,
+      22131,
+      10
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Ramener à {npc,5360} : x10 {item,22131}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5352,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Aller voir {npc,5352}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820987,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Repousser la garde personnelle de Misère"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5352,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Aller voir {npc,5352}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5354,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      4
+     ],
+     "texte": "Aller voir {npc,5354}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22047,
+       3
+      ],
+      [
+       22052,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2119,
+ "nom": "Avis de tempête",
+ "objets": [],
+ "prerequis": [
+  2118
+ ]
+}

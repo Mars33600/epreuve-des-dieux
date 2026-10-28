@@ -1,0 +1,120 @@
+{
+ "depart": [
+  {
+   "mapId": 235146497,
+   "npcId": 7715
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Votre mission : faire manger une pomme à une grosse bête endormie, et ce sans attirer l'attention de la garde-chasse. Qu'est-ce qui pourrait mal se passer ?",
+   "id": 3212,
+   "nom": "Devoir de réserve",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7699,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Aller voir {npc,7699}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      8047,
+      1,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Vaincre x1 {monster,8047} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7700,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Aller voir {npc,7700}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1137949,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Se défendre contre l'attaque provoquée par la garde-chasse"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7699,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Aller voir {npc,7699}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31673,
+       2
+      ],
+      [
+       31674,
+       2
+      ],
+      [
+       31675,
+       2
+      ],
+      [
+       31676,
+       2
+      ],
+      [
+       31677,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2531,
+ "nom": "Devoir de réserve",
+ "objets": [],
+ "prerequis": [
+  2517
+ ]
+}

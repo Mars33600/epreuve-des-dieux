@@ -1,0 +1,159 @@
+{
+ "depart": [
+  {
+   "mapId": 197921026,
+   "npcId": 4948
+  }
+ ],
+ "etapes": [
+  {
+   "description": "D'où vient la chagouar qui hante les nuits de Tylezia ? Le Maître des rêves Draconiros aura probablement la réponse à cette question.",
+   "id": 2736,
+   "nom": "Cauchemar infini",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4638,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4638}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4638,
+      21190,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,4638} : x1 {item,21190}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4638,
+      21191,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,4638} : x1 {item,21191}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4638,
+      21192,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,4638} : x1 {item,21192}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147918,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver l'esprit d'Oyukipoca dans les paradoxes des Songes infinis"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4950,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4950}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801636,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre le cauchemar avec l'aide d'Oyukipoca"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4950,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4950}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      801637,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Temple oublié d'Oyukipoca"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801638,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -11
+     ],
+     "texte": "Se frayer un chemin dans le temple"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801639,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -11
+     ],
+     "texte": "Prier dans le temple d'Oyukipoca"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4948,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Retourner voir {npc,4948}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2080,
+ "nom": "Cauchemar infini",
+ "objets": [],
+ "prerequis": [
+  2079
+ ]
+}

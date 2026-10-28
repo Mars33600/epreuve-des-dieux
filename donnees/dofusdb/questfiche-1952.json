@@ -1,0 +1,146 @@
+{
+ "depart": [
+  {
+   "mapId": 182978570,
+   "npcId": 4275
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Hugues Lindien n'a pas obtenu les résultats escomptés et souhaite poursuivre ses expériences.",
+   "id": 2593,
+   "nom": "Le héros de Plantes contre Trépamorts",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742418,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer cinq objets éthérés dans la caserne du Jour sans fin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742422,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Utiliser le talisman de Hugues Lindien avec huit cendres de Brûlâmes"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744425,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Découvrir la carte : Passage vers la Blessure d'Erazal"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4058,
+      19493,
+      1
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Ramener à {npc,4058} : x1 {item,19493}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      19492,
+      1
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Ramener à {npc,4275} : x1 {item,19492}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      19494,
+      1
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Ramener à {npc,4275} : x1 {item,19494}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4275,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Aller voir {npc,4275}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742424,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Vaincre les assaillants Calcinés"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4275,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Aller voir {npc,4275}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19405,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1952,
+ "nom": "Le héros de Plantes contre Trépamorts",
+ "objets": [],
+ "prerequis": [
+  1951
+ ]
+}

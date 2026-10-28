@@ -1,0 +1,262 @@
+{
+ "depart": [
+  {
+   "mapId": 129499136,
+   "npcId": 2351
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Léonard compte sur vous pour le réhabiliter.",
+   "id": 2140,
+   "nom": "Coiffeur de génie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885055,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Récupérer 1 Cristal bleu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885056,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -5
+     ],
+     "texte": "Récupérer 1 Pépite dorée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885057,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -6
+     ],
+     "texte": "Récupérer 1 Sac"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2351,
+      15375,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2351} : x1 {item,15375}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2351,
+      15376,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2351} : x1 {item,15376}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2351,
+      15377,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2351} : x1 {item,15377}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2351,
+      15177,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2351} : x1 {item,15177}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2351,
+      15178,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2351} : x1 {item,15178}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2351,
+      15179,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2351} : x1 {item,15179}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2351,
+      15180,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2351} : x1 {item,15180}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2434,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      -2
+     ],
+     "texte": "Aller voir {npc,2434}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2351,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Aller voir {npc,2351}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3648,
+      1,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Vaincre x1 {monster,3648} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453401,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Découvrir la carte : Sortie du Palais du roi Nidas"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2355,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Aller voir {npc,2355}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2351,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Aller voir {npc,2351}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15181,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1514,
+ "nom": "Coiffeur de génie",
+ "objets": [
+  [
+   15177,
+   1
+  ],
+  [
+   15178,
+   1
+  ],
+  [
+   15179,
+   1
+  ],
+  [
+   15180,
+   1
+  ]
+ ],
+ "prerequis": []
+}

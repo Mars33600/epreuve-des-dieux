@@ -1,0 +1,160 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez trouver un moyen d'atteindre Erazal malgré ses protections.",
+   "id": 2541,
+   "nom": "Fée d'hiver",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      770,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -10
+     ],
+     "texte": "Aller voir {npc,770}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3085,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -69
+     ],
+     "texte": "Aller voir {npc,3085}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      733309,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Découvrir la carte : Salle des Protecteurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4110,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,4110}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      733310,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Découvrir la carte : Belvédère d'Ilyzaelle"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      734595,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Découvrir la carte : Blessure d'Erazal"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      4967,
+      1,
+      184686337
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Vaincre x1 {monster,4967} sur la carte {map,184686337} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4057,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Aller voir {npc,4057}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1901,
+ "nom": "Fée d'hiver",
+ "objets": [],
+ "prerequis": [
+  1899
+ ]
+}

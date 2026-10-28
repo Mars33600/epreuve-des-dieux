@@ -1,0 +1,183 @@
+{
+ "depart": [
+  {
+   "mapId": 234752517,
+   "npcId": 7659
+  },
+  {
+   "mapId": 234752517,
+   "npcId": 7659
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La sonde de la termitière semble détecter des agitations étranges dans la Toorbz Boorzzbz. Le Caporal craint une nouvelle machination liée à la secte des Steamers, ou un dysfonctionnement de la sonde.",
+   "id": 3209,
+   "nom": "Un divin nectar",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144215,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      15
+     ],
+     "texte": "Vérifier la sonde à l'extérieur de la Toorbz Boorzzbz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144217,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Vérifier l'intérieur de la sonde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144178,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Contacter Gobastol via son krosmoglob"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144186,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Vaincre les Kabombz en sortant de la sonde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144141,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      26
+     ],
+     "texte": "Trouver la source du trouble des Kabombz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144142,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      26
+     ],
+     "texte": "Vérifier l'approvisionnement en nectar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144162,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      26
+     ],
+     "texte": "Identifier les éléments déviants dans le Puits du nectar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144163,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      25
+     ],
+     "texte": "Identifier les éléments déviants dans la Bourse des zœufs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144164,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      28
+     ],
+     "texte": "Identifier les éléments déviants dans la Larverie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144214,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      14
+     ],
+     "texte": "Identifier les éléments déviants dans le Gâtosavane"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144167,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Faire votre rapport à Gobastol"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       30
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2527,
+ "nom": "Un divin nectar",
+ "objets": [],
+ "prerequis": [
+  2515,
+  2516
+ ]
+}

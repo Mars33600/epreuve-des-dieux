@@ -1,0 +1,193 @@
+{
+ "depart": [
+  {
+   "mapId": 163054594,
+   "npcId": 3428
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous voilà enfin prêt à affronter Ombre. Avec un peu d'aide, tout devrait bien se passer...",
+   "id": 2422,
+   "nom": "Une ombre au tableau",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2978,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Aller voir {npc,2978}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699764,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à Nabrisa sur l'île de Rok"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699770,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      9
+     ],
+     "texte": "Escorter Nabrisa jusqu'à la Pyramide d'Ombre"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3564,
+      1,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Vaincre x1 {monster,3564} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3445,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Aller voir {npc,3445}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699693,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Capturer l'âme d'Ombre avec l'aide de Nabrisa"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3446,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Aller voir {npc,3446}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699672,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Écouter la voix pour dissiper l'obscurité"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Aller voir {npc,2205}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3446,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Aller voir {npc,3446}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Aller voir {npc,2205}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      914,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Aller voir {npc,914}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       14927,
+       1
+      ],
+      [
+       14928,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1785,
+ "nom": "Une ombre au tableau",
+ "objets": [],
+ "prerequis": [
+  1784,
+  1665
+ ]
+}

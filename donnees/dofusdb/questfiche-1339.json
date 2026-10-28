@@ -1,0 +1,65 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 1999
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Après avoir tiré les oreilles de Sylargh et puni Klime comme il le méritait, il vous reste un adversaire à combattre : Missiz Frizz la Forgemage. Vous pourrez ensuite goûter un repos bien mérité, soit dans une auberge, soit au cimetière, suivant la qualité de votre performance.",
+   "id": 1943,
+   "nom": "La dernière carte",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3391,
+      1,
+      0
+     ],
+     "position": [
+      -71,
+      -88
+     ],
+     "texte": "Vaincre x1 {monster,3391} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1999,
+      14215,
+      1
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Ramener à {npc,1999} : x1 {item,14215}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ],
+      [
+       13935,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1339,
+ "nom": "La dernière carte",
+ "objets": [],
+ "prerequis": [
+  1338
+ ]
+}

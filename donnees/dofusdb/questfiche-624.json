@@ -1,0 +1,64 @@
+{
+ "depart": [
+  {
+   "mapId": 60036612,
+   "npcId": 1391
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Sylvie Barbe a besoin d'organes du Korriandre pour soigner des villageois. Elle compte sur vous pour vaincre ce monstre.",
+   "id": 1267,
+   "nom": "Gare où vous posez les pieds",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56042,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Découvrir la carte : Antre du Korriandre."
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2968,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,2968} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56043,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Découvrir la carte : Sortie de l'Antre du Korriandre."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 624,
+ "nom": "Sans ma barbe, quelle barbe",
+ "objets": [],
+ "prerequis": []
+}

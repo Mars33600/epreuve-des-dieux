@@ -1,0 +1,172 @@
+{
+ "depart": [
+  {
+   "mapId": 197921026,
+   "npcId": 4948
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pour comprendre les motivations d'une créature, le meilleur moyen est de discuter avec elle. Bien sûr, s'entretenir avec un dragon mort est un peu plus compliqué... mais les rêves sont là pour ça.",
+   "id": 2738,
+   "nom": "Les raisons de la colère",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801750,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans le rêve de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801751,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer le rêve de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3499,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Aller voir {npc,3499}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801752,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Tenter d'apaiser la colère de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4638,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4638}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805708,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir un souvenir de Maminala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805704,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir une offrande du gardien du Dofus Ocre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801756,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir un morceau d'écorce de l'ancienne demeure de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805740,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir une offrande de la fille de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805705,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir un souffle de la mère de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801759,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Apaiser la colère de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3499,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -1
+     ],
+     "texte": "Aller voir {npc,3499}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4948,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Retourner voir {npc,4948}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2082,
+ "nom": "Les raisons de la colère",
+ "objets": [],
+ "prerequis": [
+  2081
+ ]
+}

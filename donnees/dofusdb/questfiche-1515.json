@@ -1,0 +1,167 @@
+{
+ "depart": [
+  {
+   "mapId": 129764610,
+   "npcId": 2412
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Gravia a demandé votre assistance pour l'aider à récupérer son argent.",
+   "id": 2130,
+   "nom": "Reconnaissance de dette",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2411,
+      15316,
+      1
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Ramener à {npc,2411} : x1 {item,15316}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2412,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      -6
+     ],
+     "texte": "Aller voir {npc,2412}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2411,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2411}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885096,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Vaincre les confrères d'Amaradin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2411,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2411}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2412,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      -6
+     ],
+     "texte": "Aller voir {npc,2412}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2411,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2411}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885097,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Vérifier le paiement"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2411,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2411}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2412,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2412}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15177,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1515,
+ "nom": "Reconnaissance de dette",
+ "objets": [],
+ "prerequis": []
+}

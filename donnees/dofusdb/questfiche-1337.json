@@ -1,0 +1,121 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 1999
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Sylargh le Brigandin pourrait bien avoir une idée derrière la tête. Pour en avoir le cœur net, vous allez tenter de comprendre ce qu'il a écrit sur le message que vous avez intercepté. Eh oui, sur Frigost, les grands méchants sont instruits. Voilà qui vous change des brutes habituelles que vous côtoyez tous les jours.",
+   "id": 1941,
+   "nom": "Les desseins de Sylargh",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452625,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le message de Sylargh"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452627,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver quelqu'un capable de traduire le texte du message"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452587,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le message traduit"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1999,
+      14212,
+      1
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Ramener à {npc,1999} : x1 {item,14212}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452589,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Fouiller le transporteur de Sylargh à la recherche d'un indice"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2046,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Aller voir {npc,2046}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Retourner voir {npc,1999}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ],
+      [
+       13982,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1337,
+ "nom": "Les desseins de Sylargh",
+ "objets": [],
+ "prerequis": [
+  1336
+ ]
+}

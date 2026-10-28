@@ -1,0 +1,390 @@
+{
+ "depart": [
+  {
+   "mapId": 202900486,
+   "npcId": 4639
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Rathrosk semble avoir compris le but secret de Corruption : corrompre tous les arbres magiques du monde des Douze par le biais du Grand Arbre, ce que vous devez à tout prix empêcher. Il semble cependant que l'influence du cavalier s'étende jusqu'à votre propre époque. Trouver un moyen de sauver votre époque devrait vous aider pour sauver le futur également.",
+   "id": 2786,
+   "nom": "Un pouvoir mérydique",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      826185,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver quelqu'un capable de voyager dans l'Éther"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      21909,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,21909} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      824592,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Découvrir la carte : Arbre des vagabonds"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890562,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Prélever un fragment de corruption sur le bourgeon parasite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5343,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,5343}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824603,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Prier devant la statue du temple pour entrer dans le Domaine des dieux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4208,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Aller voir {npc,4208}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4210,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Aller voir {npc,4210}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      826208,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      -24
+     ],
+     "texte": "Demander conseil à Théodoran Ax pour trouver les Mérydes"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5423,
+      22210,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,5423} : x10 {item,22210}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5424,
+      7014,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,5424} : x10 {item,7014}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5290,
+      22208,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,5290} : x10 {item,22208}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5422,
+      22212,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,5422} : x10 {item,22212}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5425,
+      14144,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,5425} : x10 {item,14144}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4210,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Retourner voir {npc,4210}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      1045,
+      1,
+      0
+     ],
+     "position": [
+      -54,
+      16
+     ],
+     "texte": "Vaincre x1 {monster,1045} en un seul combat avec l'altération {alteration,236} active"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824626,
+      0,
+      0
+     ],
+     "position": [
+      -54,
+      16
+     ],
+     "texte": "Détruire le premier bourgeon parasite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5444,
+      0,
+      0
+     ],
+     "position": [
+      -54,
+      16
+     ],
+     "texte": "Aller voir {npc,5444}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      257,
+      1,
+      0
+     ],
+     "position": [
+      -14,
+      -13
+     ],
+     "texte": "Vaincre x1 {monster,257} en un seul combat avec l'altération {alteration,236} active"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824627,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      -13
+     ],
+     "texte": "Détruire le second bourgeon parasite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2864,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      -13
+     ],
+     "texte": "Aller voir {npc,2864}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      1159,
+      1,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Vaincre x1 {monster,1159} en un seul combat avec l'altération {alteration,236} active"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824641,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Détruire le troisième bourgeon parasite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      833668,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Retourner voir le Mage Ax pour retourner à l'arbre des vagabonds"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824643,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Détruire le dernier Bourgeon parasite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5343,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,5343}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22211,
+       5
+      ],
+      [
+       22208,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2131,
+ "nom": "Un pouvoir mérydique",
+ "objets": [
+  [
+   7904,
+   20
+  ],
+  [
+   20962,
+   1
+  ],
+  [
+   1986,
+   10
+  ],
+  [
+   2542,
+   1
+  ],
+  [
+   22210,
+   10
+  ],
+  [
+   7014,
+   10
+  ],
+  [
+   22208,
+   10
+  ],
+  [
+   22212,
+   10
+  ],
+  [
+   14144,
+   10
+  ]
+ ],
+ "prerequis": [
+  2130
+ ]
+}

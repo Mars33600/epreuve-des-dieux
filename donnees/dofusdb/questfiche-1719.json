@@ -1,0 +1,212 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Sans signe de vie du milicien chargé de trouver la dernière Pierre Sacrée d'Araknas, cette tâche vous incombe désormais.",
+   "id": 2356,
+   "nom": "Gelé à pierre fendre",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      625543,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -42
+     ],
+     "texte": "Découvrir la carte : Bibliothèque de Frigost"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1247,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -42
+     ],
+     "texte": "Aller voir {npc,1247}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1260,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -44
+     ],
+     "texte": "Aller voir {npc,1260}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      625570,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -38
+     ],
+     "texte": "Découvrir la carte : Taverne du Paradis Frigostien"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891025,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -38
+     ],
+     "texte": "Interroger les habitués"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      625577,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Découvrir la carte : Entrée de l'antre du Korriandre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1391,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Aller voir {npc,1391}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      2968,
+      1,
+      62919680
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Vaincre x1 {monster,2968} sur la carte {map,62919680} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891026,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Utiliser le dissolvant"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      625540,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Découvrir la carte : Antre de la Pierre Sacrée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3210,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Aller voir {npc,3210}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4379,
+      1,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Vaincre x1 {monster,4379} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891027,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Prendre la Pierre Sacrée incrustée dans la statue"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      17758,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Montrer à {npc,6309} : 1 {item,17758}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1719,
+ "nom": "Gelé à pierre fendre",
+ "objets": [],
+ "prerequis": [
+  1717
+ ]
+}

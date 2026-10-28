@@ -1,0 +1,120 @@
+{
+ "depart": [
+  {
+   "mapId": 184685313,
+   "npcId": 4057
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Après bien des efforts, vous voilà enfin prêt à pénétrer en Externam ! Équipez-vous du masque mortuaire, assurez-vous que le feu du Dofus des Rois brûle toujours, et franchissez la Blessure d'Erazal.",
+   "id": 2545,
+   "nom": "Le Pays Gris",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732335,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Franchir le portail vers l'Externam"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      732339,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Pont des Derniers Soupirs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732342,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir des informations sur la reine d'Externam"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732343,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans la Citadelle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732344,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Discuter avec des mânes en attendant l'arrivée d'un huissier"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4070,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4070}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732379,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Attendre le retour de l'huissier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732380,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Convaincre l'huissier de vous laisser rencontrer un magistrat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4072,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4072}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1907,
+ "nom": "Le Pays Gris",
+ "objets": [],
+ "prerequis": [
+  1906
+ ]
+}

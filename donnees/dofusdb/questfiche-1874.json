@@ -1,0 +1,172 @@
+{
+ "depart": [
+  {
+   "mapId": 172754442,
+   "npcId": 3953
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vanelle Sings cherche à repérer l'endroit où se réunissent les adeptes du culte des goules afin de mettre un terme à leurs agissements.",
+   "id": 2514,
+   "nom": "Le trou du culte",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725560,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Fouiller les ruines de la tour de garde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725558,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Fouiller les abords de la tour décrépite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725564,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Fouiller les terres au voisinage de la tour sombre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725565,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Fouiller le chantier de l'ancienne scierie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725554,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Fouiller le vieux cimetière"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725563,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Fouiller aux alentours du cercle de pierres"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725566,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      32
+     ],
+     "texte": "Montrer les pages à Vanelle Sings"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725593,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir le lieu où se réunissent les adeptes du culte des goules"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725595,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      26
+     ],
+     "texte": "Combattre les adorateurs de goules"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3915,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      26
+     ],
+     "texte": "Aller voir {npc,3915}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725608,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      32
+     ],
+     "texte": "Escorter l'adorateur jusqu'au camp des chasseurs de goules"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3953,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      32
+     ],
+     "texte": "Aller voir {npc,3953}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19071,
+       3
+      ],
+      [
+       19070,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1874,
+ "nom": "Le trou du culte",
+ "objets": [],
+ "prerequis": []
+}

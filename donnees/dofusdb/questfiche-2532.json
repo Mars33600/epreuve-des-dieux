@@ -1,0 +1,111 @@
+{
+ "depart": [
+  {
+   "mapId": 235536897,
+   "npcId": 7769
+  },
+  {
+   "mapId": 235536897,
+   "npcId": 7758
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pour obtenir une audience avec le roi des Rhoarims, il vous faut rassembler un certain nombre de marques en guise de recommandations. Elles seront fournies par les habitants du village que vous parviendrez à convaincre de votre bonne foi.",
+   "id": 3213,
+   "nom": "Un hôte de marque",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135722,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir comment les Rhoarims honorent leurs proies"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135723,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la cuisine des Rhoarims"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139999,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir que la musique tribale adoucit les mœurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135725,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir les mystères de l'ostéomancie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135726,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir le principe fondamental de la loi des Rhoarims"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135727,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir le plus important rituel de chasse des Rhoarims"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31629,
+       2
+      ],
+      [
+       31630,
+       2
+      ],
+      [
+       31624,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2532,
+ "nom": "Un hôte de marque",
+ "objets": [],
+ "prerequis": [
+  2518
+ ]
+}

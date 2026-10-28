@@ -1,0 +1,75 @@
+{
+ "depart": [
+  {
+   "mapId": 54171950,
+   "npcId": 1375
+  },
+  {
+   "mapId": 54171950,
+   "npcId": 1376
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre le Glourséleste pour permettre sa capture.",
+   "id": 1317,
+   "nom": "Ruche en vitamines",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2864,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,2864} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55739,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Fin du donjon."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885733,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -46
+     ],
+     "texte": "Faire un rapport à l'agent de votre cité"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 702,
+ "nom": "Glourson et lumière",
+ "objets": [],
+ "prerequis": [
+  626
+ ]
+}

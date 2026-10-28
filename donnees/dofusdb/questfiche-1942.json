@@ -1,0 +1,227 @@
+{
+ "depart": [
+  {
+   "mapId": 54534177,
+   "npcId": 1251
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Votre corps est devenu le terreau fertile d'une algue. Vous devez vous en débarrasser avant qu'il ne soit trop tard.",
+   "id": 2582,
+   "nom": "Algue au rythme",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884858,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Chercher comment récupérer des parasites sur les Submergés"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      19415,
+      1,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Fabriquer 1 {item,19415} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4211,
+      19417,
+      5
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Montrer à {npc,4211} : 5 {item,19417}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4211,
+      19418,
+      5
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Montrer à {npc,4211} : 5 {item,19418}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4211,
+      19419,
+      5
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Montrer à {npc,4211} : 5 {item,19419}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4211,
+      19420,
+      5
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Montrer à {npc,4211} : 5 {item,19420}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740603,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Chasser les importuns"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740604,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Donner des parasites de Submergés à Zrid Rahys"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740605,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -45
+     ],
+     "texte": "Donner des parasites de Submergés à Albert Paisse"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11505,
+      5
+     ],
+     "position": [
+      -80,
+      -45
+     ],
+     "texte": "Ramener à {npc,1251} : x5 {item,11505}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      17994,
+      3
+     ],
+     "position": [
+      -80,
+      -45
+     ],
+     "texte": "Ramener à {npc,1251} : x3 {item,17994}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1260,
+      19416,
+      1
+     ],
+     "position": [
+      -81,
+      -44
+     ],
+     "texte": "Ramener à {npc,1260} : x1 {item,19416}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4211,
+      19421,
+      1
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Ramener à {npc,4211} : x1 {item,19421}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19407,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1942,
+ "nom": "Algue au rythme",
+ "objets": [
+  [
+   17995,
+   3
+  ],
+  [
+   17993,
+   3
+  ],
+  [
+   17992,
+   3
+  ],
+  [
+   11505,
+   5
+  ],
+  [
+   17994,
+   3
+  ],
+  [
+   19414,
+   1
+  ]
+ ],
+ "prerequis": []
+}

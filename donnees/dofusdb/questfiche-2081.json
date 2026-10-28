@@ -1,0 +1,272 @@
+{
+ "depart": [
+  {
+   "mapId": 197921026,
+   "npcId": 4948
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La déesse Ixchelonia règne sur le panthéon des dieux crocuzkiens. Vous allez devoir la convaincre qu'Oyukipoca mérite de reprendre la place qu'elle occupait jadis.",
+   "id": 2737,
+   "nom": "La Nuit-qui-rugit",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801641,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Amener la déesse Ixchelonia à se manifester sur Crocuzko"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4951,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4951}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801652,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Prier dans le temple de Kinichinti"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4952,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -15
+     ],
+     "texte": "Aller voir {npc,4952}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801717,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Montrer aux Crocuzkiens la puissance du Lézard-Soleil"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5010,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -15
+     ],
+     "texte": "Retourner voir {npc,5010}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801718,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Prier devant le puits de Chaklaplok"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4953,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -17
+     ],
+     "texte": "Aller voir {npc,4953}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      804246,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -17
+     ],
+     "texte": "Jeter une vingtaine d'anémones de sang dans le puits de Chaklaplok"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4953,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -17
+     ],
+     "texte": "Aller voir {npc,4953}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801732,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Attirer un chagouar devant l'antre de Tylezia"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801735,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Dompter les chagouars"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801734,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -11
+     ],
+     "texte": "Guider les chagouars jusqu'au temple d'Oyukipoca"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801737,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Convertir un Crocodaille crocuzkien au culte d'Oyukipoca"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      804667,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -11
+     ],
+     "texte": "Escorter le Crocuzkien dévôt jusqu'au temple d'Oyukipoca"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801747,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -11
+     ],
+     "texte": "Prier devant l'autel pour qu'Oyukipoca se manifeste"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4950,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -11
+     ],
+     "texte": "Aller voir {npc,4950}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801748,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Assister aux retrouvailles entre Tylezia et Oyukipoca"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4958,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Aller voir {npc,4958}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4948,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Aller voir {npc,4948}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2081,
+ "nom": "La Nuit-qui-rugit",
+ "objets": [],
+ "prerequis": [
+  2080
+ ]
+}

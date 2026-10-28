@@ -1,0 +1,399 @@
+{
+ "depart": [
+  {
+   "mapId": 173019657,
+   "npcId": 3869
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez rejoint la tribu des Pagneuls dans son combat contre les Trépamorts.",
+   "id": 2591,
+   "nom": "Du feu de dieu",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5102,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,5102}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5103,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,5103}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5104,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,5104}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5105,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,5105}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3869,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      25
+     ],
+     "texte": "Aller voir {npc,3869}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742232,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces des Pagneuls disparus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742233,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des survivants"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3869,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      25
+     ],
+     "texte": "Aller voir {npc,3869}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4267,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      27
+     ],
+     "texte": "Aller voir {npc,4267}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4268,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      23
+     ],
+     "texte": "Aller voir {npc,4268}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742249,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      23
+     ],
+     "texte": "Utiliser le sifflet"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4272,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      23
+     ],
+     "texte": "Aller voir {npc,4272}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4269,
+      17205,
+      4
+     ],
+     "position": [
+      -32,
+      23
+     ],
+     "texte": "Ramener à {npc,4269} : x4 {item,17205}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4273,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      23
+     ],
+     "texte": "Aller voir {npc,4273}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4270,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      18
+     ],
+     "texte": "Aller voir {npc,4270}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4274,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      18
+     ],
+     "texte": "Aller voir {npc,4274}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5186,
+      1,
+      0
+     ],
+     "position": [
+      -30,
+      18
+     ],
+     "texte": "Vaincre x1 {monster,5186} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4267,
+      19511,
+      1
+     ],
+     "position": [
+      -27,
+      27
+     ],
+     "texte": "Montrer à {npc,4267} : 1 {item,19511}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4267,
+      19512,
+      1
+     ],
+     "position": [
+      -27,
+      27
+     ],
+     "texte": "Montrer à {npc,4267} : 1 {item,19512}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4267,
+      19513,
+      1
+     ],
+     "position": [
+      -27,
+      27
+     ],
+     "texte": "Montrer à {npc,4267} : 1 {item,19513}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4271,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      27
+     ],
+     "texte": "Aller voir {npc,4271}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744502,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      22
+     ],
+     "texte": "Découvrir la carte : Endroit indiqué par Guy Mauve"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4271,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      22
+     ],
+     "texte": "Aller voir {npc,4271}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744510,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      22
+     ],
+     "texte": "Découvrir la carte : Repaire caché"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      22
+     ],
+     "texte": "Aller voir {npc,4258}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742253,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      22
+     ],
+     "texte": "Vaincre Claude M'Sé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      22
+     ],
+     "texte": "Aller voir {npc,4258}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4271,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      22
+     ],
+     "texte": "Aller voir {npc,4271}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3869,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      25
+     ],
+     "texte": "Aller voir {npc,3869}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19399,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1950,
+ "nom": "Du feu de dieu",
+ "objets": [
+  [
+   17205,
+   4
+  ]
+ ],
+ "prerequis": [
+  1949
+ ]
+}

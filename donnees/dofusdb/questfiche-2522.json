@@ -1,0 +1,103 @@
+{
+ "depart": [
+  {
+   "mapId": 235799811,
+   "npcId": 7666
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pour vous débarrasser des gardes kabombz qui protègent la machine bourdonnante, vous avez tenté d'employer la force. Hélas, à peine les avez-vous exterminés que d'autres prennent leur place. Une seule solution : demander aux reines d'intervenir. Elles semblent occupées à pondre au sommet de la tour de la Boorzzbz, vous allez donc devoir les déranger.",
+   "id": 3203,
+   "nom": "Têtes de ponte",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129589,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      23
+     ],
+     "texte": "Parler au gros Balebz pour tenter d'obtenir une audience avec les reines"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      8052,
+      1,
+      0
+     ],
+     "position": [
+      24,
+      23
+     ],
+     "texte": "Vaincre x1 {monster,8052} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7669,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      23
+     ],
+     "texte": "Retourner voir {npc,7669}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1128744,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      23
+     ],
+     "texte": "Négocier avec les trois reines des Kabombz"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       31524,
+       2
+      ],
+      [
+       31525,
+       2
+      ],
+      [
+       31526,
+       2
+      ],
+      [
+       31527,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2522,
+ "nom": "Têtes de ponte",
+ "objets": [],
+ "prerequis": [
+  2516
+ ]
+}

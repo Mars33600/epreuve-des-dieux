@@ -1,0 +1,82 @@
+{
+ "depart": [
+  {
+   "mapId": 90704898,
+   "npcId": 1581
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez inspecter l'Antre du Kralamoure Géant.",
+   "id": 1534,
+   "nom": "Le tour est joué",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      423,
+      1,
+      0
+     ],
+     "position": [
+      -61,
+      -9
+     ],
+     "texte": "Vaincre x1 {monster,423} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1581,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      27
+     ],
+     "texte": "Aller voir {npc,1581}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1577,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -15
+     ],
+     "texte": "Aller voir {npc,1577}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       13192,
+       1
+      ],
+      [
+       13193,
+       1
+      ],
+      [
+       8812,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 918,
+ "nom": "Le tour est joué",
+ "objets": [],
+ "prerequis": [
+  917
+ ]
+}

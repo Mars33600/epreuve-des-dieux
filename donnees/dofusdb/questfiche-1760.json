@@ -1,0 +1,71 @@
+{
+ "depart": [
+  {
+   "mapId": 170133512,
+   "npcId": 3246
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le roi Talas a été impressionné par votre dévouement envers les Sufokiens : il souhaite vous remercier en personne.",
+   "id": 2397,
+   "nom": "Le héros de Sufokia",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3245,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3245}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1593,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      22
+     ],
+     "texte": "Aller voir {npc,1593}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17990,
+       5
+      ],
+      [
+       17980,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1760,
+ "nom": "Le héros de Sufokia",
+ "objets": [],
+ "prerequis": [
+  1744,
+  1742,
+  1759
+ ]
+}

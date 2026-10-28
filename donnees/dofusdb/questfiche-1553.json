@@ -1,0 +1,156 @@
+{
+ "depart": [
+  {
+   "mapId": 136052996,
+   "npcId": 2534
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Tchô Wabbit vous a embauché pour retrouver le Prince Albert.",
+   "id": 2168,
+   "nom": "Viande fraîche",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885363,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Enquêter auprès des crânes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885364,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Enquêter dans les ruelles des Eaux-Suaires"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885365,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer l'enquête dans les ruelles des Eaux-Suaires"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885366,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer l'enquête dans les ruelles des Eaux-Suaires"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885367,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Enquêter dans les Catacombres"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2480,
+      15568,
+      1
+     ],
+     "position": [
+      6,
+      7
+     ],
+     "texte": "Ramener à {npc,2480} : x1 {item,15568}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452532,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      7
+     ],
+     "texte": "Découvrir la carte : Repaire du Bouché"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2535,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      7
+     ],
+     "texte": "Aller voir {npc,2535}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885368,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      7
+     ],
+     "texte": "Vaincre Le Bouché et lui parler à nouveau"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2534,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -1
+     ],
+     "texte": "Aller voir {npc,2534}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       40
+      ],
+      [
+       15454,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1553,
+ "nom": "Viande fraîche",
+ "objets": [],
+ "prerequis": []
+}

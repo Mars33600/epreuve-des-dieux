@@ -1,0 +1,146 @@
+{
+ "depart": [
+  {
+   "mapId": 130025985,
+   "npcId": 2336
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Rol Sterding vous a chargé de discuter avec quelques crânes parlants. Vous avez accepté cette mission peu orthodoxe sans sourciller. Après tout, vous avez déjà fait des choses plus étranges.",
+   "id": 2157,
+   "nom": "Mémoires d'outre-tombe",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453343,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Interroger un crâne parlant près de l'avant-poste des Voyageurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454052,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      2
+     ],
+     "texte": "Interroger un crâne parlant près de la prison de Srambad"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454051,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -2
+     ],
+     "texte": "Interroger un crâne parlant sur une corniche des Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454050,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -1
+     ],
+     "texte": "Interroger un crâne parlant sur le pont des Frissons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454057,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le maître des crânes parlants"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2489,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Aller voir {npc,2489}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2489,
+      15450,
+      1
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Ramener à {npc,2489} : x1 {item,15450}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2362,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2362}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15444,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1537,
+ "nom": "Mémoires d'outre-tombe",
+ "objets": [
+  [
+   15450,
+   1
+  ]
+ ],
+ "prerequis": [
+  1484,
+  1484
+ ]
+}

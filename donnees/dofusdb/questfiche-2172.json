@@ -1,0 +1,440 @@
+{
+ "depart": [
+  {
+   "mapId": 206307842,
+   "npcId": 5910
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La Daimya vous a convoqué pour une affaire de la plus haute importance selon le garde qui vous a interpellé. Elle semble vouloir garder cette entrevue secrète ce qui est assez inhabituel de sa part, ne traînez pas trop à vous présenter au palais de bambou.",
+   "id": 2828,
+   "nom": "Sombre mystère",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853977,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "S'entretenir avec la Daimya"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853978,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Interroger le villageois blessé dans la maison du chaman"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5561,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Aller voir {npc,5561}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853979,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -29
+     ],
+     "texte": "Se rendre sur les lieux de l'agression"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853980,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -29
+     ],
+     "texte": "Inspecter les lieux en quête d'indice"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5859,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -29
+     ],
+     "texte": "Aller voir {npc,5859}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853984,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Faire votre rapport à la Daimya"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      856164,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -40
+     ],
+     "texte": "Demander conseil au chef des Spiritueurs pour attirer le Yokai"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5902,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -40
+     ],
+     "texte": "Aller voir {npc,5902}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5902,
+      17152,
+      10
+     ],
+     "position": [
+      37,
+      -40
+     ],
+     "texte": "Ramener à {npc,5902} : x10 {item,17152}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5902,
+      23616,
+      5
+     ],
+     "position": [
+      37,
+      -40
+     ],
+     "texte": "Ramener à {npc,5902} : x5 {item,23616}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853992,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -45
+     ],
+     "texte": "Mettre en place l'appât à Kaonashi "
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6451,
+      1,
+      0
+     ],
+     "position": [
+      36,
+      -45
+     ],
+     "texte": "Vaincre x1 {monster,6451} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5902,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -45
+     ],
+     "texte": "Aller voir {npc,5902}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      857473,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Amener la Spiritueuse chez Surivitna"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      854343,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Laisser Kamiki examiner le blessé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      857474,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -42
+     ],
+     "texte": "Retrouver la Spiritueuse à l'entrée du Mont des Tombeaux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      854426,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher un signe de la Rokubi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      857475,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -43
+     ],
+     "texte": "Se défendre contre les Yokai vengeurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      855188,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre les traces de sang jusqu'à l'antre de la Rokubi"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5859,
+      0,
+      0
+     ],
+     "position": [
+      40,
+      -45
+     ],
+     "texte": "Aller voir {npc,5859}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6452,
+      1,
+      0
+     ],
+     "position": [
+      40,
+      -45
+     ],
+     "texte": "Vaincre x1 {monster,6452} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      855189,
+      0,
+      0
+     ],
+     "position": [
+      40,
+      -45
+     ],
+     "texte": "Décider du sort de la Rokubi"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5662,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -31
+     ],
+     "texte": "Aller voir {npc,5662}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5902,
+      1984,
+      100
+     ],
+     "position": [
+      40,
+      -45
+     ],
+     "texte": "Ramener à {npc,5902} : x100 {item,1984}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5902,
+      11340,
+      10
+     ],
+     "position": [
+      40,
+      -45
+     ],
+     "texte": "Ramener à {npc,5902} : x10 {item,11340}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5902,
+      7410,
+      5
+     ],
+     "position": [
+      40,
+      -45
+     ],
+     "texte": "Ramener à {npc,5902} : x5 {item,7410}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5902,
+      23617,
+      1
+     ],
+     "position": [
+      40,
+      -45
+     ],
+     "texte": "Ramener à {npc,5902} : x1 {item,23617}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      854020,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -27
+     ],
+     "texte": "Annoncer la nouvelle à Chonayu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      854021,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Faire votre rapport à la Daimya"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       7381,
+       5
+      ],
+      [
+       7410,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2172,
+ "nom": "Sombre mystère",
+ "objets": [
+  [
+   17152,
+   10
+  ],
+  [
+   1984,
+   100
+  ],
+  [
+   11340,
+   10
+  ],
+  [
+   7410,
+   5
+  ]
+ ],
+ "prerequis": [
+  2149
+ ]
+}

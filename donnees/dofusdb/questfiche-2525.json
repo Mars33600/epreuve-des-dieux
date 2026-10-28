@@ -1,0 +1,252 @@
+{
+ "depart": [
+  {
+   "mapId": 235405824,
+   "npcId": 7704
+  },
+  {
+   "mapId": 235537667,
+   "npcId": 7704
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Chaque saison de la chasse est l'occasion pour les jeunes Léosas d'être présentées à Gargandyas. Ce rite de passage scelle leur entrée dans l'âge adulte et révèle leur destinée de chasseuse. Mais pour certaines, le rituel ne se déroule pas comme prévu... C'est à ces Léosas que vous avez choisi d'apporter votre aide.",
+   "id": 3208,
+   "nom": "Suivre son instinct",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1130311,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      8
+     ],
+     "texte": "Accompagner la jeune Léosa sur le terrain de chasse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1146927,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      8
+     ],
+     "texte": "Chasser le troupeau de zarbivores"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7705,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      8
+     ],
+     "texte": "Aller voir {npc,7705}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1138928,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher une proie adaptée à la jeune Léosa dans la réserve touffue"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1130314,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à la Prêtresse Léosa"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7704,
+      31624,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,7704} : x1 {item,31624}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7704,
+      31630,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,7704} : x1 {item,31630}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7704,
+      31629,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,7704} : x1 {item,31629}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      31609,
+      1,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Fabriquer 1 {item,31609} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7704,
+      31609,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,7704} : x1 {item,31609}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      31611,
+      1,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Fabriquer 1 {item,31611} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7704,
+      31611,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,7704} : x1 {item,31611}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      31610,
+      1,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Fabriquer 1 {item,31610} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7704,
+      31610,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,7704} : x1 {item,31610}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139043,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Assister au rituel de la Prêtresse Léosa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1130318,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Assister à l'éloge de prédation de votre protégée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7705,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,7705}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       30
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2525,
+ "nom": "Suivre son instinct",
+ "objets": [
+  [
+   31624,
+   1
+  ],
+  [
+   31630,
+   1
+  ],
+  [
+   31629,
+   1
+  ],
+  [
+   31747,
+   6
+  ],
+  [
+   31754,
+   40
+  ],
+  [
+   31748,
+   6
+  ]
+ ],
+ "prerequis": [
+  2515
+ ]
+}

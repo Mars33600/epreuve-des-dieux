@@ -1,0 +1,38 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre le Glourséleste chez lui et sortir vivant de son antichambre.",
+   "id": 1308,
+   "nom": "Porte, Glourséleste, trésor",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55696,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Dernière salle de l'antichambre."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 693,
+ "nom": "Porte, Glourséleste, trésor",
+ "objets": [],
+ "prerequis": [
+  626
+ ]
+}

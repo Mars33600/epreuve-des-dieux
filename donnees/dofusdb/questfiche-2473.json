@@ -1,0 +1,278 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vitkour Pied-vif se cache dans la cité Nimbos. Il faut le retrouver au plus vite.",
+   "id": 3129,
+   "nom": "Chercher un Marteau-Aigri dans une galerie d'Ereboria",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973220,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver les appartements de Vitkour Pied-Vif"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      977015,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -65
+     ],
+     "texte": "Distraire les soldats Marteaux-Aigris"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6850,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -65
+     ],
+     "texte": "Aller voir {npc,6850}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      976125,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -63
+     ],
+     "texte": "Aller à la Taverne Aigrisante accompagné de Malva Bonnepanse"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6851,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -63
+     ],
+     "texte": "Aller voir {npc,6851}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6850,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -63
+     ],
+     "texte": "Aller voir {npc,6850}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      977675,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -63
+     ],
+     "texte": "Semer le désordre dans la taverne pour inciter Kirke Pintenlèr à parler"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6851,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -63
+     ],
+     "texte": "Aller voir {npc,6851}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      976998,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -62
+     ],
+     "texte": "Partir pour la Champignonnière avec Malva Bonnepanse"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6852,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -62
+     ],
+     "texte": "Aller voir {npc,6852}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      975730,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -62
+     ],
+     "texte": "Se débarrasser des champignons de Girol"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6852,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -62
+     ],
+     "texte": "Aller voir {npc,6852}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6850,
+      0,
+      0
+     ],
+     "position": [
+      31,
+      -62
+     ],
+     "texte": "Aller voir {npc,6850}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      975789,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Partir pour la cascade avec Malva Bonnepanse"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6850,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Aller voir {npc,6850}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      975803,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Chercher des traces du passage de Vitkour Pied-Vif"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      975804,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Suivre la piste en tentant de passer derrière la cascade"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6850,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Aller voir {npc,6850}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1004223,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Essayer de rattraper Malva avant qu'elle ne s'enfuie"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27436,
+       5
+      ],
+      [
+       27437,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2473,
+ "nom": "Chercher un Marteau-Aigri dans une galerie d'Ereboria",
+ "objets": [],
+ "prerequis": [
+  2472
+ ]
+}

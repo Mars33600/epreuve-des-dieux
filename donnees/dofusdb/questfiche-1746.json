@@ -1,0 +1,199 @@
+{
+ "depart": [
+  {
+   "mapId": 170133512,
+   "npcId": 3265
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pollie Perkine a disparu ! Vous êtes l'une des dernières personnes à l'avoir vue. Le Capitaine Skaille compte sur vous pour l'aider à retrouver la journaliste.",
+   "id": 2383,
+   "nom": "L'affaire Pollie Perkine",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      711,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      24
+     ],
+     "texte": "Aller voir {npc,711}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649698,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      24
+     ],
+     "texte": "Interroger un client de la taverne du Ripate"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649740,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      13
+     ],
+     "texte": "Interroger la responsable du chantier de fouilles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649687,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      14
+     ],
+     "texte": "Interroger le gestionnaire du chantier de fouilles"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3265,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      25
+     ],
+     "texte": "Aller voir {npc,3265}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1593,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      22
+     ],
+     "texte": "Aller voir {npc,1593}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3265,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      25
+     ],
+     "texte": "Retourner voir {npc,3265}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649737,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      25
+     ],
+     "texte": "Vaincre les adeptes des profondeurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3308,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3308}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3265,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      25
+     ],
+     "texte": "Aller voir {npc,3265}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1601,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      25
+     ],
+     "texte": "Aller voir {npc,1601}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3309,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3309}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3265,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3265}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17984,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1746,
+ "nom": "L'affaire Pollie Perkine",
+ "objets": [],
+ "prerequis": [
+  1745
+ ]
+}

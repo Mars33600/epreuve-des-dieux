@@ -1,0 +1,266 @@
+{
+ "depart": [
+  {
+   "mapId": 174854152,
+   "npcId": 3678
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Quel est le lien entre les vers des sables et l'Épice ? Sedierta Otel pourrait bien avoir la réponse à cette question.",
+   "id": 2471,
+   "nom": "Le mystère des vers",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712044,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Sedierta Otel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712184,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -70
+     ],
+     "texte": "Aider Sedierta à se débarrasser des vers"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3675,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -70
+     ],
+     "texte": "Aller voir {npc,3675}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712112,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -70
+     ],
+     "texte": "Récupérer un morceau de maçonnerie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712182,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -67
+     ],
+     "texte": "Récupérer un champignon de Saharach"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712096,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      -66
+     ],
+     "texte": "Récupérer un fragment de liane"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712078,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -69
+     ],
+     "texte": "Récupérer un débris de chariot"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712158,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Rapporter les échantillons à Sedierta"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712100,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -70
+     ],
+     "texte": "Entrer dans le Boyau du Père Ver"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4726,
+      1,
+      0
+     ],
+     "position": [
+      7,
+      -70
+     ],
+     "texte": "Vaincre x1 {monster,4726} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3675,
+      18534,
+      1
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Ramener à {npc,3675} : x1 {item,18534}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712176,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Attendre le résultat de l'expérience de Sedierta"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4746,
+      1,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Vaincre x1 {monster,4746} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3675,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Aller voir {npc,3675}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3559,
+      0,
+      0
+     ],
+     "position": [
+      14,
+      -56
+     ],
+     "texte": "Aller voir {npc,3559}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      712172,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Escorter Bento Mology jusqu'à Sedierta Otel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3675,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Aller voir {npc,3675}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3678,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -66
+     ],
+     "texte": "Aller voir {npc,3678}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18566,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1831,
+ "nom": "Le mystère des vers",
+ "objets": [],
+ "prerequis": [
+  1829
+ ]
+}

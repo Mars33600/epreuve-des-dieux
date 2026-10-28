@@ -1,0 +1,223 @@
+{
+ "depart": [
+  {
+   "mapId": 169082884,
+   "npcId": 3252
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Procurez-vous un sceau des fondateurs afin de descendre dans l'Ancienne Sufokia. Une fois sur place, vous escorterez le robot de Prosper Meraimée le temps qu'il fasse ses relevés, puis vous le ramènerez à son maître. Évitez donc de le perdre en route.",
+   "id": 2371,
+   "nom": "Topo le petit robot",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3266,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Aller voir {npc,3266}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3266,
+      17963,
+      1
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Montrer à {npc,3266} : 1 {item,17963}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644035,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      28
+     ],
+     "texte": "Utiliser le sceau sur l'ascenseur de l'Ancienne Sufokia"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644025,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      29
+     ],
+     "texte": "Escorter Topo jusqu'au premier site"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644047,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      29
+     ],
+     "texte": "Assurer la sécurité de Topo pendant qu'il fait ses relevés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644074,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      29
+     ],
+     "texte": "Escorter Topo jusqu'au deuxième site"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644125,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      29
+     ],
+     "texte": "Assurer la sécurité de Topo pendant qu'il fait ses relevés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644031,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      30
+     ],
+     "texte": "Escorter Topo jusqu'au troisième site"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644078,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      30
+     ],
+     "texte": "Assurer la sécurité de Topo pendant qu'il fait ses relevés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644072,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Escorter Topo jusqu'au quatrième site"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644111,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Assurer la sécurité de Topo pendant qu'il fait ses relevés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1169936,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver Topo dans l'Ancienne Sufokia"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644071,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Explorer les lieux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644100,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Ramener Topo à Prosper Meraimée"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17973,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1734,
+ "nom": "Topo le petit robot",
+ "objets": [
+  [
+   17963,
+   1
+  ]
+ ],
+ "prerequis": [
+  1733
+ ]
+}

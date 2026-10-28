@@ -1,0 +1,357 @@
+{
+ "depart": [
+  {
+   "mapId": 171180032,
+   "npcId": 3456
+  },
+  {
+   "mapId": 164103168,
+   "npcId": 3456
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez convaincre Aerafal de vous donner un peu de son sang.",
+   "id": 2425,
+   "nom": "Le dragon des vents",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699784,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un signe de la présence d'Aerafal dans les Hauts du Kramdam"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699723,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un signe de la présence d'Aerafal sur les hauteurs des Routes Rocailleuses"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699812,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un signe de la présence d'Aerafal au sommet de l'arbre Hakam"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      393,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Aller voir {npc,393}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699664,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer les hauteurs du pic des truches"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699809,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -43
+     ],
+     "texte": "S'approcher du courant d'air ascendant"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3481,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -43
+     ],
+     "texte": "Aller voir {npc,3481}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3481,
+      18283,
+      1
+     ],
+     "position": [
+      -10,
+      -43
+     ],
+     "texte": "Ramener à {npc,3481} : x1 {item,18283}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3481,
+      18284,
+      1
+     ],
+     "position": [
+      -10,
+      -43
+     ],
+     "texte": "Ramener à {npc,3481} : x1 {item,18284}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4648,
+      1,
+      0
+     ],
+     "position": [
+      -10,
+      -43
+     ],
+     "texte": "Vaincre x1 {monster,4648} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      699688,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -43
+     ],
+     "texte": "Découvrir la carte : Promontoire d'Aerafal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3482,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -43
+     ],
+     "texte": "Aller voir {npc,3482}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      389,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      -23
+     ],
+     "texte": "Aller voir {npc,389}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3483,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      -23
+     ],
+     "texte": "Aller voir {npc,3483}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699792,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Nobir chez les bworks du massif de Cania"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2956,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,2956}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3400,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,3400}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3369,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3369}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699771,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une feuille de rozberk"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2956,
+      18286,
+      1
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Ramener à {npc,2956} : x1 {item,18286}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3483,
+      18287,
+      1
+     ],
+     "position": [
+      -19,
+      -23
+     ],
+     "texte": "Ramener à {npc,3483} : x1 {item,18287}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3483,
+      18288,
+      1
+     ],
+     "position": [
+      -19,
+      -23
+     ],
+     "texte": "Ramener à {npc,3483} : x1 {item,18288}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3483,
+      18289,
+      1
+     ],
+     "position": [
+      -19,
+      -23
+     ],
+     "texte": "Ramener à {npc,3483} : x1 {item,18289}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699793,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      -23
+     ],
+     "texte": "Suivre Violette jusqu'à la plate-forme des orages"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699806,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      -22
+     ],
+     "texte": "Capturer la foudre de l'orage avec le patatonnerre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3482,
+      18291,
+      1
+     ],
+     "position": [
+      -10,
+      -43
+     ],
+     "texte": "Ramener à {npc,3482} : x1 {item,18291}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11328,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1788,
+ "nom": "Le dragon des vents",
+ "objets": [],
+ "prerequis": [
+  1785,
+  1786
+ ]
+}

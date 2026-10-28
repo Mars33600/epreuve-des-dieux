@@ -1,0 +1,41 @@
+{
+ "depart": [
+  {
+   "mapId": 108927238,
+   "npcId": 2007
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre Missiz Frizz et sortir vivant de sa forgefroide.",
+   "id": 1920,
+   "nom": "Porte, Missiz Frizz, trésor",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453341,
+      0,
+      0
+     ],
+     "position": [
+      -71,
+      -88
+     ],
+     "texte": "Découvrir la carte : Forgefroide de Missiz Frizz - Sortie"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1314,
+ "nom": "Porte, Missiz Frizz, trésor",
+ "objets": [],
+ "prerequis": []
+}

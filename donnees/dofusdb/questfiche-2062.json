@@ -1,0 +1,181 @@
+{
+ "depart": [
+  {
+   "mapId": 88081174,
+   "npcId": 4820
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des anomalies temporelles menaçent l'intégrité du Kontinuum. Votre mission : récupérer un fragment de temps que vous volerez à une créature vivant dans une région affectée par l'une de ces perturbations (ou que vous arracherez au gardien d'une anomalie si vous en avez le cran). Il sera ensuite étudié par les Douziens qui cherchent à découvrir l'origine du problème.",
+   "id": 2714,
+   "nom": "Chaque chose en son temps",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      949726,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Affronter des créatures affectées par une anomalie et montrer ce que vous avez découvert à l'Envoyée de Xélor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      784933,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre dans la dimension du Xélorium"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2652,
+      20822,
+      1
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Montrer à {npc,2652} : 1 {item,20822}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      784946,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Se rendre devant l'entrée du Mégalithe"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2661,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Aller voir {npc,2661}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      784951,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Combattre les Xélomorphes perturbés"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2661,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Aller voir {npc,2661}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      784952,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Entrer dans le Mégalithe et voir comment Fraktale réagit en présence du pixel perpétuel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4821,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Aller voir {npc,4821}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      784963,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Retourner au camp des Voyageurs avec Entropix"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      784965,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Présenter Entropix à Emiette Borgne"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4820,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Retourner voir {npc,4820}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2062,
+ "nom": "Chaque chose en son temps",
+ "objets": [],
+ "prerequis": []
+}

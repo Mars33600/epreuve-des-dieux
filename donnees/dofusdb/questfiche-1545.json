@@ -1,0 +1,131 @@
+{
+ "depart": [
+  {
+   "mapId": 137363456,
+   "npcId": 2438
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Kathy Brennan s'est associée à l'organisation d'Hyrda pour faire progresser les recherches sur les Nécrotiques.",
+   "id": 2165,
+   "nom": "Tique attaque",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885357,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Rejoindre le membre d'Hyrda au point de rendez-vous"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885358,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Prélever un échantillon de Nécrotique agressive puis parler à Serpentine des Fosses 12"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2438,
+      15550,
+      1
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Ramener à {npc,2438} : x1 {item,15550}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2512,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      4
+     ],
+     "texte": "Aller voir {npc,2512}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2438,
+      15552,
+      1
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Ramener à {npc,2438} : x1 {item,15552}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885359,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Prélever des échantillons de nourriture dans les Catacombres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2511,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Aller voir {npc,2511}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       40
+      ],
+      [
+       15444,
+       1
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1545,
+ "nom": "Tique attaque",
+ "objets": [],
+ "prerequis": [
+  1544
+ ]
+}

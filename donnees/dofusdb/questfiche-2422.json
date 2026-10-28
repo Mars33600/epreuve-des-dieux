@@ -1,0 +1,157 @@
+{
+ "depart": [
+  {
+   "mapId": 215486466,
+   "npcId": 6215
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous allez enfin rencontrer celle par qui tout est arrivé... La Mère des Ravageurs a-t-elle condamné les Douziens en créant un cauchemar qui se nourrit de la dissonance des Dofus Primordiaux ? Une petite excursion au pays des morts vous apportera peut-être la réponse.",
+   "id": 3079,
+   "nom": "Descendre aux cendres",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911338,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -55
+     ],
+     "texte": "Retourner dans le sanctuaire de la baleine de Grobe"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6222,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -55
+     ],
+     "texte": "Aller voir {npc,6222}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911581,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Traverser l'Océan Gris jusqu'à l'archipel des Ravageurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911582,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Monter à bord du navire démoniaque"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      918794,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Pousser la Mère à se manifester"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6390,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6390}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911712,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre les peurs venues du passé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6390,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6390}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911731,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Endurer le froid du Long Descendre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911735,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Écouter l'offre de la Mère des Ravageurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6167,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Aller voir {npc,6167}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       26036,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2422,
+ "nom": "Descendre aux cendres",
+ "objets": [],
+ "prerequis": [
+  2421
+ ]
+}

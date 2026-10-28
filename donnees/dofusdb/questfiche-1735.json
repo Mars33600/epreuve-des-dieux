@@ -1,0 +1,130 @@
+{
+ "depart": [
+  {
+   "mapId": 170131458,
+   "npcId": 3266
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Deks vous a donné rendez-vous au centre de la cité submergée : il a probablement quelque chose d'important à vous dire.",
+   "id": 2372,
+   "nom": "Piège de crystal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644129,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Rejoindre Deks dans la ville submergée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3251,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Aller voir {npc,3251}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644067,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Tirer Deks de sa torpeur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3251,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Aller voir {npc,3251}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644044,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      27
+     ],
+     "texte": "Entrer dans le vaisseau du Capitaine Meno"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4460,
+      1,
+      0
+     ],
+     "position": [
+      24,
+      27
+     ],
+     "texte": "Vaincre x1 {monster,4460} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3258,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      27
+     ],
+     "texte": "Aller voir {npc,3258}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17974,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1735,
+ "nom": "Piège de crystal",
+ "objets": [],
+ "prerequis": [
+  1734
+ ]
+}

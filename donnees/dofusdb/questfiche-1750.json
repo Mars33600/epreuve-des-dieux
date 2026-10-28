@@ -1,0 +1,151 @@
+{
+ "depart": [
+  {
+   "mapId": 168821762,
+   "npcId": 3297
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Frédyglb Rardé a besoin de réparer une machine Steamer pour participer à un concours de cuisine.",
+   "id": 2387,
+   "nom": "Qui a la plus grosse ?",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886828,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher un Steamer prêt à aider un Trithon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886829,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      27
+     ],
+     "texte": "Escorter l'assistant de Deks jusqu'à la machine"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3298,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      27
+     ],
+     "texte": "Aller voir {npc,3298}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3253,
+      18119,
+      1
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Ramener à {npc,3253} : x1 {item,18119}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886830,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      27
+     ],
+     "texte": "Récupérer des morceaux de tôle"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3298,
+      18120,
+      1
+     ],
+     "position": [
+      20,
+      27
+     ],
+     "texte": "Ramener à {npc,3298} : x1 {item,18120}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3298,
+      18121,
+      1
+     ],
+     "position": [
+      20,
+      27
+     ],
+     "texte": "Ramener à {npc,3298} : x1 {item,18121}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886831,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      27
+     ],
+     "texte": "Protéger l'assistant de Deks pendant qu'il répare la machine"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3297,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      27
+     ],
+     "texte": "Aller voir {npc,3297}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17975,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1750,
+ "nom": "Qui a la plus grosse ?",
+ "objets": [],
+ "prerequis": []
+}

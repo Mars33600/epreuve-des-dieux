@@ -1,0 +1,114 @@
+{
+ "depart": [
+  {
+   "mapId": 160565248,
+   "npcId": 3183
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les gardes du Grand Jeu semblent avoir abandonné la poursuite, mais ils ne laisseront pas Ecalice quitter le temple avec la tête sur les épaules. Vous devez trouver une solution... Si vous ne savez que faire, essayez de trouver quelqu'un qui vous mettra la puce à l'oreille.",
+   "id": 2336,
+   "nom": "De l'autre côté du Chalœil",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      608426,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver une échappatoire pour aider Ecalice"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3099,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,3099}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4263,
+      1,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Vaincre x1 {monster,4263} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      612735,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Explorer les coulisses de la salle de jeu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3102,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,3102}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3183,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,3183}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       17624,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1702,
+ "nom": "De l'autre côté du Chalœil",
+ "objets": [],
+ "prerequis": [
+  1701
+ ]
+}

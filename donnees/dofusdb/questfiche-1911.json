@@ -1,0 +1,274 @@
+{
+ "depart": [
+  {
+   "mapId": 111673344,
+   "npcId": 2018
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Clothurde veut sa part de bonheur. Selon elle, les alchimistes heureux savent où trouver ce genre de chose. Il ne vous reste plus qu'à en dénicher un, en espérant qu'il acceptera de vous révéler le secret du bonheur, rien que ça.",
+   "id": 2549,
+   "nom": "Le bonheur est dans le spray",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732458,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à un alchimiste heureux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732459,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver une likrone"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3733,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      29
+     ],
+     "texte": "Aller voir {npc,3733}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732478,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Espionner les chasseurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732479,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Faire avouer les chasseurs afin qu'ils dénoncent leurs complices"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732484,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver la grotte des Compères"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732485,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      28
+     ],
+     "texte": "Interroger les Compères"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732486,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      28
+     ],
+     "texte": "Donner une bonne leçon aux Compères"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3762,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      28
+     ],
+     "texte": "Aller voir {npc,3762}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4092,
+      19172,
+      1
+     ],
+     "position": [
+      1,
+      16
+     ],
+     "texte": "Montrer à {npc,4092} : 1 {item,19172}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732493,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le village des Troumfs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732494,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher le grimoire du Grand Troumf"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4092,
+      19173,
+      1
+     ],
+     "position": [
+      1,
+      16
+     ],
+     "texte": "Ramener à {npc,4092} : x1 {item,19173}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4092,
+      19174,
+      1
+     ],
+     "position": [
+      1,
+      16
+     ],
+     "texte": "Ramener à {npc,4092} : x1 {item,19174}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4092,
+      19175,
+      1
+     ],
+     "position": [
+      1,
+      16
+     ],
+     "texte": "Ramener à {npc,4092} : x1 {item,19175}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4092,
+      19178,
+      1
+     ],
+     "position": [
+      1,
+      16
+     ],
+     "texte": "Ramener à {npc,4092} : x1 {item,19178}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732522,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      29
+     ],
+     "texte": "Pulvériser le remède sur Rainikrone"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732523,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      29
+     ],
+     "texte": "Aider Rainikrone à voir la vie en rose"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3809,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      29
+     ],
+     "texte": "Aller voir {npc,3809}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2018,
+      19179,
+      1
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Ramener à {npc,2018} : x1 {item,19179}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19320,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1911,
+ "nom": "Le bonheur est dans le spray",
+ "objets": [],
+ "prerequis": [
+  1909
+ ]
+}

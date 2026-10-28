@@ -1,0 +1,80 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous avez accès à une carte secrète des crocs de verre. De persistantes rumeurs indiquent que des maîtres artisans divers et variés se rassemblent pour aller dans cette grotte.",
+   "id": 1265,
+   "nom": "L'épreuve de l'air",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55069,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Carte secrète des crocs de verre."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885871,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un moyen d'ouvrir les grilles"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1381,
+      11876,
+      1
+     ],
+     "position": null,
+     "texte": "Montrer à {npc,1381} : 1 {item,11876}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1381,
+      11876,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1381} : x1 {item,11876}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1381,
+      11196,
+      25
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1381} : x25 {item,11196}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27978,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 611,
+ "nom": "Le travail c'est la santé",
+ "objets": [],
+ "prerequis": [
+  597
+ ]
+}

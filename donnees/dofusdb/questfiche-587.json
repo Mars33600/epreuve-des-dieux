@@ -1,0 +1,46 @@
+{
+ "depart": [
+  {
+   "mapId": 54171466,
+   "npcId": 1281
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Baka Laïve vous a demandé d'exterminer des Bléros - pas ceux qui hurlent à l'intérieur du donjon des blops - dans les Crocs de verre ou les Cavernes du Kolosso et de lui apporter une preuve.",
+   "id": 1240,
+   "nom": "Chasse aux Bléros",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1281,
+      11131,
+      50
+     ],
+     "position": [
+      -75,
+      -74
+     ],
+     "texte": "Ramener à {npc,1281} : x50 {item,11131}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 587,
+ "nom": "Crocs en jambe",
+ "objets": [],
+ "prerequis": []
+}

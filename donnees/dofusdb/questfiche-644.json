@@ -1,0 +1,59 @@
+{
+ "depart": [
+  {
+   "mapId": 54174539,
+   "npcId": 1339
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des givrefoux complètement givrés s'en prennent aux voyageurs. Vous devez les vaincre.",
+   "id": 1187,
+   "nom": "Givrefoux givrés",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885851,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -75
+     ],
+     "texte": "Combattre les givrefoux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1339,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -75
+     ],
+     "texte": "Aller voir {npc,1339}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 644,
+ "nom": "Le convoi, le sage aussi",
+ "objets": [],
+ "prerequis": []
+}

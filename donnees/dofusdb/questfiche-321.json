@@ -1,0 +1,160 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le juge Satirev Onivin n'aimant pas les enquêtes tirant en longueur, Amayiro vous envoie auprès de lui pour obtenir un délai. Il passe le plus clair de son temps dans le bâtiment de la milice.",
+   "id": 551,
+   "nom": "Un peu de juge hot",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6396,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6396}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      503,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -16
+     ],
+     "texte": "Aller voir {npc,503}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      807,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Aller voir {npc,807}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      545,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -20
+     ],
+     "texte": "Aller voir {npc,545}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4334,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -21
+     ],
+     "texte": "Aller voir {npc,4334}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4337,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Aller voir {npc,4337}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      825,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -1
+     ],
+     "texte": "Aller voir {npc,825}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891216,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      3
+     ],
+     "texte": "Récupérer de l'hydre au miel dans la cave de Bol Pokuz"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6396,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6396}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 321,
+ "nom": "Un peu de juge hot",
+ "objets": [],
+ "prerequis": [
+  318
+ ]
+}

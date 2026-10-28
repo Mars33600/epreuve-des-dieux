@@ -1,0 +1,335 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous cherchez à comprendre ce dont parle le récit d'un explorateur.",
+   "id": 2596,
+   "nom": "Toucher le fond",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4174,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4174}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744955,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Épave"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744956,
+      0,
+      0
+     ],
+     "position": [
+      -46,
+      -81
+     ],
+     "texte": "Fouiller l'épave"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4303,
+      0,
+      0
+     ],
+     "position": [
+      -46,
+      -81
+     ],
+     "texte": "Aller voir {npc,4303}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4215,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4215}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4218,
+      0,
+      0
+     ],
+     "position": [
+      -49,
+      -80
+     ],
+     "texte": "Aller voir {npc,4218}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4240,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -80
+     ],
+     "texte": "Aller voir {npc,4240}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4176,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4176}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744965,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Interroger les Steamers"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4174,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4174}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1251,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -45
+     ],
+     "texte": "Aller voir {npc,1251}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      460,
+      70
+     ],
+     "position": [
+      -80,
+      -45
+     ],
+     "texte": "Ramener à {npc,1251} : x70 {item,460}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      16387,
+      45
+     ],
+     "position": [
+      -80,
+      -45
+     ],
+     "texte": "Ramener à {npc,1251} : x45 {item,16387}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4307,
+      19564,
+      1
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Ramener à {npc,4307} : x1 {item,19564}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4211,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4211}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744976,
+      0,
+      0
+     ],
+     "position": [
+      -45,
+      -80
+     ],
+     "texte": "Découvrir la carte : Entrée du vortex sous-marin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744977,
+      0,
+      0
+     ],
+     "position": [
+      -45,
+      -80
+     ],
+     "texte": "Emprunter le vortex sous-marin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744978,
+      0,
+      0
+     ],
+     "position": [
+      -45,
+      -80
+     ],
+     "texte": "Fouiller la grotte"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5211,
+      1,
+      0
+     ],
+     "position": [
+      -45,
+      -80
+     ],
+     "texte": "Vaincre x1 {monster,5211} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744986,
+      0,
+      0
+     ],
+     "position": [
+      -45,
+      -80
+     ],
+     "texte": "Emprunter le passage souterrain"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      745208,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -82
+     ],
+     "texte": "Chercher une sortie"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4211,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4211}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4174,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4174}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19409,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1945,
+ "nom": "Toucher le fond",
+ "objets": [
+  [
+   460,
+   70
+  ],
+  [
+   16387,
+   45
+  ]
+ ],
+ "prerequis": [
+  1944
+ ]
+}

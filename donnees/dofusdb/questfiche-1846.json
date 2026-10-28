@@ -1,0 +1,329 @@
+{
+ "depart": [
+  {
+   "mapId": 212600837,
+   "npcId": 3773
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vous assurer de l'origine d'une viande très en vogue à Bonta.",
+   "id": 2486,
+   "nom": "Frais de porc inclus",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886642,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les commerçants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886643,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les commerçants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886644,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les commerçants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886645,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les commerçants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886646,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les habitants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886647,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les habitants"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3773,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -55
+     ],
+     "texte": "Aller voir {npc,3773}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886648,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Enquêter sur le port"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886649,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -54
+     ],
+     "texte": "Observer discrètement le bateau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886650,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -54
+     ],
+     "texte": "Écouter la conversation"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886651,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -54
+     ],
+     "texte": "Vaincre les agresseurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3773,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -55
+     ],
+     "texte": "Aller voir {npc,3773}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3773,
+      311,
+      10
+     ],
+     "position": [
+      -31,
+      -55
+     ],
+     "texte": "Ramener à {npc,3773} : x10 {item,311}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3773,
+      743,
+      5
+     ],
+     "position": [
+      -31,
+      -55
+     ],
+     "texte": "Ramener à {npc,3773} : x5 {item,743}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3773,
+      16485,
+      5
+     ],
+     "position": [
+      -31,
+      -55
+     ],
+     "texte": "Ramener à {npc,3773} : x5 {item,16485}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3773,
+      17203,
+      5
+     ],
+     "position": [
+      -31,
+      -55
+     ],
+     "texte": "Ramener à {npc,3773} : x5 {item,17203}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886652,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -54
+     ],
+     "texte": "Monter clandestinement dans le bateau"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3766,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      31
+     ],
+     "texte": "Aller voir {npc,3766}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886653,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Voler une tenue de Crâmbo"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3766,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      31
+     ],
+     "texte": "Aller voir {npc,3766}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3738,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      31
+     ],
+     "texte": "Aller voir {npc,3738}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3737,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      31
+     ],
+     "texte": "Aller voir {npc,3737}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3773,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -55
+     ],
+     "texte": "Aller voir {npc,3773}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18732,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1846,
+ "nom": "Frais de porc inclus",
+ "objets": [
+  [
+   311,
+   10
+  ],
+  [
+   743,
+   5
+  ],
+  [
+   16485,
+   5
+  ],
+  [
+   17203,
+   5
+  ],
+  [
+   18708,
+   1
+  ]
+ ],
+ "prerequis": []
+}

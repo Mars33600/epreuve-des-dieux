@@ -1,0 +1,144 @@
+{
+ "depart": [
+  {
+   "mapId": 185078272,
+   "npcId": 4072
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'Archonte Kebesto attend un geste de votre part avant de demander à la reine Thanatena si elle peut vous accorder une audience. Vous devez entrer dans la dimension Enutrosor et détruire un coffret précieux. Jouer les vandales est une seconde nature chez vous, cette mission ne devrait donc pas vous poser problème.",
+   "id": 2546,
+   "nom": "Casse en Enutrosor",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732387,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Passer le portail vers Enutrosor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      734767,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des informations sur le coffret précieux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      734768,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer le chef de la confrérie des coffrets précieux"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3648,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,3648} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      734769,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Briser le coffret précieux"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4072,
+      19169,
+      1
+     ],
+     "position": null,
+     "texte": "Montrer à {npc,4072} : 1 {item,19169}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4076,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4076}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4057,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -76
+     ],
+     "texte": "Aller voir {npc,4057}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732402,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Retourner dans la salle ivoirine en Ecaflipus"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4053,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,4053}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15176,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1908,
+ "nom": "Casse en Enutrosor",
+ "objets": [],
+ "prerequis": [
+  1907
+ ]
+}

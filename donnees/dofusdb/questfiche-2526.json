@@ -1,0 +1,98 @@
+{
+ "depart": [
+  {
+   "mapId": 234752517,
+   "npcId": 7657
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les relations sont tendues entre les Voyageurs et les Rhoarims. Ces derniers ont découvert que des braconniers ont exploité leur portail pour venir chasser des zarbivores sur leur territoire. Les Voyageurs comptent sur vous pour apaiser les tensions et éviter que la situation ne dégénère encore plus.",
+   "id": 3207,
+   "nom": "Que la chasse commence !",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1138458,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Détruire les pièges posés dans la réserve et ses environs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1138011,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Faire le tour de la réserve en attendant qu'un braconnier se manifeste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1133565,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre le braconnier jusqu'à son camp"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1133564,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Donner une bonne leçon aux braconniers"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1134586,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Libérer les zarbivores emprisonnés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1133562,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Faire votre rapport à Marlyze Delarange"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       30
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2526,
+ "nom": "Que la chasse commence !",
+ "objets": [],
+ "prerequis": [
+  2515
+ ]
+}

@@ -1,0 +1,149 @@
+{
+ "depart": [
+  {
+   "mapId": 194905088,
+   "npcId": 4491
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez trouver un moyen d'ouvrir la porte pour avoir ensuite accès au royaume des Martegel et commencer à sympathiser (ou à vous battre) avec les Nimbos.",
+   "id": 2660,
+   "nom": "Frappez, ami, et entrez",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      757510,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -71
+     ],
+     "texte": "Tenter d'ouvrir les portes du royaume des Martegel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4491,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -71
+     ],
+     "texte": "Aller voir {npc,4491}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      757497,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer des Nimbos"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      757506,
+      0,
+      0
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Montrer aux Nimbos que vous savez vous battre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      757507,
+      0,
+      0
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Entrer dans la taverne du Bateau ivre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      757508,
+      0,
+      0
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Discuter avec le tavernier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759733,
+      0,
+      0
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Payer des tournées générales aux Nimbos"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      757512,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -71
+     ],
+     "texte": "Essayer à nouveau de passer les portes du royaume des Martegel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4491,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -71
+     ],
+     "texte": "Retourner voir {npc,4491}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2010,
+ "nom": "Frappez, ami, et entrez",
+ "objets": [],
+ "prerequis": [
+  624
+ ]
+}

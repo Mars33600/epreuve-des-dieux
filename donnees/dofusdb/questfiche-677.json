@@ -1,0 +1,494 @@
+{
+ "depart": [
+  {
+   "mapId": 54534177,
+   "npcId": 1251
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Albert Paisse, las de ses échecs pour sauver des vies, a besoin de ressources pour de nouvelles expériences.",
+   "id": 1274,
+   "nom": "Plantes magiques",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11891,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x5 {item,11891}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11885,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x5 {item,11885}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11888,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x5 {item,11888}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11890,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x5 {item,11890}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11893,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x5 {item,11893}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11895,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x1 {item,11895}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Albert Paisse vous a confié du courrier à remettre aux alchimistes de Frigost.",
+   "id": 1275,
+   "nom": "Facteur à ses heures",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1260,
+      11905,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1260} : x1 {item,11905}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      11906,
+      1
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Ramener à {npc,1372} : x1 {item,11906}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Albert Paisse a besoin de prélèvements de bléros.",
+   "id": 1278,
+   "nom": "Don du sang",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11984,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x1 {item,11984}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11985,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x1 {item,11985}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11986,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x1 {item,11986}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11987,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x1 {item,11987}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11988,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x1 {item,11988}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11989,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x1 {item,11989}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11990,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x1 {item,11990}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Albert Paisse vous a fait un chèque pour vous permettre de prendre un peu de bon temps. Espérons que rien de fâcheux ne se produira entre temps.",
+   "id": 1279,
+   "nom": "Pourvu que ça dure",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1244,
+      11991,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1244} : x1 {item,11991}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1251,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1251}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1245,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1245}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11992,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x1 {item,11992}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Albert Paisse a conçu une créature pour détruire le Comte Harebourg, mais elle a échappé à son contrôle. Vous devez la neutraliser avant qu'il soit trop tard.",
+   "id": 1280,
+   "nom": "La créature d'Albert Paisse",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1262,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -46
+     ],
+     "texte": "Aller voir {npc,1262}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1240,
+      0,
+      0
+     ],
+     "position": [
+      -71,
+      -43
+     ],
+     "texte": "Aller voir {npc,1240}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1270,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -42
+     ],
+     "texte": "Aller voir {npc,1270}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      54959,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher la créature sur le lac gelé."
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1276,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -58
+     ],
+     "texte": "Aller voir {npc,1276}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1279,
+      0,
+      0
+     ],
+     "position": [
+      -60,
+      -57
+     ],
+     "texte": "Aller voir {npc,1279}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1286,
+      0,
+      0
+     ],
+     "position": [
+      -58,
+      -69
+     ],
+     "texte": "Aller voir {npc,1286}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886112,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher la créature dans le berceau d'Alma"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886113,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher la créature dans les larmes d'Ouronigride"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1358,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1358}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1369,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -72
+     ],
+     "texte": "Aller voir {npc,1369}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1392,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -71
+     ],
+     "texte": "Aller voir {npc,1392}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55013,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Chercher la créature dans les crocs de verre."
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2983,
+      1,
+      0
+     ],
+     "position": [
+      -64,
+      -67
+     ],
+     "texte": "Vaincre x1 {monster,2983} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1251,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1251}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       10
+      ],
+      [
+       11932,
+       1
+      ],
+      [
+       11998,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 677,
+ "nom": "Un remède à tous les maux",
+ "objets": [
+  [
+   11891,
+   5
+  ],
+  [
+   11885,
+   5
+  ],
+  [
+   11888,
+   5
+  ],
+  [
+   11890,
+   5
+  ],
+  [
+   11893,
+   5
+  ],
+  [
+   11895,
+   1
+  ]
+ ],
+ "prerequis": [
+  633
+ ]
+}

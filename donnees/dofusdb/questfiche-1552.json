@@ -1,0 +1,147 @@
+{
+ "depart": [
+  {
+   "mapId": 137365764,
+   "npcId": 2622
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Suite au sacrifice de Flèche Mauve, vous avez décidé de rapporter à la Reine des Voleurs les récents événements.",
+   "id": 2186,
+   "nom": "La cour des miracles",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2446,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2446}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3726,
+      1,
+      0
+     ],
+     "position": [
+      8,
+      -4
+     ],
+     "texte": "Vaincre x1 {monster,3726} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2447,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2447}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      442872,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -4
+     ],
+     "texte": "Découvrir la carte : Cour des miracles"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2622,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2622}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2467,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2467}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2612,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2612}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2438,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2438}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15450,
+       3
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1552,
+ "nom": "La cour des miracles",
+ "objets": [],
+ "prerequis": [
+  1551
+ ]
+}

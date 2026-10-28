@@ -1,0 +1,142 @@
+{
+ "depart": [
+  {
+   "mapId": 168822786,
+   "npcId": 3269
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Lieutenant Trenne a besoin de vous pour explorer la faille des Trithons.",
+   "id": 2377,
+   "nom": "Sur fond de crise",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3253,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3253}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886841,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Stim Power dans la base abyssale"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3285,
+      17965,
+      1
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3285} : 1 {item,17965}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886842,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer la faille des Trithons"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4471,
+      1,
+      0
+     ],
+     "position": [
+      19,
+      31
+     ],
+     "texte": "Vaincre x1 {monster,4471} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3286,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      31
+     ],
+     "texte": "Aller voir {npc,3286}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3269,
+      17965,
+      1
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Montrer à {npc,3269} : 1 {item,17965}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3268,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Aller voir {npc,3268}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17979,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1740,
+ "nom": "Sur fond de crise",
+ "objets": [
+  [
+   17965,
+   2
+  ]
+ ],
+ "prerequis": [
+  1739
+ ]
+}

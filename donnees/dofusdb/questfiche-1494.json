@@ -1,0 +1,117 @@
+{
+ "depart": [
+  {
+   "mapId": 129499136,
+   "npcId": 2364
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le trésorier est inquiet : un kama de plomb a été découvert dans les coffres de la banque royale. S'agit-il d'un incident de fabrication, ou bien d'une contrefaçon ? Richard suspecte une ancienne confrérie de faux-monnayeurs de préparer un mauvais coup. il vous a chargé de contrôler la conformité des kamas dans les différents lieux d'Enutrosor.",
+   "id": 2114,
+   "nom": "Tout ce qui brille n'est pas or",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453997,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -1
+     ],
+     "texte": "Contrôler un tonneau de kamas dans le Creuset des fortunés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453996,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -2
+     ],
+     "texte": "Contrôler un tonneau de kamas à l'entrée de la fabrique de Malléfisk"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453999,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -3
+     ],
+     "texte": "Contrôler un tonneau de kamas à l'entrée de la galerie du Phossile"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453998,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -4
+     ],
+     "texte": "Contrôler un tonneau de kamas dans la carrière Aurifère"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453993,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -6
+     ],
+     "texte": "Contrôler un tonneau de kamas dans la Retraite des Éternels"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2364,
+      15290,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2364} : x1 {item,15290}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15179,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1494,
+ "nom": "Tout ce qui brille n'est pas or",
+ "objets": [],
+ "prerequis": [
+  1493
+ ]
+}

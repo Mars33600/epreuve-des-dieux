@@ -1,0 +1,46 @@
+{
+ "depart": [
+  {
+   "mapId": 117707777,
+   "npcId": 2189
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Si vous battez Bosko Tho, vous aurez accès à l'ascenseur des salles des abîmes, ce qui vous fera gagner du temps lors de vos déplacements dans la base abyssale. Prêt à monter sur le ring ?",
+   "id": 2060,
+   "nom": "KO pour Bosko Tho",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3539,
+      1,
+      0
+     ],
+     "position": [
+      23,
+      30
+     ],
+     "texte": "Vaincre x1 {monster,3539} en un seul combat"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       14795,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1440,
+ "nom": "KO pour Bosko Tho",
+ "objets": [],
+ "prerequis": []
+}

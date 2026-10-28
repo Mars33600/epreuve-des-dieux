@@ -1,0 +1,128 @@
+{
+ "depart": [
+  {
+   "mapId": 183763968,
+   "npcId": 46
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le moment est venu de régénérer le pouvoir du Dom de Pin, alias le Dofus Sylvestre... On vous avait bien dit de le garder précieusement.",
+   "id": 3146,
+   "nom": "Flovoraison",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      1007789,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      1
+     ],
+     "texte": "Découvrir la carte : Sylve céleste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007790,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      1
+     ],
+     "texte": "Converser avec les dieux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1036959,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver quatre graines dispersées du grand arbre d'Albuera"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007792,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Renouer le lien sacré avec les champignons de Valonia"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1037842,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Dompter les esprits sauvages de la forêt de ronces"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1037847,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      1
+     ],
+     "texte": "Préparer le calice pour le rituel de régénération du Dofus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007795,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      1
+     ],
+     "texte": "Régénérer le Dom de Pin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1007796,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Utiliser le Dofus à bon escient"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2489,
+ "nom": "Flovoraison",
+ "objets": [
+  [
+   27803,
+   1
+  ]
+ ],
+ "prerequis": [
+  2488,
+  2488
+ ]
+}

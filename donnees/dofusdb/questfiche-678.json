@@ -1,0 +1,275 @@
+{
+ "depart": [
+  {
+   "mapId": 57279745,
+   "npcId": 1377
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez remplir avec succès les trois missions confiées par les prophètes du S.L.I.P. pour être accepté dans leurs rangs et obtenir leur aide.",
+   "id": 1260,
+   "nom": "Il fait beau, mais chaud, mais beau",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1379,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1379}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885622,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      -34
+     ],
+     "texte": "Récupérer une Plante soufrière dans Feudala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885623,
+      0,
+      0
+     ],
+     "position": [
+      -20,
+      22
+     ],
+     "texte": "Récupérer une Plante soufrière dans les Terres Désacrées"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885624,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une Plante soufrière après l'Obsidiantre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      11847,
+      3
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Ramener à {npc,1372} : x3 {item,11847}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1379,
+      11848,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1379} : x1 {item,11848}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1380,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1380}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885627,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre le Royalmouth dans sa serre, sans autre équipement qu'un slip, ou string, ou caleçon"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1380,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1380}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1378,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1378}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      57,
+      11339,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,57} : x5 {item,11339}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      57,
+      11880,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,57} : x5 {item,11880}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      57,
+      11882,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,57} : x1 {item,11882}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      57,
+      11338,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,57} : x5 {item,11338}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      57,
+      11337,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,57} : x1 {item,11337}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      57,
+      11885,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,57} : x5 {item,11885}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      57,
+      11889,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,57} : x1 {item,11889}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      57,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,57}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1378,
+      11849,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1378} : x1 {item,11849}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1377,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1377}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       10
+      ],
+      [
+       14977,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 678,
+ "nom": "Chaud du S.L.I.P.",
+ "objets": [
+  [
+   11339,
+   5
+  ],
+  [
+   11880,
+   5
+  ],
+  [
+   11882,
+   1
+  ],
+  [
+   11338,
+   5
+  ],
+  [
+   11337,
+   1
+  ],
+  [
+   11885,
+   5
+  ],
+  [
+   11889,
+   1
+  ]
+ ],
+ "prerequis": []
+}

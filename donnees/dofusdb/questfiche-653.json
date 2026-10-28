@@ -1,0 +1,132 @@
+{
+ "depart": [
+  {
+   "mapId": 54534167,
+   "npcId": 1246
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Lucette Brifian vous a invité à vous mesurer aux créatures qui se sont installées dans les donjons de l'île de Frigost.",
+   "id": 1212,
+   "nom": "De cervelle et d'acier",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      883814,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Braver les dangers de La serre du Royalmouth"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      883815,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Braver les dangers de l'Excavation du Mansot Royal"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      883816,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Braver les dangers de l'Epave du Grolandais Violent"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      883817,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Braver les dangers de l'Hypogée de l'Obsidiantre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      883818,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Braver les dangers de la Tanière Givrefoux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      883819,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Braver les dangers de l'Antre du Korriandre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      883820,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -69
+     ],
+     "texte": "Braver les dangers des Cavernes du Kolosso"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      883821,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Braver les dangers de l'Antichambre des Gloursons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      883822,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Braver les dangers de Frigost puis parler à Lucette Brifian"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       3
+      ],
+      [
+       11510,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 653,
+ "nom": "Donjons et trouffions",
+ "objets": [],
+ "prerequis": [
+  650
+ ]
+}

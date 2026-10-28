@@ -1,0 +1,459 @@
+{
+ "depart": [
+  {
+   "mapId": 201591811,
+   "npcId": 5295
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Hall des Valeureux ne s'ouvrira qu'à votre mort lors d'une glorieuse bataille ; libre à vous de prendre ces informations au pied de la lettre ou bien de tenter de tromper une Valkyr avec la potion qu'Otomaï vous a donné. Reste à en faire apparaître une, peut-être qu'à force de massacrer les soldats de Guerre l'une d'elle daignera se montrer. De toute façon, vous n'avez pas d'autres pistes.",
+   "id": 2771,
+   "nom": "Voyage au bout de l'Externam",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6021,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,6021}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6024,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,6024}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6022,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,6022}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6025,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,6025}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890565,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -2
+     ],
+     "texte": "Annoncer votre échec à Filco Norse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      819976,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -2
+     ],
+     "texte": "S'approcher du Soldat Étrange"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5326,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Aller voir {npc,5326}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818831,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Discuter avec les soldats du camp et retourner voir le Commandant Che Guevaria"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890575,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Débusquer les espions proches du camp"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5326,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Retourner voir {npc,5326}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5326,
+      21987,
+      1
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Ramener à {npc,5326} : x1 {item,21987}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5326,
+      21988,
+      1
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Ramener à {npc,5326} : x1 {item,21988}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5326,
+      21986,
+      1
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Ramener à {npc,5326} : x1 {item,21986}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890574,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Glisser le Message Suspect dans les affaires des soldats aux bains de sang"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818835,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -1
+     ],
+     "texte": "Saboter les machines de siège ennemies"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5326,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Retourner voir {npc,5326}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      834814,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      1
+     ],
+     "texte": "Jouer du tambour de guerre sur un lieu propice et survivre à la bataille "
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832717,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      1
+     ],
+     "texte": "Utiliser la Potion Brisâme pour feindre la mort"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818875,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Observer la Valkyr s'approcher de vous"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5298,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,5298}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      826107,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Triompher du chevalier de l'automne"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5327,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,5327}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5317,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Retourner voir {npc,5317}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5328,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Aller voir {npc,5328}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      914,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Aller voir {npc,914}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      21984,
+      1,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Fabriquer 1 {item,21984} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820552,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Harmoniser la pierre d'âme avec un objet possédant l'essence du Chevalier de l'Automne"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5327,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      1
+     ],
+     "texte": "Retourner voir {npc,5327}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818903,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Reforger un corps pour le Chevalier de l'Automne avec Ralag Vivargent"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5392,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Aller voir {npc,5392}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5317,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Retourner voir {npc,5317}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821139,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Faire ses adieux au Chevalier de l'Automne"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22249,
+       5
+      ],
+      [
+       22251,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2116,
+ "nom": "Voyage au bout de l'Externam",
+ "objets": [
+  [
+   12740,
+   1
+  ],
+  [
+   13367,
+   3
+  ],
+  [
+   31522,
+   100
+  ],
+  [
+   14635,
+   100
+  ],
+  [
+   31517,
+   20
+  ],
+  [
+   12734,
+   20
+  ]
+ ],
+ "prerequis": [
+  2115
+ ]
+}
