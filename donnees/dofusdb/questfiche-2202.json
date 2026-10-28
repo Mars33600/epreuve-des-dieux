@@ -1,0 +1,155 @@
+{
+ "depart": [
+  {
+   "mapId": 211294208,
+   "npcId": 5962
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez réussi à convaincre Pandawa ! Il ne vous reste plus qu'à accomplir le rituel qui vous permettra de matérialiser la Main de la déesse. Vous serez alors capable d'entrer dans le jardin secret d'Imagirorukam... pour qu'enfin, les Deux redeviennent Un.",
+   "id": 2860,
+   "nom": "En ce jardin qui nous unit",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871604,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -2
+     ],
+     "texte": "Se rendre au temple de Pandawa en Amakna"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      644,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -2
+     ],
+     "texte": "Aller voir {npc,644}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871612,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -2
+     ],
+     "texte": "Se préparer pour le rituel de la Main de Pandawa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      878545,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -2
+     ],
+     "texte": "Affronter Keltra Ekazumi et terminer vos préparatifs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871621,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -2
+     ],
+     "texte": "Créer la Main de Pandawa grâce à la volonté de la déesse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871622,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retourner sur Pandala et découvrir le jardin secret"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871623,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à Imagiro et à Orukam dans le jardin secret"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871624,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se concentrer sur le rocher et les deux Dofus"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5961,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5961}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871732,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Affronter le reflet du dragon"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5986,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5986}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2202,
+ "nom": "En ce jardin qui nous unit",
+ "objets": [],
+ "prerequis": [
+  2200
+ ]
+}

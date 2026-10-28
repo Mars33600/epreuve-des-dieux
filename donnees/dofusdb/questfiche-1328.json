@@ -1,0 +1,126 @@
+{
+ "depart": [
+  {
+   "mapId": 112204547,
+   "npcId": 2051
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Comte des Mille et un jours a eu son compte, et votre mission touche à sa fin. Après une dernière visite à Nileza, il vous restera à faire votre rapport au maire Cantile et à votre commanditaire.\nJiva a laissé entendre que votre destin est désormais lié à celui de Frigost. Qu'entendait-elle par là ? Peut-être le découvrirez-vous un jour...",
+   "id": 1929,
+   "nom": "Mille et un jours, un destin",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2028,
+      14042,
+      1
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Ramener à {npc,2028} : x1 {item,14042}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452975,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "S'éloigner de Nileza pour qu'il termine la préparation de la potion"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452976,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Constater les effets de la potion de Nileza"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1237,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -42
+     ],
+     "texte": "Retourner voir {npc,1237}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2016,
+      0,
+      0
+     ],
+     "position": [
+      -22,
+      33
+     ],
+     "texte": "Retourner voir {npc,2016}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2015,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Retourner voir {npc,2015}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2014,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Retourner voir {npc,2014}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1328,
+ "nom": "Mille et un jours, un destin",
+ "objets": [],
+ "prerequis": [
+  1327
+ ]
+}

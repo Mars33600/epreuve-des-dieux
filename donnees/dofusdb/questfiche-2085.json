@@ -1,0 +1,262 @@
+{
+ "depart": [
+  {
+   "mapId": 191105026,
+   "npcId": 4962
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Voulant rejoindre Crocuzko, l'île de ses ancêtres, Crokalcrolak s'est retrouvé bloqué dans une anomalie temporelle.",
+   "id": 2741,
+   "nom": "Perdu dans le temps",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802125,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver une spécialiste des anomalies temporelles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802126,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -18
+     ],
+     "texte": "Rencontrer l'expert dépêché par l'Envoyée de Xélor"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      726,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -21
+     ],
+     "texte": "Aller voir {npc,726}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4965,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Aller voir {npc,4965}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802127,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Trouver l'ouvrage mentionné par Marno Tribun"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802128,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire « La menace aux yeux rouges »"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4965,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Aller voir {npc,4965}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802129,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Localiser l'ancien camp crocodaille"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802130,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer de la terre provenant de l'ancien camp crocodaille"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802131,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un spécialiste des objets magiques à Astrub"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802134,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher l'épée de Dard Saignant dans sa tombe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802136,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -11
+     ],
+     "texte": "Tenter de s'emparer de l'épée de Dard Saignant"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5824,
+      1,
+      0
+     ],
+     "position": [
+      -2,
+      -11
+     ],
+     "texte": "Vaincre x1 {monster,5824} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      803522,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -18
+     ],
+     "texte": "Apporter les éléments pour ouvrir l'anomalie temporelle à l'expert en chronomagie"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4964,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -18
+     ],
+     "texte": "Aller voir {npc,4964}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4963,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -14
+     ],
+     "texte": "Aller voir {npc,4963}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      802138,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -14
+     ],
+     "texte": "Se débarrasser des Crocodailles de l'anomalie temporelle"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4963,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -14
+     ],
+     "texte": "Aller voir {npc,4963}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4964,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -14
+     ],
+     "texte": "Aller voir {npc,4964}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       21206,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2085,
+ "nom": "Perdu dans le temps",
+ "objets": [],
+ "prerequis": []
+}

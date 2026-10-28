@@ -1,0 +1,220 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous cherchez à qui appartient le manuel scolaire dérobé à un chasseur.",
+   "id": 2494,
+   "nom": "La valse des manuels",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886661,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des informations sur le manuel scolaire"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      722873,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      31
+     ],
+     "texte": "Découvrir la carte : Lieu du rendez-vous avec Gihaime"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3810,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      31
+     ],
+     "texte": "Aller voir {npc,3810}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886662,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      31
+     ],
+     "texte": "Vaincre les chasseurs détendus"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3733,
+      18771,
+      1
+     ],
+     "position": [
+      -63,
+      29
+     ],
+     "texte": "Ramener à {npc,3733} : x1 {item,18771}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      722877,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      30
+     ],
+     "texte": "Découvrir la carte : Camp du Comte Razof - Cinquième salle"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3821,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      30
+     ],
+     "texte": "Aller voir {npc,3821}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      4803,
+      1,
+      179572736
+     ],
+     "position": [
+      -68,
+      30
+     ],
+     "texte": "Vaincre x1 {monster,4803} sur la carte {map,179572736} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886663,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      30
+     ],
+     "texte": "Fouiller le camp du Comte Razof à la recherche des manuels scolaires"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3748,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      30
+     ],
+     "texte": "Aller voir {npc,3748}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      722883,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      30
+     ],
+     "texte": "Découvrir la carte : Entrée du camp du Comte Razof"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3822,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      30
+     ],
+     "texte": "Aller voir {npc,3822}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886664,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      31
+     ],
+     "texte": "Rattraper le chasseur avant son embarquement"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3733,
+      18773,
+      1
+     ],
+     "position": [
+      -63,
+      29
+     ],
+     "texte": "Ramener à {npc,3733} : x1 {item,18773}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3733,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      29
+     ],
+     "texte": "Aller voir {npc,3733}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18729,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1854,
+ "nom": "La valse des manuels",
+ "objets": [],
+ "prerequis": []
+}

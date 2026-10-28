@@ -1,0 +1,183 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 1999
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Baron d'Ouillard vous a demandé de retrouver sa fille.",
+   "id": 1944,
+   "nom": "La fifille à son papa",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2002,
+      0,
+      0
+     ],
+     "position": [
+      -67,
+      -77
+     ],
+     "texte": "Aller voir {npc,2002}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2049,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Aller voir {npc,2049}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885811,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces du passage de Diana dans la Tannerie Écarlate"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2049,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Aller voir {npc,2049}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1244,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1244}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1257,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1257}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1290,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1290}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452632,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -44
+     ],
+     "texte": "Découvrir la carte : Cave du Marquis Petrovitchi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885812,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -44
+     ],
+     "texte": "Fouiller la cave du Marquis Petrovitchi"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2035,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -44
+     ],
+     "texte": "Aller voir {npc,2035}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885813,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -44
+     ],
+     "texte": "Prendre la Chachatte Rousse empaillée"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1999,
+      14210,
+      1
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Ramener à {npc,1999} : x1 {item,14210}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       6
+      ],
+      [
+       13917,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1321,
+ "nom": "La fifille à son papa",
+ "objets": [],
+ "prerequis": [
+  1325
+ ]
+}

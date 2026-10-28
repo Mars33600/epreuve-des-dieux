@@ -1,0 +1,354 @@
+{
+ "depart": [
+  {
+   "mapId": 54535191,
+   "npcId": 1237
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Ça y est, après avoir traversé Frigost dans tous les sens, vous êtes enfin envoyé dans l'endroit le plus dangereux de l'île glacée : le château du Comte Harebourg ! Qui sait ce qui vous attend là-bas ? N'oubliez pas d'envoyer une carte postale à vos amis restés sur le continent, ce sera peut-être le dernier souvenir qu'ils auront de vous.",
+   "id": 1927,
+   "nom": "Chaud et Froid",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2003,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,2003}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453797,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Découvrir la carte : Entrée des Géofourneaux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453796,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un moyen d'entrer dans les Géofourneaux"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2013,
+      14031,
+      3
+     ],
+     "position": [
+      -60,
+      -80
+     ],
+     "texte": "Ramener à {npc,2013} : x3 {item,14031}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2013,
+      14032,
+      3
+     ],
+     "position": [
+      -60,
+      -80
+     ],
+     "texte": "Ramener à {npc,2013} : x3 {item,14032}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2013,
+      14033,
+      3
+     ],
+     "position": [
+      -60,
+      -80
+     ],
+     "texte": "Ramener à {npc,2013} : x3 {item,14033}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453783,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Franchir la porte des Géofourneaux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2025,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Aller voir {npc,2025}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453785,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un moyen d'aider Hazieff Taroun"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2003,
+      14034,
+      1
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Ramener à {npc,2003} : x1 {item,14034}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2024,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      -73
+     ],
+     "texte": "Aller voir {npc,2024}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453779,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      -73
+     ],
+     "texte": "Rapporter 6 Pousses de Plante Hygrade au Glourson Frileux"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2003,
+      14036,
+      1
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Ramener à {npc,2003} : x1 {item,14036}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2025,
+      14037,
+      1
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Ramener à {npc,2025} : x1 {item,14037}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2025,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Aller voir {npc,2025}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2003,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Retourner voir {npc,2003}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452654,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Aller voir les 3 Nordes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452653,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Fabriquer un Voile de Tristesse et quitter la Caverne du Destin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2003,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Retourner voir {npc,2003}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452684,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le message de Cantile"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2028,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Aller voir {npc,2028}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2028,
+      14039,
+      1
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Ramener à {npc,2028} : x1 {item,14039}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2028,
+      14040,
+      1
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Ramener à {npc,2028} : x1 {item,14040}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2028,
+      14041,
+      1
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Ramener à {npc,2028} : x1 {item,14041}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       10
+      ],
+      [
+       13923,
+       2
+      ],
+      [
+       13935,
+       2
+      ],
+      [
+       13947,
+       2
+      ],
+      [
+       13982,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1326,
+ "nom": "Chaud et froid",
+ "objets": [],
+ "prerequis": [
+  1318
+ ]
+}

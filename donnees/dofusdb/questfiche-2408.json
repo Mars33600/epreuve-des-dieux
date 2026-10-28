@@ -1,0 +1,402 @@
+{
+ "depart": [
+  {
+   "mapId": 211293186,
+   "npcId": 5949
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pour sceller le pacte des esprits élémentaires, Shodowa a réuni les cinq trésors du lettré. Il ne lui manque que la bénédiction du premier des calligraphes... Avec votre aide, elle espère bien l'obtenir. Toutes les conditions seront alors réunies : les serments pourront être prononcés, et les pandagrammes s'inscriront sur les pages du destin de Pandala, signes prometteurs d'un soleil qui se lève après une nuit interminable.",
+   "id": 3064,
+   "nom": "Par ce serment s'écrit le monde",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891989,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Lire le document sur l'invention de l'écriture pandalienne"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5949,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Aller voir {npc,5949}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891926,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre dans les Royaumes célestes d'encre et de papier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891929,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Parler à l'un des trois Kozaru de la sagesse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891932,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer Tanukang Jei parmi les étoiles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891933,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Montrer au créateur des pandagrammes que vous avez du caractère"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891938,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Accorder votre corps et votre esprit avec un pinceau de calligraphie"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      891939,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Serment du Bois"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891990,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -29
+     ],
+     "texte": "Trouver l'inspiration pour dessiner le pandagramme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891994,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      10
+     ],
+     "texte": "Parler à Wapishikami, l'esprit du Bois"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891995,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Mettre fin à la corruption du mildiou"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5622,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      10
+     ],
+     "texte": "Retourner voir {npc,5622}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892022,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -29
+     ],
+     "texte": "Tracer le pandagramme du papier"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      892023,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Serment du Roc"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892024,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      -25
+     ],
+     "texte": "Se laisser guider par l'inspiration pour dessiner le pandagramme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892025,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      -25
+     ],
+     "texte": "Parler à Tanu, l'esprit du Roc"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892028,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      -25
+     ],
+     "texte": "Tracer le pandagramme de la pierre polie"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      892029,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Serment de l'Eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892030,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      -24
+     ],
+     "texte": "Puiser dans l'inspiration pour dessiner le pandagramme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892031,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -22
+     ],
+     "texte": "Parler à Akwanokima, l'esprit de l'Eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892032,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      -24
+     ],
+     "texte": "Tracer le pandagramme de la source"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      892033,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Serment du Feu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892034,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      -32
+     ],
+     "texte": "Nourrir l'inspiration pour dessiner le pandagramme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892035,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      -37
+     ],
+     "texte": "Parler à Akaitei, l'esprit du Feu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892036,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      -32
+     ],
+     "texte": "Tracer le pandagramme du bâton d'encre"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      892037,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Serment du Vent"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892038,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -38
+     ],
+     "texte": "Suivre l'inspiration pour dessiner le pandagramme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892039,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -39
+     ],
+     "texte": "Parler à Tensojobo, l'esprit du Vent"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892040,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -38
+     ],
+     "texte": "Tracer le pandagramme du sigil"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      892041,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Utiliser la Main de Pandawa et parler à Imagirorukam"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       24999,
+       1
+      ],
+      [
+       23824,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2408,
+ "nom": "Par ce serment s'écrit le monde",
+ "objets": [],
+ "prerequis": [
+  2406
+ ]
+}

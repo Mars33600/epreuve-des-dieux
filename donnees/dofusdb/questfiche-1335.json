@@ -1,0 +1,312 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 1999
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Votre première mission en tant que future recrue de la Garde du Jour sans fin : une promenade sur les remparts du château Harebourg. Vous avez la trouille des patrouilles ? Serrez les dents ainsi que les fesses, et dites-vous que tout se passera bien. L'auto-persuasion fait des miracles.",
+   "id": 1939,
+   "nom": "Le tour de guet",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452674,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      -73
+     ],
+     "texte": "Découvrir la carte : Tourelle de l'Alchimiste"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452675,
+      0,
+      0
+     ],
+     "position": [
+      -60,
+      -73
+     ],
+     "texte": "Découvrir la carte : Escalier des Jardins"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452661,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Découvrir la carte : Entrée du laboratoire"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452663,
+      0,
+      0
+     ],
+     "position": [
+      -56,
+      -75
+     ],
+     "texte": "Découvrir la carte : Transporteur des Jardins"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452662,
+      0,
+      0
+     ],
+     "position": [
+      -51,
+      -78
+     ],
+     "texte": "Découvrir la carte : Tourelle du Brigandin"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452665,
+      0,
+      0
+     ],
+     "position": [
+      -50,
+      -81
+     ],
+     "texte": "Découvrir la carte : Transporteur du Vent"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452664,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Découvrir la carte : Entrée du Transporteur de Sylargh"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452667,
+      0,
+      0
+     ],
+     "position": [
+      -54,
+      -87
+     ],
+     "texte": "Découvrir la carte : Escalier du Vent"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452666,
+      0,
+      0
+     ],
+     "position": [
+      -56,
+      -87
+     ],
+     "texte": "Découvrir la carte : Tourelle du Bricoleur"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452618,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -93
+     ],
+     "texte": "Découvrir la carte : Entrée des Salons privés de Klime"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452617,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -94
+     ],
+     "texte": "Découvrir la carte : Escalier de la Tannerie"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452616,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -93
+     ],
+     "texte": "Découvrir la carte : Transporteur de la Tannerie"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452614,
+      0,
+      0
+     ],
+     "position": [
+      -67,
+      -92
+     ],
+     "texte": "Découvrir la carte : Tourelle du Cordonnier"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452615,
+      0,
+      0
+     ],
+     "position": [
+      -70,
+      -88
+     ],
+     "texte": "Découvrir la carte : Escalier du Bastion"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3428,
+      1,
+      0
+     ],
+     "position": [
+      -70,
+      -88
+     ],
+     "texte": "Vaincre x1 {monster,3428} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452613,
+      0,
+      0
+     ],
+     "position": [
+      -71,
+      -88
+     ],
+     "texte": "Découvrir la carte : Entrée de la Forgefroide de Missiz Frizz"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452611,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -84
+     ],
+     "texte": "Découvrir la carte : Transporteur du Bastion"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452612,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Découvrir la carte : Tourelle de la Forgemage"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1999,
+      14209,
+      1
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Montrer à {npc,1999} : 1 {item,14209}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2002,
+      14209,
+      1
+     ],
+     "position": [
+      -67,
+      -77
+     ],
+     "texte": "Ramener à {npc,2002} : x1 {item,14209}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Retourner voir {npc,1999}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ],
+      [
+       13975,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1335,
+ "nom": "Le tour de guet",
+ "objets": [],
+ "prerequis": [
+  626
+ ]
+}

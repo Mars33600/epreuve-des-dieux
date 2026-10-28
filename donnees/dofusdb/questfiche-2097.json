@@ -1,0 +1,249 @@
+{
+ "depart": [
+  {
+   "mapId": 88081174,
+   "npcId": 4820
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les Douziens font des cauchemars étranges qui pourraient avoir un rapport avec les anomalies temporelles... L'Envoyée de Xélor compte sur vous pour partir en quête de réponses.",
+   "id": 2750,
+   "nom": "Cauchemars prémonitoires",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      726,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -21
+     ],
+     "texte": "Aller voir {npc,726}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4638,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4638}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      808916,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      25
+     ],
+     "texte": "Entrer dans le cauchemar du chef des Pagneuls"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      808918,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      25
+     ],
+     "texte": "Libérer les esclaves ouginaks"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3869,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      25
+     ],
+     "texte": "Retourner voir {npc,3869}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      808919,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      29
+     ],
+     "texte": "Entrer dans le cauchemar de la forgeuse du clan Ventrepierre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      809434,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      29
+     ],
+     "texte": "Veiller à ce que le fils de Valdi parvienne sain et sauf aux portes du camp des Bworks"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4644,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      29
+     ],
+     "texte": "Retourner voir {npc,4644}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      808921,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -65
+     ],
+     "texte": "Entrer dans le cauchemar du réfugié maudit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      808922,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -65
+     ],
+     "texte": "Neutraliser les Troolgrodytes pour que les réfugiés puissent traverser le canyon"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3704,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      -65
+     ],
+     "texte": "Retourner voir {npc,3704}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      809119,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      -34
+     ],
+     "texte": "Entrer dans le cauchemar du Protecteur d'aperirel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      809120,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      -34
+     ],
+     "texte": "Soigner les familiers malades"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3449,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      -34
+     ],
+     "texte": "Retourner voir {npc,3449}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      809121,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Montrer les pierres de cauchemar à Draconiros"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      809122,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Mélanger les poudres des pierres dans le creuset onirique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818257,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Tenter de communiquer avec la sinistre apparition et rester en vie"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5130,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5130}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2097,
+ "nom": "Cauchemars prémonitoires",
+ "objets": [],
+ "prerequis": [
+  2064
+ ]
+}

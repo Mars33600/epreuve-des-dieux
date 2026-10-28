@@ -1,0 +1,246 @@
+{
+ "depart": [
+  {
+   "mapId": 180356610,
+   "npcId": 3893
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Amy Kolog cherche à comprendre comment les champignons font pour se développer autant dans cette région. Aidez-la à réaliser des expériences.",
+   "id": 2516,
+   "nom": "La prolifération a crû",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886801,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récolter des morceaux de Champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886802,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récolter des morceaux de Champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886803,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récolter des morceaux de Champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886804,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récolter des morceaux de Champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886805,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récolter des morceaux de Champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886806,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récolter des morceaux de Champignons"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886807,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récolter 6 morceaux de Fungus dans le Domaine des Fungus"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726667,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      34
+     ],
+     "texte": "Découvrir la carte : Forte source de chaleur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3893,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      31
+     ],
+     "texte": "Aller voir {npc,3893}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726668,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      33
+     ],
+     "texte": "Découvrir la carte : Faire un relevé de température dans les cavernes Fungus"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726669,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      33
+     ],
+     "texte": "Découvrir la carte : Faire un relevé de température dans les cavernes Fungus"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726670,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      29
+     ],
+     "texte": "Découvrir la carte : Faire un relevé de température dans les cavernes Fungus"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3893,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      32
+     ],
+     "texte": "Aller voir {npc,3893}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886808,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      32
+     ],
+     "texte": "Rapporter à Amy Kolog les ingrédients nécessaires à la fabrication de la solution cryogène"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726671,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      31
+     ],
+     "texte": "Découvrir la carte : Champignonnière des Cavernes Fungus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886809,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      31
+     ],
+     "texte": "Vérifier comment se portent les jeunes pousses d'Amy"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3894,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      31
+     ],
+     "texte": "Aller voir {npc,3894}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3893,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      32
+     ],
+     "texte": "Aller voir {npc,3893}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       9279,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1876,
+ "nom": "La prolifération a crû",
+ "objets": [],
+ "prerequis": []
+}

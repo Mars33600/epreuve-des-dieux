@@ -1,0 +1,38 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous devez trouver qui serait intéressé par un Vieux magazine dans les environs du château de Harebourg, voire même au village enseveli.",
+   "id": 1915,
+   "nom": "Voila où ça nous mène",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886142,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver quelqu'un à qui refourguer un Vieux magazine"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18652,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1302,
+ "nom": "Voila où ça nous mène",
+ "objets": [],
+ "prerequis": []
+}

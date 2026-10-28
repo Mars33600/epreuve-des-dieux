@@ -1,0 +1,252 @@
+{
+ "depart": [
+  {
+   "mapId": 122421248,
+   "npcId": 2205
+  }
+ ],
+ "etapes": [
+  {
+   "description": "D'après Mériana, Dardondakal serait prêt à confier le Dofus Ivoire à la garde d'un Douzien. Comme vous aimez rendre service et que vous êtes du genre désintéressé, vous avez décidé de vous porter volontaire. Votre altruisme n'a décidément pas de limites.",
+   "id": 2543,
+   "nom": "Le dragon blanc",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2978,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2978}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732199,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le crâne de Dardondakal"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732202,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "En apprendre davantage sur les bougies draconiques"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      19160,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,19160} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      19161,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,19161} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732214,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -21
+     ],
+     "texte": "Assembler la cire et la mèche pour créer la bougie draconique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732215,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Allumer la bougie draconique au temple d'Osamodas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732217,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      32
+     ],
+     "texte": "Retourner à l'endroit où se trouve le crâne de Dardondakal pour se recueillir"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732925,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      32
+     ],
+     "texte": "Vaincre les miliciens zélés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732219,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      32
+     ],
+     "texte": "Se recueillir devant le crâne de Dardondakal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1901,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1901}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732226,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Passer le portail vers Ecaflipus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732227,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Entrer dans la salle du Chalœil"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4263,
+      1,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Vaincre x1 {monster,4263} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732836,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans la salle du Dofus Ivoire et rencontrer le dragon blanc"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4053,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,4053}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17626,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1905,
+ "nom": "Le dragon blanc",
+ "objets": [
+  [
+   1983,
+   50
+  ],
+  [
+   11110,
+   15
+  ],
+  [
+   13993,
+   1
+  ],
+  [
+   8367,
+   1
+  ],
+  [
+   11310,
+   1
+  ],
+  [
+   17979,
+   5
+  ],
+  [
+   11102,
+   15
+  ],
+  [
+   1334,
+   20
+  ]
+ ],
+ "prerequis": [
+  1462
+ ]
+}

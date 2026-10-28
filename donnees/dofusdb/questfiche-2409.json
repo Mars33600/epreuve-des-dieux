@@ -1,0 +1,183 @@
+{
+ "depart": [
+  {
+   "mapId": 207623176,
+   "npcId": 6167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Alors que la menace d'une invasion démoniaque assortie d'une Eliocalypse plane sur les Douziens, Draconiros vous a suggéré de d'abord rencontrer la personne qui a guidé votre destinée. Lorsque l'on est le gardien des Dofus Primordiaux ou le Maître des rêves et des cauchemars, sauver le monde devient tellement habituel que l'on doit prendre garde à ne plus faire que cela, quitte à négliger ses autres obligations. La vie des puissants est décidément bien compliquée.",
+   "id": 3065,
+   "nom": "Au détour d'un rêve perdu",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      894536,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer le personnage qui a guidé votre destinée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      900545,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Tenter d'ouvrir le coffret mystérieux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      894686,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer les ruines des songes perdus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896427,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Affronter la douleur avec l'aide des Onigori"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6196,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6196}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896428,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Discuter avec Draconiros dans la caverne du réceptacle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896452,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      -4
+     ],
+     "texte": "Tenter de découvrir les origines de la douleur au temple de Sacrieur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896475,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -46
+     ],
+     "texte": "Braver les flammes de la cime maudite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896473,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -46
+     ],
+     "texte": "Faire face au Dark Vlad"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896474,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -46
+     ],
+     "texte": "S'exposer au courroux de Médoroziam"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6167,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Retourner voir {npc,6167}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2409,
+ "nom": "Au détour d'un rêve perdu",
+ "objets": [
+  [
+   737,
+   1
+  ],
+  [
+   694,
+   1
+  ],
+  [
+   739,
+   1
+  ],
+  [
+   7754,
+   1
+  ],
+  [
+   7115,
+   1
+  ],
+  [
+   7114,
+   1
+  ]
+ ],
+ "prerequis": [
+  2406
+ ]
+}

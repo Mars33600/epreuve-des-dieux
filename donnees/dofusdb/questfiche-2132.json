@@ -1,0 +1,330 @@
+{
+ "depart": [
+  {
+   "mapId": 202899462,
+   "npcId": 5343
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Après avoir emprunté la puissance du dieu Sadida et des Mérydes, vous avez éradiqué l'influence de Corruption dans votre époque. Il est maintenant temps de retourner dans sa dimension et de sceller l'arbre de mort pour l'empêcher d'étendre son influence.",
+   "id": 2787,
+   "nom": "Mort et renouveau",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825572,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Retourner à l'arbre de mort pour utiliser le pouvoir de l'idole"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825571,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Demander conseil à l'ermite Dogabah"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825573,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher un endroit préservé de la corruption"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6028,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,6028}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6029,
+      6,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x6 {monster,6029}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6030,
+      7,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x7 {monster,6030}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6031,
+      8,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x8 {monster,6031}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825580,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Découvrir de qui provenait la petite voix"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825584,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Raviver les fleurs bleutées de la dimension en les arrosant"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5414,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Retourner voir {npc,5414}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825585,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Parler de Kernuros à Dogabah"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825588,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Parler de Kernuros au Garde Akronit"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5454,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      1
+     ],
+     "texte": "Aller voir {npc,5454}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825589,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      1
+     ],
+     "texte": "Tenter à nouveau de communiquer avec la Mère Nheur'Gueule"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5415,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Retourner voir {npc,5415}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825590,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      3
+     ],
+     "texte": "Tenter de communiquer avec l'arbre de mort"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5456,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5456}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825598,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Faire part de votre discussion à Kernuros"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6026,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Vaincre x1 {monster,6026} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825602,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Utiliser le pouvoir de Kernuros pour sceller le pouvoir de l'arbre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5411,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Aller voir {npc,5411}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5415,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Aller voir {npc,5415}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825603,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Parler au second Kernuros"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825604,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Faire admettre à Corruption sa défaite"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22203,
+       3
+      ],
+      [
+       22207,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2132,
+ "nom": "Mort et renouveau",
+ "objets": [],
+ "prerequis": [
+  2131
+ ]
+}

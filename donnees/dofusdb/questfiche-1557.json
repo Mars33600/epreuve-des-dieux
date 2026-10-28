@@ -1,0 +1,149 @@
+{
+ "depart": [
+  {
+   "mapId": 138152449,
+   "npcId": 2538
+  },
+  {
+   "mapId": 136185090,
+   "npcId": 2538
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il semblerait qu'on vous prenne pour un assassin. À moins que ce soit le cas mais que vous ne vous en souveniez pas.",
+   "id": 2181,
+   "nom": "Présumé coupable",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2437,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2437}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885352,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher l'enquêteur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2537,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2537}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2565,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2565}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2565,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2565}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452862,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      2
+     ],
+     "texte": "Découvrir la carte : Fuite vers le bazar"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452860,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      3
+     ],
+     "texte": "Découvrir la carte : Fuite à travers le bazar"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452861,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      3
+     ],
+     "texte": "Découvrir la carte : Fuite vers les Catacombres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2565,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      4
+     ],
+     "texte": "Aller voir {npc,2565}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15447,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1557,
+ "nom": "Présumé coupable",
+ "objets": [],
+ "prerequis": [
+  1556
+ ]
+}

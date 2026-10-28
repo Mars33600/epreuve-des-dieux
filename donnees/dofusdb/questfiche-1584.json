@@ -1,0 +1,124 @@
+{
+ "depart": [
+  {
+   "mapId": 145229323,
+   "npcId": 2652
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Toujours désireux d'en apprendre davantage sur les Hordémons, le Doc vous a envoyé faire un petit tour au Muséum. Voilà qui vous changera des tavernes et autres lieux sordides que vous fréquentez habituellement.",
+   "id": 2204,
+   "nom": "Aux origines du mal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2656,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Aller voir {npc,2656}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481271,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le Compendium dans le Muséum"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2652,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Retourner voir {npc,2652}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481294,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le lieu cité dans le compendium"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481278,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      6
+     ],
+     "texte": "Examiner la déchirure temporelle"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2726,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      6
+     ],
+     "texte": "Aller voir {npc,2726}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2652,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Retourner voir {npc,2652}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       15723,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1584,
+ "nom": "Aux origines du mal",
+ "objets": [],
+ "prerequis": [
+  1583
+ ]
+}

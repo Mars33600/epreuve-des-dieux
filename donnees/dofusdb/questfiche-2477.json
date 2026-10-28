@@ -1,0 +1,265 @@
+{
+ "depart": [
+  {
+   "mapId": 226492929,
+   "npcId": 6843
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les Marteaux-aigris ont trouvé le moyen d'affronter le terrible Cire Momore sans y laisser leurs poils et acceptent de partager leur secret.",
+   "id": 3134,
+   "nom": "Pour que la flamme vacille",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6847,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Aller voir {npc,6847}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6919,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Aller voir {npc,6919}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6920,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -64
+     ],
+     "texte": "Aller voir {npc,6920}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      980035,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Consulter le manuel de fabrication de la Fleur de Cendrepierre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6918,
+      27403,
+      1
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Montrer à {npc,6918} : 1 {item,27403}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6918,
+      27397,
+      1
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Montrer à {npc,6918} : 1 {item,27397}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6918,
+      27401,
+      1
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Montrer à {npc,6918} : 1 {item,27401}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6918,
+      27400,
+      1
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Montrer à {npc,6918} : 1 {item,27400}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6918,
+      27399,
+      1
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Montrer à {npc,6918} : 1 {item,27399}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6918,
+      27398,
+      1
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Montrer à {npc,6918} : 1 {item,27398}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6918,
+      16387,
+      7
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Montrer à {npc,6918} : 7 {item,16387}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6918,
+      27621,
+      7
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Montrer à {npc,6918} : 7 {item,27621}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      27714,
+      1,
+      0
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Fabriquer 1 {item,27714} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6918,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -63
+     ],
+     "texte": "Aller voir {npc,6918}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6921,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6921}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6917,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -70
+     ],
+     "texte": "Aller voir {npc,6917}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2477,
+ "nom": "Pour que la flamme vacille",
+ "objets": [
+  [
+   27403,
+   2
+  ],
+  [
+   27397,
+   2
+  ],
+  [
+   27401,
+   2
+  ],
+  [
+   27400,
+   2
+  ],
+  [
+   27399,
+   2
+  ],
+  [
+   27398,
+   2
+  ],
+  [
+   16387,
+   14
+  ],
+  [
+   27621,
+   14
+  ]
+ ],
+ "prerequis": [
+  2475
+ ]
+}

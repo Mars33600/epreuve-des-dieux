@@ -1,0 +1,112 @@
+{
+ "depart": [
+  {
+   "mapId": 136054020,
+   "npcId": 2618
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Un quiproquo avec Flèche Mauve a bien failli vous coûter la vie. À présent, votre enquête peut continuer normalement.",
+   "id": 2185,
+   "nom": "Bouchées à la reine",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2613,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -1
+     ],
+     "texte": "Aller voir {npc,2613}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885301,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les agents disparus dans les Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885302,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les agents disparus dans les Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885303,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les agents disparus dans les Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885304,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -3
+     ],
+     "texte": "Détruire les bombes puis aider Flèche Mauve"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2467,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -1
+     ],
+     "texte": "Aller voir {npc,2467}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15447,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1551,
+ "nom": "Bouchées à la reine",
+ "objets": [],
+ "prerequis": [
+  1550
+ ]
+}

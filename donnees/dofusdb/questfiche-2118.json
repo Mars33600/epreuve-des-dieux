@@ -1,0 +1,375 @@
+{
+ "depart": [
+  {
+   "mapId": 201852419,
+   "npcId": 5361
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La dernière Source du Vent Kissabah se trouve à l'intérieur de l'Oasis. C'est une raison supplémentaire pour franchir les remparts. Pour cela il n'y a qu'un moyen : devenir Collecteur d'impôts.",
+   "id": 2773,
+   "nom": "Tournent les vents",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5357,
+      22117,
+      1
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Ramener à {npc,5357} : x1 {item,22117}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5995,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,5995}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5993,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,5993}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5992,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,5992}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5994,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,5994}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5357,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Aller voir {npc,5357}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5357,
+      22116,
+      5
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Ramener à {npc,5357} : x5 {item,22116}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820843,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire la liste des impôts à prélever"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820841,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Prélever l'impôt auprès de Koriolys"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5366,
+      22111,
+      6
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Ramener à {npc,5366} : x6 {item,22111}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820842,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      3
+     ],
+     "texte": "Prélever l'impôt auprès de Lavra Jamahder"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820846,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      3
+     ],
+     "texte": "Prélever l'impôt auprès de Lame Pysca"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      22113,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 3 {item,22113} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820847,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      2
+     ],
+     "texte": "Prélever l'impôt auprès de Bascova Silemphra"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825826,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      2
+     ],
+     "texte": "Récupérer les besaces de nourriture volées et les donner à Bascova Silemphra en échange de ses impôts"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5357,
+      22112,
+      6
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Ramener à {npc,5357} : x6 {item,22112}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5357,
+      22119,
+      1
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Ramener à {npc,5357} : x1 {item,22119}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5357,
+      22115,
+      1
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Ramener à {npc,5357} : x1 {item,22115}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5357,
+      22113,
+      3
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Ramener à {npc,5357} : x3 {item,22113}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820851,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver les Miséreux qui ont réussi à devenir Collecteur d'impôts"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820852,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Détruire la source du Vent Kissabah"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5361,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Aller voir {npc,5361}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5353,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      4
+     ],
+     "texte": "Aller voir {npc,5353}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5357,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Aller voir {npc,5357}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820861,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le convoi pour la Sentence de la Balance"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820862,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      0
+     ],
+     "texte": "Vaincre les collecteurs d'impôts du convoi"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5354,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      0
+     ],
+     "texte": "Aller voir {npc,5354}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22050,
+       5
+      ],
+      [
+       22048,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2118,
+ "nom": "Tournent les vents",
+ "objets": [
+  [
+   22235,
+   4
+  ],
+  [
+   22236,
+   4
+  ]
+ ],
+ "prerequis": [
+  2117
+ ]
+}

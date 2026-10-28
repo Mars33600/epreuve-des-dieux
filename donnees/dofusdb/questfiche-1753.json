@@ -1,0 +1,50 @@
+{
+ "depart": [
+  {
+   "mapId": 90707713,
+   "npcId": 3300
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Jett Saite compte sur vous pour approvisionner le gratin de Bonta et Brâkmar.",
+   "id": 2390,
+   "nom": "Droit de cuissage",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3300,
+      18074,
+      40
+     ],
+     "position": [
+      21,
+      24
+     ],
+     "texte": "Ramener à {npc,3300} : x40 {item,18074}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17977,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1753,
+ "nom": "Droit de cuissage",
+ "objets": [],
+ "prerequis": []
+}

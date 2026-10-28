@@ -1,0 +1,170 @@
+{
+ "depart": [
+  {
+   "mapId": 131862017,
+   "npcId": 2364
+  },
+  {
+   "mapId": 129499136,
+   "npcId": 2364
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Richard le Trésorier vous a demandé de retrouver un Koffrefor qui a été enlevé par des brigands venus du Monde des Douze. Le coffre magique contiendrait un objet d'une immense valeur.",
+   "id": 2113,
+   "nom": "Pour quelques kamas de plus",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452823,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Prendre contact avec les voleurs de Koffrefor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452821,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Se rendre au point de rendez-vous"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2366,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2366}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2367,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2367}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2368,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Aller voir {npc,2368}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3703,
+      1,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Vaincre x1 {monster,3703} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3675,
+      1,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Vaincre x1 {monster,3675} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3673,
+      1,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Vaincre x1 {monster,3673} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454040,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -4
+     ],
+     "texte": "Récupérer l'objet gardé par le Koffrefor Traumatisé"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2364,
+      15288,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2364} : x1 {item,15288}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15180,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1493,
+ "nom": "Pour quelques kamas de plus",
+ "objets": [],
+ "prerequis": [
+  1492
+ ]
+}

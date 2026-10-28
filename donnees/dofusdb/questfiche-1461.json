@@ -1,0 +1,332 @@
+{
+ "depart": [
+  {
+   "mapId": 121896960,
+   "npcId": 2200
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le maître de la Dimension Obscure menace les habitants du Monde des Douze. À en croire Lumino, seul un héros peut se dresser contre lui. Oui, c'est bien de vous que l'on parle, ne jouez pas les modestes. Mais avant de foncer tête baissée, il serait judicieux d'en apprendre davantage sur le passé d'Ombre et de ses frères...",
+   "id": 2081,
+   "nom": "L'armée des ombres",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2167,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,2167}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      57,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      1
+     ],
+     "texte": "Aller voir {npc,57}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2214,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      4
+     ],
+     "texte": "Aller voir {npc,2214}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453894,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Richard Rouge sur l'île de Frigost"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1293,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -38
+     ],
+     "texte": "Aller voir {npc,1293}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453893,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -55
+     ],
+     "texte": "Trouver le sac tombé dans les profondeurs du lac gelé"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3581,
+      1,
+      0
+     ],
+     "position": [
+      -64,
+      -55
+     ],
+     "texte": "Vaincre x1 {monster,3581} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453865,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -55
+     ],
+     "texte": "Fouiller le sac perdu par Richard Rouge"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453864,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le premier cahier du journal de l'alchimiste"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2200,
+      14955,
+      1
+     ],
+     "position": [
+      4,
+      4
+     ],
+     "texte": "Montrer à {npc,2200} : 1 {item,14955}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453866,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Entrer dans la Dimension obscure"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453868,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer la Dimension obscure pour trouver des traces d'Ereziah"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2215,
+      14922,
+      2
+     ],
+     "position": [
+      5,
+      9
+     ],
+     "texte": "Ramener à {npc,2215} : x2 {item,14922}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2215,
+      14925,
+      2
+     ],
+     "position": [
+      5,
+      9
+     ],
+     "texte": "Ramener à {npc,2215} : x2 {item,14925}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2215,
+      14923,
+      2
+     ],
+     "position": [
+      5,
+      9
+     ],
+     "texte": "Ramener à {npc,2215} : x2 {item,14923}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2215,
+      14924,
+      2
+     ],
+     "position": [
+      5,
+      9
+     ],
+     "texte": "Ramener à {npc,2215} : x2 {item,14924}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453651,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le second cahier du journal de l'alchimiste"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1363,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -45
+     ],
+     "texte": "Aller voir {npc,1363}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453650,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -45
+     ],
+     "texte": "Trouver les chaînes alchimiques forgées par Ereziah"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3564,
+      1,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Vaincre x1 {monster,3564} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2216,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      13
+     ],
+     "texte": "Aller voir {npc,2216}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2200,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      4
+     ],
+     "texte": "Retourner voir {npc,2200}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       14953,
+       1
+      ],
+      [
+       14921,
+       9
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1461,
+ "nom": "L'armée des ombres",
+ "objets": [
+  [
+   14955,
+   1
+  ],
+  [
+   14922,
+   2
+  ],
+  [
+   14925,
+   2
+  ],
+  [
+   14923,
+   2
+  ],
+  [
+   14924,
+   2
+  ]
+ ],
+ "prerequis": []
+}

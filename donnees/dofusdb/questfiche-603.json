@@ -1,0 +1,52 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "La forêt pétrifiée cache peut-être des trésors enfouis. À vous de le découvrir.",
+   "id": 1250,
+   "nom": "Biologie expérimentale",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885948,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le passage dans la forêt pétrifiée"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2822,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,2822} en un seul combat"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11795,
+       1
+      ],
+      [
+       12046,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 603,
+ "nom": "Monstre aux plantes",
+ "objets": [],
+ "prerequis": []
+}

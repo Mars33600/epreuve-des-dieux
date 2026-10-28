@@ -1,0 +1,80 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous avez accès à une carte secrète de la forêt pétrifiée. Mieux vaut ne pas vous y aventurer seul.",
+   "id": 1264,
+   "nom": "L'épreuve de la terre",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55049,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Carte secrète de la forêt pétrifiée."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886145,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un moyen d'ouvrir les grilles"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1381,
+      11876,
+      1
+     ],
+     "position": null,
+     "texte": "Montrer à {npc,1381} : 1 {item,11876}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1381,
+      11876,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1381} : x1 {item,11876}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1381,
+      11196,
+      25
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1381} : x25 {item,11196}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27976,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 610,
+ "nom": "Voleur en tout genre",
+ "objets": [],
+ "prerequis": [
+  596
+ ]
+}

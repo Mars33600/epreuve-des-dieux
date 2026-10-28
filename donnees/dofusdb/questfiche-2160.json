@@ -1,0 +1,470 @@
+{
+ "depart": [
+  {
+   "mapId": 207619072,
+   "npcId": 5561
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Un Yokai très particulier appelé Kwamabie souhaite vous faire part d'une prophétie qui pourrait changer le destin des habitants de Pandala.",
+   "id": 2816,
+   "nom": "Une bien étrange prophétie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6000,
+      7112,
+      1
+     ],
+     "position": null,
+     "texte": "Montrer à {npc,6000} : 1 {item,7112}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896477,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Informer Surivitna de la prophétie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      902873,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher un esprit sage à qui demander conseil"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896479,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Entrer dans le rêve d'Urazaki"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897273,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Parler aux membres de l'Ordre du Silence"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896480,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Saluer le sage kozaru avec respect"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896481,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Protéger Urazaki durant son ascension spirituelle"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6208,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,6208}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896492,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Faire vos adieux à Keiko"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5561,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Retourner voir {npc,5561}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896493,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'Obarrepon dans le Mont des Tombeaux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6078,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -45
+     ],
+     "texte": "Aller voir {npc,6078}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897332,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -45
+     ],
+     "texte": "S'assurer que la symbiose s'est bien déroulée"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5998,
+      7147,
+      1
+     ],
+     "position": [
+      38,
+      -45
+     ],
+     "texte": "Ramener à {npc,5998} : x1 {item,7147}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5998,
+      25097,
+      1
+     ],
+     "position": [
+      38,
+      -45
+     ],
+     "texte": "Ramener à {npc,5998} : x1 {item,25097}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5998,
+      23972,
+      1
+     ],
+     "position": [
+      38,
+      -45
+     ],
+     "texte": "Ramener à {npc,5998} : x1 {item,23972}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5998,
+      7291,
+      5
+     ],
+     "position": [
+      38,
+      -45
+     ],
+     "texte": "Ramener à {npc,5998} : x5 {item,7291}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5998,
+      25117,
+      1
+     ],
+     "position": [
+      38,
+      -45
+     ],
+     "texte": "Ramener à {npc,5998} : x1 {item,25117}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      900704,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      -21
+     ],
+     "texte": "Montrer à l'Obareppon une pièce de théâtre d'encre"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      896514,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Passage de la Parade"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897408,
+      0,
+      0
+     ],
+     "position": [
+      35,
+      -46
+     ],
+     "texte": "Assister à la parade des cent Yokai"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896516,
+      0,
+      0
+     ],
+     "position": [
+      35,
+      -46
+     ],
+     "texte": "Protéger les peintres durant leur travail"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897397,
+      0,
+      0
+     ],
+     "position": [
+      35,
+      -46
+     ],
+     "texte": "S'enquérir de l'état des peintres"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897399,
+      0,
+      0
+     ],
+     "position": [
+      35,
+      -46
+     ],
+     "texte": "Demander des éclaircissements à l'Obareppon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897409,
+      0,
+      0
+     ],
+     "position": [
+      35,
+      -46
+     ],
+     "texte": "Interroger Nurarihyon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896518,
+      0,
+      0
+     ],
+     "position": [
+      35,
+      -46
+     ],
+     "texte": "Faire le point avec Migouze"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897599,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -34
+     ],
+     "texte": "Escorter le peintre jusqu'à son ami à Feudala"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1367,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -34
+     ],
+     "texte": "Aller voir {npc,1367}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896520,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre Barnabé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896521,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -46
+     ],
+     "texte": "Libérer Maba Kadabra de la possession du démon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896522,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -46
+     ],
+     "texte": "S'assurer que le peintre est redevenu lui-même"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896523,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Escorter Maba Kadabra chez Surivitna"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      898094,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Conclure vos découvertes avec le chaman"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       23825,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2160,
+ "nom": "Une bien étrange prophétie",
+ "objets": [
+  [
+   7112,
+   1
+  ],
+  [
+   7147,
+   1
+  ],
+  [
+   25097,
+   1
+  ],
+  [
+   23972,
+   1
+  ],
+  [
+   7291,
+   5
+  ]
+ ],
+ "prerequis": [
+  2406
+ ]
+}

@@ -1,0 +1,221 @@
+{
+ "depart": [
+  {
+   "mapId": 131597312,
+   "npcId": 2341
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'Agent Pruneaude a besoin de votre aide.",
+   "id": 2123,
+   "nom": "Le silence est d'or",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2380,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Aller voir {npc,2380}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885079,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Défendre l'Agent Pruneaude puis lui parler à nouveau"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2381,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Aller voir {npc,2381}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2380,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Aller voir {npc,2380}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2381,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Aller voir {npc,2381}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2380,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Aller voir {npc,2380}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885080,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -6
+     ],
+     "texte": "Récupérer une Trousse à outils Enutrofor"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3693,
+      1,
+      0
+     ],
+     "position": [
+      -9,
+      -6
+     ],
+     "texte": "Vaincre x1 {monster,3693} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2380,
+      15307,
+      1
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Ramener à {npc,2380} : x1 {item,15307}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2381,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Aller voir {npc,2381}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2380,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Aller voir {npc,2380}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2381,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Aller voir {npc,2381}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2380,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -5
+     ],
+     "texte": "Aller voir {npc,2380}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2341,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Aller voir {npc,2341}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15178,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1503,
+ "nom": "Le silence est d'or",
+ "objets": [],
+ "prerequis": [
+  1502
+ ]
+}

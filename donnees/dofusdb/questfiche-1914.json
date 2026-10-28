@@ -1,0 +1,210 @@
+{
+ "depart": [
+  {
+   "mapId": 111673344,
+   "npcId": 2020
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez été attaqué à plusieurs reprises par des serviteurs d'Hyrkul le Tendancieux. Comme il est fort probable que ces embuscades se poursuivent, il serait bon d'en savoir un peu plus sur Hyrkul et ses motivations. Bien connaître ses ennemis est un bon moyen de se débarrasser d'eux.",
+   "id": 2552,
+   "nom": "Le guerrier noir",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2978,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2978}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732679,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler au bibliothécaire de Brâkmar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732680,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le livre sur l'avènement d'Hyrkul"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732684,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le tome IX des Fragments Retrouvés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732685,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le tome X des Fragments Retrouvés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732686,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le livre sur la fin d'Hyrkul"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732705,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger un Centoror à propos de Menalt"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732706,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se recueillir devant la tombe de Menalt"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732707,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler au maître de l'ordre du Cœur Vaillant"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6310,
+      19193,
+      3
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Ramener à {npc,6310} : x3 {item,19193}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6310,
+      19195,
+      3
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Ramener à {npc,6310} : x3 {item,19195}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6310,
+      19194,
+      3
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Ramener à {npc,6310} : x3 {item,19194}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732747,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -12
+     ],
+     "texte": "Se recueillir une nouvelle fois devant la tombe de Menalt"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4086,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -12
+     ],
+     "texte": "Aller voir {npc,4086}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15444,
+       4
+      ],
+      [
+       17988,
+       4
+      ],
+      [
+       13913,
+       1
+      ],
+      [
+       13922,
+       1
+      ],
+      [
+       13920,
+       1
+      ],
+      [
+       13916,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1914,
+ "nom": "Le guerrier noir",
+ "objets": [],
+ "prerequis": [
+  1909
+ ]
+}

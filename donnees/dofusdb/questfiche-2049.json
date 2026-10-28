@@ -1,0 +1,368 @@
+{
+ "depart": [
+  {
+   "mapId": 163054594,
+   "npcId": 3428
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il semble que votre destinée était de réunir les six Dofus et de vous servir du Feu Primordial pour détruire le Monde des Douze. Comme ce n'est pas tout à fait ce que vous espériez, vous avez décidé de vous rebeller contre les Nordes. Pour avoir une infime chance de l'emporter, il vous faudra créer deux artefacts qui vous permettront de couper les fils d'argent faisant de vous une simple marionnette.",
+   "id": 2702,
+   "nom": "S'armer contre le destin",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2017,
+      0,
+      0
+     ],
+     "position": [
+      -54,
+      -76
+     ],
+     "texte": "Aller voir {npc,2017}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2017,
+      20214,
+      1
+     ],
+     "position": [
+      -54,
+      -76
+     ],
+     "texte": "Ramener à {npc,2017} : x1 {item,20214}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768822,
+      0,
+      0
+     ],
+     "position": [
+      -74,
+      -53
+     ],
+     "texte": "Naviguer vers l'ouest sur le radeau de Galaethiel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4081,
+      0,
+      0
+     ],
+     "position": [
+      -87,
+      -86
+     ],
+     "texte": "Aller voir {npc,4081}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768823,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Jouer avec Pistou pour le sortir de sa déprime"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4081,
+      0,
+      0
+     ],
+     "position": [
+      -87,
+      -86
+     ],
+     "texte": "Retourner voir {npc,4081}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4083,
+      0,
+      0
+     ],
+     "position": [
+      -87,
+      -86
+     ],
+     "texte": "Aller voir {npc,4083}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768824,
+      0,
+      0
+     ],
+     "position": [
+      -87,
+      -86
+     ],
+     "texte": "Mater les mutins mansots dans la prison de Galaethiel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4083,
+      0,
+      0
+     ],
+     "position": [
+      -87,
+      -86
+     ],
+     "texte": "Retourner voir {npc,4083}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4638,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4638}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4640,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4640}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      781289,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre les Kèrdes dans le songe du Marchand de Sable"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4640,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retourner voir {npc,4640}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768827,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Créer le Troisième Œil"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768832,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un forgeron expert du Grithril en Amakna"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4644,
+      20217,
+      3
+     ],
+     "position": [
+      3,
+      29
+     ],
+     "texte": "Ramener à {npc,4644} : x3 {item,20217}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4644,
+      20216,
+      3
+     ],
+     "position": [
+      3,
+      29
+     ],
+     "texte": "Ramener à {npc,4644} : x3 {item,20216}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      774736,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Demander à Gobanos de forger des ciseaux en Grithril sur l'enclume divine"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3046,
+      20218,
+      1
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Montrer à {npc,3046} : 1 {item,20218}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768852,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Arracher un éclat de destin brisé au Comte Harebourg"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2052,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Aller voir {npc,2052}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768853,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -7
+     ],
+     "texte": "Arracher un éclat de destin brisé à Vortex"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3046,
+      20219,
+      1
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Ramener à {npc,3046} : x1 {item,20219}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3046,
+      20220,
+      1
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Ramener à {npc,3046} : x1 {item,20220}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768858,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -21
+     ],
+     "texte": "Montrer les Ciseaux du Destin et le Troisième Œil à Rimanda"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15733,
+       3
+      ],
+      [
+       13995,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2049,
+ "nom": "S'armer contre le destin",
+ "objets": [
+  [
+   737,
+   1
+  ],
+  [
+   694,
+   1
+  ],
+  [
+   739,
+   1
+  ],
+  [
+   7754,
+   1
+  ],
+  [
+   7115,
+   1
+  ],
+  [
+   7114,
+   1
+  ]
+ ],
+ "prerequis": [
+  2048
+ ]
+}

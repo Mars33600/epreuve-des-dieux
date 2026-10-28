@@ -1,0 +1,355 @@
+{
+ "depart": [
+  {
+   "mapId": 54174025,
+   "npcId": 1373
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Albert Lioz est sans nouvelle de Maya et vous demande de la retrouver dans la ruche des gloursons.",
+   "id": 1287,
+   "nom": "Chasse aux rayons",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885897,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Maya dans la Ruche des Gloursons"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1405,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1405}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55424,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Canalisations de la ruche."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885898,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trafiquer les canalisations"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55427,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Canalisations de la ruche."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885899,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trafiquer les canalisations"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55433,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Canalisations de la ruche."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885900,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trafiquer les canalisations"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55444,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Canalisations de la ruche."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885901,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trafiquer les canalisations"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55452,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Canalisations de la ruche."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885902,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trafiquer les canalisations"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55456,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Canalisations de la ruche."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885903,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trafiquer les canalisations"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55463,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Canalisations de la ruche."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885904,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trafiquer les canalisations"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1405,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1405}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Maya veut détourner une partie de la production de miel des gloursons pour les villageois. Elle compte sur votre aide pour y parvenir.",
+   "id": 1288,
+   "nom": "Vol détourné",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55477,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Contrôleur des canalisations."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885906,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Modifier les paramètres du contrôleur des canalisations"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55481,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Ecoulement du miel."
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1373,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1373}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1405,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1405}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55494,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Découvrir la carte : Sommet de la Ruche des Gloursons."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Vous avez retrouvé Maya au sommet de la ruche des gloursons, ce qui ne présage rien de bon.",
+   "id": 1289,
+   "nom": "Plus dure sera la chute",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1405,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1405}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      8241,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,8241} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1405,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1405}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       5
+      ],
+      [
+       11940,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 598,
+ "nom": "Maya la belle",
+ "objets": [],
+ "prerequis": [
+  597,
+  625
+ ]
+}

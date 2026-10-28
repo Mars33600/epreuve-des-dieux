@@ -1,0 +1,192 @@
+{
+ "depart": [
+  {
+   "mapId": 122421248,
+   "npcId": 2205
+  }
+ ],
+ "etapes": [
+  {
+   "description": "D'après Mériana, le dernier œuf de la mère des Crocodailles serait conservé bien au chaud dans le temple d'Osamodas. Crocahualpa vous a affirmé que cet œuf est le réceptacle idéal pour l'âme de Crocoburio.",
+   "id": 2695,
+   "nom": "L'œuf de Crocabulia",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768561,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Se rendre au temple d'Osamodas"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      42,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Aller voir {npc,42}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      781038,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -2
+     ],
+     "texte": "Se rendre à la banque d'Amakna pour récupérer l'œuf"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768564,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Enquêter du côté du repaire des Roublards"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      58,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      2
+     ],
+     "texte": "Aller voir {npc,58}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768565,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rejoindre Srambad, la cité des voleurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768566,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Prendre contact avec les Smisse de Srambad"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768567,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Résoudre le conflit entre Blak et Sissipie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768568,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      1
+     ],
+     "texte": "Passer un marché avec les Smisse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768569,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -4
+     ],
+     "texte": "Récupérer l'objet détenu par la Reine des Voleurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      781087,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      1
+     ],
+     "texte": "Montrer le coffret aux Smisse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768575,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      1
+     ],
+     "texte": "Forcer les Smisse de Srambad à tenir leur parole"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2205,
+      20205,
+      1
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer à {npc,2205} : 1 {item,20205}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15444,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2043,
+ "nom": "L'œuf de Crocabulia",
+ "objets": [],
+ "prerequis": [
+  2042
+ ]
+}

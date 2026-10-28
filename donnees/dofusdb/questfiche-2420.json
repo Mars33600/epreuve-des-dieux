@@ -1,0 +1,219 @@
+{
+ "depart": [
+  {
+   "mapId": 207623176,
+   "npcId": 6167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Quelqu'un, quelque part, semble avoir besoin de votre aide... mais quand le temps s'emmêle et que la mort s'en mêle, il devient difficile de s'y retrouver.",
+   "id": 3077,
+   "nom": "Entretemps, une renaissance",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6222,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -55
+     ],
+     "texte": "Retourner voir {npc,6222}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      913758,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Voyager dans le temps jusqu'au Sanctuaire du dernier espoir pour en savoir plus sur Allisterine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      913766,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Communiquer avec Entropix"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4325,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Aller voir {npc,4325}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      913823,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Chapelle royale de Féca"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      913826,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Emprunter le médaillon placé sur l'autel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      913832,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Résister aux coups du bélier divin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4209,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Aller voir {npc,4209}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      922022,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rejoindre les Portes d'Onékros"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      913841,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Guider Allisterine"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6400,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6400}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      927874,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger Entropix, puis neutraliser les Cavaliers"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6400,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6400}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      913882,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Donner le médaillon à Allisteria"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2420,
+ "nom": "Entretemps, une renaissance",
+ "objets": [
+  [
+   737,
+   1
+  ],
+  [
+   694,
+   1
+  ],
+  [
+   739,
+   1
+  ],
+  [
+   7754,
+   1
+  ],
+  [
+   7115,
+   1
+  ],
+  [
+   7114,
+   1
+  ]
+ ],
+ "prerequis": [
+  2409,
+  2138,
+  2422,
+  2422
+ ]
+}

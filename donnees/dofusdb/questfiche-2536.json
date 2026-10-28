@@ -1,0 +1,356 @@
+{
+ "depart": [
+  {
+   "mapId": 234753031,
+   "npcId": 7717
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Après avoir vu tous ses agents vomir leurs tripes suite au dernier plat cuisiné par Brenshi, le capitaine Blair a ordonné au chef Zutlédoâ de confectionner un plat revigorant dont il a le secret. Un secret si bien gardé que l'intéressé lui-même en a oublié la recette !",
+   "id": 3217,
+   "nom": "Les gloutons des dimensions",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7716,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Aller voir {npc,7716}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7717,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Retourner voir {npc,7717}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7738,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      17
+     ],
+     "texte": "Aller voir {npc,7738}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      16467,
+      3
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x3 {item,16467}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      16465,
+      3
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x3 {item,16465}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      16469,
+      3
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x3 {item,16469}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      281,
+      5
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x5 {item,281}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      381,
+      5
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x5 {item,381}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      1734,
+      5
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x5 {item,1734}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      32055,
+      10
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x10 {item,32055}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      15455,
+      3
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x3 {item,15455}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      32057,
+      1
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x1 {item,32057}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      32058,
+      1
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x1 {item,32058}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      14479,
+      3
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x3 {item,14479}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      32056,
+      1
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x1 {item,32056}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      19406,
+      2
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x2 {item,19406}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      9267,
+      3
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x3 {item,9267}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7716,
+      32059,
+      1
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Ramener à {npc,7716} : x1 {item,32059}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1144740,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Expérimenter des recettes avec le chef Zutlédoâ jusqu'à trouver la bonne"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7717,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      31
+     ],
+     "texte": "Retourner voir {npc,7717}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31673,
+       2
+      ],
+      [
+       31674,
+       2
+      ],
+      [
+       31675,
+       2
+      ],
+      [
+       31676,
+       2
+      ],
+      [
+       31677,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2536,
+ "nom": "Les gloutons des dimensions",
+ "objets": [
+  [
+   16467,
+   3
+  ],
+  [
+   16465,
+   3
+  ],
+  [
+   16469,
+   3
+  ],
+  [
+   281,
+   5
+  ],
+  [
+   381,
+   5
+  ],
+  [
+   1734,
+   5
+  ],
+  [
+   15455,
+   3
+  ],
+  [
+   14479,
+   3
+  ],
+  [
+   19406,
+   2
+  ],
+  [
+   9267,
+   3
+  ]
+ ],
+ "prerequis": [
+  2515
+ ]
+}

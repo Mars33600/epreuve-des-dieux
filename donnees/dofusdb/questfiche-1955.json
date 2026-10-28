@@ -1,0 +1,110 @@
+{
+ "depart": [
+  {
+   "mapId": 188220416,
+   "npcId": 4249
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La nécromancienne Lilia Nha étudie la magie qui a créé les Trépamorts. Le prêtre de Sram vous a demandé de l'assister dans ses recherches.",
+   "id": 2588,
+   "nom": "La quête sous l'eau",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4174,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4174}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4174,
+      19562,
+      10
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Ramener à {npc,4174} : x10 {item,19562}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5208,
+      1,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Vaincre x1 {monster,5208} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4174,
+      19563,
+      1
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Montrer à {npc,4174} : 1 {item,19563}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3428,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3428}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4249,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Retourner voir {npc,4249}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19412,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1955,
+ "nom": "La quête sous l'eau",
+ "objets": [],
+ "prerequis": [
+  1954
+ ]
+}

@@ -1,0 +1,224 @@
+{
+ "depart": [
+  {
+   "mapId": 54172458,
+   "npcId": 4216
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des Frigostiens essayent de convaincre Cantile, le maire de Frigost, d'envoyer des soldats lutter contre les Submergés.",
+   "id": 2583,
+   "nom": "Au-delà de la Côte",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4215,
+      19422,
+      1
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Ramener à {npc,4215} : x1 {item,19422}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4218,
+      0,
+      0
+     ],
+     "position": [
+      -49,
+      -80
+     ],
+     "texte": "Aller voir {npc,4218}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4218,
+      12728,
+      3
+     ],
+     "position": [
+      -49,
+      -80
+     ],
+     "texte": "Ramener à {npc,4218} : x3 {item,12728}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4218,
+      11475,
+      20
+     ],
+     "position": [
+      -49,
+      -80
+     ],
+     "texte": "Ramener à {npc,4218} : x20 {item,11475}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4215,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -78
+     ],
+     "texte": "Aller voir {npc,4215}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740675,
+      0,
+      0
+     ],
+     "position": [
+      -49,
+      -82
+     ],
+     "texte": "Capturer un Submergé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4212,
+      0,
+      0
+     ],
+     "position": [
+      -49,
+      -82
+     ],
+     "texte": "Aller voir {npc,4212}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740676,
+      0,
+      0
+     ],
+     "position": [
+      -49,
+      -81
+     ],
+     "texte": "Vaincre la horde de Submergés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740677,
+      0,
+      0
+     ],
+     "position": [
+      -49,
+      -81
+     ],
+     "texte": "Parler aux Steamers"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4218,
+      0,
+      0
+     ],
+     "position": [
+      -49,
+      -80
+     ],
+     "texte": "Aller voir {npc,4218}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4216,
+      19581,
+      1
+     ],
+     "position": [
+      -77,
+      -42
+     ],
+     "texte": "Ramener à {npc,4216} : x1 {item,19581}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      740678,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -44
+     ],
+     "texte": "Découvrir la carte : Taverne d'Argent"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1244,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -44
+     ],
+     "texte": "Aller voir {npc,1244}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4216,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -42
+     ],
+     "texte": "Aller voir {npc,4216}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19410,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1943,
+ "nom": "Au-delà de la Côte",
+ "objets": [
+  [
+   12728,
+   3
+  ],
+  [
+   11475,
+   20
+  ]
+ ],
+ "prerequis": []
+}

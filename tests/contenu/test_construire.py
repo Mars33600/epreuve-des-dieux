@@ -51,7 +51,7 @@ def test_etage_1_donjons_rappels_et_quete_sans_fiche():
                                           "Cache de Kankreblath"]
     assert all(len(d.cases) == 5 and d.succes_source == "duffus" for d in e.donjons)
     assert len(e.quetes) == 43 and len(e.rappels) == 6 and e.sans_fiche == ["Quête de classe"]
-    assert any("sans fiche Duffus : Quête de classe" in a for a in e.alertes)
+    assert any("sans fiche : Quête de classe" in a for a in e.alertes)
 
 
 def test_classique_en_premier_puis_duo():

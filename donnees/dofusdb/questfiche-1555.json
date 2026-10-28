@@ -1,0 +1,207 @@
+{
+ "depart": [
+  {
+   "mapId": 135269889,
+   "npcId": 2561
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Docteur Deal Linger est persuadé de l'empoisonnement de l'alimentation des Nécrotiques. Il vous a demandé de l'assister dans son enquête.",
+   "id": 2169,
+   "nom": "Comme un poison dans l'eau",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885305,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      8
+     ],
+     "texte": "Prélever de l'eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885306,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      8
+     ],
+     "texte": "Prélever de l'eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885307,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Prélever de l'eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885308,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      9
+     ],
+     "texte": "Prélever de l'eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885309,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      8
+     ],
+     "texte": "Prélever de l'eau"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2561,
+      15570,
+      5
+     ],
+     "position": [
+      8,
+      7
+     ],
+     "texte": "Ramener à {npc,2561} : x5 {item,15570}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452516,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -1
+     ],
+     "texte": "Découvrir la carte : Panorama des Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2560,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -1
+     ],
+     "texte": "Aller voir {npc,2560}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885310,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des indices sur l'empoisonnement des eaux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2564,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -1
+     ],
+     "texte": "Aller voir {npc,2564}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885311,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      5
+     ],
+     "texte": "Chercher le passage caché vers l'Os-Pisse"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2563,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      5
+     ],
+     "texte": "Aller voir {npc,2563}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2561,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      7
+     ],
+     "texte": "Aller voir {npc,2561}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       40
+      ],
+      [
+       15444,
+       1
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1555,
+ "nom": "Comme un poison dans l'eau",
+ "objets": [],
+ "prerequis": []
+}

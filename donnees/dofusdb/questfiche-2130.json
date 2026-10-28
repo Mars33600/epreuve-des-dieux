@@ -1,0 +1,367 @@
+{
+ "depart": [
+  {
+   "mapId": 201458178,
+   "npcId": 5432
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des Sadidas semblent être présents dans la dimension de Corruption. Peut-être qu'ils pourront vous aider à vous débarrasser du cavalier, encore faudrait-il découvrir ce qu'ils sont devenus. On ne peut pas dire que l'environnement soit bien accueillant.",
+   "id": 2785,
+   "nom": "Les racines du mal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824305,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver une trace des Sadidas dans la dimension"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5438,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,5438}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5438,
+      22285,
+      1
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Ramener à {npc,5438} : x1 {item,22285}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5436,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Aller voir {npc,5436}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      824318,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Découvrir la carte : Statue de Sadida"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5435,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Aller voir {npc,5435}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5435,
+      22286,
+      15
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Ramener à {npc,5435} : x15 {item,22286}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824325,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Placer vos offrandes devant la statue de Sadida "
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824327,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Questionner la Prêtresse sur leur culte"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5436,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Retourner voir {npc,5436}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      824326,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Antre de l'ermite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5421,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Aller voir {npc,5421}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5421,
+      22211,
+      5
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Ramener à {npc,5421} : x5 {item,22211}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824328,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Tenter de pénétrer dans l'Arbre de Mort"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5421,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Retourner voir {npc,5421}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5421,
+      22274,
+      3
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Ramener à {npc,5421} : x3 {item,22274}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5421,
+      22280,
+      1
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Ramener à {npc,5421} : x1 {item,22280}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5421,
+      22203,
+      10
+     ],
+     "position": [
+      4,
+      2
+     ],
+     "texte": "Ramener à {npc,5421} : x10 {item,22203}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824396,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Retourner à l'arbre de mort transformé en Gangredogue"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5367,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Aller voir {npc,5367}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824402,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Examiner le cœur de l'arbre de mort"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4639,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Aller voir {npc,4639}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824403,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Rappeler à Rathrosk votre existence"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824404,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Se rendre auprès de l'arbre des vagabonds grâce à Rathrosk"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      824405,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Évoquer la corruption de l'endroit avec Rathrosk"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22212,
+       5
+      ],
+      [
+       22210,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2130,
+ "nom": "Les racines du mal",
+ "objets": [
+  [
+   22211,
+   5
+  ],
+  [
+   22203,
+   10
+  ]
+ ],
+ "prerequis": [
+  2122
+ ]
+}

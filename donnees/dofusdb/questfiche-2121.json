@@ -1,0 +1,362 @@
+{
+ "depart": [
+  {
+   "mapId": 203688196,
+   "npcId": 5377
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Maisial craint que la guerre de Cania évoquée dans les prophéties d'Enga Egrab n'ait des conséquences désastreuses pour le Kontinuum. Elle vous a chargé d'interroger Kanigroula à ce sujet.",
+   "id": 2776,
+   "nom": "Les sentiers de la guerre",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821124,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer la Matriarche des Kanigs après avoir montré que vous avez du cran"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821128,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -54
+     ],
+     "texte": "Vaincre les deux gardes d'élite de la Matriarche"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2294,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -54
+     ],
+     "texte": "Aller voir {npc,2294}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821136,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver Maisial là où le futur peut être prédit"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Aller voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821157,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Passer le test de Yova Etna"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821158,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Se concentrer sur la boule de cristal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Aller voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821372,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Parler avec les Kanigs qui travaillent dans le bois"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821240,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Identifier la source de la maladie touchant les Kanigs"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5377,
+      22150,
+      1
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Montrer à {npc,5377} : 1 {item,22150}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821292,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Se concentrer à nouveau sur la boule de cristal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Aller voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821315,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Comprendre le drame qui se noue dans les champs de Cania"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821316,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Tenter d'empêcher le lynchage du Kanig"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5377,
+      22152,
+      1
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Montrer à {npc,5377} : 1 {item,22152}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821371,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Se concentrer une fois de plus sur la boule de cristal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Aller voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821373,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Rencontrer les forces en présence"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821456,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Survivre à la bataille entre les Bworks et les Kanigs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Retourner voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821457,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Se concentrer une dernière fois sur la boule de cristal"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821498,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Explorer le camp de prisonniers"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821572,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Trouver le moyen de vous libérer de la vision"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Aller voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4822,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Aller voir {npc,4822}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2121,
+ "nom": "Les sentiers de la guerre",
+ "objets": [],
+ "prerequis": [
+  2120
+ ]
+}

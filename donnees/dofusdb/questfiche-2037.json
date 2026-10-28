@@ -1,0 +1,204 @@
+{
+ "depart": [
+  {
+   "mapId": 173015560,
+   "npcId": 3922
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Explorez le puits des Songes infinis à la recherche des rêves de Crocobur. Il vous faudra probablement atteindre certaines profondeurs pour découvrir les derniers souvenirs de l'épée... Ne vous réveillez donc pas trop souvent.",
+   "id": 2689,
+   "nom": "Jusqu'au bout du rêve",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768761,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans le Plan Astral"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4638,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -1
+     ],
+     "texte": "Aller voir {npc,4638}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147837,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Progresser si nécessaire et explorer le puits jusqu'à trouver le premier songe de Crocobur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147838,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Progresser si nécessaire et explorer le puits jusqu'à trouver le deuxième songe de Crocobur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147839,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Progresser si nécessaire et explorer le puits jusqu'à trouver le troisième songe de Crocobur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147840,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Progresser si nécessaire et explorer le puits jusqu'à trouver le quatrième songe de Crocobur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147841,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Progresser si nécessaire et explorer le puits jusqu'à trouver le cinquième songe de Crocobur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147842,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Progresser si nécessaire et explorer le puits jusqu'à trouver le sixième songe de Crocobur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147855,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le septième songe de Crocobur dans les Pensées oniriques (ou au-delà) d'un rêve intense (difficulté 3 ou plus)"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147854,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le huitième songe de Crocobur au cours des Balades fantastiques (ou au-delà) dans les méandres d'un rêve intense (difficulté 3 ou plus)"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147853,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le neuvième songe de Crocobur dans les Espaces imaginaires (ou au-delà) d'un rêve intense (difficulté 3 ou plus)"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147852,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le dixième songe de Crocobur dans les Concepts brumeux (ou au-delà) d'un rêve intense (difficulté 3 ou plus)"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147851,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le onzième songe de Crocobur dans les Abstractions chimériques d'un rêve intense (difficulté 3 ou plus)"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1147850,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Affronter la vague de gardiens chimériques d'un rêve intense (difficulté 3 ou plus) pour trouver le dernier songe de Crocobur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768774,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      25
+     ],
+     "texte": "Montrer l'épée éveillée à Volkaragnar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Retourner voir {npc,2205}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       32079,
+       400
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2037,
+ "nom": "Jusqu'au bout du rêve",
+ "objets": [],
+ "prerequis": [
+  2036
+ ]
+}

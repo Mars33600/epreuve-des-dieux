@@ -1,0 +1,232 @@
+{
+ "depart": [
+  {
+   "mapId": 145229323,
+   "npcId": 2652
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'œuf couleur de rubis que vous avez rapporté de votre voyage dans l'anomalie temporelle semble dégager une énergie peu commune. Rendez-vous au temple d'Osamodas pour tenter d'en apprendre davantage sur les origines de ce Dofus.",
+   "id": 2735,
+   "nom": "La mère des Dragoeufs",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801601,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Se rendre au temple d'Osamodas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801609,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Survivre à l'embuscade des dragoeufs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      42,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Aller voir {npc,42}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805017,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Obtenir un parangon et le déposer au pied de la statue du dieu Osamodas"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4946,
+      21188,
+      1
+     ],
+     "position": [
+      -4,
+      29
+     ],
+     "texte": "Montrer à {npc,4946} : 1 {item,21188}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801610,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      29
+     ],
+     "texte": "Vaincre les assassins dragoeufs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4946,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      29
+     ],
+     "texte": "Aller voir {npc,4946}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4947,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      29
+     ],
+     "texte": "Aller voir {npc,4947}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801611,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Combattre des aventuriers dans le sanctuaire des Dragoeufs jusqu'à ce que Draegnerys soit satisfaite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4947,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      29
+     ],
+     "texte": "Retourner voir {npc,4947}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      801612,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -15
+     ],
+     "texte": "Découvrir la carte : Portail de Crocuzko"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      804765,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'entrée de l'antre du dragon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      801616,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Affronter les dragoeufs qui gardent l'entrée"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      801621,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Découvrir la carte : Antre de la Mort Rouge"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4949,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Aller voir {npc,4949}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4948,
+      0,
+      0
+     ],
+     "position": [
+      -80,
+      -12
+     ],
+     "texte": "Aller voir {npc,4948}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2079,
+ "nom": "La mère des Dragoeufs",
+ "objets": [],
+ "prerequis": [
+  2078
+ ]
+}

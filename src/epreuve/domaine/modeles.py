@@ -86,6 +86,7 @@ class Quete:
     a_lier: str | None
     a_une_fiche: bool  # la fiche elle-même se lit à part (FicheQuete)
     masquee: bool = False
+    source_fiche: str | None = None  # « duffus », « dofusdb » ou None (revue admin)
 
 
 @dataclass(frozen=True)

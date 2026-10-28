@@ -1,0 +1,85 @@
+{
+ "depart": [
+  {
+   "mapId": 54534167,
+   "npcId": 1246
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Lucette Brifian veut savoir ce qui se trame dans le Donjon de la mine de Sakaï.",
+   "id": 1535,
+   "nom": "Au fion du trou",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2942,
+      1,
+      0
+     ],
+     "position": [
+      -52,
+      -45
+     ],
+     "texte": "Vaincre x1 {monster,2942} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452682,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -45
+     ],
+     "texte": "Découvrir la carte : Sortie du Donjon de la mine de Sakaï"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1246,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1246}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1250,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1250}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       13195,
+       1
+      ],
+      [
+       13196,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 919,
+ "nom": "Au fion du trou",
+ "objets": [],
+ "prerequis": [
+  653
+ ]
+}

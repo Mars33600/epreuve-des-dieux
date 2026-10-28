@@ -1,0 +1,137 @@
+{
+ "depart": [
+  {
+   "mapId": 215089665,
+   "npcId": 6219
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Rencontrer Kabahal semble inévitable si vous voulez mieux connaître les Ravageurs. Il ne vous reste donc plus qu'à jouer des coudes, voire lever le coude, pour vous frayer un chemin dans le Pandamonium. Vous pourrez ensuite taper la discute et le chaman démoniaque, et ce pas nécessairement dans cet ordre.",
+   "id": 3069,
+   "nom": "Le chant du Pandamonium",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      896835,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler au gardien du Pandamonium"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897287,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer le Pandamonium"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897288,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -58
+     ],
+     "texte": "Enivrer la tavernière à coups de boissons pandawas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897293,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans la carcasse de la baleine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897301,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -57
+     ],
+     "texte": "Affronter les Possédés et leur chaman démoniaque"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6215,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -57
+     ],
+     "texte": "Aller voir {npc,6215}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      901910,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Répondre à l'appel de la baleine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897298,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Communiquer avec l'esprit de Bakujikera"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897299,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Retourner voir Draconiros près du réceptacle des Dofus"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       25182,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2412,
+ "nom": "Le chant du Pandamonium",
+ "objets": [],
+ "prerequis": [
+  2411
+ ]
+}

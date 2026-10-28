@@ -1,0 +1,383 @@
+{
+ "depart": [
+  {
+   "mapId": 182978570,
+   "npcId": 4275
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez accepté d'aider Hugues Lindien dans son projet fou de mettre sur pied une armée végétale pour lutter contre les Trépamorts.",
+   "id": 2592,
+   "nom": "Plantes contre Trépamorts",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742371,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer des objets de rebut"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      766,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      36
+     ],
+     "texte": "Aller voir {npc,766}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4276,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      21
+     ],
+     "texte": "Aller voir {npc,4276}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4276,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      21
+     ],
+     "texte": "Aller voir {npc,4276}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      19484,
+      5
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Montrer à {npc,4275} : 5 {item,19484}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      19483,
+      5
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Montrer à {npc,4275} : 5 {item,19483}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      19485,
+      5
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Montrer à {npc,4275} : 5 {item,19485}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      19486,
+      5
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Montrer à {npc,4275} : 5 {item,19486}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      465,
+      4
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Ramener à {npc,4275} : x4 {item,465}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4277,
+      19484,
+      1
+     ],
+     "position": [
+      -27,
+      28
+     ],
+     "texte": "Ramener à {npc,4277} : x1 {item,19484}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4277,
+      19483,
+      1
+     ],
+     "position": [
+      -27,
+      28
+     ],
+     "texte": "Ramener à {npc,4277} : x1 {item,19483}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4277,
+      19485,
+      1
+     ],
+     "position": [
+      -27,
+      28
+     ],
+     "texte": "Ramener à {npc,4277} : x1 {item,19485}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4277,
+      19486,
+      1
+     ],
+     "position": [
+      -27,
+      28
+     ],
+     "texte": "Ramener à {npc,4277} : x1 {item,19486}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4277,
+      315,
+      1
+     ],
+     "position": [
+      -27,
+      28
+     ],
+     "texte": "Ramener à {npc,4277} : x1 {item,315}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4275,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Aller voir {npc,4275}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742372,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      23
+     ],
+     "texte": "Installer le premier relais"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742373,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      19
+     ],
+     "texte": "Installer le deuxième relais"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742374,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      16
+     ],
+     "texte": "Installer le troisième relais"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      742375,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      15
+     ],
+     "texte": "Installer le quatrième relais"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4277,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      28
+     ],
+     "texte": "Aller voir {npc,4277}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      19488,
+      1
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Ramener à {npc,4275} : x1 {item,19488}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      34209,
+      1
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Ramener à {npc,4275} : x1 {item,34209}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      34210,
+      1
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Ramener à {npc,4275} : x1 {item,34210}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      34211,
+      1
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Ramener à {npc,4275} : x1 {item,34211}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4275,
+      34212,
+      1
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Ramener à {npc,4275} : x1 {item,34212}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4275,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      24
+     ],
+     "texte": "Aller voir {npc,4275}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19402,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1951,
+ "nom": "Plantes contre Trépamorts",
+ "objets": [
+  [
+   465,
+   4
+  ],
+  [
+   315,
+   1
+  ],
+  [
+   19482,
+   1
+  ]
+ ],
+ "prerequis": [
+  1939
+ ]
+}

@@ -1,0 +1,367 @@
+{
+ "depart": [
+  {
+   "mapId": 194905088,
+   "npcId": 4496
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez été chargé de découvrir la raison de la colère du roi Dazak Martegel. Si par la même occasion, vous trouviez un moyen de calmer le souverain afin que les Nimbos cessent leurs attaques contre la Garde du Jour sans fin, cela serait fort appréciable.",
+   "id": 2661,
+   "nom": "De Brikke et de Brokke",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758924,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Brikke la forgeronne"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4501,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -72
+     ],
+     "texte": "Aller voir {npc,4501}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758925,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Résoudre le problème de Brikke"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4501,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -72
+     ],
+     "texte": "Aller voir {npc,4501}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758975,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à l'un des généraux pour rencontrer leur doyen"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758928,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aider à la libération du général Dourak"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4507,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -70
+     ],
+     "texte": "Aller voir {npc,4507}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4496,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -71
+     ],
+     "texte": "Retourner voir {npc,4496}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1901,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -17
+     ],
+     "texte": "Aller voir {npc,1901}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758929,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Volkaragnar et entendre sa version de l'histoire"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      760024,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler au dragon mentionné par Volkaragnar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4310,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Aller voir {npc,4310}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758936,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Lire le livre « Le Crépuscule de jade »"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      760586,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Lire le document « Les Sept Clans »"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4310,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Retourner voir {npc,4310}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4378,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -19
+     ],
+     "texte": "Aller voir {npc,4378}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758960,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'acheteuse décrite par René Gossian"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758941,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      0
+     ],
+     "texte": "Vaincre les Srams pour s'emparer du marteau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761292,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire la note confidentielle trouvée sur la Sram"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4501,
+      19934,
+      1
+     ],
+     "position": [
+      -66,
+      -72
+     ],
+     "texte": "Montrer à {npc,4501} : 1 {item,19934}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758953,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -72
+     ],
+     "texte": "Aider Brikke à réparer le marteau de Brokke"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758957,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Entrer dans la Brasserie du roi Dazak"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      758955,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Demander violemment une audience avec le roi Dazak Martegel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4500,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Aller voir {npc,4500}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761962,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Effacer plusieurs affronts de la bible des rancunes du roi Dazak"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4500,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Aller voir {npc,4500}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4496,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -71
+     ],
+     "texte": "Retourner voir {npc,4496}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19968,
+       2
+      ],
+      [
+       19970,
+       3
+      ],
+      [
+       11196,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2011,
+ "nom": "De Brikke et de Brokke",
+ "objets": [],
+ "prerequis": [
+  2010
+ ]
+}

@@ -1,0 +1,141 @@
+{
+ "depart": [
+  {
+   "mapId": 136056068,
+   "npcId": 2613
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Silverbwork vous a confié plusieurs tâches en rapport avec les événements récents.",
+   "id": 2184,
+   "nom": "Un Chafer dans le placard",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885360,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les marchands du bazar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2493,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      2
+     ],
+     "texte": "Aller voir {npc,2493}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2618,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      2
+     ],
+     "texte": "Aller voir {npc,2618}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885361,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Kochmardouk"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2467,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -1
+     ],
+     "texte": "Aller voir {npc,2467}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3804,
+      1,
+      0
+     ],
+     "position": [
+      6,
+      -1
+     ],
+     "texte": "Vaincre x1 {monster,3804} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2467,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -1
+     ],
+     "texte": "Aller voir {npc,2467}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2621,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -1
+     ],
+     "texte": "Aller voir {npc,2621}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15446,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1550,
+ "nom": "Un Chafer dans le placard",
+ "objets": [],
+ "prerequis": [
+  1549
+ ]
+}

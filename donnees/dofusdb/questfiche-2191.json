@@ -1,0 +1,197 @@
+{
+ "depart": [
+  {
+   "mapId": 207622146,
+   "npcId": 5583
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pandhidharma n'est donc pas une simple légende ! Bien que vous ayez la confirmation de son existence et de sa mort, un espoir subsiste. Dans la dimension du Wukin et du Wukang, les légendes peuvent devenir réalité, il vous reste à trouver comment...",
+   "id": 2847,
+   "nom": "Godanwa : Transcendance",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880648,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre dans le royaume céleste d'encre ou de papier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880334,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un lieu qui pourrait avoir un lien avec Pandhidharma"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880335,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Utiliser le pinceau pour inscrire le nom du moine-guerrier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880495,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Informer le maître de votre découverte"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880336,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Demander conseil à Shufamukin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880337,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Retourner au dojo pour y inscrire les caractères"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884012,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver le caractère signifiant « Moine »"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884013,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver le caractère signifiant « Quatre »"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884014,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver le caractère signifiant « Vent »"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884015,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Rapporter les Kianzhi au dojo"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880342,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Placer la perle de sagesse sur l'autel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880343,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Défier le maître des maîtres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6059,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Aller voir {npc,6059}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880344,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Faire vos adieux au Maître du Pandawushu"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2191,
+ "nom": "Godanwa : Transcendance",
+ "objets": [],
+ "prerequis": [
+  2190
+ ]
+}

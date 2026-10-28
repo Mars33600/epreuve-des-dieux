@@ -1,0 +1,296 @@
+{
+ "depart": [
+  {
+   "mapId": 54174025,
+   "npcId": 1374
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Moutou Louse et Albert Lioz ont dû abandonner des caisses dans la forêt pétrifiée pour sauver leur vie. Vous êtes chargé de les récupérer.",
+   "id": 1257,
+   "nom": "Lâcher une caisse",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885685,
+      0,
+      0
+     ],
+     "position": [
+      -74,
+      -72
+     ],
+     "texte": "Récupérer les caisses"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1374,
+      11846,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1374} : x1 {item,11846}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Selon Moutou Louse, personne ne s'intéresse aux bruits étranges de la forêt pétrifiée, considérée comme hantée. Pour en savoir plus, vous ne pouvez compter que sur vous-même.",
+   "id": 1258,
+   "nom": "La forêt de l'angoisse",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885687,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des indices dans la forêt pétrifiée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1374,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1374}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1370,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1370}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885688,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un villageois susceptible de croire Adélaïde"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1379,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1379}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "De par son insouciance, Lulu Cotte sera peut-être encline à vous aider. Reste à la convaincre.",
+   "id": 1259,
+   "nom": "Charme à deux kamas",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885690,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rejoindre Lulu Cotte dans l'hypogée de l'Obsidiantre, la nuit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      260802,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir l'aide des prophètes du S.L.I.P."
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      11851,
+      1
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Montrer à {npc,1372} : 1 {item,11851}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Asselo peut vous aider à délivrer les bûcherons prisonniers de la glace, à condition de suivre ses consignes.",
+   "id": 1261,
+   "nom": "Hibernatus",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885692,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -64
+     ],
+     "texte": "Récupérer 1 Bouton d'Or"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1372,
+      11852,
+      1
+     ],
+     "position": [
+      -76,
+      -71
+     ],
+     "texte": "Ramener à {npc,1372} : x1 {item,11852}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885693,
+      0,
+      0
+     ],
+     "position": [
+      -74,
+      -70
+     ],
+     "texte": "Délivrer le bûcheron prisonnier de la glace"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885694,
+      0,
+      0
+     ],
+     "position": [
+      -74,
+      -70
+     ],
+     "texte": "Délivrer le bûcheron prisonnier de la glace"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885695,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -67
+     ],
+     "texte": "Délivrer le bûcheron prisonnier de la glace"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885696,
+      0,
+      0
+     ],
+     "position": [
+      -78,
+      -65
+     ],
+     "texte": "Délivrer le bûcheron prisonnier de la glace"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1390,
+      11851,
+      1
+     ],
+     "position": [
+      -81,
+      -69
+     ],
+     "texte": "Ramener à {npc,1390} : x1 {item,11851}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1388,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -69
+     ],
+     "texte": "Aller voir {npc,1388}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ],
+      [
+       11892,
+       1
+      ],
+      [
+       11853,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 596,
+ "nom": "Dépôt de ravitaillement",
+ "objets": [],
+ "prerequis": [
+  595,
+  623
+ ]
+}

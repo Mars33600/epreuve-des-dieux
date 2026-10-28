@@ -1,0 +1,205 @@
+{
+ "depart": [
+  {
+   "mapId": 219153408,
+   "npcId": 6364
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez capturer des Éclats de Souvenir de dragon pour Danathor. Vous ignorez où en trouver, mais l'art divinatoire devrait pouvoir vous aider.",
+   "id": 969,
+   "nom": "La mémoire en lambeaux",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1153,
+      0,
+      0
+     ],
+     "position": [
+      -15,
+      -32
+     ],
+     "texte": "Aller voir {npc,1153}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      42,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Aller voir {npc,42}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      590563,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      1
+     ],
+     "texte": "Découvrir la carte : Demeure de Pouere Fettard."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891069,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      1
+     ],
+     "texte": "Inspecter la demeure de Pouere Fettard"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1157,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      33
+     ],
+     "texte": "Aller voir {npc,1157}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1039477,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      33
+     ],
+     "texte": "Actionner le levier pour ouvrir la grille"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1157,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      1
+     ],
+     "texte": "Aller voir {npc,1157}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891071,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher le repaire de Dardondakal dans les Dents de Pierre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3045,
+      1737,
+      5
+     ],
+     "position": [
+      -2,
+      -52
+     ],
+     "texte": "Ramener à {npc,3045} : x5 {item,1737}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3045,
+      16415,
+      5
+     ],
+     "position": [
+      -2,
+      -52
+     ],
+     "texte": "Ramener à {npc,3045} : x5 {item,16415}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891072,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -52
+     ],
+     "texte": "Inspecter l'antre à la recherche de la Psychine"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1157,
+      10205,
+      1
+     ],
+     "position": [
+      -17,
+      1
+     ],
+     "texte": "Montrer à {npc,1157} : 1 {item,10205}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6364,
+      10205,
+      1
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Montrer à {npc,6364} : 1 {item,10205}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 451,
+ "nom": "La mémoire en lambeaux",
+ "objets": [
+  [
+   1737,
+   5
+  ],
+  [
+   16415,
+   5
+  ]
+ ],
+ "prerequis": [
+  328
+ ]
+}

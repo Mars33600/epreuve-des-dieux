@@ -1,0 +1,65 @@
+{
+ "depart": [
+  {
+   "mapId": 54169387,
+   "npcId": 1240
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Circé Réal a obtenu du maire que vous puissiez accéder à la forêt pétrifiée pour y récupérer des graines magiques.",
+   "id": 1134,
+   "nom": "L'agriculture, c'est magique",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1240,
+      11150,
+      40
+     ],
+     "position": [
+      -71,
+      -43
+     ],
+     "texte": "Ramener à {npc,1240} : x40 {item,11150}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1240,
+      11151,
+      5
+     ],
+     "position": [
+      -71,
+      -43
+     ],
+     "texte": "Ramener à {npc,1240} : x5 {item,11151}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ],
+      [
+       11885,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 563,
+ "nom": "Les graines de la discorde",
+ "objets": [],
+ "prerequis": [
+  562
+ ]
+}

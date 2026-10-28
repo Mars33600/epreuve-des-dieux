@@ -1,0 +1,149 @@
+{
+ "depart": [
+  {
+   "mapId": 210764548,
+   "npcId": 5990
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Un gobelin de papier vous a fait comprendre qu'il cherchait des haïkus : ces courts poèmes célèbrent les saisons et la brièveté de l'existence. Un être aussi sensible que vous ne peut qu'être touché par une quête pleine de sens et d'émotions, aussi avez-vous décidé de collecter quelques mots pour l'esprit en manque d'inspiration.",
+   "id": 2861,
+   "nom": "Tant de mots et si peu de temps",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879144,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Donner au Kigob 5 haïkus différents arrachés aux Yokianzhi d'encre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879145,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Donner au Kigob 5 haïkus différents arrachés aux Yokianzhi de papier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      872049,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Donner au Kigob 5 haïkus différents retrouvés dans les vestiges du passé d'Imagirorukam"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      872050,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Donner au Kigob 5 haïkus différents récoltés dans les Royaumes célestes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      878303,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Donner au Kigob 5 haïkus différents créés par les esprits évanescents du Wukin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      878304,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Donner au Kigob 5 haïkus différents créés par les esprits éphémères du Wukang"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      872053,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Donner au Kigob 7 haïkus différents typiques des régions de Pandala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      872303,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Donner au Kigob 5 haïkus différents écrits par des samouraïs"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       23942,
+       1
+      ],
+      [
+       24043,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2203,
+ "nom": "Tant de mots et si peu de temps",
+ "objets": [
+  [
+   23556,
+   1
+  ]
+ ],
+ "prerequis": [
+  2149,
+  2159
+ ]
+}

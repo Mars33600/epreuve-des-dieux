@@ -1,0 +1,65 @@
+{
+ "depart": [
+  {
+   "mapId": 54169387,
+   "npcId": 1240
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Insatisfaite des résultats précédents, Circé Réal a besoin de nouvelles graines provenant des crocs de verre.",
+   "id": 1135,
+   "nom": "Les héros ramassent les orties",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1240,
+      11152,
+      40
+     ],
+     "position": [
+      -71,
+      -43
+     ],
+     "texte": "Ramener à {npc,1240} : x40 {item,11152}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1240,
+      11153,
+      5
+     ],
+     "position": [
+      -71,
+      -43
+     ],
+     "texte": "Ramener à {npc,1240} : x5 {item,11153}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       5
+      ],
+      [
+       11923,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 564,
+ "nom": "Le champ des héros",
+ "objets": [],
+ "prerequis": [
+  563
+ ]
+}

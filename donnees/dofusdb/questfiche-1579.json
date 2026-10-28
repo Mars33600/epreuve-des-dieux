@@ -1,0 +1,91 @@
+{
+ "depart": [
+  {
+   "mapId": 145229323,
+   "npcId": 2652
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez toujours rêvé de jouer les méjaires ? Vous voilà exaucé ! Veillez à ne pas perdre votre déguisement si vous voulez amadouer le Docteur Blême. Au pire, le Collecteur Sup pourra toujours vous fournir un autre voile eidolonique en échange d'orichor.",
+   "id": 2199,
+   "nom": "Juste une illusion",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      871951,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Se faire passer pour un Égaré afin d'approcher le Docteur Blême"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2664,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Aller voir {npc,2664}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481331,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Apporter 5 Racines du Lendemain au Docteur Blême"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2652,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Retourner voir {npc,2652}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15717,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1579,
+ "nom": "Juste une illusion",
+ "objets": [],
+ "prerequis": [
+  1586
+ ]
+}

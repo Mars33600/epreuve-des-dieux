@@ -1,0 +1,161 @@
+{
+ "depart": [
+  {
+   "mapId": 211295238,
+   "npcId": 6019
+  },
+  {
+   "mapId": 211291140,
+   "npcId": 6019
+  },
+  {
+   "mapId": 211291142,
+   "npcId": 6019
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'Éliocalypse et le retour du dragon de Pandala ont provoqué des déséquilibres dans les royaumes d'encre et de papier. Trop de Yokianzhis se manifestent désormais et envahissent la dimension. Afin de tendre vers un juste milieu, certains d'entre eux doivent être éliminés.",
+   "id": 2825,
+   "nom": "L'effet dragon",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879753,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      2
+     ],
+     "texte": "Effacer les mots-esprits d'encre autour du Temple du Wukang"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875781,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      4
+     ],
+     "texte": "Effacer les mots-esprits d'encre autour de l'autel des esprits du royaume de papier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875780,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      0
+     ],
+     "texte": "Effacer les mots-esprits d'encre autour de la chope géante"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880525,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      2
+     ],
+     "texte": "Effacer les mots-esprits d'encre autour du puits de Feu Blanc"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879754,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -3
+     ],
+     "texte": "Effacer les mots-esprits de papier autour du Temple du Wukin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875782,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -5
+     ],
+     "texte": "Effacer les mots-esprits de papier autour de l'autel des esprits du royaume d'encre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875883,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -3
+     ],
+     "texte": "Effacer les mots-esprits de papier autour du plateau des joueurs de go"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880526,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -3
+     ],
+     "texte": "Effacer les mots-esprits de papier autour du puits de Feu Noir"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6019,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6019}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       23957,
+       3
+      ],
+      [
+       23965,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2169,
+ "nom": "L'effet dragon",
+ "objets": [],
+ "prerequis": [
+  2149
+ ]
+}

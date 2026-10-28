@@ -1,0 +1,168 @@
+{
+ "depart": [
+  {
+   "mapId": 175112196,
+   "npcId": 3691
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez découvert l'impensable sur le territoire de Saharach : de la verdure, ce qui signifie de l'eau ! Cette découverte pourrait être la clé sur la compréhension de la sécheresse de Saharach.",
+   "id": 2475,
+   "nom": "Saharach, territoire verdoyant ?",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3692,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -69
+     ],
+     "texte": "Aller voir {npc,3692}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3692,
+      1974,
+      20
+     ],
+     "position": [
+      5,
+      -69
+     ],
+     "texte": "Ramener à {npc,3692} : x20 {item,1974}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3693,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -70
+     ],
+     "texte": "Aller voir {npc,3693}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886756,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -71
+     ],
+     "texte": "Chercher le document historique dans la serre"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4766,
+      1,
+      0
+     ],
+     "position": [
+      6,
+      -71
+     ],
+     "texte": "Vaincre x1 {monster,4766} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3693,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -70
+     ],
+     "texte": "Retourner voir {npc,3693}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3692,
+      18560,
+      1
+     ],
+     "position": [
+      5,
+      -69
+     ],
+     "texte": "Ramener à {npc,3692} : x1 {item,18560}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886758,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -71
+     ],
+     "texte": "Retourner à la serre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886757,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -71
+     ],
+     "texte": "Fouiller les plantes pour trouver des graines de plantes de Saharach"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3692,
+      18561,
+      1
+     ],
+     "position": [
+      5,
+      -69
+     ],
+     "texte": "Ramener à {npc,3692} : x1 {item,18561}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18563,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1835,
+ "nom": "Saharach, territoire verdoyant ?",
+ "objets": [
+  [
+   1974,
+   20
+  ]
+ ],
+ "prerequis": []
+}

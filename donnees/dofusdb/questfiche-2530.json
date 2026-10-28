@@ -1,0 +1,164 @@
+{
+ "depart": [
+  {
+   "mapId": 234752517,
+   "npcId": 7657
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les zarbivores n'arrivent plus à se défendre. Est-ce une conséquence normale de l'agressivité exacerbée des Rhoarims, ou s'agit-il d'autre chose ? La Voyageuse Marlyze Delarange s'est posée la même question que vous.",
+   "id": 3211,
+   "nom": "Quand on la cherche, on finit par tomber dessus",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      8042,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,8042}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      8043,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,8043}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      8044,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,8044}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      8045,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,8045}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      8046,
+      3,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x3 {monster,8046}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7657,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Retourner voir {npc,7657}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1130986,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Prélever des crottes de zarbivores"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139957,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Apporter les prélèvements à Marlyze"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1131055,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Poursuivre la mission confiée par Osamodas en attendant que Marlyze ait terminé ses analyses"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1131062,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      18
+     ],
+     "texte": "Faire le point avec Marlyze sur le comportement des zarbivores"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31673,
+       2
+      ],
+      [
+       31674,
+       2
+      ],
+      [
+       31675,
+       2
+      ],
+      [
+       31676,
+       2
+      ],
+      [
+       31677,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2530,
+ "nom": "Quand on la cherche, on finit par tomber dessus",
+ "objets": [],
+ "prerequis": [
+  2517
+ ]
+}

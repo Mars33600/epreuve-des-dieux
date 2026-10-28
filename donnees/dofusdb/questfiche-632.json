@@ -1,0 +1,432 @@
+{
+ "depart": [
+  {
+   "mapId": 54534177,
+   "npcId": 1251
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le médecin de la Bourgade a besoin de différentes fournitures pour préparer un convoi humanitaire à destination du village enseveli. Lorsque vous aurez apporté tout ce qu'il faut à Albert Paisse, récupérez des caisses bien remplies et remettez-les à Albert Lioz, le responsable du ravitaillement qui se bat aux côtés des habitants de son village, loin dans le nord. Entre Albert, il est important d'être solidaires !",
+   "id": 1237,
+   "nom": "Aider son prochain",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      17185,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,17185}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      17189,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,17189}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      17191,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,17191}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      17193,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,17193}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      17199,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,17199}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11505,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,11505}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11510,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,11510}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11503,
+      30
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x30 {item,11503}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11339,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,11339}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11338,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,11338}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      2331,
+      50
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x50 {item,2331}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1245,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1245}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11680,
+      1
+     ],
+     "position": null,
+     "texte": "Montrer à {npc,1251} : 1 {item,11680}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      484,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,484}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      153,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,153}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      147,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,147}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1290,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1290}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1290,
+      16499,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1290} : x5 {item,16499}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11679,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x5 {item,11679}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1260,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1260}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      42,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Aller voir {npc,42}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4326,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -15
+     ],
+     "texte": "Aller voir {npc,4326}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4345,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -16
+     ],
+     "texte": "Aller voir {npc,4345}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4345,
+      11682,
+      1
+     ],
+     "position": [
+      2,
+      -16
+     ],
+     "texte": "Ramener à {npc,4345} : x1 {item,11682}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4345,
+      11683,
+      1
+     ],
+     "position": [
+      2,
+      -16
+     ],
+     "texte": "Ramener à {npc,4345} : x1 {item,11683}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11681,
+      10
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x10 {item,11681}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1261,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -46
+     ],
+     "texte": "Aller voir {npc,1261}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11684,
+      2
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x2 {item,11684}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1373,
+      11685,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1373} : x5 {item,11685}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1251,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1251}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       5
+      ],
+      [
+       11335,
+       1
+      ],
+      [
+       11337,
+       1
+      ],
+      [
+       11882,
+       1
+      ],
+      [
+       11340,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 632,
+ "nom": "Convoi humanitaire",
+ "objets": [
+  [
+   17185,
+   10
+  ],
+  [
+   17189,
+   10
+  ],
+  [
+   17191,
+   10
+  ],
+  [
+   17193,
+   10
+  ],
+  [
+   17199,
+   10
+  ],
+  [
+   11505,
+   10
+  ],
+  [
+   11510,
+   10
+  ],
+  [
+   11503,
+   30
+  ],
+  [
+   11339,
+   10
+  ],
+  [
+   11338,
+   10
+  ],
+  [
+   2331,
+   50
+  ],
+  [
+   484,
+   10
+  ],
+  [
+   153,
+   10
+  ],
+  [
+   147,
+   10
+  ],
+  [
+   16499,
+   5
+  ]
+ ],
+ "prerequis": [
+  582,
+  623,
+  674
+ ]
+}

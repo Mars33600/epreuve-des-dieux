@@ -1,0 +1,268 @@
+{
+ "depart": [
+  {
+   "mapId": 111673344,
+   "npcId": 2020
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Funestaro le vampire a du mal à assumer son état. Atroskulda veut que vous lui appreniez le sens de l'existence. Un philosophe tel que vous devrait parvenir à le convaincre que la mort vaut la peine d'être vécue. Reste à trouver où il se terre... dans un cercueil au fond d'une crypte ? Interrogez d'autres suceurs de sang, peut-être l'ont-ils croisé lors d'un bal des vampires ou lors d'une mascarade organisée par la Kamarilla.",
+   "id": 2551,
+   "nom": "Le mort dans l'âme",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732566,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger des vampires pour tenter de localiser Funestaro"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      732572,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Crypte de Funestaro"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732580,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      37
+     ],
+     "texte": "Fouiller la crypte"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732581,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le parchemin jauni"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732582,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Funestaro"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4098,
+      0,
+      0
+     ],
+     "position": [
+      -23,
+      22
+     ],
+     "texte": "Aller voir {npc,4098}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      735813,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      37
+     ],
+     "texte": "Retourner à la crypte pour vérifier si Funestaro n'est pas réapparu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732622,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un spécialiste des vampires"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732651,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se procurer du pain à l'ail"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732652,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      37
+     ],
+     "texte": "Faire manger du pain à l'ail à Funestaro"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732653,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se procurer de l'eau bénite"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732654,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      37
+     ],
+     "texte": "Faire boire de l'eau bénite à Funestaro"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732655,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se procurer un pieu de chasseur de vampire"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732656,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      37
+     ],
+     "texte": "Planter un pieu dans le cœur de Funestaro"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3953,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      32
+     ],
+     "texte": "Retourner voir {npc,3953}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732657,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Escorter Funestaro jusqu'à l'entrée du manoir des Katrepat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732662,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      25
+     ],
+     "texte": "Obtenir par la force une audience avec Anerice"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732661,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      25
+     ],
+     "texte": "Présenter Funestaro à la Shushess"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4098,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      25
+     ],
+     "texte": "Aller voir {npc,4098}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2020,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Retourner voir {npc,2020}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19068,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1913,
+ "nom": "Le mort dans l'âme",
+ "objets": [],
+ "prerequis": [
+  1909
+ ]
+}

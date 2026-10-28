@@ -1,0 +1,40 @@
+{
+ "depart": [
+  {
+   "mapId": 112460048,
+   "npcId": 2008
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre le Comte Harebourg  et sortir vivant de son donjon.",
+   "id": 1921,
+   "nom": "Porte, Comte Harebourg, trésor",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453340,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Donjon du Comte Harebourg - Sortie"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1315,
+ "nom": "Porte, Comte Harebourg, trésor",
+ "objets": [],
+ "prerequis": [
+  1310
+ ]
+}

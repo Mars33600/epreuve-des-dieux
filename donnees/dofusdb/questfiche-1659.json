@@ -1,0 +1,127 @@
+{
+ "depart": [
+  {
+   "mapId": 122421248,
+   "npcId": 2205
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le dernier totem est celui de l'Ouest. Mériana vous a prévenu : vous aurez peut-être des surprises en essayant de le récupérer... ça tombe bien, vous adorez les surprises. Direction l'île d'Otomaï pour obtenir la bénédiction de Foluk !",
+   "id": 2279,
+   "nom": "Il était une foi dans l'Ouest",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      553821,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'autel de l'Ouest"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      553824,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      12
+     ],
+     "texte": "Prouver votre dévotion à Foluk"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      563259,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Goboune, le cousin du disciple de Foluk"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2891,
+      17035,
+      1
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Ramener à {npc,2891} : x1 {item,17035}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      553789,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      12
+     ],
+     "texte": "Obtenir la bénédiction de Foluk"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      556505,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le totem de l'Ouest"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4139,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,4139} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Retourner voir {npc,2205}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       2306,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1659,
+ "nom": "Il était une foi dans l'Ouest",
+ "objets": [],
+ "prerequis": [
+  1658
+ ]
+}

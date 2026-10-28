@@ -1,0 +1,274 @@
+{
+ "depart": [
+  {
+   "mapId": 122421248,
+   "npcId": 2205
+  },
+  {
+   "mapId": 195301382,
+   "npcId": 2205
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Maintenant que vous avez emprisonné l'âme de Crocoburio, il est temps de rencontrer Grougalorasalar. Arriver jusqu'à lui va vous demander quelques efforts : vous devrez notamment obtenir l'accord des Nimbos qui gardent le portail magique caché dans les marais.",
+   "id": 2693,
+   "nom": "Le dragon noir",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      777287,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Passer la porte du royaume des Nimbos de Frigost"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1185122,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      -70
+     ],
+     "texte": "Discuter avec le roi Dazak Martegel après lui avoir montré que vous n'êtes pas son ennemi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768332,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un cordonnier capable de travailler une peau de crocodaille gelée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768998,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à une magicienne nimbos capable de voir au-delà des apparences"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4622,
+      17205,
+      10
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Ramener à {npc,4622} : x10 {item,17205}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4622,
+      20444,
+      2
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Ramener à {npc,4622} : x2 {item,20444}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4622,
+      19954,
+      5
+     ],
+     "position": [
+      -63,
+      -75
+     ],
+     "texte": "Ramener à {npc,4622} : x5 {item,19954}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      768335,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Environs de la porte des marais"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768999,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      3
+     ],
+     "texte": "Dissiper l'illusion qui cache la porte des marais"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768337,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      3
+     ],
+     "texte": "Passer la porte des marais"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768338,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer dans le fort Vert-de-gris"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768340,
+      0,
+      0
+     ],
+     "position": [
+      -86,
+      13
+     ],
+     "texte": "Parler à un officier du clan Vert-de-gris"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768341,
+      0,
+      0
+     ],
+     "position": [
+      -86,
+      13
+     ],
+     "texte": "Rencontrer la reine Tressa Vert-de-gris"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768342,
+      0,
+      0
+     ],
+     "position": [
+      -87,
+      13
+     ],
+     "texte": "Parler au guide nimbos pour partir vers la Jungle Dévorante"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768370,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Traverser la Jungle Dévorante"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      781259,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer la cité de Tikoltenak"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768371,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      7
+     ],
+     "texte": "Trouver un moyen d'entrer dans le temple"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768379,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      6
+     ],
+     "texte": "Explorer le temple à la recherche de Grougalorasalar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4621,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      6
+     ],
+     "texte": "Aller voir {npc,4621}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19968,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2041,
+ "nom": "Le dragon noir",
+ "objets": [
+  [
+   17205,
+   10
+  ],
+  [
+   19954,
+   5
+  ]
+ ],
+ "prerequis": [
+  2040
+ ]
+}

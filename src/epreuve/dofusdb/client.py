@@ -31,7 +31,7 @@ class ClientDofusDB:
     async def __aexit__(self, *exc) -> None:
         await self._http.aclose()
 
-    async def _get(self, chemin: str, params: dict | None = None) -> dict:
+    async def _get(self, chemin: str, params: dict | list | None = None) -> dict:
         attente = self._intervalle - (time.monotonic() - self._derniere)
         if attente > 0:
             await asyncio.sleep(attente)
@@ -68,3 +68,23 @@ class ClientDofusDB:
             objets.extend(page.get("data", []))
             if not page.get("data") or len(objets) >= page.get("total", 0):
                 return objets
+
+    async def lot(self, chemin: str, ids: list[int], select: tuple[str, ...] = ()) -> list[dict]:
+        """Les éléments de `chemin` (« /npcs/ ») dont l'id est dans `ids`, par paquets de 50 (une requête chacun).
+        `select` limite les champs renvoyés. Le `/` final de `chemin` évite une redirection."""
+        trouves: list[dict] = []
+        for i in range(0, len(ids), 50):
+            params: list[tuple[str, str | int]] = [("id[$in][]", x) for x in ids[i : i + 50]] + [("$limit", 50)]
+            params += [("$select[]", c) for c in select]
+            trouves.extend((await self._get(chemin, params)).get("data", []))
+        return trouves
+
+    async def index_quetes(self) -> list[dict]:
+        """Toutes les quêtes du jeu, réduites à `id` et `name` (une quarantaine de requêtes)."""
+        quetes: list[dict] = []
+        while True:
+            page = await self._get("/quests/", [("$select[]", "id"), ("$select[]", "name"), ("$limit", 50),
+                                                ("$skip", len(quetes)), ("$sort[id]", 1)])
+            quetes.extend(page.get("data", []))
+            if not page.get("data") or len(quetes) >= page.get("total", 0):
+                return quetes

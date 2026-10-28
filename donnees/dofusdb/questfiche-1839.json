@@ -1,0 +1,72 @@
+{
+ "depart": [
+  {
+   "mapId": 174588929,
+   "npcId": 3707
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Laurence a besoin de votre aide pour attirer la divinité des vers des sables.",
+   "id": 2479,
+   "nom": "La cité des truites",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3707,
+      18606,
+      20
+     ],
+     "position": [
+      8,
+      -71
+     ],
+     "texte": "Ramener à {npc,3707} : x20 {item,18606}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4771,
+      1,
+      0
+     ],
+     "position": [
+      8,
+      -71
+     ],
+     "texte": "Vaincre x1 {monster,4771} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3707,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -71
+     ],
+     "texte": "Aller voir {npc,3707}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18564,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1839,
+ "nom": "La cité des truites",
+ "objets": [],
+ "prerequis": []
+}

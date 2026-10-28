@@ -1,0 +1,235 @@
+{
+ "depart": [
+  {
+   "mapId": 135268869,
+   "npcId": 2511
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La Serpentine des Fosses 12 pense tenir une piste et vous a chargé de la vérifier.",
+   "id": 2166,
+   "nom": "Sa Majesté des Nécrotiques",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2519,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Aller voir {npc,2519}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2511,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Aller voir {npc,2511}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885353,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer les Catacombres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2511,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Aller voir {npc,2511}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      454065,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Découvrir la carte : Passage des enfants"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2524,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Aller voir {npc,2524}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885354,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Vaincre Merridiou"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2526,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Aller voir {npc,2526}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2527,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Aller voir {npc,2527}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2528,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Aller voir {npc,2528}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2529,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Aller voir {npc,2529}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2473,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      4
+     ],
+     "texte": "Aller voir {npc,2473}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2511,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      9
+     ],
+     "texte": "Aller voir {npc,2511}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2437,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2437}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2438,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2438}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       40
+      ],
+      [
+       15444,
+       1
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1546,
+ "nom": "Sa Majesté des Nécrotiques",
+ "objets": [],
+ "prerequis": [
+  1545
+ ]
+}

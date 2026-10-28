@@ -1,0 +1,48 @@
+{
+ "depart": [
+  {
+   "mapId": 192413696,
+   "npcId": 4370
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Quelque chose tracasse Metag Robill et vous en êtes apparemment responsable. Le maître des clefs connaît peut-être la solution.",
+   "id": 1509,
+   "nom": "Le tracas du guerrier",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      813,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -37
+     ],
+     "texte": "Aller voir {npc,813}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       13172,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 893,
+ "nom": "Le tracas du guerrier",
+ "objets": [],
+ "prerequis": [
+  157
+ ]
+}

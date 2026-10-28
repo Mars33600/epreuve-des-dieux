@@ -1,0 +1,265 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Amayiro vous a informé qu'Ebru Of El a besoin de vos services. Vous pouvez le trouver à la Tour de Bonta.",
+   "id": 584,
+   "nom": "Si j'avais un marteau",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6311,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,6311}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      47,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Aller voir {npc,47}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      40,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -5
+     ],
+     "texte": "Aller voir {npc,40}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      46,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      1
+     ],
+     "texte": "Aller voir {npc,46}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      79,
+      0,
+      0
+     ],
+     "position": [
+      12,
+      5
+     ],
+     "texte": "Aller voir {npc,79}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      38,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      3
+     ],
+     "texte": "Aller voir {npc,38}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      384,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      -4
+     ],
+     "texte": "Aller voir {npc,384}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891184,
+      0,
+      0
+     ],
+     "position": [
+      -24,
+      39
+     ],
+     "texte": "Chercher le livre dans la bibliothèque de Brâkmar"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      587907,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Machine des encapuchonnés."
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3044,
+      0,
+      0
+     ],
+     "position": [
+      -22,
+      36
+     ],
+     "texte": "Aller voir {npc,3044}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      587902,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Machine cassée."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891185,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -56
+     ],
+     "texte": "Récupérer du fluide dans la machine cassée"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3044,
+      17446,
+      1
+     ],
+     "position": [
+      -22,
+      36
+     ],
+     "texte": "Ramener à {npc,3044} : x1 {item,17446}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      38,
+      10176,
+      1
+     ],
+     "position": [
+      1,
+      3
+     ],
+     "texte": "Ramener à {npc,38} : x1 {item,10176}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891186,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher un morceau de bois"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891187,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un sculpteur capable de tailler l'écorce sombre pétrifiée"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      583995,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      15
+     ],
+     "texte": "Découvrir la carte : Entrée de la crypte."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891188,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      15
+     ],
+     "texte": "Trouver le Marteau de Lumière"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6311,
+      9268,
+      1
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Ramener à {npc,6311} : x1 {item,9268}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 334,
+ "nom": "Si j'avais un marteau",
+ "objets": [],
+ "prerequis": [
+  326
+ ]
+}

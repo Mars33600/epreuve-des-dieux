@@ -1,0 +1,143 @@
+{
+ "depart": [
+  {
+   "mapId": 207622146,
+   "npcId": 5583
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le moment tant attendu est enfin arrivé, est-ce que l'élève a dépassé le maître ? Quoi qu'il en soit, ce dernier souhaite sans plus attendre le découvrir.",
+   "id": 2846,
+   "nom": "Yondanwa : Maîtrise absolue",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880901,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Vaincre le maître du Pandawushu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5583,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Aller voir {npc,5583}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880902,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      -31
+     ],
+     "texte": "Questionner le Kozaru dans la taverne Nimbos"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880903,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher l'endroit où l'artiste kozaru puise son inspiration"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880904,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -36
+     ],
+     "texte": "Discuter avec l'artiste martiale Kozaru"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880905,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -36
+     ],
+     "texte": "Vaincre l'artiste martiale en duel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880906,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -36
+     ],
+     "texte": "Questionner l'artiste sur l'auteur de la peinture"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6013,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6013}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5583,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Retourner voir {npc,5583}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": [
+      309
+     ]
+    }
+   ]
+  }
+ ],
+ "id": 2190,
+ "nom": "Yondanwa : Maîtrise absolue",
+ "objets": [],
+ "prerequis": [
+  2189
+ ]
+}

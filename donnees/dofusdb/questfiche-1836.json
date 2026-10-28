@@ -1,0 +1,222 @@
+{
+ "depart": [
+  {
+   "mapId": 174851076,
+   "npcId": 3690
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Fred Ricksen ne peut plus atteindre sa maison depuis un moment. Il vous demande d'aller grimper tout en haut pour libérer le passage.",
+   "id": 2476,
+   "nom": "Perché là-haut",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886746,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -68
+     ],
+     "texte": "Essayer d'emprunter le trou de ver"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3690,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -68
+     ],
+     "texte": "Retourner voir {npc,3690}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3695,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3695}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3695,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Aller voir {npc,3695}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886747,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Escalader la falaise vers la maison de Fred Ricksen"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886748,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -69
+     ],
+     "texte": "Fouiller les affaires de Fred Ricksen pour y trouver sa guitare"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886749,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -69
+     ],
+     "texte": "Dégager le passage du trou de ver"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3695,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      -68
+     ],
+     "texte": "Retourner voir {npc,3695}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3690,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -68
+     ],
+     "texte": "Retourner voir {npc,3690}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      714117,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -69
+     ],
+     "texte": "Parler à Fred Ricksen en haut de la falaise"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886750,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'apprentie mage dans le canyon"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3694,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -69
+     ],
+     "texte": "Aller voir {npc,3694}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886751,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -69
+     ],
+     "texte": "Battre l'élémentaire de vent"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3694,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -69
+     ],
+     "texte": "Aller voir {npc,3694}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3690,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -69
+     ],
+     "texte": "Retourner voir {npc,3690}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18565,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1836,
+ "nom": "Perché là-haut",
+ "objets": [],
+ "prerequis": []
+}

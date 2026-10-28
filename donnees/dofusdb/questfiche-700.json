@@ -1,0 +1,75 @@
+{
+ "depart": [
+  {
+   "mapId": 54171950,
+   "npcId": 1375
+  },
+  {
+   "mapId": 54171950,
+   "npcId": 1376
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre le Korriandre pour permettre sa capture.",
+   "id": 1315,
+   "nom": "Règles avancées",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2968,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,2968} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55730,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Découvrir la carte : Fin du donjon."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885673,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -46
+     ],
+     "texte": "Faire un rapport à l'agent de votre cité"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 700,
+ "nom": "Donjon sans dragon",
+ "objets": [],
+ "prerequis": [
+  624
+ ]
+}

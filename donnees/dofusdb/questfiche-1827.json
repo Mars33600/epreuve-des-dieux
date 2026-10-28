@@ -1,0 +1,125 @@
+{
+ "depart": [
+  {
+   "mapId": 174587905,
+   "npcId": 3670
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Une étrange serre trône dans la ville détruite, mais sa porte reste fermée. D'après Grogor Mendel, la clé pourrait se trouver dans la pyramide. Il vous demande d'aller la chercher.",
+   "id": 2466,
+   "nom": "Un problème de serre-ure",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886775,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher la clé de la serre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886776,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer à chercher la clé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886777,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher encore la clé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886778,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher désespérément cette fichue clé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3670,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -71
+     ],
+     "texte": "Aller voir {npc,3670}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      712140,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -71
+     ],
+     "texte": "Découvrir la carte : Serre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886779,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -71
+     ],
+     "texte": "Vaincre les gardiens de la serre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3670,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -71
+     ],
+     "texte": "Aller voir {npc,3670}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18538,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1827,
+ "nom": "Un problème de serre-ure",
+ "objets": [],
+ "prerequis": []
+}

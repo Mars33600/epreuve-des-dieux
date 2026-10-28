@@ -1,0 +1,256 @@
+{
+ "depart": [
+  {
+   "mapId": 54172458,
+   "npcId": 4216
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez aider Sroness à obtenir du matériel de combat sous-marin.",
+   "id": 2584,
+   "nom": "La croisière, ça m'use",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4240,
+      19429,
+      1
+     ],
+     "position": [
+      -48,
+      -80
+     ],
+     "texte": "Ramener à {npc,4240} : x1 {item,19429}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      743974,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -84
+     ],
+     "texte": "Explorer l'épave"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4241,
+      0,
+      0
+     ],
+     "position": [
+      -48,
+      -84
+     ],
+     "texte": "Aller voir {npc,4241}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      743976,
+      0,
+      0
+     ],
+     "position": [
+      -45,
+      -82
+     ],
+     "texte": "Explorer l'épave"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4242,
+      0,
+      0
+     ],
+     "position": [
+      -45,
+      -82
+     ],
+     "texte": "Aller voir {npc,4242}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5173,
+      2,
+      0
+     ],
+     "position": [
+      -45,
+      -82
+     ],
+     "texte": "Vaincre x2 {monster,5173} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4245,
+      0,
+      0
+     ],
+     "position": [
+      -45,
+      -82
+     ],
+     "texte": "Aller voir {npc,4245}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      743978,
+      0,
+      0
+     ],
+     "position": [
+      -46,
+      -81
+     ],
+     "texte": "Explorer l'épave"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4243,
+      0,
+      0
+     ],
+     "position": [
+      -46,
+      -81
+     ],
+     "texte": "Aller voir {npc,4243}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      743980,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -83
+     ],
+     "texte": "Explorer l'épave"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4244,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -83
+     ],
+     "texte": "Aller voir {npc,4244}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      743981,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -83
+     ],
+     "texte": "Poursuivre l'exploration de l'épave"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4240,
+      19546,
+      1
+     ],
+     "position": [
+      -48,
+      -80
+     ],
+     "texte": "Ramener à {npc,4240} : x1 {item,19546}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4240,
+      19547,
+      1
+     ],
+     "position": [
+      -48,
+      -80
+     ],
+     "texte": "Ramener à {npc,4240} : x1 {item,19547}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4240,
+      19548,
+      1
+     ],
+     "position": [
+      -48,
+      -80
+     ],
+     "texte": "Ramener à {npc,4240} : x1 {item,19548}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4240,
+      19549,
+      1
+     ],
+     "position": [
+      -48,
+      -80
+     ],
+     "texte": "Ramener à {npc,4240} : x1 {item,19549}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4216,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -42
+     ],
+     "texte": "Aller voir {npc,4216}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19408,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1944,
+ "nom": "La croisière, ça m'use",
+ "objets": [],
+ "prerequis": [
+  1943
+ ]
+}

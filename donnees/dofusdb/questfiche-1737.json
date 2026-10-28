@@ -1,0 +1,95 @@
+{
+ "depart": [
+  {
+   "mapId": 168822786,
+   "npcId": 3279
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez soit libérer l'émissaire de Sufokia et son escorte, soit venger leur mort.",
+   "id": 2374,
+   "nom": "Reine de beauté",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      649710,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Découvrir la carte : Entrée du Palais de Dantinéa"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4444,
+      1,
+      0
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Vaincre x1 {monster,4444} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3257,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Aller voir {npc,3257}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3246,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3246}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17978,
+       5
+      ],
+      [
+       17981,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1737,
+ "nom": "Reine de beauté",
+ "objets": [],
+ "prerequis": [
+  1731
+ ]
+}

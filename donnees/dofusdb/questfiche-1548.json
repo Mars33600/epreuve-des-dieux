@@ -1,0 +1,160 @@
+{
+ "depart": [
+  {
+   "mapId": 137363456,
+   "npcId": 2438
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous allez infiltrer le syndicat du crime pour découvrir si des Voyageurs Dimensionnels sont corrompus.",
+   "id": 2182,
+   "nom": "Les sentiers de la perdition",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2612,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2612}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2613,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -1
+     ],
+     "texte": "Aller voir {npc,2613}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2614,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      0
+     ],
+     "texte": "Aller voir {npc,2614}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2615,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      2
+     ],
+     "texte": "Aller voir {npc,2615}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2616,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      1
+     ],
+     "texte": "Aller voir {npc,2616}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1137751,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      1
+     ],
+     "texte": "Vaincre Dance Rance et son escorte"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2617,
+      15616,
+      1
+     ],
+     "position": [
+      4,
+      3
+     ],
+     "texte": "Ramener à {npc,2617} : x1 {item,15616}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2613,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -1
+     ],
+     "texte": "Aller voir {npc,2613}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2618,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -1
+     ],
+     "texte": "Aller voir {npc,2618}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15449,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1548,
+ "nom": "Les sentiers de la perdition",
+ "objets": [],
+ "prerequis": [
+  1547
+ ]
+}

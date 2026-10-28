@@ -1,0 +1,308 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous enquêtez sur les objets récupérés dans la tour de Gisgoul.",
+   "id": 2367,
+   "nom": "Ça fait froid dans le dos",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      176,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -13
+     ],
+     "texte": "Aller voir {npc,176}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3046,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Aller voir {npc,3046}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3085,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -69
+     ],
+     "texte": "Aller voir {npc,3085}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6311,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,6311}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      631228,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      20
+     ],
+     "texte": "Découvrir la carte : Planque d'Ereziah"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891254,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      20
+     ],
+     "texte": "Utiliser un rossignol pour forcer la serrure"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891255,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      20
+     ],
+     "texte": "Se débarrasser des créatures"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      93,
+      34237,
+      1
+     ],
+     "position": [
+      7,
+      20
+     ],
+     "texte": "Ramener à {npc,93} : x1 {item,34237}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      631239,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      21
+     ],
+     "texte": "Découvrir la carte : Planque secrète"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891256,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      21
+     ],
+     "texte": "Fouiller la planque secrète"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2933,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Aller voir {npc,2933}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      631230,
+      0,
+      0
+     ],
+     "position": [
+      -53,
+      -40
+     ],
+     "texte": "Découvrir la carte : Taverne de Sakaï"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2954,
+      0,
+      0
+     ],
+     "position": [
+      -53,
+      -40
+     ],
+     "texte": "Aller voir {npc,2954}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      2942,
+      1,
+      57938689
+     ],
+     "position": [
+      -52,
+      -45
+     ],
+     "texte": "Vaincre x1 {monster,2942} sur la carte {map,57938689} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3240,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -45
+     ],
+     "texte": "Aller voir {npc,3240}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2933,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Aller voir {npc,2933}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2954,
+      9318,
+      1
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Ramener à {npc,2954} : x1 {item,9318}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2954,
+      9092,
+      1
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Ramener à {npc,2954} : x1 {item,9092}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1730,
+ "nom": "Ça fait froid dans le dos",
+ "objets": [
+  [
+   34237,
+   1
+  ]
+ ],
+ "prerequis": [
+  1729
+ ]
+}

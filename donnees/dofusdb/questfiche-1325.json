@@ -1,0 +1,200 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 2003
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Mina Spirite vous a demandé de vous adresser aux membres de la Garde du Jour sans fin pour leur prêter main forte.",
+   "id": 1925,
+   "nom": "Les derniers rescapés",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2000,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -76
+     ],
+     "texte": "Aller voir {npc,2000}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2001,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -76
+     ],
+     "texte": "Aller voir {npc,2001}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,1999}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2003,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,2003}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884498,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Finir la quête Rappel à la vie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884499,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Finir la quête Moteur à explosion"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884500,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Finir la quête La fifille à son papa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884497,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Finir la quête Mutinerie chez les Armutins"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2003,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,2003}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2025,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Aller voir {npc,2025}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884501,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Finir la quête Au-delà du mur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,1999}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884502,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Finir la quête Crise d'ex-Emma"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2003,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,2003}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1325,
+ "nom": "Les derniers rescapés",
+ "objets": [],
+ "prerequis": [
+  598,
+  626
+ ]
+}

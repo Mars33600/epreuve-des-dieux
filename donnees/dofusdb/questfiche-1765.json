@@ -1,0 +1,140 @@
+{
+ "depart": [
+  {
+   "mapId": 168560656,
+   "npcId": 3349
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Bloubloup R'lyugluglu, plogplob, cloolooth P'Koutoulou.",
+   "id": 2402,
+   "nom": "Fhtagn !",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649684,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Bloubloup R'lyugluglu mglw'nogl"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649689,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Bloubloup R'lyugluglu ph'neglb"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649692,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Bloubloup R'lyugluglu wgah'ptiph"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649738,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Plogplob gnk'tgeblap"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649726,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Plogplob shk'golonakph"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649699,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Plogplob dhol'chtitaq"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649713,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Cloolooth P'Koutoulou Ch'ton"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649708,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Cloolooth P'Koutoulou Zothoth"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649736,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Cloolooth P'Koutoulou Glaakiph"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649691,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      34
+     ],
+     "texte": "Fhtagn ?"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17987,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1765,
+ "nom": "Fhtagn !",
+ "objets": [],
+ "prerequis": []
+}

@@ -1,0 +1,206 @@
+{
+ "depart": [
+  {
+   "mapId": 108791296,
+   "npcId": 2000
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Darwin Chester vous a demandé de retrouver le Professeur Imagarihs.",
+   "id": 1926,
+   "nom": "Rappel à la vie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453817,
+      0,
+      0
+     ],
+     "position": [
+      -60,
+      -73
+     ],
+     "texte": "Découvrir la carte : Muraille du Professeur Imagarihs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453818,
+      0,
+      0
+     ],
+     "position": [
+      -60,
+      -73
+     ],
+     "texte": "Chercher des traces du passage du Professeur Imagarihs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886027,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Consulter l'Extrait du Carnet du Professeur Imagarihs"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453820,
+      0,
+      0
+     ],
+     "position": [
+      -58,
+      -72
+     ],
+     "texte": "Découvrir la carte : Lieu indiqué par le carnet"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2031,
+      0,
+      0
+     ],
+     "position": [
+      -58,
+      -72
+     ],
+     "texte": "Aller voir {npc,2031}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3423,
+      1,
+      0
+     ],
+     "position": [
+      -58,
+      -72
+     ],
+     "texte": "Vaincre x1 {monster,3423} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2031,
+      0,
+      0
+     ],
+     "position": [
+      -58,
+      -72
+     ],
+     "texte": "Aller voir {npc,2031}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1260,
+      14174,
+      5
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1260} : x5 {item,14174}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886028,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer des Feuilles de paie dans les bacs de plantes des jardins d'hiver"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1260,
+      14175,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1260} : x1 {item,14175}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1241,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -31
+     ],
+     "texte": "Aller voir {npc,1241}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1260,
+      14176,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1260} : x1 {item,14176}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2031,
+      14177,
+      1
+     ],
+     "position": [
+      -58,
+      -72
+     ],
+     "texte": "Ramener à {npc,2031} : x1 {item,14177}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2000,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      -76
+     ],
+     "texte": "Aller voir {npc,2000}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       6
+      ],
+      [
+       13944,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1319,
+ "nom": "Rappel à la vie",
+ "objets": [],
+ "prerequis": [
+  1325
+ ]
+}

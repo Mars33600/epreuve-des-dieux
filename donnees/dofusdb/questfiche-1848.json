@@ -1,0 +1,292 @@
+{
+ "depart": [
+  {
+   "mapId": 179307010,
+   "npcId": 3779
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous enquêtez sur le comportement agressif inhabituel de certains animaux.",
+   "id": 2488,
+   "nom": "Nos amies les bêtes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4837,
+      1,
+      0
+     ],
+     "position": [
+      -66,
+      30
+     ],
+     "texte": "Vaincre x1 {monster,4837} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3779,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      30
+     ],
+     "texte": "Aller voir {npc,3779}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886665,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher quelqu'un capable d'expliquer l'attitude agressive de Léo Truche"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886666,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Acheter du gaz soporifique aux chasseurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886667,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Voler un gourdin dans le camp des chasseurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886668,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Voler un porte-chacha dans le camp des chasseurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886669,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Négocier des cages de transport dans le camp des chasseurs"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3781,
+      18759,
+      8
+     ],
+     "position": [
+      -66,
+      31
+     ],
+     "texte": "Montrer à {npc,3781} : 8 {item,18759}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3781,
+      18747,
+      1
+     ],
+     "position": [
+      -66,
+      31
+     ],
+     "texte": "Montrer à {npc,3781} : 1 {item,18747}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3781,
+      18755,
+      1
+     ],
+     "position": [
+      -66,
+      31
+     ],
+     "texte": "Montrer à {npc,3781} : 1 {item,18755}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3781,
+      18756,
+      1
+     ],
+     "position": [
+      -66,
+      31
+     ],
+     "texte": "Montrer à {npc,3781} : 1 {item,18756}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3781,
+      18757,
+      4
+     ],
+     "position": [
+      -66,
+      31
+     ],
+     "texte": "Montrer à {npc,3781} : 4 {item,18757}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      723430,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Tcha Chacha agressif"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4838,
+      1,
+      0
+     ],
+     "position": [
+      -66,
+      29
+     ],
+     "texte": "Vaincre x1 {monster,4838} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      722801,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Nord de la position de Bérénice Corny"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886670,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      30
+     ],
+     "texte": "Vaincre le groupe de monstres agressifs"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3781,
+      18761,
+      1
+     ],
+     "position": [
+      -66,
+      31
+     ],
+     "texte": "Ramener à {npc,3781} : x1 {item,18761}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3781,
+      18760,
+      4
+     ],
+     "position": [
+      -66,
+      31
+     ],
+     "texte": "Ramener à {npc,3781} : x4 {item,18760}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886671,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les chasseurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886672,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher le laboratoire clandestin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3792,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      29
+     ],
+     "texte": "Aller voir {npc,3792}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3781,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      31
+     ],
+     "texte": "Aller voir {npc,3781}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18733,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1848,
+ "nom": "Nos amies les bêtes",
+ "objets": [],
+ "prerequis": []
+}

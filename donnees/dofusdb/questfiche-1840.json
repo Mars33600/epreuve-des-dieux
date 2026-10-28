@@ -1,0 +1,46 @@
+{
+ "depart": [
+  {
+   "mapId": 174853122,
+   "npcId": 3709
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Bulma compte sur vous pour lui apporter des bandelettes de Maudits.",
+   "id": 2480,
+   "nom": "Momie molette",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3709,
+      18607,
+      30
+     ],
+     "position": [
+      10,
+      -69
+     ],
+     "texte": "Ramener à {npc,3709} : x30 {item,18607}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18540,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1840,
+ "nom": "Momie molette",
+ "objets": [],
+ "prerequis": []
+}

@@ -1,0 +1,403 @@
+{
+ "depart": [
+  {
+   "mapId": 211295232,
+   "npcId": 5994
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Némaki, le chacha de Niki Minawa est devenu un Bakénéko pour protéger le bar de sa maîtresse régulièrement saccagé par des Yokai qui revendiquent l'endroit comme faisant partie de leur territoire. Depuis, il a l'incroyable faculté de changer d'apparence et d'avoir des compétences différentes en fonction de ce qu'il mange, ce qui lui permet de s'opposer aux esprits. Malheureusement, certains d'entre eux sont trop forts, mais peut-être qu'avec un nouveau régime alimentaire, Némaki serait capable de les affronter.",
+   "id": 2862,
+   "nom": "Des aliments extraordinaires pour un chacha extraordinaire",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6081,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Aller voir {npc,6081}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877387,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Parler au Bakénéko coquet pour trouver son point faible"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877688,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher quel plat permettait à Némaki de faire voler en éclat l'assurance du Bakénéko coquet"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877402,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver des amateurs de moskitos frits"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      881261,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Dérober des moskitos frits aux firefoux affamés"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6081,
+      24062,
+      1
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Ramener à {npc,6081} : x1 {item,24062}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879281,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Regarder Némaki se débarrasser du Bakénéko coquet"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877411,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Interroger le Bakénéko véloce pour trouver son point faible"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877412,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher quel plat mettrait le feu aux pattes de Némaki le rendant assez rapide pour lutter contre le Bakénéko véloce"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      24061,
+      1,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Fabriquer 1 {item,24061} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6081,
+      24061,
+      1
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Ramener à {npc,6081} : x1 {item,24061}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879282,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Regarder Némaki se débarrasser du Bakénéko véloce"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879284,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Discuter avec le Bakénéko ivrogne pour trouver son point faible"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877428,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher quel plat rendrait Némaki aussi invisible qu'un fantôme afin de lutter contre le Bakénéko ivrogne"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      877430,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -47
+     ],
+     "texte": "Découvrir la carte : Tombeau des lucioles"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6098,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -47
+     ],
+     "texte": "Aller voir {npc,6098}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6590,
+      1,
+      0
+     ],
+     "position": [
+      38,
+      -47
+     ],
+     "texte": "Vaincre x1 {monster,6590} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877436,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -47
+     ],
+     "texte": "Récupérer le bol de wamen à l'intérieur du tombeau des lucioles"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6081,
+      24060,
+      1
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Ramener à {npc,6081} : x1 {item,24060}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879283,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Regarder Némaki se débarrasser du Bakénéko ivrogne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877438,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Tenter de trouver le point faible du Bakénéko indomptable"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877439,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher quel plat décuplerait les capacités de Némaki le rendant assez fort pour lutter contre le Bakénéko indomptable"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6100,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6100}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6100,
+      24064,
+      1
+     ],
+     "position": [
+      3,
+      -2
+     ],
+     "texte": "Ramener à {npc,6100} : x1 {item,24064}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6100,
+      24065,
+      1
+     ],
+     "position": [
+      3,
+      -2
+     ],
+     "texte": "Ramener à {npc,6100} : x1 {item,24065}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6081,
+      24063,
+      1
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Ramener à {npc,6081} : x1 {item,24063}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      881262,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Assister à la tentative de Némaki de se débarrasser du Bakénéko indomptable"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877479,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Combattre le Bakénéko indomptable aux côtés de Némaki"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5994,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Aller voir {npc,5994}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       23823,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2205,
+ "nom": "Des aliments extraordinaires pour un chacha extraordinaire",
+ "objets": [
+  [
+   24056,
+   20
+  ],
+  [
+   7018,
+   4
+  ],
+  [
+   1977,
+   20
+  ],
+  [
+   23735,
+   1
+  ]
+ ],
+ "prerequis": []
+}

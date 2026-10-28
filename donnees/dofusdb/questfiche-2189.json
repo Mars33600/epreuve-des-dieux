@@ -1,0 +1,362 @@
+{
+ "depart": [
+  {
+   "mapId": 207622146,
+   "npcId": 5583
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le rôle du maître du Pandawushu est de transmettre un savoir millénaire à ses disciples. Mais pour un maître présent dans la lumière, un autre demeure dans l'ombre. Gardien de secrets hérité de leur ancien maître, Tai-Lee semble avoir renié votre art pour en créer un nouveau qu'il juge plus efficace. Pour le vaincre, il vous sera nécessaire de transcender le Pandawushu en vous inspirant des différentes écoles présentes sur Pandala, à commencer par celle du maître Chifoux.",
+   "id": 2845,
+   "nom": "Sandanwa : Pluralité martiale",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875598,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      -34
+     ],
+     "texte": "Rencontrer le Maître Chifoux"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      23943,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,23943} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875647,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -33
+     ],
+     "texte": "Placer l'offrande près du territoire du Chtigre Blanc"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875661,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -33
+     ],
+     "texte": "Vaincre Byakou le chtigre blanc"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5946,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      -34
+     ],
+     "texte": "Retourner voir {npc,5946}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875662,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -35
+     ],
+     "texte": "Rencontrer le Maître Eiji Youga"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875666,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -35
+     ],
+     "texte": "Immobiliser la Cooleuvre insaisissable"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      876490,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -35
+     ],
+     "texte": "Faire le point avec le Maître Eiji Youga"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      876493,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      -35
+     ],
+     "texte": "Visualiser le chi du maître"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875724,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -26
+     ],
+     "texte": "Rencontrer le Maître Torte Hou"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875725,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver l'affiche du Maître Torte Hou"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5947,
+      23941,
+      1
+     ],
+     "position": [
+      22,
+      -26
+     ],
+     "texte": "Ramener à {npc,5947} : x1 {item,23941}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875728,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Livrer les caisses de lailait à leurs destinataires"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5947,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -26
+     ],
+     "texte": "Retourner voir {npc,5947}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5947,
+      23944,
+      1
+     ],
+     "position": [
+      22,
+      -26
+     ],
+     "texte": "Ramener à {npc,5947} : x1 {item,23944}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      877752,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -26
+     ],
+     "texte": "Détruire le rocher en étant équipé de la Carapace d'entraînement du Maître Torte Hou"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875760,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -26
+     ],
+     "texte": "Faire le point avec le Maître Torte Hou"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875762,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -33
+     ],
+     "texte": "Rencontrer le Maître Kung fu-fu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875765,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Observer une Cygrue voler en Aerdala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875766,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Observer une Cygrue pêcher en Akwadala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875786,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -33
+     ],
+     "texte": "Faire part de vos observations au Maître Kung Fu fu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5583,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Retourner voir {npc,5583}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875787,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Vaincre Tai-Lee"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5976,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Aller voir {npc,5976}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      878507,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Conclure votre apprentissage avec le Maître du Pandawushu"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       24132,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2189,
+ "nom": "Sandanwa : Pluralité martiale",
+ "objets": [
+  [
+   7014,
+   30
+  ],
+  [
+   313,
+   10
+  ],
+  [
+   7033,
+   5
+  ],
+  [
+   7383,
+   10
+  ]
+ ],
+ "prerequis": [
+  2188
+ ]
+}

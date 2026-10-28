@@ -1,0 +1,205 @@
+{
+ "depart": [
+  {
+   "mapId": 122421248,
+   "npcId": 2205
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Maintenant que vous avez récupéré l'œuf de Crocabulia, vous devez libérer l'âme du fils de Grougalorasalar afin qu'il puisse s'incarner. Malheureusement, Crocobur risque de ne pas être d'accord... Les épées maudites ont souvent un sale caractère.",
+   "id": 2696,
+   "nom": "Un nouvel héritier",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3923,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      25
+     ],
+     "texte": "Aller voir {npc,3923}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      779313,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Assouvir la soif de Crocobur en combattant des Calcinés dans les Marches Magmatiques"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768599,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      15
+     ],
+     "texte": "Calmer la faim de Crocobur en lui faisant goûter à l'âme de Solar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3923,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      25
+     ],
+     "texte": "Retourner voir {npc,3923}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768582,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le doyen des Aigles Célestes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4631,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -3
+     ],
+     "texte": "Aller voir {npc,4631}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768584,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Libérer l'âme de Crocoburio pour qu'elle entre dans l'œuf de Crocabulia"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768585,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Déposer l'œuf dans un endroit propice à son éclosion"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768586,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Protéger l'œuf jusqu'à l'éclosion de Crocoburio"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768592,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      0
+     ],
+     "texte": "Demander au petit Crocoburio à peine sorti de l'œuf de vous accompagner"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768591,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      25
+     ],
+     "texte": "Rendre l'épée Crocobur à Volkaragnar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768593,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      7
+     ],
+     "texte": "Escorter Crocoburio jusqu'à son père Grougalorasalar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768594,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      6
+     ],
+     "texte": "Convaincre Grougalorasalar de respecter sa part du marché"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768595,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      6
+     ],
+     "texte": "Devenir le nouveau gardien du Dofus Ébène"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19405,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2044,
+ "nom": "Un nouvel héritier",
+ "objets": [],
+ "prerequis": [
+  2043
+ ]
+}

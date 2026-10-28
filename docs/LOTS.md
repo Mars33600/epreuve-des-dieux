@@ -706,6 +706,8 @@ Toutes les fiches contiennent des `<img>` (stockage Duffus), et 51 sur 69 des li
 
 **Écarts avec la spec.** 24 tranches (étages 0 à 23) au lieu de 26 ; Dofus Kaliptus sans guide ; « jusqu'où » et « à lier » lus dans les notes du guide ; les fiches complètes ne sont aspirées que pour les étages demandés (`--etages`), les prérequis pour toutes les quêtes.
 
+**Repli DofusDB pour les fiches (28/10, décision de Marceau).** Aux étages 12 et 14 à 23, Duffus renvoie souvent vers un site tiers. Pour une quête **sans aucune fiche Duffus** seulement (`contenu.construire.entrees_sans_fiche` : une fiche Duffus n'est jamais remplacée), `contenu/fiche_dofusdb.py` construit la fiche depuis DofusDB (étapes, objectifs, PNJ, positions, monstres, objets, récompenses en objets, prérequis), à la forme de la fiche Duffus ; le reste est vide (pas d'XP ni de kamas : DofusDB ne donne que des coefficients). Rapprochement par **nom exact normalisé** : Duffus ne donne pas d'id de quête du jeu (`quest_list.dofus_id` est un id de Dofus). Nom ambigu ou introuvable : pas de fiche et une alerte. Le seuil de 5 % s'applique après le repli. Chaque fiche porte sa source (`duffus` ou `dofusdb`), visible dans la revue admin. Réponses mises en cache dans `donnees/dofusdb/`.
+
 ---
 
 ### Addendum E0 : tables Duffus du lot E (relevé du 28/10/2026, sans aspiration)

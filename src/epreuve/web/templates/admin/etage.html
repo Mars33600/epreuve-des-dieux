@@ -10,7 +10,7 @@
   {% if alertes or sans_fiche %}
   <div class="alerte"><b>Alertes de la dernière construction</b>
     <ul>{% for a in alertes %}<li>{{ a }}</li>{% endfor %}
-      {% if sans_fiche %}<li>{{ sans_fiche|length }} quête(s) sans fiche Duffus : {{ sans_fiche|map(attribute="nom")|join(", ") }}.</li>{% endif %}</ul></div>
+      {% if sans_fiche %}<li>{{ sans_fiche|length }} quête(s) sans fiche : {{ sans_fiche|map(attribute="nom")|join(", ") }}.</li>{% endif %}</ul></div>
   {% endif %}
   <p><a href="/etages/{{ etage.numero }}">Voir l'étage tel que les grimpeurs le verront</a></p>
   <form method="post" action="/admin/etages/{{ etage.numero }}/reglages" class="formrow">{{ csrf() }}
@@ -90,7 +90,7 @@
   <div class="table-wrap"><table>
     <thead><tr><th>Quête</th><th>Bloc</th><th>Nature</th><th>Actions</th></tr></thead>
     <tbody>{% for q in quetes %}
-      <tr><td>{{ q.nom }}<br><span class="muted">niv. {{ q.niveau or "?" }}{% if not q.a_une_fiche %} · sans fiche Duffus{% endif %}{% if q.masquee %} · masquée{% endif %}</span></td>
+      <tr><td>{{ q.nom }}<br><span class="muted">niv. {{ q.niveau or "?" }}{% if not q.a_une_fiche %} · sans fiche{% elif q.source_fiche %} · fiche {{ "Duffus" if q.source_fiche == "duffus" else "DofusDB" }}{% endif %}{% if q.masquee %} · masquée{% endif %}</span></td>
         <td>{{ q.bloc }}</td><td>{{ q.nature }} <span class="muted">({{ q.nature_origine }})</span></td>
         <td>
           <form method="post" action="/admin/quetes/{{ q.id }}" class="inline">{{ csrf() }}

@@ -1,0 +1,54 @@
+{
+ "depart": [
+  {
+   "mapId": 130025985,
+   "npcId": 2340
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Gladys vous a demandé de lui rapporter du jus de nécrotique : elle compte l'utiliser pour son prochain programme d'entraînement... ce n'est sans doute qu'un prétexte pour pouvoir martyriser les nouvelles recrues.",
+   "id": 2156,
+   "nom": "La pêche au poison",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2340,
+      15403,
+      10
+     ],
+     "position": [
+      -22,
+      -24
+     ],
+     "texte": "Ramener à {npc,2340} : x10 {item,15403}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       40
+      ],
+      [
+       15455,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1536,
+ "nom": "La pêche au poison",
+ "objets": [],
+ "prerequis": [
+  1484,
+  1485,
+  1485
+ ]
+}

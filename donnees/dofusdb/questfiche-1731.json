@@ -1,0 +1,227 @@
+{
+ "depart": [
+  {
+   "mapId": 90708481,
+   "npcId": 3238
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pollie Perkine travaille pour la Dépêche de Sufokia. Elle souhaite réaliser quelques interviews de personnalités jouant un rôle dans le développement des activités sous-marines. Les profondeurs de la baie n'étant pas sûres, elle a décidé d'engager un garde du corps efficace et discret : vous. Choix judicieux, ou monumentale erreur ? Les paris sont ouverts.",
+   "id": 2368,
+   "nom": "La pêche aux infos",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3249,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3249}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3238,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3238}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverSubAreaData",
+     "parametres": [
+      860,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      26
+     ],
+     "texte": "Découvrir la zone {subarea,860}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3266,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Aller voir {npc,3266}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3238,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      28
+     ],
+     "texte": "Aller voir {npc,3238}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverSubAreaData",
+     "parametres": [
+      863,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Découvrir la zone {subarea,863}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3268,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Aller voir {npc,3268}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3238,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Aller voir {npc,3238}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverSubAreaData",
+     "parametres": [
+      866,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      26
+     ],
+     "texte": "Découvrir la zone {subarea,866}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3276,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      26
+     ],
+     "texte": "Aller voir {npc,3276}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644121,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      26
+     ],
+     "texte": "Défendre Pollie Perkine"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3238,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      26
+     ],
+     "texte": "Aller voir {npc,3238}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644086,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Escorter Pollie Perkine jusqu'à Sufokia"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3238,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3238}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17974,
+       1
+      ],
+      [
+       17981,
+       1
+      ],
+      [
+       17988,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1731,
+ "nom": "La pêche aux infos",
+ "objets": [],
+ "prerequis": []
+}

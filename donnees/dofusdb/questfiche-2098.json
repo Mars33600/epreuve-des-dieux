@@ -1,0 +1,226 @@
+{
+ "depart": [
+  {
+   "mapId": 200804356,
+   "npcId": 5130
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Horlemar s'est enfui sur le Monde des Douze : partez à sa poursuite et détruisez-le afin qu'il ne puisse plus nuire à personne.",
+   "id": 2751,
+   "nom": "Partie de chasse",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      726,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -21
+     ],
+     "texte": "Retourner voir {npc,726}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      809141,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le disciple de Krûnsh"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5260,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Aller voir {npc,5260}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      817553,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver comment se procurer une nouvelle peluche à la foire du Trool"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      817554,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -37
+     ],
+     "texte": "Donner une collection complète de douze poupées maléfiques à Hinss Hairt"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5260,
+      21877,
+      1
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Ramener à {npc,5260} : x1 {item,21877}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816406,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Se débarrasser du cauchemar de Pleur Nycheuz"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5261,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Aller voir {npc,5261}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816407,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      16
+     ],
+     "texte": "Chercher le cauchemar dans la Forêt Maléfique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816408,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -12
+     ],
+     "texte": "Chercher le cauchemar dans la Forêt Sombre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816409,
+      0,
+      0
+     ],
+     "position": [
+      -15,
+      39
+     ],
+     "texte": "Chercher le cauchemar dans le Cimetière des Torturés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816411,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Chercher le cauchemar sur l'île de Grobe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816412,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher le cauchemar dans la carrière d'Astrub"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      816413,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -19
+     ],
+     "texte": "Vaincre le chasseur devenu fou"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      817803,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -19
+     ],
+     "texte": "Tenter de détruire le Horlemar"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4638,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retourner voir {npc,4638}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2098,
+ "nom": "Partie de chasse",
+ "objets": [],
+ "prerequis": [
+  2097
+ ]
+}

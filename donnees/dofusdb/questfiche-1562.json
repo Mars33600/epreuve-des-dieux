@@ -1,0 +1,209 @@
+{
+ "depart": [
+  {
+   "mapId": 136055044,
+   "npcId": 2560
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Patxi Misce vous a embauché pour aider les mosdeleurs dans leur projetde circuit touristique culturel mettant en valeur leur talent artistique.",
+   "id": 2180,
+   "nom": "Os sitôt dit, aussitôt fait",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2597,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Aller voir {npc,2597}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2598,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Aller voir {npc,2598}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2560,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -1
+     ],
+     "texte": "Aller voir {npc,2560}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2599,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      1
+     ],
+     "texte": "Aller voir {npc,2599}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2560,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -1
+     ],
+     "texte": "Aller voir {npc,2560}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2600,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      0
+     ],
+     "texte": "Aller voir {npc,2600}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2601,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      3
+     ],
+     "texte": "Aller voir {npc,2601}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2560,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -1
+     ],
+     "texte": "Aller voir {npc,2560}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885350,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer des explosifs dans Srambad"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452819,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -2
+     ],
+     "texte": "Découvrir la carte : Bâtiment à démolir"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885351,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -2
+     ],
+     "texte": "Utiliser les explosifs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2507,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2507}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2560,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -1
+     ],
+     "texte": "Aller voir {npc,2560}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15450,
+       3
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1562,
+ "nom": "Os sitôt dit, aussitôt fait",
+ "objets": [],
+ "prerequis": [
+  1555
+ ]
+}

@@ -1,0 +1,101 @@
+{
+ "depart": [
+  {
+   "mapId": 131597312,
+   "npcId": 2342
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le professeur Maximilio veut améliorer les relations entre le roi Nidas et l'ordre des Voyageurs. Pour cela, il souhaite rentrer dans les petits papiers d'un Enutrofor très influent auprès du roi : Richard le Trésorier. Ce dernier semble fasciné par la technomagie, aussi le professeur a-t-il accepté de lui prêter une machine à calculer unique en son genre. Vous devez remettre cet objet au Trésorier.",
+   "id": 2112,
+   "nom": "On ne prête qu'à Richard",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452801,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Demander à rencontrer Richard le Trésorier"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      3672,
+      2,
+      129499136
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Vaincre x2 {monster,3672} sur la carte {map,129499136::Banque royale} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452817,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Parler à nouveau au guichetier d'Enutrosor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452825,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Richard le Trésorier"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2364,
+      15286,
+      1
+     ],
+     "position": [
+      -9,
+      -6
+     ],
+     "texte": "Ramener à {npc,2364} : x1 {item,15286}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15177,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1492,
+ "nom": "On ne prête qu'à Richard",
+ "objets": [],
+ "prerequis": [
+  1500
+ ]
+}

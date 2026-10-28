@@ -1,0 +1,112 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez suivre la trace d'Erazal sur l'île de Frigost.",
+   "id": 2537,
+   "nom": "À glacer le sang",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1258,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -41
+     ],
+     "texte": "Aller voir {npc,1258}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1286,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1286}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730554,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger la Garde du Jour sans Fin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730555,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces du passage d'Erazal dans le bastion des froides légions"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      3391,
+      1,
+      109840899
+     ],
+     "position": [
+      -71,
+      -88
+     ],
+     "texte": "Vaincre x1 {monster,3391} sur la carte {map,109840899} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2040,
+      0,
+      0
+     ],
+     "position": [
+      -71,
+      -88
+     ],
+     "texte": "Aller voir {npc,2040}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1897,
+ "nom": "À glacer le sang",
+ "objets": [],
+ "prerequis": [
+  1895
+ ]
+}

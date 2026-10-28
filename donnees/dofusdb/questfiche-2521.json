@@ -1,0 +1,169 @@
+{
+ "depart": [
+  {
+   "mapId": 235799811,
+   "npcId": 7666
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Qzandbz tropbz fazzlzbz lzrzbz dzzcrzpzzonbz qzztzbz, avzntzrzzrbz parlzrbz kabombz mzzzxbz qzzbz Kabombz !",
+   "id": 3202,
+   "nom": "Des petites bêtes qui font bzzzbz",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      1128945,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Larvzrzzbz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129131,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      28
+     ],
+     "texte": "Assister à une courte discussion entre deux Toubibz"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      1128947,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Mztroboolododobz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129059,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      29
+     ],
+     "texte": "Échanger quelques mots avec les Kabombz voyageurs"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      1128949,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Przmzzrbz ztagzbz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129132,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      26
+     ],
+     "texte": "Participer à une conversation d'ascenseur"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      1128951,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Boorzzbz zozzfbz"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1139925,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      25
+     ],
+     "texte": "Parler aux Kabombz pour anticiper le cours de la boorzzbz sans se contredire"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1129427,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      25
+     ],
+     "texte": "Écarter la menace du Krakhbz Boorzzzrbz"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7666,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      27
+     ],
+     "texte": "Retourner voir {npc,7666}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       31524,
+       2
+      ],
+      [
+       31525,
+       2
+      ],
+      [
+       31526,
+       2
+      ],
+      [
+       31527,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2521,
+ "nom": "Des petites bêtes qui font bzzzbz",
+ "objets": [],
+ "prerequis": [
+  2516
+ ]
+}

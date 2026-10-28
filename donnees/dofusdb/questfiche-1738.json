@@ -1,0 +1,218 @@
+{
+ "depart": [
+  {
+   "mapId": 170133512,
+   "npcId": 3246
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La Reine Viktorie vous a chargé de remettre la rançon demandée contre la libération de Dame Askina et de son escorte.",
+   "id": 2375,
+   "nom": "Rançon nage",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3280,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3280}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4349,
+      17941,
+      1
+     ],
+     "position": [
+      6,
+      -15
+     ],
+     "texte": "Ramener à {npc,4349} : x1 {item,17941}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      52,
+      17941,
+      1
+     ],
+     "position": [
+      0,
+      2
+     ],
+     "texte": "Ramener à {npc,52} : x1 {item,17941}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3284,
+      17941,
+      1
+     ],
+     "position": [
+      2,
+      29
+     ],
+     "texte": "Ramener à {npc,3284} : x1 {item,17941}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886832,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les cambrioleurs dans le Territoire des Porcos"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4468,
+      2,
+      0
+     ],
+     "position": [
+      0,
+      32
+     ],
+     "texte": "Vaincre x2 {monster,4468} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886833,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      32
+     ],
+     "texte": "Récupérer le coffre auprès du trafiquant"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3280,
+      17942,
+      3
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3280} : 3 {item,17942}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3255,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Aller voir {npc,3255}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4502,
+      2,
+      0
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Vaincre x2 {monster,4502}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3257,
+      17942,
+      3
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Ramener à {npc,3257} : x3 {item,17942}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3257,
+      17943,
+      1
+     ],
+     "position": [
+      19,
+      26
+     ],
+     "texte": "Ramener à {npc,3257} : x1 {item,17943}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886834,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Accompagner Dame Askina au campement"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3268,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      27
+     ],
+     "texte": "Aller voir {npc,3268}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17978,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1738,
+ "nom": "Rançon nage",
+ "objets": [],
+ "prerequis": [
+  1737
+ ]
+}

@@ -1,0 +1,209 @@
+{
+ "depart": [
+  {
+   "mapId": 137363456,
+   "npcId": 2437
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les agents ont besoin de votre aide dans les Catacombres.",
+   "id": 2159,
+   "nom": "Les troupiers",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885347,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les agents dans les Catacombres"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885348,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      9
+     ],
+     "texte": "Défendre l'Agent Jayne Pato puis lui parler à nouveau"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2499,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      9
+     ],
+     "texte": "Aller voir {npc,2499}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453643,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      9
+     ],
+     "texte": "Découvrir la carte : Catacombres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2439,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      9
+     ],
+     "texte": "Aller voir {npc,2439}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453648,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      8
+     ],
+     "texte": "Découvrir la carte : Catacombres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2439,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      8
+     ],
+     "texte": "Aller voir {npc,2439}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453655,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      7
+     ],
+     "texte": "Découvrir la carte : Catacombres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2439,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      7
+     ],
+     "texte": "Aller voir {npc,2439}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453808,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      7
+     ],
+     "texte": "Vaincre la nuée de Scoliopodes puis donner le Krosmoglob à l'Agent Jayne Pato"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2500,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      7
+     ],
+     "texte": "Aller voir {npc,2500}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2439,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      7
+     ],
+     "texte": "Aller voir {npc,2439}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2499,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      7
+     ],
+     "texte": "Aller voir {npc,2499}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       40
+      ],
+      [
+       15452,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1539,
+ "nom": "Les troupiers",
+ "objets": [],
+ "prerequis": [
+  1538
+ ]
+}

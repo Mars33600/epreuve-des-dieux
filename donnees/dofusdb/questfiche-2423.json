@@ -1,0 +1,289 @@
+{
+ "depart": [
+  {
+   "mapId": 207619080,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207621128,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207623176,
+   "npcId": 6167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le Dofus cauchemardesque sera-t-il la clé de votre rédemption, et l'instrument qui causera la perte de la Mère des Ravageurs ? L'Eliocalypse se rapproche, inexorablement... Le monde retient son souffle, suspendu au temps du rêve.",
+   "id": 3080,
+   "nom": "Un héritage tourmenté",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3428,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -21
+     ],
+     "texte": "Retourner voir {npc,3428}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      919667,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler au premier Huppermage"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      25809,
+      1,
+      0
+     ],
+     "position": [
+      38,
+      -20
+     ],
+     "texte": "Fabriquer 1 {item,25809} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      912308,
+      0,
+      0
+     ],
+     "position": [
+      -37,
+      -61
+     ],
+     "texte": "Utiliser la rune d'harmonie sur les pyramides prismatiques de Bonta"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      912480,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver Kro'Li le démonologiste"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      920053,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir la formule du sortilège transcrit dans le grimoire de Rewona"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6302,
+      25818,
+      1
+     ],
+     "position": [
+      -24,
+      39
+     ],
+     "texte": "Ramener à {npc,6302} : x1 {item,25818}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6302,
+      25819,
+      5
+     ],
+     "position": [
+      -24,
+      39
+     ],
+     "texte": "Ramener à {npc,6302} : x5 {item,25819}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6302,
+      25820,
+      5
+     ],
+     "position": [
+      -24,
+      39
+     ],
+     "texte": "Ramener à {npc,6302} : x5 {item,25820}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      912604,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Prononcer le sortilège dans la gueule du cauchemar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      920192,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Parler aux Cavaliers"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      912605,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Neutraliser les Cavaliers avec l'aide d'Entropix et d'un allié providentiel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      912606,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Terminer le rituel pour prendre le contrôle du Dofus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      919572,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Parler à la Mère des Ravageurs et briser la barrière"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      912629,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Écouter la sentence de Draconiros"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      912633,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Rendre Entropix au temps du rêve"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6513,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Aller voir {npc,6513}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       26036,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2423,
+ "nom": "Un héritage tourmenté",
+ "objets": [
+  [
+   1536,
+   4
+  ],
+  [
+   1538,
+   4
+  ],
+  [
+   1535,
+   4
+  ],
+  [
+   1537,
+   4
+  ],
+  [
+   14635,
+   200
+  ],
+  [
+   21966,
+   2
+  ],
+  [
+   1478,
+   1
+  ],
+  [
+   26159,
+   1
+  ]
+ ],
+ "prerequis": [
+  2422,
+  2138
+ ]
+}

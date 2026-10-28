@@ -1,0 +1,92 @@
+{
+ "depart": [
+  {
+   "mapId": 54534177,
+   "npcId": 1251
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Albert Paisse a besoin de prélèvements issus des corps des Frigostiens prisonniers de la glace.",
+   "id": 1248,
+   "nom": "Cri au génie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886033,
+      0,
+      0
+     ],
+     "position": [
+      -58,
+      -55
+     ],
+     "texte": "Chercher des corps prisonniers de la glace dans la forêt des pins perdus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886034,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des corps prisonniers de la glace dans la forêt pétrifiée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886035,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer à chercher des corps prisonniers de la glace dans la forêt pétrifiée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886036,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher d'autres corps prisonniers de la glace dans la forêt pétrifiée"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1251,
+      11793,
+      4
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1251} : x4 {item,11793}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       1
+      ],
+      [
+       11894,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 633,
+ "nom": "Sang dessus-dessous",
+ "objets": [],
+ "prerequis": [
+  632
+ ]
+}

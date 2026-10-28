@@ -1,0 +1,231 @@
+{
+ "depart": [
+  {
+   "mapId": 145229323,
+   "npcId": 2652
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des Égarés vont lancer une attaque suicide contre l'avant-poste des Voyageurs. S'il y a une personne suffisamment ding... compétente pour les mettre hors d'état de nuire, c'est bien vous !",
+   "id": 2201,
+   "nom": "L'armée des 12 dingues",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2646,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2646}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2665,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2665}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481333,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -4
+     ],
+     "texte": "Neutraliser l'Égaré Apathique"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481335,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -3
+     ],
+     "texte": "Neutraliser l'Égarée Maniaque"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481334,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -5
+     ],
+     "texte": "Neutraliser l'Égaré Dofusophobe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481326,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -4
+     ],
+     "texte": "Neutraliser l'Égaré Suicidaire"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481319,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -5
+     ],
+     "texte": "Neutraliser l'Égarée Anxieuse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481318,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -5
+     ],
+     "texte": "Neutraliser l'Égaré Paranoïaque"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481325,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Neutraliser l'Égarée Claustrophobe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481324,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -5
+     ],
+     "texte": "Neutraliser l'Égaré Xélomorphobe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481323,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -3
+     ],
+     "texte": "Neutraliser l'Égaré Hypocondriaque"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481322,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -2
+     ],
+     "texte": "Neutraliser l'Égaré Psychopathe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481321,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -4
+     ],
+     "texte": "Neutraliser l'Égarée Araknophobe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481320,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -5
+     ],
+     "texte": "Neutraliser l'Égaré Érotomane"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2646,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Retourner voir {npc,2646}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15719,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1581,
+ "nom": "L'armée des 12 dingues",
+ "objets": [],
+ "prerequis": [
+  1580
+ ]
+}

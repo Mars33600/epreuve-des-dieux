@@ -1,0 +1,244 @@
+{
+ "depart": [
+  {
+   "mapId": 111286022,
+   "npcId": 2025
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Depuis le début de l'hiver éternel, le temps est figé sur Frigost. À en croire Hazieff Taroun, cette situation pourrait bien ne pas durer... et la perspective de se voir rattrapé par les années ne semble guère le réjouir. Avec l'aide d'experts en matière de chronomagie, vous devez vous assurer que la Clepsydre de Harebourg reste stable.",
+   "id": 1937,
+   "nom": "La machine à démonter le temps",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1590,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1590}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453016,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Trouver le Surveillant du Temps"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      646,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Aller voir {npc,646}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      646,
+      14236,
+      1
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Ramener à {npc,646} : x1 {item,14236}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      646,
+      14237,
+      12
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Ramener à {npc,646} : x12 {item,14237}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      646,
+      14238,
+      2
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Ramener à {npc,646} : x2 {item,14238}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452973,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -84
+     ],
+     "texte": "Découvrir la carte : Endroit où placer le Stabilisateur Temporel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453015,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -84
+     ],
+     "texte": "Placer le Stabilisateur Temporel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453014,
+      0,
+      0
+     ],
+     "position": [
+      -60,
+      -84
+     ],
+     "texte": "Trouver le premier paradoxe"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3434,
+      1,
+      0
+     ],
+     "position": [
+      -60,
+      -84
+     ],
+     "texte": "Vaincre x1 {monster,3434} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453011,
+      0,
+      0
+     ],
+     "position": [
+      -58,
+      -87
+     ],
+     "texte": "Trouver le deuxième paradoxe"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3435,
+      1,
+      0
+     ],
+     "position": [
+      -58,
+      -87
+     ],
+     "texte": "Vaincre x1 {monster,3435} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453012,
+      0,
+      0
+     ],
+     "position": [
+      -58,
+      -84
+     ],
+     "texte": "Trouver le troisième paradoxe"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3436,
+      1,
+      0
+     ],
+     "position": [
+      -58,
+      -84
+     ],
+     "texte": "Vaincre x1 {monster,3436} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453010,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -84
+     ],
+     "texte": "Activer le Stabilisateur Temporel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2025,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Retourner voir {npc,2025}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       5
+      ],
+      [
+       13988,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1333,
+ "nom": "La machine à démonter le temps",
+ "objets": [],
+ "prerequis": [
+  1326
+ ]
+}

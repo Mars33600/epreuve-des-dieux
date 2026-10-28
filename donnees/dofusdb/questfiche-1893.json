@@ -1,0 +1,225 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez découvrir qui est impliqué dans les événements survenus au cimetière des Héros.",
+   "id": 2533,
+   "nom": "Un chemin tout tracé",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      57,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      1
+     ],
+     "texte": "Aller voir {npc,57}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      278,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      33
+     ],
+     "texte": "Aller voir {npc,278}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      278,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      33
+     ],
+     "texte": "Aller voir {npc,278}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      328,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      33
+     ],
+     "texte": "Aller voir {npc,328}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4044,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      33
+     ],
+     "texte": "Aller voir {npc,4044}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6383,
+      0,
+      0
+     ],
+     "position": [
+      -24,
+      39
+     ],
+     "texte": "Aller voir {npc,6383}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      733260,
+      0,
+      0
+     ],
+     "position": [
+      -20,
+      22
+     ],
+     "texte": "Découvrir la carte : Caverne de Sidimote"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733261,
+      0,
+      0
+     ],
+     "position": [
+      -20,
+      22
+     ],
+     "texte": "Chercher des traces du passage d'Helster Dienicht"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3988,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      33
+     ],
+     "texte": "Aller voir {npc,3988}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730411,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Fouiller la crypte"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4954,
+      1,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Vaincre x1 {monster,4954} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4045,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      35
+     ],
+     "texte": "Aller voir {npc,4045}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      730413,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      37
+     ],
+     "texte": "Découvrir la carte : Cathédrale de Triste Âme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730414,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      13
+     ],
+     "texte": "Chercher des informations sur le disciple d'Erazal"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      19129,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Montrer à {npc,6309} : 1 {item,19129}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1893,
+ "nom": "Un chemin tout tracé",
+ "objets": [],
+ "prerequis": [
+  1891
+ ]
+}

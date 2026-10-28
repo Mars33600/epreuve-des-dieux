@@ -1,0 +1,118 @@
+{
+ "depart": [
+  {
+   "mapId": 130023939,
+   "npcId": 2339
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous allez tester la nouvelle invention du Major Qiu : un générateur d'illusions. Comme souvent avec le Major, vous aurez peut-être quelques surprises, mais avouez-le, vous adorez ça.",
+   "id": 2155,
+   "nom": "Faux-semblants",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453345,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      4
+     ],
+     "texte": "Tester l'appareil de camouflage sur la place marchande de Srambad"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454083,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -1
+     ],
+     "texte": "Tester l'appareil de camouflage sur une terrasse des Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454084,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      8
+     ],
+     "texte": "Tester l'appareil de camouflage au cœur des Catacombres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2437,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2437}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3787,
+      1,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Vaincre x1 {monster,3787} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454082,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Donner le Générateur Eidolonique au Sergent Raskzac"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15448,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1535,
+ "nom": "Faux-semblants",
+ "objets": [],
+ "prerequis": [
+  1484,
+  1484
+ ]
+}

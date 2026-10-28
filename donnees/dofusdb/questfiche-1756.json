@@ -1,0 +1,215 @@
+{
+ "depart": [
+  {
+   "mapId": 170133512,
+   "npcId": 3246
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pour connaître la nature du rituel évoqué par l'adepte de l'indicible, vous devez en savoir plus sur l'alignement des étoiles. Quand il ne s'agit pas d'étoiles de mer, le spécialiste en la matière est le Mage Hellan.",
+   "id": 2393,
+   "nom": "Quand les astres seront propices",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1601,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      25
+     ],
+     "texte": "Aller voir {npc,1601}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      651375,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      25
+     ],
+     "texte": "Consulter les archives de Sufokia"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649690,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      -23
+     ],
+     "texte": "Interroger Ayuto la sorcière"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649729,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Interroger le maître du temple des Osamodas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649706,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver où vivait le sorcier osamodas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649725,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Explorer les profondeurs de la maison"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649707,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Déverrouiller la dalle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649735,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver quelqu'un qui vous indiquera comment éviter le mal des abîmes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649711,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Descendre sous la dalle en se protégeant avec une statuette de Snedon"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4499,
+      1,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Vaincre x1 {monster,4499} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649728,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      22
+     ],
+     "texte": "Tenter de communiquer avec l'un des cerveaux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3246,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Retourner voir {npc,3246}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3250,
+      18039,
+      1
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3250} : 1 {item,18039}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3261,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3261}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17985,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1756,
+ "nom": "Quand les astres seront propices",
+ "objets": [],
+ "prerequis": [
+  1747
+ ]
+}

@@ -1,0 +1,297 @@
+{
+ "depart": [
+  {
+   "mapId": 161350660,
+   "npcId": 3121
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez rencontré un fan de boufbowl qui rêve de suivre les traces de son idole, le champion Khan Karkass. Comme vous ne vivez que pour rendre service aux autres, mêmes aux Iops, vous avez accepté de lui servir de guide.",
+   "id": 2342,
+   "nom": "Karkass mania",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      608420,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -5
+     ],
+     "texte": "Visiter le premier site"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3121,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -5
+     ],
+     "texte": "Aller voir {npc,3121}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      610995,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -9
+     ],
+     "texte": "Visiter le deuxième site"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3121,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -9
+     ],
+     "texte": "Aller voir {npc,3121}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      611019,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -10
+     ],
+     "texte": "Visiter le troisième site"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3121,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -10
+     ],
+     "texte": "Aller voir {npc,3121}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      611003,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      -11
+     ],
+     "texte": "Visiter le quatrième site"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3121,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      -11
+     ],
+     "texte": "Aller voir {npc,3121}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      610991,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -21
+     ],
+     "texte": "Visiter le cinquième site"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3121,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -21
+     ],
+     "texte": "Aller voir {npc,3121}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      611001,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Visiter le sixième site"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3121,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,3121}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      611020,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -6
+     ],
+     "texte": "Ramener le fan de boufbowl près de l'avant-poste"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3121,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -6
+     ],
+     "texte": "Aller voir {npc,3121}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      611002,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Visiter le site supplémentaire"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3121,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,3121}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3122,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,3122}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4345,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Vaincre x1 {monster,4345} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3122,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,3122}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3121,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,3121}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       17567,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1707,
+ "nom": "Karkass mania",
+ "objets": [],
+ "prerequis": []
+}

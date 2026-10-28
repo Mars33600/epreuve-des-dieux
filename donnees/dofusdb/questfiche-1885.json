@@ -1,0 +1,300 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous enquêtez sur un cambriolage ayant été perpétré dans le palais.",
+   "id": 2525,
+   "nom": "Cambriolage à durée déterminée",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2935,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Aller voir {npc,2935}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      233,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,233}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730142,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Acheter deux bières fraîches"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      233,
+      19119,
+      2
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Ramener à {npc,233} : x2 {item,19119}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4016,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      -59
+     ],
+     "texte": "Aller voir {npc,4016}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4017,
+      0,
+      0
+     ],
+     "position": [
+      -35,
+      -55
+     ],
+     "texte": "Aller voir {npc,4017}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4018,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Aller voir {npc,4018}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      244,
+      0,
+      0
+     ],
+     "position": [
+      -35,
+      -55
+     ],
+     "texte": "Aller voir {npc,244}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6516,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -56
+     ],
+     "texte": "Aller voir {npc,6516}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4017,
+      0,
+      0
+     ],
+     "position": [
+      -35,
+      -55
+     ],
+     "texte": "Aller voir {npc,4017}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      240,
+      0,
+      0
+     ],
+     "position": [
+      -35,
+      -56
+     ],
+     "texte": "Aller voir {npc,240}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4018,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      -56
+     ],
+     "texte": "Aller voir {npc,4018}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      233,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,233}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730137,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -55
+     ],
+     "texte": "Interroger les parieurs sur les combats de tofus"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6426,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Aller voir {npc,6426}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      730873,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -51
+     ],
+     "texte": "Découvrir la carte : Rendez-vous"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4019,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -51
+     ],
+     "texte": "Aller voir {npc,4019}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1885,
+ "nom": "Cambriolage à durée déterminée",
+ "objets": [],
+ "prerequis": [
+  1730
+ ]
+}

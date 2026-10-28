@@ -1,0 +1,195 @@
+{
+ "depart": [
+  {
+   "mapId": 178783240,
+   "npcId": 3944
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les mineurs gobelins se sentent exploités. Ils voudraient doubler leur salaire, mais Bworkemada refuse catégoriquement la moindre augmentation. Comme vous êtes un défenseur des droits des travailleurs, vous allez prouver que les gobelins sont les meilleurs ouvriers du Monde des Douze.",
+   "id": 2513,
+   "nom": "Un salaire germinable",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3943,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      18
+     ],
+     "texte": "Aller voir {npc,3943}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3944,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      21
+     ],
+     "texte": "Retourner voir {npc,3944}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3944,
+      446,
+      30
+     ],
+     "position": [
+      -17,
+      21
+     ],
+     "texte": "Ramener à {npc,3944} : x30 {item,446}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3944,
+      350,
+      60
+     ],
+     "position": [
+      -17,
+      21
+     ],
+     "texte": "Ramener à {npc,3944} : x60 {item,350}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725540,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      21
+     ],
+     "texte": "Emmener un gobelin à l'auberge de Gisgoul"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725492,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      21
+     ],
+     "texte": "Faire boire des chopes de bière de Gisgoul au gobelin assoiffé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725496,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      18
+     ],
+     "texte": "Emmener le gobelin éméché voir Bworkemada"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725535,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Emmener un gobelin à l'intérieur des égouts de Gisgoul"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725538,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      21
+     ],
+     "texte": "Aider le gobelin courageux à vaincre un monstre des égouts"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      725539,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      18
+     ],
+     "texte": "Emmener le gobelin courageux voir Bworkemada"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3943,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      18
+     ],
+     "texte": "Aller voir {npc,3943}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3944,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      21
+     ],
+     "texte": "Retourner voir {npc,3944}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       13746,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1873,
+ "nom": "Un salaire germinable",
+ "objets": [
+  [
+   446,
+   30
+  ],
+  [
+   350,
+   60
+  ]
+ ],
+ "prerequis": []
+}

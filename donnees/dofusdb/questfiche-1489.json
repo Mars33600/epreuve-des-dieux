@@ -1,0 +1,157 @@
+{
+ "depart": [
+  {
+   "mapId": 130024961,
+   "npcId": 2337
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Une Enutrofette fraîchement recrutée par l'ordre des Voyageurs a disparu. Le colonel Oneuil vous a demandé de la retrouver et de la ramener à l'avant-poste. Pour vous aider dans votre mission de sauvetage, le colonel vous a confié un détecteur de balise. On n'arrête pas le progrès.",
+   "id": 2109,
+   "nom": "Touchez pas à Grisebigle",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452774,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      -4
+     ],
+     "texte": "Activer le détecteur de balise à l'entrée de la Retraite des Éternels"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452786,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      -6
+     ],
+     "texte": "Rejoindre la position indiquée par le détecteur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452788,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Rejoindre la position indiquée par le détecteur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452783,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -4
+     ],
+     "texte": "Rejoindre la position indiquée par le détecteur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452784,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -4
+     ],
+     "texte": "Rejoindre la position indiquée par le détecteur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452781,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -4
+     ],
+     "texte": "Trouver l'Agent Grisebigle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452782,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -4
+     ],
+     "texte": "Se débarrasser des Enutrofors qui en veulent à Grisebigle"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2360,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -4
+     ],
+     "texte": "Aller voir {npc,2360}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452792,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Escorter Grisebigle jusqu'à l'avant-poste d'Enutrosor"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15180,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1489,
+ "nom": "Touchez pas à Grisebigle",
+ "objets": [],
+ "prerequis": [
+  1484,
+  1484
+ ]
+}

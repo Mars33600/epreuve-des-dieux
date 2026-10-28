@@ -1,0 +1,401 @@
+{
+ "depart": [
+  {
+   "mapId": 207624194,
+   "npcId": 6110
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Alors que les Kozaru s'aventurent au-delà d'Aerdala et provoquent des conflits de plus en plus violents, Wulan, générale des samouraïs de la Daimya, envisage plusieurs solutions pour les arrêter.",
+   "id": 3063,
+   "nom": "Le dernier rempart",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897162,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver la trace de Supahi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897163,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -27
+     ],
+     "texte": "Interroger les Kozaru à propos de Supahi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897098,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -27
+     ],
+     "texte": "Employer la force pour obtenir des réponses auprès des Kozarus"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6116,
+      0,
+      0
+     ],
+     "position": [
+      27,
+      -27
+     ],
+     "texte": "Aller voir {npc,6116}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      897322,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Lieu de capture de Supahi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897164,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -47
+     ],
+     "texte": "Libérer Supahi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      898096,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Escorter Supahi auprès de Wulan dans la salle de la Pandassemblée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6110,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Aller voir {npc,6110}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      902710,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Écouter les propositions des différents intervenants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897102,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Écouter les directives de Wulan"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897103,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver l'architecte dans le Royaume Céleste"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6641,
+      1,
+      0
+     ],
+     "position": [
+      1,
+      -2
+     ],
+     "texte": "Vaincre x1 {monster,6641} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6049,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -2
+     ],
+     "texte": "Aller voir {npc,6049}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897105,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Terminer le plan de la Muraille"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6110,
+      25153,
+      1
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Ramener à {npc,6110} : x1 {item,25153}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897106,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Trouver ce qui rend Wulan Soucieuse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      902737,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Trouver les 3 morceaux du parchemin oublié puis s'adresser à Shufamukin pour le reconstituer"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6110,
+      25137,
+      1
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Ramener à {npc,6110} : x1 {item,25137}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6004,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,6004}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6110,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,6110}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897111,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aider Shumu à se remémorer son passé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6110,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6110}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897732,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Prévenir Migi Ude qu'un nouveau conseil de guerre va avoir lieu dans la cellule de crise et que sa présence est requise"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6642,
+      1,
+      0
+     ],
+     "position": [
+      20,
+      -32
+     ],
+     "texte": "Vaincre x1 {monster,6642} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897109,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Rejoindre Wulan dans la cellule de crise et faire un rapport"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897508,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Participer au débat visant à annuler la construction du mur d'isolement des Kozaru"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5560,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Aller voir {npc,5560}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5560,
+      25138,
+      6
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Ramener à {npc,5560} : x6 {item,25138}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      897112,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Assister au dépouillement des votes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6110,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -29
+     ],
+     "texte": "Aller voir {npc,6110}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       23903,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2407,
+ "nom": "Le dernier rempart",
+ "objets": [],
+ "prerequis": [
+  2406
+ ]
+}

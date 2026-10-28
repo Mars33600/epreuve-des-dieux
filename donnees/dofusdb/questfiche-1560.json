@@ -1,0 +1,157 @@
+{
+ "depart": [
+  {
+   "mapId": 121637892,
+   "npcId": 2575
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez échoué à interrompre le rituel et capturer les voleurs. cependant, il vous reste une chance de mettre la main sur leur butin à Srambad.",
+   "id": 2173,
+   "nom": "Sortir de l'ombre",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885355,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rechercher Chii Nohaz dans Srambad"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2573,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      5
+     ],
+     "texte": "Aller voir {npc,2573}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2574,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      5
+     ],
+     "texte": "Aller voir {npc,2574}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2571,
+      15575,
+      5
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Montrer à {npc,2571} : 5 {item,15575}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2577,
+      15575,
+      5
+     ],
+     "position": [
+      6,
+      1
+     ],
+     "texte": "Ramener à {npc,2577} : x5 {item,15575}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2576,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      1
+     ],
+     "texte": "Aller voir {npc,2576}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885356,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      1
+     ],
+     "texte": "Vaincre les cambrioleurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2577,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      1
+     ],
+     "texte": "Aller voir {npc,2577}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2571,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Aller voir {npc,2571}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15449,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1560,
+ "nom": "Sortir de l'ombre",
+ "objets": [],
+ "prerequis": [
+  1559
+ ]
+}

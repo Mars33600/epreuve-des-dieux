@@ -1,0 +1,74 @@
+{
+ "depart": [
+  {
+   "mapId": 90704898,
+   "npcId": 1581
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez inspecter l'Aquadôme de Merkator.",
+   "id": 1533,
+   "nom": "Tour nage",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3534,
+      1,
+      0
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Vaincre x1 {monster,3534} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453126,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Découvrir la carte : Aquadôme - Sortie."
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1581,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      27
+     ],
+     "texte": "Aller voir {npc,1581}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       14865,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 917,
+ "nom": "Tour nage",
+ "objets": [],
+ "prerequis": [
+  916
+ ]
+}

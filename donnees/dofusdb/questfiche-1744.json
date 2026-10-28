@@ -1,0 +1,143 @@
+{
+ "depart": [
+  {
+   "mapId": 170132480,
+   "npcId": 3266
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Enfin, vous allez savoir ce qui se cache derrière la grille magique du sanctuaire de Leanor...",
+   "id": 2381,
+   "nom": "Une porte vers le passé",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644123,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Franchir la grille magique du sanctuaire de Leanor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644046,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Explorer le sanctuaire de Leanor"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4445,
+      1,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Vaincre x1 {monster,4445} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3258,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Aller voir {npc,3258}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4446,
+      1,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Vaincre x1 {monster,4446} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      644055,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Explorer le sanctuaire de Leanor"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3266,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      31
+     ],
+     "texte": "Aller voir {npc,3266}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1593,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      22
+     ],
+     "texte": "Aller voir {npc,1593}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17972,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1744,
+ "nom": "Une porte vers le passé",
+ "objets": [],
+ "prerequis": [
+  1743
+ ]
+}

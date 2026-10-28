@@ -1,0 +1,320 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez faire le nécessaire pour vous emparer du pacte de non-agression passé entre les dieux et les démons.",
+   "id": 2351,
+   "nom": "Les gardiens de la galerie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3192,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -2
+     ],
+     "texte": "Aller voir {npc,3192}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      81,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Aller voir {npc,81}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      239,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      18
+     ],
+     "texte": "Aller voir {npc,239}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      239,
+      17156,
+      2
+     ],
+     "position": [
+      1,
+      18
+     ],
+     "texte": "Ramener à {npc,239} : x2 {item,17156}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      239,
+      16469,
+      14
+     ],
+     "position": [
+      1,
+      18
+     ],
+     "texte": "Ramener à {npc,239} : x14 {item,16469}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      239,
+      16456,
+      14
+     ],
+     "position": [
+      1,
+      18
+     ],
+     "texte": "Ramener à {npc,239} : x14 {item,16456}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      129,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      24
+     ],
+     "texte": "Aller voir {npc,129}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      170,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      31
+     ],
+     "texte": "Aller voir {npc,170}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      129,
+      17753,
+      1
+     ],
+     "position": [
+      -3,
+      24
+     ],
+     "texte": "Ramener à {npc,129} : x1 {item,17753}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      239,
+      17754,
+      1
+     ],
+     "position": [
+      1,
+      18
+     ],
+     "texte": "Ramener à {npc,239} : x1 {item,17754}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverSubAreaData",
+     "parametres": [
+      233,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la zone {subarea,233}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891108,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Musa dans les Marécages sans fond"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      625526,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      12
+     ],
+     "texte": "Découvrir la carte : Temple du Collectionneur"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3193,
+      17755,
+      1
+     ],
+     "position": [
+      4,
+      12
+     ],
+     "texte": "Montrer à {npc,3193} : 1 {item,17755}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3194,
+      17755,
+      1
+     ],
+     "position": [
+      4,
+      12
+     ],
+     "texte": "Ramener à {npc,3194} : x1 {item,17755}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891109,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Lars Tord dans Gisgoul"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      625579,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      16
+     ],
+     "texte": "Découvrir la carte : Entrée du repaire des Cybworks."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891110,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      16
+     ],
+     "texte": "Chercher Lars Tord"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3196,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      16
+     ],
+     "texte": "Aller voir {npc,3196}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891111,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      16
+     ],
+     "texte": "Aider Lars Tord à obtenir le gant magique"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3196,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Aller voir {npc,3196}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      17761,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Ramener à {npc,6309} : x1 {item,17761}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1715,
+ "nom": "Les gardiens de la galerie",
+ "objets": [
+  [
+   17156,
+   2
+  ],
+  [
+   16469,
+   14
+  ],
+  [
+   16456,
+   14
+  ]
+ ],
+ "prerequis": [
+  343
+ ]
+}

@@ -1,0 +1,188 @@
+{
+ "depart": [
+  {
+   "mapId": 54534167,
+   "npcId": 1246
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Lucette Brifian vous a indiqué plusieurs lieux importants de l'île.",
+   "id": 1266,
+   "nom": "Tourisme sauvage",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55891,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -49
+     ],
+     "texte": "Découvrir la carte : Serre de Frigost."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55901,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -34
+     ],
+     "texte": "Découvrir la carte : Transporteur Frigostien."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55905,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -55
+     ],
+     "texte": "Découvrir la carte : Carrière de glace."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      199432,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -58
+     ],
+     "texte": "Découvrir la carte : Village englouti."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55913,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -71
+     ],
+     "texte": "Découvrir la carte : Récifs du Berceau d'Alma."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55917,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -86
+     ],
+     "texte": "Découvrir la carte : Grotte aquatique des larmes d'Ouronigride."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      224460,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -78
+     ],
+     "texte": "Découvrir la carte : Antre du YeCh'Ti."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55929,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -68
+     ],
+     "texte": "Découvrir la carte : Coeur de la forêt pétrifiée."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55930,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -65
+     ],
+     "texte": "Découvrir la carte : Machinerie des crocs de verre."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56019,
+      0,
+      0
+     ],
+     "position": [
+      -70,
+      -72
+     ],
+     "texte": "Découvrir la carte : Tunnels de glace."
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55471,
+      0,
+      0
+     ],
+     "position": [
+      -70,
+      -75
+     ],
+     "texte": "Découvrir la carte : Rivière de glace."
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1246,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1246}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 655,
+ "nom": "Frigost, une île pas comme les autres",
+ "objets": [],
+ "prerequis": [
+  650
+ ]
+}

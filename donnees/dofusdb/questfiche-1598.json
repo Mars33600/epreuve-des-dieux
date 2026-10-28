@@ -1,0 +1,299 @@
+{
+ "depart": [
+  {
+   "mapId": 145228299,
+   "npcId": 2707
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez enquêter sur l'agression d'un groupe d'Archiduks.",
+   "id": 2218,
+   "nom": "Guerre temporelle",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2709,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2709}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885409,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Enquêter sur les lieux de l'agression"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2685,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Aller voir {npc,2685}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2702,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Aller voir {npc,2702}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2710,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Aller voir {npc,2710}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      481352,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Découvrir la carte : Repaire des agresseurs Hordémons"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2711,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,2711}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2702,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,2702}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2711,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,2711}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885410,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -4
+     ],
+     "texte": "Escorter Vindeux extralucide dans les lendemains incertains"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2712,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -4
+     ],
+     "texte": "Aller voir {npc,2712}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885411,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -5
+     ],
+     "texte": "Escorter Vindeux extralucide dans les lendemains incertains"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2712,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -5
+     ],
+     "texte": "Aller voir {npc,2712}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481338,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -5
+     ],
+     "texte": "Défendre Vindeux extralucide contre les Égarés."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885412,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Accompagner Vindeux extralucide à l'avant-poste des Voyageurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2712,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2712}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885413,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Accompagner Vindeux extralucide jusqu'à Hibuspokus"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2712,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2712}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885414,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Accompagner Vindeux extralucide jusqu'à Trantroa Huissansix"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2711,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Aller voir {npc,2711}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15718,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1598,
+ "nom": "Guerre temporelle",
+ "objets": [],
+ "prerequis": [
+  1597
+ ]
+}

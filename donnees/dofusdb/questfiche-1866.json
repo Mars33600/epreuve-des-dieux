@@ -1,0 +1,126 @@
+{
+ "depart": [
+  {
+   "mapId": 181404680,
+   "npcId": 3897
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez été manipulé par le culte d'Ougah et accepté d'aider le petit dieu Surru à se venger.",
+   "id": 2506,
+   "nom": "Appui sur le champignon",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726604,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Souiller une statue d'Ougah"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726605,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Piétiner des champignons sacrés d'Ougah"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726606,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Griffonner par-dessus une représentation d'Ougah"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      726607,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Glisser des suppositoires dans les orifices du Champrout sacré"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      1159,
+      1,
+      182192129
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Vaincre x1 {monster,1159} sur la carte {map,182192129} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      726609,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Découvrir la carte : Sortie du Temple du Grand Ougah"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3897,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Aller voir {npc,3897}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       9277,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1866,
+ "nom": "Appui sur le champignon",
+ "objets": [],
+ "prerequis": [
+  1865
+ ]
+}

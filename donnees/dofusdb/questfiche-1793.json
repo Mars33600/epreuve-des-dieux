@@ -1,0 +1,268 @@
+{
+ "depart": [
+  {
+   "mapId": 160957441,
+   "npcId": 3433
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il est temps de neutraliser la menace que représente Kalisthe... d'une façon ou d'une autre.",
+   "id": 2430,
+   "nom": "Le destin de Kalisthe",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2852,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2852}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3457,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -14
+     ],
+     "texte": "Aller voir {npc,3457}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3457,
+      18312,
+      1
+     ],
+     "position": [
+      -11,
+      -14
+     ],
+     "texte": "Montrer à {npc,3457} : 1 {item,18312}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3457,
+      18313,
+      1
+     ],
+     "position": [
+      -11,
+      -14
+     ],
+     "texte": "Montrer à {npc,3457} : 1 {item,18313}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3457,
+      18314,
+      1
+     ],
+     "position": [
+      -11,
+      -14
+     ],
+     "texte": "Montrer à {npc,3457} : 1 {item,18314}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699681,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -14
+     ],
+     "texte": "Suivre les instructions de Kokillette pour être métamorphosé en corbac"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699668,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -6
+     ],
+     "texte": "Discuter avec les corbacs de Morrie Gane"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699678,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre à l'assemblée dans les Pénates du Corbac"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699683,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      -62
+     ],
+     "texte": "Identifier le corbac de Kalisthe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699709,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre le corbac de Kalisthe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699798,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -58
+     ],
+     "texte": "Continuer à suivre le corbac de Kalisthe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699778,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -58
+     ],
+     "texte": "Trouver Kalisthe"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3446,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -58
+     ],
+     "texte": "Aller voir {npc,3446}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3507,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -58
+     ],
+     "texte": "Aller voir {npc,3507}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699815,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -58
+     ],
+     "texte": "Parler de nouveau à la déesse Crâ"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4614,
+      1,
+      0
+     ],
+     "position": [
+      -12,
+      -58
+     ],
+     "texte": "Vaincre x1 {monster,4614} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3507,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -58
+     ],
+     "texte": "Aller voir {npc,3507}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3638,
+      0,
+      0
+     ],
+     "position": [
+      -12,
+      -58
+     ],
+     "texte": "Aller voir {npc,3638}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Retourner voir {npc,2205}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1793,
+ "nom": "Le destin de Kalisthe",
+ "objets": [],
+ "prerequis": [
+  1792
+ ]
+}

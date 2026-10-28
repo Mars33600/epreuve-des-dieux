@@ -1,0 +1,186 @@
+{
+ "depart": [
+  {
+   "mapId": 88081174,
+   "npcId": 4820
+  }
+ ],
+ "etapes": [
+  {
+   "description": "On dirait qu'Entropix n'avait pas envie de rester dans le Xélorium... Vous lui manquiez probablement. Mais peut-être a-t-il quelque chose à vous dire ?",
+   "id": 2717,
+   "nom": "Ce sera mieux avant",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4821,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Aller voir {npc,4821}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4820,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Aller voir {npc,4820}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1590,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      25
+     ],
+     "texte": "Aller voir {npc,1590}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      20899,
+      4
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Ramener à {npc,1599} : x4 {item,20899}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      20898,
+      4
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Ramener à {npc,1599} : x4 {item,20898}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      20897,
+      4
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Ramener à {npc,1599} : x4 {item,20897}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      792384,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -32
+     ],
+     "texte": "Escorter Entropix jusqu'au portail de Tainéla"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      788496,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -32
+     ],
+     "texte": "Entrer dans l'anomalie du passé en étant équipé du scaphandre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4822,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -32
+     ],
+     "texte": "Aller voir {npc,4822}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      788502,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -32
+     ],
+     "texte": "Détruire le gardien de l'anomalie pour libérer le Veilleur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4822,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -32
+     ],
+     "texte": "Aller voir {npc,4822}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4820,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      1
+     ],
+     "texte": "Retourner voir {npc,4820}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2064,
+ "nom": "Ce sera mieux avant",
+ "objets": [],
+ "prerequis": [
+  2063
+ ]
+}

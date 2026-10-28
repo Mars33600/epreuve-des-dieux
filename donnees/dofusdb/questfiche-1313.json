@@ -1,0 +1,41 @@
+{
+ "depart": [
+  {
+   "mapId": 108925717,
+   "npcId": 2006
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre Klime et sortir vivant de ses salons privés.",
+   "id": 1919,
+   "nom": "Porte, Klime, trésor",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453334,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -93
+     ],
+     "texte": "Découvrir la carte : Salons privés de Klime - Sortie"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1313,
+ "nom": "Porte, Klime, trésor",
+ "objets": [],
+ "prerequis": []
+}

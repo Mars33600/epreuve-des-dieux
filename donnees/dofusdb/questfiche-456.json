@@ -1,0 +1,144 @@
+{
+ "depart": [
+  {
+   "mapId": 219153408,
+   "npcId": 6364
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez mettre la main sur une Pensée Perdue du défunt Protecteur Solar. Des alchimistes pourront peut-être vous aider.",
+   "id": 971,
+   "nom": "Pense-bête",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6365,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Aller voir {npc,6365}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      726,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -21
+     ],
+     "texte": "Aller voir {npc,726}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891149,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les habitants dans la Montagne des Koalaks"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1159,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Aller voir {npc,1159}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5561,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Aller voir {npc,5561}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891150,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Suivre les instructions de Surivitna"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891151,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      2
+     ],
+     "texte": "Retrouver Meuh Sieurchance chez lui, au village des éleveurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1156,
+      0,
+      0
+     ],
+     "position": [
+      -20,
+      9
+     ],
+     "texte": "Aller voir {npc,1156}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6364,
+      10224,
+      1
+     ],
+     "position": [
+      -36,
+      -60
+     ],
+     "texte": "Montrer à {npc,6364} : 1 {item,10224}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 456,
+ "nom": "Pense-bête",
+ "objets": [],
+ "prerequis": [
+  451
+ ]
+}

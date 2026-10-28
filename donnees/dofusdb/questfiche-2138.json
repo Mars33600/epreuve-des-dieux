@@ -1,0 +1,366 @@
+{
+ "depart": [
+  {
+   "mapId": 186908932,
+   "npcId": 5377
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Maisial est partie s'entretenir avec Xélor au sujet des Cavaliers. Le dernier acte de votre affrontement avec ces fléaux est sur le point de se jouer, retrouvez le Veilleur pour savoir ce que le maître du temps attend de vous.",
+   "id": 2793,
+   "nom": "Prise de conscience",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827287,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Rejoindre Maisial à l'entrée de l'horloge de Xélor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1057991,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Convaincre Thanatena de ne pas s'allier aux Cavaliers"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827291,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Empêcher la guerre de Cania d'éclater"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827298,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Faire le point avec Maisial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827324,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Accéder à l'horloge et s'entretenir avec Xélor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      828820,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Lire les dernières notes de Pandora"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4822,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Aller voir {npc,4822}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      829464,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Parler à Martalo après avoir franchi le portail temporel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827740,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Plonger votre regard dans le Feu Primordial et entamer votre voyage"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827348,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Vaincre les quatre Cavaliers"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827354,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Réaliser un dernier saut dans le temps et accéder à la caverne de la conscience"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827355,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Chercher des traces du rituel ayant créé le pacte des Cavaliers"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5469,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Retourner voir {npc,5469}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827356,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Rencontrer Septange et écouter ses explications"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      831450,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -1
+     ],
+     "texte": "Retourner à l'Âge des Dofus et interroger Draconiros"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      831643,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -1
+     ],
+     "texte": "Endormir la méfiance du Gardien"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827359,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Faire une offrande à l'esprit pour le faire apparaître"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      831449,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Évoquer le futur qui attend le Monde des Douze et le pacte des Cavaliers"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827362,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Retourner voir Septange au sanctuaire du dernier espoir"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832254,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Approcher le fragment de conscience de l'orbe de la caverne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827364,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Semer la discorde entre les Cavaliers"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827365,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Utiliser le pouvoir du fragment de conscience pour briser le pacte"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6122,
+      1,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Vaincre x1 {monster,6122} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2802,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Retourner voir {npc,2802}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827366,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Éveiller l'esprit du Monde des Douze"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827367,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Évoquer un nouvel espoir pour le monde avec l'esprit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827368,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver quelqu'un capable de vous renseigner sur la pierre tourmentée"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2138,
+ "nom": "Prise de conscience",
+ "objets": [],
+ "prerequis": [
+  2122
+ ]
+}

@@ -1,0 +1,231 @@
+{
+ "depart": [
+  {
+   "mapId": 207619080,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207621128,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207623176,
+   "npcId": 6167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'île des Huppermages semble menacée : si Draconiros vous envoie là-bas, c'est sans doute parce qu'il pense que la Mère des Ravageurs et son cauchemar sont impliqués... Il ne vous reste plus qu'à vous envoler pour les Hauts du Kramdam afin d'en apprendre davantage.",
+   "id": 3078,
+   "nom": "La danse de la dissonance",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3428,
+      0,
+      0
+     ],
+     "position": [
+      38,
+      -21
+     ],
+     "texte": "Aller voir {npc,3428}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      910818,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Rituel de la Dissonance"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      910819,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -59
+     ],
+     "texte": "Entrer dans le cauchemar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911279,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler aux Huppermages envoyés par Rimanda"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      912179,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Réveiller des Douziens pris dans le conflit entre les deux cités"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911267,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Combattre les Ravageurs qui hantent les lieux"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      917886,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se confronter à des esprits cauchemardesques"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911265,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Permettre aux défunts de reposer en paix"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      917785,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Examiner le tracé incomplet de la rune"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6381,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,6381}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      918498,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Survivre à l'Éternel Conflit"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6382,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Aller voir {npc,6382}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911335,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver l'accès menant à la source de pouvoir du cauchemar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911332,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Voler des offrandes aux démons nourriciers"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911333,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Nourrir le cauchemar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      911336,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      0
+     ],
+     "texte": "Tenter de contrôler la source de pouvoir"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6215,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -57
+     ],
+     "texte": "Aller voir {npc,6215}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       26036,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2421,
+ "nom": "La danse de la dissonance",
+ "objets": [],
+ "prerequis": [
+  2413
+ ]
+}

@@ -1,0 +1,129 @@
+{
+ "depart": [
+  {
+   "mapId": 140509443,
+   "npcId": 2633
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Ninae Charpe a besoin de réaliser des tests pour mieux connaître les krobes. Elle vous a demandé de prélever du kroboplasme sur les macro-organismes qui prolifèrent sur le roc des Salbatroces et dans le ventre de la Baleine.",
+   "id": 2190,
+   "nom": "Ponctions létales",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      15673,
+      5
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x5 {item,15673}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      15674,
+      5
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x5 {item,15674}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      15676,
+      5
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x5 {item,15676}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2633,
+      15675,
+      5
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Ramener à {npc,2633} : x5 {item,15675}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      460937,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaporiser la solution sur un krobe isolé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      460936,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Retourner voir Ninae Charpe en étant krobifié"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2633,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -60
+     ],
+     "texte": "Aller voir {npc,2633}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15685,
+       5
+      ],
+      [
+       15684,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1570,
+ "nom": "Ponctions létales",
+ "objets": [],
+ "prerequis": []
+}

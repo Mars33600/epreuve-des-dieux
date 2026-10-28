@@ -1,0 +1,263 @@
+{
+ "depart": [
+  {
+   "mapId": 197918722,
+   "npcId": 4988
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le prêtre d'Ixchelonia refuse toujours de considérer Crokalcrolak comme un détenteur légitime de la pierre de lune inaltérée. Le seul moyen de le convaincre est de faire intervenir la déesse Ixchelonia en personne.",
+   "id": 2743,
+   "nom": "Le sens du sacrifice",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5806,
+      1,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Vaincre x1 {monster,5806} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4999,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4999}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4988,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4988}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      804197,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -13
+     ],
+     "texte": "Découvrir la carte : Autel des sacrifices"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4988,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -13
+     ],
+     "texte": "Aller voir {npc,4988}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805512,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -13
+     ],
+     "texte": "Capturer un crapaud-mufle albinos et l'enfermer dans la cage"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      804199,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Collecter 5 algues sous la surface du lac"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805511,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -13
+     ],
+     "texte": "Attacher le crapaud-mufle albinos au piédestal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4988,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -13
+     ],
+     "texte": "Aller voir {npc,4988}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      804201,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -13
+     ],
+     "texte": "Suivre les instructions du Prêtre d'Ixchelonia tout au long du rituel sacrificiel"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4999,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4999}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      804203,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Faire apparaître la déesse Ixchelonia"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4951,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4951}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4951,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4951}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4988,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4988}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4963,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4963}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      804204,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramener Crokalcrolak en toute sécurité jusqu'à Astrub"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4963,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -18
+     ],
+     "texte": "Aller voir {npc,4963}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       21208,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2087,
+ "nom": "Le sens du sacrifice",
+ "objets": [],
+ "prerequis": [
+  2086
+ ]
+}

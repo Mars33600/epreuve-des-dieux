@@ -1,0 +1,189 @@
+{
+ "depart": [
+  {
+   "mapId": 122421248,
+   "npcId": 2205
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Votre quête touche à sa fin : vous devez maintenant vous préparer à la confrontation avec Furye. Seul, vous n'avez aucune chance : vous allez donc recruter des esprits aquatiques qui combattront pour vous. Si vous remportez la victoire, le Dofus Turquoise sera vôtre !",
+   "id": 2283,
+   "nom": "Une âme en colère",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2205,
+      16900,
+      5
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer à {npc,2205} : 5 {item,16900}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      553815,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Capturer un Goémus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      553814,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Capturer une Norie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      553813,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Capturer une Kelpe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      553809,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Capturer un Verak"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      553810,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Capturer un Cyanog"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      389,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      -23
+     ],
+     "texte": "Aller voir {npc,389}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      553826,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      33
+     ],
+     "texte": "Placer les totems puis souffler dans la conque"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2952,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      33
+     ],
+     "texte": "Aller voir {npc,2952}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4074,
+      1,
+      0
+     ],
+     "position": [
+      32,
+      33
+     ],
+     "texte": "Vaincre x1 {monster,4074} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3002,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      33
+     ],
+     "texte": "Aller voir {npc,3002}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2205,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Retourner voir {npc,2205}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2953,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -3
+     ],
+     "texte": "Aller voir {npc,2953}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11475,
+       10
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1663,
+ "nom": "Une âme en colère",
+ "objets": [],
+ "prerequis": [
+  1659
+ ]
+}

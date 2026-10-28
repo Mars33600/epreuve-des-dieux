@@ -1,0 +1,80 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous avez accès à une carte secrète de la crevasse Perge. Mieux vaut ne pas vous y aventurer seul.",
+   "id": 1263,
+   "nom": "L'épreuve de l'eau",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55039,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Carte secrète de la crevasse Perge."
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2979,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,2979} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1381,
+      11876,
+      1
+     ],
+     "position": null,
+     "texte": "Montrer à {npc,1381} : 1 {item,11876}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1381,
+      11876,
+      1
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1381} : x1 {item,11876}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1381,
+      11196,
+      25
+     ],
+     "position": null,
+     "texte": "Ramener à {npc,1381} : x25 {item,11196}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27977,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 609,
+ "nom": "Tous pour un",
+ "objets": [],
+ "prerequis": [
+  595
+ ]
+}

@@ -1,0 +1,195 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Amayiro estime que vous avez les qualités requises pour continuer les investigations à Gisgoul.",
+   "id": 2366,
+   "nom": "Tout est bien qui finit mal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      201,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,201}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891205,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      -55
+     ],
+     "texte": "Obtenir un mysténergiomètre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      201,
+      10367,
+      1
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Montrer à {npc,201} : 1 {item,10367}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      10367,
+      1
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Montrer à {npc,1599} : 1 {item,10367}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      466,
+      1
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Ramener à {npc,1599} : x1 {item,466}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      11928,
+      1
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Ramener à {npc,1599} : x1 {item,11928}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1599,
+      10367,
+      1
+     ],
+     "position": [
+      7,
+      25
+     ],
+     "texte": "Ramener à {npc,1599} : x1 {item,10367}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891206,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Effectuer des relevés dans la Tour de Gisgoul"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891207,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Vaincre les gardes monstrueux"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      9318,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Montrer à {npc,6309} : 1 {item,9318}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      9092,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Montrer à {npc,6309} : 1 {item,9092}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6309,
+      9307,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Ramener à {npc,6309} : x1 {item,9307}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1729,
+ "nom": "Tout est bien qui finit mal",
+ "objets": [
+  [
+   466,
+   1
+  ],
+  [
+   11928,
+   1
+  ]
+ ],
+ "prerequis": [
+  1728
+ ]
+}

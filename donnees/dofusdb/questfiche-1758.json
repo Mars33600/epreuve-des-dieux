@@ -1,0 +1,187 @@
+{
+ "depart": [
+  {
+   "mapId": 170133512,
+   "npcId": 3261
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez créer un Signe des Très Vieux Anciens pour empêcher la libération de Koutoulou.",
+   "id": 2395,
+   "nom": "Il suffira d'un signe",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3261,
+      17983,
+      5
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3261} : 5 {item,17983}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3261,
+      17984,
+      5
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3261} : 5 {item,17984}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3261,
+      17986,
+      5
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3261} : 5 {item,17986}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3261,
+      17985,
+      5
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3261} : 5 {item,17985}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3261,
+      17987,
+      5
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3261} : 5 {item,17987}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3261,
+      18086,
+      1
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3261} : 1 {item,18086}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3261,
+      18087,
+      5
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Montrer à {npc,3261} : 5 {item,18087}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4500,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,4500} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649701,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aider Nomis à créer le Signe des Très Vieux Anciens"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3246,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      24
+     ],
+     "texte": "Aller voir {npc,3246}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17988,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1758,
+ "nom": "Il suffira d'un signe",
+ "objets": [
+  [
+   17983,
+   5
+  ],
+  [
+   17984,
+   5
+  ],
+  [
+   17986,
+   5
+  ],
+  [
+   17985,
+   5
+  ],
+  [
+   17987,
+   5
+  ]
+ ],
+ "prerequis": [
+  1756
+ ]
+}

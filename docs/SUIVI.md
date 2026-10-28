@@ -29,7 +29,7 @@ Détails : `DECISIONS-V4.md`.
 
 - [x] Étages = tranches du guide Duffus (24 étages, 0 à 23), cap = haut de la tranche
 - [x] Étages 0 et 1 importés (quêtes, fiches, donjons et leurs succès)
-- [x] Étages 2 à 23 importés (base de test ; la base de production reste à créer). ⚠️ Étages 12 et 14 à 23 : Duffus n'a souvent pas de fiche de quête
+- [x] Étages 2 à 23 importés (base de test ; la base de production reste à créer). Fiches absentes chez Duffus prises sur DofusDB : il ne manque que 2 fiches sur 1 010 quêtes
 - [x] Quêtes principales et secondaires classées d'après les guides par Dofus (sans supposition)
 - [x] Images des étages récupérées sur le Discord (étages 0 à 10)
 - [x] Images affichées sur le site, chacune seulement une fois son étage ouvert
@@ -55,7 +55,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] Encyclopédie (objets, monstres, recettes, panoplies, sorts, PNJ, quêtes), à fusionner ; manquent les cartes et les variantes de sorts
 - [ ] Outils (sans les tutoriels) : 6 sur 7 faits (Almanax, drop, classes et sorts, élevage, craft, XP des métiers) ; manque la carte interactive
 - [x] Stuffs (builds PvM de Duffus)
-- [ ] Builder : base faite (objets, panoplies, conditions, totaux, builds partagés) ; manquent forgemagie, calculateurs d'arme et de sorts, comparaison, variantes
+- [ ] Builder : objets, panoplies, conditions, totaux, builds partagés, comparaison, duplication et dégâts d'arme faits ; manquent le calculateur de sorts, la forgemagie et les variantes (environ 7 jours)
 - [x] Rien ne renvoie à Duffus (en-têtes, Twitch, Discord, soutien), sauf « Merci Duffus »
 
 ## Crédit

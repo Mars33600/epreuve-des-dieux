@@ -1,0 +1,440 @@
+{
+ "depart": [
+  {
+   "mapId": 88604676,
+   "npcId": 914
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous êtes sous l'emprise d'une malédiction jetée par Kalisthe, l'archère aveugle. Selon Otomaï, il existerait un remède... et le seul qui puisse le fabriquer semble Rosal, le Maître des fleurs.",
+   "id": 2423,
+   "nom": "Un remède draconien",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699803,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Silouate le Protecteur dans les Plaines de Cania"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3450,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -22
+     ],
+     "texte": "Aller voir {npc,3450}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3451,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -22
+     ],
+     "texte": "Aller voir {npc,3451}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699755,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver quelque chose qui pourrait faire perdre son sang-froid à Taurgnol"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3450,
+      18259,
+      1
+     ],
+     "position": [
+      -28,
+      -22
+     ],
+     "texte": "Montrer à {npc,3450} : 1 {item,18259}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699740,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -22
+     ],
+     "texte": "Participer à la bagarre entre Taurgnol et les éclaireurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3451,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -22
+     ],
+     "texte": "Aller voir {npc,3451}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3450,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -22
+     ],
+     "texte": "Aller voir {npc,3450}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699737,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      -34
+     ],
+     "texte": "Emmener Taurgnol voir Silouate"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699689,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un wabbit qui se lève au petit matin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3455,
+      0,
+      0
+     ],
+     "position": [
+      25,
+      -8
+     ],
+     "texte": "Aller voir {npc,3455}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3455,
+      14503,
+      5
+     ],
+     "position": [
+      25,
+      -8
+     ],
+     "texte": "Ramener à {npc,3455} : x5 {item,14503}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      141,
+      18261,
+      1
+     ],
+     "position": [
+      27,
+      -11
+     ],
+     "texte": "Ramener à {npc,141} : x1 {item,18261}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3449,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      -34
+     ],
+     "texte": "Retourner voir {npc,3449}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699712,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      -34
+     ],
+     "texte": "Offrir la goutte de rosée à Rosal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      47,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Aller voir {npc,47}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699817,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver une championne de Crâ dans la Forêt Sombre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699745,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir des traces de Razarbok"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699761,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Pister Razarbok"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699744,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer à pister Razarbok"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699754,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un moyen de débusquer Razarbok"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699738,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -37
+     ],
+     "texte": "Utiliser l'appeau à sanglier dans les champs de Cania"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699790,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -37
+     ],
+     "texte": "Dompter Razarbok"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699799,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -14
+     ],
+     "texte": "Ramener le sanglier au refuge de Kokillette"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3456,
+      18268,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Ramener à {npc,3456} : x1 {item,18268}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3456,
+      18267,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Ramener à {npc,3456} : x1 {item,18267}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3456,
+      18263,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Ramener à {npc,3456} : x1 {item,18263}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3456,
+      18264,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Ramener à {npc,3456} : x1 {item,18264}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3456,
+      18265,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Ramener à {npc,3456} : x1 {item,18265}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3456,
+      18266,
+      1
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Ramener à {npc,3456} : x1 {item,18266}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3456,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Aller voir {npc,3456}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699710,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Boire le remède de Rosal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      914,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Aller voir {npc,914}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11944,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1786,
+ "nom": "Un remède draconien",
+ "objets": [],
+ "prerequis": [
+  1785
+ ]
+}

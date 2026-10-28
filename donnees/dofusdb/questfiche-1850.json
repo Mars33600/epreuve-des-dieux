@@ -1,0 +1,317 @@
+{
+ "depart": [
+  {
+   "mapId": 179308033,
+   "npcId": 3793
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez découvert un corps décapité et cherchez comment cela s'est produit.",
+   "id": 2490,
+   "nom": "Shyriiwook",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886673,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les individus aux abords du chantier"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3794,
+      18748,
+      1
+     ],
+     "position": [
+      -63,
+      30
+     ],
+     "texte": "Ramener à {npc,3794} : x1 {item,18748}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3795,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3795}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886674,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher l'entrée de la vallée de Bujbuj Oiseau"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3794,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      30
+     ],
+     "texte": "Aller voir {npc,3794}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3797,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      32
+     ],
+     "texte": "Aller voir {npc,3797}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886675,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser des cailloux dorés dans la rivière"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4852,
+      1,
+      0
+     ],
+     "position": [
+      -66,
+      29
+     ],
+     "texte": "Vaincre x1 {monster,4852} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      723441,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Voler du papier toilette"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3797,
+      18768,
+      4
+     ],
+     "position": [
+      -64,
+      32
+     ],
+     "texte": "Ramener à {npc,3797} : x4 {item,18768}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3797,
+      18766,
+      10
+     ],
+     "position": [
+      -64,
+      32
+     ],
+     "texte": "Ramener à {npc,3797} : x10 {item,18766}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3797,
+      18767,
+      5
+     ],
+     "position": [
+      -64,
+      32
+     ],
+     "texte": "Ramener à {npc,3797} : x5 {item,18767}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3794,
+      18769,
+      1
+     ],
+     "position": [
+      -63,
+      30
+     ],
+     "texte": "Montrer à {npc,3794} : 1 {item,18769}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886676,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      30
+     ],
+     "texte": "Installer le banquier empaillé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3799,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      30
+     ],
+     "texte": "Aller voir {npc,3799}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3799,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      30
+     ],
+     "texte": "Aller voir {npc,3799}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      721850,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      30
+     ],
+     "texte": "Découvrir la carte : Traces du chasseur"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      721851,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      29
+     ],
+     "texte": "Découvrir la carte : Traces du chasseur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3800,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      29
+     ],
+     "texte": "Aller voir {npc,3800}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      722835,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      29
+     ],
+     "texte": "Découvrir la carte : Bosquet du Jabeurwookie"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3801,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      29
+     ],
+     "texte": "Aller voir {npc,3801}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886677,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      29
+     ],
+     "texte": "Vaincre Seurjone Téniel et son groupe de chasseurs"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3794,
+      18751,
+      1
+     ],
+     "position": [
+      -63,
+      30
+     ],
+     "texte": "Ramener à {npc,3794} : x1 {item,18751}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18731,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1850,
+ "nom": "Shyriiwook",
+ "objets": [],
+ "prerequis": []
+}

@@ -1,0 +1,201 @@
+{
+ "depart": [
+  {
+   "mapId": 91750919,
+   "npcId": 1597
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Muni d'un appareil topographique dernier cri, vous allez arpenter la base abyssale en long, en large et en travers. Tâchez de ne pas vous faire repérer pendant que vous prenez vos repères.",
+   "id": 2062,
+   "nom": "Relevez les niveaux",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453194,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      20
+     ],
+     "texte": "Découvrir la carte : Salle du Bassin"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453208,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      19
+     ],
+     "texte": "Découvrir la carte : Salle des Minerais"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453209,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      17
+     ],
+     "texte": "Découvrir la carte : Ascenseur du Cartographe"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453210,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      26
+     ],
+     "texte": "Découvrir la carte : Quartiers de Kralab Rah"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453212,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      26
+     ],
+     "texte": "Découvrir la carte : Salle des Poissons"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453168,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      25
+     ],
+     "texte": "Découvrir la carte : Ascenseur des Courants"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453166,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      25
+     ],
+     "texte": "Découvrir la carte : Salle des Arbres"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453164,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      25
+     ],
+     "texte": "Découvrir la carte : Salle de la Rocaille"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453163,
+      0,
+      0
+     ],
+     "position": [
+      23,
+      30
+     ],
+     "texte": "Découvrir la carte : Quartiers de Bosko Tho"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453161,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      31
+     ],
+     "texte": "Découvrir la carte : Ascenseur des Abîmes"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453159,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Découvrir la carte : Entrée de l'Aquadôme"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2196,
+      14815,
+      1
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Ramener à {npc,2196} : x1 {item,14815}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       14860,
+       5
+      ],
+      [
+       14819,
+       5
+      ],
+      [
+       14822,
+       5
+      ],
+      [
+       14862,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1442,
+ "nom": "Relevez les niveaux",
+ "objets": [],
+ "prerequis": []
+}

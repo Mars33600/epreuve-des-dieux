@@ -1,0 +1,46 @@
+{
+ "depart": [
+  {
+   "mapId": 54171466,
+   "npcId": 1281
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Baka Laïve vous a demandé d'exterminer des Gloursons sur le Mont Torrideau, dans leur ruche ou dans l'Antichambre et de lui apporter une preuve.",
+   "id": 1241,
+   "nom": "Chasse aux Gloursons",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1281,
+      11132,
+      50
+     ],
+     "position": [
+      -75,
+      -74
+     ],
+     "texte": "Ramener à {npc,1281} : x50 {item,11132}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 588,
+ "nom": "Ourse molle",
+ "objets": [],
+ "prerequis": []
+}

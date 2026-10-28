@@ -1,0 +1,48 @@
+{
+ "depart": [
+  {
+   "mapId": 108791296,
+   "npcId": 2000
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La troupe du Baron d'Ouillard n'est plus assez nombreuse pour exterminer les créatures du château de Harebourg. Darwin Chester compte sur vous pour leur prêter main forte : vous devez affronter des Cuirassés dans la Tannerie Écarlate.",
+   "id": 1909,
+   "nom": "Blouson noir",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2000,
+      14138,
+      50
+     ],
+     "position": [
+      -65,
+      -76
+     ],
+     "texte": "Ramener à {npc,2000} : x50 {item,14138}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1296,
+ "nom": "Blouson noir",
+ "objets": [],
+ "prerequis": [
+  626
+ ]
+}

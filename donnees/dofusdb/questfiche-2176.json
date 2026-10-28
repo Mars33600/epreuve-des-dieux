@@ -1,0 +1,65 @@
+{
+ "depart": [
+  {
+   "mapId": 206831621,
+   "npcId": 5895
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Quand un Grobelin fait du calcul mental pour compter le temps qui lui est nécessaire pour accomplir son devoir, il n'a plus le temps de rien !",
+   "id": 2832,
+   "nom": "Gobstination d'un Grobelin",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5895,
+      23692,
+      30
+     ],
+     "position": [
+      34,
+      -40
+     ],
+     "texte": "Ramener à {npc,5895} : x30 {item,23692}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       7379,
+       5
+      ],
+      [
+       7404,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2176,
+ "nom": "Gobstination d'un Grobelin",
+ "objets": [
+  [
+   1334,
+   30
+  ],
+  [
+   23693,
+   30
+  ],
+  [
+   23694,
+   30
+  ]
+ ],
+ "prerequis": [
+  2149
+ ]
+}

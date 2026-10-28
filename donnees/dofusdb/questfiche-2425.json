@@ -1,0 +1,113 @@
+{
+ "depart": [
+  {
+   "mapId": 219939844,
+   "npcId": 6354
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il y a des siècles, Maïmane aurait capturé les émotions des Douziens pour mettre fin à la guerre des cités. Jusqu'ici, vous aviez du mal à croire à cette fable... Cogner sur les plus féroces créatures du Monde des Douze vous permettra de la rendre un peu plus réelle.",
+   "id": 3082,
+   "nom": "Les totems de Maïmane",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6354,
+      26076,
+      1
+     ],
+     "position": [
+      2,
+      4
+     ],
+     "texte": "Ramener à {npc,6354} : x1 {item,26076}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6354,
+      26077,
+      1
+     ],
+     "position": [
+      2,
+      4
+     ],
+     "texte": "Ramener à {npc,6354} : x1 {item,26077}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6354,
+      26078,
+      1
+     ],
+     "position": [
+      2,
+      4
+     ],
+     "texte": "Ramener à {npc,6354} : x1 {item,26078}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6354,
+      26079,
+      1
+     ],
+     "position": [
+      2,
+      4
+     ],
+     "texte": "Ramener à {npc,6354} : x1 {item,26079}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6354,
+      26080,
+      1
+     ],
+     "position": [
+      2,
+      4
+     ],
+     "texte": "Ramener à {npc,6354} : x1 {item,26080}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6354,
+      26081,
+      1
+     ],
+     "position": [
+      2,
+      4
+     ],
+     "texte": "Ramener à {npc,6354} : x1 {item,26081}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       26058,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2425,
+ "nom": "Les totems de Maïmane",
+ "objets": [],
+ "prerequis": [
+  2423
+ ]
+}

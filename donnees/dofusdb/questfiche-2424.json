@@ -1,0 +1,61 @@
+{
+ "depart": [
+  {
+   "mapId": 214958850,
+   "npcId": 6212
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Tous les mortels font des cauchemars, mais seuls certains d'entre eux ont le privilège de pouvoir les vivre pleinement.",
+   "id": 3081,
+   "nom": "Le poids de son regard",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      913948,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -59
+     ],
+     "texte": "Jeter un rêve d'harmonie dans le puits démoniaque"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      913949,
+      0,
+      0
+     ],
+     "position": [
+      43,
+      -59
+     ],
+     "texte": "Soutenir le regard du Ch'Tyx pour entrer dans le cauchemar"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2424,
+ "nom": "Le poids de son regard",
+ "objets": [
+  [
+   25275,
+   1
+  ]
+ ],
+ "prerequis": [
+  2149
+ ]
+}

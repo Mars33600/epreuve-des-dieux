@@ -1,0 +1,87 @@
+{
+ "depart": [
+  {
+   "mapId": 160268,
+   "npcId": 3001
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Rassemblez quelques idoles en allant voir Harmonie Daule près de l'église d'Amakna, et partez tirer les oreilles des gardiens de donjon qui figurent sur la liste noire de Foluk, le dieu de l'Ouest : si vous revenez vainqueur, vous obtiendrez sa bénédiction. Et n'essayez pas de tricher en affrontant les monstres dans une arène, ça ne marchera pas.",
+   "id": 2282,
+   "nom": "La bénédiction de Foluk",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3651,
+      1,
+      0
+     ],
+     "position": [
+      -2,
+      -3
+     ],
+     "texte": "Vaincre x1 {monster,3651} en un seul combat avec l'altération {alteration,245} active"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3556,
+      1,
+      0
+     ],
+     "position": [
+      -5,
+      -54
+     ],
+     "texte": "Vaincre x1 {monster,3556} en un seul combat avec l'altération {alteration,246} active"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2968,
+      1,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Vaincre x1 {monster,2968} en un seul combat avec l'altération {alteration,247} active"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2982,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      12
+     ],
+     "texte": "Retourner voir {npc,2982}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11342,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1662,
+ "nom": "La bénédiction de Foluk",
+ "objets": [],
+ "prerequis": [
+  1659
+ ]
+}

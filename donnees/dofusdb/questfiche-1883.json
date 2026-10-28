@@ -1,0 +1,350 @@
+{
+ "depart": [
+  {
+   "mapId": 172490754,
+   "npcId": 4001
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez escorter un architecte pendant qu'il étudie la tour de Gisgoul.",
+   "id": 2523,
+   "nom": "Au pied du mur",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      728662,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Escorter Moctar Chitekt devant la Tour de Gisgoul"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4001,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Aller voir {npc,4001}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      728663,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Escorter Moctar Chitekt dans la Tour de Gisgoul"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4001,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Aller voir {npc,4001}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      728664,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Escorter Moctar Chitekt dans la Tour de Gisgoul"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4001,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Aller voir {npc,4001}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      728665,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Fouiller la pièce"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      728666,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Fouiller la pièce"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      729140,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Examiner le livre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4001,
+      0,
+      0
+     ],
+     "position": [
+      -16,
+      17
+     ],
+     "texte": "Aller voir {npc,4001}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3877,
+      19098,
+      1
+     ],
+     "position": [
+      -19,
+      21
+     ],
+     "texte": "Montrer à {npc,3877} : 1 {item,19098}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      728670,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      21
+     ],
+     "texte": "Interroger les mineurs gobelins"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3945,
+      991,
+      5
+     ],
+     "position": [
+      -17,
+      21
+     ],
+     "texte": "Ramener à {npc,3945} : x5 {item,991}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      729167,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      21
+     ],
+     "texte": "Fouiller la mine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      729168,
+      0,
+      0
+     ],
+     "position": [
+      -17,
+      21
+     ],
+     "texte": "Fouiller les affaires"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3877,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      21
+     ],
+     "texte": "Aller voir {npc,3877}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      728673,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      33
+     ],
+     "texte": "Enquêter à la milice de Brâkmar"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      728674,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      38
+     ],
+     "texte": "Découvrir la carte : Taverne du Chabrulé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      312,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      38
+     ],
+     "texte": "Aller voir {npc,312}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4002,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      38
+     ],
+     "texte": "Aller voir {npc,4002}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4003,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      38
+     ],
+     "texte": "Aller voir {npc,4003}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4004,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      38
+     ],
+     "texte": "Aller voir {npc,4004}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      729192,
+      0,
+      0
+     ],
+     "position": [
+      -26,
+      39
+     ],
+     "texte": "Découvrir la carte : Lieu du rendez-vous"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4003,
+      0,
+      0
+     ],
+     "position": [
+      -26,
+      39
+     ],
+     "texte": "Aller voir {npc,4003}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       13742,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1883,
+ "nom": "Au pied du mur",
+ "objets": [
+  [
+   991,
+   5
+  ]
+ ],
+ "prerequis": []
+}

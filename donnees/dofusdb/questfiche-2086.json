@@ -1,0 +1,202 @@
+{
+ "depart": [
+  {
+   "mapId": 197920772,
+   "npcId": 4964
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Crokalcrolak a disparu, il faut le retrouver. Mais Crocuzko est tout sauf une terre hospitalière.",
+   "id": 2742,
+   "nom": "Plongée dans un bain de sang",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      803203,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver des traces de Crokalcrolak aux alentours du zaap"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      803204,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver des traces de Crokalcrolak sur les crocodailles de Crokuzco"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      803205,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les autochtones de l'île à propos du parchemin mordillé et de la pierre de lune inaltérée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4988,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4988}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      803206,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se défendre contre l'attaque surprise des crocodailles"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4988,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4988}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      803207,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -17
+     ],
+     "texte": "Découvrir la carte : Puits de l'Eau-qui-mord"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4989,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -17
+     ],
+     "texte": "Aller voir {npc,4989}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      803208,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre les crocodailles adorateurs de Chaklaplok"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4989,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -17
+     ],
+     "texte": "Aller voir {npc,4989}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4963,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -17
+     ],
+     "texte": "Aller voir {npc,4963}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      804224,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Escorter Crokalcrolak jusqu'au Prêtre d'Ixchelonia"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      803210,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Suivre l'échange entre le Prêtre d'Ixchelonia et Crokalcrolak"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4988,
+      0,
+      0
+     ],
+     "position": [
+      -84,
+      -16
+     ],
+     "texte": "Aller voir {npc,4988}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       21210,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2086,
+ "nom": "Plongée dans un bain de sang",
+ "objets": [],
+ "prerequis": [
+  2085
+ ]
+}

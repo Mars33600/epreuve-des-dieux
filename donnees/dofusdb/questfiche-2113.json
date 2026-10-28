@@ -1,0 +1,290 @@
+{
+ "depart": [
+  {
+   "mapId": 202115594,
+   "npcId": 5309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La Galère de Servitude retient une âme prisonnière et pas n'importe laquelle : celle de Draconiros. Le dragon astral est retenu par cinq chaines de Servitude. Trop faible, il a besoin d'aide pour se libérer de ses entraves.",
+   "id": 2768,
+   "nom": "Briser ses chaines",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5315,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5315}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818488,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Tenter de détruire la première chaine de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818489,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Tenter de détruire la deuxième chaine de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6000,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,6000} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818490,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Tenter de détruire la troisième chaine de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5315,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5315}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3923,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,3923}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3923,
+      1460,
+      1
+     ],
+     "position": [
+      -29,
+      25
+     ],
+     "texte": "Ramener à {npc,3923} : x1 {item,1460}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3923,
+      1334,
+      10
+     ],
+     "position": [
+      -29,
+      25
+     ],
+     "texte": "Ramener à {npc,3923} : x10 {item,1334}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3923,
+      16460,
+      2
+     ],
+     "position": [
+      -29,
+      25
+     ],
+     "texte": "Ramener à {npc,3923} : x2 {item,16460}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3923,
+      22026,
+      10
+     ],
+     "position": [
+      -29,
+      25
+     ],
+     "texte": "Ramener à {npc,3923} : x10 {item,22026}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3923,
+      147,
+      1
+     ],
+     "position": [
+      -29,
+      25
+     ],
+     "texte": "Montrer à {npc,3923} : 1 {item,147}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825751,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      29
+     ],
+     "texte": "Jeter le Fortifiant de Volkaragnar dans la colonne de magmort et y plonger la tête du Marteau de boisaille"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825752,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      29
+     ],
+     "texte": "Se débarrasser des monstres qui bloquent l'accès au magmort et récupérer le Marteau de boisaille fortifié"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818492,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Tenter de détruire la troisième chaine de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818493,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Tenter de détruire la quatrième chaine de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818494,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Tenter de détruire la cinquième chaine de Servitude"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5315,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5315}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5955,
+      1,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Vaincre x1 {monster,5955} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818495,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retourner à l'intérieur de la figure de proue"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5316,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5316}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22223,
+       5
+      ],
+      [
+       22216,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2113,
+ "nom": "Briser ses chaines",
+ "objets": [
+  [
+   1460,
+   1
+  ],
+  [
+   1334,
+   10
+  ],
+  [
+   16460,
+   2
+  ],
+  [
+   147,
+   1
+  ]
+ ],
+ "prerequis": [
+  2112
+ ]
+}

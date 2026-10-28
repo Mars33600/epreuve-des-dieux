@@ -19,6 +19,7 @@ from typing import Literal
 import yaml
 from pydantic import BaseModel, ConfigDict, ValidationError
 
+from epreuve.contenu.fiche_dofusdb import FicheRepli
 from epreuve.contenu.fiche_duffus import lire_fiche, nettoyer_fiche  # noqa: F401 (interface figée : nettoyer_fiche vit ici)
 from epreuve.db.depot import ContenuFiche
 from epreuve.domaine.modeles import Nature, OrigineNature
@@ -94,12 +95,18 @@ class EtagePrepare:
     sans_fiche: list[str] = field(default_factory=list)
     rappels: list[str] = field(default_factory=list)
 
+    @property
+    def nb_fiches(self) -> dict[str, int]:
+        """Fiches par source (« duffus », « dofusdb ») ; les quêtes sans fiche sont dans `sans_fiche`."""
+        return {s: sum(1 for q in self.quetes if q.source_fiche == s) for s in ("duffus", "dofusdb")}
+
     def rapport(self) -> str:
         lignes = [f"Étage {self.numero} « {self.nom} » = tranche {self.tranche} (niveaux {self.niveau_min} à "
                   f"{self.niveau_max}, cap {self.level_cap})",
                   f"  {len(self.donjons)} donjons, {sum(len(d.cases) for d in self.donjons)} cases, "
                   f"{len(self.quetes)} quêtes ({sum(1 for q in self.quetes if q.nature == 'principale')} principales)",
-                  f"  quêtes sans fiche Duffus : {len(self.sans_fiche)}"
+                  f"  fiches : {self.nb_fiches['duffus']} Duffus, {self.nb_fiches['dofusdb']} DofusDB, "
+                  f"{len(self.sans_fiche)} sans fiche"
                   + (f" ({', '.join(self.sans_fiche)})" if self.sans_fiche else "")]
         lignes += [f"  alerte : {a}" for a in self.alertes]
         return "\n".join(lignes)
@@ -242,6 +249,32 @@ def derniere_aspiration(racine: Path = RACINE / "donnees" / "duffus") -> Path:
     return dossiers[-1]
 
 
+def entrees_sans_fiche(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage],
+                       dofus_retenus: frozenset[str]) -> dict[int, str]:
+    """Les quêtes de l'étage sans fiche Duffus (id Duffus → titre) : les seules que le repli DofusDB a le droit
+    de toucher."""
+    e = construire(numero, aspi, config, dofus_retenus, forcer=True)
+    return {int(q.duffus_id): q.nom for q in e.quetes if q.fiche is None}
+
+
+async def fiches_repli_etage(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage],
+                             dofus_retenus: frozenset[str], client) -> dict[int, FicheRepli]:
+    """Les fiches DofusDB de l'étage, demandées pour les SEULES quêtes sans fiche Duffus."""
+    from epreuve.contenu.fiche_dofusdb import fiches_de_repli
+
+    manquantes = entrees_sans_fiche(numero, aspi, config, dofus_retenus)
+    return await fiches_de_repli(manquantes, client, _normaliser, duffus_par_nom(aspi))
+
+
+def duffus_par_nom(aspi: Aspiration) -> dict[str, list[int]]:
+    """Nom normalisé → ids Duffus des quêtes du guide (pour le rapprochement exact avec DofusDB)."""
+    sortie: dict[str, list[int]] = {}
+    for q in aspi.quetes.values():
+        if q.get("quest_ornot"):
+            sortie.setdefault(_normaliser(q["title"]), []).append(q["id"])
+    return sortie
+
+
 def slug_quete(entree: Mapping) -> str | None:
     url = entree.get("url") or ""
     return url.removeprefix("/quete/").strip("/") or None if url.startswith("/quete/") else None
@@ -304,11 +337,15 @@ def donjon_prepare(page: Mapping, aspi: Aspiration, ordre: int, bloc: str | None
 
 def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage], dofus_retenus: frozenset[str],
                forcees: Mapping[str, Nature] | None = None, quetes_ouvertes: Mapping[str, str] | None = None,
-               forcer: bool = False, guides_repli: Mapping[str, frozenset[int]] | None = None) -> EtagePrepare:
+               forcer: bool = False, guides_repli: Mapping[str, frozenset[int]] | None = None,
+               fiches_repli: Mapping[int, FicheRepli] | None = None) -> EtagePrepare:
     """L'étage `numero`, prêt à écrire. `forcees` : natures choisies par un admin (duffus_id → nature) ;
     `quetes_ouvertes` : slug → notre adresse, pour les quêtes des étages déjà visibles (liens des fiches).
 
-    ConstructionArretee au-delà de 5 % de quêtes sans fiche Duffus, sauf `forcer`."""
+    `fiches_repli` : id Duffus → fiche DofusDB (`contenu.fiche_dofusdb`). Elle n'est consultée QUE pour une quête
+    sans fiche Duffus. Le seuil de 5 % s'applique après ce repli.
+
+    ConstructionArretee au-delà de 5 % de quêtes sans aucune fiche, sauf `forcer`."""
     actives = sorted((r for r in aspi.ranges if r["is_active"]), key=lambda r: r["order_index"])
     cfg = config.get(numero) or _ConfigEtage()
     if cfg.tranche is not None:
@@ -371,21 +408,30 @@ def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage]
         page = aspi.pages.get(slug) if slug else None
         fiche = (lire_fiche(page, entree, slug_vers_id, ouvertes, aspi.ressources.get(entree["id"], []))
                  if page else None)
-        if fiche is None:
-            e.sans_fiche.append(entree["title"])
+        source: Literal["duffus", "dofusdb"] | None = "duffus" if fiche else None
+        if fiche is None:  # seul cas où DofusDB est consulté
+            repli = (fiches_repli or {}).get(entree["id"])
+            if repli and repli.fiche:
+                fiche, source = repli.fiche, "dofusdb"
+            else:
+                e.sans_fiche.append(entree["title"])
+                if repli and repli.alerte:
+                    e.alertes.append(repli.alerte)
         c = classement[entree["id"]]
         jusqu, lier = jusqu_ou_et_a_lier(entree)
         e.quetes.append(QuetePreparee(str(entree["id"]), entree["title"].strip(), _niveau(entree.get("level")), bloc,
                                       ordre, c.nature, c.origine, c.dofus, jusqu, lier, fiche,
-                                      "duffus" if fiche else None))
+                                      source))
     if e.quetes and len(e.sans_fiche) / len(e.quetes) > SEUIL_SANS_FICHE:
-        message = (f"{len(e.sans_fiche)} quêtes sur {len(e.quetes)} sans fiche Duffus (plus de 5 %) : "
+        message = (f"{len(e.sans_fiche)} quêtes sur {len(e.quetes)} sans aucune fiche (plus de 5 %) : "
                    "décision de Marceau nécessaire, relancer avec --forcer pour passer outre")
         if not forcer:
             raise ConstructionArretee(message)
         e.alertes.append(message)
     if e.sans_fiche:
-        e.alertes.append(f"{len(e.sans_fiche)} quête(s) sans fiche Duffus : {', '.join(e.sans_fiche)}")
+        e.alertes.append(f"{len(e.sans_fiche)} quête(s) sans fiche : {', '.join(e.sans_fiche)}")
+    if e.nb_fiches["dofusdb"]:
+        e.alertes.append(f"{e.nb_fiches['dofusdb']} fiche(s) construites depuis DofusDB (absentes chez Duffus)")
 
     for page in sorted(aspi.donjons.values(), key=lambda p: p["slug"]):
         d, _ = donjon_prepare(page, aspi, 0, None)

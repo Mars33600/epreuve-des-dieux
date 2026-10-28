@@ -1,0 +1,88 @@
+{
+ "depart": [
+  {
+   "mapId": 197919748,
+   "npcId": 5011
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Trois gobelins ont eu le tort de suivre une fausse carte au trésor : les voilà coincés sur Crocuzko. Tirez-les de ce mauvais pas en réduisant la population de crocodailles avides de chair fraîche, et assurez-vous que la voie est libre pour que les nabots puissent s'enfuir.",
+   "id": 2744,
+   "nom": "Le tort tue",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5810,
+      20,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x20 {monster,5810}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5808,
+      20,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x20 {monster,5808}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5809,
+      20,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x20 {monster,5809}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5811,
+      20,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x20 {monster,5811}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5011,
+      0,
+      0
+     ],
+     "position": [
+      -83,
+      -15
+     ],
+     "texte": "Retourner voir {npc,5011}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       21209,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2088,
+ "nom": "Le tort tue",
+ "objets": [],
+ "prerequis": [
+  2085
+ ]
+}

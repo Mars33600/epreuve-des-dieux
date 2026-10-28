@@ -1,0 +1,212 @@
+{
+ "depart": [
+  {
+   "mapId": 122421248,
+   "npcId": 2205
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez récupérer un certain nombre de composants pour ensuite les transformer dans le creuset de Mériana. Chaussez vos meilleures bottes, vous allez en avoir besoin.",
+   "id": 2691,
+   "nom": "Le creuset de Mériana",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767941,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Consulter la page du grimoire pour obtenir des informations sur les composants"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2205,
+      20159,
+      3
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer à {npc,2205} : 3 {item,20159}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2205,
+      20160,
+      3
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer à {npc,2205} : 3 {item,20160}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2205,
+      20161,
+      1
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer à {npc,2205} : 1 {item,20161}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2205,
+      20163,
+      1
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer à {npc,2205} : 1 {item,20163}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2205,
+      20165,
+      7
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer à {npc,2205} : 7 {item,20165}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2205,
+      20167,
+      1
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer à {npc,2205} : 1 {item,20167}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767978,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un alchimiste ayant accompli le Grand Œuvre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      778992,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver l'alchimiste et lui prouver votre détermination"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      771919,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      27
+     ],
+     "texte": "Parler à l'alchimiste"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2205,
+      20164,
+      1
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer à {npc,2205} : 1 {item,20164}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      770938,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Placer les composants dans le creuset"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      767983,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      -3
+     ],
+     "texte": "Montrer le résultat de la transmutation à Mériana"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17988,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2039,
+ "nom": "Le creuset de Mériana",
+ "objets": [
+  [
+   20162,
+   10
+  ],
+  [
+   17995,
+   10
+  ],
+  [
+   7033,
+   10
+  ],
+  [
+   11110,
+   10
+  ]
+ ],
+ "prerequis": [
+  2038
+ ]
+}

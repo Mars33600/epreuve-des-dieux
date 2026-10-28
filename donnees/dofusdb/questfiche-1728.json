@@ -1,0 +1,180 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez conclure l'arrangement de la situation entre Bonta et Amakna.",
+   "id": 2365,
+   "nom": "On se calme",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2014,
+      9315,
+      1
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Ramener à {npc,2014} : x1 {item,9315}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3237,
+      9314,
+      1
+     ],
+     "position": [
+      -2,
+      4
+     ],
+     "texte": "Ramener à {npc,3237} : x1 {item,9314}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3237,
+      9314,
+      1
+     ],
+     "position": [
+      9,
+      4
+     ],
+     "texte": "Ramener à {npc,3237} : x1 {item,9314}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6555,
+      9314,
+      1
+     ],
+     "position": [
+      6,
+      16
+     ],
+     "texte": "Ramener à {npc,6555} : x1 {item,9314}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      825,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -1
+     ],
+     "texte": "Aller voir {npc,825}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1005,
+      9312,
+      1
+     ],
+     "position": [
+      1,
+      0
+     ],
+     "texte": "Ramener à {npc,1005} : x1 {item,9312}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2014,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Aller voir {npc,2014}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      631229,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire le livre L'invasion d'Uk'Not'Allag"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1502,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Aller voir {npc,1502}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4325,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Aller voir {npc,4325}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17854,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1728,
+ "nom": "On se calme",
+ "objets": [
+  [
+   9312,
+   1
+  ]
+ ],
+ "prerequis": [
+  1723
+ ]
+}

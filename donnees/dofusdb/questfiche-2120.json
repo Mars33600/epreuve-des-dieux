@@ -1,0 +1,338 @@
+{
+ "depart": [
+  {
+   "mapId": 200804356,
+   "npcId": 5130
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Suite à une vision menaçante, Draconiros vous a envoyé consulter les prophéties d'Enga Egrab au temple des Eliotropes.",
+   "id": 2775,
+   "nom": "Rêves translucides",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820880,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      32
+     ],
+     "texte": "Se rendre au temple des Eliotropes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2825,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      32
+     ],
+     "texte": "Aller voir {npc,2825}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820901,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Examiner un premier document dans la bibliothèque eliotrope"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820902,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Examiner un deuxième document dans la bibliothèque eliotrope"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820903,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Examiner un troisième document dans la bibliothèque eliotrope"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820904,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Examiner un quatrième document dans la bibliothèque eliotrope"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820905,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Relire le document sur l'Eliocalypse pour prendre des notes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2825,
+      0,
+      0
+     ],
+     "position": [
+      16,
+      32
+     ],
+     "texte": "Retourner voir {npc,2825}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1590,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      25
+     ],
+     "texte": "Aller voir {npc,1590}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820918,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer le bibliomancien sur Pandala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820921,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -27
+     ],
+     "texte": "Vaincre les Eliotropes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5372,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -27
+     ],
+     "texte": "Aller voir {npc,5372}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5372,
+      22124,
+      3
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Ramener à {npc,5372} : x3 {item,22124}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      22132,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,22132} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821041,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Aider Hiboukin à lancer le sortilège de bibliomancie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821042,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire la transcription de la prophétie eliotrope"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Aller voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821086,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retrouver Maisial près du zaap oublié au large d'Astrub"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Aller voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821087,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Traverser l'arche de Vili"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4822,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Aller voir {npc,4822}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821531,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Lire le manuscrit du sanctuaire pour en apprendre davantage sur le conseil"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4822,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -20
+     ],
+     "texte": "Retourner voir {npc,4822}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2120,
+ "nom": "Rêves translucides",
+ "objets": [
+  [
+   397,
+   2
+  ],
+  [
+   447,
+   8
+  ],
+  [
+   13365,
+   2
+  ],
+  [
+   311,
+   4
+  ],
+  [
+   428,
+   10
+  ]
+ ],
+ "prerequis": [
+  2099
+ ]
+}

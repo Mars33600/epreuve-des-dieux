@@ -1,0 +1,277 @@
+{
+ "depart": [
+  {
+   "mapId": 207622146,
+   "npcId": 5583
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La menace que représentait Nasumara ayant été écartée, il est temps de reprendre votre entraînement où vous l'aviez laissé. La cérémonie du Fermenthé devrait vous permettre de ressentir votre chi et d'évoluer en tant que Pandawushuka.",
+   "id": 2844,
+   "nom": "Nidanwa : Harmonie intérieure",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5562,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -27
+     ],
+     "texte": "Aller voir {npc,5562}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      24137,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,24137} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879038,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -27
+     ],
+     "texte": "Participer à une cérémonie du Fermenthé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5583,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Retourner voir {npc,5583}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5837,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -40
+     ],
+     "texte": "Aller voir {npc,5837}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5837,
+      23626,
+      1
+     ],
+     "position": [
+      36,
+      -40
+     ],
+     "texte": "Montrer à {npc,5837} : 1 {item,23626}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890934,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -41
+     ],
+     "texte": "Vaincre les Guerrières Spiritueuses équipé du Bandeau de Spiritueur"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879040,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -40
+     ],
+     "texte": "Faire le point avec Danaba Retzu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879041,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Demander conseil à Surivitna"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5561,
+      16387,
+      30
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Ramener à {npc,5561} : x30 {item,16387}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5561,
+      7393,
+      3
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Ramener à {npc,5561} : x3 {item,7393}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5561,
+      24150,
+      1
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Ramener à {npc,5561} : x1 {item,24150}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879341,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Respirer la fumée méditative préparée par le shaman"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879339,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Examiner l'étrange prisme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879338,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Faire face à vos manifestations du Wukin et du Wukang intérieures"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879337,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -27
+     ],
+     "texte": "Reprendre vos esprits et discuter avec Surivitna"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      879336,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Annoncer la nouvelle au Maître du Pandawushu"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2188,
+ "nom": "Nidanwa : Harmonie intérieure",
+ "objets": [
+  [
+   425,
+   30
+  ],
+  [
+   16385,
+   20
+  ],
+  [
+   1688,
+   1
+  ],
+  [
+   2656,
+   10
+  ],
+  [
+   23626,
+   1
+  ],
+  [
+   16387,
+   30
+  ],
+  [
+   7393,
+   3
+  ]
+ ],
+ "prerequis": [
+  2187
+ ]
+}

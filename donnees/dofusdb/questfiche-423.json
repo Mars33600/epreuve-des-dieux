@@ -1,0 +1,222 @@
+{
+ "depart": [
+  {
+   "mapId": 213910788,
+   "npcId": 6312
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Terra Cogita détient des informations sur l'emplacement des statuettes de Sumens. Elviana Tirips vous a chargé de mettre la main dessus avant les Brâkmariens.",
+   "id": 788,
+   "nom": "Apprentissage : Maître des Parchemins",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1049,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      -59
+     ],
+     "texte": "Aller voir {npc,1049}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6365,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Aller voir {npc,6365}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6365,
+      17060,
+      5
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6365} : x5 {item,17060}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6365,
+      519,
+      10
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6365} : x10 {item,519}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6365,
+      16389,
+      14
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6365} : x14 {item,16389}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6365,
+      16456,
+      14
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6365} : x14 {item,16456}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6365,
+      16469,
+      14
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6365} : x14 {item,16469}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6365,
+      16154,
+      4
+     ],
+     "position": [
+      -29,
+      -54
+     ],
+     "texte": "Ramener à {npc,6365} : x4 {item,16154}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      887644,
+      0,
+      0
+     ],
+     "position": [
+      -15,
+      -5
+     ],
+     "texte": "Mettre de l'eau enchantée dans la Potion de Souvenir : Mémoire"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1049,
+      9538,
+      1
+     ],
+     "position": [
+      -29,
+      -59
+     ],
+     "texte": "Ramener à {npc,1049} : x1 {item,9538}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6312,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,6312}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      887643,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      29
+     ],
+     "texte": "Trouver la statuette de Sumens cachée dans le Temple du Grand Ougah"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6312,
+      9532,
+      1
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Ramener à {npc,6312} : x1 {item,9532}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 423,
+ "nom": "Apprentissage : Maître des Parchemins",
+ "objets": [
+  [
+   17060,
+   5
+  ],
+  [
+   519,
+   10
+  ],
+  [
+   16389,
+   14
+  ],
+  [
+   16456,
+   14
+  ],
+  [
+   16469,
+   14
+  ],
+  [
+   16154,
+   4
+  ]
+ ],
+ "prerequis": []
+}

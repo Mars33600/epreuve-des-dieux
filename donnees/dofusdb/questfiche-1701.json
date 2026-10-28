@@ -1,0 +1,150 @@
+{
+ "depart": [
+  {
+   "mapId": 161481986,
+   "npcId": 3124
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Ecalice risque d'être condamnée pour avoir mangé une part de tarte. Il se peut bien que vous soyez pour quelque chose dans cette affaire : votre honneur et votre honnêteté vous commandent donc d'intervenir lors du procès. Si vous n'êtes doté d'aucune de ces qualités, disons que c'est juste pour passer le temps.",
+   "id": 2335,
+   "nom": "Une parodie de jeustice",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      608483,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre sur les lieux du procès d'Ecalice"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      611030,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -18
+     ],
+     "texte": "Écouter le juge royal"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      610997,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -18
+     ],
+     "texte": "Écouter l'acte d'accusation"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      611005,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -18
+     ],
+     "texte": "Entendre le premier témoignage"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      611023,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -18
+     ],
+     "texte": "Témoigner auprès de la Cour"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      610996,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -18
+     ],
+     "texte": "Vaincre les gardes du Grand Jeu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3183,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -18
+     ],
+     "texte": "Aller voir {npc,3183}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      611021,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un refuge pour Ecalice dans le temple de Kerubim"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3183,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -22
+     ],
+     "texte": "Aller voir {npc,3183}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       17625,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1701,
+ "nom": "Une parodie de jeustice",
+ "objets": [],
+ "prerequis": [
+  1700
+ ]
+}

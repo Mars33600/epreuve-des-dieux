@@ -1,0 +1,102 @@
+{
+ "depart": [
+  {
+   "mapId": 169082888,
+   "npcId": 3264
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Santiagob veut attraper un gros poisson. Comme vous ne pouvez rien refuser à un gobelin, vous vous êtes porté volontaire pour réaliser son rêve.",
+   "id": 2401,
+   "nom": "Le vieux gob et la mer",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3264,
+      18107,
+      7
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Montrer à {npc,3264} : 7 {item,18107}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      649712,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Cacher les appâts"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3264,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Retourner voir {npc,3264}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4513,
+      1,
+      0
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Vaincre x1 {monster,4513} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3264,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Aller voir {npc,3264}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17973,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1764,
+ "nom": "Le vieux gob et la mer",
+ "objets": [],
+ "prerequis": []
+}

@@ -1,0 +1,195 @@
+{
+ "depart": [
+  {
+   "mapId": 168559616,
+   "npcId": 3299
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La Xélor Umra Tawil a besoin de vos compétences pour parfaire ses connaissances.",
+   "id": 2388,
+   "nom": "L'odeur devant le seuil",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1601,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      25
+     ],
+     "texte": "Aller voir {npc,1601}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886818,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer l'Anneau de Pierres"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3299,
+      0,
+      0
+     ],
+     "position": [
+      26,
+      26
+     ],
+     "texte": "Aller voir {npc,3299}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      18082,
+      1,
+      0
+     ],
+     "position": [
+      26,
+      26
+     ],
+     "texte": "Fabriquer 1 {item,18082} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      18083,
+      1,
+      0
+     ],
+     "position": [
+      26,
+      26
+     ],
+     "texte": "Fabriquer 1 {item,18083} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3299,
+      18084,
+      8
+     ],
+     "position": [
+      26,
+      26
+     ],
+     "texte": "Ramener à {npc,3299} : x8 {item,18084}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3299,
+      18082,
+      1
+     ],
+     "position": [
+      26,
+      26
+     ],
+     "texte": "Ramener à {npc,3299} : x1 {item,18082}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3299,
+      18083,
+      1
+     ],
+     "position": [
+      26,
+      26
+     ],
+     "texte": "Ramener à {npc,3299} : x1 {item,18083}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17863,
+       10
+      ],
+      [
+       17986,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1751,
+ "nom": "L'odeur devant le seuil",
+ "objets": [
+  [
+   17991,
+   6
+  ],
+  [
+   17992,
+   6
+  ],
+  [
+   17993,
+   6
+  ],
+  [
+   17994,
+   6
+  ],
+  [
+   17995,
+   6
+  ],
+  [
+   17160,
+   6
+  ],
+  [
+   17975,
+   2
+  ],
+  [
+   17977,
+   2
+  ],
+  [
+   17978,
+   2
+  ],
+  [
+   17970,
+   2
+  ],
+  [
+   17971,
+   2
+  ],
+  [
+   17972,
+   2
+  ],
+  [
+   17983,
+   2
+  ],
+  [
+   17986,
+   2
+  ]
+ ],
+ "prerequis": []
+}

@@ -1,0 +1,159 @@
+{
+ "depart": [
+  {
+   "mapId": 221250564,
+   "npcId": 6685
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Une créature fantasque et insaisissable nourrit le feu spectral qui consume le sceau de Terrakourial : vous devez trouver un moyen de la neutraliser, sans quoi tous vos efforts auront été inutiles.",
+   "id": 3103,
+   "nom": "Quand les esprits s'échauffent",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933495,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer l'ancienne forêt mystifiée à la recherche de l'esprit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933496,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -67
+     ],
+     "texte": "Affronter les créatures de la forêt"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933497,
+      0,
+      0
+     ],
+     "position": [
+      -77,
+      -67
+     ],
+     "texte": "Tenter de capturer l'esprit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933498,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Solliciter l'aide d'un spécialiste des esprits"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      937722,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -44
+     ],
+     "texte": "Attirer l'attention de la Kitsoune à neuf queues par une démonstration de force"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933501,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -44
+     ],
+     "texte": "Passer un marché avec Koumiho"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      938329,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -44
+     ],
+     "texte": "Rapporter les délices des Kitsous à Jibakurei"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933503,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      18
+     ],
+     "texte": "Retourner dans la cave de la chaumière et rejoindre l'esprit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      938328,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      18
+     ],
+     "texte": "Imposer la volonté d'Inali à l'esprit boutefeu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933505,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      19
+     ],
+     "texte": "Examiner à nouveau le sceau de Terrakourial"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       26264,
+       6
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2447,
+ "nom": "Quand les esprits s'échauffent",
+ "objets": [],
+ "prerequis": [
+  2446
+ ]
+}

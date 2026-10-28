@@ -1,0 +1,168 @@
+{
+ "depart": [
+  {
+   "mapId": 179309058,
+   "npcId": 3826
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez trouver Xaniel, le familier de Rod et Rem, avant les chasseurs.",
+   "id": 2489,
+   "nom": "Il a fui, il a tout compris",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      723091,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      29
+     ],
+     "texte": "Découvrir la carte : Lieu de l'altercation"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886654,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      29
+     ],
+     "texte": "Chercher des traces du passage de Xaniel sur les cartes avoisinantes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886655,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les chasseurs du camp sur la capture d'une Gerbouille"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886656,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces à proximité du camp"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3826,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      30
+     ],
+     "texte": "Aller voir {npc,3826}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886657,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les aventuriers à proximité du camp des chasseurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886658,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      32
+     ],
+     "texte": "Se frotter aux déchets pour masquer son odeur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3826,
+      0,
+      0
+     ],
+     "position": [
+      -62,
+      30
+     ],
+     "texte": "Aller voir {npc,3826}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886659,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une bouteille particulière et la placer au sud de l'île"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886660,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher Xaniel à l'est de l'île"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3826,
+      18784,
+      1
+     ],
+     "position": [
+      -62,
+      30
+     ],
+     "texte": "Ramener à {npc,3826} : x1 {item,18784}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18735,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1849,
+ "nom": "Il a fui, il a tout compris",
+ "objets": [
+  [
+   18784,
+   1
+  ]
+ ],
+ "prerequis": [
+  1848
+ ]
+}

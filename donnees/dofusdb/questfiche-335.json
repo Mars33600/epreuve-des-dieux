@@ -1,0 +1,345 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il semblerait qu'Ebuf Of El ait encore besoin de vos services concernant le Marteau de Lumière et son esprit.",
+   "id": 966,
+   "nom": "Esprit, es-tu là ?",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6311,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,6311}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6312,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Aller voir {npc,6312}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1091,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -55
+     ],
+     "texte": "Aller voir {npc,1091}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      80,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Aller voir {npc,80}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4337,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -19
+     ],
+     "texte": "Aller voir {npc,4337}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1154,
+      0,
+      0
+     ],
+     "position": [
+      -18,
+      8
+     ],
+     "texte": "Aller voir {npc,1154}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891013,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver des informations sur l'emplacement de la dalle Enutrof"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891014,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Désactiver la magie de la dalle Ecaflip"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891015,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Désactiver la magie de la dalle Xélor"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891016,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Désactiver la magie de la dalle Enutrof"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891017,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      -31
+     ],
+     "texte": "Débloquer l'accès à la grotte"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4252,
+      1,
+      0
+     ],
+     "position": [
+      -14,
+      -32
+     ],
+     "texte": "Vaincre x1 {monster,4252} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3054,
+      17472,
+      1
+     ],
+     "position": [
+      -14,
+      -32
+     ],
+     "texte": "Ramener à {npc,3054} : x1 {item,17472}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891018,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      -31
+     ],
+     "texte": "Ouvrir la grotte"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1153,
+      0,
+      0
+     ],
+     "position": [
+      -15,
+      -32
+     ],
+     "texte": "Aller voir {npc,1153}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      583929,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Esprit de Lumière dans le Cimetière des Torturés."
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      993,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      40
+     ],
+     "texte": "Aller voir {npc,993}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891019,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher les personnes dont Nosilla Budois a fait mention"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      807,
+      313,
+      35
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Ramener à {npc,807} : x35 {item,313}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      807,
+      16454,
+      35
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Ramener à {npc,807} : x35 {item,16454}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      807,
+      11337,
+      1
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Ramener à {npc,807} : x1 {item,11337}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      807,
+      11339,
+      10
+     ],
+     "position": [
+      6,
+      -21
+     ],
+     "texte": "Ramener à {npc,807} : x10 {item,11339}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      993,
+      9270,
+      1
+     ],
+     "position": [
+      -14,
+      40
+     ],
+     "texte": "Ramener à {npc,993} : x1 {item,9270}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6311,
+      10200,
+      1
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Ramener à {npc,6311} : x1 {item,10200}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 335,
+ "nom": "Esprit, es-tu là ?",
+ "objets": [
+  [
+   313,
+   35
+  ],
+  [
+   16454,
+   35
+  ],
+  [
+   10200,
+   1
+  ],
+  [
+   11337,
+   1
+  ],
+  [
+   11339,
+   10
+  ]
+ ],
+ "prerequis": [
+  334
+ ]
+}

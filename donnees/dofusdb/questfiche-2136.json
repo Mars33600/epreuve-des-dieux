@@ -1,0 +1,226 @@
+{
+ "depart": [
+  {
+   "mapId": 183763980,
+   "npcId": 5377
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pour convaincre la Mort de ne pas rejoindre les Cavaliers, vous devez la rencontrer sous son aspect le plus menaçant. D'après Maisial, le Maître Corbac connaît un moyen d'appeler la Grande Faucheuse sur le Monde des Douze.",
+   "id": 2791,
+   "nom": "L'avis de la Mort",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      828756,
+      0,
+      0
+     ],
+     "position": [
+      -15,
+      -62
+     ],
+     "texte": "Parler à Virgil pour entrer dans la salle du trône du Maître Corbac"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5485,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -57
+     ],
+     "texte": "Aller voir {npc,5485}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5485,
+      22449,
+      1
+     ],
+     "position": [
+      -15,
+      -62
+     ],
+     "texte": "Ramener à {npc,5485} : x1 {item,22449}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      833272,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir des informations sur les chachas noirs auprès d'une sorcière"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832493,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un temple secret du dieu des chachas noirs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832501,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -34
+     ],
+     "texte": "Prier le dieu des chachas noirs et lui offrir une sousouris albinos"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5499,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -34
+     ],
+     "texte": "Aller voir {npc,5499}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832517,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Discuter avec Maisial de ce que vous avez découvert"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832506,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire la prophétie mentionnant un chacha noir"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5377,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      32
+     ],
+     "texte": "Aller voir {npc,5377}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832537,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Débusquer Chabuz avec de l'herbe à chacha divine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832519,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -78
+     ],
+     "texte": "Appeler la Mort sur le Monde des Douze"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5468,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -78
+     ],
+     "texte": "Aller voir {npc,5468}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6121,
+      1,
+      0
+     ],
+     "position": [
+      8,
+      -78
+     ],
+     "texte": "Vaincre x1 {monster,6121} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832539,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -78
+     ],
+     "texte": "Convaincre Thanatena de ne pas rejoindre les Cavaliers de l'Eliocalypse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832540,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Retourner voir Maisial au temple de Xélor"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2136,
+ "nom": "L'avis de la Mort",
+ "objets": [],
+ "prerequis": [
+  2138
+ ]
+}

@@ -1,0 +1,225 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le pacte récupéré auprès de Qu'Tan était un faux. Plutôt que de vous renvoyer combattre de suite, il vous charge d'une enquête sur les pierres.",
+   "id": 2360,
+   "nom": "Il ne faut pas se fier aux apparences",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1247,
+      0,
+      0
+     ],
+     "position": [
+      -79,
+      -42
+     ],
+     "texte": "Aller voir {npc,1247}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6312,
+      17783,
+      1
+     ],
+     "position": [
+      -34,
+      -58
+     ],
+     "texte": "Ramener à {npc,6312} : x1 {item,17783}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4341,
+      17783,
+      1
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Montrer à {npc,4341} : 1 {item,17783}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1574,
+      17783,
+      1
+     ],
+     "position": [
+      7,
+      -19
+     ],
+     "texte": "Montrer à {npc,1574} : 1 {item,17783}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3192,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -2
+     ],
+     "texte": "Aller voir {npc,3192}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3196,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Aller voir {npc,3196}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      81,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Aller voir {npc,81}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3193,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      12
+     ],
+     "texte": "Aller voir {npc,3193}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      239,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      18
+     ],
+     "texte": "Aller voir {npc,239}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      81,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Aller voir {npc,81}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2348,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -36
+     ],
+     "texte": "Aller voir {npc,2348}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2347,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      -36
+     ],
+     "texte": "Aller voir {npc,2347}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      58,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      2
+     ],
+     "texte": "Aller voir {npc,58}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1723,
+ "nom": "Il ne faut pas se fier aux apparences",
+ "objets": [],
+ "prerequis": [
+  1721
+ ]
+}

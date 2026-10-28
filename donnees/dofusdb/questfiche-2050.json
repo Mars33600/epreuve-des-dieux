@@ -1,0 +1,294 @@
+{
+ "depart": [
+  {
+   "mapId": 163054594,
+   "npcId": 3428
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous voilà prêt à partir en guerre contre les Nordes. Suivez les fils d'argent grâce au Troisième Œil, et gagnez votre liberté avec un bon coup de ciseaux. Vous ne réussirez peut-être pas à vous affranchir de la dictature du destin, mais vous aurez au moins essayé.",
+   "id": 2703,
+   "nom": "La fin... ou le commencement",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768861,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre le fil du passé jusqu'au rouet de Clothurde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768862,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver comment éloigner les fantômes du passé"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2974,
+      20428,
+      1
+     ],
+     "position": [
+      -1,
+      -12
+     ],
+     "texte": "Ramener à {npc,2974} : x1 {item,20428}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      775537,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -13
+     ],
+     "texte": "Éloigner les fantômes avec l'aide de Snuffles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768864,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -13
+     ],
+     "texte": "Couper le fil de Ce qui a été"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768865,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre le fil du présent jusqu'au rouet de Lachandi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      775636,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir de l'aide pour combattre les pantins contrôlés par le destin"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      775638,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      -21
+     ],
+     "texte": "Vaincre les pantins avec l'aide d'Artand"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768869,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      -21
+     ],
+     "texte": "Couper le fil de Ce qui est"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768870,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Suivre le fil du futur jusqu'au rouet d'Atroskulda"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768872,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir le moyen de neutraliser les Larmes de l'Ogre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768874,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -28
+     ],
+     "texte": "Faire disparaître les Larmes avec l'aide d'Aisling"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2802,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -28
+     ],
+     "texte": "Aller voir {npc,2802}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768875,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -28
+     ],
+     "texte": "Couper le fil de Ce qui sera"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768876,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -3
+     ],
+     "texte": "Parler au vieux de la vieille qui vous attend à la taverne d'Incarnam"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768877,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Retourner dans le sanctuaire où se joue le destin du monde"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768878,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Parler aux Nordes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768879,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Affronter la colère des Nordes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768880,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Assumer votre choix et prendre en main votre destinée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      768881,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Parler à Ganymède pour conclure la quête des Dofus"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2050,
+ "nom": "La fin... ou le commencement",
+ "objets": [
+  [
+   737,
+   1
+  ],
+  [
+   694,
+   1
+  ],
+  [
+   739,
+   1
+  ],
+  [
+   7754,
+   1
+  ],
+  [
+   7115,
+   1
+  ],
+  [
+   7114,
+   1
+  ]
+ ],
+ "prerequis": [
+  2049
+ ]
+}

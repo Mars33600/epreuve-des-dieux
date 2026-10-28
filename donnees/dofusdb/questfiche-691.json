@@ -1,0 +1,38 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre le Korriandre chez lui et sortir vivant de son antre.",
+   "id": 1306,
+   "nom": "Porte, Korriandre, trésor",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55694,
+      0,
+      0
+     ],
+     "position": [
+      -73,
+      -69
+     ],
+     "texte": "Découvrir la carte : Dernière salle de l'antre."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 691,
+ "nom": "Porte, Korriandre, trésor",
+ "objets": [],
+ "prerequis": [
+  624
+ ]
+}

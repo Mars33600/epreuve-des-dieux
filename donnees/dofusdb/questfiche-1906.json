@@ -1,0 +1,276 @@
+{
+ "depart": [
+  {
+   "mapId": 183242244,
+   "npcId": 4053
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Bien que l'Externam soit une destination très prisée des mortels, y entrer avant l'heure n'est pas des plus facile. Le roi Beldarion de Bonta connaît un moyen de contourner les chemins habituels.",
+   "id": 2544,
+   "nom": "Examen de passage",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2933,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2933}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2904,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2904}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732238,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un spécialiste des arts funéraires"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732240,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Localiser le masque dans l'une des deux cités ennemies"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733288,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Annoncer que vous avez atteint le rang le plus élevé dans l'un des ordres des cités"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732244,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer le masque mortuaire"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3956,
+      19165,
+      1
+     ],
+     "position": [
+      -15,
+      27
+     ],
+     "texte": "Montrer à {npc,3956} : 1 {item,19165}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732305,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de Wabbit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733063,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de guerrier pandawa"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732304,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de Maudit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733342,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de Brâkmarien torturé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732307,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de Bontarien héroïque"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732308,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de serviteur de Moon"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732309,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme d'Enutrof"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733353,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de Gobelin mineur et vulcanologue"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732311,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de Porcos"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733351,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de chasseur de mansot"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732315,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme d'alchimiste ailurophile"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733352,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Ramasser de la poussière d'âme de sectateur de l'Indicible"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3956,
+      19167,
+      1
+     ],
+     "position": [
+      -15,
+      27
+     ],
+     "texte": "Montrer à {npc,3956} : 1 {item,19167}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732319,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obtenir la bénédiction d'un esprit psychopompe"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      732320,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Blessure d'Erazal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4057,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,4057}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15689,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1906,
+ "nom": "Examen de passage",
+ "objets": [
+  [
+   19165,
+   1
+  ]
+ ],
+ "prerequis": [
+  1905
+ ]
+}

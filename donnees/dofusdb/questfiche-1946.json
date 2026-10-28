@@ -1,0 +1,330 @@
+{
+ "depart": [
+  {
+   "mapId": 186387972,
+   "npcId": 4232
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il reste une faible chance de sauver Clarisse et vous devez la saisir.",
+   "id": 2585,
+   "nom": "La mort de ma vie",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744177,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Chercher Clarisse emmenée au nord"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4234,
+      0,
+      0
+     ],
+     "position": [
+      -46,
+      -82
+     ],
+     "texte": "Aller voir {npc,4234}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740896,
+      0,
+      0
+     ],
+     "position": [
+      -46,
+      -82
+     ],
+     "texte": "Délivrer Clarisse"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4232,
+      19423,
+      1
+     ],
+     "position": [
+      -45,
+      -80
+     ],
+     "texte": "Ramener à {npc,4232} : x1 {item,19423}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4211,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4211}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740897,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -28
+     ],
+     "texte": "Récupérer des éclats de nécronyx"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744202,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -13
+     ],
+     "texte": "Réduire le nécronyx en poudre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4211,
+      19425,
+      1
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Ramener à {npc,4211} : x1 {item,19425}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740900,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Trouver une perle d'éternité et la montrer à Zrid Rahys"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740901,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Absorber l'âme d'un fantôme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740902,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Absorber l'âme d'un fantôme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740903,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Absorber l'âme d'un fantôme"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740904,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Absorber l'âme d'un fantôme"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4211,
+      19426,
+      1
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Ramener à {npc,4211} : x1 {item,19426}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740905,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Cueillir un Iris d'Os"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4211,
+      19427,
+      1
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Ramener à {npc,4211} : x1 {item,19427}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4211,
+      17991,
+      3
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Ramener à {npc,4211} : x3 {item,17991}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4211,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4211}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4232,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4232}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4233,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4233}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      740906,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Vaincre Clarisse"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4211,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4211}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4232,
+      0,
+      0
+     ],
+     "position": [
+      -47,
+      -80
+     ],
+     "texte": "Aller voir {npc,4232}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19412,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1946,
+ "nom": "La mort de ma vie",
+ "objets": [
+  [
+   19423,
+   1
+  ],
+  [
+   17991,
+   3
+  ],
+  [
+   19482,
+   1
+  ]
+ ],
+ "prerequis": [
+  1944,
+  1939
+ ]
+}

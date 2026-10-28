@@ -1,0 +1,253 @@
+{
+ "depart": [
+  {
+   "mapId": 235406081,
+   "npcId": 7803
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Un jeune Léodas semble avoir un comportement étrange depuis quelque temps, enchaînant les fugues. Son maître est persuadé qu'il se cache dans un endroit rattaché au village Rhoarim. Si ce changement d'attitude est lié au mal qui afflige la dimension, il est de votre devoir d'enquêter sur la question.",
+   "id": 3216,
+   "nom": "Le roi balafré",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1146163,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher le jeune Léodas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1146164,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Inspecter la statue brisée avant de reprendre vos recherches"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1143714,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Discuter avec le fugueur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7817,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Aller voir {npc,7817}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1146162,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      5
+     ],
+     "texte": "Retrouver le père du jeune Léodas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1143725,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      12
+     ],
+     "texte": "Tenter d'en savoir plus auprès d'Hemyt l'ermite"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7799,
+      32075,
+      1
+     ],
+     "position": [
+      7,
+      12
+     ],
+     "texte": "Ramener à {npc,7799} : x1 {item,32075}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7799,
+      31988,
+      1
+     ],
+     "position": [
+      7,
+      12
+     ],
+     "texte": "Ramener à {npc,7799} : x1 {item,31988}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      7799,
+      31989,
+      1
+     ],
+     "position": [
+      7,
+      12
+     ],
+     "texte": "Ramener à {npc,7799} : x1 {item,31989}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1143726,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      12
+     ],
+     "texte": "Écouter Hemyt vous raconter le mythe du premier roi"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7771,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Aller voir {npc,7771}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1143727,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Retourner au Promontoire du Réprouvé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7804,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Aller voir {npc,7804}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1143728,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Affronter l'esprit du Roi des Rois"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1143920,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Libérer Ménalion de l'influence de l'esprit"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7699,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      1
+     ],
+     "texte": "Aller voir {npc,7699}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31629,
+       2
+      ],
+      [
+       31630,
+       2
+      ],
+      [
+       31624,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2535,
+ "nom": "Le roi balafré",
+ "objets": [],
+ "prerequis": [
+  2515,
+  2518
+ ]
+}

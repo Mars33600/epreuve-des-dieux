@@ -1,0 +1,157 @@
+{
+ "depart": [
+  {
+   "mapId": 136056068,
+   "npcId": 2613
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Silverbwork vous a confié quelques tâches de routine avant de passer aux choses sérieuses.",
+   "id": 2183,
+   "nom": "Le Bazar du Bizarre",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885345,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Rencontrer Chacha Témou"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2491,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      3
+     ],
+     "texte": "Aller voir {npc,2491}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885346,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Rencontrer Simon Spartan"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2492,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Aller voir {npc,2492}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      443561,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      3
+     ],
+     "texte": "Découvrir la carte : Lieu du rendez-vous"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2492,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2492}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2453,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      3
+     ],
+     "texte": "Aller voir {npc,2453}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2618,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      3
+     ],
+     "texte": "Aller voir {npc,2618}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2613,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -1
+     ],
+     "texte": "Aller voir {npc,2613}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15448,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1549,
+ "nom": "Le Bazar du Bizarre",
+ "objets": [],
+ "prerequis": [
+  1548
+ ]
+}

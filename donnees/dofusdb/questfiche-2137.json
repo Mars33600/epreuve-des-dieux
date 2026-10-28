@@ -1,0 +1,317 @@
+{
+ "depart": [
+  {
+   "mapId": 183763980,
+   "npcId": 5377
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les premiers bouleversements étant à l'origine de la guerre de Cania ont peut-être déjà eu lieu à votre époque. Votre mission commence par le château d'Amakna, pour enquêter sur des évènements auxquels vous avez personnellement participé et vous assurer que le cours de l'histoire n'a pas été altéré.",
+   "id": 2792,
+   "nom": "La guerre de Cania n'aura pas lieu",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827409,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Discuter avec la Sénéchale Dejah Kob de l'ambassadeur Markofiel"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827410,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -5
+     ],
+     "texte": "Questionner Hulos Spek"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827415,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Retourner voir Maisial pour discuter de la marche à suivre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827422,
+      0,
+      0
+     ],
+     "position": [
+      -15,
+      -44
+     ],
+     "texte": "Découvrir pourquoi la diligence a été épargnée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827425,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher le cadavre du Chef Krokouto dans les environs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      828951,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -57
+     ],
+     "texte": "Remonter le temps et empêcher la mort du Chef Krokouto"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2287,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -57
+     ],
+     "texte": "Aller voir {npc,2287}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827427,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -5
+     ],
+     "texte": "Retourner dans le présent et s'assurer qu'Hulos n'a pas pu arriver au château"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      830810,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Retourner voir Maisial pour se rendre à la boulangerie de Bonta"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827429,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -52
+     ],
+     "texte": "Remonter le temps pour aider Hulos à terminer ses commandes"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      22383,
+      1,
+      0
+     ],
+     "position": [
+      -31,
+      -52
+     ],
+     "texte": "Fabriquer 1 {item,22383} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827459,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      -58
+     ],
+     "texte": "S'assurer qu'Hulos a bien pris sa diligence"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827460,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      -58
+     ],
+     "texte": "Consulter Maisial pour comprendre les événements"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832661,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Consulter les archives de l'horloge pour déterminer l'itinéraire choisi par l'intrus"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827462,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Parler à Maisial pour tendre une embuscade au noble amaknéen"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      827463,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -25
+     ],
+     "texte": "Confronter Deverar et le questionner sur son objectif"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6119,
+      1,
+      0
+     ],
+     "position": [
+      -2,
+      -25
+     ],
+     "texte": "Vaincre x1 {monster,6119} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5495,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -25
+     ],
+     "texte": "Aller voir {npc,5495}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832189,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -25
+     ],
+     "texte": "Inspecter la faille temporelle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832187,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Retourner dans le présent et s'assurer que l'histoire a bien repris son cours"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      832186,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Faire le point avec Maisial"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2137,
+ "nom": "La guerre de Cania n'aura pas lieu",
+ "objets": [
+  [
+   311,
+   10
+  ],
+  [
+   997,
+   15
+  ],
+  [
+   532,
+   20
+  ],
+  [
+   2034,
+   1
+  ]
+ ],
+ "prerequis": [
+  2138
+ ]
+}

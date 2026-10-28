@@ -1,0 +1,205 @@
+{
+ "depart": [
+  {
+   "mapId": 227279874,
+   "npcId": 6849
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Malva Bonnepanse a trompé son monde, elle est la véritable instigatrice des derniers coups montés. Il ne reste plus qu'une chose à faire, la retrouver et l'arrêter.",
+   "id": 3131,
+   "nom": "La fin des maningances",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      976778,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Échafauder un plan d'évasion avec Vitkour"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      976779,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Mettre le plan d'évasion à exécution"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6849,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Aller voir {npc,6849}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6849,
+      27619,
+      1
+     ],
+     "position": [
+      32,
+      -62
+     ],
+     "texte": "Ramener à {npc,6849} : x1 {item,27619}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      976762,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Repasser de l'autre côté de la cascade avec Vitkour"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      976743,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Aller voir Barbéryl, en compagnie de Vitkour Pied-Vif, pour l'avertir à propos de Malva Bonnepanse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973237,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Écouter le plaidoyer de Malva Bonnepanse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      973238,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Suivre l'intervention de Vitkour Pied-Vif"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      977741,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Interrompre la tentative de meurtre de Malva Bonnepanse"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6847,
+      0,
+      0
+     ],
+     "position": [
+      32,
+      -64
+     ],
+     "texte": "Aller voir {npc,6847}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      6803,
+      27620,
+      20
+     ],
+     "position": [
+      38,
+      -77
+     ],
+     "texte": "Ramener à {npc,6803} : x20 {item,27620}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6842,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -77
+     ],
+     "texte": "Aller voir {npc,6842}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6843,
+      0,
+      0
+     ],
+     "position": [
+      33,
+      -84
+     ],
+     "texte": "Aller voir {npc,6843}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       27434,
+       5
+      ],
+      [
+       27435,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2474,
+ "nom": "La fin des maningances",
+ "objets": [],
+ "prerequis": [
+  2473
+ ]
+}

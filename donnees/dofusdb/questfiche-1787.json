@@ -1,0 +1,298 @@
+{
+ "depart": [
+  {
+   "mapId": 171180032,
+   "npcId": 3456
+  },
+  {
+   "mapId": 164103168,
+   "npcId": 3456
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez convaincre Aguabrial de vous donner un peu de son sang.",
+   "id": 2424,
+   "nom": "Le dragon des eaux",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699808,
+      0,
+      0
+     ],
+     "position": [
+      -19,
+      -23
+     ],
+     "texte": "Parler à Girle Pylote sur la plate-forme de l'atelier du village des Brigandins"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699748,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -3
+     ],
+     "texte": "Entrer dans le sanctuaire d'Aguabrial"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699752,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -3
+     ],
+     "texte": "Convaincre la gardienne de libérer le passage"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2953,
+      0,
+      0
+     ],
+     "position": [
+      37,
+      -3
+     ],
+     "texte": "Aller voir {npc,2953}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      383,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -3
+     ],
+     "texte": "Retourner voir {npc,383}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699715,
+      0,
+      0
+     ],
+     "position": [
+      14,
+      -55
+     ],
+     "texte": "Rejoindre le port de l'île de Saharach"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3464,
+      0,
+      0
+     ],
+     "position": [
+      14,
+      -55
+     ],
+     "texte": "Aller voir {npc,3464}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699800,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer un premier chercheur d'eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699727,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer un deuxième chercheur d'eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699670,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer un troisième chercheur d'eau"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699680,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le sourcier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699725,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -60
+     ],
+     "texte": "Aider le sourcier"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3465,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -60
+     ],
+     "texte": "Aller voir {npc,3465}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3465,
+      18273,
+      4
+     ],
+     "position": [
+      18,
+      -60
+     ],
+     "texte": "Ramener à {npc,3465} : x4 {item,18273}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3465,
+      18272,
+      2
+     ],
+     "position": [
+      18,
+      -60
+     ],
+     "texte": "Ramener à {npc,3465} : x2 {item,18272}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699787,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -60
+     ],
+     "texte": "Ramasser 5 roses des sables de Saharach et les rapporter au sourcier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699742,
+      0,
+      0
+     ],
+     "position": [
+      18,
+      -60
+     ],
+     "texte": "Obtenir la baguette de sourcier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699756,
+      0,
+      0
+     ],
+     "position": [
+      15,
+      -61
+     ],
+     "texte": "Bénir la baguette de sourcier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699781,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Utiliser la baguette pour trouver l'eau qui n'existe pas"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4647,
+      1,
+      0
+     ],
+     "position": [
+      14,
+      -65
+     ],
+     "texte": "Vaincre x1 {monster,4647} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2953,
+      18280,
+      1
+     ],
+     "position": [
+      37,
+      -3
+     ],
+     "texte": "Ramener à {npc,2953} : x1 {item,18280}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18441,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1787,
+ "nom": "Le dragon des eaux",
+ "objets": [],
+ "prerequis": [
+  1785,
+  1786
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "depart": [
+  {
+   "mapId": 183501830,
+   "npcId": 4079
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Contrairement à vous, cette caserne ne manque pas d'esprit : il y a même un problème de surpopulation spectrale. Un brin de ménage ne ferait pas de mal.",
+   "id": 2548,
+   "nom": "La garde meurt mais ne se rend pas",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4969,
+      10,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x10 {monster,4969}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4970,
+      10,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x10 {monster,4970}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4971,
+      10,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x10 {monster,4971}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      4972,
+      10,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x10 {monster,4972}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732429,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre un premier groupe d'armutins dans la caserne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732430,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre un deuxième groupe d'armutins dans la caserne"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732431,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre un troisième groupe d'armutins dans la caserne"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4079,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -79
+     ],
+     "texte": "Retourner voir {npc,4079}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19233,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1910,
+ "nom": "La garde meurt mais ne se rend pas",
+ "objets": [],
+ "prerequis": [
+  626
+ ]
+}

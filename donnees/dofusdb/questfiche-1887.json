@@ -1,0 +1,411 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "En attendant un rapport de la patrouille, vous enquêtez sur la puanteur qui se répand dans la cité.",
+   "id": 2527,
+   "nom": "C'est toujours dur le matin",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      921830,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Fouiller le sud des égouts"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      730177,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      -56
+     ],
+     "texte": "Découvrir la carte : Poursuivre les rats"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      730178,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      -57
+     ],
+     "texte": "Découvrir la carte : Poursuivre les rats"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      730179,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      -58
+     ],
+     "texte": "Découvrir la carte : Poursuivre les rats"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730180,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      -58
+     ],
+     "texte": "Interroger les rats"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730181,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Conduire Skav en prison"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      233,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,233}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4342,
+      19120,
+      1
+     ],
+     "position": [
+      0,
+      -19
+     ],
+     "texte": "Ramener à {npc,4342} : x1 {item,19120}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      233,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,233}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4026,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,4026}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      732974,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -51
+     ],
+     "texte": "Découvrir la carte : Lieu repéré par Kaleb Ouze"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732975,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -51
+     ],
+     "texte": "Observer et écouter les passants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730190,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      -41
+     ],
+     "texte": "Chercher un moyen d'entrer dans le laboratoire suite au départ de ses occupants"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730191,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      -41
+     ],
+     "texte": "Pénétrer dans le laboratoire"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730192,
+      0,
+      0
+     ],
+     "position": [
+      -7,
+      -41
+     ],
+     "texte": "Fouiller le laboratoire"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      743,
+      19121,
+      1
+     ],
+     "position": [
+      8,
+      -4
+     ],
+     "texte": "Montrer à {npc,743} : 1 {item,19121}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730193,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les habitants du port de Madrestam"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4029,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -2
+     ],
+     "texte": "Aller voir {npc,4029}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      733026,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      2
+     ],
+     "texte": "Découvrir la carte : Rives de la rivière Kawaii"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4029,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      2
+     ],
+     "texte": "Aller voir {npc,4029}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4029,
+      0,
+      0
+     ],
+     "position": [
+      30,
+      5
+     ],
+     "texte": "Aller voir {npc,4029}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733027,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher des traces des marins dans la jungle interdite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4030,
+      0,
+      0
+     ],
+     "position": [
+      29,
+      8
+     ],
+     "texte": "Aller voir {npc,4030}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      733028,
+      0,
+      0
+     ],
+     "position": [
+      29,
+      8
+     ],
+     "texte": "Prendre Huguette Rhon en filature"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730199,
+      0,
+      0
+     ],
+     "position": [
+      29,
+      8
+     ],
+     "texte": "Parler aux disciples des petits dieux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4029,
+      0,
+      0
+     ],
+     "position": [
+      29,
+      8
+     ],
+     "texte": "Aller voir {npc,4029}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      730200,
+      0,
+      0
+     ],
+     "position": [
+      29,
+      8
+     ],
+     "texte": "Vaincre les disciples des petits dieux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4031,
+      0,
+      0
+     ],
+     "position": [
+      29,
+      8
+     ],
+     "texte": "Aller voir {npc,4031}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4029,
+      0,
+      0
+     ],
+     "position": [
+      29,
+      8
+     ],
+     "texte": "Aller voir {npc,4029}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1887,
+ "nom": "C'est toujours dur le matin",
+ "objets": [],
+ "prerequis": [
+  1885
+ ]
+}

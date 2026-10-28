@@ -1,0 +1,121 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous avez remarqué que le crystal de résonance vibrait plus fort dans les crocs de verre.",
+   "id": 1252,
+   "nom": "La mémoire du crystal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55705,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Chercher une utilité au crystal dans les crocs de verre."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885839,
+      0,
+      0
+     ],
+     "position": [
+      -66,
+      -68
+     ],
+     "texte": "Faire entrer les cristaux en résonance"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55711,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Chercher d'autres cristaux dans les crocs de verre."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885842,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -67
+     ],
+     "texte": "Faire entrer les cristaux en résonance"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55715,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Chercher d'autres cristaux dans les crocs de verre."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885843,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -68
+     ],
+     "texte": "Faire entrer les cristaux en résonance"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Les cristaux des crocs de verre sont entrés en résonance. Il vous faut à présent trouver quelqu'un capable de vous expliquer ce phénomène.",
+   "id": 1253,
+   "nom": "La chanteuse crystal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885845,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver des renseignements sur la résonance des cristaux"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 604,
+ "nom": "La transe du crystal",
+ "objets": [],
+ "prerequis": []
+}

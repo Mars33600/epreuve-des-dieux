@@ -1,0 +1,276 @@
+{
+ "depart": [
+  {
+   "mapId": 188219392,
+   "npcId": 4207
+  }
+ ],
+ "etapes": [
+  {
+   "description": "On vous a demandé de participer à une enquête dans les marches magmatiques.",
+   "id": 2589,
+   "nom": "Cœur de pierre",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4251,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      28
+     ],
+     "texte": "Aller voir {npc,4251}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741376,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      26
+     ],
+     "texte": "Espionner l'activité du groupe de Brâkmariens"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741377,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      26
+     ],
+     "texte": "Continuer l'espionnage du groupe de Brâkmariens"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4251,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      28
+     ],
+     "texte": "Aller voir {npc,4251}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741378,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer en contact avec le groupe de Brâkmariens"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4254,
+      19463,
+      20
+     ],
+     "position": [
+      -28,
+      27
+     ],
+     "texte": "Ramener à {npc,4254} : x20 {item,19463}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4255,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      27
+     ],
+     "texte": "Aller voir {npc,4255}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5175,
+      1,
+      0
+     ],
+     "position": [
+      -28,
+      27
+     ],
+     "texte": "Vaincre x1 {monster,5175} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4254,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      27
+     ],
+     "texte": "Aller voir {npc,4254}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      741383,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      26
+     ],
+     "texte": "Découvrir la carte : Brakdad café"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741384,
+      0,
+      0
+     ],
+     "position": [
+      -25,
+      26
+     ],
+     "texte": "Discuter avec les Brâkmariens"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4251,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      28
+     ],
+     "texte": "Aller voir {npc,4251}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      741385,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Lieu de la livraison"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      741386,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      27
+     ],
+     "texte": "Écouter la conversation"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744319,
+      0,
+      0
+     ],
+     "position": [
+      -21,
+      27
+     ],
+     "texte": "Prendre l'individu discret en filature"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744320,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      23
+     ],
+     "texte": "Fouiller le repaire"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4257,
+      0,
+      0
+     ],
+     "position": [
+      -14,
+      23
+     ],
+     "texte": "Aller voir {npc,4257}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      5176,
+      1,
+      0
+     ],
+     "position": [
+      -14,
+      23
+     ],
+     "texte": "Vaincre x1 {monster,5176} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4251,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      28
+     ],
+     "texte": "Aller voir {npc,4251}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19400,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1948,
+ "nom": "Cœur de pierre",
+ "objets": [],
+ "prerequis": [
+  1939
+ ]
+}

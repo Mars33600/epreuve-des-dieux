@@ -1,0 +1,143 @@
+{
+ "depart": [
+  {
+   "mapId": 198575110,
+   "npcId": 5029
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Quand une crocodaille affamée ne veut plus s'attaquer à ses congénères pour se nourrir, il faut trouver une solution.",
+   "id": 2745,
+   "nom": "Elle n'a pas fini d'aimer la viande",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      804653,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un artisan boucher à Crocuzko"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4990,
+      21283,
+      10
+     ],
+     "position": [
+      -84,
+      -15
+     ],
+     "texte": "Ramener à {npc,4990} : x10 {item,21283}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4990,
+      21284,
+      10
+     ],
+     "position": [
+      -84,
+      -15
+     ],
+     "texte": "Ramener à {npc,4990} : x10 {item,21284}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4990,
+      21285,
+      10
+     ],
+     "position": [
+      -84,
+      -15
+     ],
+     "texte": "Ramener à {npc,4990} : x10 {item,21285}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4990,
+      21286,
+      10
+     ],
+     "position": [
+      -84,
+      -15
+     ],
+     "texte": "Ramener à {npc,4990} : x10 {item,21286}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4990,
+      16153,
+      5
+     ],
+     "position": [
+      -84,
+      -15
+     ],
+     "texte": "Ramener à {npc,4990} : x5 {item,16153}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4990,
+      371,
+      20
+     ],
+     "position": [
+      -84,
+      -15
+     ],
+     "texte": "Ramener à {npc,4990} : x20 {item,371}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5029,
+      21287,
+      10
+     ],
+     "position": [
+      -86,
+      -14
+     ],
+     "texte": "Ramener à {npc,5029} : x10 {item,21287}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       21212,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2089,
+ "nom": "Elle n'a pas fini d'aimer la viande",
+ "objets": [
+  [
+   16153,
+   5
+  ],
+  [
+   371,
+   20
+  ]
+ ],
+ "prerequis": []
+}

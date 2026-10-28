@@ -1,0 +1,88 @@
+{
+ "depart": [
+  {
+   "mapId": 145229323,
+   "npcId": 2652
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Après avoir cueilli des racines, vous voilà engagé pour une mission un brin plus physique : un dangereux Égaré sévit au sud des Lendemains incertains. Montrez-lui que les Voyageurs ne sont pas du genre à se laisser faire.",
+   "id": 2200,
+   "nom": "Maboul de cristal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3899,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x1 {monster,3899} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2652,
+      15919,
+      1
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Montrer à {npc,2652} : 1 {item,15919}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      481332,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -3
+     ],
+     "texte": "Se déguiser en Méjaire et retourner voir le Docteur Blême"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2652,
+      15920,
+      1
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Ramener à {npc,2652} : x1 {item,15920}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15716,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1580,
+ "nom": "Maboul de cristal",
+ "objets": [],
+ "prerequis": [
+  1579
+ ]
+}

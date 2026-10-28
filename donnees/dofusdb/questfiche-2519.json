@@ -1,0 +1,143 @@
+{
+ "depart": [
+  {
+   "mapId": 234750978,
+   "npcId": 7641
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Votre mission touche bientôt à sa fin... tant qu'il ne s'agit pas de la vôtre, tout va bien. Bon, pour débusquer le supposé parasite, vous allez devoir affronter un titan gigantesque, mais avec un peu de chance, son esprit aura la taille d'un petit pois.\nConfiant ou non, n'y allez pas seul !",
+   "id": 3200,
+   "nom": "Destructeur de mondes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7641,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Aller voir {npc,7641}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1142567,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Interroger le Méryde des parasites"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      1142051,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      8
+     ],
+     "texte": "Découvrir la carte : Temple de Gargandyas"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7701,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      8
+     ],
+     "texte": "Aller voir {npc,7701}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1142727,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      8
+     ],
+     "texte": "Vaincre ou affaiblir suffisamment Gargandyas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1142054,
+      0,
+      0
+     ],
+     "position": [
+      17,
+      8
+     ],
+     "texte": "Se confronter au parasite d'Osavora"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7641,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Retourner voir {npc,7641}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1142055,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Faire le bilan avec la voix d'Osamodas"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31892,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2519,
+ "nom": "Destructeur de mondes",
+ "objets": [],
+ "prerequis": [
+  2518
+ ]
+}

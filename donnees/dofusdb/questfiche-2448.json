@@ -1,0 +1,74 @@
+{
+ "depart": [
+  {
+   "mapId": 220729859,
+   "npcId": 6682
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il ne vous reste plus qu'un dernier petit détail à régler avant de considérer votre quête achevée : vous assurer que l'entité maléfique enterrée sous le tumulus n'est pas en mesure de s'échapper. Ne dit-on pas que le diable est dans les détails ?",
+   "id": 3104,
+   "nom": "Le serment de l'ambre",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933506,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      19
+     ],
+     "texte": "Se confronter au mal enfermé dans le bloc d'ambre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      933507,
+      0,
+      0
+     ],
+     "position": [
+      -3,
+      19
+     ],
+     "texte": "Réparer le sceau de Terrakourial"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      914,
+      0,
+      0
+     ],
+     "position": [
+      -55,
+      15
+     ],
+     "texte": "Retourner voir {npc,914}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       26264,
+       12
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2448,
+ "nom": "Le serment de l'ambre",
+ "objets": [],
+ "prerequis": [
+  2447
+ ]
+}

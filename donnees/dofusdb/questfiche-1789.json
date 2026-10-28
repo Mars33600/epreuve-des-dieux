@@ -1,0 +1,267 @@
+{
+ "depart": [
+  {
+   "mapId": 171180032,
+   "npcId": 3456
+  },
+  {
+   "mapId": 164103168,
+   "npcId": 3456
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez convaincre Ignemikhal de vous donner un peu de son sang.",
+   "id": 2426,
+   "nom": "Le dragon des flammes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      848500,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un signe de la présence d'Ignemikhal dans la zone de Feudala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699820,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un signe de la présence d'Ignemikhal près de la bordure de Brâkmar"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699659,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un signe de la présence d'Ignemikhal sur la presqu'île des Dragoeufs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      393,
+      0,
+      0
+     ],
+     "position": [
+      -9,
+      -40
+     ],
+     "texte": "Aller voir {npc,393}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699819,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Explorer l'Hypogée de l'Obsidiantre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699716,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "S'approcher du courant brûlant"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3489,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Aller voir {npc,3489}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3489,
+      18292,
+      1
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Ramener à {npc,3489} : x1 {item,18292}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3489,
+      18293,
+      1
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Ramener à {npc,3489} : x1 {item,18293}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4650,
+      1,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Vaincre x1 {monster,4650} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      699753,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Découvrir la carte : Caverne d'Ignemikhal"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3490,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Aller voir {npc,3490}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699791,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Purifier Bonta de la présence des adeptes du dieu cornu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699796,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Purifier Brâkmar de la présence des adeptes du dieu cornu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699730,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Purifier Astrub de la présence des adeptes du dieu cornu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699661,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Purifier Sufokia de la présence des adeptes du dieu cornu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699673,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Purifier la Bourgade de la présence des adeptes du dieu cornu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699732,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Purifier Pandala de la présence des adeptes du dieu cornu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      699705,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Purifier Amakna de la présence des adeptes du dieu cornu"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3490,
+      0,
+      0
+     ],
+     "position": [
+      -72,
+      -83
+     ],
+     "texte": "Retourner voir {npc,3490}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11332,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1789,
+ "nom": "Le dragon des flammes",
+ "objets": [],
+ "prerequis": [
+  1785,
+  1786
+ ]
+}

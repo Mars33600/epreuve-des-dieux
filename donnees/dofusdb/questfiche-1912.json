@@ -1,0 +1,207 @@
+{
+ "depart": [
+  {
+   "mapId": 111673344,
+   "npcId": 2019
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Lachandi aimerait entendre à nouveau la voix de Kallishindri. Le problème, c'est que cette dernière n'est plus de ce monde... La Norde vous a conseillé de parler à Asselo, la sœur de la défunte. Espérons qu'elle pourra vous aiguiller vers un moyen d'obtenir ce que vous voulez.",
+   "id": 2550,
+   "nom": "Une voix de crystal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1372,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1372}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1999}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      735484,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le fantôme de la meilleure amie de Kallishindri"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4094,
+      0,
+      0
+     ],
+     "position": [
+      -75,
+      -80
+     ],
+     "texte": "Aller voir {npc,4094}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732531,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Rencontrer Nileza"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732534,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir qui a créé le crystal évoqué par Nileza"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3258,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      27
+     ],
+     "texte": "Aller voir {npc,3258}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732568,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une partition du Concerto pour limonade"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732551,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une partition du Concerto royal"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732552,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une partition du Concerto épicé"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732553,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une partition du Concerto pour toiles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732554,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une partition du Concerto pour chacha"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732555,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une partition du Concerto des mercenaires"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732557,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer une partition du Concerto amaknéen"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      732558,
+      0,
+      0
+     ],
+     "position": [
+      24,
+      27
+     ],
+     "texte": "Donner les partitions au capitaine Meno"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2019,
+      19187,
+      1
+     ],
+     "position": [
+      -76,
+      -80
+     ],
+     "texte": "Ramener à {npc,2019} : x1 {item,19187}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       13948,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1912,
+ "nom": "Une voix de crystal",
+ "objets": [],
+ "prerequis": [
+  1909
+ ]
+}

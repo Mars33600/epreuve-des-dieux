@@ -1,0 +1,243 @@
+{
+ "depart": [
+  {
+   "mapId": 183108105,
+   "npcId": 4258
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Claude M'Sé a un plan pour atteindre le cœur livide dans la tour de Solar.",
+   "id": 2590,
+   "nom": "Les pierres à feu",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744690,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      24
+     ],
+     "texte": "Découvrir la carte : Lieu de destination"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      24
+     ],
+     "texte": "Aller voir {npc,4258}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744691,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      24
+     ],
+     "texte": "Combattre les Calcinés"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      24
+     ],
+     "texte": "Aller voir {npc,4258}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744693,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      24
+     ],
+     "texte": "Découvrir la carte : Lieu de destination"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      24
+     ],
+     "texte": "Aller voir {npc,4258}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744695,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      24
+     ],
+     "texte": "Découvrir la carte : Lieu de destination"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      24
+     ],
+     "texte": "Aller voir {npc,4258}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744697,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      24
+     ],
+     "texte": "Occuper les cibles"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -29,
+      24
+     ],
+     "texte": "Aller voir {npc,4258}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744698,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      24
+     ],
+     "texte": "Découvrir la carte : Lieu de destination"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      24
+     ],
+     "texte": "Aller voir {npc,4258}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      744700,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      24
+     ],
+     "texte": "Vaincre les brigands"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      24
+     ],
+     "texte": "Aller voir {npc,4258}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      744702,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      22
+     ],
+     "texte": "Découvrir la carte : Lieu de destination"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4258,
+      0,
+      0
+     ],
+     "position": [
+      -27,
+      22
+     ],
+     "texte": "Aller voir {npc,4258}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19401,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1949,
+ "nom": "Les pierres à feu",
+ "objets": [],
+ "prerequis": [
+  1939
+ ]
+}

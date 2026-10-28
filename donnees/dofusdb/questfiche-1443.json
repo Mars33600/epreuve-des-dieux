@@ -1,0 +1,130 @@
+{
+ "depart": [
+  {
+   "mapId": 117706767,
+   "npcId": 2196
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Théo Dolith est fasciné par les calculs de Merkator, aussi vous a-t-il demandé d'aller récupérer quelques feuilles de notes laissées par le Cartographe dans l'Aquadôme. Au passage, vous risquez d'être obligé de multiplier les combats afin de procéder à quelques soustractions dans les effectifs des Mercemers, mais ce genre d'opérations n'est pas pour vous déplaire.",
+   "id": 2063,
+   "nom": "Prise de notes",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453187,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Récupérer des notes dans la Salle du Bathyscaphe"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453188,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Récupérer des notes dans la Salle des Bulles"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453185,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Récupérer des notes dans la Salle des Globes"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453186,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Récupérer des notes dans la Salle du Périscope"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453137,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      18
+     ],
+     "texte": "Récupérer des notes dans la Salle des Trésors"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2196,
+      14820,
+      5
+     ],
+     "position": [
+      22,
+      30
+     ],
+     "texte": "Ramener à {npc,2196} : x5 {item,14820}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1597,
+      14821,
+      1
+     ],
+     "position": [
+      21,
+      13
+     ],
+     "texte": "Ramener à {npc,1597} : x1 {item,14821}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       14859,
+       5
+      ],
+      [
+       14864,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1443,
+ "nom": "Prise de notes",
+ "objets": [],
+ "prerequis": [
+  1442
+ ]
+}

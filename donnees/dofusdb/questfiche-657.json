@@ -1,0 +1,145 @@
+{
+ "depart": [
+  {
+   "mapId": 190582274,
+   "npcId": 1367
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Retrouvez Barnabé. Il a été enlevé et emmené en dehors de ce monde.",
+   "id": 1217,
+   "nom": "Barnabé dans l'espace",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      493055,
+      0,
+      0
+     ],
+     "position": [
+      -22,
+      -24
+     ],
+     "texte": "Découvrir la carte : Tour des Voyageurs"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2357,
+      0,
+      0
+     ],
+     "position": [
+      -22,
+      -24
+     ],
+     "texte": "Aller voir {npc,2357}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2339,
+      0,
+      0
+     ],
+     "position": [
+      -22,
+      -24
+     ],
+     "texte": "Aller voir {npc,2339}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      502655,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -12
+     ],
+     "texte": "Découvrir la carte : Maison de Maytésé Nyhil"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2838,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -12
+     ],
+     "texte": "Aller voir {npc,2838}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884777,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -12
+     ],
+     "texte": "Interroger les autochtones"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      884778,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -12
+     ],
+     "texte": "Délivrer Barnabé"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2838,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -12
+     ],
+     "texte": "Aller voir {npc,2838}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      1367,
+      11566,
+      1
+     ],
+     "position": [
+      10,
+      -12
+     ],
+     "texte": "Ramener à {npc,1367} : x1 {item,11566}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 657,
+ "nom": "Barnabé dans l'espace",
+ "objets": [],
+ "prerequis": []
+}

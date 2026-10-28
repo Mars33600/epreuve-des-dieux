@@ -1,0 +1,85 @@
+{
+ "depart": [
+  {
+   "mapId": 108922368,
+   "npcId": 1999
+  }
+ ],
+ "etapes": [
+  {
+   "description": "La Garde du Jour sans fin a pour tâche de surveiller ce qui se passe dans le château Harebourg. Ultime rempart face à la menace que représentent les lieutenants du Comte, la Garde ne doit pas faiblir ni faillir. Rejoindre ce corps d'élite sera un immense honneur : vous pourrez enfin annoncer à vos parents que vous avez fait quelque chose de votre vie. Car franchement, courir sans raison après des monstres et dépenser vos kamas dans les hôtels de vente, est-ce une occupation bien sérieuse ?",
+   "id": 1938,
+   "nom": "La vie de château",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452678,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Montrer que vous êtes un patrouilleur consciencieux."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452677,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Prouver que vous êtes un combattant émérite."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452676,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Affirmer votre supériorité intellectuelle en dévoilant les intentions de Sylargh."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452672,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Confisquer la peau magique tannée par Klime"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      452673,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Réduire à néant les plans de Missiz Frizz"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1334,
+ "nom": "La vie de château",
+ "objets": [],
+ "prerequis": [
+  626
+ ]
+}

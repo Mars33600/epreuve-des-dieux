@@ -1,0 +1,145 @@
+{
+ "depart": [
+  {
+   "mapId": 194774020,
+   "npcId": 4504
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Lambik souhaite remettre la Barbarbe au goût du jour. Après plusieurs années de recherche, il pense avoir découvert la composition de cette bière légendaire, mais il lui manque certains des ingrédients nécessaires pour tester la recette... Si vous lisez ces lignes, vous connaissez l'identité de l'aventurier qui s'est porté volontaire pour l'aider.",
+   "id": 2664,
+   "nom": "La dernière barbe avant la fin du monde",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4504,
+      19948,
+      10
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Ramener à {npc,4504} : x10 {item,19948}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4504,
+      19949,
+      4
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Ramener à {npc,4504} : x4 {item,19949}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4504,
+      19950,
+      10
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Montrer à {npc,4504} : 10 {item,19950}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4504,
+      19952,
+      4
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Montrer à {npc,4504} : 4 {item,19952}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4504,
+      19951,
+      1
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Montrer à {npc,4504} : 1 {item,19951}"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      19953,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,19953} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      4504,
+      19953,
+      1
+     ],
+     "position": [
+      -70,
+      -69
+     ],
+     "texte": "Ramener à {npc,4504} : x1 {item,19953}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19954,
+       5
+      ],
+      [
+       19972,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2014,
+ "nom": "La dernière barbe avant la fin du monde",
+ "objets": [
+  [
+   19950,
+   30
+  ],
+  [
+   19952,
+   12
+  ],
+  [
+   19951,
+   3
+  ]
+ ],
+ "prerequis": [
+  2010,
+  626
+ ]
+}

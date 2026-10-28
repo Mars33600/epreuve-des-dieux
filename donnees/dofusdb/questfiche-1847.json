@@ -1,0 +1,255 @@
+{
+ "depart": [
+  {
+   "mapId": 179307525,
+   "npcId": 3767
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous avez décidé de venir en aide à Jano Wapin.",
+   "id": 2487,
+   "nom": "À armes égales",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3768,
+      0,
+      0
+     ],
+     "position": [
+      -67,
+      31
+     ],
+     "texte": "Aller voir {npc,3768}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3768,
+      18741,
+      1
+     ],
+     "position": [
+      -67,
+      31
+     ],
+     "texte": "Montrer à {npc,3768} : 1 {item,18741}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886678,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      33
+     ],
+     "texte": "Installer les pièges à proximité du terrier de Jano Wapin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3767,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      33
+     ],
+     "texte": "Aller voir {npc,3767}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      196,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -39
+     ],
+     "texte": "Aller voir {npc,196}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3767,
+      18742,
+      1
+     ],
+     "position": [
+      -65,
+      33
+     ],
+     "texte": "Ramener à {npc,3767} : x1 {item,18742}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3769,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      33
+     ],
+     "texte": "Aller voir {npc,3769}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886679,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Chercher quelqu'un capable de donner des attributs de prédateur à Jano Wapin"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3769,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      33
+     ],
+     "texte": "Aller voir {npc,3769}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3770,
+      18744,
+      1
+     ],
+     "position": [
+      -65,
+      30
+     ],
+     "texte": "Ramener à {npc,3770} : x1 {item,18744}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3770,
+      18743,
+      1
+     ],
+     "position": [
+      -65,
+      30
+     ],
+     "texte": "Ramener à {npc,3770} : x1 {item,18743}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3771,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      30
+     ],
+     "texte": "Aller voir {npc,3771}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3770,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      30
+     ],
+     "texte": "Aller voir {npc,3770}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886680,
+      0,
+      0
+     ],
+     "position": [
+      -67,
+      31
+     ],
+     "texte": "Voler un fusil et des munitions aux chasseurs"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3767,
+      18754,
+      1
+     ],
+     "position": [
+      -65,
+      33
+     ],
+     "texte": "Ramener à {npc,3767} : x1 {item,18754}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3772,
+      0,
+      0
+     ],
+     "position": [
+      -65,
+      33
+     ],
+     "texte": "Aller voir {npc,3772}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18730,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1847,
+ "nom": "À armes égales",
+ "objets": [
+  [
+   18741,
+   1
+  ],
+  [
+   18742,
+   1
+  ],
+  [
+   18744,
+   1
+  ],
+  [
+   18743,
+   1
+  ]
+ ],
+ "prerequis": []
+}

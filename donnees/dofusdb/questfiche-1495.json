@@ -1,0 +1,65 @@
+{
+ "depart": [
+  {
+   "mapId": 129499136,
+   "npcId": 2364
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Richard se fait du souci pour le roi Nidas : il craint que le monarque n'ait attrapé une maladie au contact des aventuriers. Comme le souverain des Enutrofors déteste les médecins, c'est à vous qu'il incombe de lui arracher le poil de nez nécessaire à l'établissement d'un diagnostic.",
+   "id": 2115,
+   "nom": "Un morceau de roi",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      454000,
+      0,
+      0
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Prélever de façon violente un poil de nez sur le roi Nidas"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2364,
+      15292,
+      1
+     ],
+     "position": [
+      -5,
+      -5
+     ],
+     "texte": "Ramener à {npc,2364} : x1 {item,15292}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15181,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1495,
+ "nom": "Un morceau de roi",
+ "objets": [],
+ "prerequis": [
+  1494
+ ]
+}

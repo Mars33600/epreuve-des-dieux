@@ -1,0 +1,38 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous devez trouver le propriétaire du String en poils de nez dans les environs du château de Harebourg.",
+   "id": 1914,
+   "nom": "Un string de caractère",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      886114,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver le propriétaire du String en poils de nez"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       18652,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1301,
+ "nom": "Un string de caractère",
+ "objets": [],
+ "prerequis": []
+}

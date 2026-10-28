@@ -1,0 +1,47 @@
+{
+ "depart": [
+  {
+   "mapId": 54791183,
+   "npcId": 1365
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre votre adversaire en un seul combat. Bonne chance.",
+   "id": 1214,
+   "nom": "Combat loyal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885713,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Gagner le combat et parler à Chuck 'Niouke' Pala"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11371,
+       1
+      ],
+      [
+       11540,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 656,
+ "nom": "Fight club",
+ "objets": [],
+ "prerequis": []
+}

@@ -1,0 +1,124 @@
+{
+ "depart": [
+  {
+   "mapId": 198447106,
+   "npcId": 5030
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Afin de préserver la biodiversité sur l'île de Crocuzko, un crocodaille a mis au point un produit répulsif qui empêche les crocodailles d'attaquer les œufs de crapaud-mufle.",
+   "id": 2746,
+   "nom": "Œufs dans l'eau",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885443,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -16
+     ],
+     "texte": "Apporter le produit répulsif au crocuzkien engagé après l'avoir fabriqué en suivant ses indications"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805516,
+      0,
+      0
+     ],
+     "position": [
+      -86,
+      -17
+     ],
+     "texte": "Verser quelques gouttes du produit répulsif pour protéger les œufs de crapaud-mufle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805515,
+      0,
+      0
+     ],
+     "position": [
+      -86,
+      -16
+     ],
+     "texte": "Verser quelques gouttes du produit répulsif pour protéger les œufs de crapaud-mufle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805514,
+      0,
+      0
+     ],
+     "position": [
+      -85,
+      -18
+     ],
+     "texte": "Verser quelques gouttes du produit répulsif pour protéger les œufs de crapaud-mufle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805513,
+      0,
+      0
+     ],
+     "position": [
+      -82,
+      -18
+     ],
+     "texte": "Verser quelques gouttes du produit répulsif pour protéger les œufs de crapaud-mufle"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      805517,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -17
+     ],
+     "texte": "Verser quelques gouttes du produit répulsif pour protéger les œufs de crapaud-mufle"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5030,
+      0,
+      0
+     ],
+     "position": [
+      -81,
+      -16
+     ],
+     "texte": "Aller voir {npc,5030}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       21211,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2090,
+ "nom": "Œufs dans l'eau",
+ "objets": [],
+ "prerequis": []
+}

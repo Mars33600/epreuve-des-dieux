@@ -1,0 +1,265 @@
+{
+ "depart": [
+  {
+   "mapId": 207622146,
+   "npcId": 5583
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Votre apprentissage est terminé, mais vous avez pourtant encore beaucoup à apprendre et votre maître ne sera plus qu'un guide pour les nouvelles épreuves qui vous attendent. Pour évoluer il vous faudra cultiver votre énergie intérieure, mais vous devez renforcer votre corps jusqu'à son extrême limite pour y parvenir. Les spectres de Grobe sont des combattants émérites à même de vous faire progresser, la malédiction de l'île n'étant qu'un détail.",
+   "id": 2843,
+   "nom": "Shodanwa : Perfection martiale",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6383,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,6383}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6384,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,6384}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6385,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,6385}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      6386,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,6386}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      853170,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -42
+     ],
+     "texte": "Découvrir la carte : Dojo des Immortels"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      857495,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -42
+     ],
+     "texte": "Se recueillir devant l'autel des maîtres"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853172,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -42
+     ],
+     "texte": "Relever le défi de Nasumara"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5872,
+      0,
+      0
+     ],
+     "position": [
+      36,
+      -40
+     ],
+     "texte": "Aller voir {npc,5872}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      853185,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -40
+     ],
+     "texte": "Découvrir la carte : Forge sépulcrale"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5871,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -40
+     ],
+     "texte": "Aller voir {npc,5871}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853186,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -40
+     ],
+     "texte": "Trouver un moyen de gagner la confiance du forgeron"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853463,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -40
+     ],
+     "texte": "Apporter les composants nécessaires au forgeron"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853188,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -40
+     ],
+     "texte": "Protéger les alentours pendant que Nasumara forge la lame"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853189,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -40
+     ],
+     "texte": "Reparler au forgeron pour voir le fruit de vos efforts"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5871,
+      23610,
+      1
+     ],
+     "position": [
+      39,
+      -40
+     ],
+     "texte": "Ramener à {npc,5871} : x1 {item,23610}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853195,
+      0,
+      0
+     ],
+     "position": [
+      34,
+      -42
+     ],
+     "texte": "Retourner au Dojo des immortels pour régler vos comptes"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6437,
+      1,
+      0
+     ],
+     "position": [
+      34,
+      -42
+     ],
+     "texte": "Vaincre x1 {monster,6437} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5871,
+      0,
+      0
+     ],
+     "position": [
+      39,
+      -40
+     ],
+     "texte": "Retourner voir {npc,5871}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      853198,
+      0,
+      0
+     ],
+     "position": [
+      20,
+      -31
+     ],
+     "texte": "Raconter vos péripéties au Maître du Pandawushu"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2187,
+ "nom": "Shodanwa : Perfection martiale",
+ "objets": [],
+ "prerequis": [
+  2186
+ ]
+}

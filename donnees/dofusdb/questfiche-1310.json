@@ -1,0 +1,56 @@
+{
+ "depart": [
+  {
+   "mapId": 112460048,
+   "npcId": 2008
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous êtes pris d'une soudaine envie de frapper sur le Comte Harebourg juste pour vous calmer les nerfs. À moins que vous ne souhaitiez lui faire payer le temps passé à massacrer des monstres pour atteindre le haut de sa tour.",
+   "id": 1933,
+   "nom": "Un comte de faits divers",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3416,
+      1,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Vaincre x1 {monster,3416} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453027,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -89
+     ],
+     "texte": "Découvrir la carte : Donjon du Comte - Grande aiguille"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1310,
+ "nom": "Un comte de faits divers",
+ "objets": [],
+ "prerequis": [
+  1309
+ ]
+}

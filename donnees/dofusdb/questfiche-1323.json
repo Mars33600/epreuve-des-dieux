@@ -1,0 +1,284 @@
+{
+ "depart": [
+  {
+   "mapId": 111286022,
+   "npcId": 2025
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Hazieff Taroun, inquiet pour son ami Jean Neige, vous a demandé de le retrouver.",
+   "id": 1950,
+   "nom": "Au-delà du mur",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,1999}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885573,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Chercher des traces du passage de Jean Neige dans le Laboratoire de Nileza"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      929684,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Expliquer à Nileza par les armes que vous êtes venu en paix"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2028,
+      0,
+      0
+     ],
+     "position": [
+      -59,
+      -74
+     ],
+     "texte": "Aller voir {npc,2028}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2005,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -87
+     ],
+     "texte": "Aller voir {npc,2005}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452982,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Entrepôt de pièces détachées"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885575,
+      0,
+      0
+     ],
+     "position": [
+      -52,
+      -84
+     ],
+     "texte": "Fouiller l'entrepôt des pièces détachées"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2006,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -93
+     ],
+     "texte": "Aller voir {npc,2006}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1999,
+      0,
+      0
+     ],
+     "position": [
+      -68,
+      -78
+     ],
+     "texte": "Aller voir {npc,1999}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2025,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Aller voir {npc,2025}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2006,
+      14241,
+      1
+     ],
+     "position": [
+      -63,
+      -93
+     ],
+     "texte": "Ramener à {npc,2006} : x1 {item,14241}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885576,
+      0,
+      0
+     ],
+     "position": [
+      -63,
+      -93
+     ],
+     "texte": "Interroger les invités"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2007,
+      0,
+      0
+     ],
+     "position": [
+      -71,
+      -88
+     ],
+     "texte": "Aller voir {npc,2007}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452980,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Chercher Jean Neige dans le bastion des froides légions."
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3437,
+      1,
+      0
+     ],
+     "position": [
+      -71,
+      -83
+     ],
+     "texte": "Vaincre x1 {monster,3437} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2068,
+      0,
+      0
+     ],
+     "position": [
+      -71,
+      -83
+     ],
+     "texte": "Aller voir {npc,2068}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452977,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -81
+     ],
+     "texte": "Découvrir la carte : Phénix du Château de Harebourg"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2069,
+      0,
+      0
+     ],
+     "position": [
+      -57,
+      -81
+     ],
+     "texte": "Aller voir {npc,2069}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2025,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -81
+     ],
+     "texte": "Aller voir {npc,2025}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       6
+      ],
+      [
+       13947,
+       2
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1323,
+ "nom": "Au-delà du mur",
+ "objets": [],
+ "prerequis": [
+  1325,
+  1319,
+  1320,
+  1321,
+  1322
+ ]
+}

@@ -1,0 +1,312 @@
+{
+ "depart": [
+  {
+   "mapId": 145229323,
+   "npcId": 2693
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Les Égarés se préparent à éliminer les Voyageurs Dimensionnels et vous devez les en empêcher.",
+   "id": 2221,
+   "nom": "Les sables du temps",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2694,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2694}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885415,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -4
+     ],
+     "texte": "Infiltrer un bâtiment des Égarés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885416,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -4
+     ],
+     "texte": "Trouver un moyen de se débarrasser des gardes"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      475909,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -4
+     ],
+     "texte": "Découvrir la carte : Salle de la Dague du temps"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885417,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -4
+     ],
+     "texte": "Chercher la Dague du temps"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2695,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -4
+     ],
+     "texte": "Aller voir {npc,2695}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2693,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2693}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2687,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2687}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885418,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Semer les Voyageurs"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885419,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      6
+     ],
+     "texte": "Trouver une cachette"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885420,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      6
+     ],
+     "texte": "Attendre la fin de l'affrontement"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      475963,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      1
+     ],
+     "texte": "Découvrir la carte : Entrée du Muséum"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      475967,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      -4
+     ],
+     "texte": "Découvrir la carte : Entrée du futur"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      475966,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -7
+     ],
+     "texte": "Découvrir la carte : Entrée de l'Œil de Vortex"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      475965,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -7
+     ],
+     "texte": "Découvrir la carte : Œil de Vortex- Sortie"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885421,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -7
+     ],
+     "texte": "Écouter le rapport des Égarés"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2687,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -7
+     ],
+     "texte": "Aller voir {npc,2687}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3877,
+      1,
+      0
+     ],
+     "position": [
+      7,
+      -7
+     ],
+     "texte": "Vaincre x1 {monster,3877} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2687,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -7
+     ],
+     "texte": "Aller voir {npc,2687}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2693,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2693}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2693,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2693}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15717,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1601,
+ "nom": "Les sables du temps",
+ "objets": [],
+ "prerequis": [
+  1596
+ ]
+}

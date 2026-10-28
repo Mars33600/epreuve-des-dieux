@@ -1,0 +1,70 @@
+{
+ "depart": [
+  {
+   "mapId": 112204547,
+   "npcId": 2051
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Voilà des années que vous en rêviez... enfin, vous le tenez entre vos mains. Le mythique Dofus des Glaces. Grâce à son pouvoir, votre lait de bambou fermenté restera toujours bien frais, même en plein été. Cela valait le coup d'attendre, non ?",
+   "id": 1930,
+   "nom": "Le Dofus des Glaces",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2051,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,2051}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1329,
+ "nom": "Le Dofus des Glaces",
+ "objets": [],
+ "prerequis": [
+  612,
+  613,
+  614,
+  619,
+  620,
+  621,
+  622,
+  623,
+  624,
+  625,
+  626,
+  649,
+  650,
+  651,
+  652,
+  653,
+  655,
+  919,
+  1309,
+  1330,
+  1325,
+  1310,
+  1333,
+  1334,
+  710,
+  711,
+  1316,
+  1317,
+  1318,
+  1326,
+  1327
+ ]
+}

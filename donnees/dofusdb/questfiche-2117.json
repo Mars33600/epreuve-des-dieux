@@ -1,0 +1,396 @@
+{
+ "depart": [
+  {
+   "mapId": 201852417,
+   "npcId": 5357
+  }
+ ],
+ "etapes": [
+  {
+   "description": "D'après les informations recueillies, Allisterine s'est introduite dans l'Oasis dont l'accès est extrêmement limité. Afin d'y entrer, il va falloir assister les habitants du village du miséreux qui luttent contre les vents déchainés par Misère dans le désert.",
+   "id": 2772,
+   "nom": "Le vent se lève",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820780,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les habitants du désert de Misère pour trouver un moyen d'entrer dans l'enceinte de l'Oasis"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5361,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Aller voir {npc,5361}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5369,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Aller voir {npc,5369}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5361,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Aller voir {npc,5361}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      820812,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir la carte : Entrée de la Caverne Abandonnée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5368,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Aller voir {npc,5368}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5368,
+      22105,
+      4
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Ramener à {npc,5368} : x4 {item,22105}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5368,
+      22104,
+      1
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Ramener à {npc,5368} : x1 {item,22104}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5368,
+      22106,
+      1
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Ramener à {npc,5368} : x1 {item,22106}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890564,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Mettre l'explosif en position"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5368,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Aller voir {npc,5368}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      820817,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Découvrir la carte : Intérieur de la Caverne Abandonnée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5368,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Aller voir {npc,5368}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonstersOnMapData",
+     "parametres": [
+      6035,
+      1,
+      201851139
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Vaincre x1 {monster,6035} sur la carte {map,201851139} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5368,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Aller voir {npc,5368}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820820,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Fouiller la Caverne Abandonnée"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820821,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Lire les documents trouvés dans la Caverne Abandonnée"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5368,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      -1
+     ],
+     "texte": "Aller voir {npc,5368}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820822,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Escorter Reg Chanamo jusqu'au village des Miséreux"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5361,
+      22107,
+      1
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Montrer à {npc,5361} : 1 {item,22107}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820823,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Prendre la tête de l'excursion et mener le groupe au point nord"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820826,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      0
+     ],
+     "texte": "Détruire la Source du vent au nord"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820825,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Prendre la tête de l'excursion et mener le groupe au point nord ouest"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820827,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Détruire la Source du vent au nord ouest"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820828,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Prendre la tête de l'excursion et mener le groupe au point sud ouest"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      820829,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      3
+     ],
+     "texte": "Détruire la Source du vent au sud ouest"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821752,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Découvrir ce qu'il est advenu de Reg Chanamo"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5361,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      3
+     ],
+     "texte": "Aller voir {npc,5361}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22051,
+       5
+      ],
+      [
+       22049,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2117,
+ "nom": "Le vent se lève",
+ "objets": [
+  [
+   22105,
+   4
+  ]
+ ],
+ "prerequis": [
+  2122
+ ]
+}

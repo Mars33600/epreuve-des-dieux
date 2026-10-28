@@ -1,0 +1,147 @@
+{
+ "depart": [
+  {
+   "mapId": 137363456,
+   "npcId": 2437
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'Agent Ray Seuc a besoin de votre aide.",
+   "id": 2160,
+   "nom": "Balance la sauce",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2441,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      0
+     ],
+     "texte": "Aller voir {npc,2441}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885298,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      0
+     ],
+     "texte": "Défendre l'Agent Ray Seuc puis lui parler à nouveau"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453801,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -2
+     ],
+     "texte": "Découvrir la carte : Fosse commune"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885299,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -2
+     ],
+     "texte": "Chercher les documents cachés"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2502,
+      0,
+      0
+     ],
+     "position": [
+      6,
+      -2
+     ],
+     "texte": "Aller voir {npc,2502}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885300,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -2
+     ],
+     "texte": "Tabasser Fingar Neuman pour récupérer les documents"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2441,
+      15489,
+      1
+     ],
+     "position": [
+      6,
+      0
+     ],
+     "texte": "Montrer à {npc,2441} : 1 {item,15489}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2437,
+      15489,
+      1
+     ],
+     "position": [
+      2,
+      2
+     ],
+     "texte": "Ramener à {npc,2437} : x1 {item,15489}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15447,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1540,
+ "nom": "Balance la sauce",
+ "objets": [],
+ "prerequis": [
+  1539
+ ]
+}

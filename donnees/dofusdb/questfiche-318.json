@@ -1,0 +1,119 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Trev Pelsantery est accusé de traîtrise mais Amayiro le croit innocent. Il vous charge de demander sa version des faits à Trev, actuellement en prison, et de vérifier ses dires.",
+   "id": 546,
+   "nom": "Un coupable idéal",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6412,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6412}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      256,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      -56
+     ],
+     "texte": "Aller voir {npc,256}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891213,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      -57
+     ],
+     "texte": "Fouiller l'atelier des cordonniers à la recherche d'indices"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      985,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -52
+     ],
+     "texte": "Aller voir {npc,985}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6412,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6412}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      233,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,233}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 318,
+ "nom": "Un coupable idéal",
+ "objets": [],
+ "prerequis": []
+}

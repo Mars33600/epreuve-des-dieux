@@ -1,0 +1,79 @@
+{
+ "depart": [
+  {
+   "mapId": 130024961,
+   "npcId": 2337
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Le colonel Oneuil vous a demandé de faire la chasse aux Hordémons afin de reprendre ce qu'ils ont volé aux Voyageurs. Si vous avez du mal à distinguer les couleurs, foncez dans le tas : il finira bien par en sortir quelque chose.",
+   "id": 2195,
+   "nom": "Les voleurs de couleurs",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2646,
+      15712,
+      4
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Ramener à {npc,2646} : x4 {item,15712}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2646,
+      15713,
+      4
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Ramener à {npc,2646} : x4 {item,15713}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2646,
+      15714,
+      4
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Ramener à {npc,2646} : x4 {item,15714}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       35
+      ],
+      [
+       15722,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1575,
+ "nom": "Les voleurs de couleurs",
+ "objets": [],
+ "prerequis": [
+  1484,
+  1484
+ ]
+}

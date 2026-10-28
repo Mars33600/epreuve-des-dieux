@@ -1,0 +1,218 @@
+{
+ "depart": [
+  {
+   "mapId": 202244616,
+   "npcId": 5303
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Une rumeur circule à propos de la Galère de Servitude : elle serait vivante. Il faut découvrir les dessous de la vérité.",
+   "id": 2767,
+   "nom": "Le navire aux esclaves",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818349,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Mener une enquête à propos de la Galère"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5303,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retourner voir {npc,5303}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821892,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un objet contondant sur la Galère"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      821175,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Tenter de produire une secousse de la Galère en endommageant le pont principal"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818475,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      -1
+     ],
+     "texte": "Tenter de produire une secousse de la Galère en endommageant la zone des cachots"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825615,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Tenter de produire une secousse de la Galère en endommageant le pont près de la figure de proue"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5303,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Retourner voir {npc,5303}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818478,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Assister à la rébellion d'un esclave"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5303,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5303}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5978,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,5978}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5980,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,5980}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5983,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,5983}"
+    },
+    {
+     "genre": "QuestObjectiveMultiFightMonsterData",
+     "parametres": [
+      5989,
+      5,
+      0
+     ],
+     "position": null,
+     "texte": "Vaincre x5 {monster,5989}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      825810,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver des restes de vos victimes éparpillés sur le pont de la Galère"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818480,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver la source des grondements"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      818481,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Entrer à l'intérieur de la figure de proue"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5309,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,5309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       22218,
+       5
+      ],
+      [
+       22224,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2112,
+ "nom": "Le navire aux esclaves",
+ "objets": [],
+ "prerequis": [
+  2122
+ ]
+}

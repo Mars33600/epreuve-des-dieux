@@ -1,0 +1,78 @@
+{
+ "depart": [
+  {
+   "mapId": 54171950,
+   "npcId": 1375
+  },
+  {
+   "mapId": 54171950,
+   "npcId": 1376
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre le Kolosso pour permettre sa capture.",
+   "id": 1316,
+   "nom": "La gêne des mutants",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      2986,
+      1,
+      0
+     ],
+     "position": [
+      -61,
+      -69
+     ],
+     "texte": "Vaincre x1 {monster,2986} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55735,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -69
+     ],
+     "texte": "Découvrir la carte : Fin du donjon."
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885605,
+      0,
+      0
+     ],
+     "position": [
+      -76,
+      -46
+     ],
+     "texte": "Faire un rapport à l'agent de votre cité"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       11196,
+       4
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 701,
+ "nom": "C'est Rébro",
+ "objets": [],
+ "prerequis": [
+  625
+ ]
+}

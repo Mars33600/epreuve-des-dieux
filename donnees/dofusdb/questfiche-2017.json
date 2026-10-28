@@ -1,0 +1,197 @@
+{
+ "depart": [
+  {
+   "mapId": 194776070,
+   "npcId": 4498
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Dundivad se pose beaucoup de questions sur lui-même : est-il un Nimbos ordinaire, une force de la nature ou une monstruosité ? Aidez-le à voir le super-héros qui sommeille en lui.",
+   "id": 2667,
+   "nom": "Nincassable",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761617,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Emmener Dundivad voir le Professeur Xa devant les Cavernes du Kolosso"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1393,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -69
+     ],
+     "texte": "Aller voir {npc,1393}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759504,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -69
+     ],
+     "texte": "Tester les capacités de Dundivad en affrontant les Bléros du Professeur Xa"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      1393,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Aller voir {npc,1393}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761622,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Se rendre à la mine du Jour sans fin avec Dundivad"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4498,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -67
+     ],
+     "texte": "Aller voir {npc,4498}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759506,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -67
+     ],
+     "texte": "Parler au mineur désigné par Dundivad"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759528,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -67
+     ],
+     "texte": "Affronter le mineur avec l'aide de Dundivad"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4498,
+      0,
+      0
+     ],
+     "position": [
+      -64,
+      -67
+     ],
+     "texte": "Aller voir {npc,4498}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      761623,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Accompagner Dundivad dans la partie nord-ouest des Crocs de Verre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4497,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -70
+     ],
+     "texte": "Aller voir {npc,4497}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      759530,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -70
+     ],
+     "texte": "Combattre aux côtés de Dundivad pour vaincre Monsieur Glace"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      4498,
+      0,
+      0
+     ],
+     "position": [
+      -69,
+      -70
+     ],
+     "texte": "Aller voir {npc,4498}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       19973,
+       5
+      ],
+      [
+       11196,
+       3
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2017,
+ "nom": "Nincassable",
+ "objets": [],
+ "prerequis": [
+  2010,
+  625
+ ]
+}

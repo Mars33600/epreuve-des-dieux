@@ -1,0 +1,226 @@
+{
+ "depart": [
+  {
+   "mapId": 234750978,
+   "npcId": 7641
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Voici venu le moment d'entrer dans la cage aux mufafahs et de rencontrer les féroces Rhoarims. D'après ce que l'on raconte, ils n'aiment pas trop les aventuriers. Paradoxalement, c'est presque rassurant : s'ils vous trouvaient à leur goût, vous finiriez sans doute à la broche.",
+   "id": 3199,
+   "nom": "Trois cœurs, un roi",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      1135694,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      7
+     ],
+     "texte": "Découvrir la carte : Montée des Rhoarims"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135695,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      5
+     ],
+     "texte": "Gravir la montée puis se présenter officiellement à l'entrée du village"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135717,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      5
+     ],
+     "texte": "Affronter les deux gardes lors d'un duel amical mais brutal"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135718,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      5
+     ],
+     "texte": "Se voir accorder l'hospitalité après avoir versé le sang"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135720,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      2
+     ],
+     "texte": "Apprendre les coutumes des Rhoarims pour obtenir une audience avec le roi"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135868,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      2
+     ],
+     "texte": "Parler au roi Lhéoden et à son conseiller"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135914,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      3
+     ],
+     "texte": "Déranger la chamane des Rhoarims malgré l'avis de Grimaslan"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1140767,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Renouer les liens spirituels entre les Rhoarims et les autres créatures d'Osavora"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1140839,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      2
+     ],
+     "texte": "Retourner voir le roi et la chamane pour la dernière offrande aux esprits"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1141882,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      2
+     ],
+     "texte": "Assister à la discussion entre Grimaslan, Lhéoden et Sekismeth"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135918,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      4
+     ],
+     "texte": "Relever le défi imposé par Grimaslan"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135919,
+      0,
+      0
+     ],
+     "position": [
+      9,
+      4
+     ],
+     "texte": "Parler à Grimaslan après l'avoir vaincu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1135920,
+      0,
+      0
+     ],
+     "position": [
+      13,
+      2
+     ],
+     "texte": "Parler au roi et à la chamane"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7641,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Retourner voir {npc,7641}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       31627,
+       1
+      ],
+      [
+       31626,
+       1
+      ],
+      [
+       31625,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2518,
+ "nom": "Trois cœurs, un roi",
+ "objets": [],
+ "prerequis": [
+  2517
+ ]
+}

@@ -1,0 +1,87 @@
+{
+ "depart": [
+  {
+   "mapId": 207619080,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207621128,
+   "npcId": 6167
+  },
+  {
+   "mapId": 207623176,
+   "npcId": 6167
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Il vous reste quelques tâches  à mener à bien pour conclure votre longue aventure sur Pandala. Lorsque vous les aurez accomplies, Draconiros vous orientera dans votre quête de réponses... et un nouveau chapitre commencera.",
+   "id": 3062,
+   "nom": "Quand l'éveil n'est qu'un songe",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891991,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Sceller la promesse des esprits élémentaires de protéger Pandala"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      891992,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Faire comprendre aux Pandaliens que la division mène à la ruine"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      894791,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Donner aux Pandawas le moyen de se prémunir contre certains événements funestes"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6167,
+      0,
+      0
+     ],
+     "position": [
+      21,
+      -33
+     ],
+     "texte": "Retourner voir {npc,6167}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       23902,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2406,
+ "nom": "Quand l'éveil n'est qu'un songe",
+ "objets": [],
+ "prerequis": [
+  2202,
+  2135
+ ]
+}

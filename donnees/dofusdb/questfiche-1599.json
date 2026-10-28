@@ -1,0 +1,273 @@
+{
+ "depart": [
+  {
+   "mapId": 144442368,
+   "npcId": 2725
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des Égarés ont insisté pour que vous rencontriez quelqu'un d'important.",
+   "id": 2219,
+   "nom": "L'étendue Gödelique",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      481272,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -2
+     ],
+     "texte": "Découvrir la carte : Repaire de Silikargn"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2723,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -2
+     ],
+     "texte": "Aller voir {npc,2723}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885425,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -2
+     ],
+     "texte": "Prendre les matériaux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2702,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2702}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2652,
+      15890,
+      1
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Ramener à {npc,2652} : x1 {item,15890}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2652,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2652}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      481286,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      6
+     ],
+     "texte": "Découvrir la carte : Repérage"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      481285,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      4
+     ],
+     "texte": "Découvrir la carte : Repérage"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      481284,
+      0,
+      0
+     ],
+     "position": [
+      3,
+      2
+     ],
+     "texte": "Découvrir la carte : Repérage"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      481283,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      0
+     ],
+     "texte": "Découvrir la carte : Repérage"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      481282,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      -4
+     ],
+     "texte": "Découvrir la carte : Repérage"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      481293,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -5
+     ],
+     "texte": "Découvrir la carte : Repérage"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2652,
+      15891,
+      1
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Ramener à {npc,2652} : x1 {item,15891}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885426,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -6
+     ],
+     "texte": "Fabriquer un explosif temporel et l'utiliser dans les lendemains incertains"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885427,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      -5
+     ],
+     "texte": "Fabriquer un explosif temporel et l'utiliser dans les lendemains incertains"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885428,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -4
+     ],
+     "texte": "Fabriquer un explosif temporel et l'utiliser dans les lendemains incertains"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885429,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -4
+     ],
+     "texte": "Vaincre les gardiens Xélomorphes puis activer le détonateur"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2702,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      6
+     ],
+     "texte": "Aller voir {npc,2702}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15717,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1599,
+ "nom": "L'étendue Gödelique",
+ "objets": [],
+ "prerequis": [
+  1598
+ ]
+}

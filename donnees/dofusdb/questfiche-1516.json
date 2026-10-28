@@ -1,0 +1,133 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous avez trouvé un vieux plan d'Enutrosor. Ribériche pourra peut-être vous en dire davantage à son sujet.",
+   "id": 2139,
+   "nom": "Laissé en plan",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2388,
+      15335,
+      1
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Ramener à {npc,2388} : x1 {item,15335}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885077,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer des morceaux de Koffrefors dans la carrière aurifère et le creuset des fortunés"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885078,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer des gemmes enchantées dans la carrière aurifère et le creuset des fortunés"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2434,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      -2
+     ],
+     "texte": "Aller voir {npc,2434}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3716,
+      1,
+      0
+     ],
+     "position": [
+      -4,
+      -2
+     ],
+     "texte": "Vaincre x1 {monster,3716} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2434,
+      0,
+      0
+     ],
+     "position": [
+      -4,
+      -2
+     ],
+     "texte": "Aller voir {npc,2434}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2388,
+      15336,
+      1
+     ],
+     "position": [
+      -1,
+      -1
+     ],
+     "texte": "Montrer à {npc,2388} : 1 {item,15336}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2424,
+      15336,
+      1
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Ramener à {npc,2424} : x1 {item,15336}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15180,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1516,
+ "nom": "Laissé en plan",
+ "objets": [],
+ "prerequis": [
+  1506,
+  1513
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Vous devez vaincre le Kolosso chez lui et sortir vivant de ses cavernes.",
+   "id": 1307,
+   "nom": "Porte, Kolosso, trésor",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55695,
+      0,
+      0
+     ],
+     "position": [
+      -61,
+      -69
+     ],
+     "texte": "Découvrir la carte : Dernière salle des cavernes."
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 692,
+ "nom": "Porte, Kolosso, trésor",
+ "objets": [],
+ "prerequis": [
+  625
+ ]
+}

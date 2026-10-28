@@ -1,0 +1,379 @@
+{
+ "depart": [
+  {
+   "mapId": 204997634,
+   "npcId": 6058
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Pour mettre en scène sa dernière pièce de théâtre d'encre, un montreur a besoin de marionnettes, mais pas n'importe lesquelles. Il lui faut des silhouettes provenant de la dimension du Wukin, où l'encre coule à flots.",
+   "id": 2858,
+   "nom": "De l'encre spectaculaire",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880914,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver Kugutsu, la fournisseuse de silhouettes, dans le Royaume d'encre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      874006,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -2
+     ],
+     "texte": "Obtenir des indications pour savoir comment récupérer une silhouette de sage"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      881265,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Récupérer le caractère du Sage dans la Sigillaire des Kianzhi"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5965,
+      23797,
+      1
+     ],
+     "position": [
+      -1,
+      -2
+     ],
+     "texte": "Ramener à {npc,5965} : x1 {item,23797}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5964,
+      23790,
+      1
+     ],
+     "position": [
+      19,
+      -21
+     ],
+     "texte": "Ramener à {npc,5964} : x1 {item,23790}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      874009,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -2
+     ],
+     "texte": "Obtenir des indications pour savoir comment récupérer une silhouette de cygrue"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      874838,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un Yokianzhi Cygrue à transformer en silhouette pour le théâtre d'encre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5966,
+      23793,
+      3
+     ],
+     "position": [
+      -3,
+      -1
+     ],
+     "texte": "Montrer à {npc,5966} : 3 {item,23793}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      881266,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Attirer le Yokianzhi Cygrue en dispersant des gouttes d'encre indélébile le long du chemin jusqu'à l'extérieur du Royaume d'encre"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5964,
+      23788,
+      1
+     ],
+     "position": [
+      19,
+      -21
+     ],
+     "texte": "Ramener à {npc,5964} : x1 {item,23788}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      874021,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -2
+     ],
+     "texte": "Obtenir des indications pour savoir comment récupérer une silhouette de chacha"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      867309,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver un chacha qui accepterait de vous suivre dans la dimension du Wukin"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5967,
+      23825,
+      10
+     ],
+     "position": [
+      23,
+      -32
+     ],
+     "texte": "Ramener à {npc,5967} : x10 {item,23825}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      880929,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -2
+     ],
+     "texte": "Escorter la chachatte comédienne jusqu'à Kugutsu"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      874523,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -2
+     ],
+     "texte": "Regarder Kugutsu réaliser une silhouette de chacha grâce au modèle de la chachatte comédienne"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5964,
+      23791,
+      1
+     ],
+     "position": [
+      19,
+      -21
+     ],
+     "texte": "Ramener à {npc,5964} : x1 {item,23791}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      874024,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -2
+     ],
+     "texte": "Obtenir des indications pour savoir comment récupérer une silhouette de sousouris"
+    },
+    {
+     "genre": "QuestObjectiveCraftItemData",
+     "parametres": [
+      23987,
+      1,
+      0
+     ],
+     "position": null,
+     "texte": "Fabriquer 1 {item,23987} et fermer l'interface"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      873841,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Placer le piège à sousouris dans un endroit isolé et attendre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      875077,
+      0,
+      0
+     ],
+     "position": [
+      22,
+      -27
+     ],
+     "texte": "Attendre quelques minutes avant de récupérer la sousouris empoisonnée par le piège à sousouris"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5965,
+      23796,
+      1
+     ],
+     "position": [
+      -1,
+      -2
+     ],
+     "texte": "Ramener à {npc,5965} : x1 {item,23796}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5964,
+      23789,
+      1
+     ],
+     "position": [
+      19,
+      -21
+     ],
+     "texte": "Ramener à {npc,5964} : x1 {item,23789}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      874027,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -2
+     ],
+     "texte": "Obtenir des indications pour savoir comment récupérer une silhouette de chtigre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      881267,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Obliger le Yokianzhi d'un chtigre à se manifester grâce au bloc de papier"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      6534,
+      1,
+      0
+     ],
+     "position": [
+      8,
+      2
+     ],
+     "texte": "Vaincre x1 {monster,6534} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      5964,
+      23792,
+      1
+     ],
+     "position": [
+      19,
+      -21
+     ],
+     "texte": "Ramener à {npc,5964} : x1 {item,23792}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      5964,
+      0,
+      0
+     ],
+     "position": [
+      19,
+      -21
+     ],
+     "texte": "Aller voir {npc,5964}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       23914,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2204,
+ "nom": "De l'encre spectaculaire",
+ "objets": [
+  [
+   23825,
+   10
+  ],
+  [
+   312,
+   12
+  ],
+  [
+   444,
+   5
+  ],
+  [
+   16494,
+   2
+  ]
+ ],
+ "prerequis": [
+  2149
+ ]
+}

@@ -1,0 +1,135 @@
+{
+ "depart": [
+  {
+   "mapId": 130024961,
+   "npcId": 2337
+  },
+  {
+   "mapId": 130025985,
+   "npcId": 2340
+  },
+  {
+   "mapId": 234751491,
+   "npcId": 7640
+  }
+ ],
+ "etapes": [
+  {
+   "description": "L'avant-poste que les Voyageurs ont installé en Osavora pourrait bien disparaître, détruit par les attaques incessantes des Rhoarims. Les Douziens ne semblent pas les bienvenus dans cette région sauvage d'Ingloriom... Serez-vous l'exception qui confirme la règle ?\nSi vous n'avez pas encore accès à la dimension du dieu Osamodas, vous devrez partir à la recherche d'une fissure planaire pour vous ancrer à votre destination avant d'emprunter le portail au sommet de la tour des Voyageurs. N'hésitez pas à demander de l'aide, car les créatures qui émergent des fissures sont plutôt hostiles.",
+   "id": 3196,
+   "nom": "Ça barde là-haut",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1138948,
+      0,
+      0
+     ],
+     "position": [
+      1,
+      17
+     ],
+     "texte": "Parler au Capitaine Blair après être entré dans la dimension Osavora"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7641,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Aller voir {npc,7641}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1125727,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Rapporter à la prêtresse : x3 {{item,31480::[Lait nourricier]}} avant la fin de la saison de la Naissance"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1125728,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Rapporter à la prêtresse : x3 {{item,31481::[Sang brûlant]}} avant la fin de la saison de la Chasse"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1126120,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Rapporter à la prêtresse : x3 {{item,31482::[Lymphe régénérante]}} avant la fin de la saison du Repos"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      1125739,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Écouter la voix du dieu Osamodas"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      7641,
+      0,
+      0
+     ],
+     "position": [
+      2,
+      16
+     ],
+     "texte": "Retourner voir {npc,7641}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       20
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 2515,
+ "nom": "Ça barde là-haut",
+ "objets": [],
+ "prerequis": [
+  1484,
+  1484
+ ]
+}

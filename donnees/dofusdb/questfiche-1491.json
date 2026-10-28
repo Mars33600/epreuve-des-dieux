@@ -1,0 +1,53 @@
+{
+ "depart": [
+  {
+   "mapId": 130024963,
+   "npcId": 2338
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Fasciné par les créatures dimensionnelles, le docteur Gaw souhaite étudier les Enutrofors. Comme il n'a pas le temps de se rendre dans la Retraite des Éternels, il vous a chargé de recueillir des échantillons de leur sang. Attendez-vous à de la résistance de la part des donateurs.",
+   "id": 2111,
+   "nom": "Échantillonnage",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2338,
+      15285,
+      10
+     ],
+     "position": [
+      -22,
+      -24
+     ],
+     "texte": "Ramener à {npc,2338} : x10 {item,15285}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15179,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1491,
+ "nom": "Échantillonnage",
+ "objets": [],
+ "prerequis": [
+  1484,
+  1484
+ ]
+}

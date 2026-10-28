@@ -1,0 +1,172 @@
+{
+ "depart": [],
+ "etapes": [
+  {
+   "description": "Une Ecaflipuce s'est installée dans votre ventre. Vous devez trouver un moyen de l'en déloger.",
+   "id": 2350,
+   "nom": "Se piquer au jeu",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885043,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Trouver quelqu'un susceptible de vous débarrasser du parasite sans vous éventrer"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885044,
+      0,
+      0
+     ],
+     "position": [
+      -10,
+      -21
+     ],
+     "texte": "Récolter une botte de chanvre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885045,
+      0,
+      0
+     ],
+     "position": [
+      -11,
+      -19
+     ],
+     "texte": "Récolter une botte de chanvre"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885046,
+      0,
+      0
+     ],
+     "position": [
+      -13,
+      -21
+     ],
+     "texte": "Récolter une botte de chanvre"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3095,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Aller voir {npc,3095}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      4365,
+      1,
+      0
+     ],
+     "position": [
+      3,
+      -9
+     ],
+     "texte": "Vaincre x1 {monster,4365} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3095,
+      17724,
+      1
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Ramener à {npc,3095} : x1 {item,17724}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      3095,
+      17725,
+      8
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Ramener à {npc,3095} : x8 {item,17725}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3095,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Aller voir {npc,3095}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885047,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Boire le contenu de la fiole anti-parasite"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      3095,
+      0,
+      0
+     ],
+     "position": [
+      -1,
+      -6
+     ],
+     "texte": "Aller voir {npc,3095}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       17567,
+       1
+      ],
+      [
+       15206,
+       50
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1713,
+ "nom": "Se piquer au jeu",
+ "objets": [],
+ "prerequis": []
+}

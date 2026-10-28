@@ -1,0 +1,336 @@
+{
+ "depart": [
+  {
+   "mapId": 87820805,
+   "npcId": 2596
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Vous n'avez pas compris ce qui vous arrive.",
+   "id": 2179,
+   "nom": "La grosse commission",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2602,
+      0,
+      0
+     ],
+     "position": [
+      11,
+      -5
+     ],
+     "texte": "Aller voir {npc,2602}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885329,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -3
+     ],
+     "texte": "Récupérer la cargaison"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2603,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -3
+     ],
+     "texte": "Aller voir {npc,2603}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885330,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -3
+     ],
+     "texte": "Trouver un arrangement avec Arrimeur louche"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452838,
+      0,
+      0
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Découvrir la carte : Portail de Srambad"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      2604,
+      15614,
+      1
+     ],
+     "position": [
+      0,
+      0
+     ],
+     "texte": "Ramener à {npc,2604} : x1 {item,15614}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452842,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      2
+     ],
+     "texte": "Découvrir la carte : Taverne du Bourreau"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2605,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      2
+     ],
+     "texte": "Aller voir {npc,2605}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2606,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      2
+     ],
+     "texte": "Aller voir {npc,2606}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452828,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -1
+     ],
+     "texte": "Découvrir la carte : Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3800,
+      1,
+      0
+     ],
+     "position": [
+      5,
+      -1
+     ],
+     "texte": "Vaincre x1 {monster,3800} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2606,
+      0,
+      0
+     ],
+     "position": [
+      5,
+      -1
+     ],
+     "texte": "Aller voir {npc,2606}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452827,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -2
+     ],
+     "texte": "Découvrir la carte : Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2605,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -2
+     ],
+     "texte": "Aller voir {npc,2605}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452855,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -2
+     ],
+     "texte": "Découvrir la carte : Hauts Ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2606,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -2
+     ],
+     "texte": "Aller voir {npc,2606}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452856,
+      0,
+      0
+     ],
+     "position": [
+      7,
+      -2
+     ],
+     "texte": "Découvrir la carte : Retour sur ses pas"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885331,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les habitants du quartier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885332,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Continuer à interroger les habitants du quartier"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      452847,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Découvrir la carte : Lieu de l'explosion"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2610,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,2610}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2606,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -2
+     ],
+     "texte": "Aller voir {npc,2606}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2611,
+      0,
+      0
+     ],
+     "position": [
+      8,
+      -2
+     ],
+     "texte": "Aller voir {npc,2611}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15448,
+       5
+      ],
+      [
+       15531,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1561,
+ "nom": "La grosse commission",
+ "objets": [],
+ "prerequis": [
+  1547
+ ]
+}

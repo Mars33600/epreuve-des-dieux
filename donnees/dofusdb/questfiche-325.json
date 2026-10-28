@@ -1,0 +1,352 @@
+{
+ "depart": [
+  {
+   "mapId": 217318404,
+   "npcId": 6309
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Amayiro vous a demandé d'interroger le témoin ayant accusé Trev Pelsantery de traîtrise jusqu'à ce qu'il dévoile quelque chose d'intéressant. Vous le trouverez sûrement à la Taverne Alakarte.",
+   "id": 559,
+   "nom": "De drôles de témoins",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      912882,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -58
+     ],
+     "texte": "Interroger les clients de la Taverne Alakarte"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      919699,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -52
+     ],
+     "texte": "Découvrir la carte : Atelier des Paysans"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      985,
+      0,
+      0
+     ],
+     "position": [
+      -31,
+      -52
+     ],
+     "texte": "Aller voir {npc,985}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      923346,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      -53
+     ],
+     "texte": "Découvrir la carte : Poste de garde de Trev Pelsantery"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      923347,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      -56
+     ],
+     "texte": "Découvrir la carte : Forge de Bonta"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      256,
+      0,
+      0
+     ],
+     "position": [
+      -30,
+      -56
+     ],
+     "texte": "Aller voir {npc,256}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      919863,
+      0,
+      0
+     ],
+     "position": null,
+     "texte": "Interroger les enfants du quartier"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      919866,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      -54
+     ],
+     "texte": "Trouver un témoin dans le quartier ouest"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      919865,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      -59
+     ],
+     "texte": "Découvrir la carte : Place de la Fontaine"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      204,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      -59
+     ],
+     "texte": "Aller voir {npc,204}"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      919864,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -54
+     ],
+     "texte": "Découvrir la carte : Enclos de Nissacram"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      298,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -54
+     ],
+     "texte": "Aller voir {npc,298}"
+    },
+    {
+     "genre": "QuestObjectiveBringItemToNpcData",
+     "parametres": [
+      233,
+      10120,
+      1
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Ramener à {npc,233} : x1 {item,10120}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      298,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -54
+     ],
+     "texte": "Aller voir {npc,298}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6422,
+      0,
+      0
+     ],
+     "position": [
+      -36,
+      -58
+     ],
+     "texte": "Aller voir {npc,6422}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      298,
+      0,
+      0
+     ],
+     "position": [
+      -28,
+      -54
+     ],
+     "texte": "Aller voir {npc,298}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      199,
+      0,
+      0
+     ],
+     "position": [
+      -33,
+      -54
+     ],
+     "texte": "Aller voir {npc,199}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890990,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -55
+     ],
+     "texte": "Interroger les clients de la maison d'Heticili Ufot"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890991,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -55
+     ],
+     "texte": "Interroger les clients de la maison d'Heticili Ufot, la nuit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890992,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -55
+     ],
+     "texte": "Interroger les clients de la maison d'Heticili Ufot, la nuit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890993,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -55
+     ],
+     "texte": "Interroger les clients de la maison d'Heticili Ufot, la nuit"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      890994,
+      0,
+      0
+     ],
+     "position": [
+      -34,
+      -55
+     ],
+     "texte": "Interroger les clients de la maison d'Heticili Ufot, la nuit"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      6309,
+      0,
+      0
+     ],
+     "position": [
+      -32,
+      -57
+     ],
+     "texte": "Aller voir {npc,6309}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 325,
+ "nom": "De drôles de témoins",
+ "objets": [],
+ "prerequis": [
+  321
+ ]
+}

@@ -1,0 +1,196 @@
+{
+ "depart": [
+  {
+   "mapId": 129763328,
+   "npcId": 2424
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Des rumeurs circulent sur la présence d'une taupe au sein de la Koffrérie. Pépénible vous a chargé d'enquêter.",
+   "id": 2135,
+   "nom": "Espionnage industriel",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885069,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Fouiller le bâtiment à la recherche d'indices"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      885070,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Apporter les indices à Pépénible"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2425,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2425}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2426,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2426}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2427,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2427}"
+    },
+    {
+     "genre": "QuestObjectiveFreeFormData",
+     "parametres": [
+      453503,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Chercher René dans le bâtiment"
+    },
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      453504,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Découvrir la carte : Salle des projets"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2429,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2429}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2430,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2430}"
+    },
+    {
+     "genre": "QuestObjectiveFightMonsterData",
+     "parametres": [
+      3713,
+      1,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Vaincre x1 {monster,3713} en un seul combat"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2430,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2430}"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      2424,
+      0,
+      0
+     ],
+     "position": [
+      -8,
+      -5
+     ],
+     "texte": "Aller voir {npc,2424}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       15206,
+       50
+      ],
+      [
+       15177,
+       5
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 1510,
+ "nom": "Espionnage industriel",
+ "objets": [],
+ "prerequis": [
+  1506,
+  1507
+ ]
+}
