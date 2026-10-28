@@ -3,6 +3,7 @@
     GET  /builder                         mes builds et ceux de la guilde, et « Nouveau build »
     GET  /builder/nouveau                 l'éditeur, sur un build vierge
     GET  /api/builder/objets              la fenêtre de choix d'un emplacement (filtres de Duffus)
+    POST /api/builder/calcul              totaux, panoplies, conditions, base, parchemins, dérivés (sans effet de bord)
     GET  /static/builder/<fichier>        la feuille et le script de l'éditeur
 
 Le module se branche sur l'application par `brancher(app, source)` : un routeur et l'état dont il a besoin.
@@ -22,10 +23,14 @@ from typing import Any
 from fastapi import APIRouter, FastAPI, Query, Request
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel, Field, ValidationError
 
+from epreuve.builder.calcul import Build, calculer, puissance_par_element
 from epreuve.builder.catalogue import Catalogue, catalogue_par_defaut
 from epreuve.builder.effets import (
+    CARACS_PRINCIPALES,
     EMPLACEMENTS,
+    GROUPES,
     NOMS_EMPLACEMENTS,
     NOMS_TYPES,
     ORDRE_CARACS,
@@ -112,7 +117,8 @@ def _contexte_editeur() -> dict:
         "dofus": [[t, nom] for nom, t in TYPES_DOFUS.items()],
     }
     return {"emplacements": [[e, NOMS_EMPLACEMENTS[e]] for e in EMPLACEMENTS], "familles": familles,
-            "caracs": list(ORDRE_CARACS), "classes": list(CLASSES)}
+            "caracs": list(ORDRE_CARACS), "classes": list(CLASSES), "principales": list(CARACS_PRINCIPALES),
+            "groupes": [[nom, list(c)] for nom, c in GROUPES]}
 
 
 # --- Pages ----------------------------------------------------------------------------------------------------
@@ -161,3 +167,44 @@ async def api_objets(request: Request, emplacement: str, q: str = "", niveau_min
         emplacement, texte=q, niveau_min=niveau_min, niveau_max=niveau_max, types=type_ or None, caracs=carac,
         limite=PAGE_MAX, decalage=decalage)  # fmt: skip
     return JSONResponse({"total": total, "objets": [o.resume() for o in page]})
+
+
+class CorpsBuild(BaseModel):
+    """Le build tel que l'envoie la page. Les bornes fines (niveau, parchemins) sont celles de `calcul.nettoyer`."""
+
+    niveau: int = Field(200, ge=-10_000, le=10_000)
+    objets: dict[str, int | None] = Field(default_factory=dict, max_length=32)
+    caracs_base: dict[str, int] = Field(default_factory=dict, max_length=12)
+    caracs_parcho: dict[str, int] = Field(default_factory=dict, max_length=12)
+
+    def build(self) -> Build:
+        bornes = lambda d: {k: max(-10_000, min(10_000, v)) for k, v in d.items()}  # noqa: E731
+        return Build(self.niveau, dict(self.objets), bornes(self.caracs_base), bornes(self.caracs_parcho))
+
+
+def resultat_json(build: Build, catalogue: Catalogue) -> dict:
+    r = calculer(build, catalogue)
+    objets = {e: o.resume() for e, oid in build.objets.items() if e in EMPLACEMENTS and (o := catalogue.objet(oid))}
+    return {"objets": objets, "totaux": r.totaux, "affichage": r.affichage, "alertes": r.alertes,
+            "panoplies": [{"id": p.id, "nom": p.nom, "nb": p.nb, "max": p.max_nb, "caracs": [list(c) for c in p.caracs]}
+                          for p in r.panoplies],
+            "points": {"total": r.points_total, "depenses": r.points_depenses,
+                       "restants": r.points_total - r.points_depenses},
+            "puissance": puissance_par_element(r.totaux), "detail": r.detail}
+
+
+async def _lire_corps(request: Request, modele: type[BaseModel]) -> BaseModel | None:
+    try:
+        return modele.model_validate(await request.json())
+    except (ValueError, ValidationError):
+        return None
+
+
+@routeur.post("/api/builder/calcul")
+async def api_calcul(request: Request) -> Response:
+    if await _visiteur(request) is None:
+        return _erreur(401, MESSAGE_CONNEXION)
+    corps = await _lire_corps(request, CorpsBuild)
+    if corps is None:
+        return _erreur(422, "Build illisible.")
+    return JSONResponse({"ok": True, **resultat_json(corps.build(), _services(request).catalogue())})

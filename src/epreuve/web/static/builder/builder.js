@@ -11,6 +11,8 @@
   const etat = {
     nom: "", classe: config.classes[0], niveau: 200,
     objets: {}, // emplacement → résumé d'objet (id, nom, niveau, icone, caracs…)
+    base: {}, parcho: {}, note: "",
+    resultat: null,
   };
 
   function el(tag, attrs, enfants) {
@@ -173,12 +175,127 @@
     changement();
   }
 
+  // --- Calcul (serveur : une seule source des formules) -------------------------------------------------------
+
+  let minuteurCalcul = null, numeroCalcul = 0;
+
+  function corpsBuild() {
+    const objets = {};
+    for (const [e, o] of Object.entries(etat.objets)) if (o) objets[e] = o.id;
+    return { niveau: etat.niveau, objets, caracs_base: etat.base, caracs_parcho: etat.parcho };
+  }
+
+  function message(texte, erreur) {
+    const p = $("b-etat");
+    p.textContent = texte;
+    p.classList.toggle("erreur", !!erreur);
+  }
+
+  async function calculer() {
+    const numero = ++numeroCalcul;
+    try {
+      const r = await fetch("/api/builder/calcul", {
+        method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(corpsBuild()),
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.message || "Erreur");
+      if (numero !== numeroCalcul) return;
+      etat.resultat = d;
+      for (const [e, o] of Object.entries(d.objets)) etat.objets[e] = o;
+      dessinerResultat();
+    } catch (err) {
+      if (numero === numeroCalcul) message("Calcul impossible : " + err.message, true);
+    }
+  }
+
+  function dessinerResultat() {
+    const d = etat.resultat;
+    if (!d) return;
+    dessinerEmplacements(d.alertes);
+    dessinerAlertes(d.alertes);
+    const a = d.affichage;
+    const bulles = $("b-bulles");
+    bulles.replaceChildren(...[["PA", "PA"], ["PM", "PM"], ["Vitalité", "PV"]].map(([c, nom]) =>
+      el("div", { classe: "b-bulle" }, [el("strong", { texte: String(a[c]) }), el("span", { texte: nom })])));
+    const p = $("b-points");
+    p.replaceChildren("Points de caractéristique restants : ", el("strong", { texte: d.points.restants + " / " + d.points.total }));
+    p.classList.toggle("negatif", d.points.restants < 0);
+    dessinerBase();
+    const groupes = $("b-groupes");
+    groupes.replaceChildren();
+    for (const [nom, caracs] of config.groupes) {
+      const ul = el("ul");
+      for (const c of caracs) {
+        const v = a[c] || 0;
+        const b = el("button", { type: "button", classe: "b-ligne-carac" + (v === 0 ? " nul" : v < 0 ? " neg" : ""),
+          "aria-label": c + " : " + v + ", voir le détail" }, [el("span", { texte: c }), el("b", { texte: String(v) })]);
+        b.addEventListener("click", () => ouvrirDetail(c));
+        ul.append(el("li", {}, [b]));
+      }
+      groupes.append(el("div", { classe: "b-groupe" }, [el("h3", { texte: nom }), ul]));
+    }
+    const zone = $("b-panoplies");
+    zone.replaceChildren();
+    if (!d.panoplies.length) zone.append(el("p", { classe: "b-vide", texte: "Aucune panoplie active (il faut au moins 2 objets d'une même panoplie)." }));
+    for (const pan of d.panoplies) {
+      zone.append(el("div", { classe: "b-panoplie" }, [
+        el("h3", { texte: pan.nom + " (" + pan.nb + "/" + pan.max + ")" }),
+        el("p", { texte: pan.caracs.map(([c, v]) => signe(v) + " " + c).join(" · ") }),
+      ]));
+    }
+    message("");
+  }
+
+  function dessinerBase() {
+    const d = etat.resultat;
+    const tbody = $("b-base").querySelector("tbody");
+    tbody.replaceChildren();
+    for (const c of config.principales) {
+      const ligne = el("tr", {}, [el("th", { scope: "row", texte: c }), el("td", { texte: String(d.totaux[c] || 0) }),
+        el("td", { texte: c in d.puissance ? String(d.puissance[c]) : "" })]);
+      for (const [cle, max, min] of [["base", 10000, -10000], ["parcho", 100, 0]]) {
+        const champ = el("input", { type: "number", inputmode: "numeric", min: String(min), max: String(max),
+          value: String(etat[cle][c] || 0), "aria-label": c + (cle === "base" ? " : points de base" : " : parchemin"),
+          disabled: !modifiable });
+        champ.addEventListener("change", () => {
+          let v = parseInt(champ.value, 10) || 0;
+          v = Math.min(max, Math.max(min, v));
+          champ.value = String(v);
+          if (v) etat[cle][c] = v; else delete etat[cle][c];
+          changement();
+        });
+        ligne.append(el("td", {}, [champ]));
+      }
+      tbody.append(ligne);
+    }
+  }
+
+  function ouvrirDetail(c) {
+    const d = etat.resultat.detail[c] || { objets: [], panoplies: [], base: 0, parchemin: 0 };
+    const total = (etat.resultat.affichage[c] || 0);
+    $("b-detail-titre").textContent = c + " : " + total;
+    const ul = $("b-detail-liste");
+    ul.replaceChildren();
+    const ligne = (nom, v) => ul.append(el("li", {}, [el("span", { texte: nom }), el("b", { texte: signe(v) })]));
+    for (const [nom, v] of d.objets) ligne(nom, v);
+    for (const [nom, v] of d.panoplies) ligne(nom, v);
+    if (d.base) ligne("Points de base", d.base);
+    if (d.parchemin) ligne("Parchemin", d.parchemin);
+    const derive = total - (etat.resultat.totaux[c] || 0);
+    if (derive) ligne("Base du personnage et dérivés", derive);
+    if (!ul.children.length) ul.append(el("li", { texte: "Rien pour l'instant." }));
+    $("b-detail").showModal();
+  }
+
   // --- Cycle de mise à jour -----------------------------------------------------------------------------------
 
-  const extensions = []; // fonctions appelées à chaque changement (calcul, sauvegarde…)
+  const extensions = []; // fonctions appelées à chaque changement (sauvegarde…)
 
   function changement() {
-    dessinerEmplacements();
+    dessinerEmplacements(etat.resultat && etat.resultat.alertes);
+    clearTimeout(minuteurCalcul);
+    minuteurCalcul = setTimeout(calculer, 150);
     for (const f of extensions) f();
   }
 
@@ -205,8 +322,16 @@
     $("b-plus").addEventListener("click", () => chercher(false));
     $("b-retirer").addEventListener("click", () => equiper(choix.emplacement, null));
     $("b-choix").addEventListener("click", (ev) => { if (ev.target === $("b-choix")) $("b-choix").close(); });
+    $("b-detail").addEventListener("click", (ev) => { if (ev.target === $("b-detail")) $("b-detail").close(); });
+    const tout = $("b-parcho-tout");
+    if (tout) tout.addEventListener("click", () => {
+      const plein = config.principales.every((c) => etat.parcho[c] === 100);
+      etat.parcho = plein ? {} : Object.fromEntries(config.principales.map((c) => [c, 100]));
+      changement();
+    });
   }
 
   brancherFormulaire();
   dessinerEmplacements();
+  calculer();
 })();

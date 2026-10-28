@@ -24,7 +24,34 @@
   <div class="b-alertes" id="b-alertes" aria-live="polite"></div>
 </section>
 
-{% block sections_calcul %}{% endblock %}
+<section class="b-carte" aria-labelledby="t-caracs">
+  <h2 id="t-caracs">Caractéristiques</h2>
+  <div class="b-bulles" id="b-bulles"></div>
+  <div class="b-base-tete">
+    <p class="b-points" id="b-points" aria-live="polite"></p>
+    {% if config.modifiable %}<button type="button" class="b-bouton" id="b-parcho-tout">Parchemins : tout à 100</button>{% endif %}
+  </div>
+  <div class="b-base-defile">
+    <table class="b-base" id="b-base">
+      <thead><tr><th scope="col"></th><th scope="col">Total</th><th scope="col">+ Puissance</th><th scope="col">Base</th><th scope="col">Parchemin</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="b-groupes" id="b-groupes"></div>
+</section>
+
+<section class="b-carte" aria-labelledby="t-panoplies">
+  <h2 id="t-panoplies">Bonus de panoplie</h2>
+  <div id="b-panoplies"><p class="b-vide">Aucune panoplie active (il faut au moins 2 objets d'une même panoplie).</p></div>
+</section>
+
+<dialog class="b-detail" id="b-detail" aria-labelledby="b-detail-titre">
+  <form method="dialog" class="b-choix-tete">
+    <h2 id="b-detail-titre">Détail</h2>
+    <button class="b-fermer" value="fermer" aria-label="Fermer">×</button>
+  </form>
+  <ul class="b-detail-liste" id="b-detail-liste"></ul>
+</dialog>
 
 <dialog class="b-choix" id="b-choix" aria-labelledby="b-choix-titre">
   <form method="dialog" class="b-choix-tete">

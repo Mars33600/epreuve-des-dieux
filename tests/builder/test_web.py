@@ -1,12 +1,15 @@
 """Le builder dans le site : connexion requise, CSP sans script en ligne, pied de page, API de recherche."""
 
 import hashlib
+import json
 import re
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
+from py_mini_racer import MiniRacer
 
 from epreuve.config import Config
 from epreuve.web.app import creer_app
@@ -146,3 +149,32 @@ async def test_identifier_par_session():
     assert await ident(Requete({"__Host-session": "inconnu"})) is None
     assert await ident(Requete({})) is None
     assert await identifier_par_session(None)(Requete({"__Host-session": "a"})) is None
+
+
+# --- Calcul ---------------------------------------------------------------------------------------------------
+
+
+def test_script_valide_pour_v8():
+    source = (Path(__file__).resolve().parents[2] / "src/epreuve/web/static/builder/builder.js").read_text()
+    MiniRacer().eval("new Function(" + json.dumps(source) + "); 1")  # analyse sans exécuter
+
+
+def test_calcul_panoplie_du_bouftou():
+    corps = {"niveau": 50, "objets": {"coiffe": 2411, "cape": 2414, "amulette": 2425, "ceinture": 2428,
+                                      "bottes": 2422, "anneau1": 2419, "bouclier": 18666, "arme": 2416},
+             "caracs_base": {"Force": 100, "Vitalité": 45, "Sagesse": 30},
+             "caracs_parcho": {"Force": 100, "Intelligence": 50, "Vitalité": 100, "Agilité": 25}}
+    d = client().post("/api/builder/calcul", json=corps).json()
+    assert d["ok"] and d["totaux"]["Force"] == 300 and d["affichage"]["Vitalité"] == 640
+    assert d["points"] == {"total": 245, "depenses": 235, "restants": 10}
+    assert d["panoplies"][0]["nb"] == 8 and d["objets"]["coiffe"]["nom"] == "Coiffe du Bouftou"
+    assert d["puissance"]["Force"] == 325 and d["alertes"] == {}
+
+
+def test_calcul_refus():
+    assert client(None).post("/api/builder/calcul", json={}).status_code == 401
+    c = client()
+    assert c.post("/api/builder/calcul", content=b"pas du json").status_code == 422
+    assert c.post("/api/builder/calcul", json={"niveau": "x"}).status_code == 422
+    assert c.post("/api/builder/calcul", json={"objets": {str(i): 1 for i in range(40)}}).status_code == 422
+    assert c.post("/api/builder/calcul", json={}).json()["affichage"]["PA"] == 7  # build vierge, niveau 200
