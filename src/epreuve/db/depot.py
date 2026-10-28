@@ -19,7 +19,7 @@ from datetime import datetime, timedelta
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, TypeAdapter
-from sqlalchemy import and_, delete, exists, func, insert, literal, select, text, update
+from sqlalchemy import and_, delete, exists, func, insert, literal, or_, select, text, update
 from sqlalchemy.dialects.postgresql import insert as insert_pg
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncConnection, AsyncEngine
@@ -141,7 +141,8 @@ def _case(r) -> CaseSucces:
 
 def _quete(r) -> Quete:
     return Quete(r.id, r.etage_id, r.corrections.get("nom", r.nom), r.niveau, r.bloc, r.ordre, r.nature,
-                 r.nature_origine, tuple(r.dofus or ()), r.jusqu_ou, r.a_lier, bool(r.a_une_fiche), r.masquee)
+                 r.nature_origine, tuple(r.dofus or ()), r.jusqu_ou, r.a_lier, bool(r.a_une_fiche), r.masquee,
+                 r.source_fiche)
 
 
 def _grimpeur(r) -> Grimpeur:
@@ -158,9 +159,13 @@ def _cle(ref: ElementRef) -> str:
     return f"{ref.type}:{ref.id}"
 
 
-# « A une fiche » : une fiche Duffus existe (une fiche DofusDB seule, c'est « Fiche détaillée indisponible »).
-_A_UNE_FICHE = exists().where(and_(t.fiche_quete.c.quete_id == t.quete.c.id,
-                                   t.fiche_quete.c.source != "dofusdb")).label("a_une_fiche")
+# « A une fiche » : une fiche Duffus existe, ou une fiche DofusDB construite (avec des étapes) ; une ligne
+# DofusDB vide, c'est « Fiche détaillée indisponible ». `_SOURCE_FICHE` : d'où vient la fiche (revue admin).
+_A_UNE_FICHE = exists().where(and_(t.fiche_quete.c.quete_id == t.quete.c.id, or_(
+    t.fiche_quete.c.source != "dofusdb",
+    func.jsonb_array_length(t.fiche_quete.c.contenu["etapes"]) > 0))).label("a_une_fiche")
+_SOURCE_FICHE = (select(t.fiche_quete.c.source).where(t.fiche_quete.c.quete_id == t.quete.c.id)
+                 .scalar_subquery().label("source_fiche"))
 _TYPES_COCHE = ("coche", "coche_donjon")
 
 
@@ -199,7 +204,7 @@ class Depot:
                                   .order_by(t.donjon.c.ordre, t.donjon.c.id))
         cases = await c.execute(select(t.case_succes).join(t.donjon).where(t.donjon.c.etage_id == etage_id)
                                 .order_by(t.case_succes.c.donjon_id, t.case_succes.c.ordre))
-        quetes = await c.execute(select(t.quete, _A_UNE_FICHE).where(t.quete.c.etage_id == etage_id)
+        quetes = await c.execute(select(t.quete, _A_UNE_FICHE, _SOURCE_FICHE).where(t.quete.c.etage_id == etage_id)
                                  .order_by(t.quete.c.ordre, t.quete.c.id))
         return (_etage(e), [_donjon(r) for r in donjons], [_case(r) for r in cases], [_quete(r) for r in quetes])
 
@@ -640,7 +645,8 @@ class Depot:
             valeurs |= {"nature": nature, "nature_origine": "admin", "nature_motif": motif_}
         await self._corriger(t.quete, quete_id, acteur, maintenant, valeurs, self._libelles(nom=nom), "quête")
         async with self._moteur.connect() as c:
-            return _quete((await c.execute(select(t.quete, _A_UNE_FICHE).where(t.quete.c.id == quete_id))).one())
+            requete = select(t.quete, _A_UNE_FICHE, _SOURCE_FICHE).where(t.quete.c.id == quete_id)
+            return _quete((await c.execute(requete)).one())
 
     async def modifier_donjon(self, donjon_id: int, acteur: int, maintenant: datetime, *,
                               masque: bool | None = None, nom: str | None = None) -> Donjon:

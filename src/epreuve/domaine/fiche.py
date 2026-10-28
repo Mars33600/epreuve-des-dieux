@@ -73,8 +73,9 @@ class FicheQuete:
 
     @property
     def complete(self) -> bool:
-        """Vrai si une fiche Duffus existe (sinon : « Fiche détaillée indisponible »)."""
-        return self.source != "dofusdb"
+        """Vrai si la fiche a un vrai contenu : Duffus, ou DofusDB avec ses étapes (sinon : « Fiche détaillée
+        indisponible »)."""
+        return self.source != "dofusdb" or bool(self.etapes)
 
 
 SCELLE = Prerequis(None, None, "scelle")

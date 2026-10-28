@@ -207,7 +207,7 @@ def test_revue_nature_masquage_libelles():
 def test_revue_affiche_alertes_sources_et_quetes_sans_fiche():
     m, c, t = admin()
     html = c.get("/admin/etages/0").text
-    assert "succès pris chez DofusDB" in html and "1 quête(s) sans fiche Duffus : Le Vieux Puits" in html
+    assert "succès pris chez DofusDB" in html and "1 quête(s) sans fiche : Le Vieux Puits" in html
     assert "succès : DofusDB" in html and "succès : Duffus" in html
     assert c.get("/admin/etages/1").status_code == 200 and "4 succès seulement" in c.get("/admin/etages/1").text
     assert c.get("/admin/etages/42").status_code == 404

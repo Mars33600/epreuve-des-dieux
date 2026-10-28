@@ -1,5 +1,6 @@
 """Textes du domaine : listes, dates en heure de Paris, pseudos, mentions Discord, fiche de quête."""
 
+from dataclasses import replace
 from datetime import UTC, datetime, timedelta, timezone
 
 import pytest
@@ -66,7 +67,8 @@ def fiche(*prerequis, source="duffus"):
 
 def test_fiche_complete_selon_la_source():
     assert fiche().complete and fiche(source="duffus+dofusdb").complete
-    assert not fiche(source="dofusdb").complete
+    assert fiche(source="dofusdb").complete  # DofusDB avec ses étapes : une vraie fiche
+    assert not replace(fiche(source="dofusdb"), etapes=()).complete
 
 
 def test_masquer_prerequis_scelles():

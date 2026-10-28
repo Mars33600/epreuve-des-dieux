@@ -23,6 +23,7 @@ from epreuve.contenu.construire import (
     completer_par_dofusdb,
     construire,
     derniere_aspiration,
+    fiches_repli_etage,
     guides_par_dofus,
     guides_repli_vers_duffus,
     lire_config_etages,
@@ -62,8 +63,11 @@ async def _preparer(args: argparse.Namespace, url: str, client: ClientEnCache):
     aspi = Aspiration.lire(dossier)
     sans_guide = {d for d in retenus if d not in guides_par_dofus(aspi)}
     repli = guides_repli_vers_duffus(await guides_repli(client, sans_guide), aspi) if sans_guide else {}
-    e = construire(args.etage, aspi, lire_config_etages(), retenus, forcees, ouvertes, forcer=args.forcer,
-                   guides_repli=repli)
+    config = lire_config_etages()
+    # Repli : DofusDB ne voit que les quêtes sans fiche Duffus (jamais les autres).
+    fiches = await fiches_repli_etage(args.etage, aspi, config, retenus, client)
+    e = construire(args.etage, aspi, config, retenus, forcees, ouvertes, forcer=args.forcer,
+                   guides_repli=repli, fiches_repli=fiches)
     return f"aspiration {dossier.name}", await completer_par_dofusdb(e, client)
 
 
