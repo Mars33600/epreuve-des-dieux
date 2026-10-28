@@ -1,0 +1,8 @@
+{% extends "site.html" %}
+{# La fiche de quête en page complète : l'adresse /etages/{n}/quetes/{id} fonctionne sans JavaScript. #}
+{% block titre %}{{ quete.nom }} · Étage {{ etage.numero }} · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<article class="card qd-page" aria-labelledby="qdTitle">
+  {% with pleine_page = True %}{% include "_quete.html" %}{% endwith %}
+</article>
+{% endblock %}

@@ -17,6 +17,7 @@ from pydantic import ValidationError
 from epreuve.config import Config
 from epreuve.web.app import creer_app, jour_en_clair
 from epreuve.web.securite import ENTETES_SECURITE, chemin_permis
+from tests.web.outils import routes_declarees
 
 STATIQUES = Path(__file__).resolve().parents[2] / "src/epreuve/web/static"
 OUVERTURE = datetime(2026, 11, 13, 16, 0, tzinfo=UTC)  # 17:00 à Paris (heure d'hiver)
@@ -160,7 +161,7 @@ def test_script_sans_adresse_externe():
 
 def _chemins_declares(app) -> set[str]:
     """Toutes les routes et montages de l'application, avec un exemple concret pour les paramètres."""
-    return {re.sub(r"\{[^}]+\}", "1", route.path) for route in app.routes}
+    return {re.sub(r"\{[^}]+\}", "1", route.path) for route in routes_declarees(app)}
 
 
 def test_toutes_les_routes_declarees_sont_fermees_pendant_le_teaser():
@@ -197,13 +198,14 @@ def test_adresses_fermees_pendant_le_teaser(chemin):
         assert r.status_code == 303 and r.headers["location"] == "/"
 
 
-def test_statiques_permis_mais_seulement_ceux_du_teaser():
+def test_statiques_permis_pendant_le_teaser():
     c = client()
     assert c.get("/static/teaser/teaser.css").status_code == 200
     assert c.get("/static/teaser/teaser.js").status_code == 200
-    # L'ancienne page v3 reste dans le dépôt jusqu'au lot B, mais n'est pas servie (hors des préfixes permis).
-    assert c.get("/static/app.js").status_code in (303, 404)
-    assert c.get("/static/style.css").status_code in (303, 404)
+    # Pendant le teaser, seuls les dossiers du teaser sont permis : la feuille et le script du site
+    # ne servent qu'aux admins (redirigés vers / pour un visiteur).
+    assert c.get("/static/app.js").status_code == 303
+    assert c.get("/static/style.css").status_code == 303
 
 
 # --- La bascule (critère 7) -------------------------------------------------------------------------------
@@ -217,8 +219,12 @@ def test_statiques_permis_mais_seulement_ceux_du_teaser():
 def test_auto_bascule_a_site_ouvert_le(maintenant, mode):
     c = client(maintenant)
     assert c.get("/sante").json()["mode"] == mode
-    # Pendant le teaser, une page inconnue renvoie vers /. Ensuite, elle n'existe tout simplement pas.
-    assert c.get("/grimpeurs").status_code == (303 if mode == "teaser" else 404)
+    # Pendant le teaser, / est le teaser ; ensuite, l'accueil du site avec la connexion Discord.
+    html = c.get("/").text
+    assert ("teaser.js" in html) is (mode == "teaser")
+    assert ('href="/connexion"' in html) is (mode == "ouvert")
+    # Une page inconnue : redirigée pendant le teaser, introuvable ensuite.
+    assert c.get("/une-adresse-inventee").status_code == (303 if mode == "teaser" else 404)
 
 
 def test_teaser_force_apres_la_date():
@@ -231,15 +237,14 @@ def test_teaser_force_apres_la_date():
 def test_ouvert_force_avant_la_date():
     c = client(AVANT, SITE_MODE="ouvert")
     assert c.get("/sante").json()["mode"] == "ouvert"
-    assert c.get("/etages/0").status_code == 404
+    assert 'href="/connexion"' in c.get("/").text
 
 
-def test_page_provisoire_en_mode_ouvert():
+def test_accueil_en_mode_ouvert():
     html = client(APRES).get("/").text
-    assert "<title>Les portes sont ouvertes · L'Épreuve des Dieux</title>" in html
-    assert 'id="countdown" aria-labelledby="cdLabel" hidden' in html
-    assert '<section class="opened" id="opened" aria-live="polite">' in html
-    assert 'class="is-open"' in html and "Merci Duffus" in html
+    assert "Se connecter avec Discord" in html and "teaser.js" not in html
+    assert '<link rel="stylesheet" href="/static/style.css">' in html
+    assert "Merci Duffus" in html and "Projet de fans" in html
 
 
 # --- En-têtes de sécurité (critère 9) ------------------------------------------------------------------
@@ -271,7 +276,7 @@ def test_entetes_sur_une_404_en_mode_ouvert_et_une_erreur_500():
     _verifier_entetes(client(APRES).get("/une-adresse-inventee"))
     r = client(source=Source(RuntimeError("panne"))).get("/sante")  # erreur rattrapée : pas une 500
     assert r.status_code == 200
-    app = creer_app(config(), horloge=lambda: APRES)  # mode ouvert : le filtre laisse passer la route
+    app = creer_app(config(), horloge=lambda: APRES)  # site ouvert : la route passe le filtre du mode
 
     @app.get("/boum")
     async def boum():

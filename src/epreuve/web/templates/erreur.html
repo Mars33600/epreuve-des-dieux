@@ -1,0 +1,9 @@
+{% extends "site.html" %}
+{% block titre %}{{ "Introuvable" if statut == 404 else "Accès refusé" }} · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<section class="card solo" aria-labelledby="erreurTitre">
+  <div class="eyebrow">{{ "Introuvable" if statut == 404 else "Un instant" }}</div>
+  <h2 id="erreurTitre">{{ message }}</h2>
+  <p><a href="/">Revenir à la tour</a></p>
+</section>
+{% endblock %}

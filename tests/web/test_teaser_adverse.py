@@ -118,6 +118,7 @@ def test_chemin_permis_refuse_les_segments_points_ou_vides(chemin):
 
 
 def test_route_a_parametre_en_tete_ne_repond_pas_sous_static():
+    # Lot B : tout /static/ est monté avant les routes : /static/… ne tombe plus sur une route à paramètre.
     statut, corps = appel_brut(app_piegee(), "GET", "/static/fuite")
     assert FUITE.encode() not in corps, statut
 
@@ -200,7 +201,8 @@ def test_fichiers_de_deploiement_alignes_sur_la_date(fichier):
 def test_bascule_de_bout_en_bout_avec_la_configuration_par_defaut():
     juste_avant = OUVERTURE_PAR_DEFAUT - timedelta(seconds=1)
     assert TestClient(app_piegee(juste_avant), follow_redirects=False).get("/admin").status_code == 303
-    assert TestClient(app_piegee(OUVERTURE_PAR_DEFAUT)).get("/admin").json() == {"x": FUITE}
+    # Lot B : /admin est déclaré par le site (avant la route piégée) ; /api/etat reste une route « oubliée ».
+    assert TestClient(app_piegee(OUVERTURE_PAR_DEFAUT)).get("/api/etat").json() == {"x": FUITE}
 
 
 # --- Configuration bancale -----------------------------------------------------------------------------

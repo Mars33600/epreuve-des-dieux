@@ -1,0 +1,72 @@
+{% extends "site.html" %}
+{% block titre %}Admin · Grimpeurs{% endblock %}
+{% block page %}
+<section class="card" aria-labelledby="listeTitre">
+  <div class="eyebrow">Admin</div>
+  <h2 id="listeTitre">Liste officielle</h2>
+  {% if message %}<p class="succes-msg" role="status">{{ message }}{% if ajoutes %} {{ ajoutes }} nouvel(s) identifiant(s).{% endif %}</p>{% endif %}
+  {% if erreur %}<p class="alerte" role="alert">{{ erreur }}</p>{% endif %}
+  <form method="post" action="/admin/liste" class="ask">
+    <input type="hidden" name="csrf" value="{{ v.csrf }}">
+    <div class="champ"><label for="mentions">Identifiants Discord ou mentions <code>&lt;@…&gt;</code> copiées de #liste-grimpeurs</label>
+      <textarea id="mentions" name="mentions" required placeholder="<@123456789012345678> <@234567890123456789>"></textarea></div>
+    <div class="formrow">
+      <div class="champ"><label for="statut_initial">Statut initial</label>
+        <select id="statut_initial" name="statut_initial"><option value="actif">Actif</option><option value="pause">En pause (gelé jusqu'à réintégration)</option></select></div>
+      <button class="btn or" type="submit">Ajouter à la liste</button>
+    </div>
+  </form>
+</section>
+
+<section class="card" aria-labelledby="tableauTitre">
+  <h2 id="tableauTitre">Les grimpeurs</h2>
+  {% if moins and vue %}<p class="note">Le moins avancé des actifs : <b>{{ moins.pseudo }}</b>, {{ vue.points(moins.id) }} point(s), {{ vue.avancement(moins.id)[0] }}/{{ vue.avancement(moins.id)[1] }} cases{% if moins.niveau_declare %}, niveau {{ moins.niveau_declare }}{% endif %}.</p>{% endif %}
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Pseudo</th><th>Classe</th><th>Statut</th><th>Niveau</th><th>Dernière activité</th><th>Inscrit le</th><th>Actions</th></tr></thead>
+    <tbody>
+    {%- for g in grimpeurs %}
+      <tr>
+        <td><a href="/grimpeurs/{{ g.id }}">{{ g.pseudo }}</a><br><span class="muted">{{ g.nom_discord }}</span></td>
+        <td>{{ g.classe or "—" }}</td>
+        <td>{{ {"actif": "Actif", "pause": "En pause", "exclu": "Exclu"}[g.statut] }}
+          {% if g.statut == "pause" and vue %}<br><span class="muted">{{ vue.points(g.id) }} pt · {{ vue.avancement(g.id)[0] }}/{{ vue.avancement(g.id)[1] }}{% if moins %} (moins avancé des actifs : {{ moins.pseudo }}, {{ vue.points(moins.id) }} pt · {{ vue.avancement(moins.id)[0] }}/{{ vue.avancement(moins.id)[1] }}){% endif %}</span>{% endif %}</td>
+        <td class="num">{{ g.niveau_declare or "—" }}</td>
+        <td>{{ activites.get(g.id)|heure_paris }}</td>
+        <td>{{ g.inscrit_le|heure_paris }}</td>
+        <td>
+          {% if g.statut == "actif" %}
+          <form method="post" action="/admin/grimpeurs/{{ g.id }}/statut" class="inline"><input type="hidden" name="csrf" value="{{ v.csrf }}"><input type="hidden" name="statut" value="pause">
+            <input type="text" name="motif" placeholder="Motif (facultatif)" aria-label="Motif du gel"><button class="btn" type="submit">Geler{% if effets %} ({{ effets.geler }}){% endif %}</button></form>
+          {% elif g.statut == "pause" %}
+          <form method="post" action="/admin/grimpeurs/{{ g.id }}/statut" class="inline"><input type="hidden" name="csrf" value="{{ v.csrf }}"><input type="hidden" name="statut" value="actif">
+            <input type="text" name="motif" placeholder="Motif (facultatif)" aria-label="Motif de la réintégration"><button class="btn" type="submit">Réintégrer{% if effets %} ({{ effets.reintegrer }}){% endif %}</button></form>
+          {% else %}
+          <form method="post" action="/admin/grimpeurs/{{ g.id }}/statut" class="inline"><input type="hidden" name="csrf" value="{{ v.csrf }}"><input type="hidden" name="statut" value="actif">
+            <input type="text" name="motif" placeholder="Motif (facultatif)" aria-label="Motif"><button class="btn" type="submit">Lever l'exclusion</button></form>
+          {% endif %}
+          {% if g.statut != "exclu" %}
+          <details><summary class="linkbtn">Exclure…</summary>
+            <form method="post" action="/admin/grimpeurs/{{ g.id }}/statut" class="inline"><input type="hidden" name="csrf" value="{{ v.csrf }}"><input type="hidden" name="statut" value="exclu">
+              <input type="text" name="motif" required placeholder="Motif (obligatoire)" aria-label="Motif de l'exclusion">
+              <label><input type="checkbox" name="confirmer" value="oui" required> Je confirme</label>
+              <button class="btn danger" type="submit">Exclure</button></form></details>
+          {% endif %}
+          <details><summary class="linkbtn">Corriger…</summary>
+            <form method="post" action="/admin/grimpeurs/{{ g.id }}" class="inline"><input type="hidden" name="csrf" value="{{ v.csrf }}">
+              <input type="text" name="pseudo" value="{{ g.pseudo }}" aria-label="Pseudo">
+              <select name="classe" aria-label="Classe"><option value="">—</option>{% for c in classes %}<option{% if c == g.classe %} selected{% endif %}>{{ c }}</option>{% endfor %}</select>
+              <input type="number" name="niveau" min="1" max="200" value="{{ g.niveau_declare or '' }}" aria-label="Niveau">
+              <button class="btn" type="submit">Corriger</button></form></details>
+          <a href="/grimpeurs/{{ g.id }}?edition=1">Coches…</a>
+        </td>
+      </tr>
+    {%- endfor %}
+    {%- for did, st in a_creer %}
+      <tr><td><span class="muted">Fiche à créer</span><br><span class="num muted">{{ did }}</span></td><td>—</td><td>{{ "Actif" if st == "actif" else "En pause" }} (initial)</td><td>—</td><td>—</td><td>—</td><td></td></tr>
+    {%- endfor %}
+    </tbody>
+  </table>
+  </div>
+</section>
+{% endblock %}
