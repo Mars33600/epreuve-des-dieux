@@ -1,382 +1,346 @@
-// L'Épreuve des Dieux : affichage de /api/etat, repris de docs/maquette-v1.html.
-//
-// Règle de sécurité : AUCUNE donnée n'est insérée comme du HTML. On construit les éléments avec
-// la fonction el() et textContent, si bien qu'un pseudo comme « <img onerror=…> » s'affiche tel
-// quel au lieu de s'exécuter.
-//
-// Le calcul de la jauge n'est PAS refait ici : le serveur envoie points, maximum et seuil.
-// Ce fichier ne fait que dessiner, et rafraîchit les données toutes les 30 secondes.
+/* L'Épreuve des Dieux · le script du site (lot B).
+   Tiré de docs/design/maquette-v2.html. Règles :
+   - aucune donnée n'est insérée avec innerHTML : uniquement textContent et createElement (pseudos, libellés) ;
+     le seul HTML inséré est la fiche de quête rendue et échappée par le serveur (Jinja) ;
+   - la CSP interdit les styles en ligne : couleurs et pourcentages passent par des classes (c-…, p-…) ;
+   - tout marche sans JavaScript (formulaires, liens) ; le script ajoute la coche sans rechargement,
+     le filtre mémorisé, le panneau de la fiche de quête et le décor animé. */
+(() => {
 "use strict";
+const $ = id => document.getElementById(id);
+const reduit = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const CATS = ["donjons", "full_succes", "principales", "secondaires"];
+const csrf = (document.querySelector('meta[name="csrf"]') || {}).content || "";
 
-const Epreuve = (() => {
-  const PARIS = "Europe/Paris";
-  const RAFRAICHIR_MS = 30000;
-  const DIFF = {
-    easy: { nom: "Aventurier", pluriel: "Aventuriers", c: "var(--easy)" },
-    med: { nom: "Éclaireur", pluriel: "Éclaireurs", c: "var(--med)" },
-    hard: { nom: "Collectionneur", pluriel: "Collectionneurs", c: "var(--hard)" },
-  };
-  // Le nom court des marques sur les cartes, par rang de palier (sinon : le libellé).
-  const COURT = { 1: "Donjon", 2: "Full succès", 3: "Quêtes" };
-  const COULEUR_PALIER = { 1: "var(--easy)", 2: "var(--med)", 3: "var(--hard)" };
+/* Classe « p-45 » (par pas de 5 %) pour une barre ou un anneau. */
+function pct(el, faits, total){
+  if (!el) return;
+  [...el.classList].filter(c => /^p-\d+$/.test(c)).forEach(c => el.classList.remove(c));
+  const p = total > 0 ? Math.min(100, Math.max(0, Math.round(faits / total * 20) * 5)) : 0;
+  el.classList.add("p-" + p);
+}
+function texte(el, t){ if (el) el.textContent = t; }
 
-  // --- Fonctions pures (testées sans navigateur) ------------------------------------------------
+/* =================== Heure de Paris (en-tête) =================== */
+function horloge(){
+  const ouverture = Date.parse(document.body.dataset.ouverture || "");
+  if (!$("clock") || isNaN(ouverture)) return;
+  const ms = ouverture - Date.now();
+  if (ms <= 0){
+    texte($("clockLabel"), "L'ascension a commencé");
+    texte($("clock"), `Jour ${Math.floor(-ms / 864e5) + 1}`);
+    texte($("clockSub"), "depuis le vendredi 13 novembre, 17 h 00");
+    return;
+  }
+  const s = Math.floor(ms / 1000), d2 = n => String(n).padStart(2, "0");
+  texte($("clockLabel"), "Les portes s'ouvrent dans");
+  texte($("clock"), `${Math.floor(s / 86400)} j ${d2(Math.floor(s / 3600) % 24)} h ${d2(Math.floor(s / 60) % 60)} min ${d2(s % 60)} s`);
+  texte($("clockSub"), "vendredi 13 novembre · 17 h 00, heure de Paris");
+}
 
-  /** Le compte à rebours : vers l'ouverture de l'étage 0, puis vers la date plancher.
-   *  Renvoie null quand il n'y a plus rien à attendre (le bloc disparaît). */
-  function compteARebours(maintenant, etat) {
-    const ouverture = etat.ouverture_etage0 ? new Date(etat.ouverture_etage0) : null;
-    if (ouverture && maintenant < ouverture) {
-      return { libelle: "Ouverture de l'étage 0", cible: ouverture };
+/* =================== Message d'échec =================== */
+let minuteur;
+function message(t){
+  const el = $("messageCoche"); if (!el) return;
+  el.textContent = t; el.hidden = false;
+  clearTimeout(minuteur); minuteur = setTimeout(() => { el.hidden = true; }, 4000);
+}
+
+/* =================== Jauge, catégories, compteurs =================== */
+function majJauge(j){
+  const g = $("jauge"); if (!g || !j) return;
+  g.classList.toggle("ok", j.pleine);
+  texte(g.querySelector('[data-j="score"]'), String(j.score));
+  const manque = Math.max(0, j.palier - j.score), m = g.querySelector('[data-j="manque"]');
+  if (m){
+    m.textContent = "";
+    const b = document.createElement("b");
+    if (j.pleine){ b.textContent = "Palier atteint"; m.append(b); }
+    else { b.className = "num"; b.textContent = String(manque); m.append("Il manque ", b, ` point${manque > 1 ? "s" : ""}`); }
+  }
+  const actifs = `${j.actifs} grimpeur${j.actifs > 1 ? "s" : ""} actif${j.actifs > 1 ? "s" : ""}`;
+  const pause = j.en_pause ? `, ${j.en_pause} en pause` : "";
+  texte(g.querySelector('[data-j="texte"]'), (j.pleine
+    ? `Score ${j.score} sur un palier de ${j.palier} : la jauge est pleine.`
+    : `Score ${j.score} sur un palier de ${j.palier}, il en manque ${manque}.`) + ` ${actifs}${pause}.`);
+  // Les encoches : une par point requis, dans l'ordre des catégories.
+  const enc = $("encoches");
+  if (enc){
+    const pleines = []; CATS.forEach(c => { for (let i = 0; i < (j.points_par_categorie[c] || 0); i++) pleines.push(c); });
+    const n = Math.max(j.palier, j.score); enc.textContent = "";
+    for (let i = 0; i < n; i++){
+      const e = document.createElement("i");
+      if (i < pleines.length){ e.className = "c-" + pleines[i] + (i >= j.palier ? " over" : ""); e.dataset.c = ""; }
+      else e.className = "vide";
+      enc.append(e);
     }
-    const ec = etat.etage_courant;
-    if (ec && ec.date_plancher_suivant) {
-      const plancher = new Date(ec.date_plancher_suivant);
-      const suivant = ec.numero + 1;
-      if (maintenant < plancher) {
-        return { libelle: `Étage ${suivant} déblocable au plus tôt`, cible: plancher };
-      }
-      if (ec.jauge && ec.jauge.pleine) {
-        return { libelle: `Étage ${suivant}`, texte: `Étage ${suivant} déblocable` };
-      }
-    }
-    return null;
+    enc.setAttribute("aria-label", `${j.score} points sur ${j.palier} requis`);
   }
-
-  /** « 3 j 04 h 07 » entre deux dates. */
-  function duree(ms) {
-    const j = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
-    return `${j} j ${String(h).padStart(2, "0")} h ${String(m).padStart(2, "0")}`;
-  }
-
-  /** « il y a 2 h », « hier », « le 31/10 ». */
-  function ilYA(date, maintenant) {
-    const min = Math.round((maintenant - date) / 6e4);
-    if (min < 1) return "à l'instant";
-    if (min < 60) return `il y a ${min} min`;
-    const h = Math.round(min / 60);
-    if (h < 24) return `il y a ${h} h`;
-    if (h < 48) return "hier";
-    if (h < 24 * 7) return `il y a ${Math.round(h / 24)} j`;
-    return "le " + date.toLocaleDateString("fr-FR", { timeZone: PARIS, day: "2-digit", month: "2-digit" });
-  }
-
-  function trierGrimpeurs(liste) {
-    // Actifs d'abord, puis ordre alphabétique. Pas de tri par score : l'ascension est collective.
-    return [...liste].sort((a, b) =>
-      (a.statut === "actif" ? 0 : 1) - (b.statut === "actif" ? 0 : 1) ||
-      a.pseudo.localeCompare(b.pseudo, "fr", { sensitivity: "base" }));
-  }
-
-  // --- Le reste a besoin du navigateur -----------------------------------------------------------
-
-  /** Crée un élément. `props` : class, text, style (variables CSS), attrs, data. Le texte passe toujours par textContent. */
-  function el(tag, props = {}, ...enfants) {
-    const n = document.createElement(tag);
-    if (props.class) n.className = props.class;
-    if (props.text !== undefined) n.textContent = String(props.text);
-    for (const [k, v] of Object.entries(props.style || {})) n.style.setProperty(k, v);
-    for (const [k, v] of Object.entries(props.attrs || {})) n.setAttribute(k, v);
-    for (const [k, v] of Object.entries(props.data || {})) n.dataset[k] = v;
-    for (const e of enfants.flat()) if (e !== null && e !== undefined && e !== false) {
-      n.append(typeof e === "string" ? document.createTextNode(e) : e);
-    }
-    return n;
-  }
-  const $ = (id) => document.getElementById(id);
-  const remplacer = (id, ...enfants) => $(id).replaceChildren(...enfants.flat());
-
-  let etat = null;
-  let filtre = "all";
-  let horlogeDecalage = 0; // en démo : écart entre l'heure simulée et l'heure réelle
-  let dernierFil = null;
-
-  function maintenant() { return new Date(Date.now() + horlogeDecalage); }
-
-  function dateLongue(d) {
-    return d.toLocaleDateString("fr-FR", { timeZone: PARIS, weekday: "long", day: "numeric", month: "long" });
-  }
-  /** « vendredi 13 novembre à 17 h » */
-  function quandLong(d) {
-    const h = d.toLocaleTimeString("fr-FR", { timeZone: PARIS, hour: "numeric", minute: "2-digit" });
-    const [hh, mm] = h.split(":");
-    return `${dateLongue(d)} à ${Number(hh)} h${mm && mm !== "00" ? " " + mm : ""}`;
-  }
-
-  function dessinerHorloge() {
-    if (!etat) return;
-    const cr = compteARebours(maintenant(), etat);
-    $("clockBox").hidden = !cr;
-    if (!cr) return;
-    $("clockLabel").textContent = cr.libelle;
-    if (cr.texte) {
-      $("clock").textContent = cr.texte;
-      $("clockSub").textContent = "";
-      return;
-    }
-    $("clock").textContent = duree(cr.cible - maintenant());
-    $("clockSub").textContent = quandLong(cr.cible);
-  }
-
-  function dessinerTour() {
-    const tour = etat.tour || [];
-    const courant = tour.find((e) => e.statut === "ouvert");
-    const scelles = tour.filter((e) => e.statut === "scelle");
-    const termines = tour.filter((e) => e.statut === "termine");
-    // On ne connaît pas le nombre d'étages : on dessine 6 étages scellés « ? » au-dessus.
-    const hauts = Math.max(6, scelles.length);
-    const lignes = [];
-    for (let i = hauts; i >= 1; i--) {
-      const w = 52 + (hauts - i) * (48 / hauts);
-      lignes.push(el("div", { class: "floor locked", style: { "--w": `${w}%` } },
-        el("b", { text: "?" }), el("span", { text: i === 1 ? "scellé" : "" })));
-    }
-    if (courant) {
-      lignes.push(el("div", { class: "floor current", style: { "--w": "100%" }, attrs: { "aria-current": "step" } },
-        el("b", { text: `Étage ${courant.numero}` }), el("span", { text: courant.nom || "" })));
-    }
-    for (const e of [...termines].reverse()) {
-      lignes.push(el("div", { class: "floor", style: { "--w": "100%" } },
-        el("b", { text: `Étage ${e.numero}` }), el("span", { text: e.nom || "terminé" })));
-    }
-    remplacer("floors", lignes);
-  }
-
-  function dessinerEtage() {
-    const ec = etat.etage_courant;
-    if (!ec) {
-      $("floorTitle").textContent = "Aucun étage ouvert";
-      remplacer("facts"); remplacer("gauges");
-      $("verdict").textContent = "La tour attend son premier étage.";
-      return;
-    }
-    $("floorTitle").textContent = `Étage ${ec.numero} · ${ec.nom}`;
-    remplacer("facts",
-      el("span", {}, "Cap de niveau ", el("b", { class: "num", text: ec.level_cap })),
-      ec.donjons.length ? el("span", {}, ec.donjons.length > 1 ? "Donjons " : "Donjon ",
-        el("b", { text: ec.donjons.join(", ") })) : null,
-      ec.chapitre_guide ? el("span", {}, "Quêtes ", el("a", { attrs: { href: ec.lien_guide, rel: "noopener" } },
-        el("b", { text: `guide Duffus : ${ec.chapitre_guide}` })))
-        : ec.zone_quetes ? el("span", {}, "Quêtes ", el("b", { text: ec.zone_quetes })) : null);
-
-    // Une seule jauge : remplie à min(points ÷ maximum, 100 %), repère au seuil.
-    const j = ec.jauge, d = ec.comptes_par_difficulte;
-    const pct = j.maximum > 0 ? Math.min(100, (j.points / j.maximum) * 100) : 0;
-    const manque = Math.max(0, j.seuil - j.points);
-    const lecture = `${j.points} points sur ${j.seuil} requis, maximum ${j.maximum}`;
-    remplacer("gauges", el("div", { class: "gauge" + (j.pleine ? " ok" : ""), style: { "--c": "var(--gold)" } },
-      el("span", { class: "tag", text: `Jauge de l'étage · seuil ${ec.seuil_pourcent} % du maximum` }),
-      // Le texte est toujours là : la jauge se lit sans la couleur.
-      el("div", { class: "count" }, String(j.points), el("small", { text: ` points sur ${j.seuil} requis` })),
-      el("div", { class: "bar", attrs: { role: "img", "aria-label": lecture } },
-        el("i", { style: { "--p": `${pct}%` } }),
-        el("span", { class: "seuil", style: { "--s": `${ec.seuil_pourcent}%` }, attrs: { "data-label": `seuil ${j.seuil}` } })),
-      el("span", { class: "left", text: j.pleine ? "Seuil atteint" : `Il en manque ${manque}` }),
-      el("div", { class: "detail" },
-        el("span", {}, "Maximum ", el("b", { class: "num", text: j.maximum }),
-          ` = ${d.hard} Collectionneur${d.hard > 1 ? "s" : ""} × 3 + ${d.med} Éclaireur${d.med > 1 ? "s" : ""} × 2`
-          + ` + ${d.easy} Aventurier${d.easy > 1 ? "s" : ""} × 1. Seuil ${ec.seuil_pourcent} %.`),
-        el("div", { class: "paliers" }, ec.paliers.map((p) =>
-          el("span", { class: "mark" + (p.grimpeurs ? " done" : ""), style: { "--c": COULEUR_PALIER[p.rang] } },
-            `Palier ${p.rang} · ${COURT[p.rang] || p.libelle} : `, el("b", { class: "num", text: p.grimpeurs })))))));
-
-    const v = $("verdict");
-    const suivant = ec.numero + 1;
-    const plancher = ec.date_plancher_suivant ? new Date(ec.date_plancher_suivant) : null;
-    const avantPlancher = plancher && maintenant() < plancher;
-    v.className = "verdict" + (j.pleine ? " open" : "");
-    if (j.maximum === 0) {
-      v.replaceChildren(el("b", { text: "Aucun grimpeur actif." }), " La jauge se remplira dès la première inscription.");
-      return;
-    }
-    const morceaux = [`${ec.n_comptes} grimpeur${ec.n_comptes > 1 ? "s" : ""} actif${ec.n_comptes > 1 ? "s" : ""}`];
-    if (ec.n_pause) morceaux.push(`${ec.n_pause} en pause`);
-    const base = " " + morceaux.join(", ") + ".";
-    if (j.pleine) {
-      v.replaceChildren(el("b", { text: "Le seuil est atteint." }),
-        avantPlancher ? ` Un admin pourra ouvrir l'étage ${suivant} le ${quandLong(plancher)}, pas avant.`
-          : ` Un admin peut ouvrir l'étage ${suivant}.`, base);
-    } else {
-      v.replaceChildren(`L'étage ${suivant} s'ouvre quand la jauge atteint le seuil` +
-        (plancher ? `, et pas avant le ${quandLong(plancher)}.` : ".") + base);
-    }
-  }
-
-  function dessinerClasses() {
-    remplacer("classes", etat.classes.map((c) => {
-      const vide = c.actifs === 0;
-      return el("li", { class: "classe" + (vide ? " vide" : "") },
-        el("b", { text: c.classe }),
-        el("span", { class: "combien", text: vide ? "Personne encore" : String(c.actifs) }),
-        c.en_pause ? el("small", { text: `+ ${c.en_pause} en pause` }) : null);
-    }));
-  }
-
-  function dessinerFiltres() {
-    const options = [["all", "Tous"], ...Object.entries(DIFF).map(([k, d]) => [k, d.pluriel])];
-    remplacer("filters", options.map(([k, libelle]) => {
-      const n = k === "all" ? etat.grimpeurs.length : etat.grimpeurs.filter((g) => g.difficulte === k).length;
-      return el("button", { class: "chip", attrs: { type: "button", "aria-pressed": String(filtre === k) }, data: { f: k } },
-        `${libelle} `, el("span", { class: "num", text: n }));
-    }));
-  }
-
-  function statutLisible(g) {
-    return g.statut === "actif" ? "Actif" : "En pause";
-  }
-
-  /** « 2 pts · ✓ sa part », « 3 pts · ✓ sa part · +2 bonus » ou « 0 pt · encore 2 pts » (maquette).
-   *  « Sa part » = les points attendus pour sa difficulté ; au-delà, c'est du bonus pour le groupe. */
-  function ptsLabel(points, vises) {
-    const nb = (n) => `${n} pt${n > 1 ? "s" : ""}`;
-    const etat = points >= vises
-      ? `✓ sa part${points > vises ? ` · +${points - vises} bonus` : ""}`
-      : `encore ${nb(vises - points)}`;
-    return `${nb(points)} · ${etat}`;
-  }
-
-  function marques(g) {
-    return [1, 2, 3].map((rang) => {
-      const fait = !!g.marques[String(rang)];
-      return el("span", { class: "mark" + (fait ? " done" : ""),
-        attrs: { title: `${COURT[rang]} : ${fait ? "fait" : "pas encore"}` },
-        text: rang === 3 && fait ? "Quêtes déclarées" : COURT[rang] });
+  CATS.forEach(c => {
+    texte(document.querySelector(`[data-jcat="${c}"]`), String(j.points_par_categorie[c] || 0));
+    pct(document.querySelector(`[data-jmini="${c}"]`), j.points_par_categorie[c] || 0, j.actifs);
+  });
+  const v = $("verdict");
+  if (v){ v.classList.toggle("open", j.pleine); v.textContent = j.pleine ? v.dataset.plein : v.dataset.pasPlein; }
+}
+const NOMS = {donjons:"Donjons", full_succes:"Full succès", principales:"Quêtes principales", secondaires:"Quêtes secondaires"};
+function majMoi(moi){
+  const zone = $("maProgression"); if (!zone || !moi) return;
+  texte(zone.querySelector('[data-moi="points"]'), String(moi.points));
+  CATS.forEach(c => {
+    const e = moi.categories[c]; if (!e) return;
+    texte(zone.querySelector(`[data-moi-cat="${c}"]`), `${e.faits}/${e.total}${e.acquise ? " ✓" : ""}`);
+    const p = zone.querySelector(`[data-pip="${c}"]`);
+    if (p){ pct(p, e.faits, e.total); p.classList.toggle("got", e.acquise);
+      const lab = `${NOMS[c]} : ${e.acquise ? "point obtenu" : `${e.faits} sur ${e.total}`}`;
+      p.setAttribute("aria-label", lab); p.title = lab; }
+  });
+}
+function majCompteurs(compteurs){
+  Object.entries(compteurs || {}).forEach(([cle, n]) => {
+    document.querySelectorAll(`[data-compteur="${cle}"]`).forEach(a => {
+      a.textContent = `${n}/${a.textContent.split("/")[1]}`;
     });
-  }
+  });
+}
+/* L'état d'une ligne de donjon (badges « Donjon » et « Full succès », compte x/5) et data-fait des lignes. */
+function majLignes(){
+  document.querySelectorAll("li[data-donjon]").forEach(li => {
+    const boxes = [...li.querySelectorAll("input[data-ref]")];
+    const faits = boxes.filter(b => b.checked).length, classique = boxes[0];
+    texte(li.querySelector("[data-djcompte]"), String(faits));
+    const tout = boxes.length > 0 && faits === boxes.length;
+    li.querySelector('[data-djbadge="donjon"]')?.classList.toggle("on", !!(classique && classique.checked));
+    li.querySelector('[data-djbadge="succes"]')?.classList.toggle("on", tout);
+    li.dataset.fait = tout ? "1" : "0"; li.dataset.vaincu = classique && classique.checked ? "1" : "0";
+  });
+  document.querySelectorAll("li[data-cats] input[data-ref^='quete:']").forEach(b => { b.closest("li").dataset.fait = b.checked ? "1" : "0"; });
+  filtrer();
+}
 
-  function carteGrimpeur(g, ec) {
-    const d = DIFF[g.difficulte];
-    const cap = ec ? ec.level_cap : null;
-    const niveau = g.niveau === null ? "Niveau inconnu" : cap ? `Niv. ${g.niveau} / ${cap}` : `Niv. ${g.niveau}`;
-    const pct = g.niveau && cap ? Math.min(100, (g.niveau / cap) * 100) : 0;
-    return el("button", { class: "player" + (g.statut === "actif" ? "" : " paused"), style: { "--c": d.c },
-      attrs: { type: "button", "aria-haspopup": "dialog" }, data: { id: g.id } },
-      el("div", { class: "ptop" }, el("strong", { text: g.pseudo }), el("span", { class: "diff", text: d.nom })),
-      el("div", { class: "meta" }, el("span", { text: g.classe }), el("span", { text: statutLisible(g) }),
-        el("span", { class: "pts", text: ptsLabel(g.points, g.points_vises) })),
-      el("div", { class: "lvl" },
-        el("div", { class: "meta" }, el("span", { class: "num" + (g.au_dessus_du_cap ? " over" : ""), text: niveau }),
-          g.au_dessus_du_cap ? el("span", { class: "over", text: "Dépasse le cap" }) : null),
-        el("div", { class: "bar", attrs: { "aria-hidden": "true" } }, el("i", { style: { "--p": `${pct}%` } }))),
-      el("div", { class: "marks" }, marques(g)));
+/* =================== Cocher =================== */
+const enCours = new Set();
+function boites(ref){ return [...document.querySelectorAll(`input[data-ref="${ref}"]`)]; }
+function remettre(refs, etats){ refs.forEach((r, i) => boites(r).forEach(b => { b.checked = etats[i]; })); }
+async function envoyer(corps, refs, avant){
+  const cible = document.querySelector("[data-cible]");
+  if (cible){
+    corps.grimpeur_id = Number(cible.dataset.cible);
+    corps.motif = ($("motif") || {}).value || "";
+    if (!corps.motif.trim()){ remettre(refs, avant); message("Indique d'abord un motif."); $("motif")?.focus(); return null; }
   }
+  try{
+    const r = await fetch("/api/coches", {method:"POST", credentials:"same-origin",
+      headers:{"Content-Type":"application/json", "X-CSRF-Token":csrf}, body:JSON.stringify(corps)});
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok || !d.ok){ remettre(refs, avant); message(d.message || "Pas enregistré, réessaie."); return null; }
+    return d;
+  }catch(e){ remettre(refs, avant); message("Pas enregistré, réessaie."); return null; }
+}
+function appliquer(d){ majCompteurs(d.compteurs); majJauge(d.jauge); majMoi(d.moi); majLignes(); }
+async function cocher(box){
+  const ref = box.dataset.ref;
+  if (enCours.has(ref)){ box.checked = !box.checked; return; }   // double toucher : on attend la réponse
+  const [type, id] = ref.split(":"), cochee = box.checked;
+  enCours.add(ref); boites(ref).forEach(b => { b.checked = cochee; b.disabled = true; });
+  const d = await envoyer({type, id:Number(id), cochee}, [ref], [!cochee]);
+  boites(ref).forEach(b => { b.disabled = false; });
+  enCours.delete(ref);
+  if (!d) return;
+  // La cascade (T-16) : les éléments changés en plus prennent le même état.
+  Object.keys(d.compteurs || {}).forEach(k => boites(k).forEach(b => { b.checked = cochee; }));
+  appliquer(d);
+}
+async function toutLeDonjon(btn){
+  const li = btn.closest("li[data-donjon]"), refs = [...li.querySelectorAll("input[data-ref]")].map(b => b.dataset.ref);
+  if (btn.disabled) return; btn.disabled = true;
+  const avant = refs.map(r => !!boites(r)[0]?.checked);
+  refs.forEach(r => boites(r).forEach(b => { b.checked = true; }));
+  const d = await envoyer({type:"donjon", id:Number(li.dataset.donjon), cochee:true}, refs, avant);
+  btn.disabled = false;
+  if (d) appliquer(d);
+}
+document.addEventListener("change", e => {
+  const box = e.target.closest("input[data-ref]"); if (box) cocher(box);
+});
 
-  function dessinerGrimpeurs() {
-    const ec = etat.etage_courant;
-    const liste = trierGrimpeurs(etat.grimpeurs.filter((g) => filtre === "all" || g.difficulte === filtre));
-    if (!liste.length) {
-      remplacer("roster", el("p", { class: "vide-liste", text: "Aucun grimpeur pour l'instant." }));
-      return;
+/* =================== Filtre cumulatif (mémorisé sur l'appareil) =================== */
+const CLE_FILTRE = "epreuve-filtre";
+function lireFiltre(){ try{ return JSON.parse(localStorage.getItem(CLE_FILTRE)) || null; }catch(e){ return null; } }
+function filtrer(){
+  const f = $("filtre"); if (!f) return;
+  const choix = [...f.querySelectorAll("input")].filter(i => i.checked).map(i => i.value);
+  const reste = choix.includes("reste"), cats = choix.filter(c => c !== "reste");
+  const seulSucces = cats.length === 1 && cats[0] === "full_succes";
+  document.querySelectorAll("#liste li[data-cats]").forEach(li => {
+    let voir = li.dataset.cats.split(" ").some(c => cats.includes(c));
+    if (voir && reste){
+      if (li.dataset.donjon && !cats.includes("full_succes")) voir = li.dataset.vaincu !== "1";
+      else voir = li.dataset.fait !== "1";
     }
-    remplacer("roster", liste.map((g) => carteGrimpeur(g, ec)));
-  }
+    li.hidden = !voir;
+    const det = li.querySelector("details"); if (det && seulSucces) det.open = true;
+  });
+  document.querySelectorAll("#liste .bloc").forEach(b => { b.hidden = !b.querySelector("li[data-cats]:not([hidden])"); });
+}
+function initFiltre(){
+  const f = $("filtre"); if (!f) return;
+  const memo = lireFiltre();
+  if (Array.isArray(memo)) f.querySelectorAll("input").forEach(i => { i.checked = memo.includes(i.value); });
+  f.addEventListener("change", e => {
+    e.stopPropagation();
+    try{ localStorage.setItem(CLE_FILTRE, JSON.stringify([...f.querySelectorAll("input")].filter(i => i.checked).map(i => i.value))); }catch(err){ /* stockage indisponible : le filtre marche quand même */ }
+    filtrer();
+  });
+  filtrer();
+}
 
-  function dessinerFil() {
-    const cle = JSON.stringify(etat.fil[0] || null);
-    const nouveau = dernierFil !== null && cle !== dernierFil;
-    dernierFil = cle;
-    if (!etat.fil.length) {
-      remplacer("feed", el("li", {}, el("span"), el("span", { class: "note", text: "Aucune validation pour l'instant." })));
-      return;
+/* =================== Fiche de quête : panneau (dialog) =================== */
+let declencheur = null, pousse = false;
+async function ouvrirQuete(href, depuis){
+  const dlg = $("qd"); if (!dlg){ location.href = href; return; }
+  try{
+    const r = await fetch(href, {headers:{"Accept":"text/html-fragment"}, credentials:"same-origin"});
+    if (!r.ok) throw new Error(String(r.status));
+    const t = document.createElement("template");
+    t.innerHTML = await r.text();   // HTML rendu et échappé par le serveur (Jinja), pas une donnée brute
+    dlg.replaceChildren(t.content);
+  }catch(e){ location.href = href; return; }
+  if (!dlg.open){
+    declencheur = depuis || document.activeElement;
+    dlg.showModal();
+    history.pushState({quete:href}, "", href); pousse = true;
+  } else {
+    history.replaceState({quete:href}, "", href);
+  }
+  dlg.scrollTop = 0;
+  $("qdTitle")?.focus();
+}
+function initQuete(){
+  const dlg = $("qd"); if (!dlg) return;
+  dlg.addEventListener("close", () => {
+    if (pousse){ pousse = false; history.back(); }   // l'adresse de la liste revient, sa position de défilement aussi
+    const id = declencheur && declencheur.dataset ? declencheur.dataset.qopen : null;
+    const t = declencheur && document.contains(declencheur) ? declencheur
+      : (id ? document.querySelector(`#liste [data-qopen="${id}"]`) : null);
+    declencheur = null;
+    if (t) t.focus({preventScroll:true});
+  });
+  dlg.addEventListener("click", e => {
+    if (e.target === dlg || e.target.closest("[data-qclose]")) dlg.close();   // clic sur le fond, la croix ou « Retour »
+  });
+  addEventListener("popstate", () => { if (dlg.open){ pousse = false; dlg.close(); } });   // bouton retour du téléphone
+}
+
+/* =================== « Qui n'a pas fait… ? » (page des grimpeurs) =================== */
+function puce(g, cls){
+  const s = document.createElement("span"); s.className = "person " + cls; s.textContent = g.pseudo;
+  if (g.classe){ const c = document.createElement("span"); c.className = "muted"; c.textContent = " " + g.classe; s.append(c); }
+  return s;
+}
+function titre(t, petit){
+  const h = document.createElement("h3"); h.textContent = t + " ";
+  const s = document.createElement("small"); s.textContent = petit; h.append(s); return h;
+}
+async function demander(quoi){
+  const form = $("ask"), ans = $("answer"); if (!form || !ans) return;
+  const roster = [...document.querySelectorAll("#roster .player")];
+  roster.forEach(p => p.classList.remove("target", "dim"));
+  history.replaceState(null, "", quoi ? `/grimpeurs?quoi=${encodeURIComponent(quoi)}` : "/grimpeurs");
+  ans.textContent = "";
+  if (!quoi){ const p = document.createElement("p"); p.className = "muted"; p.textContent = "Choisis un objectif pour voir qui ne l'a pas encore fait, et qui pourrait l'accompagner."; ans.append(p); return; }
+  const [type, id] = quoi.split(":");
+  try{
+    const r = await fetch(`/api/etages/${encodeURIComponent(form.dataset.etage)}/manque?type=${encodeURIComponent(type)}&id=${encodeURIComponent(id)}`, {credentials:"same-origin"});
+    const d = await r.json(); if (!r.ok) throw new Error(d.message || "");
+    const libelle = $("askSel").selectedOptions[0]?.textContent || "";
+    const l1 = document.createElement("div"); l1.className = "people"; d.pas_fait.forEach(g => l1.append(puce(g, "miss")));
+    if (!d.pas_fait.length) l1.textContent = "Tout le monde l'a fait.";
+    const l2 = document.createElement("div"); l2.className = "people"; d.fait.forEach(g => l2.append(puce(g, "done")));
+    if (!d.fait.length) l2.textContent = "Personne pour l'instant.";
+    ans.append(titre("Pas encore fait", `${d.pas_fait.length} sur ${d.pas_fait.length + d.fait.length} · ${libelle}`), l1,
+               titre("Déjà fait, ils peuvent accompagner", String(d.fait.length)), l2);
+    const manque = new Set(d.pas_fait.map(g => g.id)), fait = new Set(d.fait.map(g => g.id));
+    roster.forEach(p => { const n = Number(p.dataset.gid);
+      if (manque.has(n)) p.classList.add("target"); else if (fait.has(n)) p.classList.add("dim"); });
+  }catch(e){ const p = document.createElement("p"); p.className = "alerte"; p.textContent = "Réponse indisponible, réessaie."; ans.append(p); }
+}
+function initAsk(){
+  const sel = $("askSel"); if (!sel) return;
+  sel.addEventListener("change", e => { e.stopPropagation(); demander(sel.value); });
+  $("askVoir")?.setAttribute("hidden", "");
+}
+
+/* =================== Clics =================== */
+document.addEventListener("click", e => {
+  const qo = e.target.closest("a[data-qopen]");
+  if (qo && !e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0){
+    e.preventDefault(); ouvrirQuete(qo.getAttribute("href"), $("qd")?.open ? null : qo); return;
+  }
+  const tout = e.target.closest("[data-donjon-tout]");
+  if (tout){ toutLeDonjon(tout); return; }
+  const cp = e.target.closest("[data-copier]");
+  if (cp){
+    const t = cp.dataset.copier, avant = cp.textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject(new Error("presse-papiers"))).then(
+      () => { cp.textContent = "Copié"; setTimeout(() => { cp.textContent = avant; }, 1500); },
+      () => message(t));
+  }
+});
+
+/* =================== Décor : étoiles, poussières, image d'ambiance =================== */
+function ambiance(url){
+  if (!url || !$("ambiance") || !/^https:\/\//.test(url)) return;
+  const img = new Image(); img.decoding = "async";
+  img.onload = () => { $("ambiance").style.backgroundImage = `url("${encodeURI(url).replace(/"/g, "%22")}")`; $("ambiance").classList.add("ready"); };
+  img.src = url; // en cas d'erreur, rien ne change : le décor généré reste
+}
+function ciel(){
+  const sc = $("stars"), mc = $("motes"); if (!sc || !mc) return;
+  const sx = sc.getContext("2d"), mx = mc.getContext("2d");
+  const dpr = Math.min(2, devicePixelRatio || 1), al = (a, b) => a + Math.random() * (b - a);
+  const sprite = document.createElement("canvas"); sprite.width = sprite.height = 32;
+  const g = sprite.getContext("2d"), rg = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+  rg.addColorStop(0, "rgba(255,236,190,1)"); rg.addColorStop(.25, "rgba(246,205,120,.5)"); rg.addColorStop(1, "rgba(227,181,82,0)");
+  g.fillStyle = rg; g.fillRect(0, 0, 32, 32);
+  let W, H, motes = [];
+  const neuve = tout => ({x:al(0, W), y:tout ? al(0, H) : H + 10, v:al(5, 12), s:al(2.5, 6), ph:al(0, 6.28), amp:al(6, 18), vie:0, duree:al(10, 22)});
+  function taille(){
+    W = innerWidth; H = innerHeight;
+    for (const c of [sc, mc]){ c.width = W * dpr; c.height = H * dpr; }
+    sx.setTransform(dpr, 0, 0, dpr, 0, 0); mx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    sx.clearRect(0, 0, W, H);
+    for (let i = 0, n = Math.min(260, W * H / 5000); i < n; i++){        // étoiles fixes : dessinées une fois
+      const y = Math.pow(Math.random(), 1.5) * H * .85;
+      sx.globalAlpha = al(.2, .8) * (1 - y / H * .7); sx.fillStyle = Math.random() < .2 ? "#fff3d6" : "#d8def5";
+      sx.beginPath(); sx.arc(al(0, W), y, al(.25, 1.1), 0, 6.283); sx.fill();
     }
-    const now = maintenant();
-    remplacer("feed", etat.fil.map((f, i) => {
-      const quand = new Date(f.horodatage);
-      const noms = [];
-      f.pseudos.forEach((p, j) => {
-        if (j > 0) noms.push(j === f.pseudos.length - 1 ? " et " : ", ");
-        noms.push(el("b", { text: p }));
-      });
-      return el("li", { class: nouveau && i === 0 ? "fresh" : "" },
-        el("time", { attrs: { datetime: f.horodatage }, text: ilYA(quand, now) }),
-        el("span", {}, ...noms, " ", f.texte));
-    }));
+    motes = Array.from({length:Math.round(Math.min(24, W * H / 50000))}, () => neuve(true));
   }
-
-  function ouvrirFiche(id) {
-    const g = etat.grimpeurs.find((x) => x.id === id);
-    if (!g) return;
-    const ec = etat.etage_courant, d = DIFF[g.difficulte];
-    const corps = $("sheetBody");
-    corps.style.setProperty("--c", d.c);
-    const niveau = g.niveau === null ? "Niveau inconnu" : ec ? `Niveau ${g.niveau}, cap ${ec.level_cap}` : `Niveau ${g.niveau}`;
-    corps.replaceChildren(
-      el("div", { class: "row" },
-        el("div", {}, el("div", { class: "eyebrow", style: { color: d.c }, text: d.nom }),
-          el("h3", { attrs: { id: "sheetTitle" }, text: g.pseudo })),
-        el("button", { class: "btn", attrs: { type: "button" }, data: { close: "1" }, text: "Fermer" })),
-      el("div", { class: "meta" }, el("span", { text: g.classe }),
-        el("span", { class: "num" + (g.au_dessus_du_cap ? " over" : ""), text: niveau }),
-        el("span", { text: statutLisible(g) }),
-        el("span", { class: "pts", text: ptsLabel(g.points, g.points_vises) })),
-      el("div", { class: "checks" }, (ec ? ec.paliers : []).map((p) => {
-        const fait = !!g.marques[String(p.rang)];
-        return el("div", { class: "check" + (fait ? " done" : "") },
-          el("span", {}, `Palier ${p.rang} · ${p.libelle}`,
-            el("small", { text: fait ? (p.rang === 3 ? "Déclaré par le grimpeur" : "Validé par un admin") : "Pas encore fait" }),
-            p.rang === 3 && ec.chapitre_guide ? el("small", {}, el("a", { attrs: { href: ec.lien_guide, rel: "noopener" },
-              text: `Guide Duffus : ${ec.chapitre_guide}` })) : null),
-          el("span", { class: "etat", text: fait ? "Fait" : "À faire" }));
-      })),
-      el("p", { class: "note", text: "Les points suivent l'ordre des paliers : les quêtes ne rapportent qu'une fois le full succès atteint." }),
-      g.au_dessus_du_cap ? el("p", { class: "note over", text: "Niveau au-dessus du cap : un admin jugera s'il s'agit d'un dépassement involontaire." }) : null,
-      g.statut !== "actif" ? el("p", { class: "note", text: "En pause : ne compte pas dans la jauge pour l’instant." }) : null);
-    const dlg = $("sheet");
-    if (!dlg.open) dlg.showModal();
-    corps.querySelector("[data-close]").focus();
+  function dessin(t){
+    mx.clearRect(0, 0, W, H);
+    for (const m of motes){ mx.globalAlpha = Math.sin(Math.min(1, m.vie / m.duree) * Math.PI) * .7; mx.drawImage(sprite, m.x + Math.sin(t / 2600 + m.ph) * m.amp, m.y, m.s, m.s); }
   }
-
-  function toutDessiner() {
-    dessinerHorloge(); dessinerTour(); dessinerEtage(); dessinerClasses();
-    dessinerFiltres(); dessinerGrimpeurs(); dessinerFil();
-  }
-
-  async function rafraichir() {
-    const alerte = $("alerte");
-    try {
-      const params = new URLSearchParams(location.search);
-      const url = "/api/etat" + (params.get("horloge") ? `?horloge=${encodeURIComponent(params.get("horloge"))}` : "");
-      const r = await fetch(url, { headers: { Accept: "application/json" } });
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      etat = await r.json();
-      alerte.hidden = r.headers.get("X-Etat-Perime") !== "1";
-      alerte.textContent = "Dernier état connu : la mise à jour a échoué, nouvel essai dans 30 secondes.";
-      toutDessiner();
-    } catch (e) {
-      alerte.hidden = false;
-      alerte.textContent = etat
-        ? "Dernier état connu : la mise à jour a échoué, nouvel essai dans 30 secondes."
-        : "Les données sont momentanément indisponibles. Réessaie dans une minute.";
+  let prec = 0, actif = !reduit;
+  function boucle(t){
+    if (!actif) return;
+    if (t - prec >= 40){
+      const dt = Math.min(.1, (t - (prec || t)) / 1000);
+      motes.forEach((m, i) => { m.y -= m.v * dt; m.vie += dt; if (m.vie > m.duree) motes[i] = neuve(false); });
+      dessin(t); prec = t;
     }
+    requestAnimationFrame(boucle);
   }
+  taille(); dessin(0);
+  if (!reduit){ requestAnimationFrame(boucle);
+    document.addEventListener("visibilitychange", () => { actif = !document.hidden; if (actif){ prec = 0; requestAnimationFrame(boucle); } }); }
+  let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { taille(); dessin(performance.now()); }, 150); });
+}
 
-  function demarrer() {
-    const simulee = document.body.dataset.horloge;
-    if (simulee) horlogeDecalage = new Date(simulee) - Date.now();
-    try { etat = JSON.parse($("etat-initial").textContent); } catch { etat = null; }
-    if (etat) toutDessiner();
-
-    $("filters").addEventListener("click", (e) => {
-      const b = e.target.closest("[data-f]");
-      if (!b) return;
-      filtre = b.dataset.f;
-      dessinerFiltres(); dessinerGrimpeurs();
-    });
-    $("roster").addEventListener("click", (e) => {
-      const b = e.target.closest("[data-id]");
-      if (b) ouvrirFiche(Number(b.dataset.id));
-    });
-    $("sheet").addEventListener("click", (e) => {
-      if (e.target === $("sheet") || e.target.closest("[data-close]")) $("sheet").close();
-    });
-    setInterval(dessinerHorloge, 30000);
-    setInterval(rafraichir, RAFRAICHIR_MS);
-  }
-
-  if (typeof document !== "undefined") {
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", demarrer);
-    else demarrer();
-  }
-
-  return { compteARebours, duree, ilYA, trierGrimpeurs, ptsLabel };
+initFiltre();
+initQuete();
+initAsk();
+horloge(); setInterval(horloge, 1000);
+ambiance(document.body.dataset.ambiance);
+ciel();
 })();

@@ -1,0 +1,18 @@
+{% extends "site.html" %}
+{% block titre %}Admin · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<section class="card" aria-labelledby="adminTitre">
+  <div class="eyebrow">Admin</div>
+  <h2 id="adminTitre">Tableau de bord</h2>
+  <div class="facts">
+    <span>Étage ouvert <b>{% if ouvert %}{{ ouvert.numero }} · {{ ouvert.nom }}{% else %}aucun{% endif %}</b></span>
+    <span><b class="num">{{ nb_grimpeurs }}</b> fiches</span><span><b class="num">{{ nb_liste }}</b> sur la liste officielle</span>
+  </div>
+  <nav class="nav" aria-label="Admin">
+    <a href="/admin/grimpeurs">Grimpeurs et liste officielle</a>
+    <a href="/admin/etages">Étages : revue et ouverture</a>
+    <a href="/admin/journal">Journal</a>
+  </nav>
+  <p class="muted">Le site n'écrit rien sur Discord : annonce toi-même l'ouverture d'un étage.</p>
+</section>
+{% endblock %}

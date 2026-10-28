@@ -1,0 +1,39 @@
+{% extends "site.html" %}
+{% from "_macros.html" import tour as dessiner_tour, jauge_bloc %}
+{% block titre %}La tour · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<div class="layout">
+  <aside class="tower" aria-label="La tour">{{ dessiner_tour(etages, jauge, nb_scelles) }}</aside>
+  <main>
+    {% if ouvert %}
+    <section class="card" aria-labelledby="floorTitle">
+      <div class="row">
+        <div>
+          <div class="eyebrow">Étage en cours</div>
+          <h2 id="floorTitle">Étage {{ ouvert.numero }} · {{ ouvert.nom }}</h2>
+        </div>
+        <div class="facts"><span>Tranche <b>niveaux {{ ouvert.niveau_min }} à {{ ouvert.niveau_max }}</b></span><span>Cap <b class="num">{{ ouvert.level_cap }}</b></span>
+          <span><b class="num">{{ vue.contenu.donjons|length }}</b> donjons</span><span><b class="num">{{ vue.contenu.quetes|length }}</b> quêtes</span></div>
+      </div>
+      <p class="how">Chaque grimpeur peut rapporter <b>4 points</b> par étage, un par catégorie <b>terminée en entier</b>. L'étage suivant se descelle quand la guilde atteint le palier.</p>
+      {{ jauge_bloc(jauge, encoches, formule, texte_jauge, verdict_plein, verdict_pas_plein) }}
+      <p><a class="cta" href="/etages/{{ ouvert.numero }}">Ouvrir l'étage {{ ouvert.numero }}</a></p>
+    </section>
+    {% else %}
+    <section class="card"><h2>La tour se prépare</h2><p class="muted">Aucun étage n'est ouvert pour l'instant.</p></section>
+    {% endif %}
+
+    <section class="card" aria-labelledby="classesTitle">
+      <div class="row">
+        <h2 id="classesTitle">Répartition des classes</h2>
+        <span class="muted">{{ classes_absentes }} classe{{ "s" if classes_absentes > 1 }} encore absente{{ "s" if classes_absentes > 1 }}</span>
+      </div>
+      <div class="classes">
+        {%- for r in classes %}
+        <div class="cl{% if not r.actifs %} none{% endif %}"><span>{{ r.classe }}</span><span class="num">{{ r.actifs }}</span><div class="mini c-or"><i class="{{ r.actifs|pct(classes_max) }}"></i></div></div>
+        {%- endfor %}
+      </div>
+    </section>
+  </main>
+</div>
+{% endblock %}

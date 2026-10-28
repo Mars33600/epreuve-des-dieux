@@ -1,0 +1,58 @@
+{% extends "site.html" %}
+{% from "_macros.html" import pip, personnes %}
+{% block titre %}Les grimpeurs · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<section class="roster" aria-labelledby="rosterTitle">
+  <div class="row">
+    <h2 id="rosterTitle">Les grimpeurs</h2>
+    <span class="muted">{{ actifs }} actifs · {{ en_pause }} en pause</span>
+  </div>
+  {% if vue %}
+  <form class="card ask" method="get" action="/grimpeurs" id="ask" data-etage="{{ ouvert.numero }}">
+    <label for="askSel">Qui n'a pas fait… ? <span class="muted">(étage {{ ouvert.numero }})</span></label>
+    <div class="askrow">
+      <select id="askSel" name="quoi">
+        <option value="">Choisir une catégorie, un donjon, un succès ou une quête…</option>
+        <optgroup label="Catégories (le point entier)">{% for info in CATS %}<option value="categorie:{{ info.cle }}"{% if quoi == "categorie:" ~ info.cle %} selected{% endif %}>{{ info.nom }}</option>{% endfor %}</optgroup>
+        <optgroup label="Donjons vaincus">{% for d in vue.contenu.donjons %}<option value="donjon:{{ d.id }}"{% if quoi == "donjon:" ~ d.id %} selected{% endif %}>{{ d.nom }}</option>{% endfor %}</optgroup>
+        {% for d in vue.contenu.donjons %}<optgroup label="Succès · {{ d.nom }}">{% for c in vue.contenu.cases_du_donjon(d.id) if not c.est_classique %}<option value="case:{{ c.id }}"{% if quoi == "case:" ~ c.id %} selected{% endif %}>{{ c.nom }} ({{ d.nom }})</option>{% endfor %}</optgroup>{% endfor %}
+        <optgroup label="Quêtes principales">{% for q in vue.contenu.quetes if q.nature == "principale" %}<option value="quete:{{ q.id }}"{% if quoi == "quete:" ~ q.id %} selected{% endif %}>{{ q.nom }}</option>{% endfor %}</optgroup>
+        <optgroup label="Quêtes secondaires">{% for q in vue.contenu.quetes if q.nature == "secondaire" %}<option value="quete:{{ q.id }}"{% if quoi == "quete:" ~ q.id %} selected{% endif %}>{{ q.nom }}</option>{% endfor %}</optgroup>
+      </select>
+      <button class="btn" type="submit" id="askVoir">Voir</button>
+      <a class="btn" href="/grimpeurs" id="askClear">Effacer</a>
+    </div>
+    <div class="answer" id="answer" aria-live="polite">
+      {% if reponse %}{% set libelle, pas_fait, fait = reponse %}
+      <h3>Pas encore fait <small>{{ pas_fait|length }} sur {{ vue.jauge.actifs }} · {{ libelle }}</small></h3>
+      {% if pas_fait %}{{ personnes(pas_fait, "miss") }}{% else %}<p class="muted">Tout le monde l'a fait.</p>{% endif %}
+      <h3>Déjà fait, ils peuvent accompagner <small>{{ fait|length }}</small></h3>
+      {% if fait %}{{ personnes(fait, "done") }}{% else %}<p class="muted">Personne pour l'instant.</p>{% endif %}
+      {% else %}<p class="muted">Choisis un objectif pour voir qui ne l'a pas encore fait, et qui pourrait l'accompagner.</p>{% endif %}
+    </div>
+  </form>
+  {% endif %}
+  <div class="grid" id="roster">
+    {%- for g in grimpeurs %}
+    {%- set cls = [] %}
+    {%- if g.statut == "pause" %}{% set _ = cls.append("paused") %}{% endif %}
+    {%- if v.grimpeur and g.id == v.grimpeur.id %}{% set _ = cls.append("me") %}{% endif %}
+    {%- if reponse and g.statut == "actif" %}{% set _ = cls.append("target" if g.id in cibles else "dim") %}{% endif %}
+    {%- set pts = vue.points(g.id) if vue else 0 %}
+    <a class="player {{ cls|join(' ') }}" href="/grimpeurs/{{ g.id }}" data-gid="{{ g.id }}" data-statut="{{ g.statut }}">
+      <div class="ptop"><strong>{{ g.pseudo }}</strong><span class="total{% if pts == 4 %} full{% endif %}">{{ pts }}<small>/4</small></span></div>
+      <div class="meta">
+        {% if regles.afficher_nom_discord %}<span class="discord">{{ g.nom_discord }}</span>{% endif %}
+        <span>{{ g.classe or "Classe non précisée" }}</span>
+        {% if g.niveau_declare %}<span class="num">niv. {{ g.niveau_declare }}</span>{% endif %}
+        {% if g.statut == "pause" %}<span class="tag">En pause</span>{% elif g.statut == "exclu" %}<span class="tag exclu">Exclu</span>{% endif %}
+        {% if v.grimpeur and g.id == v.grimpeur.id %}<span class="tag me">Toi</span>{% endif %}
+      </div>
+      {% if vue %}{% set cats = vue.categories(g.id) %}
+      <div class="pips">{% for info in CATS %}<span class="pipcell">{{ pip(info, cats[info.cle]) }}<span>{{ info.court }}</span></span>{% endfor %}</div>
+      {% endif %}
+    </a>
+    {%- endfor %}
+  </div>
+</section>
+{% endblock %}

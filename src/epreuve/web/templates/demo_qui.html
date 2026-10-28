@@ -1,0 +1,10 @@
+{% extends "site.html" %}
+{% block titre %}Démo · qui es-tu ?{% endblock %}
+{% block page %}
+<section class="card solo" aria-labelledby="demoTitre">
+  <div class="eyebrow">Démonstration · données fictives</div>
+  <h2 id="demoTitre">Qui es-tu ?</h2>
+  <p class="muted">En production, c'est ici que Discord demande ton accord. En démo, choisis un profil.</p>
+  <div class="profils">{% for lien, nom in profils %}<a href="{{ lien }}">{{ nom }}</a>{% endfor %}</div>
+</section>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "site.html" %}
+{% from "_macros.html" import pip, liste_etage, icone %}
+{% block titre %}{{ g.pseudo }} · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<section class="card" aria-labelledby="sheetTitle">
+  <div class="sheethead">
+    <div><div class="eyebrow">Fiche du grimpeur{% if soi %} · la tienne{% endif %}{% if edition %} · mode édition (admin){% endif %}</div>
+      <h2 id="sheetTitle">{{ g.pseudo }}</h2>
+      <div class="meta">
+        {% if regles.afficher_nom_discord %}<span>{{ g.nom_discord }}</span>{% endif %}
+        <span>{{ g.classe or "Classe non précisée" }}</span>
+        {% if g.niveau_declare %}<span class="num">niveau {{ g.niveau_declare }}</span>{% endif %}
+        <span>{{ {"actif": "Actif", "pause": "En pause", "exclu": "Exclu"}[g.statut] }}</span>
+      </div></div>
+    <div class="facts"><span>Avancement global <b class="num">{{ global[0] }}/{{ global[1] }}</b>{% if global[1] %} ({{ (global[0] * 100 // global[1]) }} %){% endif %}</span></div>
+  </div>
+  {% if message %}<p class="succes-msg" role="status">{{ message }}</p>{% endif %}
+  {% if erreur %}<p class="alerte" role="alert">{{ erreur }}</p>{% endif %}
+  {% if soi %}
+  <details>
+    <summary class="linkbtn">Modifier mon pseudo, ma classe ou mon niveau</summary>
+    <form method="post" action="/grimpeurs/moi" class="formrow">
+      <input type="hidden" name="csrf" value="{{ v.csrf }}">
+      <div class="champ"><label for="pseudo">Pseudo</label><input type="text" id="pseudo" name="pseudo" value="{{ g.pseudo }}" required minlength="2" maxlength="30"></div>
+      <div class="champ"><label for="classe">Classe</label><select id="classe" name="classe"><option value="">—</option>{% for c in classes %}<option{% if c == g.classe %} selected{% endif %}>{{ c }}</option>{% endfor %}</select></div>
+      <div class="champ"><label for="niveau">Niveau</label><input type="number" id="niveau" name="niveau" min="1" max="200" value="{{ g.niveau_declare or '' }}"></div>
+      <button class="btn or" type="submit">Enregistrer</button>
+    </form>
+  </details>
+  {% elif v.est_admin and not edition %}
+  <p><a class="btn" href="/grimpeurs/{{ g.id }}?edition=1">Modifier ses coches (admin)</a></p>
+  {% endif %}
+  {% if edition %}
+  <div class="force">
+    <label class="champ" for="motif"><span>Motif de la modification (obligatoire)</span>
+      <input type="text" id="motif" maxlength="300" placeholder="ex. validation contraire aux règles convenues"></label>
+    <small class="muted">Le motif et l'auteur restent au journal (non public) : {{ g.pseudo }} ne les voit pas sur sa fiche.</small>
+  </div>
+  {% endif %}
+</section>
+
+<div {% if edition %}data-cible="{{ g.id }}"{% endif %}>
+{%- for vue in vues %}{% set cats = vue.categories(g.id) %}{% set av = vue.avancement(g.id) %}
+<section class="card" aria-labelledby="etage{{ vue.etage.numero }}">
+  <div class="row">
+    <h2 id="etage{{ vue.etage.numero }}"><a href="/etages/{{ vue.etage.numero }}">Étage {{ vue.etage.numero }} · {{ vue.etage.nom }}</a></h2>
+    <span class="total{% if vue.points(g.id) == 4 %} full{% endif %}">{{ vue.points(g.id) }}<small>/4 points · {{ av[0] }}/{{ av[1] }}{% if av[1] %} ({{ av[0] * 100 // av[1] }} %){% endif %}</small></span>
+  </div>
+  <div class="bigpips">{% for info in CATS %}{% set e = cats[info.cle] %}<span class="pipcell">{{ pip(info, e, True) }}<span>{{ info.court }}</span><b>{{ e.faits }}/{{ e.total }}</b></span>{% endfor %}</div>
+  {% if vue.contenu.donjons %}
+  <h3 class="section-title">Succès de donjon</h3>
+  <div class="dungeons">
+    {%- for d in vue.contenu.donjons %}{% set cs = vue.contenu.cases_du_donjon(d.id) %}{% set n = cs|selectattr("id", "in", vue.coches_de(g.id).cases)|list|length %}
+    <article class="dj{% if cs and n == cs|length %} full{% endif %}"><header>{{ icone("i-donjon") }}<h4>{{ d.nom }}</h4><span class="cnt">{{ n }}/{{ cs|length }}</span></header></article>
+    {%- endfor %}
+  </div>
+  {% endif %}
+  <details{% if edition or (soi and loop.first) %} open{% endif %}>
+    <summary class="section-title">Le détail coché</summary>
+    {{ liste_etage(vue, g, cochable) }}
+  </details>
+</section>
+{%- else %}
+<section class="card"><p class="muted">Aucun étage ouvert pour l'instant.</p></section>
+{%- endfor %}
+</div>
+{% endblock %}

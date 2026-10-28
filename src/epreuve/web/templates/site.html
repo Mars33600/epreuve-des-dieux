@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{# Mise en page de toutes les pages du site (hors teaser) : décor de la DA, en-tête, navigation, bandeau du
+   mode teaser pour les admins. Aucun script ni style en ligne (CSP) : tout vient de /static/. #}
+{% from "_macros.html" import sprite %}
+{% block tete %}
+<meta name="csrf" content="{{ v.csrf }}">
+<link rel="stylesheet" href="/static/style.css">
+{% endblock %}
+{% block attributs_body %} data-ouverture="{{ ouverture_iso }}"{% if ambiance %} data-ambiance="{{ ambiance }}"{% endif %}{% endblock %}
+{% block contenu %}
+{{ sprite() }}
+<div class="scene" aria-hidden="true">
+  <div class="sky"></div>
+  <div class="ambiance" id="ambiance"></div>
+  <canvas id="stars"></canvas>
+  <div class="glow"></div>
+  <svg class="ridge" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMax slice">
+    <path fill="#0d1224" d="M0 190 L110 150 L210 178 L320 124 L420 166 L540 132 L660 172 L780 146 L900 184 L1020 140 L1140 170 L1260 128 L1380 168 L1500 140 L1600 160 V300 H0Z"/>
+    <path fill="#070a14" d="M0 240 L160 222 L320 238 L480 216 L640 236 L800 226 L960 238 L1120 218 L1280 236 L1440 224 L1600 236 V300 H0Z"/>
+    <g fill="#070a14"><path d="M1200 232 V130 L1208 122 L1220 128 L1226 112 L1236 120 V232Z"/><path d="M1300 236 V100 H1312 V92 H1372 V100 H1384 V236 H1364 V146 A22 22 0 0 0 1320 146 V236Z"/><path d="M1440 230 V176 L1448 168 L1458 174 L1464 162 L1470 170 V230Z"/></g>
+  </svg>
+  <div class="fog fog-a"></div>
+  <div class="fog fog-b"></div>
+  <canvas id="motes"></canvas>
+  <div class="scrim"></div>
+</div>
+
+<div class="wrap">
+  <header class="head">
+    <div>
+      <div class="eyebrow">Serveur Kourial · Guilde des grimpeurs</div>
+      <h1><a href="/" class="titre-lien">L'Épreuve <span>des Dieux</span></a></h1>
+      <p class="sub">Une tour, des étages, une seule règle&nbsp;: on monte ensemble.</p>
+    </div>
+    <div class="droite">
+      <div class="clock" role="timer" aria-labelledby="clockLabel">
+        <span class="eyebrow" id="clockLabel">L'ascension</span>
+        <strong id="clock">—</strong>
+        <small id="clockSub">depuis le vendredi 13 novembre, 17 h 00</small>
+      </div>
+      {% if v.connecte %}
+      <div class="who"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        Connecté&nbsp;: <b>{{ v.grimpeur.pseudo if v.grimpeur else v.session.nom_discord }}</b>
+        {% if v.est_admin %}<span class="tag me">admin</span>{% endif %}
+        <form method="post" action="/deconnexion"><input type="hidden" name="csrf" value="{{ v.csrf }}"><button class="linkbtn" type="submit">Se déconnecter</button></form>
+      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if mode == "teaser" and v.est_admin %}
+  <p class="bandeau" role="status"><b>Mode teaser</b> : les grimpeurs ne voient pas encore cette page.</p>
+  {% endif %}
+
+  {% if v.connecte and (v.est_admin or v.grimpeur) %}
+  <nav class="nav" aria-label="Navigation principale">
+    <a href="/" {% if chemin == "/" %}aria-current="page"{% endif %}>La tour</a>
+    {% if numero_ouvert is not none %}<a href="/etages/{{ numero_ouvert }}" {% if chemin.startswith("/etages/") %}aria-current="page"{% endif %}>Étage {{ numero_ouvert }}</a>{% endif %}
+    <a href="/grimpeurs" {% if chemin == "/grimpeurs" %}aria-current="page"{% endif %}>Les grimpeurs</a>
+    {% if v.grimpeur %}<a href="/grimpeurs/{{ v.grimpeur.id }}" {% if chemin == "/grimpeurs/" ~ v.grimpeur.id %}aria-current="page"{% endif %}>Ma fiche</a>{% endif %}
+    <a href="/regles" {% if chemin == "/regles" %}aria-current="page"{% endif %}>Règles</a>
+    {% if v.est_admin %}<a href="/admin" {% if chemin.startswith("/admin") %}aria-current="page"{% endif %}>Admin</a>{% endif %}
+  </nav>
+  {% endif %}
+
+  {% block page %}{% endblock %}
+</div>
+<dialog class="qd" id="qd" aria-modal="true" aria-labelledby="qdTitle"></dialog>
+<p class="message-coche" id="messageCoche" role="alert" hidden></p>
+{% endblock %}
+{% block scripts %}<script src="/static/app.js"></script>{% endblock %}

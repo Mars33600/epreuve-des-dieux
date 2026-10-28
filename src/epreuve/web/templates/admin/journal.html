@@ -1,0 +1,23 @@
+{% extends "site.html" %}
+{% block titre %}Admin · Journal{% endblock %}
+{% block page %}
+<section class="card" aria-labelledby="journalTitre">
+  <div class="eyebrow">Admin</div>
+  <h2 id="journalTitre">Journal</h2>
+  <form method="get" action="/admin/journal" class="formrow">
+    <div class="champ"><label for="fGrimpeur">Grimpeur</label><select id="fGrimpeur" name="grimpeur"><option value="">Tous</option>{% for g in grimpeurs.values()|sort(attribute="pseudo") %}<option value="{{ g.id }}"{% if filtre.grimpeur == g.id|string %} selected{% endif %}>{{ g.pseudo }}</option>{% endfor %}</select></div>
+    <div class="champ"><label for="fType">Type</label><input type="text" id="fType" name="type" value="{{ filtre.type }}" placeholder="coche, statut, palier…"></div>
+    <div class="champ"><label for="fEtage">Étage</label><select id="fEtage" name="etage"><option value="">Tous</option>{% for e in etages %}<option value="{{ e.numero }}"{% if filtre.etage == e.numero|string %} selected{% endif %}>Étage {{ e.numero }}</option>{% endfor %}</select></div>
+    <button class="btn" type="submit">Filtrer</button>
+  </form>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Date</th><th>Auteur</th><th>Type</th><th>Grimpeur</th><th>Étage</th><th>Détails</th></tr></thead>
+    <tbody>{% for l in lignes %}
+      <tr><td>{{ l.horodatage|heure_paris }}</td><td class="num">{{ l.acteur_discord_id or "—" }}</td><td>{{ l.type }}{% if not l.public %} <span class="tag">non public</span>{% endif %}</td>
+        <td>{{ grimpeurs[l.grimpeur_id].pseudo if l.grimpeur_id in grimpeurs else "—" }}</td>
+        <td>{{ etages_par_id[l.etage_id].numero if l.etage_id in etages_par_id else "—" }}</td>
+        <td class="journal-details">{% for k, val in l.details.items() if val is not none %}{{ k }} : {{ val }}{% if not loop.last %} · {% endif %}{% endfor %}</td></tr>
+    {% else %}<tr><td colspan="6" class="muted">Rien au journal pour ce filtre.</td></tr>{% endfor %}</tbody>
+  </table></div>
+</section>
+{% endblock %}

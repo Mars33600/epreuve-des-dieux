@@ -1,0 +1,58 @@
+{% extends "site.html" %}
+{% from "_macros.html" import jauge_bloc, liste_etage, filtre, pip %}
+{% block titre %}Étage {{ etage.numero }} · {{ etage.nom }} · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<div class="layout">
+  <aside class="tower" aria-label="Les étages ouverts">
+    <nav class="card" aria-label="Tranches des étages ouverts">
+      <div class="eyebrow">Les étages</div>
+      <div class="floors">
+        {%- for e in tranches|reverse %}
+        <a class="floor w-full {{ 'current' if e.statut == 'ouvert' else 'done' }}" href="/etages/{{ e.numero }}"{% if e.id == etage.id %} aria-current="page"{% endif %}><b>Étage {{ e.numero }}</b><span>niv. {{ e.niveau_min }} à {{ e.niveau_max }}</span></a>
+        {%- endfor %}
+      </div>
+    </nav>
+  </aside>
+  <main>
+    <section class="card" aria-labelledby="floorTitle">
+      <div class="row">
+        <div>
+          <div class="eyebrow">Étage {{ etage.numero }}{% if etage.statut == "termine" %} · terminé{% elif etage.statut == "scelle" %} · scellé (vue admin){% endif %}</div>
+          <h2 id="floorTitle">{{ etage.nom }}</h2>
+        </div>
+        <div class="facts"><span>Tranche <b>niveaux {{ etage.niveau_min }} à {{ etage.niveau_max }}</b></span><span>Level cap <b class="num">{{ etage.level_cap }}</b></span></div>
+      </div>
+      <p class="how">Entre grimpeurs, <b>sans dépasser le cap</b> de niveau {{ etage.level_cap }}, <b>sans PL</b>. Chaque catégorie terminée en entier rapporte un point. {{ formule }}.</p>
+      {% if bilan %}<p class="note">Bilan figé le {{ bilan.fige_le|date_paris }} : score {{ bilan.score }} sur un palier de {{ bilan.palier }}, {{ bilan.actifs }} grimpeurs actifs.{% if bilan.force %} Ouverture forcée par un admin.{% endif %} Cocher ici complète ta fiche sans changer ce bilan.</p>{% endif %}
+    </section>
+
+    {% if cible %}
+    <section class="card" aria-labelledby="progTitre" id="maProgression">
+      <div class="row"><h2 id="progTitre">Ma progression</h2>
+        <span class="total{% if vue.points(cible.id) == 4 %} full{% endif %}"><span data-moi="points">{{ vue.points(cible.id) }}</span><small> point(s) sur 4</small></span></div>
+      <div class="mesprog">
+        {%- set cats = vue.categories(cible.id) %}
+        {%- for info in CATS %}{% set e = cats[info.cle] %}
+        <span class="pipcell">{{ pip(info, e, True) }}<span>{{ info.nom }}</span><b data-moi-cat="{{ info.cle }}">{{ e.faits }}/{{ e.total }}{% if e.acquise %} ✓{% endif %}</b></span>
+        {%- endfor %}
+      </div>
+      {% if cible.statut == "pause" %}<p class="note">Tu es en pause : tu peux cocher pour rattraper ton retard, tes points compteront à ta réintégration.</p>{% endif %}
+    </section>
+    {% endif %}
+
+    {% if etage.statut == "ouvert" %}
+    <section class="card" aria-label="La jauge de l'étage">
+      {{ jauge_bloc(jauge, encoches, formule, texte_jauge, verdict_plein, verdict_pas_plein) }}
+    </section>
+    {% endif %}
+
+    <section class="card" aria-labelledby="listeTitre" id="liste" data-etage="{{ etage.numero }}">
+      <div class="row"><h2 id="listeTitre">Le guide de l'étage</h2>
+        <span class="muted">{% if not cochable %}Lecture seule{% else %}Touche une case pour la cocher{% endif %}</span></div>
+      {{ filtre() }}
+      <p class="muted">Touche le nom d'une quête pour ouvrir sa fiche : où aller, quoi faire, quoi apporter. Le compteur dit combien de grimpeurs actifs l'ont faite.</p>
+      {{ liste_etage(vue, cible, cochable) }}
+    </section>
+  </main>
+</div>
+{% endblock %}
