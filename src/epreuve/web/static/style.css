@@ -491,3 +491,6 @@ td .muted{font-size:13px}
 .qd-sec + .qd-sec{margin-top:6px}
 article.card > .qd-sec{padding-top:4px}
 .qdone input{--c:inherit}
+
+.recherche-globale { margin: .4rem 0; }
+.recherche-globale input { width: 100%; max-width: 22rem; box-sizing: border-box; padding: .4rem .6rem; font: inherit; }
