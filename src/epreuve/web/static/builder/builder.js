@@ -13,6 +13,7 @@
     objets: {}, // emplacement → résumé d'objet (id, nom, niveau, icone, caracs…)
     base: {}, parcho: {}, note: "", modeArme: "melee", buffArme: "",
     fm: {}, // emplacement → { effectId: valeur } (forgemagie : jets choisis et exos)
+    variantes: {}, // emplacement → { objet: résumé, fm: {…} } : un second objet, hors des totaux
     resultat: null,
   };
 
@@ -47,12 +48,14 @@
       const bouton = el("button", {
         type: "button", classe: "b-case" + (o ? " pleine" : "") + (raisons.length ? " alerte" : ""),
         "aria-label": nom + (o ? " : " + o.nom + ", niveau " + o.niveau : " : vide") +
+          (etat.variantes[e] ? ", variante " + etat.variantes[e].objet.nom : "") +
           (raisons.length ? " (" + raisons.join(", ") + ")" : ""),
         disabled: !modifiable && !o,
       }, [
         o && o.icone ? el("img", { src: o.icone, alt: "", loading: "lazy" }) : null,
         el("span", { classe: o ? "b-case-nom" : "", texte: o ? o.nom : nom }),
         raisons.length ? el("span", { classe: "b-signe", "aria-hidden": "true", texte: "!" }) : null,
+        etat.variantes[e] ? el("span", { classe: "b-var", title: "Variante : " + etat.variantes[e].objet.nom, texte: "⇄" }) : null,
       ]);
       if (modifiable) bouton.addEventListener("click", () => ouvrirChoix(e));
       ul.append(el("li", { classe: "b-emplacement" }, [bouton]));
@@ -72,16 +75,27 @@
 
   const choix = { emplacement: null, types: new Set(), caracs: [], decalage: 0, minuteur: null, requete: 0 };
 
-  function ouvrirChoix(emplacement) {
+  // La cible de la fenêtre : l'objet porté, ou la variante de l'emplacement.
+  function objetCible() {
+    return choix.variante ? (etat.variantes[choix.emplacement] || {}).objet : etat.objets[choix.emplacement];
+  }
+  function fmCible() {
+    return (choix.variante ? (etat.variantes[choix.emplacement] || {}).fm : etat.fm[choix.emplacement]) || {};
+  }
+
+  function ouvrirChoix(emplacement, variante) {
     choix.emplacement = emplacement;
+    choix.variante = !!variante;
     choix.types = new Set();
     choix.caracs = [];
-    $("b-choix-titre").textContent = NOMS[emplacement];
+    $("b-choix-titre").textContent = NOMS[emplacement] + (variante ? " · variante" : "");
     $("f-texte").value = "";
     $("f-min").value = "";
     $("f-max").value = String(etat.niveau);
-    $("b-retirer").hidden = !etat.objets[emplacement];
+    $("b-retirer").hidden = !objetCible();
+    $("b-retirer").textContent = variante ? "Retirer la variante" : "Retirer l'objet";
     dessinerFm();
+    dessinerVariante();
     dessinerTypes();
     dessinerCaracs();
     $("b-choix").showModal();
@@ -172,6 +186,14 @@
   }
 
   function equiper(emplacement, objet) {
+    if (choix.variante) {
+      const avant = etat.variantes[emplacement];
+      if (objet) etat.variantes[emplacement] = { objet, fm: avant && avant.objet.id === objet.id ? avant.fm : {} };
+      else delete etat.variantes[emplacement];
+      $("b-choix").close();
+      changement();
+      return;
+    }
     const avant = etat.objets[emplacement];
     if (!objet || !avant || avant.id !== objet.id) delete etat.fm[emplacement]; // nouvel objet : jets par défaut
     if (objet) etat.objets[emplacement] = objet; else delete etat.objets[emplacement];
@@ -182,21 +204,65 @@
   // --- Forgemagie de l'objet porté --------------------------------------------------------------------------------
 
   function regler(emplacement, eid, valeur, defaut) {
-    const fm = { ...(etat.fm[emplacement] || {}) };
+    const fm = { ...fmCible() };
     if (valeur === null || valeur === defaut) delete fm[eid]; else fm[eid] = valeur;
-    if (Object.keys(fm).length) etat.fm[emplacement] = fm; else delete etat.fm[emplacement];
+    if (choix.variante) etat.variantes[emplacement].fm = fm;
+    else if (Object.keys(fm).length) etat.fm[emplacement] = fm; else delete etat.fm[emplacement];
     changement();
     dessinerFm();
   }
 
+  // --- Variantes (Duffus : un second objet par emplacement, à échanger avec l'objet porté) -----------------------
+
+  function dessinerVariante() {
+    const e = choix.emplacement, zone = $("b-variante");
+    zone.replaceChildren();
+    if (choix.variante) {
+      const retour = el("button", { type: "button", classe: "b-bouton", texte: "Revenir à l'objet porté" });
+      retour.addEventListener("click", () => ouvrirChoix(e, false));
+      zone.append(retour);
+      return;
+    }
+    const v = etat.variantes[e], o = etat.objets[e];
+    zone.append(el("h3", { classe: "b-surtitre", texte: "Variante" }));
+    if (v) {
+      zone.append(el("p", { classe: "b-objet-nom", texte: v.objet.nom + " (niv. " + v.objet.niveau + ")" }));
+      const ecart = ecartCaracs(o ? o.caracs : [], v.objet.caracs);
+      zone.append(el("p", { classe: "b-aide", texte: ecart.length ? "Si tu la portes : " + ecart.map(([c, d]) => signe(d) + " " + c).join(" · ") : "Même caractéristiques que l'objet porté." }));
+    }
+    const choisir = el("button", { type: "button", classe: "b-bouton", texte: v ? "Changer la variante" : "Choisir une variante" });
+    choisir.addEventListener("click", () => ouvrirChoix(e, true));
+    zone.append(choisir);
+    if (v) {
+      const echanger = el("button", { type: "button", classe: "b-bouton b-bouton-or", texte: "Échanger avec l'objet porté" });
+      echanger.addEventListener("click", () => {
+        const porte = etat.objets[e] ? { objet: etat.objets[e], fm: etat.fm[e] || {} } : null;
+        etat.objets[e] = v.objet;
+        if (Object.keys(v.fm || {}).length) etat.fm[e] = v.fm; else delete etat.fm[e];
+        if (porte) etat.variantes[e] = porte; else delete etat.variantes[e];
+        $("b-choix").close();
+        changement();
+      });
+      zone.append(echanger);
+    }
+  }
+
+  // Écart objet par objet (sans panoplie ni forgemagie), comme le badge de Duffus.
+  function ecartCaracs(porte, variante) {
+    const d = {};
+    for (const [c, v] of variante || []) d[c] = (d[c] || 0) + v;
+    for (const [c, v] of porte || []) d[c] = (d[c] || 0) - v;
+    return config.caracs.filter((c) => d[c]).map((c) => [c, d[c]]);
+  }
+
   function dessinerFm() {
-    const e = choix.emplacement, o = etat.objets[e];
+    const e = choix.emplacement, o = objetCible();
     const zone = $("b-fm");
     zone.hidden = !o || !o.effets;
     if (zone.hidden) return;
     const lignes = $("b-fm-lignes");
     lignes.replaceChildren();
-    const fm = etat.fm[e] || {};
+    const fm = fmCible();
     const surObjet = new Set();
     const ligne = (eid, carac, valeur, defaut, exo) => {
       const champ = el("input", { type: "number", inputmode: "numeric", value: String(valeur), "aria-label": carac + (exo ? " (exo)" : "") });
@@ -221,7 +287,8 @@
     const objets = {};
     for (const [e, o] of Object.entries(etat.objets)) if (o) objets[e] = o.id;
     return { niveau: etat.niveau, objets, caracs_base: etat.base, caracs_parcho: etat.parcho,
-      mode_arme: etat.modeArme, buff_arme: etat.buffArme, fm: etat.fm };
+      mode_arme: etat.modeArme, buff_arme: etat.buffArme, fm: etat.fm,
+      variantes: Object.fromEntries(Object.entries(etat.variantes).map(([e, v]) => [e, { id: v.objet.id, fm: v.fm || {} }])) };
   }
 
   function message(texte, erreur) {
@@ -242,6 +309,7 @@
       if (numero !== numeroCalcul) return;
       etat.resultat = d;
       for (const [e, o] of Object.entries(d.objets)) etat.objets[e] = o;
+      for (const [e, o] of Object.entries(d.variantes || {})) if (etat.variantes[e]) etat.variantes[e].objet = o;
       dessinerResultat();
     } catch (err) {
       if (numero === numeroCalcul) message("Calcul impossible : " + err.message, true);
@@ -447,6 +515,9 @@
   function charger(b) {
     etat.nom = b.nom; etat.classe = b.classe; etat.niveau = b.niveau; etat.note = b.note || "";
     etat.base = { ...b.caracs_base }; etat.parcho = { ...b.caracs_parcho }; etat.fm = JSON.parse(JSON.stringify(b.fm || {}));
+    for (const [e, v] of Object.entries(b.variantes || {})) {
+      etat.variantes[e] = { objet: { id: v.id, nom: "…", niveau: 0, icone: null, caracs: [] }, fm: { ...(v.fm || {}) } };
+    }
     for (const [e, id] of Object.entries(b.objets)) etat.objets[e] = { id, nom: "…", niveau: 0, icone: null, caracs: [] };
     $("b-nom").value = b.nom; $("b-classe").value = b.classe; $("b-niveau").value = String(b.niveau);
     $("b-note").value = etat.note;

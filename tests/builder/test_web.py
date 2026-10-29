@@ -360,3 +360,20 @@ def test_forgemagie_dans_l_api_et_enregistree():
     trop = {"objets": {"coiffe": 2411}, "fm": {"coiffe": {str(i): 1 for i in range(40)}}}
     assert moi.post("/api/builder/calcul", json=trop).status_code == 200  # 32 effets au plus par emplacement
     assert moi.post("/api/builder/calcul", json={"fm": {"coiffe": {"x": 1}}}).status_code == 422
+
+
+def test_variantes_hors_des_totaux_et_enregistrees():
+    builds = FauxBuilds()
+    moi = client(MOI, builds=builds)
+    corps = {"niveau": 50, "objets": {"coiffe": 2411}, "variantes": {"coiffe": {"id": 27282, "fm": {"118": 3}}}}
+    d = moi.post("/api/builder/calcul", json=corps).json()
+    assert d["totaux"]["Force"] == 20  # la variante ne compte pas
+    assert d["variantes"]["coiffe"]["nom"] == "Coiffe du Bouftou Ankarton"
+    enregistre = {**CORPS, "variantes": {"coiffe": {"id": 27282, "fm": {"118": 3, "99999": 1}},
+                                         "chapeau": {"id": 1}}}
+    bid = moi.post("/api/builder/builds", json=enregistre, headers=CSRF).json()["id"]
+    assert builds.lignes[bid].contenu.variantes == {"coiffe": {"id": 27282, "fm": {"118": 3}}}
+    copie = moi.post(f"/api/builder/builds/{bid}/dupliquer", headers=CSRF).json()["id"]
+    assert builds.lignes[copie].contenu.variantes == {"coiffe": {"id": 27282, "fm": {"118": 3}}}
+    assert '"variantes": {"coiffe": {"fm": {"118": 3}, "id": 27282}}' in moi.get(f"/builder/{bid}").text
+    assert moi.post("/api/builder/calcul", json={"variantes": {"coiffe": {"fm": {}}}}).status_code == 422

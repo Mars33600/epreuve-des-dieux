@@ -9,7 +9,7 @@ from epreuve.builder.depot import Contenu, DepotBuilds
 from tests.fabrique import PENDANT
 
 BUILD = Contenu("Iop Bouftou", "Iop", 50, {"coiffe": 2411}, {"Force": 100}, {"Force": 100}, "note", False,
-                {"coiffe": {"118": 25}})
+                {"coiffe": {"118": 25}}, {"cape": {"id": 2414, "fm": {}}})
 
 
 @pytest.fixture
