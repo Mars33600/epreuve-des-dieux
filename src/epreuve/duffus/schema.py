@@ -63,6 +63,14 @@ class QuestePrerequis(_Ligne):
     prereq_quests: str | None  # JSON en texte : [{"title", "link": "/quete/<slug>", …}]
 
 
+class QuestQuick(_Ligne):
+    """Les « infos rapides » d'une fiche (nombre de combats, farm, donjons…), lues pour toutes les quêtes."""
+
+    id: str
+    slug: str
+    quick: str | None  # JSON en texte : {"solo", "group", "songes", "tactic", "alea", "tiles", "farm", "dungeons", …}
+
+
 class QuestePage(_Ligne):
     """La fiche complète d'une quête (lue pour les étages demandés seulement)."""
 

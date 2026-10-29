@@ -30,11 +30,11 @@ TABLES = {
     "guide_ranges": RANGES,
     "quest_list": [quete(11, "b"), quete(10, "a")],
     "quest_pages": [
-        {"id": "u1", "slug": "a", "published": True, "status": "approved", "prereq_quests": "[]", "prereqs": [],
+        {"id": "u1", "slug": "a", "published": True, "status": "approved", "prereq_quests": "[]", "quick": "{}", "prereqs": [],
          "meta": {"title": "Q10", "level": "10", "zone": "I", "startNpc": "P", "startCoords": "[0,0]",
                   "image": "/images/x.png"}, "rewards": {"xp": "1 xp"}, "manual_resources": [], "steps": [],
          "content_html": "<p>Étape</p>"},
-        {"id": "u2", "slug": "b", "published": True, "status": "approved", "prereq_quests": "[]", "prereqs": [],
+        {"id": "u2", "slug": "b", "published": True, "status": "approved", "prereq_quests": "[]", "quick": "{}", "prereqs": [],
          "meta": {}, "rewards": {}, "manual_resources": [], "steps": [], "content_html": ""},
     ],
     "dungeon_pages": [{"id": 1, "slug": "crypte", "published": True, "linked_quests": [],
