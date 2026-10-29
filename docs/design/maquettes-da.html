@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>L'Épreuve des Dieux · Maquettes DA</title>
+<meta name="theme-color" content="#05070e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@500;700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Trois palettes, une seule structure. Texte courant visé : AAA (7:1) sur des cartes quasi opaques. */
+:root{--f-display:"Alegreya SC",Georgia,serif;--f-body:"Alegreya Sans",system-ui,sans-serif;--f-data:"IBM Plex Mono",ui-monospace,monospace;
+  --vh:1vh}
+@supports (height:1svh){:root{--vh:1svh}}
+/* A : nuit du teaser */
+body,body[data-v=a]{--n0:#05070e;--n1:#0a0e1c;--n2:#141a30;--hor:#2a2240;--card:rgba(10,14,28,.96);--card2:#151b33;
+  --ink:#f1ead9;--muted:#bdb7a7;--gold:#e3b552;--hi:#f6d58a;--deep:#a8781f;--st1:#2a3150;--st2:#0c1020;--veil:5,8,22;--fog:150,160,200;--glow:255,221,150;--line:rgba(227,181,82,.4)}
+/* B : nuit d'or */
+body[data-v=b]{--n0:#0b0705;--n1:#150e08;--n2:#261808;--hor:#4a2a0e;--card:rgba(20,13,8,.96);--card2:#241709;
+  --ink:#f6ecd6;--muted:#d0c1a2;--gold:#f0b23c;--hi:#ffd98a;--deep:#b07a1a;--st1:#4a3216;--st2:#150d07;--veil:16,9,3;--fog:200,160,110;--glow:255,200,110;--line:rgba(240,178,60,.45)}
+/* C : nuit pourpre */
+body[data-v=c]{--n0:#07040c;--n1:#0f0817;--n2:#1d0f2e;--hor:#3a1650;--card:rgba(14,8,23,.96);--card2:#1c1030;
+  --ink:#f3ebdc;--muted:#cbbed2;--gold:#e8b84e;--hi:#f8dc92;--deep:#a8781f;--st1:#3a2152;--st2:#120a1c;--veil:14,5,26;--fog:170,140,200;--glow:240,200,150;--line:rgba(232,184,78,.4)}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--n0);color:var(--ink);font:400 18px/1.55 var(--f-body);overflow-x:clip;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--hi);outline-offset:3px;border-radius:4px}
+a{color:var(--hi)}
+h1,h2,h3{font-family:var(--f-display);margin:0;line-height:1.1;letter-spacing:.015em}
+
+/* ---- Décor fixe (dégradés, canvas, SVG) ---- */
+.scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.scene>*{position:absolute}
+.sky{inset:0;background:radial-gradient(120% 70% at 50% 108%,var(--hor),transparent 60%),linear-gradient(180deg,var(--n0),var(--n1) 45%,var(--n2))}
+.photo{inset:0;background:url(maquettes/etage-0.webp) center/cover no-repeat;filter:saturate(.85) brightness(.8)}
+.veil{inset:0;background:linear-gradient(180deg,rgba(var(--veil),.80) 0%,rgba(var(--veil),.55) 45%,rgba(var(--veil),.80) 100%)}
+#stars{inset:0;width:100%;height:100%}
+.glow{left:50%;top:22%;width:150vmax;height:110vmax;transform:translate(-50%,-50%);
+  background:radial-gradient(closest-side,rgba(var(--glow),.30),rgba(var(--glow),.08) 40%,transparent 100%)}
+.rays{left:50%;top:22%;width:170vmax;height:170vmax;transform:translate(-50%,-50%);
+  background:repeating-conic-gradient(rgba(var(--glow),.04) 0 1.5deg,transparent 1.5deg 13deg);
+  -webkit-mask:radial-gradient(closest-side,#000,transparent 60%);mask:radial-gradient(closest-side,#000,transparent 60%)}
+.fog{left:-20%;width:140%;height:34%;animation:drift 60s ease-in-out infinite alternate;
+  background:radial-gradient(28% 34% at 22% 52%,rgba(var(--fog),.20),transparent 70%),radial-gradient(30% 30% at 74% 60%,rgba(var(--fog),.17),transparent 70%),radial-gradient(40% 22% at 50% 75%,rgba(var(--fog),.13),transparent 70%)}
+.fog.f1{top:18%}.fog.f2{bottom:0;animation-duration:80s;animation-direction:alternate-reverse}
+@keyframes drift{from{transform:translateX(-5%)}to{transform:translateX(5%)}}
+.vig{inset:0;background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.7))}
+
+/* ---- Barre d'onglets ---- */
+.tabs{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);
+  display:flex;gap:6px;padding:8px max(12px,env(safe-area-inset-left));justify-content:center;flex-wrap:wrap}
+.tabs a{min-height:44px;display:flex;align-items:center;padding:0 14px;border-radius:8px;text-decoration:none;color:var(--ink);
+  font:500 16px/1.2 var(--f-body);border:1px solid transparent}
+.tabs a b{font:700 18px var(--f-display);color:var(--hi);margin-right:8px}
+.tabs a[aria-selected=true]{background:var(--card2);border-color:var(--gold)}
+main{position:relative;z-index:1}
+.eyebrow{font:500 14px/1.4 var(--f-data);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:0 0 6px}
+
+/* ---- 1. Accueil ---- */
+.hero{position:relative;min-height:calc(var(--vh)*100 - 61px);display:flex;flex-direction:column;align-items:center;overflow:hidden;padding:14px 12px 0}
+.menu{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:760px;margin:0;padding:0;list-style:none;position:relative;z-index:3}
+.menu a{min-height:44px;display:flex;align-items:center;padding:0 14px;border-radius:999px;text-decoration:none;
+  background:var(--card);color:var(--ink);border:1px solid var(--line);font:500 16px/1 var(--f-body)}
+.menu a[aria-current]{border-color:var(--hi);color:var(--hi)}
+.menu a:hover{background:var(--card2)}
+.title{position:relative;z-index:3;text-align:center;margin:14px 0 0;font-size:clamp(34px,7vw,72px);font-weight:800;color:var(--ink);text-shadow:0 2px 14px #000}
+.title span{display:block;color:var(--hi)}
+.pyr{position:relative;flex:1;width:100%;min-height:clamp(470px,84svh,1000px);margin-top:-8px}
+.pyr svg{position:absolute;left:50%;bottom:0;height:100%;width:auto;transform:translateX(-50%);overflow:visible}
+.tier path{stroke:var(--gold);stroke-opacity:.28;stroke-width:1.5}
+.tier text{font-family:var(--f-display);font-weight:700;text-anchor:middle;dominant-baseline:central;fill:var(--gold);opacity:.8}
+#t0 path{stroke:var(--hi);stroke-opacity:1;stroke-width:3;transition:filter .3s}
+#t0 text{fill:var(--hi);opacity:1}
+#t0:hover path,#t0:focus-visible path{filter:brightness(1.35) drop-shadow(0 0 14px rgba(var(--glow),.7))}
+#t0:focus-visible{outline:none}
+#t0:focus-visible path{stroke:#fff}
+.mist{position:absolute;left:0;right:0;top:0;height:74%;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,transparent 0,rgba(var(--fog),.10) 20%,var(--n1) 100%);opacity:.8;
+  -webkit-mask:linear-gradient(180deg,#000 55%,transparent);mask:linear-gradient(180deg,#000 55%,transparent)}
+.mist.m2{top:18%;height:34%;background:radial-gradient(50% 60% at 50% 50%,rgba(var(--fog),.38),transparent 75%);opacity:.9;animation:drift 50s ease-in-out infinite alternate;-webkit-mask:none;mask:none}
+.gauge{position:absolute;z-index:3;left:50%;bottom:14px;transform:translateX(-50%);width:min(88vw,420px);text-decoration:none;
+  display:block;padding:12px 16px 14px;background:var(--card);border:1px solid var(--hi);border-radius:12px;color:var(--ink);box-shadow:0 8px 28px #000}
+.gauge .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:500 16px/1.3 var(--f-body)}
+.gauge .row b{font:500 20px var(--f-data);color:var(--hi)}
+.bar{height:12px;border-radius:6px;background:var(--st2);border:1px solid var(--line);margin:8px 0 6px;overflow:hidden}
+.bar i{display:block;height:100%;width:37.5%;background:linear-gradient(90deg,var(--deep),var(--hi))}
+.gauge small{font-size:16px;color:var(--muted)}
+
+/* ---- Cartes et sections ---- */
+section.page{position:relative;padding:72px 12px;display:flex;flex-direction:column;align-items:center}
+.card{width:100%;max-width:720px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 18px;box-shadow:0 10px 36px rgba(0,0,0,.6),inset 0 1px 0 var(--line)}
+.card+.card{margin-top:20px}
+.card h2{font-size:clamp(30px,6vw,44px);font-weight:800;color:var(--hi);margin-bottom:8px}
+.card h3{font-size:24px;font-weight:700;color:var(--gold);margin:0 0 10px}
+.card p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.legend{display:flex;gap:12px;align-items:center;background:var(--card2);border:1px solid var(--gold);border-radius:10px;padding:12px 14px;font-weight:500;color:var(--ink)}
+.legend svg{flex:none;width:28px;height:28px;color:var(--hi)}
+.rooms{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;list-style:none;margin:0;padding:0}
+.rooms li{min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:6px 2px;font:400 16px/1.2 var(--f-body)}
+.rooms li b{font:500 20px var(--f-data);color:var(--gold)}
+.rooms li.on{border:2px solid var(--hi);background:var(--st1);box-shadow:0 0 18px rgba(var(--glow),.45);color:var(--ink)}
+.rooms li.on b{color:var(--hi)}
+.quests{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.quests label{display:flex;gap:12px;align-items:flex-start;min-height:44px;padding:10px 12px;background:var(--card2);border:1px solid var(--line);border-radius:10px;cursor:pointer}
+.quests input{appearance:none;-webkit-appearance:none;flex:none;width:28px;height:28px;margin:0;border:2px solid var(--gold);border-radius:6px;background:var(--st2);display:grid;place-content:center;cursor:pointer}
+.quests input:checked{background:var(--gold)}
+.quests input:checked::after{content:"";width:8px;height:15px;border:solid var(--n0);border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.quests label:has(input:checked) .q{text-decoration:line-through;text-decoration-thickness:1px;color:var(--muted)}
+.q{flex:1}.tag{display:inline-block;font:500 14px/1.3 var(--f-data);letter-spacing:.06em;text-transform:uppercase;color:var(--hi);border:1px solid var(--gold);border-radius:4px;padding:0 6px;margin-right:6px}
+.tag.s{color:var(--muted);border-color:var(--muted)}
+.brief{width:100%;border-collapse:collapse;margin:0 0 6px}
+.brief th,.brief td{text-align:left;padding:10px 8px;border-top:1px solid var(--line);vertical-align:top;font-size:17px}
+.brief th{width:34%;font:500 14px/1.5 var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:4px 0 14px 52px;min-height:44px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;font:500 18px var(--f-data);color:var(--hi);background:var(--st2)}
+.who{display:grid;gap:20px}
+.who ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.who li{min-height:44px;display:flex;align-items:center;gap:10px;padding:0 12px;background:var(--card2);border:1px solid var(--line);border-radius:10px}
+.who .ok::before{content:"✓";color:var(--hi);font-weight:700}
+.who .ko::before{content:"○";color:var(--muted)}
+@media(min-width:720px){.card{padding:30px 34px}.who{grid-template-columns:1fr 1fr}.brief th{width:26%}}
+.story{max-width:660px}.story p{margin:0 0 20px;font-size:19px;line-height:1.7}
+.story .lead{font-size:21px;color:var(--ink);font-style:italic}
+.story .big{font:800 clamp(34px,8vw,52px)/1.1 var(--f-display);color:var(--hi);text-align:center;margin:28px 0}
+.story .quote{border-left:3px solid var(--gold);padding:6px 0 6px 16px;font:500 22px/1.45 var(--f-body);color:var(--hi);margin:26px 0}
+.story .final{font:800 clamp(26px,6vw,36px)/1.2 var(--f-display);color:var(--hi);text-align:center;margin:36px 0 4px;padding-top:24px;border-top:1px solid var(--line)}
+footer{position:relative;z-index:1;text-align:center;padding:0 12px 40px;font-size:16px;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body data-v="a">
+<div class="scene" aria-hidden="true">
+  <div class="sky"></div><div class="photo"></div><div class="veil"></div><canvas id="stars"></canvas><div class="glow"></div><div class="rays"></div>
+  <div class="fog f1"></div><div class="fog f2"></div><div class="vig"></div>
+</div>
+
+<nav class="tabs" role="tablist" aria-label="Variantes de direction artistique">
+  <a role="tab" href="?v=a" data-v="a"><b>A</b>Nuit du teaser</a>
+  <a role="tab" href="?v=b" data-v="b"><b>B</b>Nuit d'or</a>
+  <a role="tab" href="?v=c" data-v="c"><b>C</b>Nuit pourpre</a>
+</nav>
+
+<main>
+<header class="hero" id="accueil">
+  <ul class="menu" aria-label="Navigation principale">
+    <li><a href="#accueil" aria-current="page">La Tour</a></li><li><a href="#etage">Règles</a></li><li><a href="#etage">Encyclopédie</a></li>
+    <li><a href="#quete">Builder</a></li><li><a href="#quete">Outils</a></li><li><a href="#accueil">Grimpeurs</a></li><li><a href="#accueil">Tableau de bord</a></li>
+  </ul>
+  <h1 class="title">L'Épreuve <span>des Dieux</span></h1>
+  <div class="pyr">
+    <svg id="pyr" viewBox="0 0 800 720" role="img" aria-label="La tour : l'étage 0 est ouvert, les étages supérieurs sont scellés dans la brume">
+      <defs>
+        <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--st1)"/><stop offset="1" stop-color="var(--st2)"/></linearGradient>
+        <linearGradient id="open" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--deep)"/><stop offset="1" stop-color="var(--st1)"/></linearGradient>
+      </defs>
+    </svg>
+    <div class="mist"></div><div class="mist m2"></div>
+    <a class="gauge" href="#etage" aria-label="Ouvrir l'étage 0 : 9 points sur 24">
+      <div class="row"><span>Étage 0 · ouvert</span><b>9 / 24</b></div>
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="24" aria-valuenow="9"><i></i></div>
+      <small>15 points pour sceller l'étage et monter</small>
+    </a>
+  </div>
+</header>
+
+<section class="page" id="histoire">
+  <article class="card story">
+    <p class="eyebrow">Par Shadoaze</p>
+    <h2>L'Épreuve des Dieux</h2>
+    <p class="lead">Il existe, quelque part dans le Monde des Douze, un lieu dont peu osent prononcer le nom.</p>
+    <p class="big">Une tour.</p>
+    <p>Nul ne sait quand elle fut érigée. Nul ne connaît le nombre de ses étages. Certains prétendent qu’elle touche les cieux. D’autres murmurent qu’elle plonge bien plus profondément… là où même les dieux refusent de regarder.</p>
+    <p>Une chose est certaine : elle n’a pas été bâtie pour les faibles.</p>
+    <p>Les Dieux l’ont créée. Dans quel but ? Nul ne le sait vraiment. Mettre à l’épreuve les Douziens ? Juger leur valeur ? Ou les préparer à quelque chose que le monde n’est pas encore prêt à affronter ?</p>
+    <p>Les légendes racontent que la tour a été créée par les dieux afin de trouver leur successeur.</p>
+    <p>Depuis son apparition, d’innombrables aventuriers ont tenté d’en percer les secrets.</p>
+    <p class="quote">Tous ont échoué.</p>
+    <p class="quote">Tous… sauf un.</p>
+    <p class="big">Goultard.</p>
+    <p>Mais depuis son ascension, la tour est restée silencieuse.</p>
+    <p>Jusqu’à aujourd’hui.</p>
+    <p>Ses portes s’entrouvrent à nouveau. Les premiers signes apparaissent. Et dans les profondeurs du Monde des Douze, quelque chose semble s’éveiller.</p>
+    <p>Les dieux n’ont donné aucune explication. Aucun avertissement. Seulement une invitation.</p>
+    <p class="quote">Gravissez les étages. Surmontez les épreuves. Prouvez votre valeur.</p>
+    <p>Cette fois, nul ne pourra triompher seul. Il faudra s’entraider, vaincre ensemble et prouver, étage après étage, que le Monde des Douze mérite de relever le défi des dieux.</p>
+    <p class="quote">Douziens… le premier étage vous attend.</p>
+    <p class="final">Oserez-vous franchir le seuil ?</p>
+  </article>
+</section>
+
+<section class="page" id="etage">
+  <article class="card">
+    <p class="eyebrow">Étage 0 · niveaux 1 à 20</p>
+    <h2>Les premières épreuves</h2>
+    <p class="legend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17l-6.1 3.6 1.4-6.8L2.2 9.1l6.9-.8z"/></svg>Vaincre le boss = déjà 1 point</p>
+  </article>
+  <article class="card">
+    <h3>Donjon : la Crypte de Kardorim</h3>
+    <p class="muted">La première case vaut le point Donjons ; les cinq cochées sur tous les donjons de l'étage donnent le point Full succès.</p>
+    <ol class="rooms">
+      <li class="on"><b>✓</b>Vaincre le boss</li><li><b>2</b>Duo</li><li><b>3</b>Zombie</li><li><b>4</b>Premier</li><li><b>5</b>Spécial</li>
+    </ol>
+  </article>
+  <article class="card">
+    <h3>Quêtes de l'étage</h3>
+    <ul class="quests">
+      <li><label><input type="checkbox" checked><span class="q"><span class="tag">Principale</span>Le serment du Parvis</span></label></li>
+      <li><label><input type="checkbox"><span class="q"><span class="tag">Principale</span>La première clé</span></label></li>
+      <li><label><input type="checkbox"><span class="q"><span class="tag s">Secondaire</span>Les Bouftous égarés</span></label></li>
+    </ul>
+  </article>
+</section>
+
+<section class="page" id="quete">
+  <article class="card">
+    <p class="eyebrow">Quête principale · Étage 0</p>
+    <h2>La première clé</h2>
+    <p class="muted">Un vieux gardien refuse de céder la clé du Parvis tant qu'on ne lui a pas prouvé sa valeur.</p>
+    <h3>En bref</h3>
+    <table class="brief">
+      <tr><th scope="row">Lieu</th><td>Astrub, place du village</td></tr>
+      <tr><th scope="row">PNJ</th><td>Gardien Orlan</td></tr>
+      <tr><th scope="row">Niveau</th><td>12</td></tr>
+      <tr><th scope="row">XP</th><td>4 800</td></tr>
+      <tr><th scope="row">Kamas</th><td>1 200</td></tr>
+      <tr><th scope="row">Objets</th><td>Clé du Parvis, 3 potions de rappel</td></tr>
+      <tr><th scope="row">Prérequis</th><td>Le serment du Parvis</td></tr>
+    </table>
+  </article>
+  <article class="card">
+    <h3>Les étapes</h3>
+    <ol class="steps">
+      <li>Parler au Gardien Orlan, sur la place d'Astrub.</li>
+      <li>Rapporter dix pétales de fleur de Bouftou.</li>
+      <li>Retourner voir Orlan pour recevoir la clé.</li>
+    </ol>
+  </article>
+  <article class="card who">
+    <div><h3>Qui l'a faite</h3><ul><li class="ok">Marceau</li></ul></div>
+    <div><h3>Qui ne l'a pas faite</h3><ul><li class="ko">Shadoaze</li></ul></div>
+  </article>
+</section>
+</main>
+<footer>Maquette de direction artistique : les noms et chiffres sont des exemples.</footer>
+
+<script>
+// Variante : ?v=a|b|c, mémorisée dans l'adresse.
+const V=new URLSearchParams(location.search).get('v'), cur=['a','b','c'].includes(V)?V:'a';
+document.body.dataset.v=cur;
+document.querySelectorAll('.tabs a').forEach(a=>{
+  a.setAttribute('aria-selected',a.dataset.v===cur);
+  a.addEventListener('click',e=>{e.preventDefault();history.replaceState(null,'','?v='+a.dataset.v+location.hash);
+    document.body.dataset.v=a.dataset.v;document.querySelectorAll('.tabs a').forEach(b=>b.setAttribute('aria-selected',b===a));
+    document.querySelector('meta[name=theme-color]').content=getComputedStyle(document.body).getPropertyValue('--n0').trim();});
+});
+
+// Pyramide : 8 étages empilés, l'étage 0 (le plus bas) est seul ouvert.
+(function(){
+  const svg=document.getElementById('pyr'),N=8,top=30,bot=700,cx=400,half=370,h0=170,hs=(bot-top-h0)/(N-1);
+  const w=y=>half*(y-top)/(bot-top), rom=['I','II','III','IV','V','VI','VII'];
+  let out='';
+  for(let i=0;i<N;i++){
+    const yb=i===0?bot:bot-h0-(i-1)*hs, yt=i===0?bot-h0:yb-hs, g=3;
+    const a=w(yt+g),b=w(yb-g), d=`M${cx-a} ${yt+g}H${cx+a}L${cx+b} ${yb-g}H${cx-b}Z`;
+    const mid=(yt+yb)/2;
+    if(i===0) out+=`<a id="t0" href="#etage" class="tier" aria-label="Étage 0, ouvert"><path d="${d}" fill="url(#open)"/><text x="${cx}" y="${yt+46}" font-size="34">ÉTAGE 0</text></a>`;
+    else out+=`<g class="tier" aria-hidden="true"><path d="${d}" fill="url(#stone)"/><text x="${cx}" y="${mid}" font-size="${Math.max(16,28-i*2)}">${rom[i-1]}</text></g>`;
+  }
+  svg.insertAdjacentHTML('beforeend',out+`<path d="M${cx-18} ${top+2}L${cx} ${top-26}L${cx+18} ${top+2}Z" fill="var(--hi)" opacity=".9"/>`);
+})();
+
+// Étoiles : canvas, fixe si mouvement réduit.
+(function(){
+  const c=document.getElementById('stars'),x=c.getContext('2d'),S=[];
+  const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function size(){c.width=innerWidth;c.height=innerHeight;S.length=0;
+    for(let i=0;i<Math.round(c.width*c.height/9000);i++)S.push([Math.random()*c.width,Math.random()*c.height*.8,Math.random()*1.2+.3,Math.random()*6.28]);}
+  function draw(t){x.clearRect(0,0,c.width,c.height);
+    for(const s of S){x.globalAlpha=.35+.5*(rm?.5:(Math.sin(t/1200+s[3])+1)/2);x.fillStyle='#f6ecd0';x.fillRect(s[0],s[1],s[2],s[2]);}
+    if(!rm)requestAnimationFrame(draw);}
+  addEventListener('resize',()=>{size();draw(0)});size();requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
