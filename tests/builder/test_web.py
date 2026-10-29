@@ -53,7 +53,8 @@ def test_page_csp_sans_script_en_ligne_et_merci_duffus():
     assert "'unsafe-inline'" not in r.headers["content-security-policy"]
     html = r.text
     for balise in re.findall(r"<script[^>]*>", html):
-        assert 'src="/static/builder/builder.js"' in balise or 'type="application/json"' in balise
+        assert any(x in balise for x in ('src="/static/builder/builder.js"', 'src="/static/entete.js"',
+                                        'type="application/json"')), balise
     assert " on" not in " ".join(re.findall(r"<[^>]+ on[a-z]+=", html))  # aucun gestionnaire en ligne
     assert "style=" not in html
     assert "Merci Duffus" in html and 'href="https://duffus.fr"' in html

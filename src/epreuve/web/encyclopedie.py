@@ -47,8 +47,8 @@ class _Redirection(Exception):
 class Visiteur:
     """Ce que les pages savent de la personne connectée (jamais la session elle-même)."""
 
-    def __init__(self, est_admin: bool, pseudo: str | None) -> None:
-        self.est_admin, self.pseudo = est_admin, pseudo
+    def __init__(self, est_admin: bool, pseudo: str | None, grimpeur_id: int | None = None) -> None:
+        self.est_admin, self.pseudo, self.grimpeur_id = est_admin, pseudo, grimpeur_id
 
 
 def _entier(v: str | None, bas: int | None = None, haut: int | None = None) -> int | None:
@@ -102,7 +102,8 @@ def routeur_encyclopedie(depot, ency: DepotEncyclopedie, gabarits: Jinja2Templat
                 raise _Redirection("/inscription")
             if grimpeur.statut == "exclu":
                 raise HTTPException(403)
-        return Visiteur(session.est_admin, grimpeur.pseudo if grimpeur else session.nom_discord)
+        return Visiteur(session.est_admin, grimpeur.pseudo if grimpeur else session.nom_discord,
+                        grimpeur.id if grimpeur else None)
 
     async def tranches(v: Visiteur) -> tuple[list[TrancheVisible], TrancheVisible | None]:
         """Les étages visibles, et l'étage en cours (sinon le plus haut visible)."""

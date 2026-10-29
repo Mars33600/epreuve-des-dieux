@@ -33,12 +33,6 @@
   <p class="bandeau" role="status"><b>Mode teaser</b> : les grimpeurs ne voient pas encore cette page.</p>
   {% endif %}
 
-  {% if v.connecte and (v.est_admin or v.grimpeur) %}
-  {% if v.grimpeur or v.est_admin %}<form class="recherche-globale" action="/encyclopedie" method="get" role="search">
-    <input type="search" name="q" placeholder="Rechercher un objet, un monstre…" aria-label="Recherche dans l'encyclopédie" maxlength="80">
-  </form>{% endif %}
-  {% endif %}
-
   {% block page %}{% endblock %}
 </div>
 <dialog class="qd" id="qd" aria-modal="true" aria-labelledby="qdTitle"></dialog>

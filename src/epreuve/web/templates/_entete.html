@@ -1,0 +1,56 @@
+{# Barre du haut commune à toutes les pages du site (site, encyclopédie, builder). Attend `chemin` (adresse courante)
+   et, par `with` : bar_connecte, bar_membre (accès au site), bar_admin, bar_gid (fiche du grimpeur ou None),
+   bar_pseudo, bar_csrf (None : pas de bouton de déconnexion). Ordre : La Tour · L'histoire · Règles · Tableau de bord
+   · Grimpeurs · menu « Monde des Douze » · Admin. Le menu déroulant et le burger sont pilotés par /static/entete.js. #}
+{% set monde = (("/encyclopedie", "Encyclopédie"), ("/stuffs", "Stuffs"), ("/builder", "Builder"), ("/outils", "Outils"),
+                ("/archimonstres", "Archis et avis")) %}
+{% macro actif(prefixes) -%}{% if chemin.startswith(prefixes) %} aria-current="page"{% endif %}{%- endmacro %}
+<header class="bar">
+  <div class="bar-in">
+    <h1 class="marque-h1"><a href="/" class="marque">L'Épreuve <span>des Dieux</span></a></h1>
+    {% if bar_horloge is not defined or bar_horloge %}<div class="clock" role="timer" aria-labelledby="clockLabel">
+      <span class="sr-only" id="clockLabel">L'ascension</span>
+      <strong id="clock">—</strong>
+      <small id="clockSub" class="sr-only">vendredi 13 novembre · 17 h 00, heure de Paris</small>
+    </div>{% endif %}
+    {% if bar_membre %}
+    <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="barMenu" aria-label="Menu">
+      <span class="burger-trait" aria-hidden="true"></span></button>
+    {% endif %}
+    <div class="bar-menu" id="barMenu">
+    {% if bar_membre %}
+      <form class="rech" action="/recherche" method="get" role="search">
+        <input type="search" name="q" class="rech-champ" placeholder="Rechercher…" aria-label="Rechercher sur le site"
+               maxlength="80" autocomplete="off" spellcheck="false" data-suggest="global"
+               role="combobox" aria-expanded="false" aria-controls="rechListe" aria-autocomplete="list">
+        <div class="rech-panneau" id="rechListe" role="listbox" aria-label="Suggestions" hidden></div>
+      </form>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="/"{% if chemin == "/" or chemin.startswith("/etages") %} aria-current="page"{% endif %}>La Tour</a>
+        <a href="/histoire"{{ actif("/histoire") }}>L'histoire</a>
+        <a href="/regles"{{ actif("/regles") }}>Règles</a>
+        {% if bar_gid %}<a href="/tableau-de-bord"{{ actif("/tableau-de-bord") }}>Tableau de bord</a>{% endif %}
+        <a href="/grimpeurs"{{ actif("/grimpeurs") }}>Grimpeurs</a>
+        {% set sur_monde = chemin.startswith(("/encyclopedie", "/stuffs", "/builder", "/outils", "/archimonstres", "/avis-de-recherche")) %}
+        <div class="deroulant{% if sur_monde %} contient-actif{% endif %}">
+          <button type="button" class="deroulant-bouton" aria-haspopup="true" aria-expanded="false" aria-controls="menuMonde">
+            Monde des Douze <svg class="chevron" viewBox="0 0 10 6" width="10" height="6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <ul class="deroulant-liste" id="menuMonde" hidden>
+            {% for lien, nom in monde %}
+            <li><a href="{{ lien }}"{{ actif(("/archimonstres", "/avis-de-recherche") if lien == "/archimonstres" else lien) }}>{{ nom }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% if bar_admin %}<a href="/admin"{{ actif("/admin") }}>Admin</a>{% endif %}
+      </nav>
+    {% endif %}
+      {% if bar_connecte %}
+      <div class="who">
+        {% if bar_gid %}<a class="ma-fiche" href="/grimpeurs/{{ bar_gid }}"{% if chemin == "/grimpeurs/" ~ bar_gid %} aria-current="page"{% endif %}>Ma fiche<span class="sr-only"> ({{ bar_pseudo }})</span></a>{% else %}<b>{{ bar_pseudo or "" }}</b>{% endif %}
+        {% if bar_admin %}<span class="tag me">admin</span>{% endif %}
+        {% if bar_csrf %}<form method="post" action="/deconnexion"><input type="hidden" name="csrf" value="{{ bar_csrf }}"><button class="linkbtn" type="submit">Se déconnecter</button></form>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</header>

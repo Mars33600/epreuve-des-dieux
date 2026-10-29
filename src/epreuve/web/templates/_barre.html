@@ -1,28 +1,4 @@
-{# Barre du haut commune (site, encyclopédie) : attend `v` (visiteur) et `chemin` (adresse courante). #}
-<header class="bar">
-  <div class="bar-in">
-    <h1 class="marque-h1"><a href="/" class="marque">L'Épreuve <span>des Dieux</span></a></h1>
-    <div class="clock" role="timer" aria-labelledby="clockLabel">
-      <span class="sr-only" id="clockLabel">L'ascension</span>
-      <strong id="clock">—</strong>
-      <small id="clockSub" class="sr-only">vendredi 13 novembre · 17 h 00, heure de Paris</small>
-    </div>
-    {% if v.connecte and (v.est_admin or v.grimpeur) %}
-    <input type="checkbox" id="burger" class="burger-case" aria-label="Afficher le menu">
-    <label for="burger" class="burger" aria-hidden="true"><span class="burger-trait"></span></label>
-    {% endif %}
-    <div class="bar-menu">
-    {% if v.connecte and (v.est_admin or v.grimpeur) %}
-    <nav class="nav" aria-label="Navigation principale">
-      {% with grimpeur_id=(v.grimpeur.id if v.grimpeur else None), est_admin=v.est_admin, modules=True %}{% include "_liens.html" %}{% endwith %}
-    </nav>
-    {% endif %}
-      {% if v.connecte %}
-      <div class="who"><b>{{ v.grimpeur.pseudo if v.grimpeur else v.session.nom_discord }}</b>
-        {% if v.est_admin %}<span class="tag me">admin</span>{% endif %}
-        <form method="post" action="/deconnexion"><input type="hidden" name="csrf" value="{{ v.csrf }}"><button class="linkbtn" type="submit">Se déconnecter</button></form>
-      </div>
-      {% endif %}
-    </div>
-  </div>
-</header>
+{# Barre du haut des pages du site : attend `v` (visiteur) et `chemin`. #}
+{% with bar_connecte=v.connecte, bar_membre=(v.connecte and (v.est_admin or v.grimpeur)), bar_admin=v.est_admin,
+        bar_gid=(v.grimpeur.id if v.grimpeur else None), bar_pseudo=(v.grimpeur.pseudo if v.grimpeur else (v.session.nom_discord if v.session else "")),
+        bar_csrf=v.csrf %}{% include "_entete.html" %}{% endwith %}

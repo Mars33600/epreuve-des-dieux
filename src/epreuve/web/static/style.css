@@ -415,8 +415,6 @@ td .muted{font-size:var(--t-sm)}
 article.card > .qd-sec{padding-top:4px}
 .qdone input{--c:inherit}
 
-.recherche-globale { margin: .4rem 0; }
-.recherche-globale input { width: 100%; max-width: 22rem; box-sizing: border-box; padding: .4rem .6rem; font: inherit; }
 
 /* Fiche de quête : tableau récapitulatif */
 .recap{width:100%;border-collapse:collapse;font-size:15px}
@@ -426,7 +424,6 @@ article.card > .qd-sec{padding-top:4px}
 .recap-list{margin:0;padding:0;list-style:none;display:grid;gap:4px}
 /* ---------- Voiles locaux derrière le texte posé sur le décor ---------- */
 .pyramide-note{background:rgba(5,8,22,.82);border-radius:var(--r);padding:10px 14px}
-.recherche-globale input{background:var(--sunken);color:var(--ink);border:1px solid var(--line);border-radius:var(--r)}
 
 /* ---------- Accueil : la pyramide en grand (DECISIONS-V4 §13) ----------
    Gradins anonymes en haut : UN seul élément dessiné ici (aucun étage dans le HTML), qui s'efface dans la brume.

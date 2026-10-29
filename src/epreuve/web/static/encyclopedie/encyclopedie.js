@@ -24,7 +24,8 @@
   });
 
   var saisie = formulaire.querySelector("input[type=search]");
-  if (saisie) {
+  // Avec des suggestions en direct (entete.js), on ne recharge plus la page à chaque pause : Entrée suffit.
+  if (saisie && !saisie.hasAttribute("data-suggest")) {
     var minuterie = null;
     var initiale = saisie.value;
     saisie.addEventListener("input", function () {
