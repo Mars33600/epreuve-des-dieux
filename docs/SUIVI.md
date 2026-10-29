@@ -55,7 +55,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] Encyclopédie (objets, monstres, recettes, panoplies, sorts, PNJ, quêtes) ; manquent les cartes et les variantes de sorts
 - [ ] Outils (sans les tutoriels) : 6 sur 7 faits (Almanax, drop, classes et sorts, élevage, craft, XP des métiers) ; manque la carte interactive
 - [x] Stuffs (builds PvM de Duffus)
-- [ ] Builder : objets, panoplies, conditions, totaux, builds partagés, comparaison, duplication, dégâts d'arme et de sorts, forgemagie faits ; manquent les variantes et le navigateur de panoplies (environ 2 jours)
+- [x] Builder : objets, panoplies (et navigateur), conditions, totaux, forgemagie, variantes, dégâts d'arme et de sorts, comparaison, builds partagés. Non repris faute de demande : simulation Poutch, skins, forgemagie élémentaire de l'arme, dossiers
 - [x] Rien ne renvoie à Duffus (en-têtes, Twitch, Discord, soutien), sauf « Merci Duffus »
 
 ## Crédit
