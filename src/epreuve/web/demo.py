@@ -585,6 +585,94 @@ class DepotDemo:
         return len(vieilles)
 
 
+# ---------------------------------------------------------------------- jeu « étage 8 »
+NOMS_ETAGES = {0: "Le Seuil", 1: "Les Champs Murmurants", 2: "La Forêt des Abraknydes", 3: "Le Vallon Interdit",
+               4: "Les Marais Oubliés", 5: "La Falaise des Échos", 6: "Les Mines Silencieuses",
+               7: "Le Pont des Soupirs", 8: "Les Pics Venteux", 9: "Étage scellé", 10: "Étage scellé"}
+# 22 actifs, puis 3 en pause
+PSEUDOS_ETAGE8 = ("Brindille", "Kaskarot", "Mirelune", "Torvald", "Pépin-Lagrume", "Sélénith", "Gromolo",
+                  "Fleur-de-Bwork", "Cliquetis", "Nalouette", "Aubépine", "Bouldegomme", "Cendrine", "Dragonnet",
+                  "Écume", "Fanfreluche", "Gribouille", "Hurlevent", "Ixia", "Jolicœur", "Korrigan", "Lunaire",
+                  "Ombrevive", "Vieux-Grain", "Mousse-Pierre")
+SCORE_ETAGE8 = {"donjons": 14, "full_succes": 4, "principales": 8, "secondaires": 5}  # 14 + 4 + 8 + 5 = 31 points
+
+
+class DepotEtage8(DepotDemo):
+    """Maquette pour le client : la tour plus tard dans l'aventure. Les étages 0 à 7 sont terminés, le 8 est en
+    cours (31 points sur un palier de 44, 22 grimpeurs actifs, 3 en pause), les étages 9 et 10 sont scellés."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        ouverture = datetime(2027, 1, 8, 17, 0, tzinfo=PARIS).astimezone(UTC)
+        self._etages = {}
+        for n, nom in NOMS_ETAGES.items():
+            statut = "termine" if n < 8 else ("ouvert" if n == 8 else "scelle")
+            nmin = 1 + 20 * n
+            self._etages[n + 1] = Etage(n + 1, n, nom, nmin, nmin + 19, nmin + 19, statut,
+                                        ouverture - timedelta(weeks=8 - n) if n <= 8 else None,
+                                        None, None, f"/etages/{n}/image")
+        self._alertes = {}
+        self._bilans = {}
+        e8 = 9
+        noms_dj = [("Aire du Grand Condor", 168, 24, "Les Pics"), ("Crypte des Gargouilles", 172, 33, "La Citadelle"),
+                   ("Forge de Skarn", 176, 50, "La Citadelle"), ("Sommet Éventré", 180, 60, None)]
+        for i, (nom, niv, ordre, bloc) in enumerate(noms_dj, start=1):
+            did = 80 + i
+            self._donjons[did] = Donjon(did, e8, nom, niv, ordre, bloc, 90 + did, "propose", "duffus", False)
+            for k, d in enumerate(("Boss", *list(DEFIS)[:4]), start=1):
+                nom_case = "Vaincre le boss" if k == 1 else d
+                regle = "Succès de base : il valide le donjon" if k == 1 else DEFIS[d]
+                self._cases[did * 10 + k] = CaseSucces(did * 10 + k, did, k, nom_case, regle, k == 1, False)
+        quetes = [(801, "Le Cri du Condor", 161, "Les Pics", 11, "principale", ["Dofus Ocre"]),
+                  (802, "Plumes pour la Vigie", 162, "Les Pics", 12, "secondaire", []),
+                  (803, "Les Marches de Givre", 165, "Les Pics", 21, "principale", ["Dofus Ocre"]),
+                  (804, "Le Colporteur égaré", 166, "Les Pics", 22, "secondaire", []),
+                  (805, "Le Cairn des Disparus", 167, "Les Pics", 23, "secondaire", []),
+                  (806, "Le Pacte des Vents", 170, "La Citadelle", 31, "principale", ["Dofus Ocre"]),
+                  (807, "Les Vitraux fêlés", 171, "La Citadelle", 32, "secondaire", []),
+                  (808, "La Clé de Voûte", 173, "La Citadelle", 41, "principale", ["Dofus Ocre", "Dofus Pourpre"]),
+                  (809, "L'Œil de la Tempête", 178, "La Citadelle", 51, "principale", ["Dofus Pourpre"]),
+                  (810, "Les Parchemins mouillés", 175, "La Citadelle", 52, "secondaire", []),
+                  (811, "Le Dernier Veilleur", 179, "La Citadelle", 53, "secondaire", [])]
+        for id_, nom, niv, bloc, ordre, nature, dofus in quetes:
+            self._quetes[id_] = Quete(id_, e8, nom, niv, bloc, ordre, nature, "duffus", tuple(dofus), None, None,
+                                      False, False)
+        self._grimpeurs, self._coches_cases, self._coches_quetes = {}, {}, {}
+        self._liste, self._activite = {ID_NOUVELLE: "actif"}, {}
+        cases_boss = [d * 10 + 1 for d in range(81, 85)]
+        toutes = [d * 10 + k for d in range(81, 85) for k in range(1, 6)]
+        princ, second = [801, 803, 806, 808, 809], [802, 804, 805, 807, 810, 811]
+        for i, pseudo in enumerate(PSEUDOS_ETAGE8, start=1):
+            statut = "actif" if i <= 22 else "pause"
+            rang = i - 1
+            did = _id_discord(i)
+            self._liste[did] = statut
+            classe = CLASSES_ETAGE8[rang % len(CLASSES_ETAGE8)]
+            self._grimpeurs[i] = Grimpeur(i, did, f"{pseudo.lower()}#discord", pseudo, classe, statut,
+                                          170 + rang % 10, INSCRIPTION, True)
+            cases, quetes_faites = set(), set()
+            if rang < SCORE_ETAGE8["full_succes"]:
+                cases.update(toutes)
+            elif rang < SCORE_ETAGE8["donjons"]:
+                cases.update(cases_boss)
+            else:  # un peu de progression, jamais assez pour un point de plus
+                cases.update(cases_boss[: rang % 3 + 1])
+            if rang < SCORE_ETAGE8["principales"]:
+                quetes_faites.update(princ)
+            else:
+                quetes_faites.update(princ[: rang % 4])
+            if rang < SCORE_ETAGE8["secondaires"]:
+                quetes_faites.update(second)
+            else:
+                quetes_faites.update(second[: rang % 5])
+            self._coches_cases[i], self._coches_quetes[i] = cases, quetes_faites
+            self._activite[i] = INSCRIPTION + timedelta(hours=i)
+
+
+CLASSES_ETAGE8 = ("Eniripsa", "Iop", "Crâ", "Sacrieur", "Enutrof", "Xélor", "Pandawa", "Sram", "Steamer", "Osamodas",
+                  "Féca", "Roublard", "Ecaflip", "Sadida", "Eliotrope", "Huppermage", "Ouginak", "Zobal", "Forgelance")
+
+
 # ---------------------------------------------------------------------- faux Discord
 PROFILS_DEMO: dict[int, tuple[str, bool]] = {
     ID_MARCEAU: ("Marceau (admin sans fiche)", True),
@@ -644,11 +732,11 @@ class ClientOAuthDemo(ClientOAuth):
         return f"/demo/qui?state={state}"
 
 
-def creer_app_demo(mode: str = "ouvert"):
+def creer_app_demo(mode: str = "ouvert", jeu: str = "standard"):
     from epreuve.config import Config
     from epreuve.web.app import creer_app
 
-    depot = DepotDemo()
+    depot = DepotEtage8() if jeu == "etage8" else DepotDemo()
     config = Config(SITE_MODE=mode, DISCORD_GUILD_ID=1,  # sans SITE_URL : l’origine attendue est celle de la requête
                     DISCORD_ADMIN_ROLE_IDS=str(ROLE_ADMIN), _env_file=None)  # la démo ne lit jamais .env
     oauth = ClientOAuthDemo(config.discord_client_id, SecretStr("demo"), config.redirect_uri, 1,
@@ -672,9 +760,11 @@ def main() -> None:  # pragma: no cover — lance un serveur
     parser = argparse.ArgumentParser(description="Site de démonstration, données fictives.")
     parser.add_argument("--port", type=int, default=8080)
     parser.add_argument("--mode", choices=["ouvert", "teaser"], default="ouvert")
+    parser.add_argument("--jeu", choices=["standard", "etage8"], default="standard",
+                        help="etage8 : la tour plus tard dans l'aventure (maquette client)")
     args = parser.parse_args()
     print(f"Démo : http://127.0.0.1:{args.port}  (données fictives, Ctrl+C pour arrêter)")
-    uvicorn.run(creer_app_demo(args.mode), host="127.0.0.1", port=args.port, log_level="warning")
+    uvicorn.run(creer_app_demo(args.mode, args.jeu), host="127.0.0.1", port=args.port, log_level="warning")
 
 
 if __name__ == "__main__":  # pragma: no cover

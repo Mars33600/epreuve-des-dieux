@@ -662,7 +662,8 @@ def test_bandeau_etage_vide_sans_grimpeur_actif():
 def test_gradin_courant_est_une_barre_avec_infobulle_et_pseudos():
     tour = monde().connecter(ID_BRINDILLE).get("/").text
     gradin = tour[tour.index("gradin-jauge"):tour.index('<div class="pyr-brume"')]
-    assert 'role="progressbar"' in gradin and 'tabindex="0"' in gradin and 'aria-describedby="infobulle-jauge"' in gradin
+    assert 'role="progressbar"' in gradin and 'tabindex="0"' in gradin
+    assert 'aria-describedby="infobulle-jauge"' in gradin
     assert re.search(r'aria-valuemin="0" aria-valuemax="(\d+)" aria-valuenow="\d+"', gradin)
     assert "ep-palier" in gradin and ">palier</small>" in gradin and 'role="tooltip" id="infobulle-jauge"' in gradin
     assert re.search(r'<span class="ep-score">\d+ / \d+</span>', gradin)
@@ -692,3 +693,31 @@ def test_photo_de_fond_sur_chaque_page_jamais_un_etage_scelle():
     for chemin in ("/regles", "/histoire", "/grimpeurs"):
         assert 'data-ambiance="/etages/0/image"' in c.get(chemin).text, chemin
     assert 'data-ambiance="/etages/1/image"' not in c.get("/regles").text
+
+
+def test_jeu_demo_etage8():
+    import asyncio
+
+    from epreuve.domaine.bareme import calculer_jauge
+    from epreuve.web.demo import DepotEtage8
+
+    depot = DepotEtage8()
+    etages = asyncio.run(depot.etages())
+    assert [e.statut for e in etages] == ["termine"] * 8 + ["ouvert", "scelle", "scelle"]
+    e8 = next(e for e in etages if e.numero == 8)
+    contenu = asyncio.run(depot.contenu_etage(e8.id))
+    jauge = calculer_jauge(contenu, asyncio.run(depot.grimpeurs()), asyncio.run(depot.coches_etage(e8.id)), Regles())
+    assert (jauge.score, jauge.palier, jauge.actifs, jauge.en_pause, jauge.maximum) == (31, 44, 22, 3, 88)
+
+
+def test_maquette_etage8_autonome():
+    from pathlib import Path
+
+    dossier = Path(__file__).resolve().parents[2] / "docs" / "design"
+    html = (dossier / "maquette-etage8.html").read_text()
+    assert "<script" not in html and "<link" not in html and 'role="progressbar"' in html
+    assert "maquette-etage8/etage-8.webp" in html and "31 / 44" in html
+    assert not re.search(r'(?:href|src)="/', html)  # aucun lien absolu cassé
+    assert (dossier / "maquette-etage8" / "etage-8.webp").stat().st_size <= 300_000
+    pyramide = html[html.index('<nav class="pyramide"'):html.index('<div class="pyr-brume"')]
+    assert "Étage 8" not in pyramide and not re.search(r"\d+ étages", html) and "Étage scellé" not in html
