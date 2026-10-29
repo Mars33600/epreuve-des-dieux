@@ -12,7 +12,9 @@ from epreuve.encyclopedie.textes import (
     icone_objet,
     icone_sort,
     image_monstre,
+    nettoyer_balises,
     requete_plein_texte,
+    sans_balises,
 )
 
 
@@ -93,3 +95,12 @@ def test_objectifs_en_clair():
     assert objectif_en_clair(libre, {}, {}, {}) == "Escorter Bob"
     inconnu = {"classe": "Nouveau", "p": [1, 0, 0], "texte": None, "x": None, "y": None}
     assert objectif_en_clair(inconnu, {}, {}, {}) == "Nouveau"
+
+
+def test_balises_de_texte_dofusdb_ne_gardent_que_le_nom():
+    assert sans_balises("{{spell,5453,1::Veille Dimensionnelle}} : soigne") == "Veille Dimensionnelle : soigne"
+    assert sans_balises("Rapporter x3 {{item,31480::[Lait nourricier]}} ici") == "Rapporter x3 [Lait nourricier] ici"
+    assert sans_balises("Sur le {{transition,152305664,0,520,0,0::bord droit}}.") == "Sur le bord droit."
+    assert sans_balises("une {{ui,subQuestUi,btn,4}} balise sans nom") == "une  balise sans nom"
+    fiche = {"a": ["{{monster,2785,-1,50::poutch}}", 3], "b": {"c": "ok"}}
+    assert nettoyer_balises(fiche) == {"a": ["poutch", 3], "b": {"c": "ok"}}

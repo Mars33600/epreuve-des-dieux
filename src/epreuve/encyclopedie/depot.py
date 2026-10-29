@@ -25,6 +25,7 @@ from epreuve.encyclopedie.textes import (
     ids_des_conditions,
     ids_des_objectifs,
     image_monstre,
+    nettoyer_balises,
     objectif_en_clair,
     requete_plein_texte,
 )
@@ -367,6 +368,7 @@ class DepotEncyclopedie:
         page = await self._paginer(requete, f)
         for r in page.lignes:
             r["image"] = icone_sort(r["icone"])
+            nettoyer_balises(r)
         return page
 
     async def sort(self, ident: int, plafond: int | None = None) -> dict | None:
@@ -382,7 +384,7 @@ class DepotEncyclopedie:
         for n in fiche["niveaux"]:
             n["effets_lus"] = await self.en_clair(n["effets"])
             n["effets_cc_lus"] = await self.en_clair(n["effets_cc"])
-        return fiche
+        return nettoyer_balises(fiche)
 
     # --- PNJ ---------------------------------------------------------------------------------------------
 
@@ -444,4 +446,4 @@ class DepotEncyclopedie:
                               for d in fiche["depart"] if d.get("pnj")]
         fiche["conditions_lues"] = await self._conditions(fiche["condition"])
         fiche["repetition_lue"] = REPETITIONS.get(fiche["repetition"] or 0, "Non répétable")
-        return fiche
+        return nettoyer_balises(fiche)

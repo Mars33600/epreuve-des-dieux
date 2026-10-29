@@ -64,6 +64,30 @@ def requete_plein_texte(saisie: str | None) -> str | None:
     return " & ".join(f"{m}:*" for m in mots) or None
 
 
+# --- Balises de texte de DofusDB -------------------------------------------------------------------------
+
+_BALISE_NOMMEE = re.compile(r"\{\{[a-zA-Z]+,[^}:]*::([^}]*)\}\}")
+_BALISE_MUETTE = re.compile(r"\{\{[a-zA-Z]+,[^}]*\}\}")
+
+
+def sans_balises(texte: str) -> str:
+    """« {{spell,5453,1::Veille}} : … » → « Veille : … ». DofusDB glisse des liens dans ses textes (sort, objet,
+    monstre, ui…) : on ne garde que le nom lisible, et on retire une balise sans nom."""
+    return _BALISE_MUETTE.sub("", _BALISE_NOMMEE.sub(r"\1", texte))
+
+
+def nettoyer_balises(valeur):
+    """Applique `sans_balises` à toutes les chaînes d'un dictionnaire ou d'une liste, sur place si possible."""
+    if isinstance(valeur, str):
+        return sans_balises(valeur) if "{{" in valeur else valeur
+    if isinstance(valeur, dict):
+        for k, v in valeur.items():
+            valeur[k] = nettoyer_balises(v)
+    elif isinstance(valeur, list):
+        valeur[:] = [nettoyer_balises(v) for v in valeur]
+    return valeur
+
+
 # --- Effets ---------------------------------------------------------------------------------------------
 
 _BLOC = re.compile(r"\{\{([^}]*)\}\}")
