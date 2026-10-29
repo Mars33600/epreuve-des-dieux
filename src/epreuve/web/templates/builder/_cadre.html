@@ -9,12 +9,9 @@
 {% block attributs_body %} class="page-builder"{% endblock %}
 {% block contenu %}
 {% include "_decor.html" %}
-<header class="b-entete">
-  <div class="b-entete-in">
-    <a class="b-retour" href="/">← La tour</a>
-    <h1><a href="/builder">Builder</a></h1>
-  </div>
-</header>
+{% set chemin = request.url.path %}
+{% with bar_connecte=true, bar_membre=true, bar_admin=v.est_admin, bar_gid=v.grimpeur_id, bar_pseudo=v.pseudo,
+        bar_csrf=None, bar_horloge=false %}{% include "_entete.html" %}{% endwith %}
 <main class="b-page">
 {% block page %}{% endblock %}
 </main>

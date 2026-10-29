@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="/static/teaser/teaser.css">
 {% endblock %}
 {% block attributs_body %} data-ouverture="{{ site_ouvert_le.isoformat() }}" data-lien-site="{{ teaser_lien_entrer }}"{% if ouvert %} class="is-open"{% endif %}{% endblock %}
+{% block script_entete %}{% endblock %}
 {% block contenu %}
 <div class="scene" aria-hidden="true">
   <div class="sky"></div>

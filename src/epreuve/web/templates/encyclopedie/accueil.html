@@ -6,7 +6,7 @@
   <h1>Chercher dans le Monde des Douze</h1>
   <p class="muted">Objets, ressources, monstres et recettes. La recherche porte sur le début des mots : « epee boi » trouve l'Épée de Boisaille.</p>
   <form class="filtres" action="/encyclopedie" method="get" role="search" data-filtres>
-    <label class="large">Nom <input type="search" name="q" value="{{ f.q or '' }}" placeholder="Un objet, un monstre…" autocomplete="off" data-focus></label>
+    <label class="large">Nom <input type="search" name="q" value="{{ f.q or '' }}" placeholder="Un objet, un monstre…" autocomplete="off" data-focus data-suggest="page"></label>
     <div class="actions"><button class="bouton" type="submit">Chercher</button></div>
   </form>
 </section>
