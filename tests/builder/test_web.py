@@ -338,7 +338,7 @@ def test_sorts_de_la_classe():
     d = client(builds=FauxBuilds()).post("/api/builder/sorts", json=corps).json()
     [pression] = d["sorts"]
     assert pression["nom"] == "Pression" and pression["grade"] == 3
-    assert pression["icone"] == "https://api.dofusdb.fr/img/spells/11830.png"
+    assert pression["icone"] == "https://api.dofusdb.fr/img/spells/sort_11830.png"
     assert pression["normal"][0]["jet"] == [52, 60]  # (100 + 100) / 100 × 26 et × 30
     feca = client(builds=FauxBuilds()).post("/api/builder/sorts", json={**corps, "classe": "Féca"}).json()
     assert feca["sorts"] == []

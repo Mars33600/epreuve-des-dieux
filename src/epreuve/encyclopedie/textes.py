@@ -165,11 +165,13 @@ def icone_objet(icone: int | None) -> str | None:
 
 
 def icone_sort(icone: int | None) -> str | None:
-    return f"https://api.dofusdb.fr/img/spells/{icone}.png" if icone is not None else None
+    # Les fichiers de DofusDB s'appellent « sort_<icône>.png » : « <icône>.png » seul répond 404.
+    return f"https://api.dofusdb.fr/img/spells/sort_{icone}.png" if icone is not None else None
 
 
-def image_monstre(ident: int | None) -> str | None:
-    return f"https://api.dofusdb.fr/img/monsters/{ident}.png" if ident else None
+def image_monstre(gfx: int | None) -> str | None:
+    """L'image d'un monstre porte le numéro de son apparence (`gfx`), pas celui du monstre : `<id>.png` répond 404."""
+    return f"https://api.dofusdb.fr/img/monsters/{gfx}.png" if gfx else None
 
 
 # --- Conditions d'objet et de quête ----------------------------------------------------------------------

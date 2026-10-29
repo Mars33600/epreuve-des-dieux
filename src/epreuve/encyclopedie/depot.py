@@ -199,7 +199,7 @@ class DepotEncyclopedie:
             if fiche["drops"]:
                 monstres = (await c.execute(
                     select(t.ency_monstre.c.id, t.ency_monstre.c.nom, t.ency_monstre.c.niveau_min,
-                           t.ency_monstre.c.niveau_max, t.ency_monstre.c.drops)
+                           t.ency_monstre.c.niveau_max, t.ency_monstre.c.drops, t.ency_monstre.c.gfx)
                     .where(t.ency_monstre.c.id.in_(fiche["drops"]),
                            *_niveaux(t.ency_monstre.c.niveau_min, Filtres(), plafond))
                     .order_by(t.ency_monstre.c.niveau_min, t.ency_monstre.c.id))).mappings().all()
@@ -228,7 +228,7 @@ class DepotEncyclopedie:
         for m in monstres:
             taux = next((d for d in m["drops"] if d[0] == ident), None)
             fiche["monstres"].append({"id": m["id"], "nom": m["nom"], "niveau_min": m["niveau_min"],
-                                      "niveau_max": m["niveau_max"], "image": image_monstre(m["id"]),
+                                      "niveau_max": m["niveau_max"], "image": image_monstre(m["gfx"]),
                                       "taux": (taux[1], taux[2]) if taux else None,
                                       "condition": bool(taux and taux[3])})
         return fiche
@@ -243,13 +243,13 @@ class DepotEncyclopedie:
             conds.append(m.c.recherche.op("@@")(func.to_tsquery(text("'simple'"), tsq)))
         if f.race_id is not None:
             conds.append(m.c.race_id == f.race_id)
-        requete = (select(m.c.id, m.c.nom, m.c.niveau_min, m.c.niveau_max, ra.c.nom.label("race"))
+        requete = (select(m.c.id, m.c.nom, m.c.niveau_min, m.c.niveau_max, m.c.gfx, ra.c.nom.label("race"))
                    .join(ra, ra.c.id == m.c.race_id, isouter=True).where(and_(True, *conds))
                    .order_by(*_tri({"niveau": m.c.niveau_min, "nom": m.c.nom, "id": m.c.id,
                                     "cle": m.c.cle_recherche}, f.tri)))
         page = await self._paginer(requete, f)
         for r in page.lignes:
-            r["image"] = image_monstre(r["id"])
+            r["image"] = image_monstre(r.pop("gfx"))
         return page
 
     async def monstre(self, ident: int, plafond: int | None = None) -> dict | None:
@@ -261,7 +261,7 @@ class DepotEncyclopedie:
         if r is None:
             return None
         fiche = {k: v for k, v in r.items() if k != "recherche"}
-        fiche["image"] = image_monstre(ident)
+        fiche["image"] = image_monstre(fiche["gfx"])
         objets = await self._mini_objets([d[0] for d in fiche["drops"]], plafond)
         fiche["butin"] = sorted(
             ({**objets[d[0]], "taux": (d[1], d[2]), "condition": bool(d[3])} for d in fiche["drops"] if d[0] in objets),

@@ -10,6 +10,7 @@ from epreuve.encyclopedie.textes import (
     famille_du_super_type,
     formater_effet,
     icone_objet,
+    icone_sort,
     image_monstre,
     requete_plein_texte,
 )
@@ -65,6 +66,9 @@ def test_etage_d_un_niveau_premier_etage_qui_le_contient():
 def test_images_chez_dofusdb_jamais_chez_duffus():
     assert icone_objet(6007) == "https://api.dofusdb.fr/img/items/6007.png"
     assert image_monstre(31) == "https://api.dofusdb.fr/img/monsters/31.png"
+    # Régressions de la recette : les fichiers de DofusDB portent le gfx du monstre et « sort_ » pour les sorts.
+    assert icone_sort(162) == "https://api.dofusdb.fr/img/spells/sort_162.png"
+    assert image_monstre(None) is None
     assert icone_objet(None) is None
 
 
