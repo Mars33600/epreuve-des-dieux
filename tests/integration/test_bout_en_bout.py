@@ -90,8 +90,12 @@ async def test_parcours_complet_du_lot_b(site, depot, moteur):
     assert "Shadoaze" in (await intrus.get("/inscription")).text
 
     # La tour et l'étage 0 réels ; l'étage 1 est scellé.
+    assert 'class="prologue"' in (await brindille.get("/")).text  # première connexion : le prologue d'abord
+    t = await site.csrf(brindille, "/histoire")
+    r = await brindille.post("/histoire/vu", data={"csrf": t}, headers={"Origin": SITE})
+    assert r.status_code == 303
     tour = (await brindille.get("/")).text
-    assert "L'anneau de tous les dangers" not in tour and "Étage 0" in tour
+    assert "L'anneau de tous les dangers" not in tour and 'href="/etages/0"' in tour
     etage0 = await brindille.get("/etages/0")
     assert etage0.status_code == 200 and "L&#39;anneau de tous les dangers" in etage0.text
     assert "Crypte de Kardorim" in etage0.text
