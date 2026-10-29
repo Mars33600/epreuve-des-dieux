@@ -28,3 +28,8 @@ docs/design/etages/
 
 # Pages d'une aspiration de l'encyclopédie en cours (reprise) : seuls les extraits fusionnés sont suivis
 donnees/duffus/encyclopedie/.en-cours/
+
+# Clé PRIVÉE des sauvegardes (age) : ne quitte jamais ce Mac
+cle-sauvegarde.txt
+*.dump
+*.dump.age
