@@ -250,7 +250,10 @@ async function ouvrirQuete(href, depuis){
   if (!dlg.open){
     declencheur = depuis || document.activeElement;
     dlg.showModal();
-    if (depuis !== false){ history.pushState({quete:href}, "", href); pousse = true; }
+    // Ouverte par « page suivante » (depuis === false), l'entrée d'historique existe déjà : on ne l'empile pas,
+    // mais la fermeture doit quand même revenir à la liste, sinon l'adresse de la fiche reste affichée.
+    if (depuis !== false) history.pushState({quete:href}, "", href);
+    pousse = true;
   } else {
     history.replaceState({quete:href}, "", href);
   }
