@@ -33,7 +33,7 @@ from epreuve.config import Config
 from epreuve.discord.oauth import ClientOAuth
 from epreuve.domaine.mode_site import mode_effectif
 from epreuve.domaine.modeles import Regles
-from epreuve.web import admin, api, auth, builder, captures, outils, pages, tableau
+from epreuve.web import admin, api, auth, builder, captures, outils, pages, recherche, tableau
 from epreuve.web.auth import Refus, admin_pour_le_filtre, visiteur
 from epreuve.web.encyclopedie import brancher as brancher_encyclopedie
 from epreuve.web.rendu import creer_gabarits, rendre
@@ -146,6 +146,7 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
     app.include_router(api.routeur)
     app.include_router(tableau.routeur)
     app.include_router(outils.routeur)
+    app.include_router(recherche.routeur)  # recherche globale de l'en-tête
     app.include_router(admin.routeur)
     app.include_router(captures.routeur)  # module E1 : archimonstres et avis de recherche
     builder.brancher(app, source)  # module E3 : le builder (/builder, /api/builder/…), sur connexion

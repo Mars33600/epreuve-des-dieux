@@ -1,0 +1,27 @@
+{% extends "site.html" %}
+{% block titre %}Recherche · L'Épreuve des Dieux{% endblock %}
+{# Page « voir tout » de la recherche globale : tous les résultats d'un type, ou les premiers de chaque type. #}
+{% block page %}
+<article class="card resultats" aria-labelledby="rechTitre">
+  <div class="eyebrow">Recherche</div>
+  <h2 id="rechTitre">{% if libelle_unique %}{{ libelle_unique }}{% else %}Résultats{% endif %}{% if q %} pour « {{ q }} »{% endif %}</h2>
+  {% if unique %}<p><a href="/recherche?q={{ q|urlencode }}">← Tous les types de résultats</a></p>{% endif %}
+  <form class="rech-page" action="/recherche" method="get" role="search">
+    {% if unique %}<input type="hidden" name="type" value="{{ unique }}">{% endif %}
+    <label for="rechPage" class="sr-only">Rechercher</label>
+    <input id="rechPage" type="search" name="q" value="{{ q }}" maxlength="80" autocomplete="off" placeholder="Rechercher…">
+    <button class="btn or" type="submit">Chercher</button>
+  </form>
+  {% for g in groupes %}
+  <section aria-labelledby="g-{{ g.type }}">
+    <h3 id="g-{{ g.type }}">{{ g.libelle }}</h3>
+    <ul class="liste-resultats">
+      {% for r in g.resultats %}<li><a href="{{ r.lien }}">{{ r.nom }}</a>{% if r.detail %} <span class="muted">{{ r.detail }}</span>{% endif %}</li>{% endfor %}
+    </ul>
+    {% if g.plus and not unique %}<p><a href="{{ voir_tout(g.type) }}">Voir tout : {{ g.libelle|lower }}</a></p>{% endif %}
+  </section>
+  {% else %}
+  <p class="muted">{% if q|trim %}Rien ne correspond à « {{ q }} ».{% else %}Tape un nom : grimpeur, quête, donjon, monstre, objet, panoplie, sort, PNJ ou outil.{% endif %}</p>
+  {% endfor %}
+</article>
+{% endblock %}
