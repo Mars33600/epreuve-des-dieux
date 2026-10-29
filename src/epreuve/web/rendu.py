@@ -59,7 +59,8 @@ def creer_gabarits() -> Jinja2Templates:
     g.env.filters.update(pct=pct, pct1=pct1, cle=cle, date_paris=date_paris, heure_paris=heure_paris,
                          fiche_propre=fiche_propre)
     g.env.globals.update(CATS=INFOS_CATEGORIES, texte_donjons=texte_point_donjons, texte_full=texte_point_full,
-                         titre_etage=titre_etage, avec_article=avec_article, decouper_quantite=decouper_quantite, LIENS_VIDES=Liens())
+                         titre_etage=titre_etage, avec_article=avec_article, decouper_quantite=decouper_quantite,
+                         LIENS_VIDES=Liens())
     return g
 
 
