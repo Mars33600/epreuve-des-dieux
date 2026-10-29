@@ -310,12 +310,12 @@ def test_fiche_de_quete_page_complete_et_fragment():
     for html in (page, frag):
         assert 'id="qdTitle"' in html and "La Graine de Mère Cawotte" in html
         for bloc in ("Jusqu'où la faire", "Prérequis", "Étapes", "Ce dont tu as besoin", "Positions",
-                     "Succès lié", "Récompenses", "En bref", "Qui l'a faite", "Qui ne l'a pas encore faite"):
+                     "Succès lié", "Récompenses", "En bref", "Faite par", "Pas encore faite par"):
             assert bloc in html, bloc
         assert 'href="/etages/0/quetes/101"' in html  # prérequis d'un étage ouvert : un lien vers sa fiche
         assert "[5,-17]" in html and 'data-copier="/travel 5,-17"' in html
         assert 'data-ref="quete:102"' in html  # la même case que la liste
-    assert "← Retour à la liste" in page and 'href="/etages/0">← Retour' in page
+    assert 'href="/etages/0">← Retour' in page
 
 
 def test_fiche_complete_parite_des_champs():

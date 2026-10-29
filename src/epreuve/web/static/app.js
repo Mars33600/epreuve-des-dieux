@@ -222,12 +222,12 @@ async function ouvrirQuete(href, depuis){
   if (!dlg.open){
     declencheur = depuis || document.activeElement;
     dlg.showModal();
-    history.pushState({quete:href}, "", href); pousse = true;
+    if (depuis !== false){ history.pushState({quete:href}, "", href); pousse = true; }
   } else {
     history.replaceState({quete:href}, "", href);
   }
   dlg.scrollTop = 0;
-  $("qdTitle")?.focus();
+  (dlg.querySelector("[data-qfocus]") || dlg).focus({preventScroll:true});
 }
 function initQuete(){
   const dlg = $("qd"); if (!dlg) return;
@@ -240,9 +240,20 @@ function initQuete(){
     if (t) t.focus({preventScroll:true});
   });
   dlg.addEventListener("click", e => {
-    if (e.target === dlg || e.target.closest("[data-qclose]")) dlg.close();   // clic sur le fond, la croix ou « Retour »
+    if (e.target === dlg || e.target.closest("[data-qclose]")) dlg.close();   // clic sur le fond ou la croix
+    const q = e.target.closest("[data-qui]");
+    if (q){ const p = $("quiPanneau"); if (p){ p.hidden = !p.hidden; q.setAttribute("aria-expanded", String(!p.hidden)); } }
   });
-  addEventListener("popstate", () => { if (dlg.open){ pousse = false; dlg.close(); } });   // bouton retour du téléphone
+  // une adresse directe (?quete=id ou #quete-id) ouvre la fiche de cette quête
+  const m = location.search.match(/[?&]quete=(\d+)/) || location.hash.match(/^#quete-(\d+)/);
+  if (m){
+    const a = document.querySelector(`a[data-qopen="${m[1]}"]`);
+    if (a){ history.replaceState(null, "", location.pathname); ouvrirQuete(a.getAttribute("href"), a); }
+  }
+  addEventListener("popstate", e => {   // retour arrière : ferme la fiche ; avant : la rouvre
+    if (dlg.open){ pousse = false; dlg.close(); }
+    else if (e.state && e.state.quete) ouvrirQuete(e.state.quete, false);
+  });
 }
 
 /* =================== « Qui n'a pas fait… ? » (page des grimpeurs) =================== */
