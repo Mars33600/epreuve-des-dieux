@@ -57,6 +57,20 @@ INFOS_CATEGORIES: tuple[InfoCategorie, ...] = (
 assert tuple(i.cle for i in INFOS_CATEGORIES) == CATEGORIES
 
 
+def texte_point_donjons(n: int) -> str:
+    """La règle du point Donjons, dite juste : il faut vaincre tous les donjons de l'étage (1 seul, ou N)."""
+    if n == 1:
+        return "Vaincre ce donjon rapporte 1 point (Donjons)"
+    return f"Vaincre les {n} donjons de l'étage rapporte 1 point (Donjons)"
+
+
+def texte_point_full(n: int) -> str:
+    """La règle du point Full succès : les 5 cases de chaque donjon de l'étage."""
+    if n == 1:
+        return "Cocher les 5 cases de ce donjon rapporte 1 point (Full succès)"
+    return f"Cocher les 5 cases des {n} donjons de l'étage rapporte 1 point (Full succès)"
+
+
 def pct(faits: int, total: int) -> str:
     """Classe CSS « p-45 » (par pas de 5 %) : la CSP interdit style="--p:45%"."""
     if total <= 0:

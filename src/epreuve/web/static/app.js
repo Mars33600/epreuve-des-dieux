@@ -114,6 +114,8 @@ function majLignes(){
     li.querySelector('[data-djbadge="succes"]')?.classList.toggle("on", tout);
     li.dataset.fait = tout ? "1" : "0"; li.dataset.vaincu = classique && classique.checked ? "1" : "0";
   });
+  const vn = document.querySelectorAll("li[data-donjon][data-vaincu='1']").length, cn = document.querySelectorAll("li[data-donjon][data-fait='1']").length;
+  texte(document.querySelector("[data-vaincus]"), String(vn)); texte(document.querySelector("[data-complets]"), String(cn));
   document.querySelectorAll("li[data-cats] input[data-ref^='quete:']").forEach(b => { b.closest("li").dataset.fait = b.checked ? "1" : "0"; });
   filtrer();
 }
@@ -177,34 +179,60 @@ async function suivreEtape(box){
   box.disabled = false;
 }
 
-/* =================== Filtre cumulatif (mémorisé sur l'appareil) =================== */
-const CLE_FILTRE = "epreuve-filtre";
-function lireFiltre(){ try{ return JSON.parse(localStorage.getItem(CLE_FILTRE)) || null; }catch(e){ return null; } }
+/* =================== Filtre cumulatif (état dans l'URL : ?voir=donjons,principales&reste=1) =================== */
+/* Sans paramètre « voir », tout est affiché. Chaque case montre ou masque sa catégorie, les cases se combinent. */
+function filtreDepuisUrl(f){
+  const p = new URLSearchParams(location.search);
+  const voir = p.has("voir") ? p.get("voir").split(",").filter(Boolean) : null;
+  f.querySelectorAll("input").forEach(i => {
+    i.checked = i.value === "reste" ? p.get("reste") === "1" : (voir === null || voir.includes(i.value));
+  });
+}
+function filtreVersUrl(f){
+  const cats = [...f.querySelectorAll("input")].filter(i => i.value !== "reste");
+  const choisies = cats.filter(i => i.checked).map(i => i.value);
+  const p = new URLSearchParams(location.search);
+  p.delete("voir"); p.delete("reste");
+  if (choisies.length !== cats.length) p.set("voir", choisies.join(","));
+  if (f.querySelector('input[value="reste"]').checked) p.set("reste", "1");
+  const q = p.toString();
+  try{ history.replaceState(history.state, "", location.pathname + (q ? "?" + q : "") + location.hash); }catch(e){ /* URL non modifiable : le filtre marche quand même */ }
+}
 function filtrer(){
   const f = $("filtre"); if (!f) return;
   const choix = [...f.querySelectorAll("input")].filter(i => i.checked).map(i => i.value);
-  const reste = choix.includes("reste"), cats = choix.filter(c => c !== "reste");
-  const seulSucces = cats.length === 1 && cats[0] === "full_succes";
+  const reste = choix.includes("reste");
+  const donj = choix.includes("donjons"), succes = choix.includes("full_succes");
   document.querySelectorAll("#liste li[data-cats]").forEach(li => {
-    let voir = li.dataset.cats.split(" ").some(c => cats.includes(c));
-    if (voir && reste){
-      if (li.dataset.donjon && !cats.includes("full_succes")) voir = li.dataset.vaincu !== "1";
-      else voir = li.dataset.fait !== "1";
+    let voir;
+    if (li.dataset.donjon){
+      voir = donj || succes;
+      if (voir && reste){
+        const ok = (donj && li.dataset.vaincu !== "1") || (succes && li.dataset.fait !== "1");
+        voir = ok;
+      }
+      // Seulement la catégorie choisie : on masque les cases de l'autre catégorie dans le donjon.
+      li.querySelectorAll(".ticks > li").forEach(t => { t.hidden = t.classList.contains("premiere") ? !donj : !succes; });
+    }else{
+      voir = choix.includes(li.dataset.cats);
+      if (voir && reste) voir = li.dataset.fait !== "1";
     }
     li.hidden = !voir;
-    const det = li.querySelector("details"); if (det && seulSucces) det.open = true;
   });
-  document.querySelectorAll("#liste .bloc").forEach(b => { b.hidden = !b.querySelector("li[data-cats]:not([hidden])"); });
+  let n = 0;
+  document.querySelectorAll("#liste .bloc").forEach(b => { const v = !!b.querySelector("li[data-cats]:not([hidden])"); b.hidden = !v; if (v) n++; });
+  const vide = $("filtreVide"); if (vide) vide.hidden = n > 0;
 }
 function initFiltre(){
   const f = $("filtre"); if (!f) return;
-  const memo = lireFiltre();
-  if (Array.isArray(memo)) f.querySelectorAll("input").forEach(i => { i.checked = memo.includes(i.value); });
-  f.addEventListener("change", e => {
-    e.stopPropagation();
-    try{ localStorage.setItem(CLE_FILTRE, JSON.stringify([...f.querySelectorAll("input")].filter(i => i.checked).map(i => i.value))); }catch(err){ /* stockage indisponible : le filtre marche quand même */ }
-    filtrer();
+  filtreDepuisUrl(f);
+  f.addEventListener("change", e => { e.stopPropagation(); filtreVersUrl(f); filtrer(); });
+  $("filtreTout")?.addEventListener("click", () => {
+    f.querySelectorAll("input").forEach(i => { i.checked = i.value !== "reste"; });
+    filtreVersUrl(f); filtrer();
   });
+  window.addEventListener("pageshow", () => { filtreDepuisUrl(f); filtrer(); });
+  window.addEventListener("popstate", () => { filtreDepuisUrl(f); filtrer(); });
   filtrer();
 }
 

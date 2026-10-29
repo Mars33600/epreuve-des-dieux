@@ -523,3 +523,11 @@ h1,h2,h3{font-weight:700}
 .prologue-pied{display:flex;justify-content:center;padding:var(--s3) var(--s4) max(var(--s3),env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line-soft)}
 .prologue-pied .cta{min-width:min(100%,280px)}
 @media (min-width:720px){.story-carte{padding:var(--s6) 48px}}
+
+.legende-dj > div{display:grid;gap:6px}
+.legende-dj p{margin:0}
+.cpt-dj{display:inline-block;margin-left:6px;padding:0 10px;border-radius:999px;border:1px solid var(--c-donjon);font-weight:700;color:var(--ink);white-space:nowrap}
+.filtre .btn{min-height:44px}
+.filtre-vide[hidden]{display:none}
+.player .ptop small.etg{display:block;font-weight:400;color:var(--faint)}
+.ticks > li[hidden]{display:none}
