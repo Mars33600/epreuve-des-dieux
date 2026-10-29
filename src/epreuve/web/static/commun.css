@@ -162,3 +162,5 @@ footer{background:linear-gradient(180deg,transparent,rgba(5,8,22,.85) 40%);paddi
 .linkbtn{display:inline-flex;align-items:center}
 .ambiance.statique{opacity:1;background-image:url(/ambiance)}
 @media (prefers-reduced-motion:reduce){.fog,.glow,.towermist,.pyr-lueur,.pyr-brume{animation:none!important}.ambiance{transition:none}}
+
+img.img-absente{visibility:hidden}

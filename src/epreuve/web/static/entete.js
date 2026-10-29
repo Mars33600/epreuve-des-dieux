@@ -215,4 +215,11 @@
   }
 
   document.querySelectorAll("input[data-suggest]").forEach(function (champ) { recherches.push(creer(champ)); });
+
+  // --- Images absentes -------------------------------------------------------------------------------
+  // DofusDB n'a pas toutes les images : une image qui ne charge pas laisse sa case vide (classe « img-absente »)
+  // au lieu de l'icône d'image cassée et du texte de remplacement.
+  function absente(img) { if (img.tagName === "IMG") img.classList.add("img-absente"); }
+  document.addEventListener("error", function (e) { if (e.target && e.target.tagName === "IMG") absente(e.target); }, true);
+  Array.prototype.forEach.call(document.images, function (img) { if (img.complete && img.naturalWidth === 0 && img.src) absente(img); });
 })();
