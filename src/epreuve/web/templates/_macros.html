@@ -27,28 +27,90 @@
 {%- endif -%}
 {%- endmacro %}
 
-{% macro pyramide(etages, jauge) -%}
+{% macro texte_manque(jauge) -%}
+{%- if jauge.pleine -%}Palier atteint{%- else -%}Il manque {{ jauge.manquants }} point{{ "s" if jauge.manquants > 1 }}{%- endif -%}
+{%- endmacro %}
+
+{% macro pyramide(etages, jauge, actifs=(), pauses=()) -%}
 {#- La pyramide : en haut, des gradins anonymes dessinés par la seule feuille de style (un seul élément, aucun étage
     à compter) qui se perdent dans la brume ; en dessous, seulement les étages ouverts ou terminés, nommés et
-    cliquables. Aucun numéro d'étage ni aucun nombre : le HTML ne trahit rien du total. La largeur de chaque
-    étage ouvert passe par une classe (pb-k, k depuis le bas) car la CSP interdit style="…". -#}
+    cliquables. Aucun numéro d'étage ni aucun nombre d'étages : le HTML ne trahit rien du total. La largeur de chaque
+    étage ouvert passe par une classe (pb-k, k depuis le bas) car la CSP interdit style="…".
+    Le gradin de l'étage en cours est une barre de progression : il se remplit de gauche à droite jusqu'au maximum
+    (bord droit), un trait pointillé marque le palier, une infobulle (survol, toucher, clavier) liste les actifs.
+    Tout y est en <span> : la zone ne contient que les trois <div> de décor. -#}
 <div class="pyr{% if jauge and jauge.pleine %} prete{% endif %}">
   <div class="pyr-haut" aria-hidden="true"></div>
   <div class="pyr-lueur" aria-hidden="true"></div>
   <nav class="pyramide" aria-label="Les étages ouverts de la tour">
   {%- for e in etages|reverse %}
+    {%- if e.statut == "ouvert" and jauge %}
+    {%- set maxi = jauge.maximum %}
+    <span class="etage-p courant gradin-jauge pb-{{ loop.revindex0 }}">
+      <span class="ep-jauge{% if jauge.actifs == 0 %} sans-actif{% endif %}" tabindex="0" role="progressbar" aria-label="Jauge de l'étage {{ e.nom }}" aria-describedby="infobulle-jauge"
+            aria-valuemin="0" aria-valuemax="{{ maxi }}" aria-valuenow="{{ [jauge.score, maxi]|min }}"
+            aria-valuetext="{% if jauge.actifs == 0 %}Aucun grimpeur actif pour l'instant{% else %}{{ jauge.score }} points sur un palier de {{ jauge.palier }}, maximum {{ maxi }}{% endif %}">
+        <i class="ep-rempli {{ [jauge.score, maxi]|min|pct1(maxi) }}"></i>
+        {%- if jauge.actifs > 0 %}
+        <i class="ep-palier {{ jauge.palier|pct1(maxi) }}{% if jauge.palier * 100 > 80 * maxi %} fin{% endif %}"><small>palier</small></i>
+        <span class="ep-score">{{ jauge.score }} / {{ jauge.palier }}</span>
+        {%- endif %}
+      </span>
+      <a class="ep-lien" href="/etages/{{ e.numero }}"><span class="nom">{{ e.nom }}</span>
+        <span class="detail">niveaux {{ e.niveau_min }} à {{ e.niveau_max }} · ouvert</span></a>
+      <span class="ep-tip" role="tooltip" id="infobulle-jauge">
+        {%- if jauge.actifs == 0 %}
+        <b>Aucun grimpeur actif pour l'instant</b>
+        {%- else %}
+        <b class="ep-t1">{{ jauge.score }} / {{ jauge.palier }} points</b>
+        <span class="ep-t2">Palier {{ jauge.palier }} · maximum {{ maxi }} · {{ texte_manque(jauge)|lower }}</span>
+        <span class="ep-t3">Grimpeurs actifs ({{ actifs|length }})</span>
+        <span class="ep-pseudos">{% for g in actifs %}<span class="pseudo">{{ g.pseudo }}</span>{% endfor %}</span>
+        {%- if pauses %}<span class="ep-t3">En pause ({{ pauses|length }}), hors palier</span>
+        <span class="ep-pseudos">{% for g in pauses %}<span class="pseudo pause">{{ g.pseudo }}</span>{% endfor %}</span>{% endif %}
+        {%- endif %}
+      </span>
+    </span>
+    {%- else %}
     <a class="etage-p {{ 'courant' if e.statut == 'ouvert' else 'fini' }} pb-{{ loop.revindex0 }}" href="/etages/{{ e.numero }}">
       <span class="nom">{{ e.nom }}</span>
       <span class="detail">niveaux {{ e.niveau_min }} à {{ e.niveau_max }} · {{ "terminé" if e.statut == "termine" else "ouvert" }}</span>
     </a>
+    {%- endif %}
   {%- endfor %}
   </nav>
   <div class="pyr-brume" aria-hidden="true"></div>
 </div>
 {%- endmacro %}
 
-{% macro resume_jauge(jauge) -%}
-<span class="resume" data-j="resume">{% if jauge.actifs == 0 %}Aucun grimpeur actif{% else %}{{ jauge.score }} / {{ jauge.palier }} points{% endif %}</span>
+{% macro barre_progression(jauge) -%}
+{#- La barre du bandeau d'étage : score, manque, piste remplie jusqu'au maximum, trait pointillé au palier. -#}
+{%- set maxi = jauge.maximum %}
+<div class="progres" id="progres" data-vide="{{ 1 if jauge.actifs == 0 else 0 }}">
+  <p class="pg-vide" data-pg-vide>Aucun grimpeur actif pour l'instant</p>
+  <p class="pg-tete" data-pg-normal><strong class="pg-score" data-pg="score">{% if jauge.actifs > 0 %}{{ jauge.score }} / {{ jauge.palier }} points{% endif %}</strong>
+    <span class="pg-manque" data-pg="manque">{% if jauge.actifs > 0 %}{{ texte_manque(jauge) }}{% endif %}</span></p>
+  <div class="pg-piste" data-pg="piste" role="progressbar" aria-label="Progression de la jauge de l'étage" aria-valuemin="0" aria-valuemax="{{ maxi }}"
+       aria-valuenow="{{ [jauge.score, maxi]|min }}" aria-valuetext="{% if jauge.actifs == 0 %}Aucun grimpeur actif pour l'instant{% else %}{{ jauge.score }} points sur un palier de {{ jauge.palier }}, maximum {{ maxi }}{% endif %}">
+    <i class="pg-rempli {{ [jauge.score, maxi]|min|pct1(maxi) }}" data-pg="rempli"></i>
+    <i class="pg-palier {{ jauge.palier|pct1(maxi) }}{% if jauge.palier * 100 > 80 * maxi %} fin{% endif %}" data-pg="palier" data-pg-normal><small>palier</small></i>
+  </div>
+</div>
+{%- endmacro %}
+
+{% macro bandeau_etage(etage, vue, jauge, sur_titre, titre) -%}
+<section class="card bloc-etage" id="enteteEtage" aria-labelledby="floorTitle">
+  <span class="eyebrow">{{ sur_titre }}</span>
+  <h2 id="floorTitle">{{ titre }}</h2>
+  <p class="facts">
+    <span>Niveaux <b class="num">{{ etage.niveau_min }} à {{ etage.niveau_max }}</b></span>
+    <span>Cap <b class="num">{{ etage.level_cap }}</b></span>
+    <span><b class="num">{{ vue.contenu.donjons|length }}</b> donjon{{ "s" if vue.contenu.donjons|length > 1 }}</span>
+    <span><b class="num">{{ vue.nb_principales }}</b> quête{{ "s" if vue.nb_principales > 1 }} principale{{ "s" if vue.nb_principales > 1 }}</span>
+    <span><b class="num">{{ vue.nb_secondaires }}</b> quête{{ "s" if vue.nb_secondaires > 1 }} secondaire{{ "s" if vue.nb_secondaires > 1 }}</span>
+  </p>
+  {%- if etage.statut == "ouvert" %}{{ barre_progression(jauge) }}{% endif %}
+</section>
 {%- endmacro %}
 
 {% macro jauge_bloc(jauge, encoches, formule, texte, verdict_plein, verdict_pas_plein) -%}
@@ -111,10 +173,6 @@
         <div class="droite-ligne">{{ badge_nature(q) }}{{ compteur(vue, "quete:" ~ q.id) }}</div>
       </div>
     </li>
-  {%- elif l.type == "repere" %}{% set d = l.donjon %}
-    <li class="repere" data-repere="{{ d.id }}">
-      <a href="#donjon-{{ d.id }}" data-vers-donjon="{{ d.id }}">{{ icone("i-donjon") }}<span>C'est le moment de faire {{ avec_article(d.nom) }}</span><span aria-hidden="true">→</span></a>
-    </li>
   {%- else %}{% set d = l.donjon %}{% set faits = l.cases|selectattr("id", "in", coches.cases)|list|length %}{% set classique = l.cases|selectattr("est_classique")|first %}
     <li id="donjon-{{ d.id }}" data-cats="donjons full_succes" data-donjon="{{ d.id }}" data-fait="{{ 1 if l.cases and faits == l.cases|length else 0 }}" data-vaincu="{{ 1 if classique and classique.id in coches.cases else 0 }}">
       <details class="dj-ligne">
@@ -124,6 +182,9 @@
             <span class="badge succes{% if l.cases and faits == l.cases|length %} on{% endif %}" data-djbadge="succes">{{ icone("i-succes") }}Full succès</span></span>
         </summary>
         <div class="dj-corps">
+          {%- if l.apres %}
+          <p class="moment">Moment conseillé : après la quête « <a href="/etages/{{ numero }}/quetes/{{ l.apres.id }}" data-qopen="{{ l.apres.id }}" aria-haspopup="dialog">{{ l.apres.nom }}</a> »</p>
+          {%- endif %}
           <ul class="ticks">
           {%- for c in l.cases %}
             <li{% if c.est_classique %} class="premiere"{% endif %}><label class="tick c-{{ 'donjons' if c.est_classique else 'full_succes' }}"><input type="checkbox" data-ref="case:{{ c.id }}"{% if c.id in coches.cases %} checked{% endif %}{% if not cochable %} disabled{% endif %}>

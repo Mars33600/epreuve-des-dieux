@@ -93,7 +93,7 @@ DEFIS = {"Duo": "Finir le donjon à deux grimpeurs seulement",
 
 def _donjons_et_cases() -> tuple[dict[int, Donjon], dict[int, CaseSucces]]:
     brut = [(1, 1, "Donjon des Champs", 20, 0, None, ["Duo", "Pusillanime", "Hardi", "Premier"]),
-            (2, 1, "Crypte de Kardorim", 12, 10, "Incarnam", ["Duo", "Premier", "Statue", "Hardi"]),
+            (2, 1, "Crypte de Kardorim", 12, 14, "Incarnam", ["Duo", "Premier", "Statue", "Hardi"]),
             (3, 1, "Donjon des Bouftous", 16, 30, "Astrub", ["Duo", "Collant", "Nomade", "Dernier"]),
             (4, 2, "Repaire des Murmures", 30, 0, None, ["Duo", "Premier", "Statue", "Nomade"])]
     donjons, cases = {}, {}

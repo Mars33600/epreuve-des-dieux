@@ -482,6 +482,46 @@ article.card > .qd-sec{padding-top:4px}
 .etage-p.courant{border-color:var(--gold);background:linear-gradient(180deg,#4a3d22,#1a1a22);box-shadow:0 0 0 3px var(--gold-wash),0 0 34px rgba(var(--glow),.3)}
 a.etage-p:hover{border-color:var(--gold-hi);filter:brightness(1.18);transform:translateY(-1px);box-shadow:0 0 0 3px var(--gold-wash),0 0 30px rgba(var(--glow),.55)}
 a.etage-p:focus-visible{outline:3px solid var(--gold-hi);outline-offset:3px}
+
+/* Le gradin de l'étage en cours est une barre de progression (remplie jusqu'au maximum = bord droit). */
+.q-0{--q:0%;--n:0}.q-1{--q:1%;--n:0.01}.q-2{--q:2%;--n:0.02}.q-3{--q:3%;--n:0.03}.q-4{--q:4%;--n:0.04}.q-5{--q:5%;--n:0.05}.q-6{--q:6%;--n:0.06}.q-7{--q:7%;--n:0.07}.q-8{--q:8%;--n:0.08}.q-9{--q:9%;--n:0.09}
+.q-10{--q:10%;--n:0.1}.q-11{--q:11%;--n:0.11}.q-12{--q:12%;--n:0.12}.q-13{--q:13%;--n:0.13}.q-14{--q:14%;--n:0.14}.q-15{--q:15%;--n:0.15}.q-16{--q:16%;--n:0.16}.q-17{--q:17%;--n:0.17}.q-18{--q:18%;--n:0.18}.q-19{--q:19%;--n:0.19}
+.q-20{--q:20%;--n:0.2}.q-21{--q:21%;--n:0.21}.q-22{--q:22%;--n:0.22}.q-23{--q:23%;--n:0.23}.q-24{--q:24%;--n:0.24}.q-25{--q:25%;--n:0.25}.q-26{--q:26%;--n:0.26}.q-27{--q:27%;--n:0.27}.q-28{--q:28%;--n:0.28}.q-29{--q:29%;--n:0.29}
+.q-30{--q:30%;--n:0.3}.q-31{--q:31%;--n:0.31}.q-32{--q:32%;--n:0.32}.q-33{--q:33%;--n:0.33}.q-34{--q:34%;--n:0.34}.q-35{--q:35%;--n:0.35}.q-36{--q:36%;--n:0.36}.q-37{--q:37%;--n:0.37}.q-38{--q:38%;--n:0.38}.q-39{--q:39%;--n:0.39}
+.q-40{--q:40%;--n:0.4}.q-41{--q:41%;--n:0.41}.q-42{--q:42%;--n:0.42}.q-43{--q:43%;--n:0.43}.q-44{--q:44%;--n:0.44}.q-45{--q:45%;--n:0.45}.q-46{--q:46%;--n:0.46}.q-47{--q:47%;--n:0.47}.q-48{--q:48%;--n:0.48}.q-49{--q:49%;--n:0.49}
+.q-50{--q:50%;--n:0.5}.q-51{--q:51%;--n:0.51}.q-52{--q:52%;--n:0.52}.q-53{--q:53%;--n:0.53}.q-54{--q:54%;--n:0.54}.q-55{--q:55%;--n:0.55}.q-56{--q:56%;--n:0.56}.q-57{--q:57%;--n:0.57}.q-58{--q:58%;--n:0.58}.q-59{--q:59%;--n:0.59}
+.q-60{--q:60%;--n:0.6}.q-61{--q:61%;--n:0.61}.q-62{--q:62%;--n:0.62}.q-63{--q:63%;--n:0.63}.q-64{--q:64%;--n:0.64}.q-65{--q:65%;--n:0.65}.q-66{--q:66%;--n:0.66}.q-67{--q:67%;--n:0.67}.q-68{--q:68%;--n:0.68}.q-69{--q:69%;--n:0.69}
+.q-70{--q:70%;--n:0.7}.q-71{--q:71%;--n:0.71}.q-72{--q:72%;--n:0.72}.q-73{--q:73%;--n:0.73}.q-74{--q:74%;--n:0.74}.q-75{--q:75%;--n:0.75}.q-76{--q:76%;--n:0.76}.q-77{--q:77%;--n:0.77}.q-78{--q:78%;--n:0.78}.q-79{--q:79%;--n:0.79}
+.q-80{--q:80%;--n:0.8}.q-81{--q:81%;--n:0.81}.q-82{--q:82%;--n:0.82}.q-83{--q:83%;--n:0.83}.q-84{--q:84%;--n:0.84}.q-85{--q:85%;--n:0.85}.q-86{--q:86%;--n:0.86}.q-87{--q:87%;--n:0.87}.q-88{--q:88%;--n:0.88}.q-89{--q:89%;--n:0.89}
+.q-90{--q:90%;--n:0.9}.q-91{--q:91%;--n:0.91}.q-92{--q:92%;--n:0.92}.q-93{--q:93%;--n:0.93}.q-94{--q:94%;--n:0.94}.q-95{--q:95%;--n:0.95}.q-96{--q:96%;--n:0.96}.q-97{--q:97%;--n:0.97}.q-98{--q:98%;--n:0.98}.q-99{--q:99%;--n:0.99}
+.q-100{--q:100%;--n:1}
+.etage-p.gradin-jauge{--w:max(var(--w0,66%),min(100%,440px));width:var(--w);min-height:100px;justify-content:flex-start;padding:var(--s3) var(--s3) 40px;
+  overflow:visible;cursor:default}
+.gradin-jauge.pb-0{--w0:100%}.gradin-jauge.pb-1{--w0:94%}.gradin-jauge.pb-2{--w0:88%}.gradin-jauge.pb-3{--w0:82%}.gradin-jauge.pb-4{--w0:76%}
+.gradin-jauge.pb-5{--w0:72%}.gradin-jauge.pb-6{--w0:70%}.gradin-jauge.pb-7{--w0:68%}
+.ep-jauge{position:absolute;inset:0;border-radius:inherit;overflow:hidden;z-index:1}
+.ep-jauge:focus-visible{outline:3px solid var(--gold-hi);outline-offset:3px;overflow:visible}
+.ep-palier{top:0;bottom:0}
+.ep-palier small{bottom:5px}
+.ep-score{position:absolute;left:8px;bottom:5px;font:500 var(--t-sm)/1 var(--f-data);font-variant-numeric:tabular-nums;color:var(--ink);
+  background:rgba(5,8,22,.9);border:1px solid var(--gold-line);border-radius:4px;padding:3px 7px}
+.ep-lien{position:relative;z-index:2;display:grid;gap:2px;justify-items:center;text-decoration:none;border-radius:6px;padding:2px 8px;
+  background:rgba(5,8,22,.62)}
+.ep-lien .nom{color:var(--gold-hi)}
+.ep-lien:hover .nom{text-decoration:underline}
+.ep-lien:focus-visible{outline:3px solid var(--gold-hi);outline-offset:3px}
+.ep-tip{position:absolute;z-index:20;top:100%;left:50%;transform:translateX(-50%);margin-top:8px;width:min(340px,92vw);display:grid;gap:6px;
+  padding:var(--s3);text-align:left;border-radius:var(--r);background:rgba(10,14,28,.98);border:1px solid var(--gold-line);box-shadow:var(--ombre),inset 0 1px 0 var(--gold-line);
+  visibility:hidden;opacity:0;transition:opacity .15s}
+.ep-tip::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}
+.gradin-jauge:hover .ep-tip,.gradin-jauge:focus-within .ep-tip{visibility:visible;opacity:1}
+.ep-t1{font:500 20px/1.1 var(--f-data);color:var(--gold-hi)}
+.ep-t2{font-size:var(--t-sm);color:var(--muted)}
+.ep-t3{font:500 var(--t-xs)/1.3 var(--f-data);letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-top:4px}
+.ep-pseudos{display:flex;flex-wrap:wrap;gap:4px 6px;max-height:140px;overflow-y:auto}
+.ep-pseudos .pseudo{font-size:var(--t-xs);padding:2px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink)}
+.ep-pseudos .pause{border-style:dashed;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.pg-rempli,.ep-rempli{animation:none}.ep-tip{transition:none}}
 .pyr-jauge{width:min(100%,760px);min-width:0}
 @media (max-width:640px){.pyr-haut{width:72%;height:clamp(220px,36vh,320px)}}
 /* Donjons : la première case (vaincre le boss) vaut déjà le point Donjons. */
@@ -538,16 +578,41 @@ h1,h2,h3{font-weight:700}
 .alea{display:inline-block;margin-left:6px;padding:0 6px;border-radius:999px;border:1px solid var(--c-donjon);color:var(--c-donjon);font-size:11px;font-weight:700;line-height:1.5;text-transform:uppercase;letter-spacing:.04em}
 .alea-note{display:block;color:var(--muted);font-style:italic}
 
-/* En-tête d'étage en dépliant : bandeau compact centré, détail au clic */
-details.bloc-etage > summary{list-style:none;cursor:pointer;display:grid;gap:2px;justify-items:center;text-align:center;min-height:48px;padding:2px 28px 2px 4px;position:relative;border-radius:6px}
-details.bloc-etage > summary::-webkit-details-marker{display:none}
-details.bloc-etage > summary::after{content:"▸";position:absolute;right:6px;top:50%;margin-top:-8px;color:var(--faint);font:400 16px/1 var(--f-body);transition:transform .2s}
-details.bloc-etage[open] > summary::after{transform:rotate(90deg)}
-details.bloc-etage > summary:hover{background:rgba(241,234,217,.06)}
-details.bloc-etage > summary h2{margin:0;overflow-wrap:anywhere}
-details.bloc-etage > summary .resume{font:500 var(--t-sm)/1.3 var(--f-data);color:var(--muted);font-variant-numeric:tabular-nums}
-details.bloc-etage[open] > summary{margin-bottom:10px}
-details.bloc-etage > .facts{justify-content:center}
+/* Bandeau d'étage : tout est visible d'emblée (titre, faits, barre de progression), aucun dépliant */
+.bloc-etage{display:grid;gap:10px;justify-items:center;text-align:center}
+.bloc-etage h2{margin:0;overflow-wrap:anywhere}
+.bloc-etage .eyebrow{margin:0}
+.bloc-etage .facts{justify-content:center;margin:0}
+.progres{width:100%;display:grid;gap:8px;text-align:left}
+.pg-tete{margin:0;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 14px}
+.pg-score{font:500 24px/1.1 var(--f-data);font-variant-numeric:tabular-nums;color:var(--gold-hi)}
+.pg-manque{font-size:var(--t-sm);color:var(--muted)}
+.pg-vide{margin:0;text-align:center;color:var(--muted)}
+.pg-piste{position:relative;margin-top:20px;height:26px;border-radius:6px;background:var(--sunken);border:1px solid var(--line)}
+.progres[data-vide="1"] [data-pg-normal],.progres[data-vide="0"] [data-pg-vide]{display:none}
+.pg-rempli,.ep-rempli{position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,#7c5a1c,#b88628 70%,#d9a63f);
+  transform:scaleX(var(--n));transform-origin:left center;animation:remplir 1.4s ease-out both}
+@keyframes remplir{from{transform:scaleX(0)}}
+.pg-palier,.ep-palier{position:absolute;top:-6px;bottom:-6px;left:var(--q);width:0;border-left:2px dashed var(--gold-hi);filter:drop-shadow(0 0 2px #000)}
+.pg-palier small,.ep-palier small{position:absolute;left:0;transform:translateX(-50%);font:500 11px/1 var(--f-data);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold-hi);background:rgba(5,8,22,.92);border:1px solid var(--gold-line);border-radius:4px;padding:2px 5px;white-space:nowrap}
+.pg-palier small{top:-18px}
+.pg-palier.fin small,.ep-palier.fin small{transform:translateX(-100%)}
+.regle-etage{display:grid;gap:12px}
+.regle-etage > p{margin:0}
+
+/* Dépliant « Grimpeurs actifs (N) » */
+.actifs-etage > summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;font:700 var(--t-h3)/1.2 var(--f-display);list-style:none}
+.actifs-etage > summary::-webkit-details-marker{display:none}
+.actifs-etage > summary::before{content:"▸";color:var(--gold);transition:transform .2s}
+.actifs-etage[open] > summary::before{transform:rotate(90deg)}
+.actifs-etage h3{margin:12px 0 4px}
+.roles{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:4px 14px}
+.roles li{display:flex;justify-content:space-between;gap:8px;padding:4px 0;border-bottom:1px solid var(--line-soft)}
+.roles .pseudo{overflow-wrap:anywhere}
+.roles.pause{opacity:.75}
+.moment{margin:0 0 6px;font-size:var(--t-sm);color:var(--muted)}
+.moment a{color:var(--gold-hi)}
 .jauge-bloc{display:grid;gap:14px}
 .jauge-bloc[data-vide="1"] [data-j-normal],.jauge-bloc[data-vide="0"] [data-j-vide]{display:none}
 .jauge-bloc[data-vide="1"] .cats .stat,.jauge-bloc[data-vide="1"] .cats .mini{display:none}

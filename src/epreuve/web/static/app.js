@@ -47,11 +47,32 @@ function message(t){
 }
 
 /* =================== Jauge, catégories, compteurs =================== */
+/* La barre du bandeau d'étage : remplissage jusqu'au maximum, trait de palier, score et manque. */
+function classeQ(el, valeur, total){
+  if (!el) return;
+  [...el.classList].filter(c => /^q-\d+$/.test(c)).forEach(c => el.classList.remove(c));
+  el.classList.add("q-" + (total > 0 ? Math.min(100, Math.max(0, Math.round(valeur / total * 100))) : 0));
+}
+function majBarre(j){
+  const b = $("progres"); if (!b) return;
+  b.dataset.vide = j.actifs === 0 ? "1" : "0";
+  const maxi = 4 * j.actifs, manque = Math.max(0, j.palier - j.score);
+  texte(b.querySelector('[data-pg="score"]'), `${j.score} / ${j.palier} points`);
+  texte(b.querySelector('[data-pg="manque"]'), j.pleine ? "Palier atteint" : `Il manque ${manque} point${manque > 1 ? "s" : ""}`);
+  classeQ(b.querySelector('[data-pg="rempli"]'), Math.min(j.score, maxi), maxi);
+  const pal = b.querySelector('[data-pg="palier"]');
+  classeQ(pal, j.palier, maxi); if (pal) pal.classList.toggle("fin", j.palier * 100 > 80 * maxi);
+  const piste = b.querySelector('[data-pg="piste"]');
+  if (piste){
+    piste.setAttribute("aria-valuemax", String(maxi)); piste.setAttribute("aria-valuenow", String(Math.min(j.score, maxi)));
+    piste.setAttribute("aria-valuetext", j.actifs === 0 ? "Aucun grimpeur actif pour l'instant" : `${j.score} points sur un palier de ${j.palier}, maximum ${maxi}`);
+  }
+}
 function majJauge(j){
   const g = $("jauge"); if (!g || !j) return;
   g.classList.toggle("ok", j.pleine);
   const bloc = g.closest(".jauge-bloc"); if (bloc) bloc.dataset.vide = j.actifs === 0 ? "1" : "0";
-  texte(document.querySelector('[data-j="resume"]'), j.actifs === 0 ? "Aucun grimpeur actif" : `${j.score} / ${j.palier} points`);
+  majBarre(j);
   texte(g.querySelector('[data-j="score"]'), String(j.score));
   const manque = Math.max(0, j.palier - j.score), m = g.querySelector('[data-j="manque"]');
   if (m){
@@ -221,19 +242,9 @@ function filtrer(){
     }
     li.hidden = !voir;
   });
-  // Un repère suit son donjon : visible seulement si le dépliant l'est.
-  document.querySelectorAll("#liste li[data-repere]").forEach(r => { r.hidden = !!$("donjon-" + r.dataset.repere)?.hidden; });
   let n = 0;
-  document.querySelectorAll("#liste .bloc").forEach(b => { const v = !!b.querySelector("li[data-cats]:not([hidden]), li[data-repere]:not([hidden])"); b.hidden = !v; if (v) n++; });
+  document.querySelectorAll("#liste .bloc").forEach(b => { const v = !!b.querySelector("li[data-cats]:not([hidden])"); b.hidden = !v; if (v) n++; });
   const vide = $("filtreVide"); if (vide) vide.hidden = n > 0;
-}
-/* Le repère du fil du guide : fait défiler jusqu'au dépliant du donjon et l'ouvre. */
-function allerAuDonjon(id){
-  const li = $("donjon-" + id); if (!li || li.hidden) return;
-  const det = li.querySelector("details"); if (det) det.open = true;
-  const calme = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  li.scrollIntoView({behavior: calme ? "auto" : "smooth", block: "start"});
-  const sum = det?.querySelector("summary"); if (sum) sum.focus({preventScroll: true});
 }
 function initFiltre(){
   const f = $("filtre"); if (!f) return;
@@ -346,8 +357,6 @@ document.addEventListener("click", e => {
   }
   const tout = e.target.closest("[data-donjon-tout]");
   if (tout){ toutLeDonjon(tout); return; }
-  const vers = e.target.closest("a[data-vers-donjon]");
-  if (vers && !e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0){ e.preventDefault(); allerAuDonjon(vers.dataset.versDonjon); return; }
   const cp = e.target.closest("[data-copier]");
   if (cp){
     const t = cp.dataset.copier, avant = cp.textContent;
@@ -357,13 +366,6 @@ document.addEventListener("click", e => {
   }
 });
 
-/* =================== En-tête d'étage : ouvert ou fermé, mémorisé =================== */
-function initEntete(){
-  const d = $("enteteEtage"); if (!d) return;
-  try{ d.open = localStorage.getItem("epreuve.enteteEtage") === "1"; }catch(e){ /* stockage indisponible : fermé */ }
-  d.addEventListener("toggle", () => { try{ localStorage.setItem("epreuve.enteteEtage", d.open ? "1" : "0"); }catch(e){ /* sans mémoire */ } });
-}
-initEntete();
 
 /* =================== Décor : étoiles, poussières, image d'ambiance =================== */
 function ambiance(url){

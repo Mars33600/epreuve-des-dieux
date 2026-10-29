@@ -78,6 +78,13 @@ def pct(faits: int, total: int) -> str:
     return f"p-{min(100, max(0, round(faits / total * 20) * 5))}"
 
 
+def pct1(valeur: int, total: int) -> str:
+    """Classe CSS « q-37 » (au pour cent près) : la position d'un remplissage ou du trait de palier."""
+    if total <= 0:
+        return "q-0"
+    return f"q-{min(100, max(0, round(valeur / total * 100)))}"
+
+
 def cle(ref: ElementRef) -> str:
     return f"{ref.type}:{ref.id}"
 
@@ -86,6 +93,7 @@ def cle(ref: ElementRef) -> str:
 class LigneDonjon:
     donjon: Donjon
     cases: tuple[CaseSucces, ...]
+    apres: Quete | None = None  # la quête qui précède le donjon dans le guide : « moment conseillé »
     type: str = "donjon"
 
 
@@ -96,17 +104,9 @@ class LigneQuete:
 
 
 @dataclass
-class LigneRepere:
-    """Dans le fil du guide : « c'est le moment de faire ce donjon ». Le donjon lui-même est dans la section
-    « Donjons de l'étage », en tête."""
-    donjon: Donjon
-    type: str = "repere"
-
-
-@dataclass
 class Bloc:
     nom: str | None
-    lignes: list[LigneDonjon | LigneQuete | LigneRepere] = field(default_factory=list)
+    lignes: list[LigneDonjon | LigneQuete] = field(default_factory=list)
     donjons: bool = False
 
 
@@ -123,20 +123,25 @@ def avec_article(nom: str) -> str:
     return f"le {nom}" if premier in _MASCULINS else f"la {nom}"
 
 
+def quete_avant(donjon: Donjon, quetes: Iterable[Quete]) -> Quete | None:
+    """La dernière quête du même bloc qui précède le donjon dans l'ordre du guide Duffus, s'il y en a une."""
+    if donjon.bloc is None:
+        return None
+    avant = [q for q in quetes if q.bloc == donjon.bloc and q.ordre < donjon.ordre]
+    return max(avant, key=lambda q: (q.ordre, q.id), default=None)
+
+
 def blocs_du_guide(contenu: ContenuEtage) -> list[Bloc]:
-    """En tête, tous les donjons de l'étage, chacun dans son dépliant ; puis le fil du guide, où un donjon n'est
-    plus qu'un repère à sa place (les donjons sans bloc n'ont pas de repère)."""
+    """En tête, tous les donjons de l'étage, chacun dans son dépliant (avec le « moment conseillé » : après quelle
+    quête le faire) ; puis le fil du guide, qui ne contient que des quêtes."""
     ordonnes = sorted(contenu.donjons, key=lambda d: (d.ordre, d.id))
-    tete = Bloc(NOM_BLOC_DONJONS, [LigneDonjon(d, contenu.cases_du_donjon(d.id)) for d in ordonnes], donjons=True)
-    par_bloc: dict[str, list[tuple[int, int, LigneQuete | LigneRepere]]] = {}
+    tete = Bloc(NOM_BLOC_DONJONS, [LigneDonjon(d, contenu.cases_du_donjon(d.id), quete_avant(d, contenu.quetes))
+                                   for d in ordonnes], donjons=True)
+    par_bloc: dict[str, list[tuple[int, LigneQuete]]] = {}
     for q in contenu.quetes:
-        par_bloc.setdefault(q.bloc, []).append((q.ordre, 1, LigneQuete(q)))
-    for d in contenu.donjons:
-        if d.bloc is not None:
-            par_bloc.setdefault(d.bloc, []).append((d.ordre, 0, LigneRepere(d)))
-    classes = sorted(par_bloc.items(), key=lambda kv: min(o for o, _, _ in kv[1]))
-    blocs = [Bloc(nom, [ligne for _, _, ligne in sorted(lignes, key=lambda t: (t[0], t[1]))])
-             for nom, lignes in classes]
+        par_bloc.setdefault(q.bloc, []).append((q.ordre, LigneQuete(q)))
+    classes = sorted(par_bloc.items(), key=lambda kv: min(o for o, _ in kv[1]))
+    blocs = [Bloc(nom, [ligne for _, ligne in sorted(lignes, key=lambda t: t[0])]) for nom, lignes in classes]
     return ([tete] if tete.lignes else []) + blocs
 
 
@@ -163,6 +168,19 @@ class VueEtage:
 
     def avancement(self, grimpeur_id: int | None) -> tuple[int, int]:
         return avancement(self.contenu, self.coches_de(grimpeur_id))
+
+    @property
+    def nb_principales(self) -> int:
+        return sum(1 for q in self.contenu.quetes if q.nature == "principale")
+
+    @property
+    def nb_secondaires(self) -> int:
+        return len(self.contenu.quetes) - self.nb_principales
+
+    def grimpeurs_par_statut(self, statut: str) -> list[tuple[Grimpeur, int]]:
+        """(grimpeur, points sur cet étage), du plus avancé au moins avancé, puis par pseudo."""
+        lignes = [(g, self.points(g.id)) for g in self.grimpeurs if g.statut == statut]
+        return sorted(lignes, key=lambda t: (-t[1], t[0].pseudo.lower()))
 
     def blocs(self) -> list[Bloc]:
         return blocs_du_guide(self.contenu)

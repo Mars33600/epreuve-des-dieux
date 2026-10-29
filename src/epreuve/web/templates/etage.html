@@ -1,5 +1,5 @@
 {% extends "site.html" %}
-{% from "_macros.html" import jauge_bloc, resume_jauge, liste_etage, filtre, pip %}
+{% from "_macros.html" import jauge_bloc, bandeau_etage, liste_etage, filtre, pip %}
 {% block titre %}{% if etage.nom|lower == "étage " ~ etage.numero %}{{ etage.nom }}{% else %}Étage {{ etage.numero }} · {{ etage.nom }}{% endif %} · L'Épreuve des Dieux{% endblock %}
 {% block page %}
 <div class="layout">
@@ -14,16 +14,25 @@
     </nav>
   </aside>
   <main>
-    <details class="card bloc-etage" id="enteteEtage" aria-labelledby="floorTitle">
-      <summary>
-        <span class="eyebrow">Niveaux {{ etage.niveau_min }} à {{ etage.niveau_max }}{% if etage.statut == "termine" %} · terminé{% elif etage.statut == "scelle" %} · scellé (vue admin){% endif %}</span>
-        <h2 id="floorTitle">{% if etage.nom|lower == "étage " ~ etage.numero %}{{ etage.nom }}{% else %}Étage {{ etage.numero }} · {{ etage.nom }}{% endif %}</h2>
-        {% if etage.statut == "ouvert" %}{{ resume_jauge(jauge) }}{% endif %}
-      </summary>
-      <div class="facts"><span>Level cap <b class="num">{{ etage.level_cap }}</b></span><span><b class="num">{{ vue.contenu.donjons|length }}</b> donjons</span><span><b class="num">{{ vue.contenu.quetes|length }}</b> quêtes</span></div>
+    {{ bandeau_etage(etage, vue, jauge,
+         "Niveaux " ~ etage.niveau_min ~ " à " ~ etage.niveau_max ~ (" · terminé" if etage.statut == "termine" else (" · scellé (vue admin)" if etage.statut == "scelle" else "")),
+         etage.nom if etage.nom|lower == "étage " ~ etage.numero else "Étage " ~ etage.numero ~ " · " ~ etage.nom) }}
+    <section class="card regle-etage">
       <p class="how">Entre grimpeurs, <b>sans dépasser le cap</b> de niveau {{ etage.level_cap }}, <b>sans PL</b>. Chaque catégorie terminée en entier rapporte un point. {{ formule }}.</p>
-      {% if bilan %}<p class="note">Bilan figé le {{ bilan.fige_le|date_paris }} : score {{ bilan.score }} sur un palier de {{ bilan.palier }}, {{ bilan.actifs }} grimpeurs actifs.{% if bilan.force %} Ouverture forcée par un admin.{% endif %} Cocher ici complète ta fiche sans changer ce bilan.</p>{% endif %}
+      {% if bilan %}<p class="note">Bilan figé le {{ bilan.fige_le|date_paris }} : score {{ bilan.score }} sur un palier de {{ bilan.palier }}, {{ bilan.actifs }} grimpeur{{ "s" if bilan.actifs > 1 }} actif{{ "s" if bilan.actifs > 1 }}.{% if bilan.force %} Ouverture forcée par un admin.{% endif %} Cocher ici complète ta fiche sans changer ce bilan.</p>{% endif %}
       {% if etage.statut == "ouvert" %}{{ jauge_bloc(jauge, encoches, formule, texte_jauge, verdict_plein, verdict_pas_plein) }}{% endif %}
+    </section>
+
+    <details class="card actifs-etage" id="actifsEtage">
+      <summary><span>Grimpeurs actifs ({{ actifs_liste|length }})</span></summary>
+      {% if actifs_liste %}
+      <ul class="roles">{% for g, pts in actifs_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / 4</b></li>{% endfor %}</ul>
+      {% else %}<p class="muted">Aucun grimpeur actif pour l'instant.</p>{% endif %}
+      {% if pauses_liste %}
+      <h3>En pause ({{ pauses_liste|length }})</h3>
+      <p class="muted">Ils ne comptent pas dans le palier ; leurs points reviendront à leur réintégration.</p>
+      <ul class="roles pause">{% for g, pts in pauses_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / 4</b></li>{% endfor %}</ul>
+      {% endif %}
     </details>
 
     {% if cible %}

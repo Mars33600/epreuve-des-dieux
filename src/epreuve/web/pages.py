@@ -68,9 +68,13 @@ def peut_cocher_soi(v: Visiteur, etage: Etage, regles) -> bool:
 def contexte_etage(request: Request, vue: VueEtage) -> dict:
     s = _s(request)
     plein, pas_plein = verdicts(vue.etage, s.horloge())
+    actifs_points = vue.grimpeurs_par_statut("actif")
+    pauses_points = vue.grimpeurs_par_statut("pause")
     return {"vue": vue, "jauge": vue.jauge, "encoches": encoches(vue.jauge),
             "formule": formule_palier(vue.jauge, s.regles), "texte_jauge": texte_jauge(vue.jauge),
-            "verdict_plein": plein, "verdict_pas_plein": pas_plein}
+            "verdict_plein": plein, "verdict_pas_plein": pas_plein,
+            "actifs_points": actifs_points, "pauses_points": pauses_points,
+            "actifs_liste": [g for g, _ in actifs_points], "pauses_liste": [g for g, _ in pauses_points]}
 
 
 async def tour(request: Request, v: Visiteur):

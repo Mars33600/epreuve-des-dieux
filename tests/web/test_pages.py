@@ -218,10 +218,13 @@ def test_liste_dans_l_ordre_du_guide_avec_badges():
                                       "Le Vieux Puits")]
     assert ordre == sorted(ordre)
     assert liste.count("<details") == 3
-    repere = re.search(r'<li class="repere" data-repere="2">.*?</li>', liste, re.S).group(0)
-    assert "C'est le moment de faire la Crypte de Kardorim" in repere and 'href="#donjon-2"' in repere
-    assert liste.index("<h3>Incarnam</h3>") < liste.index(repere) < liste.index("Le Bouftou égaré")
-    assert "<details" not in repere
+    # Plus de repère « C'est le moment de faire… » dans le fil : ce n'est pas une quête.
+    assert "C'est le moment" not in html and 'class="repere"' not in html
+    # Le « moment conseillé » est dans le dépliant du donjon, avec un lien vers la quête qui le précède.
+    crypte = re.search(r'<li id="donjon-2".*?</li>\s*<li id="donjon-3"', liste, re.S).group(0)
+    assert "Moment conseillé : après la quête « <a href=\"/etages/0/quetes/106\"" in crypte
+    assert "Lettres pour Incarnam</a> »" in crypte
+    assert "Moment conseillé" not in re.search(r'<li id="donjon-1".*?</li>', liste, re.S).group(0)  # sans bloc
     # Badges lisibles sans la couleur : texte et icône.
     assert liste.count('<span class="badge princ"><svg') == 4 and liste.count(">Principale</span>") == 4
     assert liste.count('<span class="badge second"><svg') == 5 and liste.count(">Secondaire</span>") == 5
@@ -611,12 +614,12 @@ def _jauge_rendue(actifs: int) -> str:
     j = EtatJauge(0, 2 * actifs, False, actifs, 0, 4, {})
     macros = creer_gabarits().env.get_template("_macros.html").module
     jauge = macros.jauge_bloc(j, encoches(j), "Palier = 2 × 0 grimpeur actif", "t", "plein", "pas plein")
-    return macros.resume_jauge(j) + jauge
+    return macros.barre_progression(j) + jauge
 
 
 def test_jauge_sans_grimpeur_actif_etat_vide_clair():
     html = _jauge_rendue(0)
-    assert 'data-vide="1"' in html and ">Aucun grimpeur actif</span>" in html
+    assert 'data-vide="1"' in html and "Aucun grimpeur actif pour l'instant</p>" in html
     assert "la jauge démarrera avec les premières fiches" in html
     assert "0 / 0 points" not in html.split("data-j-vide")[0]  # le résumé du bandeau n'affiche pas « 0 / 0 »
     # Le chiffrage creux reste dans la page (le script le montre dès qu'un grimpeur devient actif) mais masqué.
@@ -625,17 +628,63 @@ def test_jauge_sans_grimpeur_actif_etat_vide_clair():
 
 def test_jauge_avec_actifs_affiche_le_resume_et_pas_l_etat_vide():
     html = _jauge_rendue(12)
-    assert 'data-vide="0"' in html and ">0 / 24 points</span>" in html
+    assert 'data-vide="0"' in html and ">0 / 24 points</strong>" in html and "Il manque 24 points" in html
 
 
-def test_entete_etage_en_depliant_un_seul_libelle():
+def test_bandeau_etage_sans_depliant_avec_barre_et_faits():
     c = monde().connecter(ID_BRINDILLE)
     html = c.get("/etages/0").text
-    entete = html.split('id="enteteEtage"')[1].split("</summary>")[0]
-    assert "<details" in html.split('id="enteteEtage"')[0][-60:] and "Niveaux 1 à 20" in entete
-    assert entete.count("Étage 0") == 1 and 'data-j="resume"' in entete
-    tour = c.get("/").text.split('id="enteteEtage"')[1].split("</summary>")[0]
-    assert "Étage en cours" in tour and 'data-j="resume"' in tour
+    bandeau = html.split('id="enteteEtage"')[1].split("</section>")[0]
+    assert "<details" not in html.split('id="enteteEtage"')[0][-60:] and "Niveaux 1 à 20" in bandeau
+    assert bandeau.count("Étage 0") == 1
+    assert '<b class="num">3</b> donjons' in bandeau and '<b class="num">4</b> quêtes principales' in bandeau
+    assert '<b class="num">5</b> quêtes secondaires' in bandeau
+    assert 'role="progressbar"' in bandeau and "pg-palier" in bandeau and ">palier</small>" in bandeau
+    assert re.search(r'data-pg="score">\d+ / \d+ points</strong>', bandeau) and "Il manque" in bandeau
+    tour = c.get("/").text.split('id="enteteEtage"')[1].split("</section>")[0]
+    assert "Étage en cours" in tour and 'role="progressbar"' in tour and "<details" not in tour
+
+
+def test_bandeau_etage_vide_sans_grimpeur_actif():
+    m = monde()
+    for g in m.depot._grimpeurs.values():
+        m.depot._grimpeurs[g.id] = replace(g, statut="pause")
+    html = m.connecter(ID_MARCEAU).get("/etages/0").text
+    bandeau = html.split('id="enteteEtage"')[1].split("</section>")[0]
+    assert 'data-vide="1"' in bandeau and "Aucun grimpeur actif pour l&#39;instant" in bandeau or \
+        "Aucun grimpeur actif pour l'instant" in bandeau
+    assert 'aria-valuemax="0"' in bandeau and "q-0" in bandeau
+    tour = m.connecter(ID_MARCEAU).get("/").text
+    gradin = tour[tour.index("gradin-jauge"):tour.index('<div class="pyr-brume"')]
+    assert "sans-actif" in gradin and "ep-palier" not in gradin and "Aucun grimpeur actif pour l'instant" in gradin
+
+
+def test_gradin_courant_est_une_barre_avec_infobulle_et_pseudos():
+    tour = monde().connecter(ID_BRINDILLE).get("/").text
+    gradin = tour[tour.index("gradin-jauge"):tour.index('<div class="pyr-brume"')]
+    assert 'role="progressbar"' in gradin and 'tabindex="0"' in gradin and 'aria-describedby="infobulle-jauge"' in gradin
+    assert re.search(r'aria-valuemin="0" aria-valuemax="(\d+)" aria-valuenow="\d+"', gradin)
+    assert "ep-palier" in gradin and ">palier</small>" in gradin and 'role="tooltip" id="infobulle-jauge"' in gradin
+    assert re.search(r'<span class="ep-score">\d+ / \d+</span>', gradin)
+    for pseudo in ("Brindille", "Sélénith"):
+        assert f'<span class="pseudo">{pseudo}</span>' in gradin
+    assert "Ombrevive" in gradin and "pseudo pause" in gradin and "Fourbe" not in gradin  # pause à part, exclu absent
+
+
+def test_phrase_d_accueil():
+    tour = monde().connecter(ID_BRINDILLE).get("/").text
+    assert ("Plus on la gravit, plus elle s'élève. Nul n'a vu son sommet&nbsp;: seules s'éveillent les marches que la "
+            "guilde a méritées. Les autres dorment dans la brume, "
+            "et attendent ceux qui oseront monter ensemble.") in tour
+    assert "Nul ne connaît la hauteur" not in tour
+
+
+def test_page_etage_liste_des_grimpeurs_actifs_et_en_pause():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
+    bloc = html.split('id="actifsEtage"')[1].split("</details>")[0]
+    assert re.search(r"Grimpeurs actifs \(\d+\)", bloc) and "En pause (2)" in bloc
+    assert bloc.index("Brindille") < bloc.index("En pause") < bloc.index("Ombrevive")
+    assert re.search(r'Sélénith</span><b class="num">\d / 4</b>', bloc)
 
 
 def test_photo_de_fond_sur_chaque_page_jamais_un_etage_scelle():
