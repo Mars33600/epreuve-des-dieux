@@ -1,0 +1,259 @@
+{
+ "depart": [
+  {
+   "mapId": 99092993,
+   "npcId": 447
+  }
+ ],
+ "etapes": [
+  {
+   "description": "Dans ce sous-sol, comme dans la plupart des sous-sols des bibliothèques, vous trouverez toutes sortes de livres ainsi que des toiles d'araknes... mais l'atmosphère qui règne en ces lieux est quelque peu mystérieuse...",
+   "id": 74,
+   "nom": "Le sous-sol de la Bibliothèque",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      55374,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Découvrir la carte : Souterrain de la Bibliothèque"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      447,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,447}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Une porte dérobée dans la montagne donne accès à un souterrain, encore faut-il trouver comment...",
+   "id": 80,
+   "nom": "Souterrain ténébreux",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56139,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      2
+     ],
+     "texte": "Découvrir la carte : Souterrain ténébreux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      447,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,447}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Une dalle perchée en haut d'une montagne et une porte dérobée... il va falloir trouver des volontaires pour arriver au bout de cette galerie...",
+   "id": 81,
+   "nom": "Souterrain mystérieux",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56089,
+      0,
+      0
+     ],
+     "position": [
+      -2,
+      -6
+     ],
+     "texte": "Découvrir la carte : Souterrain mystérieux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      447,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,447}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Gare au Dragoeuf ! Il va falloir traverser leur territoire pour accéder à cette nouvelle grotte...",
+   "id": 163,
+   "nom": "Souterrain impénétrable",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56146,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      24
+     ],
+     "texte": "Découvrir la carte : Souterrain impénétrable"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      447,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,447}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Ce souterrain risque de vous faire perdre patience !",
+   "id": 164,
+   "nom": "Souterrain hasardeux",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      560800,
+      0,
+      0
+     ],
+     "position": [
+      -6,
+      5
+     ],
+     "texte": "Découvrir la carte : Souterrain hasardeux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      447,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,447}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [],
+     "titlesReward": []
+    }
+   ]
+  },
+  {
+   "description": "Seul huit courageux aventuriers seront capables de venir à bout de ce souterrain !",
+   "id": 211,
+   "nom": "Souterrain rigoureux",
+   "objectifs": [
+    {
+     "genre": "QuestObjectiveDiscoverMapData",
+     "parametres": [
+      56228,
+      0,
+      0
+     ],
+     "position": [
+      10,
+      -19
+     ],
+     "texte": "Découvrir la carte : Souterrain rigoureux"
+    },
+    {
+     "genre": "QuestObjectiveGoToNpcData",
+     "parametres": [
+      447,
+      0,
+      0
+     ],
+     "position": [
+      4,
+      1
+     ],
+     "texte": "Aller voir {npc,447}"
+    }
+   ],
+   "recompenses": [
+    {
+     "emotesReward": [],
+     "itemsReward": [
+      [
+       8394,
+       1
+      ]
+     ],
+     "titlesReward": []
+    }
+   ]
+  }
+ ],
+ "id": 26,
+ "nom": "Manuscrit de Terra Cogita",
+ "objets": [],
+ "prerequis": []
+}

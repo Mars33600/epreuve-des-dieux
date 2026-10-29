@@ -41,7 +41,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] Fiches joueurs visibles par tous
 - [x] Filtre « qui n'a pas fait… ? » par quête ou succès
 - [x] Un seul guide avec code couleur et filtre principales / secondaires
-- [x] Fiche de quête complète comme sur Duffus (étapes, besoins, prérequis, succès lié)
+- [x] Fiche de quête complète comme sur Duffus : départ (zone, position, PNJ), étapes détaillées avec suivi étape par étape, besoins, prérequis, gains (kamas compris), succès lié, qui l'a faite ou non
 - [x] Onglet de validation des succès de donjon, dans la progression du tableau de bord
 - [x] Tour en pyramide et ambiance de la maquette
 - [x] Accès réservé aux participants

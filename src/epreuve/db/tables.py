@@ -151,6 +151,14 @@ coche_quete = Table(
     Column("cochee_par", BigInteger),
 )
 
+suivi_etape = Table(
+    "suivi_etape", metadata,
+    Column("grimpeur_id", Integer, ForeignKey("grimpeur.id"), primary_key=True),
+    Column("quete_id", Integer, ForeignKey("quete.id"), primary_key=True),
+    Column("ordre", Integer, primary_key=True),
+    Column("cochee_le", Horodatage, nullable=False),
+)
+
 bilan_etage = Table(
     "bilan_etage", metadata,
     Column("etage_id", Integer, ForeignKey("etage.id"), primary_key=True),

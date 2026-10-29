@@ -38,6 +38,7 @@ TABLES: dict[str, Table] = {t.nom: t for t in (
     Table("guide_ranges", "guide_ranges", s.GuideRange),
     Table("quest_list", "quest_list", s.QuestListe),
     Table("quest_prereqs", "quest_pages", s.QuestePrerequis, "slug"),
+    Table("quest_quick", "quest_pages", s.QuestQuick, "slug"),
     Table("quest_pages", "quest_pages", s.QuestePage, "slug"),
     Table("dungeon_pages", "dungeon_pages", s.DonjonPage),
     Table("achievements", "achievements", s.Succes),

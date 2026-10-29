@@ -5,6 +5,7 @@ Critères 11 à 14, 18, 28 bis et 37.
 
 from __future__ import annotations
 
+import re
 from dataclasses import replace
 
 import pytest
@@ -260,3 +261,46 @@ def test_manque_requete_invalide_et_etage_scelle():
     assert c.get("/api/etages/0/manque?type=autre&id=1").status_code == 422
     assert c.get("/api/etages/1/manque?type=categorie&id=donjons").status_code == 404
     assert c.get("/api/etages/99/manque?type=categorie&id=donjons").status_code == 404
+
+
+# --- Lot F4 : le suivi étape par étape ------------------------------------------------------------------------
+
+
+def etape(c, t, **corps):
+    return c.post("/api/etapes", json=corps, headers={"X-CSRF-Token": t, "Origin": SITE})
+
+
+def test_suivi_des_etapes_perso_sans_cocher_la_quete():
+    m, c, t = connecte(ID_BRINDILLE)
+    fiche = m.depot._fiches[102]
+    derniere = len(fiche.etapes)
+    html = c.get("/etages/0/quetes/102").text
+    assert f'data-etape="{derniere}"' in html and 'data-etape="1"' in html  # des cases d'étape pour ce grimpeur
+    avant = c.get("/etages/0/quetes/102").text
+    r = etape(c, t, quete_id=102, ordre=derniere, faite=True)
+    assert r.status_code == 200 and r.json() == {"ok": True, "faites": [derniere], "total": derniere}
+    assert r.headers["cache-control"] == "no-store"
+    apres = c.get("/etages/0/quetes/102").text
+    assert re.search(rf'data-etape="{derniere}"[^>]*checked', apres)
+    # La dernière étape ne coche PAS la quête : la case « Faite » est inchangée.
+    assert re.search(r'data-ref="quete:102"(?: checked)?>', avant)
+    assert (re.search(r'data-ref="quete:102"[^>]*checked', avant) is None) == (
+        re.search(r'data-ref="quete:102"[^>]*checked', apres) is None)
+    assert etape(c, t, quete_id=102, ordre=derniere, faite=False).json()["faites"] == []
+
+
+def test_suivi_des_etapes_refus():
+    m, c, t = connecte(ID_BRINDILLE)
+    assert etape(c, t, quete_id=102, ordre=99, faite=True).status_code == 404       # étape inconnue
+    assert etape(c, t, quete_id=201, ordre=1, faite=True).status_code == 404        # quête d'un étage scellé
+    assert etape(c, t, quete_id="102", ordre=1, faite=True).status_code == 422      # corps invalide
+    assert m.client().post("/api/etapes", json={"quete_id": 102, "ordre": 1, "faite": True},
+                           headers={"Origin": SITE}).status_code in (401, 403)      # sans session
+    _, c2, t2 = connecte(ID_FOURBE)
+    assert etape(c2, t2, quete_id=102, ordre=1, faite=True).status_code == 403      # exclu
+
+
+def test_pas_de_cases_d_etape_sans_fiche_ni_en_lecture_seule():
+    m = monde()
+    html = m.connecter(ID_MARCEAU).get("/etages/0/quetes/102").text  # admin sans fiche
+    assert "data-etape=" not in html

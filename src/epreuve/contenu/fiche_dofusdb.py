@@ -19,11 +19,14 @@ from html import escape
 
 from epreuve.contenu.fiche_duffus import nettoyer_fiche
 from epreuve.db.depot import ContenuFiche, PrerequisBrut
-from epreuve.domaine.fiche import Besoin, EtapeFiche, Position
+from epreuve.domaine.fiche import Besoin, EtapeFiche, LigneEtape, Position
 
 _JETON = re.compile(r"\{(npc|monster|item),(\d+)[^}]*\}")
 _COMBAT = {"QuestObjectiveFightMonsterData", "QuestObjectiveMultiFightMonsterData"}
 _APPORTER = "QuestObjectiveBringItemToNpcData"
+_ALLER_VOIR = "QuestObjectiveGoToNpcData"
+_FABRIQUER = "QuestObjectiveCraftItemData"
+_AME = "QuestObjectiveBringSoulToNpcData"
 _GENRE = {"npc": "npcs", "monster": "monsters", "item": "items"}
 
 
@@ -52,19 +55,24 @@ def construire_fiche(q: Mapping, noms: Mapping[str, Mapping[int, str | None]], c
     monstres: dict[str, int] = {}
     objets: dict[str, int] = {}
     recompenses: list[str] = []
+    pnj_depart = None
     for d in q.get("depart") or []:
         xy = cartes.get(d.get("mapId"))
+        pnj = nom("npcs", d["npcId"]) if d.get("npcId") else None
+        if pnj_depart is None:
+            pnj_depart = pnj  # le PNJ s'affiche même si DofusDB ne donne pas les coordonnées de sa carte
         if xy:
-            positions.append(Position(f"Départ : {nom('npcs', d['npcId'])}" if d.get("npcId") else "Départ",
-                                      xy[0], xy[1], None))
+            positions.append(Position(f"Départ : {pnj}" if pnj else "Départ", xy[0], xy[1], None))
     for item_id, qte in q.get("objets") or []:
         objets[nom("items", item_id)] = max(objets.get(nom("items", item_id), 0), int(qte))
     for e in q["etapes"]:
         lignes = []
+        detail = []
         for o in e["objectifs"]:
             t = texte(o["texte"])
             if t:
                 lignes.append(t)
+            detail.append(_ligne(o, t, nom))
             if o["position"]:
                 positions.append(Position(t or "Position", o["position"][0], o["position"][1], None))
             if o["genre"] in _COMBAT and o["parametres"][0]:
@@ -74,7 +82,8 @@ def construire_fiche(q: Mapping, noms: Mapping[str, Mapping[int, str | None]], c
                 n = nom("items", o["parametres"][1])
                 objets[n] = max(objets.get(n, 0), int(o["parametres"][2]), 1)
         description = nettoyer_fiche(escape(e["description"]), {}) if e["description"].strip() else ""
-        etapes.append(EtapeFiche(len(etapes) + 1, e["nom"].strip() or "Étape", description, tuple(lignes)))
+        etapes.append(EtapeFiche(len(etapes) + 1, e["nom"].strip() or "Étape", description, tuple(lignes),
+                                 lignes=tuple(detail)))
         for r in e["recompenses"]:
             recompenses += [f"{qte} × {nom('items', i)}" for i, qte in r["itemsReward"]]
     vus: set[tuple] = set()
@@ -83,9 +92,36 @@ def construire_fiche(q: Mapping, noms: Mapping[str, Mapping[int, str | None]], c
                  for i in q.get("prerequis") or [] if (n := nom_quete(i))]
     return ContenuFiche(
         prerequis=prerequis, etapes=etapes, objets=[Besoin(n, c) for n, c in objets.items()],
-        monstres=[Besoin(n, c) for n, c in monstres.items()], positions=positions, succes_lie=None,
+        monstres=[Besoin(n, c) for n, c in monstres.items()], positions=positions, pnj_depart=pnj_depart,
+        succes_lie=None,
         recompenses=list(dict.fromkeys(recompenses)),
     )  # fmt: skip
+
+
+def _ligne(o: Mapping, texte: str, nom_de: Callable[[str, int], str]) -> LigneEtape:
+    """Un objectif DofusDB → sa ligne détaillée : genre, cible, quantité et position (ce qui manque reste vide).
+    Paramètres selon le type : combat (monstre, nombre), apporter (PNJ, objet, nombre), fabriquer (objet, nombre),
+    âme (PNJ, monstre, nombre), aller voir (PNJ)."""
+    p, g = o["parametres"], o["genre"]
+    xy = o["position"] or (None, None)
+
+    def nom(genre: str, id_: int) -> str | None:
+        n = nom_de(genre, id_)
+        return None if n == "(inconnu)" else n
+
+    if g in _COMBAT:
+        genre, cible, qte = "monstre", nom("monsters", p[0]) if p[0] else None, max(int(p[1]), 1)
+    elif g == _APPORTER:
+        genre, cible, qte = "objet", nom("items", p[1]) if p[1] else None, max(int(p[2]), 1)
+    elif g == _FABRIQUER:
+        genre, cible, qte = "objet", nom("items", p[0]) if p[0] else None, max(int(p[1]), 1)
+    elif g == _AME:
+        genre, cible, qte = "monstre", nom("monsters", p[1]) if p[1] else None, max(int(p[2]), 1)
+    elif g == _ALLER_VOIR:
+        genre, cible, qte = "pnj", nom("npcs", p[0]) if p[0] else None, None
+    else:
+        genre, cible, qte = "texte", None, None
+    return LigneEtape(genre, texte, cible, qte, xy[0], xy[1])
 
 
 def ids_utiles(quetes: Iterable[Mapping]) -> tuple[dict[str, set[int]], set[int]]:

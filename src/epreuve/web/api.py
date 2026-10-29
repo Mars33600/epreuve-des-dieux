@@ -1,6 +1,7 @@
 """L'API JSON consommée par `app.js` (LOTS, lot B, « API JSON » : forme et codes figés).
 
     POST /api/coches                         cocher ou décocher (soi-même ; un admin pour un autre, avec motif)
+    POST /api/etapes                         cocher ou décocher une étape d'une quête (suivi perso, sans points)
     GET  /api/etages/{n}/manque?type=&id=    « qui ne l'a pas fait ? » pour un élément ou une catégorie
 
 Erreurs : `{"ok": false, "message": "…"}` en français. 401 sans session ; 403 CSRF, Origin, cible non
@@ -113,6 +114,42 @@ async def coches(request: Request):
         "jauge": jauge_json(vue.jauge),
         "compteurs": {cle(r): vue.compteurs.get(cle(r), 0) for r in changes},
     }, headers={"Cache-Control": "no-store"})
+
+
+@routeur.post("/api/etapes")
+async def etapes(request: Request):
+    """Le suivi étape par étape d'une quête : le grimpeur connecté, sur SA fiche seulement. Ne coche jamais la
+    quête (la case « Faite » reste seule à compter), même pour la dernière étape."""
+    v = await verifier_ecriture(request)
+    corps = await lire_corps_etape(request)
+    v = await exiger_grimpeur(request)
+    s = request.app.state
+    g = v.grimpeur
+    if g is None:
+        raise Refus(409, "Crée d'abord ta fiche pour suivre les étapes.")
+    if g.statut == "exclu":
+        raise Refus(403, MESSAGE_SUSPENDU)
+    if g.statut == "pause" and not s.regles.pause_peut_cocher:
+        raise Refus(403, "Cette fiche ne peut pas être modifiée pour l'instant.")
+    await etage_de_l_element(s.depot, "quete", corps["quete_id"])
+    fiche = await s.depot.fiche_quete(corps["quete_id"])
+    if fiche is None or corps["ordre"] not in {e.ordre for e in fiche.etapes}:
+        raise Refus(404, INTROUVABLE)
+    await s.depot.suivre_etape(g.id, corps["quete_id"], corps["ordre"], corps["faite"], s.horloge())
+    faites = await s.depot.etapes_suivies(g.id, corps["quete_id"])
+    return JSONResponse({"ok": True, "faites": sorted(faites), "total": len(fiche.etapes)},
+                        headers={"Cache-Control": "no-store"})
+
+
+async def lire_corps_etape(request: Request) -> dict:
+    try:
+        corps = json.loads(await request.body())
+    except (ValueError, UnicodeDecodeError) as e:
+        raise _corps_invalide() from e
+    if (not isinstance(corps, dict) or type(corps.get("quete_id")) is not int or type(corps.get("ordre")) is not int
+            or type(corps.get("faite")) is not bool):
+        raise _corps_invalide()
+    return {"quete_id": corps["quete_id"], "ordre": corps["ordre"], "faite": corps["faite"]}
 
 
 @routeur.get("/api/etages/{numero}/manque")

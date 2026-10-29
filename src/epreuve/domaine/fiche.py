@@ -17,19 +17,34 @@ SourceFiche = Literal["duffus", "duffus+dofusdb", "dofusdb"]
 
 
 @dataclass(frozen=True)
-class EtapeFiche:
-    ordre: int
-    titre: str
-    texte_html: str  # déjà nettoyé par contenu.construire.nettoyer_fiche
-    objectifs: tuple[str, ...] = ()
-
-
-@dataclass(frozen=True)
 class Position:
     libelle: str  # « PNJ Ganymède »
     x: int
     y: int
     zone: str | None = None  # « Incarnam »
+
+
+@dataclass(frozen=True)
+class LigneEtape:
+    """Un objectif détaillé d'une étape : ce qu'il faut faire, où, quoi et combien. Tout ce que la source ne
+    donne pas reste vide."""
+
+    genre: str  # « monstre », « objet », « pnj » ou « texte »
+    texte: str = ""  # la phrase de l'objectif quand la source en donne une
+    nom: str | None = None  # le monstre, l'objet ou le PNJ visé
+    quantite: int | None = None
+    x: int | None = None
+    y: int | None = None
+
+
+@dataclass(frozen=True)
+class EtapeFiche:
+    ordre: int
+    titre: str
+    texte_html: str  # déjà nettoyé par contenu.construire.nettoyer_fiche
+    objectifs: tuple[str, ...] = ()
+    lieux: tuple[Position, ...] = ()  # les positions [x,y] de l'étape, dans l'ordre
+    lignes: tuple[LigneEtape, ...] = ()  # les objectifs détaillés (monstres, objets, PNJ avec quantités)
 
 
 @dataclass(frozen=True)
@@ -70,6 +85,21 @@ class FicheQuete:
     succes_lie: str | None
     recompenses: tuple[str, ...]  # « 1 200 XP », « 300 kamas », « Émote … »
     source: SourceFiche
+    pnj_depart_connu: str | None = None  # le PNJ de départ quand la source le donne sans position
+    infos_rapides: tuple[str, ...] = ()  # « Combats en groupe ×2 », « Donjon : … » (vide pour une fiche DofusDB)
+
+    @property
+    def depart(self) -> Position | None:
+        """L'emplacement de départ : la première position, quand elle est le départ (« Départ : <PNJ> »)."""
+        premiere = self.positions[0] if self.positions else None
+        return premiere if premiere and premiere.libelle.startswith("Départ") else None
+
+    @property
+    def pnj_depart(self) -> str | None:
+        d = self.depart
+        if d and d.libelle.startswith("Départ : "):
+            return d.libelle[len("Départ : "):]
+        return self.pnj_depart_connu
 
     @property
     def complete(self) -> bool:

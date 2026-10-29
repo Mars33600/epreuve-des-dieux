@@ -28,10 +28,12 @@
   </header>
   <div class="qd-body">
     <section class="qd-sec"><h3>En bref</h3>
-      {%- set depart = fiche.positions[0] if fiche and fiche.positions and fiche.positions[0].libelle.startswith("Départ") else none -%}
+      {%- set depart = fiche.depart if fiche else none -%}
       <table class="recap"><tbody>
-        <tr><th scope="row">Zone et position</th><td>{% if depart %}{% if depart.zone %}{{ depart.zone }} {% endif %}<span class="num">[{{ depart.x }},{{ depart.y }}]</span>{% else %}<span class="muted">Non précisée</span>{% endif %}</td></tr>
-        <tr><th scope="row">PNJ de départ</th><td>{% if depart and depart.libelle.startswith("Départ : ") %}{{ depart.libelle[9:] }}{% else %}<span class="muted">Non précisé</span>{% endif %}</td></tr>
+        <tr><th scope="row">Zone</th><td>{% if depart and depart.zone %}{{ depart.zone }}{% else %}<span class="muted">Non précisée</span>{% endif %}</td></tr>
+        <tr><th scope="row">Position de départ</th><td>{% if depart %}<button class="pos-copier" type="button" data-copier="/travel {{ depart.x }},{{ depart.y }}" title="Copier la commande de trajet">[{{ depart.x }},{{ depart.y }}]</button>{% else %}<span class="muted">Non précisée</span>{% endif %}</td></tr>
+        <tr><th scope="row">PNJ de départ</th><td>{% if fiche and fiche.pnj_depart %}{{ fiche.pnj_depart }}{% else %}<span class="muted">Non précisé</span>{% endif %}</td></tr>
+        <tr><th scope="row">Infos rapides</th><td>{% if fiche and fiche.infos_rapides %}<ul class="recap-list">{% for i in fiche.infos_rapides %}<li>{{ i }}</li>{% endfor %}</ul>{% else %}<span class="muted">Aucune</span>{% endif %}</td></tr>
         <tr><th scope="row">Niveau</th><td class="num">{{ quete.niveau if quete.niveau is not none else "?" }}</td></tr>
         <tr><th scope="row">Récompenses</th><td>{% if fiche and fiche.recompenses %}<ul class="recap-list">{% for r in fiche.recompenses %}<li>{{ r }}</li>{% endfor %}</ul>{% else %}<span class="muted">Non précisées</span>{% endif %}</td></tr>
         <tr><th scope="row">Prérequis</th><td>{% if fiche and fiche.prerequis %}<ul class="recap-list">
@@ -57,10 +59,26 @@
     {% if fiche %}
     {% if fiche.etapes %}
     <section class="qd-sec"><h3>Étapes</h3>
+      {% if etapes_suivies is not none %}<p class="suivi-note muted">Coche les étapes au fil de ta progression (suivi perso : cela ne coche pas la quête).</p>{% endif %}
       <ol class="steps">
       {%- for e in fiche.etapes %}
-        <li><b>{{ e.titre }}</b><div class="etape-texte">{{ e.texte_html|fiche_propre }}</div>
-          {% if e.objectifs %}<ul class="objectifs">{% for o in e.objectifs %}<li>{{ o }}</li>{% endfor %}</ul>{% endif %}</li>
+        <li data-etape-li="{{ e.ordre }}">
+          {%- if etapes_suivies is not none %}<label class="etape-suivi"><input type="checkbox" data-etape="{{ e.ordre }}" data-quete="{{ quete.id }}"{% if e.ordre in etapes_suivies %} checked{% endif %}> <span class="sr-only">Étape {{ e.ordre }} faite</span></label>{% endif %}
+          <b>{{ e.titre }}</b><div class="etape-texte">{{ e.texte_html|fiche_propre }}</div>
+          {%- if e.lieux %}<p class="etape-lieux">{% for p in e.lieux %}<button class="pos-copier" type="button" data-copier="/travel {{ p.x }},{{ p.y }}" title="Copier la commande de trajet">[{{ p.x }},{{ p.y }}]</button> {% endfor %}</p>{% endif %}
+          {%- if e.lignes %}
+          <ul class="objectifs">
+            {%- for l in e.lignes %}
+            {%- set dans_texte = l.nom and l.texte and l.nom in l.texte %}
+            <li>{% if l.genre != "texte" %}<span class="k">{{ {"monstre": "Monstre", "objet": "Objet", "pnj": "PNJ"}[l.genre] }}</span> {% endif %}
+              {%- if l.texte %}{{ l.texte }}{% endif %}
+              {%- if l.nom and not dans_texte %} {{ l.nom }}{% endif %}
+              {%- if l.quantite and not dans_texte %} <span class="q">×{{ l.quantite }}</span>{% endif %}
+              {%- if l.x is not none and l.y is not none %} <button class="pos-copier" type="button" data-copier="/travel {{ l.x }},{{ l.y }}" title="Copier la commande de trajet">[{{ l.x }},{{ l.y }}]</button>{% endif %}</li>
+            {%- endfor %}
+          </ul>
+          {%- elif e.objectifs %}<ul class="objectifs">{% for o in e.objectifs %}<li>{{ o }}</li>{% endfor %}</ul>{% endif %}
+        </li>
       {%- endfor %}
       </ol>
     </section>

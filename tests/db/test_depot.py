@@ -20,7 +20,7 @@ from epreuve.db.depot import (
     contenu_fiche_json,
 )
 from epreuve.domaine.fiche import Besoin, EtapeFiche, Position, Prerequis
-from epreuve.domaine.modeles import ElementRef, Regles
+from epreuve.domaine.modeles import Coches, ElementRef, Regles
 from epreuve.domaine.ouverture import Bilan
 from tests.fabrique import OUVERTURE, PENDANT, PLANCHER
 
@@ -400,3 +400,19 @@ async def test_journal_filtres(base):
     assert {j.type for j in await base.journal()} == {"liste_ajout", "inscription"}
     assert [j.type for j in await base.journal(grimpeur_id=g.id)] == ["inscription"]
     assert await base.journal(etage_id=1) == [] and len(await base.journal(limite=1)) == 1
+
+
+# --- Lot F4 : le suivi étape par étape -----------------------------------------------------------------------
+
+
+async def test_suivi_des_etapes_ne_coche_jamais_la_quete(base):
+    (g,) = await inscrire(base, 10)
+    await base.suivre_etape(g.id, 1, 1, True, OUVERTURE)
+    await base.suivre_etape(g.id, 1, 2, True, OUVERTURE)
+    await base.suivre_etape(g.id, 1, 2, True, OUVERTURE)  # idempotent
+    assert await base.etapes_suivies(g.id, 1) == frozenset({1, 2})
+    await base.suivre_etape(g.id, 1, 2, False, OUVERTURE)
+    assert await base.etapes_suivies(g.id, 1) == frozenset({1})
+    assert await base.etapes_suivies(g.id, 2) == frozenset()  # par quête
+    contenu = await base.coches_etage(1)
+    assert 1 not in contenu.get(g.id, Coches(g.id)).quetes  # la quête n'est pas cochée, même étape par étape
