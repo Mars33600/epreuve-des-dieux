@@ -6,6 +6,8 @@
 from __future__ import annotations
 
 import math
+from collections import Counter
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -13,11 +15,13 @@ from sqlalchemy import Select, and_, func, select, text
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from epreuve.encyclopedie import tables as t
+from epreuve.encyclopedie.liens import Liens
 from epreuve.encyclopedie.textes import (
     FAMILLES,
     METIERS,
     REPETITIONS,
     EffetLu,
+    cle_recherche,
     conditions_en_clair,
     effets_en_clair,
     icone_objet,
@@ -132,6 +136,39 @@ class DepotEncyclopedie:
                 .where(select(m.c.id).where(m.c.race_id == t.ency_race.c.id).exists())
                 .order_by(t.ency_race.c.nom))).all()
         return [(r.id, r.nom) for r in rangs]
+
+    async def liens(self, noms: Iterable[str] = (), plafond: int | None = None, **ids: Iterable[int]) -> Liens:
+        """Résout les noms cités (et, par `objet=`, `monstre=`…, des identifiants) en fiches de l'encyclopédie.
+
+        Un nom n'est retenu que s'il désigne une seule fiche ; `plafond` écarte les fiches au-dessus du cap de
+        niveau (l'encyclopédie y répond 404 quand elle est verrouillée par étage).
+        """
+        cles = sorted({c for c in (cle_recherche(n) for n in noms) if c})
+        t = self._tables_liens()
+        par_nom: dict[tuple[str, str], int] = {}
+        existants: set[tuple[str, int]] = set()
+        async with self._moteur.connect() as c:
+            for genre, (table, niveau, filtre) in t.items():
+                bornes = [filtre] if filtre is not None else []
+                if plafond is not None and niveau is not None:
+                    bornes.append(niveau <= plafond)
+                if cles:
+                    rangs = (await c.execute(select(table.c.id, table.c.cle_recherche)
+                                             .where(table.c.cle_recherche.in_(cles), *bornes))).all()
+                    comptes = Counter(r.cle_recherche for r in rangs)
+                    par_nom.update({(genre, r.cle_recherche): r.id for r in rangs if comptes[r.cle_recherche] == 1})
+                voulus = sorted(set(ids.get(genre, ())))
+                if voulus:
+                    existants.update((genre, r.id) for r in await c.execute(
+                        select(table.c.id).where(table.c.id.in_(voulus), *bornes)))
+        return Liens(par_nom, frozenset(existants))
+
+    @staticmethod
+    def _tables_liens() -> dict:
+        o, m, p, n, s = t.ency_objet, t.ency_monstre, t.ency_panoplie, t.ency_pnj, t.ency_sort
+        return {"objet": (o, o.c.niveau, None), "monstre": (m, m.c.niveau_min, None),
+                "panoplie": (p, p.c.niveau, None), "pnj": (n, None, n.c.visible.is_(True)),
+                "sort": (s, s.c.niveau_min, None)}
 
     async def _noms(self, table, ids: set[int], plafond: int | None = None) -> dict[int, str]:
         """{id: nom} pour des ids cités par une condition ou un objectif (les absents restent « n°… »)."""

@@ -29,6 +29,7 @@ from epreuve.captures import domaine as d
 from epreuve.captures.catalogue import construire, derniere_aspiration, lire_dossier
 from epreuve.captures.depot import CapturesMemoire, DepotCaptures, ElementInconnu, SourceCaptures
 from epreuve.web.auth import Refus, Visiteur, exiger_grimpeur, verifier_ecriture
+from epreuve.web.liens import liens_pour
 from epreuve.web.rendu import rendre
 
 routeur = APIRouter()
@@ -154,8 +155,10 @@ async def page_archimonstres(request: Request, onglet: str = "archis", q: str = 
     libelles = {"alpha": "A–Z", "etape": "Par étape", "zone": "Par zone", "niveau": "Par niveau"}
     liens_tri = [(t, libelles[t], "/archimonstres?" + urlencode([(k, x) for k, x in {**params, "tri": t}.items() if x]))
                  for t in tris]
+    liens = await liens_pour(request, [i.nom for i in items], v.est_admin,
+                             monstre=[i.monstre_id for i in items if i.monstre_id])
     return await _page(request, "captures/archimonstres.html", {
-        "genre": genre, "items": items, "groupes": groupes, "nombres": nombres, "personnages": persos,
+        "liens": liens, "genre": genre, "items": items, "groupes": groupes, "nombres": nombres, "personnages": persos,
         "visibles": visibles, "progression": d.progression(items, nombres, persos),
         "pierres": d.pierres_a_prevoir(items, nombres, persos), "q": q, "etat": etat, "minimum": minimum,
         "tri": tri, "liens_tri": liens_tri, "panneau": panneau, "peut_suivre": gid is not None,
@@ -236,8 +239,9 @@ async def fiche_avis(request: Request, slug: str):
     captures = await cap.avis_captures(v.grimpeur_id) if v.grimpeur_id else set()
     ont, pas = await _qui(request, "avis", a.id)
     meme_milice = [x for x in d.filtrer_avis(avis, set(), milice=a.milice) if x.id != a.id] if a.milice else []
+    liens = await liens_pour(request, [a.nom], v.est_admin, monstre=[a.monstre_id] if a.monstre_id else [])
     return await _page(request, "captures/avis_fiche.html", {
-        "a": a, "capture": a.id in captures, "ont": ont, "pas": pas, "meme_milice": meme_milice,
+        "liens": liens, "a": a, "capture": a.id in captures, "ont": ont, "pas": pas, "meme_milice": meme_milice,
         "captures": captures, "peut_suivre": v.grimpeur_id is not None,
     })  # fmt: skip
 

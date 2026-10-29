@@ -28,6 +28,11 @@
     return n;
   }
 
+  // Un nom d'objet, de panoplie ou de sort : vrai lien <a href> vers sa fiche d'encyclopédie (jamais dans un bouton).
+  function lienEnc(chemin, id, texte) {
+    return id ? el("a", { classe: "enc", href: "/encyclopedie/" + chemin + "/" + id, texte }) : texte;
+  }
+
   function signe(v) { return (v > 0 ? "+" : "") + v; }
 
   function famille(emplacement) {
@@ -58,7 +63,9 @@
         etat.variantes[e] ? el("span", { classe: "b-var", title: "Variante : " + etat.variantes[e].objet.nom, texte: "⇄" }) : null,
       ]);
       if (modifiable) bouton.addEventListener("click", () => ouvrirChoix(e));
-      ul.append(el("li", { classe: "b-emplacement" }, [bouton]));
+      ul.append(el("li", { classe: "b-emplacement" }, [bouton,
+        o ? el("a", { classe: "enc b-fiche", href: "/encyclopedie/objets/" + o.id, texte: "Fiche",
+          "aria-label": "Fiche de " + o.nom + " dans l'encyclopédie" }) : null]));
     }
   }
 
@@ -226,7 +233,7 @@
     const v = etat.variantes[e], o = etat.objets[e];
     zone.append(el("h3", { classe: "b-surtitre", texte: "Variante" }));
     if (v) {
-      zone.append(el("p", { classe: "b-objet-nom", texte: v.objet.nom + " (niv. " + v.objet.niveau + ")" }));
+      zone.append(el("p", { classe: "b-objet-nom" }, [lienEnc("objets", v.objet.id, v.objet.nom), " (niv. " + v.objet.niveau + ")"]));
       const ecart = ecartCaracs(o ? o.caracs : [], v.objet.caracs);
       zone.append(el("p", { classe: "b-aide", texte: ecart.length ? "Si tu la portes : " + ecart.map(([c, d]) => signe(d) + " " + c).join(" · ") : "Même caractéristiques que l'objet porté." }));
     }
@@ -348,7 +355,7 @@
     if (!d.panoplies.length) zone.append(el("p", { classe: "b-vide", texte: "Aucune panoplie active (il faut au moins 2 objets d'une même panoplie)." }));
     for (const pan of d.panoplies) {
       zone.append(el("div", { classe: "b-panoplie" }, [
-        el("h3", { texte: pan.nom + " (" + pan.nb + "/" + pan.max + ")" }),
+        el("h3", {}, [lienEnc("panoplies", pan.id, pan.nom), " (" + pan.nb + "/" + pan.max + ")"]),
         el("p", { texte: pan.caracs.map(([c, v]) => signe(v) + " " + c).join(" · ") }),
       ]));
     }
@@ -442,7 +449,7 @@
         zone.append(el("li", { classe: "b-sort" }, [
           s.icone ? el("img", { src: s.icone, alt: "", loading: "lazy" }) : el("span"),
           el("div", {}, [
-            el("p", {}, [el("span", { classe: "b-objet-nom", texte: s.nom }), " ",
+            el("p", {}, [el("span", { classe: "b-objet-nom" }, [lienEnc("sorts", s.id, s.nom)]), " ",
               el("span", { classe: "b-objet-meta", texte: "grade " + s.grade + " · " + s.pa + " PA · PO " + s.po[0] + "–" + s.po[1] +
                 (s.cc ? " · critique " + s.taux_critique + " %" : "") })]),
             el("p", { texte: texte(s.normal) || "—" }),
@@ -508,12 +515,12 @@
       zone.hidden = true; $("b-panos-filtres").hidden = false; $("b-panos-liste").hidden = false;
       $("b-panos-plus").hidden = panos.decalage >= panos.total;
     });
-    zone.append(retour, el("h3", { texte: p.nom + " · niv. " + p.niveau }));
+    zone.append(retour, el("h3", {}, [lienEnc("panoplies", p.id, p.nom), " · niv. " + p.niveau]));
     const objets = el("ul", { classe: "b-resultats" });
     for (const o of p.objets) {
       objets.append(el("li", {}, [el("div", { classe: "b-objet" }, [
         o.icone ? el("img", { src: o.icone, alt: "", loading: "lazy" }) : el("span"),
-        el("span", {}, [el("span", { classe: "b-objet-nom", texte: o.nom }), document.createElement("br"),
+        el("span", {}, [el("span", { classe: "b-objet-nom" }, [lienEnc("objets", o.id, o.nom)]), document.createElement("br"),
           el("span", { classe: "b-objet-meta", texte: "Niv. " + o.niveau + (o.emplacement ? " · " + NOMS[o.emplacement] : " · non placé") })]),
       ])]));
     }

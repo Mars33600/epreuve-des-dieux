@@ -1,4 +1,5 @@
 {% extends "site.html" %}
+{% from "_macros.html" import lien %}
 {% from "captures/_cp.html" import tete_captures, onglets, barre, sans_fiche, panneau_qui %}
 {% block titre %}{{ "Boss du Dofus Ocre" if genre == "boss" else "Archimonstres" }} · L'Épreuve des Dieux{% endblock %}
 {% block tete %}{{ super() }}{{ tete_captures() }}{% endblock %}
@@ -8,7 +9,7 @@
 {%- set n = nombres.get(i.id, 0) -%}
 <li class="cp-carte{% if n >= personnages %} complet{% elif n > 0 %} entame{% endif %}"{% if tri != "zone" %} id="{{ genre }}-{{ i.id }}"{% endif %} data-id="{{ i.id }}" data-nom="{{ normaliser(i.nom) }}" data-zones="{{ normaliser(i.zone_texte) }}" data-nombre="{{ n }}"{% if i.niveau_max is not none %} data-niveau="{{ i.niveau_max }}"{% endif %}{% if i.id not in visibles %} hidden{% endif %}>
 {%- if i.icone %}<img class="cp-icone" src="{{ i.icone }}" alt="" loading="lazy" width="64" height="64">{% else %}<span class="cp-icone vide" aria-hidden="true">?</span>{% endif -%}
-<div class="cp-corps"><h3 class="cp-nom">{{ i.nom }}</h3><p class="cp-meta">{% if i.etape is not none %}<span class="tag">Étape {{ i.etape }}</span>{% endif %}{% if i.niveaux %} <span class="num">{{ i.niveaux }}</span>{% endif %}</p>{% if i.zone_texte %}<p class="cp-zone">{{ i.zone_texte }}</p>{% endif %}</div>
+<div class="cp-corps"><h3 class="cp-nom">{{ lien(liens, i.nom, "monstre", i.monstre_id) }}</h3><p class="cp-meta">{% if i.etape is not none %}<span class="tag">Étape {{ i.etape }}</span>{% endif %}{% if i.niveaux %} <span class="num">{{ i.niveaux }}</span>{% endif %}</p>{% if i.zone_texte %}<p class="cp-zone">{{ i.zone_texte }}</p>{% endif %}</div>
 <div class="cp-pied"><span class="cp-etat" data-etat>{% if n >= personnages %}✓ Complet{% elif n > 0 %}Capturé{% else %}Manquant{% endif %}</span><a class="cp-quibtn" href="{{ base }}{{ '&' if retour else '?' }}qui={{ i.id }}#qui" data-qui>Qui l'a&nbsp;?</a>
 {%- if peut_suivre %}<span class="cp-compteur"><button form="cpF" formaction="/archimonstres/{{ genre }}/{{ i.id }}" name="delta" value="-1" aria-label="Retirer un exemplaire de {{ i.nom }}"{% if n == 0 %} disabled{% endif %}>−</button><output class="num" data-nombre aria-live="polite">{{ n }}</output><button form="cpF" formaction="/archimonstres/{{ genre }}/{{ i.id }}" name="delta" value="1" aria-label="Ajouter un exemplaire de {{ i.nom }}">+</button></span>{% endif -%}
 </div></li>

@@ -20,6 +20,7 @@ from markupsafe import Markup
 
 from epreuve.contenu.fiche_duffus import BALISES
 from epreuve.domaine.textes import date_paris
+from epreuve.encyclopedie.liens import Liens, decouper_quantite
 from epreuve.web.vues import INFOS_CATEGORIES, avec_article, cle, pct, texte_point_donjons, texte_point_full
 
 ICI = Path(__file__).parent
@@ -49,7 +50,7 @@ def creer_gabarits() -> Jinja2Templates:
     g.env.filters.update(pct=pct, cle=cle, date_paris=date_paris, heure_paris=heure_paris,
                          fiche_propre=fiche_propre)
     g.env.globals.update(CATS=INFOS_CATEGORIES, texte_donjons=texte_point_donjons, texte_full=texte_point_full,
-                         avec_article=avec_article)
+                         avec_article=avec_article, decouper_quantite=decouper_quantite, LIENS_VIDES=Liens())
     return g
 
 

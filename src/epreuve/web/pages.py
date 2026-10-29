@@ -20,14 +20,17 @@ from fastapi import APIRouter, Request
 from fastapi.responses import FileResponse, RedirectResponse
 
 from epreuve.db.depot import DejaInscrit, Introuvable, PasSurLaListe, PseudoDejaPris
+from epreuve.domaine.bareme import palier
 from epreuve.domaine.classes import CLASSES, repartition_classes
 from epreuve.domaine.fiche import FicheQuete, masquer_prerequis_scelles
 from epreuve.domaine.modeles import CATEGORIES, NOM_CATEGORIE, ElementRef, Etage, Grimpeur
 from epreuve.domaine.progression import qui, qui_categorie
 from epreuve.domaine.textes import valider_pseudo
 from epreuve.domaine.visibilite import etage_cochable, etages_visibles
+from epreuve.encyclopedie.liens import noms_de_fiche
 from epreuve.web.auth import Refus, Visiteur, exiger_connecte, exiger_grimpeur, mode, verifier_ecriture
 from epreuve.web.histoire import paragraphes
+from epreuve.web.liens import liens_pour
 from epreuve.web.rendu import rendre
 from epreuve.web.vues import (
     VueEtage,
@@ -163,7 +166,8 @@ async def page_quete(request: Request, numero: int, quete_id: int):
     cochable = peut_cocher_soi(v, etage, s.regles)
     # Le suivi des étapes est personnel : seulement pour le grimpeur connecté sur sa propre fiche.
     suivies = await s.depot.etapes_suivies(v.grimpeur.id, quete_id) if cochable and v.grimpeur else None
-    ctx = {"etage": etage, "quete": quete, "fiche": fiche, "carte": carte, "vue": vue,
+    liens = await liens_pour(request, noms_de_fiche(fiche), v.est_admin) if fiche else None
+    ctx = {"etage": etage, "quete": quete, "fiche": fiche, "carte": carte, "vue": vue, "liens": liens,
            "cible": v.grimpeur, "cochable": cochable, "etapes_suivies": suivies,
            "pas_fait": qui(ref, vue.grimpeurs, vue.coches, fait=False),
            "fait": qui(ref, vue.grimpeurs, vue.coches, fait=True)}
@@ -197,6 +201,8 @@ async def page_regles(request: Request):
     ouvert = next((e for e in await s.depot.etages() if e.statut == "ouvert"), None)
     return await rendre(request, "regles.html", {
         "m": str(m.numerator) if m.denominator == 1 else f"{m.numerator}/{m.denominator}",
+        # Les exemples chiffrés viennent de la même fonction que la vraie jauge : jamais de nombre écrit en dur.
+        "palier_12": palier(12, 4, s.regles), "palier_12_trois": palier(12, 3, s.regles),
         "ouvert": ouvert, "plancher": ouvert.date_plancher_suivant if ouvert else None})
 
 

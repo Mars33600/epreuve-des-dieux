@@ -1,7 +1,8 @@
 {#- La fiche de quête (SPEC §4.4 bis) : fragment chargé par app.js dans le panneau <dialog>, ou inclus dans
     quete.html (page complète sans JavaScript). Chaque bloc n'apparaît que s'il a des données. Le seul HTML
     inséré tel quel est le texte des étapes, nettoyé par liste blanche à la construction (nettoyer_fiche). -#}
-{%- from "_macros.html" import badge_nature, compteur, personnes, icone -%}
+{%- from "_macros.html" import badge_nature, compteur, personnes, icone, lien, lien_dans -%}
+{%- set liens = liens if liens is defined and liens is not none else LIENS_VIDES -%}
 {%- set cat = "principales" if quete.nature == "principale" else "secondaires" -%}
 {%- set coches = vue.coches_de(cible.id if cible else none) -%}
 {%- set fait_moi = quete.id in coches.quetes -%}
@@ -40,9 +41,9 @@
       <dl class="recap">
         <div class="r"><dt>Zone</dt><dd>{% if depart and depart.zone %}{{ depart.zone }}{% else %}<span class="muted">Non précisée</span>{% endif %}</dd></div>
         <div class="r"><dt>Position de départ</dt><dd>{% if depart %}<button class="pos-copier" type="button" data-copier="/travel {{ depart.x }},{{ depart.y }}" title="Copier la commande de trajet">[{{ depart.x }},{{ depart.y }}]</button>{% else %}<span class="muted">Non précisée</span>{% endif %}</dd></div>
-        <div class="r"><dt>PNJ de départ</dt><dd>{% if fiche and fiche.pnj_depart %}{{ fiche.pnj_depart }}{% else %}<span class="muted">Non précisé</span>{% endif %}</dd></div>
+        <div class="r"><dt>PNJ de départ</dt><dd>{% if fiche and fiche.pnj_depart %}{{ lien(liens, fiche.pnj_depart, "pnj") }}{% else %}<span class="muted">Non précisé</span>{% endif %}</dd></div>
         <div class="r wide"><dt>Infos rapides</dt><dd>{% if fiche and fiche.infos_rapides %}<ul class="recap-list">{% for i in fiche.infos_rapides %}<li>{{ i }}</li>{% endfor %}</ul>{% else %}<span class="muted">Aucune</span>{% endif %}</dd></div>
-        <div class="r wide"><dt>Récompenses</dt><dd>{% if fiche and fiche.recompenses %}<ul class="recap-list">{% for r in fiche.recompenses %}<li>{{ r }}</li>{% endfor %}</ul>{% else %}<span class="muted">Non précisées</span>{% endif %}</dd></div>
+        <div class="r wide"><dt>Récompenses</dt><dd>{% if fiche and fiche.recompenses %}<ul class="recap-list">{% for r in fiche.recompenses %}<li>{% set qte, cite = decouper_quantite(r) %}{{ qte }}{{ lien(liens, cite, ("objet", "panoplie")) }}</li>{% endfor %}</ul>{% else %}<span class="muted">Non précisées</span>{% endif %}</dd></div>
         <div class="r wide"><dt>Prérequis</dt><dd>{% if fiche and fiche.prerequis %}<ul class="recap-list">
           {%- for p in fiche.prerequis %}
             <li>
@@ -77,8 +78,9 @@
             {%- for l in e.lignes %}
             {%- set dans_texte = l.nom and l.texte and l.nom in l.texte %}
             <li>{% if l.genre != "texte" %}<span class="k">{{ {"monstre": "Monstre", "objet": "Objet", "pnj": "PNJ"}[l.genre] }}</span> {% endif %}
-              {%- if l.texte %}{{ l.texte }}{% endif %}
-              {%- if l.nom and not dans_texte %} {{ l.nom }}{% endif %}
+              {%- set genre_enc = {"monstre": "monstre", "objet": ("objet", "panoplie"), "pnj": "pnj"}.get(l.genre) -%}
+              {%- if l.texte %}{% if genre_enc and dans_texte %}{{ lien_dans(liens, l.texte, l.nom, genre_enc) }}{% else %}{{ l.texte }}{% endif %}{% endif %}
+              {%- if l.nom and not dans_texte %} {% if genre_enc %}{{ lien(liens, l.nom, genre_enc) }}{% else %}{{ l.nom }}{% endif %}{% endif %}
               {%- if l.quantite and not dans_texte %} <span class="q">×{{ l.quantite }}</span>{% endif %}
               {%- if l.x is not none and l.y is not none %} <button class="pos-copier" type="button" data-copier="/travel {{ l.x }},{{ l.y }}" title="Copier la commande de trajet">[{{ l.x }},{{ l.y }}]</button>{% endif %}</li>
             {%- endfor %}
@@ -92,8 +94,8 @@
     {% if fiche.objets or fiche.monstres %}
     <section class="qd-sec"><h3>Ce dont tu as besoin</h3>
       <ul class="items">
-        {%- for b in fiche.objets %}<li><span class="k">Objet</span><span>{{ b.nom }}</span><span class="q">×{{ b.quantite }}</span></li>{% endfor %}
-        {%- for b in fiche.monstres %}<li><span class="k">Monstre</span><span>{% if b.icone_url and b.icone_url.startswith("https://api.dofusdb.fr/") %}<img src="{{ b.icone_url }}" alt="" width="24" height="24" loading="lazy"> {% endif %}{{ b.nom }}</span><span class="q">×{{ b.quantite }}</span></li>{% endfor %}
+        {%- for b in fiche.objets %}<li><span class="k">Objet</span><span>{{ lien(liens, b.nom, ("objet", "panoplie")) }}</span><span class="q">×{{ b.quantite }}</span></li>{% endfor %}
+        {%- for b in fiche.monstres %}<li><span class="k">Monstre</span><span>{% if b.icone_url and b.icone_url.startswith("https://api.dofusdb.fr/") %}<img src="{{ b.icone_url }}" alt="" width="24" height="24" loading="lazy"> {% endif %}{{ lien(liens, b.nom, "monstre") }}</span><span class="q">×{{ b.quantite }}</span></li>{% endfor %}
       </ul>
     </section>
     {% endif %}
