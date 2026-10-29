@@ -99,6 +99,7 @@ class Grimpeur:
     statut: Statut
     niveau_declare: int | None
     inscrit_le: datetime
+    prologue_vu: bool = False  # a passé le prologue plein écran de la première connexion
 
     def __post_init__(self) -> None:
         if self.classe is not None and self.classe not in CLASSES:

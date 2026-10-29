@@ -130,6 +130,15 @@ async def test_creer_grimpeur(base):
     assert (await base.grimpeur(g.id)).nom_discord == "nouveau"
 
 
+async def test_prologue_vu_retenu_en_base_une_seule_fois(base):
+    await base.ajouter_liste([10], "actif", ADMIN, OUVERTURE)
+    g = await base.creer_grimpeur(10, "d10", "Brindille", None, None, OUVERTURE)
+    assert g.prologue_vu is False
+    await base.marquer_prologue_vu(g.id, PENDANT)
+    await base.marquer_prologue_vu(g.id, PENDANT + timedelta(days=1))  # idempotent
+    assert (await base.grimpeur(g.id)).prologue_vu is True
+
+
 async def test_ajouter_liste_sans_doublon(base):
     assert await base.ajouter_liste([3, 4, 3], "actif", ADMIN, OUVERTURE) == [3, 4]
     assert await base.ajouter_liste([4, 5], "actif", ADMIN, OUVERTURE) == [5]

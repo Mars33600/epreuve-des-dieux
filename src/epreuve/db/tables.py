@@ -132,6 +132,7 @@ grimpeur = Table(
     Column("statut", Text, nullable=False),
     Column("niveau_declare", Integer),
     Column("inscrit_le", Horodatage, nullable=False),
+    Column("prologue_vu_le", Horodatage),  # première fois que le grimpeur a passé le prologue
 )
 
 coche_case = Table(

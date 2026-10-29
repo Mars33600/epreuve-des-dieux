@@ -27,28 +27,24 @@
 {%- endif -%}
 {%- endmacro %}
 
-{% macro pyramide(etages, jauge, nb_scelles) -%}
-{#- La pyramide : de haut en bas, des scellés décoratifs (jamais comptés ni nommés), puis les étages ouverts ou terminés,
-    cliquables. Le rang depuis le bas (pb-k) donne la largeur par classe CSS (la CSP interdit style=""). -#}
-{%- set ouvert = etages|selectattr("statut", "equalto", "ouvert")|first -%}
-{%- set total = nb_scelles + etages|length -%}
-<nav class="pyramide" aria-label="Les étages de la tour">
-  <div class="towermist"></div>
-  {%- for i in range(nb_scelles, 0, -1) %}
-  {%- if i == 1 and ouvert and jauge and jauge.pleine %}
-  <div class="etage-p prete pb-{{ total - nb_scelles + i - 1 }}"><b>Étage {{ ouvert.numero + 1 }}</b><span>· prêt</span></div>
-  {%- else %}
-  <div class="etage-p scelle pb-{{ total - nb_scelles + i - 1 }}" aria-label="Étage scellé"><span class="seal" aria-hidden="true">?</span></div>
-  {%- endif %}
-  {%- endfor %}
+{% macro pyramide(etages, jauge) -%}
+{#- La pyramide : en haut, des gradins anonymes dessinés par la seule feuille de style (un seul élément, aucun étage
+    à compter) qui se perdent dans la brume ; en dessous, seulement les étages ouverts ou terminés, nommés et
+    cliquables. Aucun numéro d'étage ni aucun nombre : le HTML ne trahit rien du total. La largeur de chaque
+    étage ouvert passe par une classe (pb-k, k depuis le bas) car la CSP interdit style="…". -#}
+<div class="pyr{% if jauge and jauge.pleine %} prete{% endif %}">
+  <div class="pyr-haut" aria-hidden="true"></div>
+  <div class="pyr-lueur" aria-hidden="true"></div>
+  <nav class="pyramide" aria-label="Les étages ouverts de la tour">
   {%- for e in etages|reverse %}
-  <a class="etage-p {{ 'courant' if e.statut == 'ouvert' else 'fini' }} pb-{{ loop.revindex0 }}" href="/etages/{{ e.numero }}">
-    <span class="nom"><b>Étage {{ e.numero }}</b> {{ e.nom }}</span>
-    <span class="detail">niv. {{ e.niveau_min }} à {{ e.niveau_max }}{% if e.statut == "termine" %} · terminé{% else %} · ouvert{% endif %}</span>
-    {%- if e.statut == "ouvert" and jauge %}<i class="fill {{ jauge.score|pct(jauge.palier) }}"></i>{% endif %}
-  </a>
+    <a class="etage-p {{ 'courant' if e.statut == 'ouvert' else 'fini' }} pb-{{ loop.revindex0 }}" href="/etages/{{ e.numero }}">
+      <span class="nom">{{ e.nom }}</span>
+      <span class="detail">niveaux {{ e.niveau_min }} à {{ e.niveau_max }} · {{ "terminé" if e.statut == "termine" else "ouvert" }}</span>
+    </a>
   {%- endfor %}
-</nav>
+  </nav>
+  <div class="pyr-brume" aria-hidden="true"></div>
+</div>
 {%- endmacro %}
 
 {% macro jauge_bloc(jauge, encoches, formule, texte, verdict_plein, verdict_pas_plein) -%}

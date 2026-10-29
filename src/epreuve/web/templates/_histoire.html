@@ -1,0 +1,8 @@
+{# Le récit de Shadoaze, en mise en page de récit (maquettes-da.html). Partagé par le prologue et la page « L'histoire ». #}
+<article class="story">
+  <p class="eyebrow">Par Shadoaze</p>
+  <h2>L'Épreuve des Dieux</h2>
+  {%- for role, texte in histoire %}
+  <p class="{{ 'story-' ~ role if role != 'p' else '' }}">{{ texte }}</p>
+  {%- endfor %}
+</article>

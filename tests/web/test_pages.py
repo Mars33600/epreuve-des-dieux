@@ -145,30 +145,47 @@ def test_modifier_sa_fiche():
 # ---------------------------------------------------------------- tour et brouillard (critère 8)
 
 
-def test_tour_seulement_les_etages_visibles_et_6_scelles_decoratifs():
+def _pyramide(html: str) -> str:
+    return html[html.index('<div class="pyr'):].split("</nav>")[0]
+
+
+def test_tour_seulement_les_etages_ouverts_nommes_et_cliquables():
     html = monde().connecter(ID_BRINDILLE).get("/").text
-    tour = html.split('class="pyramide"')[1].split("</nav>")[0]
-    assert tour.count('class="etage-p scelle') == 6 and tour.count('aria-label="Étage scellé"') == 6
-    assert "Étage 0" in tour and "Étage 1" not in tour and "prêt" not in tour
-    assert 'href="/etages/0"' in tour and tour.count("<a ") == 1  # seul l'étage ouvert est cliquable
-    menu = html.split('<nav class="pyramide"')[0].split('aria-label="Navigation principale"')[1]
+    tour = _pyramide(html)
+    assert "Le Seuil" in tour and 'href="/etages/0"' in tour and tour.count("<a ") == 1
+    assert "Étage 0" not in tour and "scell" not in tour and "prêt" not in tour  # aucun numéro, aucun scellé nommé
+    menu = html[:html.index('<div class="pyr')].split('aria-label="Navigation principale"')[1]
     assert 'href="/etages/0"' not in menu  # plus d'onglet « Étage 0 » : on choisit dans la pyramide
+    # La jauge vient après la pyramide, jamais dedans.
+    assert html.index('class="pyr-jauge"') > html.index('class="pyramide"')
 
 
-def test_tour_etage_suivant_pret_si_la_jauge_est_pleine():
+def test_tour_html_ne_trahit_pas_le_nombre_d_etages():
+    """Le HTML de l'accueil est identique avec 3 ou 8 étages scellés : rien ne compte les étages."""
+    def accueil(nb_scelles: int) -> str:
+        m = monde()
+        base = m.depot._etages[2]
+        for i in range(nb_scelles):
+            n = 10 + i
+            m.depot._etages[n] = replace(base, id=n, numero=n, nom=f"Secret {n}", statut="scelle")
+        return m.connecter(ID_BRINDILLE).get("/").text
+
+    a, b = accueil(0), accueil(8)
+    zone = lambda h: h[h.index('<div class="pyr'):h.index('<div class="pyr-jauge"')]  # noqa: E731
+    assert zone(a) == zone(b)
+    assert zone(a).count("<div") == 4  # gradins anonymes : des décors, pas une liste d'étages
+    for html in (a, b):
+        for trace in ("data-", " hidden", "display:none", "Secret"):  # ni attribut de données, ni liste cachée
+            assert trace not in zone(html), trace
+        assert not re.search(r"\b(\d+)\s+étages\b", html)
+        assert "scellé" not in zone(html)
+
+
+def test_tour_etage_suivant_pret_sans_numero():
     m = monde()
     m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)
-    tour = m.connecter(ID_BRINDILLE).get("/").text.split('class="pyramide"')[1].split("</nav>")[0]
-    assert "<b>Étage 1</b><span>· prêt</span>" in tour and tour.count('class="etage-p scelle') == 5
-    assert "Champs Murmurants" not in tour
-
-
-def test_etage_pret_meme_si_le_suivant_n_existe_pas():
-    m = monde()
-    for i in (2, 3, 4):
-        del m.depot._etages[i]
-    m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)
-    assert "<b>Étage 1</b><span>· prêt</span>" in m.connecter(ID_BRINDILLE).get("/").text
+    tour = _pyramide(m.connecter(ID_BRINDILLE).get("/").text)
+    assert 'class="pyr prete"' in tour and "Étage 1" not in tour and "Champs Murmurants" not in tour
 
 
 def test_brouillard_aucune_trace_d_un_scelle():

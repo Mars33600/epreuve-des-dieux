@@ -1,0 +1,14 @@
+{% extends "site.html" %}
+{# Prologue plein écran de la première connexion : le récit, puis « Entrer dans la tour » (ou passer). #}
+{% block titre %}Prologue · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<div class="prologue" role="dialog" aria-modal="true" aria-label="Prologue">
+  <div class="prologue-in">
+    {% include "_histoire.html" %}
+  </div>
+  <form class="prologue-pied" method="post" action="/histoire/vu">
+    <input type="hidden" name="csrf" value="{{ v.csrf }}">
+    <button class="cta" type="submit" autofocus>Entrer dans la tour</button>
+  </form>
+</div>
+{% endblock %}

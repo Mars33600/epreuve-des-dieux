@@ -147,7 +147,7 @@ def _quete(r) -> Quete:
 
 def _grimpeur(r) -> Grimpeur:
     return Grimpeur(r.id, r.discord_user_id, r.nom_discord, r.pseudo_ig, r.classe, r.statut, r.niveau_declare,
-                    r.inscrit_le)
+                    r.inscrit_le, r.prologue_vu_le is not None)
 
 
 def _entree(r) -> EntreeJournal:
@@ -361,6 +361,13 @@ class Depot:
         async with self._moteur.begin() as c:
             await c.execute(update(t.grimpeur).where(t.grimpeur.c.discord_user_id == discord_user_id)
                             .values(nom_discord=nom_discord))
+
+    async def marquer_prologue_vu(self, grimpeur_id: int, maintenant: datetime) -> None:
+        """Retient que le grimpeur a passé le prologue (idempotent : la première date reste)."""
+        async with self._moteur.begin() as c:
+            await c.execute(update(t.grimpeur).where(t.grimpeur.c.id == grimpeur_id,
+                                                     t.grimpeur.c.prologue_vu_le.is_(None))
+                            .values(prologue_vu_le=maintenant))
 
     async def modifier_grimpeur(self, grimpeur_id: int, acteur: int, maintenant: datetime, *,
                                 pseudo: str | None = None, classe: str | None = None,

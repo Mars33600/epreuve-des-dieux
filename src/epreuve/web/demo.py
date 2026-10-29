@@ -73,7 +73,7 @@ def _id_discord(n: int) -> int:
 
 def _etages() -> dict[int, Etage]:
     def e(id_, numero, nom, nmin, nmax, statut, ouvert=None, plancher=None):
-        return Etage(id_, numero, nom, nmin, nmax, nmax, statut, ouvert, plancher, None, None)
+        return Etage(id_, numero, nom, nmin, nmax, nmax, statut, ouvert, plancher, None, f"/etages/{numero}/image")
 
     return {1: e(1, 0, "Le Seuil", 1, 20, "ouvert", OUVERTURE_ETAGE_0, PLANCHER_ETAGE_0),
             2: e(2, 1, "Les Champs Murmurants", 21, 40, "scelle"),
@@ -238,7 +238,7 @@ class DepotDemo:
             did = _id_discord(id_)
             self._liste[did] = "actif" if statut == "exclu" else statut
             self._grimpeurs[id_] = Grimpeur(id_, did, f"{pseudo.lower()}#discord", pseudo, classe, statut, niv,
-                                            INSCRIPTION)
+                                            INSCRIPTION, True)
             cases = {dj * 10 + k for dj, n in zip((1, 2, 3), d, strict=True) for k in range(1, n + 1)}
             self._coches_cases[id_] = cases
             self._coches_quetes[id_] = set(PRINCIPALES[:p]) | set(SECONDAIRES[:s])
@@ -362,6 +362,11 @@ class DepotDemo:
         g = await self.grimpeur_par_discord(discord_user_id)
         if g is not None:
             self._grimpeurs[g.id] = replace(g, nom_discord=nom_discord)
+
+    async def marquer_prologue_vu(self, grimpeur_id, maintenant):
+        g = self._grimpeurs.get(grimpeur_id)
+        if g is not None:
+            self._grimpeurs[grimpeur_id] = replace(g, prologue_vu=True)
 
     async def modifier_grimpeur(self, grimpeur_id, acteur, maintenant, *, pseudo=None, classe=None,
                                 niveau_declare=None):

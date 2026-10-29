@@ -4,7 +4,6 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from epreuve.domaine.visibilite import (
-    NB_SCELLES_DECORATIFS,
     etage_cochable,
     etages_visibles,
     peut_modifier_coches,
@@ -38,7 +37,3 @@ def test_peut_modifier_coches():
     assert not peut_modifier_coches(3, False, 4)
     assert not peut_modifier_coches(None, False, 4)
     assert peut_modifier_coches(None, True, 4)  # admin sans fiche
-
-
-def test_constante_decorative():
-    assert NB_SCELLES_DECORATIFS == 6

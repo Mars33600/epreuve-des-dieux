@@ -3,26 +3,23 @@
 {% block titre %}La tour · L'Épreuve des Dieux{% endblock %}
 {% block page %}
 <section class="accueil-tour" aria-labelledby="tourTitre">
-  <div class="pyramide-zone">
-    <div class="pyramide-note"><div class="eyebrow">La tour</div>
-      <h2 id="tourTitre">Choisis ton étage</h2>
-      <p class="muted">Touche un étage ouvert pour y entrer. Nul ne connaît le nombre d'étages&nbsp;: chacun se dévoile quand la guilde a descellé le précédent.</p></div>
-    {{ pyramide(etages, jauge, nb_scelles) }}
-  </div>
-  <div class="pyramide-jauge">
+  <h2 id="tourTitre" class="sr-only">La tour</h2>
+  <p class="pyr-note">Nul ne connaît la hauteur de la tour. Touche un étage ouvert pour y entrer&nbsp;; chaque autre se dévoilera quand la guilde aura descellé celui d'en dessous.</p>
+  {{ pyramide(etages, jauge) }}
+  <div class="pyr-jauge">
     {% if ouvert %}
     <section class="card" aria-labelledby="floorTitle">
       <div class="row">
         <div>
           <div class="eyebrow">Étage en cours</div>
-          <h2 id="floorTitle">Étage {{ ouvert.numero }} · {{ ouvert.nom }}</h2>
+          <h2 id="floorTitle">{{ ouvert.nom }}</h2>
         </div>
         <div class="facts"><span>Tranche <b>niveaux {{ ouvert.niveau_min }} à {{ ouvert.niveau_max }}</b></span><span>Cap <b class="num">{{ ouvert.level_cap }}</b></span>
           <span><b class="num">{{ vue.contenu.donjons|length }}</b> donjons</span><span><b class="num">{{ vue.contenu.quetes|length }}</b> quêtes</span></div>
       </div>
       <p class="how">Chaque grimpeur peut rapporter <b>4 points</b> par étage, un par catégorie <b>terminée en entier</b>. L'étage suivant se descelle quand la guilde atteint le palier.</p>
       {{ jauge_bloc(jauge, encoches, formule, texte_jauge, verdict_plein, verdict_pas_plein) }}
-      <p><a class="cta" href="/etages/{{ ouvert.numero }}">Ouvrir l'étage {{ ouvert.numero }}</a></p>
+      <p><a class="cta" href="/etages/{{ ouvert.numero }}">Entrer dans l'étage</a></p>
     </section>
     {% else %}
     <section class="card"><h2>La tour se prépare</h2><p class="muted">Aucun étage n'est ouvert pour l'instant.</p></section>

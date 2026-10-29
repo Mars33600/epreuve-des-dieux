@@ -2,6 +2,7 @@
 
     GET  /etages/{n}                 l'onglet d'un étage : ma progression, la jauge, le filtre, la liste unique
     GET  /etages/{n}/quetes/{id}     la fiche de quête : fragment (Accept: text/html-fragment) ou page complète
+    GET  /histoire                   l'histoire de Shadoaze ; POST /histoire/vu retient le prologue passé
     GET  /grimpeurs                  toutes les fiches + le filtre « qui n'a pas fait… ? » (?quoi=…)
     GET  /grimpeurs/{id}             la fiche d'un grimpeur (?edition=1 : mode édition de l'admin)
     POST /grimpeurs/moi              modifier son pseudo, sa classe, son niveau
@@ -24,8 +25,9 @@ from epreuve.domaine.fiche import FicheQuete, masquer_prerequis_scelles
 from epreuve.domaine.modeles import CATEGORIES, NOM_CATEGORIE, ElementRef, Etage, Grimpeur
 from epreuve.domaine.progression import qui, qui_categorie
 from epreuve.domaine.textes import valider_pseudo
-from epreuve.domaine.visibilite import NB_SCELLES_DECORATIFS, etage_cochable, etages_visibles
+from epreuve.domaine.visibilite import etage_cochable, etages_visibles
 from epreuve.web.auth import Refus, Visiteur, exiger_connecte, exiger_grimpeur, mode, verifier_ecriture
+from epreuve.web.histoire import paragraphes
 from epreuve.web.rendu import rendre
 from epreuve.web.vues import (
     VueEtage,
@@ -74,10 +76,12 @@ def contexte_etage(request: Request, vue: VueEtage) -> dict:
 async def tour(request: Request, v: Visiteur):
     """L'accueil connecté : la tour, la jauge de l'étage ouvert, la répartition des classes."""
     s = _s(request)
+    if v.grimpeur is not None and not v.grimpeur.prologue_vu:
+        return await rendre(request, "prologue.html", {"histoire": paragraphes()})
     etages = etages_visibles(await s.depot.etages(), est_admin=False)  # la tour ne montre jamais un scellé
     ouvert = next((e for e in etages if e.statut == "ouvert"), None)
     grimpeurs = await s.depot.grimpeurs()
-    ctx: dict = {"etages": etages, "ouvert": ouvert, "nb_scelles": NB_SCELLES_DECORATIFS, "vue": None,
+    ctx: dict = {"etages": etages, "ouvert": ouvert, "vue": None,
                 "ambiance": ouvert.ambiance_url if ouvert else None}
     if ouvert is not None:
         vue = await charger_vue_etage(s.depot, ouvert, s.regles, grimpeurs)
@@ -152,6 +156,22 @@ async def page_quete(request: Request, numero: int, quete_id: int):
     if "text/html-fragment" in request.headers.get("accept", ""):
         return await rendre(request, "_quete.html", ctx)
     return await rendre(request, "quete.html", ctx)
+
+
+@routeur.get("/histoire")
+async def page_histoire(request: Request):
+    """L'histoire de Shadoaze (DECISIONS-V4 §13), relisible à tout moment depuis le menu."""
+    await exiger_grimpeur(request)
+    return await rendre(request, "histoire.html", {"histoire": paragraphes()})
+
+
+@routeur.post("/histoire/vu")
+async def prologue_vu(request: Request):
+    """« Entrer dans la tour » : retient en base que le prologue a été passé, puis retour à l'accueil."""
+    v = await verifier_ecriture(request)
+    if v.grimpeur is not None:
+        await _s(request).depot.marquer_prologue_vu(v.grimpeur.id, _s(request).horloge())
+    return RedirectResponse("/", status_code=303)
 
 
 @routeur.get("/regles")

@@ -10,8 +10,6 @@ from collections.abc import Iterable
 
 from epreuve.domaine.modeles import Etage
 
-NB_SCELLES_DECORATIFS = 6  # constante d'affichage, jamais calculée (ne révèle pas le nombre d'étages)
-
 
 def etages_visibles(etages: Iterable[Etage], est_admin: bool) -> list[Etage]:
     """Ouverts et terminés (admin : tous), triés par numéro."""
