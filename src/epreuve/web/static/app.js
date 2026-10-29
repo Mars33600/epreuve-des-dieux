@@ -57,6 +57,7 @@ function majBarre(j){
   const b = $("progres"); if (!b) return;
   b.dataset.vide = j.actifs === 0 ? "1" : "0";
   const maxi = 4 * j.actifs, manque = Math.max(0, j.palier - j.score);
+  texte(b.querySelector('[data-pg="maximum"]'), String(maxi));
   texte(b.querySelector('[data-pg="score"]'), `${j.score} / ${j.palier} points`);
   texte(b.querySelector('[data-pg="manque"]'), j.pleine ? "Palier atteint" : `Il manque ${manque} point${manque > 1 ? "s" : ""}`);
   classeQ(b.querySelector('[data-pg="rempli"]'), Math.min(j.score, maxi), maxi);
@@ -70,35 +71,8 @@ function majBarre(j){
 }
 function majJauge(j){
   const g = $("jauge"); if (!g || !j) return;
-  g.classList.toggle("ok", j.pleine);
-  const bloc = g.closest(".jauge-bloc"); if (bloc) bloc.dataset.vide = j.actifs === 0 ? "1" : "0";
+  g.dataset.vide = j.actifs === 0 ? "1" : "0";
   majBarre(j);
-  texte(g.querySelector('[data-j="score"]'), String(j.score));
-  const manque = Math.max(0, j.palier - j.score), m = g.querySelector('[data-j="manque"]');
-  if (m){
-    m.textContent = "";
-    const b = document.createElement("b");
-    if (j.pleine){ b.textContent = "Palier atteint"; m.append(b); }
-    else { b.className = "num"; b.textContent = String(manque); m.append("Il manque ", b, ` point${manque > 1 ? "s" : ""}`); }
-  }
-  const actifs = `${j.actifs} grimpeur${j.actifs > 1 ? "s" : ""} actif${j.actifs > 1 ? "s" : ""}`;
-  const pause = j.en_pause ? `, ${j.en_pause} en pause` : "";
-  texte(g.querySelector('[data-j="texte"]'), (j.pleine
-    ? `Score ${j.score} sur un palier de ${j.palier} : la jauge est pleine.`
-    : `Score ${j.score} sur un palier de ${j.palier}, il en manque ${manque}.`) + ` ${actifs}${pause}.`);
-  // Les encoches : une par point requis, dans l'ordre des catégories.
-  const enc = $("encoches");
-  if (enc){
-    const pleines = []; CATS.forEach(c => { for (let i = 0; i < (j.points_par_categorie[c] || 0); i++) pleines.push(c); });
-    const n = Math.max(j.palier, j.score); enc.textContent = "";
-    for (let i = 0; i < n; i++){
-      const e = document.createElement("i");
-      if (i < pleines.length){ e.className = "c-" + pleines[i] + (i >= j.palier ? " over" : ""); e.dataset.c = ""; }
-      else e.className = "vide";
-      enc.append(e);
-    }
-    enc.setAttribute("aria-label", `${j.score} points sur ${j.palier} requis`);
-  }
   CATS.forEach(c => {
     texte(document.querySelector(`[data-jcat="${c}"]`), String(j.points_par_categorie[c] || 0));
     pct(document.querySelector(`[data-jmini="${c}"]`), j.points_par_categorie[c] || 0, j.actifs);

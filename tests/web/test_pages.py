@@ -259,14 +259,13 @@ def test_jauge_de_reference_calculee_a_la_main():
     Sélénith, Cliquetis → 4. Secondaires (5/5) : Pépin, Sélénith, Gromolo, Cliquetis → 4. Score 8+3+4+4 = 19.
     """
     html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
-    assert "Score 19 sur un palier de 20, il en manque 1. 10 grimpeurs actifs, 2 en pause." in html
+    assert "19 / 20 points" in html and "Il manque 1 point" in html
     assert "Palier = 2 × 10 grimpeurs actifs" in html
+    assert "Jauge de l'étage</div>" not in html and "Il manque <b" not in html
     assert re.findall(r'data-jcat="(\w+)">(\d+)<', html) == [("donjons", "8"), ("full_succes", "3"),
                                                              ("principales", "4"), ("secondaires", "4")]
-    encoches = html.split('id="encoches"')[1].split("</div>")[0]
-    assert encoches.count("<i ") == 20 and encoches.count('class="vide"') == 1
-    assert encoches.count('class="c-donjons"') == 8
-    assert "Maximum possible : <span class=\"num\">40</span>" in html
+    assert 'id="encoches"' not in html
+    assert 'Maximum possible : <span class="num" data-pg="maximum">40</span>' in html
 
 
 def test_formule_du_palier_suit_les_regles():
@@ -609,21 +608,18 @@ def test_article_du_repere():
 def _jauge_rendue(actifs: int) -> str:
     from epreuve.domaine.bareme import EtatJauge
     from epreuve.web.rendu import creer_gabarits
-    from epreuve.web.vues import encoches
 
     j = EtatJauge(0, 2 * actifs, False, actifs, 0, 4, {})
     macros = creer_gabarits().env.get_template("_macros.html").module
-    jauge = macros.jauge_bloc(j, encoches(j), "Palier = 2 × 0 grimpeur actif", "t", "plein", "pas plein")
+    jauge = macros.jauge_bloc(j, "plein", "pas plein")
     return macros.barre_progression(j) + jauge
 
 
 def test_jauge_sans_grimpeur_actif_etat_vide_clair():
     html = _jauge_rendue(0)
     assert 'data-vide="1"' in html and "Aucun grimpeur actif pour l'instant</p>" in html
-    assert "la jauge démarrera avec les premières fiches" in html
-    assert "0 / 0 points" not in html.split("data-j-vide")[0]  # le résumé du bandeau n'affiche pas « 0 / 0 »
-    # Le chiffrage creux reste dans la page (le script le montre dès qu'un grimpeur devient actif) mais masqué.
-    assert 'data-j-normal' in html and 'class="gcount" data-j-normal' in html
+    assert "0 / 0 points" not in html  # le résumé du bandeau n'affiche pas « 0 / 0 »
+    assert 'class="pg-max" data-pg-normal' in html  # masqué tant qu'il n'y a pas d'actif
 
 
 def test_jauge_avec_actifs_affiche_le_resume_et_pas_l_etat_vide():

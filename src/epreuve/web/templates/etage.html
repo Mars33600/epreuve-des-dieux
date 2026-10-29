@@ -17,10 +17,10 @@
     {{ bandeau_etage(etage, vue, jauge,
          "Niveaux " ~ etage.niveau_min ~ " à " ~ etage.niveau_max ~ (" · terminé" if etage.statut == "termine" else (" · scellé (vue admin)" if etage.statut == "scelle" else "")),
          etage.nom if etage.nom|lower == "étage " ~ etage.numero else "Étage " ~ etage.numero ~ " · " ~ etage.nom) }}
+    {% if etage.statut == "ouvert" %}<div class="card">{{ jauge_bloc(jauge, verdict_plein, verdict_pas_plein) }}</div>{% endif %}
     <section class="card regle-etage">
       <p class="how">Entre grimpeurs, <b>sans dépasser le cap</b> de niveau {{ etage.level_cap }}, <b>sans PL</b>. Chaque catégorie terminée en entier rapporte un point. {{ formule }}.</p>
       {% if bilan %}<p class="note">Bilan figé le {{ bilan.fige_le|date_paris }} : score {{ bilan.score }} sur un palier de {{ bilan.palier }}, {{ bilan.actifs }} grimpeur{{ "s" if bilan.actifs > 1 }} actif{{ "s" if bilan.actifs > 1 }}.{% if bilan.force %} Ouverture forcée par un admin.{% endif %} Cocher ici complète ta fiche sans changer ce bilan.</p>{% endif %}
-      {% if etage.statut == "ouvert" %}{{ jauge_bloc(jauge, encoches, formule, texte_jauge, verdict_plein, verdict_pas_plein) }}{% endif %}
     </section>
 
     <details class="card actifs-etage" id="actifsEtage">

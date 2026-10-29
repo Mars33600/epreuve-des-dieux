@@ -106,6 +106,7 @@
     <i class="pg-rempli {{ [jauge.score, maxi]|min|pct1(maxi) }}" data-pg="rempli"></i>
     <i class="pg-palier {{ jauge.palier|pct1(maxi) }}{% if jauge.palier * 100 > 80 * maxi %} fin{% endif %}" data-pg="palier" data-pg-normal><small>palier</small></i>
   </div>
+  <p class="pg-max" data-pg-normal>Maximum possible : <span class="num" data-pg="maximum">{{ maxi }}</span></p>
 </div>
 {%- endmacro %}
 
@@ -124,19 +125,8 @@
 </section>
 {%- endmacro %}
 
-{% macro jauge_bloc(jauge, encoches, formule, texte, verdict_plein, verdict_pas_plein) -%}
-<div class="jauge-bloc" data-vide="{{ 1 if jauge.actifs == 0 else 0 }}">
-<div class="gauge{% if jauge.pleine %} ok{% endif %}" id="jauge" data-palier="{{ jauge.palier }}" data-actifs="{{ jauge.actifs }}" data-en-pause="{{ jauge.en_pause }}">
-  <div class="eyebrow">Jauge de l'étage</div>
-  <p class="muted" data-j-vide>Aucun grimpeur actif pour l'instant : la jauge démarrera avec les premières fiches.</p>
-  <div class="gcount" data-j-normal><strong><span data-j="score">{{ jauge.score }}</span><small> / {{ jauge.palier }} points</small></strong>
-    <span>{{ formule }}</span></div>
-  <div class="notches" id="encoches" data-j-normal role="img" aria-label="{{ jauge.score }} points sur {{ jauge.palier }} requis">
-    {%- for c in encoches %}<i class="{{ c }}"{% if c != "vide" %} data-c{% endif %}></i>{% endfor -%}
-  </div>
-  <div class="gfoot" data-j-normal><span data-j="manque">{% if jauge.pleine %}<b>Palier atteint</b>{% else %}Il manque <b class="num">{{ jauge.manquants }}</b> point{{ "s" if jauge.manquants > 1 }}{% endif %}</span><span>Maximum possible : <span class="num">{{ jauge.maximum }}</span></span></div>
-  <p class="muted" data-j="texte" data-j-normal>{{ texte }}</p>
-</div>
+{% macro jauge_bloc(jauge, verdict_plein, verdict_pas_plein) -%}
+<div class="jauge-bloc" id="jauge" data-vide="{{ 1 if jauge.actifs == 0 else 0 }}" data-palier="{{ jauge.palier }}" data-actifs="{{ jauge.actifs }}" data-en-pause="{{ jauge.en_pause }}">
 <div class="cats">
   {%- for info in CATS %}{% set k = jauge.points_par_categorie.get(info.cle, 0) %}
   <div class="cat c-{{ info.cle }}">
