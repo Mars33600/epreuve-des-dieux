@@ -1,6 +1,6 @@
 {% extends "site.html" %}
 {% from "_macros.html" import jauge_bloc, bandeau_etage, liste_etage, filtre, pip %}
-{% block titre %}{% if etage.nom|lower == "étage " ~ etage.numero %}{{ etage.nom }}{% else %}Étage {{ etage.numero }} · {{ etage.nom }}{% endif %} · L'Épreuve des Dieux{% endblock %}
+{% block titre %}{{ titre_etage(etage) }} · L'Épreuve des Dieux{% endblock %}
 {% block page %}
 <div class="layout">
   <aside class="tower" aria-label="Les étages ouverts">
@@ -16,7 +16,7 @@
   <main>
     {{ bandeau_etage(etage, vue, jauge,
          "Niveaux " ~ etage.niveau_min ~ " à " ~ etage.niveau_max ~ (" · terminé" if etage.statut == "termine" else (" · scellé (vue admin)" if etage.statut == "scelle" else "")),
-         etage.nom if etage.nom|lower == "étage " ~ etage.numero else "Étage " ~ etage.numero ~ " · " ~ etage.nom) }}
+         titre_etage(etage)) }}
     {% if etage.statut == "ouvert" %}<div class="card">{{ jauge_bloc(jauge, verdict_plein, verdict_pas_plein) }}</div>{% endif %}
     <section class="card regle-etage">
       <p class="how">Entre grimpeurs, <b>sans dépasser le cap</b> de niveau {{ etage.level_cap }}, <b>sans PL</b>. Chaque catégorie terminée en entier rapporte un point. {{ formule }}.</p>

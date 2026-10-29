@@ -5,7 +5,7 @@
   <div class="eyebrow">Admin</div>
   <h2 id="adminTitre">Tableau de bord</h2>
   <div class="facts">
-    <span>Étage ouvert <b>{% if ouvert %}{{ ouvert.numero }} · {{ ouvert.nom }}{% else %}aucun{% endif %}</b></span>
+    <span>Étage ouvert <b>{% if ouvert %}{{ titre_etage(ouvert) }}{% else %}aucun{% endif %}</b></span>
     <span><b class="num">{{ nb_grimpeurs }}</b> fiches</span><span><b class="num">{{ nb_liste }}</b> sur la liste officielle</span>
   </div>
   <nav class="nav" aria-label="Admin">

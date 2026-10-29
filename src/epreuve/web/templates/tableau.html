@@ -25,7 +25,7 @@
 {% for b in blocs %}{% set vue = b.vue %}{% set cats = vue.categories(g.id) %}
 <section class="card" aria-labelledby="tb{{ vue.etage.numero }}">
   <div class="row">
-    <h3 id="tb{{ vue.etage.numero }}"><a href="/etages/{{ vue.etage.numero }}">Étage {{ vue.etage.numero }} · {{ vue.etage.nom }}</a></h3>
+    <h3 id="tb{{ vue.etage.numero }}"><a href="/etages/{{ vue.etage.numero }}">{{ titre_etage(vue.etage) }}</a></h3>
     <span class="total{% if b.points == 4 %} full{% endif %}">{{ b.points }}<small>/4 points · {{ b.faits }}/{{ b.total }}</small></span>
   </div>
   <p class="muted">Niveaux {{ vue.etage.niveau_min }} à {{ vue.etage.niveau_max }}{% if vue.etage.statut == "termine" %} · étage terminé{% else %} · jauge {{ vue.jauge.score }}/{{ vue.jauge.palier }}{% endif %}</p>
@@ -52,7 +52,7 @@
 </section>
 {% for b in blocs %}{% set vue = b.vue %}{% set coches = vue.coches_de(g.id) %}
 <section class="card" aria-labelledby="titre{{ vue.etage.numero }}" id="etage{{ vue.etage.numero }}">
-  <div class="row"><h3 id="titre{{ vue.etage.numero }}">Étage {{ vue.etage.numero }} · {{ vue.etage.nom }}</h3>
+  <div class="row"><h3 id="titre{{ vue.etage.numero }}">{{ titre_etage(vue.etage) }}</h3>
     <span class="muted num">{{ vue.categories(g.id)["full_succes"].faits }}/{{ vue.categories(g.id)["full_succes"].total }} donjons en full succès</span></div>
   <ul class="liste">
   {%- for d in vue.contenu.donjons %}{% set cases = vue.contenu.cases_du_donjon(d.id) %}{% set n = cases|selectattr("id", "in", coches.cases)|list|length %}

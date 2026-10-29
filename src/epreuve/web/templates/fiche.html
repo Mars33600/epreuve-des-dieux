@@ -43,7 +43,7 @@
 {%- for vue in vues %}{% set cats = vue.categories(g.id) %}{% set av = vue.avancement(g.id) %}
 <section class="card" aria-labelledby="etage{{ vue.etage.numero }}">
   <div class="row">
-    <h2 id="etage{{ vue.etage.numero }}"><a href="/etages/{{ vue.etage.numero }}">Étage {{ vue.etage.numero }} · {{ vue.etage.nom }}</a></h2>
+    <h2 id="etage{{ vue.etage.numero }}"><a href="/etages/{{ vue.etage.numero }}">{{ titre_etage(vue.etage) }}</a></h2>
     <span class="total{% if vue.points(g.id) == 4 %} full{% endif %}">{{ vue.points(g.id) }}<small>/4 points · {{ av[0] }}/{{ av[1] }}{% if av[1] %} ({{ av[0] * 100 // av[1] }} %){% endif %}</small></span>
   </div>
   <div class="bigpips">{% for info in CATS %}{% set e = cats[info.cle] %}<span class="pipcell">{{ pip(info, e, True) }}<span>{{ info.court }}</span><b>{{ e.faits }}/{{ e.total }}</b></span>{% endfor %}</div>

@@ -208,6 +208,14 @@ def formule_palier(jauge: EtatJauge, regles: Regles) -> str:
     return f"Palier = {m_txt} × {n} × {jauge.nb_categories} catégories sur 4, arrondi au-dessus"
 
 
+def titre_etage(etage) -> str:
+    """« Étage 3 · Les Pics » ; juste « Étage 3 » quand l'étage n'a pas de nom propre (jamais « Étage 3 · Étage 3 »)."""
+    nom = (etage.nom or "").strip()
+    if not nom or nom.casefold() == f"étage {etage.numero}":
+        return f"Étage {etage.numero}"
+    return f"Étage {etage.numero} · {nom}"
+
+
 def texte_jauge(jauge: EtatJauge) -> str:
     """Toujours présent et lisible sans la couleur (SPEC §4.5)."""
     pause = f", {jauge.en_pause} en pause" if jauge.en_pause else ""
