@@ -58,11 +58,14 @@ async def rendre(request: Request, gabarit: str, contexte: dict | None = None, s
 
     s = request.app.state
     v = await visiteur(request)
-    numero_ouvert = None
+    numero_ouvert = ambiance = None
     if v.connecte and s.depot is not None:
-        numero_ouvert = next((e.numero for e in await s.depot.etages() if e.statut == "ouvert"), None)
+        ouvert = next((e for e in await s.depot.etages() if e.statut == "ouvert"), None)
+        # Photo de fond de chaque page : l'étage en cours, jamais un étage scellé. Une page d'étage peut
+        # imposer la sienne (`ambiance` dans son contexte, après contrôle de visibilité).
+        numero_ouvert, ambiance = (ouvert.numero, ouvert.ambiance_url) if ouvert else (None, None)
     base = {"v": v, "mode": mode(request), "regles": s.regles, "ouverture_iso": s.config.site_ouvert_le.isoformat(),
-            "chemin": request.url.path, "numero_ouvert": numero_ouvert}
+            "chemin": request.url.path, "numero_ouvert": numero_ouvert, "ambiance": ambiance}
     base.update(contexte or {})
     return s.gabarits.TemplateResponse(request, gabarit, base, status_code=statut,
                                        headers={"Cache-Control": "no-store"})

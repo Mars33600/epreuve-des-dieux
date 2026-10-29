@@ -1,5 +1,5 @@
 {% extends "site.html" %}
-{% from "_macros.html" import pyramide, jauge_bloc %}
+{% from "_macros.html" import pyramide, jauge_bloc, resume_jauge %}
 {% block titre %}La tour · L'Épreuve des Dieux{% endblock %}
 {% block page %}
 <section class="accueil-tour" aria-labelledby="tourTitre">
@@ -8,18 +8,17 @@
   {{ pyramide(etages, jauge) }}
   <div class="pyr-jauge">
     {% if ouvert %}
-    <section class="card" aria-labelledby="floorTitle">
-      <div class="row">
-        <div>
-          <div class="eyebrow">Étage en cours</div>
-          <h2 id="floorTitle">{{ ouvert.nom }}</h2>
-        </div>
-        <div class="facts"><span>Tranche <b>niveaux {{ ouvert.niveau_min }} à {{ ouvert.niveau_max }}</b></span><span>Cap <b class="num">{{ ouvert.level_cap }}</b></span>
-          <span><b class="num">{{ vue.contenu.donjons|length }}</b> donjons</span><span><b class="num">{{ vue.contenu.quetes|length }}</b> quêtes</span></div>
-      </div>
+    <details class="card bloc-etage" id="enteteEtage">
+      <summary>
+        <span class="eyebrow">Étage en cours</span>
+        <h2 id="floorTitle">{{ ouvert.nom }}</h2>
+        {{ resume_jauge(jauge) }}
+      </summary>
+      <div class="facts"><span>Tranche <b>niveaux {{ ouvert.niveau_min }} à {{ ouvert.niveau_max }}</b></span><span>Cap <b class="num">{{ ouvert.level_cap }}</b></span>
+        <span><b class="num">{{ vue.contenu.donjons|length }}</b> donjons</span><span><b class="num">{{ vue.contenu.quetes|length }}</b> quêtes</span></div>
       <p class="how">Chaque grimpeur peut rapporter <b>4 points</b> par étage, un par catégorie <b>terminée en entier</b>. L'étage suivant se descelle quand la guilde atteint le palier.</p>
       {{ jauge_bloc(jauge, encoches, formule, texte_jauge, verdict_plein, verdict_pas_plein) }}
-    </section>
+    </details>
     {% else %}
     <section class="card"><h2>La tour se prépare</h2><p class="muted">Aucun étage n'est ouvert pour l'instant.</p></section>
     {% endif %}

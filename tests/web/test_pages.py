@@ -601,3 +601,45 @@ def test_article_du_repere():
 
     assert [avec_article(n) for n in ("Crypte de Kardorim", "Château Ensablé", "Antichambre des Gloursons")] == [
         "la Crypte de Kardorim", "le Château Ensablé", "l'Antichambre des Gloursons"]
+
+
+def _jauge_rendue(actifs: int) -> str:
+    from epreuve.domaine.bareme import EtatJauge
+    from epreuve.web.rendu import creer_gabarits
+    from epreuve.web.vues import encoches
+
+    j = EtatJauge(0, 2 * actifs, False, actifs, 0, 4, {})
+    macros = creer_gabarits().env.get_template("_macros.html").module
+    jauge = macros.jauge_bloc(j, encoches(j), "Palier = 2 × 0 grimpeur actif", "t", "plein", "pas plein")
+    return macros.resume_jauge(j) + jauge
+
+
+def test_jauge_sans_grimpeur_actif_etat_vide_clair():
+    html = _jauge_rendue(0)
+    assert 'data-vide="1"' in html and ">Aucun grimpeur actif</span>" in html
+    assert "la jauge démarrera avec les premières fiches" in html
+    assert "0 / 0 points" not in html.split("data-j-vide")[0]  # le résumé du bandeau n'affiche pas « 0 / 0 »
+    # Le chiffrage creux reste dans la page (le script le montre dès qu'un grimpeur devient actif) mais masqué.
+    assert 'data-j-normal' in html and 'class="gcount" data-j-normal' in html
+
+
+def test_jauge_avec_actifs_affiche_le_resume_et_pas_l_etat_vide():
+    html = _jauge_rendue(12)
+    assert 'data-vide="0"' in html and ">0 / 24 points</span>" in html
+
+
+def test_entete_etage_en_depliant_un_seul_libelle():
+    c = monde().connecter(ID_BRINDILLE)
+    html = c.get("/etages/0").text
+    entete = html.split('id="enteteEtage"')[1].split("</summary>")[0]
+    assert "<details" in html.split('id="enteteEtage"')[0][-60:] and "Niveaux 1 à 20" in entete
+    assert entete.count("Étage 0") == 1 and 'data-j="resume"' in entete
+    tour = c.get("/").text.split('id="enteteEtage"')[1].split("</summary>")[0]
+    assert "Étage en cours" in tour and 'data-j="resume"' in tour
+
+
+def test_photo_de_fond_sur_chaque_page_jamais_un_etage_scelle():
+    c = monde().connecter(ID_BRINDILLE)
+    for chemin in ("/regles", "/histoire", "/grimpeurs"):
+        assert 'data-ambiance="/etages/0/image"' in c.get(chemin).text, chemin
+    assert 'data-ambiance="/etages/1/image"' not in c.get("/regles").text

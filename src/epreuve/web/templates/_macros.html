@@ -47,16 +47,22 @@
 </div>
 {%- endmacro %}
 
+{% macro resume_jauge(jauge) -%}
+<span class="resume" data-j="resume">{% if jauge.actifs == 0 %}Aucun grimpeur actif{% else %}{{ jauge.score }} / {{ jauge.palier }} points{% endif %}</span>
+{%- endmacro %}
+
 {% macro jauge_bloc(jauge, encoches, formule, texte, verdict_plein, verdict_pas_plein) -%}
+<div class="jauge-bloc" data-vide="{{ 1 if jauge.actifs == 0 else 0 }}">
 <div class="gauge{% if jauge.pleine %} ok{% endif %}" id="jauge" data-palier="{{ jauge.palier }}" data-actifs="{{ jauge.actifs }}" data-en-pause="{{ jauge.en_pause }}">
   <div class="eyebrow">Jauge de l'étage</div>
-  <div class="gcount"><strong><span data-j="score">{{ jauge.score }}</span><small> / {{ jauge.palier }} points</small></strong>
+  <p class="muted" data-j-vide>Aucun grimpeur actif pour l'instant : la jauge démarrera avec les premières fiches.</p>
+  <div class="gcount" data-j-normal><strong><span data-j="score">{{ jauge.score }}</span><small> / {{ jauge.palier }} points</small></strong>
     <span>{{ formule }}</span></div>
-  <div class="notches" id="encoches" role="img" aria-label="{{ jauge.score }} points sur {{ jauge.palier }} requis">
+  <div class="notches" id="encoches" data-j-normal role="img" aria-label="{{ jauge.score }} points sur {{ jauge.palier }} requis">
     {%- for c in encoches %}<i class="{{ c }}"{% if c != "vide" %} data-c{% endif %}></i>{% endfor -%}
   </div>
-  <div class="gfoot"><span data-j="manque">{% if jauge.pleine %}<b>Palier atteint</b>{% else %}Il manque <b class="num">{{ jauge.manquants }}</b> point{{ "s" if jauge.manquants > 1 }}{% endif %}</span><span>Maximum possible : <span class="num">{{ jauge.maximum }}</span></span></div>
-  <p class="muted" data-j="texte">{{ texte }}</p>
+  <div class="gfoot" data-j-normal><span data-j="manque">{% if jauge.pleine %}<b>Palier atteint</b>{% else %}Il manque <b class="num">{{ jauge.manquants }}</b> point{{ "s" if jauge.manquants > 1 }}{% endif %}</span><span>Maximum possible : <span class="num">{{ jauge.maximum }}</span></span></div>
+  <p class="muted" data-j="texte" data-j-normal>{{ texte }}</p>
 </div>
 <div class="cats">
   {%- for info in CATS %}{% set k = jauge.points_par_categorie.get(info.cle, 0) %}
@@ -67,7 +73,8 @@
   </div>
   {%- endfor %}
 </div>
-<p class="verdict{% if jauge.pleine %} open{% endif %}" id="verdict" data-plein="{{ verdict_plein }}" data-pas-plein="{{ verdict_pas_plein }}">{{ verdict_plein if jauge.pleine else verdict_pas_plein }}</p>
+<p class="verdict{% if jauge.pleine %} open{% endif %}" id="verdict" data-j-normal data-plein="{{ verdict_plein }}" data-pas-plein="{{ verdict_pas_plein }}">{{ verdict_plein if jauge.pleine else verdict_pas_plein }}</p>
+</div>
 {%- endmacro %}
 
 {% macro compteur(vue, ref) -%}

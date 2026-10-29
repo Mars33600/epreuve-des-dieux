@@ -50,6 +50,8 @@ function message(t){
 function majJauge(j){
   const g = $("jauge"); if (!g || !j) return;
   g.classList.toggle("ok", j.pleine);
+  const bloc = g.closest(".jauge-bloc"); if (bloc) bloc.dataset.vide = j.actifs === 0 ? "1" : "0";
+  texte(document.querySelector('[data-j="resume"]'), j.actifs === 0 ? "Aucun grimpeur actif" : `${j.score} / ${j.palier} points`);
   texte(g.querySelector('[data-j="score"]'), String(j.score));
   const manque = Math.max(0, j.palier - j.score), m = g.querySelector('[data-j="manque"]');
   if (m){
@@ -354,6 +356,14 @@ document.addEventListener("click", e => {
       () => message(t));
   }
 });
+
+/* =================== En-tête d'étage : ouvert ou fermé, mémorisé =================== */
+function initEntete(){
+  const d = $("enteteEtage"); if (!d) return;
+  try{ d.open = localStorage.getItem("epreuve.enteteEtage") === "1"; }catch(e){ /* stockage indisponible : fermé */ }
+  d.addEventListener("toggle", () => { try{ localStorage.setItem("epreuve.enteteEtage", d.open ? "1" : "0"); }catch(e){ /* sans mémoire */ } });
+}
+initEntete();
 
 /* =================== Décor : étoiles, poussières, image d'ambiance =================== */
 function ambiance(url){
