@@ -77,7 +77,29 @@
 <section class="b-carte" aria-labelledby="t-panoplies">
   <h2 id="t-panoplies">Bonus de panoplie</h2>
   <div id="b-panoplies"><p class="b-vide">Aucune panoplie active (il faut au moins 2 objets d'une même panoplie).</p></div>
+  <button type="button" class="b-bouton" id="b-panos-ouvrir">Parcourir les panoplies</button>
 </section>
+
+<dialog class="b-choix" id="b-panos" aria-labelledby="b-panos-titre">
+  <form method="dialog" class="b-choix-tete">
+    <h2 id="b-panos-titre">Panoplies</h2>
+    <button class="b-fermer" value="fermer" aria-label="Fermer">×</button>
+  </form>
+  <div class="b-filtres" id="b-panos-filtres">
+    <input id="p-texte" type="search" placeholder="Nom de la panoplie" autocomplete="off" aria-label="Nom de la panoplie">
+    <div class="b-filtres-ligne">
+      <label>Niveau min <input id="p-min" type="number" inputmode="numeric" min="1" max="200"></label>
+      <label>max <input id="p-max" type="number" inputmode="numeric" min="1" max="200"></label>
+    </div>
+    <label class="b-filtre-carac">Caractéristique du bonus complet
+      <select id="p-carac"><option value="">Toutes</option></select>
+    </label>
+  </div>
+  <p class="b-choix-compte" id="b-panos-compte" aria-live="polite"></p>
+  <ul class="b-resultats" id="b-panos-liste"></ul>
+  <button type="button" class="b-bouton" id="b-panos-plus" hidden>Plus de résultats</button>
+  <div class="b-pano" id="b-pano" hidden></div>
+</dialog>
 
 <dialog class="b-detail" id="b-detail" aria-labelledby="b-detail-titre">
   <form method="dialog" class="b-choix-tete">
@@ -106,6 +128,7 @@
   </div>
   <p class="b-choix-compte" id="b-choix-compte" aria-live="polite"></p>
   <button type="button" class="b-bouton b-retirer" id="b-retirer" hidden>Retirer l'objet</button>
+  <div class="b-variante" id="b-variante"></div>
   <section class="b-fm" id="b-fm" hidden aria-labelledby="b-fm-titre">
     <h3 id="b-fm-titre" class="b-surtitre">Forgemagie de l'objet porté</h3>
     <p class="b-aide">Par défaut, le jet maximal. Change une valeur, ou ajoute un exo.</p>

@@ -13,7 +13,15 @@ from functools import cache
 from pathlib import Path
 
 from epreuve.builder.arme import Arme
-from epreuve.builder.effets import EFFET_CARAC, EMPLACEMENTS, EXCLUS, TYPES_DOFUS, valeur_effet
+from epreuve.builder.effets import (
+    EFFET_CARAC,
+    EMPLACEMENTS,
+    EXCLUS,
+    TYPES_ARMES,
+    TYPES_DOFUS,
+    TYPES_FAMILIERS,
+    valeur_effet,
+)
 
 DOSSIER = Path(__file__).resolve().parents[3] / "donnees" / "duffus" / "builder"
 URL_ICONE = "https://api.dofusdb.fr/img/items/{}.png"  # autorisée par la CSP (img-src)
@@ -103,6 +111,44 @@ class Catalogue:
         lire = lambda nom: json.loads((dossier / nom).read_text(encoding="utf-8"))  # noqa: E731
         return cls.depuis_json(lire("objets.json"), lire("panoplies.json"))
 
+    def niveau_panoplie(self, p: Panoplie) -> int:
+        """`levelMax` de Duffus : le niveau de l'objet le plus haut de la panoplie."""
+        return max((o.niveau for i in p.objets if (o := self.objets.get(i))), default=0)
+
+    def chercher_panoplies(self, *, texte: str = "", niveau_min: int | None = None, niveau_max: int | None = None,
+                           caracs: list[str] | None = None, limite: int = 30,
+                           decalage: int = 0) -> tuple[int, list[dict]]:
+        """Le navigateur de panoplies : nom, niveau (objet le plus haut), caractéristiques du bonus complet."""
+        cherche = normaliser(texte) if len(texte.strip()) >= 2 else ""
+        voulues = set(caracs or [])
+        trouvees = []
+        for p in self.panoplies.values():
+            niveau = self.niveau_panoplie(p)
+            if not niveau or (niveau_min is not None and niveau < niveau_min) or \
+                    (niveau_max is not None and niveau > niveau_max):
+                continue
+            if cherche and cherche not in normaliser(p.nom):
+                continue
+            complet = max((k for k, v in p.bonus.items() if v), default=0)
+            bonus = _caracs_bonus(p.bonus.get(complet, ()))
+            if voulues and not voulues <= {c for c, v in bonus if v > 0}:
+                continue
+            trouvees.append({"id": p.id, "nom": p.nom, "niveau": niveau,
+                             "nb_objets": sum(1 for i in p.objets if i in self.objets), "bonus_complet": bonus,
+                             "nb_complet": complet})
+        trouvees.sort(key=lambda x: (-x["niveau"], -x["id"]))
+        return len(trouvees), trouvees[decalage:decalage + limite]
+
+    def panoplie(self, panoplie_id: int) -> dict | None:
+        p = self.panoplies.get(panoplie_id)
+        if p is None:
+            return None
+        objets = [o for i in p.objets if (o := self.objets.get(i))]
+        places = emplacements_panoplie(objets)
+        return {"id": p.id, "nom": p.nom, "niveau": self.niveau_panoplie(p),
+                "objets": [{**o.resume(), "emplacement": places.get(o.id)} for o in objets],
+                "bonus": [[k, _caracs_bonus(v)] for k, v in sorted(p.bonus.items()) if v]}
+
     def objet(self, objet_id: int | None) -> Objet | None:
         return self.objets.get(objet_id) if objet_id is not None else None
 
@@ -148,6 +194,26 @@ def _arme(d: dict | None) -> Arme | None:
         return None
     return Arme(d["pa"], d["po_min"], d["po"], d["cc"], d["bonus_cc"], d["lancers"],
                 tuple(tuple(e) for e in d["effets"]))
+
+
+def _caracs_bonus(effets: tuple[Effet, ...]) -> list[list]:
+    return [[k, v] for k, v in caracs_des_effets(effets).items()]
+
+
+def emplacements_panoplie(objets: list[Objet]) -> dict[int, str]:
+    """Où va chaque objet quand on équipe la panoplie entière (`Ri` chez Duffus) : par type, les anneaux dans
+    l'ordre (anneau 1 puis 2) ; les Dofus et trophées ne sont pas placés."""
+    par_type = {16: "coiffe", 17: "cape", 1: "amulette", 10: "ceinture", 11: "bottes", 82: "bouclier",
+                **{t: "arme" for t in TYPES_ARMES}, **{t: "familier" for t in TYPES_FAMILIERS.values()}}
+    places: dict[int, str] = {}
+    anneaux = ["anneau1", "anneau2"]
+    for o in objets:
+        if o.type == 9:
+            if anneaux:
+                places[o.id] = anneaux.pop(0)
+        elif o.type in par_type and par_type[o.type] not in places.values():
+            places[o.id] = par_type[o.type]
+    return places
 
 
 @cache

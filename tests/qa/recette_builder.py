@@ -9,6 +9,7 @@ Sans base : un faux visiteur et un faux dépôt de builds.
 """
 
 import asyncio
+import socket
 import sys
 import threading
 import time
@@ -23,7 +24,16 @@ from epreuve.web.app import creer_app  # noqa: E402
 from epreuve.web.builder import ServicesBuilder, Visiteur  # noqa: E402
 from tests.builder.test_web import FauxBuilds  # noqa: E402
 
-ADRESSE = "http://127.0.0.1:8765"
+
+def port_libre() -> int:
+    # Un port choisi par le système : d'autres serveurs de démo tournent parfois sur la machine.
+    with socket.socket() as s:
+        s.bind(("127.0.0.1", 0))
+        return s.getsockname()[1]
+
+
+PORT = port_libre()
+ADRESSE = f"http://127.0.0.1:{PORT}"
 LARGEUR_PAGE = "[document.documentElement.scrollWidth, document.documentElement.clientWidth]"
 
 
@@ -34,7 +44,7 @@ def lancer_serveur() -> uvicorn.Server:
         return Visiteur(11, False, "jeton", 1, "Brindille")
 
     app.state.builder = ServicesBuilder(identifier, builds=FauxBuilds())
-    serveur = uvicorn.Server(uvicorn.Config(app, host="127.0.0.1", port=8765, log_level="warning"))
+    serveur = uvicorn.Server(uvicorn.Config(app, host="127.0.0.1", port=PORT, log_level="warning"))
     threading.Thread(target=serveur.run, daemon=True).start()
     time.sleep(1.5)
     return serveur
@@ -72,6 +82,15 @@ async def recette_a(navigateur, largeur: int, sortie: Path) -> list[str]:
     await page.click("#b-fm-ajouter")
     await page.wait_for_selector(".b-fm-ligne.exo")
     await page.click("#b-choix .b-fermer")
+    # Variante de la coiffe, échangée deux fois : on revient au même build.
+    await page.click(".b-emplacement:nth-child(1) .b-case")
+    await page.click("#b-variante >> text=Choisir une variante")
+    await page.fill("#f-texte", "ankarton")
+    await page.click(".b-objet >> text='Coiffe du Bouftou Ankarton'")
+    await page.wait_for_selector(".b-emplacement:nth-child(1) .b-var")
+    for _ in range(2):
+        await page.click(".b-emplacement:nth-child(1) .b-case")
+        await page.click("#b-variante >> text=Échanger avec l'objet porté")
     await choisir(page, 9, "bouftou", "Marteau du Bouftou", niveau_max="20")
     await page.wait_for_selector("#b-arme table")
     await page.click("[data-buff='base']")
@@ -89,6 +108,12 @@ async def recette_a(navigateur, largeur: int, sortie: Path) -> list[str]:
         problemes.append(f"{largeur} px : {pa} PA au lieu de 7")
     if force != "230":
         problemes.append(f"{largeur} px : Force {force} au lieu de 230")
+    # Navigateur de panoplies : toute la panoplie du Bouftou d'un coup.
+    await page.click("#b-panos-ouvrir")
+    await page.fill("#p-texte", "bouftou")
+    await page.click(".b-objet-pano >> text='Panoplie du Bouftou'")
+    await page.click("#b-pano >> text=Équiper toute la panoplie")
+    await page.wait_for_selector(".b-panoplie >> text=(8/8)")
     await page.fill("#b-nom", "Recette")
     await page.click("#b-enregistrer")
     await page.wait_for_url(lambda u: u.rstrip("/").split("/")[-1].isdigit())

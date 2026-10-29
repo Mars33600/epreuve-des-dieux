@@ -28,6 +28,7 @@ build = Table(
     Column("caracs_parcho", JSONB, nullable=False),
     Column("note", Text, nullable=False),
     Column("fm", JSONB, nullable=False),
+    Column("variantes", JSONB, nullable=False),
     Column("partage", Boolean, nullable=False),
     Column("cree_le", DateTime(timezone=True), nullable=False),
     Column("maj_le", DateTime(timezone=True), nullable=False),
@@ -47,6 +48,7 @@ class Contenu:
     note: str = ""
     partage: bool = False
     fm: dict[str, dict[str, int]] = field(default_factory=dict)  # emplacement → effectId (texte) → valeur
+    variantes: dict[str, dict] = field(default_factory=dict)  # emplacement → {"id": objet, "fm": {effectId: valeur}}
 
 
 @dataclass(frozen=True)
@@ -66,7 +68,7 @@ class DepotBuilds:
     def _valeurs(c: Contenu) -> dict:
         return {"nom": c.nom, "classe": c.classe, "niveau": c.niveau, "objets": c.objets,
                 "caracs_base": c.caracs_base, "caracs_parcho": c.caracs_parcho, "note": c.note, "partage": c.partage,
-                "fm": c.fm}
+                "fm": c.fm, "variantes": c.variantes}
 
     def _requete(self):
         return (select(build, t.grimpeur.c.pseudo_ig.label("pseudo"))
@@ -76,7 +78,8 @@ class DepotBuilds:
     def _ligne(r) -> BuildEnregistre:
         return BuildEnregistre(r.id, r.grimpeur_id, r.pseudo,
                                Contenu(r.nom, r.classe, r.niveau, dict(r.objets), dict(r.caracs_base),
-                                       dict(r.caracs_parcho), r.note, r.partage, dict(r.fm)), r.maj_le)
+                                       dict(r.caracs_parcho), r.note, r.partage, dict(r.fm), dict(r.variantes)),
+                               r.maj_le)
 
     async def creer(self, grimpeur_id: int, contenu: Contenu, maintenant: datetime) -> int:
         async with self._moteur.begin() as c:

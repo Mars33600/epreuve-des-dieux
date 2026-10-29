@@ -81,3 +81,37 @@ def test_exclus_et_texte_court():
     assert [o.id for o in cat.rechercher("coiffe")[1]] == [1]
     assert cat.rechercher("coiffe", texte="z")[0] == 1  # moins de 2 caractères : pas de filtre
     assert cat.rechercher("coiffe", texte="zz")[0] == 0
+
+
+def test_navigateur_de_panoplies():
+    cat = catalogue_par_defaut()
+    total, page = cat.chercher_panoplies(texte="bouftou", niveau_max=20)
+    bouftou = next(p for p in page if p["id"] == 1)
+    assert (bouftou["nom"], bouftou["niveau"], bouftou["nb_objets"], bouftou["nb_complet"]) == \
+        ("Panoplie du Bouftou", 20, 8, 8)
+    assert ["PA", 1] in bouftou["bonus_complet"] and ["Force", 50] in bouftou["bonus_complet"]
+    _, avec_pa = cat.chercher_panoplies(caracs=["PA"], limite=1000)
+    assert avec_pa and all(any(c == "PA" and v > 0 for c, v in p["bonus_complet"]) for p in avec_pa)
+    _, hauts = cat.chercher_panoplies(niveau_min=190, limite=1000)
+    assert all(p["niveau"] >= 190 for p in hauts) and [p["niveau"] for p in hauts] == \
+        sorted((p["niveau"] for p in hauts), reverse=True)
+    assert total >= 1
+
+
+def test_detail_et_emplacements_de_la_panoplie():
+    d = catalogue_par_defaut().panoplie(1)
+    places = {o["nom"]: o["emplacement"] for o in d["objets"]}
+    assert places == {"Coiffe du Bouftou": "coiffe", "Cape Bouffante": "cape", "Marteau du Bouftou": "arme",
+                      "Anneau de Bouze le Clerc": "anneau1", "Boufbottes": "bottes", "Amulette du Bouftou": "amulette",
+                      "Ceinture du Bouftou": "ceinture", "Bouclier du Bouftou": "bouclier"}
+    assert d["bonus"][0] == [2, [["Force", 5], ["Intelligence", 5], ["Vitalité", 5]]]
+    assert catalogue_par_defaut().panoplie(999999) is None
+
+
+def test_emplacements_anneaux_et_dofus():
+    from epreuve.builder.catalogue import emplacements_panoplie
+
+    cat = Catalogue.depuis_json([{"id": i, "nom": str(i), "niveau": 1, "type": t, "effets": []}
+                                 for i, t in ((1, 9), (2, 9), (3, 9), (4, 23), (5, 16), (6, 16))], [])
+    assert emplacements_panoplie([cat.objet(i) for i in range(1, 7)]) == \
+        {1: "anneau1", 2: "anneau2", 5: "coiffe"}  # 3e anneau, Dofus et 2e coiffe non placés

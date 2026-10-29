@@ -3,6 +3,7 @@
     GET  /builder                         mes builds et ceux de la guilde, et « Nouveau build »
     GET  /builder/nouveau                 l'éditeur, sur un build vierge
     GET  /api/builder/objets              la fenêtre de choix d'un emplacement (filtres de Duffus)
+    GET  /api/builder/panoplies[/{id}]    le navigateur de panoplies (recherche, détail, emplacements pour tout équiper)
     POST /api/builder/sorts               les sorts de la classe au niveau du build (tables de l'encyclopédie)
     POST /api/builder/calcul              totaux, panoplies, conditions, base, parchemins, dérivés (sans effet de bord)
     GET  /builder/{id}                    un build : éditeur pour l'auteur, lecture seule s'il est partagé
@@ -38,6 +39,7 @@ from epreuve.builder.catalogue import Catalogue, catalogue_par_defaut
 from epreuve.builder.depot import BuildEnregistre, Contenu, DepotBuilds
 from epreuve.builder.effets import (
     CARACS_PRINCIPALES,
+    EFFET_CARAC,
     EFFET_POSITIF,
     EMPLACEMENTS,
     GROUPES,
@@ -174,7 +176,7 @@ def _build_json(b: BuildEnregistre) -> dict:
     c = b.contenu
     return {"id": b.id, "auteur": b.auteur, "nom": c.nom, "classe": c.classe, "niveau": c.niveau, "objets": c.objets,
             "caracs_base": c.caracs_base, "caracs_parcho": c.caracs_parcho, "note": c.note, "partage": c.partage,
-            "fm": c.fm}
+            "fm": c.fm, "variantes": c.variantes}
 
 
 @routeur.get("/builder/{build_id:int}", response_class=HTMLResponse)
@@ -261,6 +263,11 @@ async def api_objets(request: Request, emplacement: str, q: str = "", niveau_min
     return JSONResponse({"total": total, "objets": [o.resume() for o in page]})
 
 
+class CorpsVariante(BaseModel):
+    id: int
+    fm: dict[int, int] = Field(default_factory=dict, max_length=32)
+
+
 class CorpsBuild(BaseModel):
     """Le build tel que l'envoie la page. Les bornes fines (niveau, parchemins) sont celles de `calcul.nettoyer`."""
 
@@ -269,6 +276,7 @@ class CorpsBuild(BaseModel):
     caracs_base: dict[str, int] = Field(default_factory=dict, max_length=12)
     caracs_parcho: dict[str, int] = Field(default_factory=dict, max_length=12)
     fm: dict[str, dict[int, int]] = Field(default_factory=dict, max_length=16)
+    variantes: dict[str, CorpsVariante] = Field(default_factory=dict, max_length=16)
     mode_arme: str = "melee"
     buff_arme: str = ""
 
@@ -278,7 +286,28 @@ class CorpsBuild(BaseModel):
         return Build(self.niveau, dict(self.objets), bornes(self.caracs_base), bornes(self.caracs_parcho), fm)
 
 
-def resultat_json(build: Build, catalogue: Catalogue, mode_arme: str = "melee", buff_arme: str = "") -> dict:
+@routeur.get("/api/builder/panoplies")
+async def api_panoplies(request: Request, q: str = "", niveau_min: int | None = None, niveau_max: int | None = None,
+                        carac: list[str] = Query(default=[]), decalage: int = 0) -> Response:  # noqa: B008
+    if await _visiteur(request) is None:
+        return _erreur(401, MESSAGE_CONNEXION)
+    if any(c not in ORDRE_CARACS for c in carac) or decalage < 0 or len(q) > 100:
+        return _erreur(422, "Filtre invalide.")
+    total, page = _services(request).catalogue().chercher_panoplies(
+        texte=q, niveau_min=niveau_min, niveau_max=niveau_max, caracs=carac, limite=PAGE_MAX, decalage=decalage)
+    return JSONResponse({"total": total, "panoplies": page})
+
+
+@routeur.get("/api/builder/panoplies/{panoplie_id:int}")
+async def api_panoplie(request: Request, panoplie_id: int) -> Response:
+    if await _visiteur(request) is None:
+        return _erreur(401, MESSAGE_CONNEXION)
+    p = _services(request).catalogue().panoplie(panoplie_id)
+    return JSONResponse(p) if p else _erreur(404, "Panoplie introuvable.")
+
+
+def resultat_json(build: Build, catalogue: Catalogue, mode_arme: str = "melee", buff_arme: str = "",
+                  variantes: dict[str, int] | None = None) -> dict:
     r = calculer(build, catalogue)
     arme = catalogue.objet(build.objets.get("arme"))
     calcul_arme = None
@@ -290,7 +319,9 @@ def resultat_json(build: Build, catalogue: Catalogue, mode_arme: str = "melee", 
                           for p in r.panoplies],
             "points": {"total": r.points_total, "depenses": r.points_depenses,
                        "restants": r.points_total - r.points_depenses},
-            "puissance": puissance_par_element(r.totaux), "detail": r.detail, "arme": calcul_arme}
+            "puissance": puissance_par_element(r.totaux), "detail": r.detail, "arme": calcul_arme,
+            "variantes": {e: o.resume() for e, oid in (variantes or {}).items()
+                          if e in EMPLACEMENTS and (o := catalogue.objet(oid))}}
 
 
 async def _lire_corps(request: Request, modele: type[BaseModel]) -> BaseModel | None:
@@ -309,7 +340,8 @@ async def api_calcul(request: Request) -> Response:
         return _erreur(422, "Build illisible.")
     if corps.mode_arme not in MODES or corps.buff_arme not in BUFFS_PUISSANCE:
         return _erreur(422, "Réglage d'arme inconnu.")
-    resultat = resultat_json(corps.build(), _services(request).catalogue(), corps.mode_arme, corps.buff_arme)
+    resultat = resultat_json(corps.build(), _services(request).catalogue(), corps.mode_arme, corps.buff_arme,
+                             {e: v.id for e, v in corps.variantes.items()})
     return JSONResponse({"ok": True, **resultat})
 
 
@@ -352,7 +384,13 @@ class CorpsEnregistre(CorpsBuild):
         b = nettoyer(self.build())
         return Contenu(self.nom.strip(), self.classe, b.niveau, {k: v for k, v in b.objets.items() if v is not None},
                        b.caracs_base, b.caracs_parcho, self.note, self.partage,
-                       {e: {str(k): v for k, v in f.items()} for e, f in b.fm.items()})
+                       {e: {str(k): v for k, v in f.items()} for e, f in b.fm.items()}, self.variantes_propres())
+
+    def variantes_propres(self) -> dict[str, dict]:
+        """Les variantes d'emplacements connus, forgemagie bornée et limitée aux effets de caractéristique."""
+        return {e: {"id": v.id, "fm": {str(k): max(-10_000, min(10_000, x)) for k, x in v.fm.items()
+                                       if k in EFFET_CARAC}}
+                for e, v in self.variantes.items() if e in EMPLACEMENTS}
 
 
 def _origine_permise(request: Request) -> bool:
@@ -426,7 +464,7 @@ async def api_dupliquer(request: Request, build_id: int) -> Response:
         return _erreur(404, "Build introuvable.")
     c = source.contenu
     copie = Contenu(f"Copie de {c.nom}"[:80], c.classe, c.niveau, c.objets, c.caracs_base, c.caracs_parcho, c.note,
-                    partage=False, fm=c.fm)
+                    partage=False, fm=c.fm, variantes=c.variantes)
     s = _services(request)
     return JSONResponse({"ok": True, "id": await s.builds.creer(v.grimpeur_id, copie, s.horloge())},
                         status_code=201)
