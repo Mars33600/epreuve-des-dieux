@@ -162,7 +162,20 @@ async function toutLeDonjon(btn){
 }
 document.addEventListener("change", e => {
   const box = e.target.closest("input[data-ref]"); if (box) cocher(box);
+  const etape = e.target.closest("input[data-etape]"); if (etape) suivreEtape(etape);
 });
+/* Suivi étape par étape (perso) : n'agit jamais sur la case « Faite » de la quête. */
+async function suivreEtape(box){
+  const faite = box.checked; box.disabled = true;
+  try{
+    const r = await fetch("/api/etapes", {method:"POST", credentials:"same-origin",
+      headers:{"Content-Type":"application/json", "X-CSRF-Token":csrf},
+      body:JSON.stringify({quete_id:Number(box.dataset.quete), ordre:Number(box.dataset.etape), faite})});
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok || !d.ok){ box.checked = !faite; message(d.message || "Pas enregistré, réessaie."); }
+  }catch(e){ box.checked = !faite; message("Pas enregistré, réessaie."); }
+  box.disabled = false;
+}
 
 /* =================== Filtre cumulatif (mémorisé sur l'appareil) =================== */
 const CLE_FILTRE = "epreuve-filtre";

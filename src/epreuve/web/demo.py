@@ -232,6 +232,7 @@ class DepotDemo:
         self._grimpeurs: dict[int, Grimpeur] = {}
         self._coches_cases: dict[int, set[int]] = {}
         self._coches_quetes: dict[int, set[int]] = {}
+        self._suivi: set[tuple[int, int, int]] = set()
         self._activite: dict[int, datetime] = {}
         self._liste: dict[int, Statut] = {ID_NOUVELLE: "actif"}
         for id_, pseudo, classe, niv, statut, d, p, s in BRUT:
@@ -323,6 +324,13 @@ class DepotDemo:
         if q is None or f is None:
             return None
         return replace(f, etage_numero=self._etages[q.etage_id].numero)
+
+    async def etapes_suivies(self, grimpeur_id: int, quete_id: int) -> frozenset[int]:
+        return frozenset(o for g, q, o in self._suivi if g == grimpeur_id and q == quete_id)
+
+    async def suivre_etape(self, grimpeur_id: int, quete_id: int, ordre: int, faite: bool,
+                           maintenant: datetime) -> None:
+        (self._suivi.add if faite else self._suivi.discard)((grimpeur_id, quete_id, ordre))
 
     async def etage_des_quetes(self) -> dict[int, int]:
         return {q.id: self._etages[q.etage_id].numero for q in self._quetes.values()}

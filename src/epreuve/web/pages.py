@@ -145,8 +145,11 @@ async def page_quete(request: Request, numero: int, quete_id: int):
         raise Refus(404, INTROUVABLE)
     fiche, carte = await fiche_pour(request, v, etage, quete_id)
     ref = ElementRef("quete", quete.id)
+    cochable = peut_cocher_soi(v, etage, s.regles)
+    # Le suivi des étapes est personnel : seulement pour le grimpeur connecté sur sa propre fiche.
+    suivies = await s.depot.etapes_suivies(v.grimpeur.id, quete_id) if cochable and v.grimpeur else None
     ctx = {"etage": etage, "quete": quete, "fiche": fiche, "carte": carte, "vue": vue,
-           "cible": v.grimpeur, "cochable": peut_cocher_soi(v, etage, s.regles),
+           "cible": v.grimpeur, "cochable": cochable, "etapes_suivies": suivies,
            "pas_fait": qui(ref, vue.grimpeurs, vue.coches, fait=False),
            "fait": qui(ref, vue.grimpeurs, vue.coches, fait=True)}
     if "text/html-fragment" in request.headers.get("accept", ""):
