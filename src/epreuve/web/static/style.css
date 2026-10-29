@@ -437,7 +437,10 @@ article.card > .qd-sec{padding-top:4px}
    Gradins anonymes en haut : UN seul élément dessiné ici (aucun étage dans le HTML), qui s'efface dans la brume.
    Dessous, les seuls étages ouverts, nommés ; la jauge de l'étage en cours vient après, sans chevauchement. */
 .accueil-tour{display:grid;gap:var(--s5);justify-items:center;min-width:0}
-.pyr-note{max-width:560px;text-align:center;color:var(--muted);font-size:var(--t-sm);background:rgba(5,8,22,.78);border-radius:var(--r);padding:var(--s2) var(--s4)}
+.pyr-note{max-width:min(1100px,100%);text-align:center;color:var(--gold-hi);font:italic 400 clamp(17px,1.9vw,23px)/1.4 var(--f-body);letter-spacing:.01em;
+  text-shadow:0 0 18px rgba(227,181,82,.25);background:rgba(5,8,22,.78);border-radius:var(--r);padding:var(--s3) var(--s5)}
+/* Une seule ligne dès que la largeur le permet ; elle se replie proprement sur mobile. */
+@media (min-width:1100px){.pyr-note{white-space:nowrap}}
 .pyr{position:relative;width:min(100%,760px);display:grid;justify-items:center;isolation:isolate}
 .pyr-haut{position:relative;width:64%;height:clamp(260px,44vh,440px);
   background:
