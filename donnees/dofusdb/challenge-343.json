@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "{0} muss als Letztes besiegt werden.",
+  "en": "{0} must be finished off last.",
+  "es": "{0} debe ser eliminado el último.",
+  "fr": "{0} doit être achevé en dernier.",
+  "id": "1014318",
+  "pt": "{0} deve ser derrotado por último."
+ },
+ "id": 343,
+ "name": {
+  "de": "Als Letztes",
+  "en": "Last",
+  "es": "Último",
+  "fr": "Dernier",
+  "id": "851201",
+  "pt": "Último"
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer dürfen während ihres Spielzugs jede Aktion insgesamt nur einmal ausführen.",
+  "en": "Allied fighters must not use the same action more than once on each of their turns.",
+  "es": "Los luchadores aliados solo pueden realizar una sola vez la misma acción durante su turno de juego.",
+  "fr": "Les combattants alliés ne doivent utiliser qu'une seule fois une même action pendant leurs tours de jeu.",
+  "id": "1014240",
+  "pt": "Os combatentes aliados não devem utilizar uma mesma ação mais de uma vez durante seus turnos."
+ },
+ "id": 120,
+ "name": {
+  "de": "Vielseitigkeit",
+  "en": "Versatile",
+  "es": "Versátil",
+  "fr": "Versatile",
+  "id": "851156",
+  "pt": "Versátil"
+ }
+}

@@ -52,6 +52,10 @@ class ClientDofusDB:
         """Un succès, avec `categoryId` et ses `objectives` (critères `Qf=…`, `OA=…`)."""
         return await self._get(f"/achievements/{id_}")
 
+    async def defi(self, id_: int) -> dict:
+        """Un challenge de donjon (le `[challenge,N]` d'un succès) : `name.fr` et `description.fr`, la règle."""
+        return await self._get(f"/challenges/{id_}")
+
     async def quete(self, id_: int) -> dict:
         """Une quête : `name.fr`, `startCriterion` (à lire avec `nature.quetes_obligatoires`)."""
         return await self._get(f"/quests/{id_}")

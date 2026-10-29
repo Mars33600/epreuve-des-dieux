@@ -60,6 +60,11 @@ class Donjon:
     masque: bool = False
 
 
+# Une règle qui change d'un combat à l'autre (le monstre à viser est choisi par le jeu) est écrite en deux
+# temps dans `condition` : la règle, puis ce marqueur, puis l'explication. Pas de colonne en plus.
+MARQUE_ALEATOIRE = " Aléatoire : "
+
+
 @dataclass(frozen=True)
 class CaseSucces:
     id: int
@@ -69,6 +74,17 @@ class CaseSucces:
     condition: str
     est_classique: bool
     masquee: bool = False
+
+    @property
+    def regle(self) -> str:
+        """La règle à afficher, sans l'explication « aléatoire »."""
+        return self.condition.partition(MARQUE_ALEATOIRE)[0]
+
+    @property
+    def explication_aleatoire(self) -> str | None:
+        """Pourquoi la règle change d'un combat à l'autre ; None si la règle est fixe."""
+        _, marque, suite = self.condition.partition(MARQUE_ALEATOIRE)
+        return suite if marque else None
 
 
 @dataclass(frozen=True)

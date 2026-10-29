@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer müssen ihren Spielzug auf einem Feld beenden, das an das Feld eines anderen verbündeten Kämpfers angrenzt.",
+  "en": "Allied fighters must end their turn on a cell adjacent to another allied fighter.",
+  "es": "Los luchadores aliados deben terminar su turno en una casilla adyacente a la de otro luchador aliado.",
+  "fr": "Les combattants alliés doivent finir leur tour sur une cellule adjacente à celle d'un autre combattant allié.",
+  "id": "1011900",
+  "pt": "Os combatentes aliados devem terminar seus turnos em uma célula adjacente à de um outro combatente aliado."
+ },
+ "id": 342,
+ "name": {
+  "de": "Anhängsel",
+  "en": "Tight",
+  "es": "Pegajoso",
+  "fr": "Collant",
+  "id": "851196",
+  "pt": "Pegajoso"
+ }
+}

@@ -528,3 +528,12 @@ h1,h2,h3{font-weight:700}
 .filtre-vide[hidden]{display:none}
 .player .ptop small.etg{display:block;font-weight:400;color:var(--faint)}
 .ticks > li[hidden]{display:none}
+
+/* Page d'étage : section « Donjons de l'étage », repères dans le fil du guide, règles des défis */
+.liste > li[id^="donjon-"]{scroll-margin-top:72px}
+.liste > li.repere{border-bottom:0;padding:0}
+.repere a{display:flex;align-items:center;gap:8px;min-height:40px;padding:6px 10px;border-radius:6px;border:1px dashed color-mix(in srgb,var(--c-donjon) 55%,transparent);color:var(--c-donjon);text-decoration:none;font-size:var(--t-sm)}
+.repere a span:nth-of-type(1){flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
+.repere a:hover{background:color-mix(in srgb,var(--c-donjon) 10%,transparent)}
+.alea{display:inline-block;margin-left:6px;padding:0 6px;border-radius:999px;border:1px solid var(--c-donjon);color:var(--c-donjon);font-size:11px;font-weight:700;line-height:1.5;text-transform:uppercase;letter-spacing:.04em}
+.alea-note{display:block;color:var(--muted);font-style:italic}

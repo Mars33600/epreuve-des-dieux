@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer dürfen ihren Spielzug nie auf einem Feld beenden, das an das Feld eines Gegners angrenzt.",
+  "en": "Allied fighters must never finish their turn on a cell adjacent to an enemy.",
+  "es": "Los luchadores aliados nunca deben terminar su turno en una casilla adyacente a la de un enemigo.",
+  "fr": "Les combattants alliés ne doivent jamais finir leur tour sur une cellule adjacente à celle d'un ennemi.",
+  "id": "1011949",
+  "pt": "Os combatentes aliados nunca devem terminar seus turnos em uma célula adjacente à de um inimigo."
+ },
+ "id": 121,
+ "name": {
+  "de": "Vorsichtig",
+  "en": "Cautious",
+  "es": "Prudente",
+  "fr": "Prudent",
+  "id": "1013974",
+  "pt": "Prudente"
+ }
+}

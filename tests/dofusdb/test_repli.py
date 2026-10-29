@@ -6,7 +6,8 @@ import httpx
 import pytest
 
 from epreuve.dofusdb.client import USER_AGENT, ClientDofusDB
-from epreuve.dofusdb.repli import ClientEnCache, succes_du_donjon
+from epreuve.dofusdb.repli import ClientEnCache, formater_regle, id_du_defi, regle_du_defi, succes_du_donjon
+from epreuve.domaine.modeles import MARQUE_ALEATOIRE
 from tests.conftest import DONNEES, transport_dofusdb
 
 
@@ -18,7 +19,9 @@ async def test_succes_du_donjon_90_depuis_dofusdb_puis_cache(tmp_path):
                                            "Kardorim (Premier)", "Kardorim (Spécial)"]
     assert [e for *_, e in cases] == [True, False, False, False, False]
     assert cases[0][0] == "dofusdb:33" and "[challenge" not in cases[1][2]
-    assert len(appels) == 6 and (tmp_path / "dungeon-90.json").exists()
+    assert cases[1][2] == "Finir le donjon à deux personnages au plus."
+    assert cases[3][2].endswith("d'un combat à l'autre.")
+    assert len(appels) == 10 and (tmp_path / "dungeon-90.json").exists()
     assert await succes_du_donjon(ClientEnCache(None, tmp_path), 90) == cases  # relu sans réseau
 
 
@@ -115,3 +118,29 @@ async def test_client_pacing_une_requete_par_seconde(monkeypatch):
         await c.quete(1)
         await c.quete(2)
     assert len(attentes) == 1 and 0 < attentes[0] <= 1
+
+
+def test_formater_regle_duo_sans_le_parametre_de_tours():
+    duo = "Vaincre tous les monstres avec 2 personnages maximum et en moins de {1} tours."
+    assert formater_regle(duo) == "Finir le donjon à deux personnages au plus."
+
+
+def test_formater_regle_fixe_reste_telle_quelle():
+    regle = "Les ennemis ne doivent pas recevoir de soin."
+    assert formater_regle(regle + "\n") == regle
+
+
+def test_formater_regle_aleatoire_explique_et_ne_nomme_aucun_monstre():
+    texte = formater_regle("{0} doit être achevé en premier.")
+    regle, marque, explication = texte.partition(MARQUE_ALEATOIRE)
+    assert regle == "Le monstre désigné par le jeu doit être achevé en premier." and marque
+    assert "{" not in texte and "changer d'un combat à l'autre" in explication
+
+
+async def test_regle_du_defi_lue_chez_dofusdb_et_introuvable_sans_cache(tmp_path):
+    texte = "Les combattants alliés doivent utiliser exactement un point de mouvement par tour de jeu."
+    (tmp_path / "challenge-115.json").write_text(json.dumps({"id": 115, "description": {"fr": texte}}))
+    c = ClientEnCache(None, tmp_path)
+    assert (await regle_du_defi(c, 115)).startswith("Les combattants alliés")
+    assert await regle_du_defi(c, 999) is None
+    assert id_du_defi("Vaincre X en validant le challenge [challenge,115].") == 115 and id_du_defi("Vaincre X.") is None

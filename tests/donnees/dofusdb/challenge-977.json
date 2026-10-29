@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Kardoripp darf seine Runde niemals in Nahkampfentfernung zu einem Kämpfer beenden. \nDie Kardoripps dürfen weder Schaden erleiden noch geschubst werden.",
+  "en": "Kardorim must never finish his turn adjacent to a fighter. \nKardoribs must not suffer damage or be pushed.",
+  "es": "Chadalid no debe acabar nunca su turno en contacto con un luchador. \nLos chadaribs no deben sufrir daños ni ser empujados.",
+  "fr": "Kardorim ne doit jamais terminer son tour au contact d'un combattant. \nLes Kardoribs ne doivent pas subir de dommages, ni être poussés.",
+  "id": "1121929",
+  "pt": "Kardorim nunca deve terminar o turno em contato com um combatente. \nOs Kardoribs não podem nunca sofrer danos, nem serem empurrados."
+ },
+ "id": 977,
+ "name": {
+  "de": "Lass mich los",
+  "en": "Don't Tickle My Ribs",
+  "es": "Suéltame las costillas",
+  "fr": "Lâche mes côtes",
+  "id": "1009895",
+  "pt": "Me deixa"
+ }
+}

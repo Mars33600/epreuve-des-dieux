@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Verbündete Kämpfer müssen in jedem Spielzug genau einen Bewegungspunkt verwenden.",
+  "en": "Allied fighters must use exactly one Movement Point per turn.",
+  "es": "Los luchadores aliados deben utilizar exactamente un punto de movimiento por cada turno de juego.",
+  "fr": "Les combattants alliés doivent utiliser exactement un point de mouvement par tour de jeu.",
+  "id": "1194119",
+  "pt": "Os combatentes aliados devem usar exatamente um ponto de movimento por turno."
+ },
+ "id": 115,
+ "name": {
+  "de": "Zombie",
+  "en": "Zombie",
+  "es": "Zombi",
+  "fr": "Zombie",
+  "id": "850890",
+  "pt": "Zumbi"
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Wenn ein Gegner angegriffen wird, muss dieser besiegt werden, bevor er dran ist.",
+  "en": "When an enemy is attacked, they must be finished off before they start their turn.",
+  "es": "Cuando se ataca a un enemigo, se debe acabar con él antes del inicio de su turno de juego.",
+  "fr": "Lorsqu'un ennemi est attaqué, il doit être achevé avant le début de son tour de jeu.",
+  "id": "1014392",
+  "pt": "Quando um inimigo for atacado, ele deve ser derrotado antes do início do turno dele."
+ },
+ "id": 122,
+ "name": {
+  "de": "Blitzangriff",
+  "en": "Blitzkrieg",
+  "es": "Blitzkrieg",
+  "fr": "Blitzkrieg",
+  "id": "851165",
+  "pt": "Blitzkrieg"
+ }
+}

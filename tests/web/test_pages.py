@@ -211,10 +211,17 @@ def test_admin_voit_un_etage_scelle():
 def test_liste_dans_l_ordre_du_guide_avec_badges():
     html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
     liste = html.split('id="liste"')[1]
-    ordre = [liste.index(n) for n in ("Donjon des Champs", "<h3>Incarnam</h3>", "Crypte de Kardorim",
-                                      "L&#39;Appel d&#39;Incarnam", "Le Bouftou égaré", "<h3>Astrub</h3>",
-                                      "La Graine de Mère Cawotte", "Donjon des Bouftous", "Le Vieux Puits")]
+    # Les donjons sont en tête, chacun dans son dépliant ; le fil du guide ne garde qu'un repère par donjon.
+    ordre = [liste.index(n) for n in ("<h3>Donjons de l&#39;étage</h3>", 'id="donjon-1"', 'id="donjon-2"',
+                                      'id="donjon-3"', "<h3>Incarnam</h3>", "L&#39;Appel d&#39;Incarnam",
+                                      "Le Bouftou égaré", "<h3>Astrub</h3>", "La Graine de Mère Cawotte",
+                                      "Le Vieux Puits")]
     assert ordre == sorted(ordre)
+    assert liste.count("<details") == 3
+    repere = re.search(r'<li class="repere" data-repere="2">.*?</li>', liste, re.S).group(0)
+    assert "C'est le moment de faire la Crypte de Kardorim" in repere and 'href="#donjon-2"' in repere
+    assert liste.index("<h3>Incarnam</h3>") < liste.index(repere) < liste.index("Le Bouftou égaré")
+    assert "<details" not in repere
     # Badges lisibles sans la couleur : texte et icône.
     assert liste.count('<span class="badge princ"><svg') == 4 and liste.count(">Principale</span>") == 4
     assert liste.count('<span class="badge second"><svg') == 5 and liste.count(">Secondaire</span>") == 5
@@ -575,3 +582,22 @@ def test_filtre_page_etage_a_tout_afficher_et_etat_lu_dans_l_url():
     assert 'id="filtreTout"' in html and "Tout afficher" in html
     app_js = c.get("/static/app.js").text
     assert "URLSearchParams(location.search)" in app_js and "replaceState" in app_js
+
+
+def test_regle_precise_et_aleatoire_dans_les_cases():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
+    assert 'class="alea"' not in html or "alea-note" in html
+    from epreuve.domaine.modeles import MARQUE_ALEATOIRE, CaseSucces
+
+    fixe = CaseSucces(1, 1, 2, "Duo", "Finir le donjon à deux personnages au plus.", False)
+    assert fixe.regle == fixe.condition and fixe.explication_aleatoire is None
+    regle = "Le monstre désigné doit être achevé en premier."
+    alea = CaseSucces(2, 1, 3, "Premier", f"{regle}{MARQUE_ALEATOIRE}Il change.", False)
+    assert alea.regle == regle and alea.explication_aleatoire == "Il change."
+
+
+def test_article_du_repere():
+    from epreuve.web.vues import avec_article
+
+    assert [avec_article(n) for n in ("Crypte de Kardorim", "Château Ensablé", "Antichambre des Gloursons")] == [
+        "la Crypte de Kardorim", "le Château Ensablé", "l'Antichambre des Gloursons"]

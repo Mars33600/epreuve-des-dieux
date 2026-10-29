@@ -96,23 +96,47 @@ class LigneQuete:
 
 
 @dataclass
+class LigneRepere:
+    """Dans le fil du guide : « c'est le moment de faire ce donjon ». Le donjon lui-même est dans la section
+    « Donjons de l'étage », en tête."""
+    donjon: Donjon
+    type: str = "repere"
+
+
+@dataclass
 class Bloc:
     nom: str | None
-    lignes: list[LigneDonjon | LigneQuete] = field(default_factory=list)
+    lignes: list[LigneDonjon | LigneQuete | LigneRepere] = field(default_factory=list)
+    donjons: bool = False
+
+
+NOM_BLOC_DONJONS = "Donjons de l'étage"
+_MASCULINS = {"château", "dojo", "laboratoire", "temple", "clos", "repaire", "palais", "antre", "fort", "manoir",
+              "donjon", "marais", "bois", "mont", "col", "pic", "port", "jardin", "sanctuaire", "monastère"}
+
+
+def avec_article(nom: str) -> str:
+    """« Crypte de Kardorim » → « la Crypte de Kardorim » ; « Château Ensablé » → « le Château Ensablé »."""
+    premier = nom.split(" ", 1)[0].lower().strip("'’")
+    if premier and premier[0] in "aeiouyàâéèêîôû":
+        return f"l'{nom}"
+    return f"le {nom}" if premier in _MASCULINS else f"la {nom}"
 
 
 def blocs_du_guide(contenu: ContenuEtage) -> list[Bloc]:
-    """La liste unique dans l'ordre du guide : les donjons à leur place dans les blocs, sinon en tête."""
-    tete = Bloc(None, [LigneDonjon(d, contenu.cases_du_donjon(d.id)) for d in contenu.donjons if d.bloc is None])
-    par_bloc: dict[str, list[tuple[int, int, LigneDonjon | LigneQuete]]] = {}
+    """En tête, tous les donjons de l'étage, chacun dans son dépliant ; puis le fil du guide, où un donjon n'est
+    plus qu'un repère à sa place (les donjons sans bloc n'ont pas de repère)."""
+    ordonnes = sorted(contenu.donjons, key=lambda d: (d.ordre, d.id))
+    tete = Bloc(NOM_BLOC_DONJONS, [LigneDonjon(d, contenu.cases_du_donjon(d.id)) for d in ordonnes], donjons=True)
+    par_bloc: dict[str, list[tuple[int, int, LigneQuete | LigneRepere]]] = {}
     for q in contenu.quetes:
         par_bloc.setdefault(q.bloc, []).append((q.ordre, 1, LigneQuete(q)))
     for d in contenu.donjons:
         if d.bloc is not None:
-            par_bloc.setdefault(d.bloc, []).append((d.ordre, 0, LigneDonjon(d, contenu.cases_du_donjon(d.id))))
-    ordonnes = sorted(par_bloc.items(), key=lambda kv: min(o for o, _, _ in kv[1]))
+            par_bloc.setdefault(d.bloc, []).append((d.ordre, 0, LigneRepere(d)))
+    classes = sorted(par_bloc.items(), key=lambda kv: min(o for o, _, _ in kv[1]))
     blocs = [Bloc(nom, [ligne for _, _, ligne in sorted(lignes, key=lambda t: (t[0], t[1]))])
-             for nom, lignes in ordonnes]
+             for nom, lignes in classes]
     return ([tete] if tete.lignes else []) + blocs
 
 

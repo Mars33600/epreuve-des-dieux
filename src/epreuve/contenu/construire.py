@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, ValidationError
 from epreuve.contenu.fiche_dofusdb import FicheRepli
 from epreuve.contenu.fiche_duffus import lire_fiche, nettoyer_fiche  # noqa: F401 (interface figée : nettoyer_fiche vit ici)
 from epreuve.db.depot import ContenuFiche
+from epreuve.dofusdb.repli import id_du_defi
 from epreuve.domaine.modeles import Nature, OrigineNature
 from epreuve.domaine.nature import classer, fermeture
 
@@ -47,6 +48,7 @@ class CasePreparee:
     nom: str
     condition: str
     est_classique: bool
+    defi_id: int | None = None  # le challenge DofusDB dont la règle reste à lire (`completer_regles`)
 
 
 @dataclass(frozen=True)
@@ -329,13 +331,15 @@ def succes_duffus(page: Mapping, succes: list[dict]) -> list[CasePreparee]:
     autres.sort(key=lambda s: (not s["name"].endswith("(Duo)"), s["order"] or 0, s["id"]))
     regle = ((page.get("successes") or {}).get("special") or {}).get("rule")
 
-    def condition(s: dict) -> str:
-        texte = re.sub(r"\s*\[challenge,\d+\]", "", s["description"] or "").strip()
-        if s["name"].endswith("(Spécial)") and regle:
-            texte = f"{texte} Règle : {regle}"
-        return texte
+    def case(i: int, s: dict) -> CasePreparee:
+        if i == 1:
+            return CasePreparee(str(s["id"]), i, s["name"], (s["description"] or "").strip(), True)
+        # Duffus ne donne la règle que du « Spécial » (dungeon_pages.successes.special.rule) ; celle des autres
+        # défis se lit chez DofusDB à partir du numéro de challenge (`completer_regles`). Rien n'est inventé.
+        duffus = " ".join(regle.split()) if s["name"].endswith("(Spécial)") and regle else ""
+        return CasePreparee(str(s["id"]), i, s["name"], duffus, False, id_du_defi(s["description"]))
 
-    return [CasePreparee(str(s["id"]), i, s["name"], condition(s), i == 1) for i, s in enumerate([c, *autres], 1)]
+    return [case(i, s) for i, s in enumerate([c, *autres], 1)]
 
 
 def donjon_prepare(page: Mapping, aspi: Aspiration, ordre: int, bloc: str | None) -> tuple[DonjonPrepare, list[str]]:
@@ -477,6 +481,26 @@ def guides_repli_vers_duffus(guides: Mapping[str, Mapping[int, str]], aspi: Aspi
         par_nom.setdefault(_normaliser(q["title"]), set()).add(q["id"])
     return {dofus: frozenset(i for nom in quetes.values() for i in par_nom.get(_normaliser(nom), ()))
             for dofus, quetes in guides.items()}
+
+
+async def completer_regles(e: EtagePrepare, client) -> EtagePrepare:
+    """Les cases de défi sans règle Duffus prennent celle de leur challenge DofusDB (cache `donnees/dofusdb/`).
+    Introuvable : la case le dit (`REGLE_INTROUVABLE`) et une alerte le signale."""
+    from epreuve.dofusdb.repli import REGLE_INTROUVABLE, regle_du_defi
+
+    donjons = []
+    for d in e.donjons:
+        cases = []
+        for c in d.cases:
+            if not c.condition and c.defi_id:
+                regle = await regle_du_defi(client, c.defi_id)
+                if regle is None:
+                    e.alertes.append(f"donjon « {d.nom} » : règle de « {c.nom} » introuvable (challenge {c.defi_id})")
+                c = replace(c, condition=regle or REGLE_INTROUVABLE)
+            cases.append(c)
+        donjons.append(replace(d, cases=tuple(cases)))
+    e.donjons = donjons
+    return e
 
 
 async def completer_par_dofusdb(e: EtagePrepare, client) -> EtagePrepare:

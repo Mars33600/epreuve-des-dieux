@@ -90,7 +90,7 @@
 </div></div>
 {%- endif %}
 {%- for bloc in vue.blocs() %}
-<section class="bloc">
+<section class="bloc{% if bloc.donjons %} bloc-donjons{% endif %}"{% if bloc.donjons %} id="donjons-etage"{% endif %}>
   {% if bloc.nom %}<h3>{{ bloc.nom }}</h3>{% endif %}
   <ul class="liste">
   {%- for l in bloc.lignes %}
@@ -104,8 +104,12 @@
         <div class="droite-ligne">{{ badge_nature(q) }}{{ compteur(vue, "quete:" ~ q.id) }}</div>
       </div>
     </li>
+  {%- elif l.type == "repere" %}{% set d = l.donjon %}
+    <li class="repere" data-repere="{{ d.id }}">
+      <a href="#donjon-{{ d.id }}" data-vers-donjon="{{ d.id }}">{{ icone("i-donjon") }}<span>C'est le moment de faire {{ avec_article(d.nom) }}</span><span aria-hidden="true">→</span></a>
+    </li>
   {%- else %}{% set d = l.donjon %}{% set faits = l.cases|selectattr("id", "in", coches.cases)|list|length %}{% set classique = l.cases|selectattr("est_classique")|first %}
-    <li data-cats="donjons full_succes" data-donjon="{{ d.id }}" data-fait="{{ 1 if l.cases and faits == l.cases|length else 0 }}" data-vaincu="{{ 1 if classique and classique.id in coches.cases else 0 }}">
+    <li id="donjon-{{ d.id }}" data-cats="donjons full_succes" data-donjon="{{ d.id }}" data-fait="{{ 1 if l.cases and faits == l.cases|length else 0 }}" data-vaincu="{{ 1 if classique and classique.id in coches.cases else 0 }}">
       <details class="dj-ligne">
         <summary><span class="nomdj">{{ icone("i-donjon") }}{{ d.nom }}</span>
           <span class="droite-ligne"><span class="num muted">niv. {{ d.niveau if d.niveau is not none else "?" }} · <span data-djcompte>{{ faits }}</span>/{{ l.cases|length }}</span>
@@ -116,7 +120,7 @@
           <ul class="ticks">
           {%- for c in l.cases %}
             <li{% if c.est_classique %} class="premiere"{% endif %}><label class="tick c-{{ 'donjons' if c.est_classique else 'full_succes' }}"><input type="checkbox" data-ref="case:{{ c.id }}"{% if c.id in coches.cases %} checked{% endif %}{% if not cochable %} disabled{% endif %}>
-              <span><b>{{ c.nom }}</b><small>{{ c.condition }}{% if c.est_classique %}<em class="pt-dj">{{ texte_donjons(nd) }}</em>{% endif %}</small></span></label>{{ compteur(vue, "case:" ~ c.id) }}</li>
+              <span><b>{{ c.nom }}</b><small>{{ c.regle }}{% if c.explication_aleatoire %} <span class="alea" title="{{ c.explication_aleatoire }}">aléatoire</span><span class="alea-note">{{ c.explication_aleatoire }}</span>{% endif %}{% if c.est_classique %}<em class="pt-dj">{{ texte_donjons(nd) }}</em>{% endif %}</small></span></label>{{ compteur(vue, "case:" ~ c.id) }}</li>
           {%- endfor %}
           </ul>
           {% if cochable %}<p><button class="btn" type="button" data-donjon-tout="{{ d.id }}">Tout le donjon (5 cases)</button></p>{% endif %}

@@ -37,6 +37,7 @@ def transport_dofusdb(appels: list[str] | None = None) -> httpx.MockTransport:
     fichiers = {
         "/dungeons/": "dungeon-{}.json",
         "/achievements/": "achievement-{}.json",
+        "/challenges/": "challenge-{}.json",
         "/quest-categories/": "quest-category-{}.json",
     }
 

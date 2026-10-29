@@ -70,6 +70,7 @@ def test_classique_en_premier_puis_duo():
         for d in e.donjons:
             assert d.cases[0].est_classique and d.cases[0].nom == d.nom
             assert d.cases[1].nom.endswith("(Duo)") and "[challenge," not in d.cases[1].condition
+            assert all(c.defi_id for c in d.cases[1:]) and not d.cases[0].defi_id
 
 
 def test_nature_par_les_guides_par_dofus():
@@ -389,3 +390,22 @@ async def test_commande_ecrit_en_base(depot, moteur, monkeypatch, url_base, caps
     resultat = await asyncio.to_thread(main, commande)
     assert resultat == 0 and "Étage créé" in capsys.readouterr().out
     assert len(await depot.etages()) == 1
+
+
+def test_regle_du_special_prise_chez_duffus_et_les_autres_attendent_dofusdb():
+    cases = ETAGES[0].donjons[0].cases
+    assert cases[4].condition.startswith("Kardorim ne doit jamais finir son tour")
+    assert [c.condition for c in cases[1:4]] == ["", "", ""] and [c.defi_id for c in cases[1:4]] == [102, 115, 117]
+
+
+async def test_completer_regles_depuis_le_cache_dofusdb():
+    from epreuve.dofusdb.repli import ClientEnCache
+
+    e = await k.completer_regles(etage(0), ClientEnCache(None, k.RACINE / "donnees" / "dofusdb"))
+    regles = {c.nom: c.condition for c in e.donjons[0].cases}
+    assert regles["Kardorim (Duo)"] == "Finir le donjon à deux personnages au plus."
+    assert regles["Kardorim (Zombie)"].startswith("Les combattants alliés doivent utiliser exactement un point")
+    assert "Aléatoire :" in regles["Kardorim (Premier)"] and all(regles.values())
+    e1 = await k.completer_regles(etage(1), ClientEnCache(None, k.RACINE / "donnees" / "dofusdb"))
+    assert not any("introuvable" in a for a in e1.alertes)
+    assert all(c.condition and "{" not in c.condition for d in e1.donjons for c in d.cases)

@@ -17,7 +17,10 @@ import re
 from collections.abc import Collection
 from pathlib import Path
 
+import httpx
+
 from epreuve.dofusdb.client import ClientDofusDB
+from epreuve.domaine.modeles import MARQUE_ALEATOIRE
 from epreuve.domaine.nature import quetes_obligatoires
 
 CATEGORIE_COMPAGNONS = 142
@@ -30,6 +33,7 @@ _OA = re.compile(r"\bOA=(\d+)")
 _GARDER = {
     "dungeon": ("id", "name", "achievements", "optimalPlayerLevel"),
     "achievement": ("id", "name", "description", "categoryId", "objectives"),
+    "challenge": ("id", "name", "description"),
     "quest": ("id", "name", "startCriterion", "levelMin", "levelMax"),
     "item": ("id", "name", "typeId", "img", "questsThatReward", "achievementsThatReward"),
 }
@@ -77,6 +81,9 @@ class ClientEnCache:
 
     async def succes(self, id_: int) -> dict:
         return await self._lire(f"achievement-{id_}", lambda i: self._c().succes(i), id_)
+
+    async def defi(self, id_: int) -> dict:
+        return await self._lire(f"challenge-{id_}", lambda i: self._c().defi(i), id_)
 
     async def quete(self, id_: int) -> dict:
         return await self._lire(f"quest-{id_}", lambda i: self._c().quete(i), id_)
@@ -160,6 +167,50 @@ def _fr(valeur) -> str:
     return (valeur or {}).get("fr", "") if isinstance(valeur, dict) else str(valeur or "")
 
 
+_DEFI = re.compile(r"\[challenge,(\d+)\]")
+_DUO = re.compile(r"avec 2 personnages maximum")
+_TOURS = re.compile(r"\s+et en moins de \{\d+\} tours")
+_PARAM = re.compile(r"\{\d+\}")
+
+
+def id_du_defi(description: str | None) -> int | None:
+    """Le numéro de challenge d'un succès : « … en validant le challenge [challenge,115]. » → 115."""
+    trouve = _DEFI.search(description or "")
+    return int(trouve.group(1)) if trouve else None
+
+
+def formater_regle(description: str) -> str:
+    """La règle d'un challenge, telle que DofusDB l'écrit, sans rien ajouter.
+
+    - « Duo » : DofusDB borne aussi les tours par un paramètre ({1}) que le jeu remplit et que les données
+      ne donnent pas ; on ne garde que ce qui est écrit : deux personnages au plus.
+    - Tout autre paramètre ({0} : le monstre visé…) est choisi par le jeu au lancement du combat : la règle est
+      alors dite « aléatoire » (domaine.modeles.MARQUE_ALEATOIRE) et ne nomme pas le monstre."""
+    texte = " ".join(description.split())
+    if _DUO.search(texte):
+        return "Finir le donjon à deux personnages au plus."
+    texte = _TOURS.sub("", texte)
+    if not _PARAM.search(texte):
+        return texte
+    texte = _PARAM.sub("le monstre désigné par le jeu", texte, count=1) if texte.startswith("{0}") else texte
+    texte = texte[0].upper() + texte[1:]
+    return (f"{texte}{MARQUE_ALEATOIRE}Le jeu choisit ce monstre lui-même au lancement du combat, "
+            "il peut donc changer d'un combat à l'autre.")
+
+
+async def regle_du_defi(client: ClientEnCache, defi_id: int) -> str | None:
+    """La règle d'un challenge chez DofusDB, ou None si elle y est absente ou vide."""
+    try:
+        brut = await client.defi(defi_id)
+    except (LookupError, httpx.HTTPError):
+        return None
+    description = _fr(brut.get("description")).strip()
+    return formater_regle(description) if description else None
+
+
+REGLE_INTROUVABLE = "Règle introuvable (ni chez Duffus ni chez DofusDB)."
+
+
 async def succes_du_donjon(client: ClientEnCache, dofusdb_id: int) -> list[tuple[str, str, str, bool]]:
     """(id, nom, condition, est_classique) dans l'ordre : la classique, « (Duo) », puis les autres par id."""
     donjon = await client.donjon(dofusdb_id)
@@ -173,7 +224,11 @@ async def succes_du_donjon(client: ClientEnCache, dofusdb_id: int) -> list[tuple
     sortie = []
     for i, s in enumerate(succes):
         description = _fr(s.get("description"))
-        condition = description.split(" en validant")[0].strip() + "." if defi(s) else description
+        if defi(s):
+            defi_id = id_du_defi(description)
+            condition = (await regle_du_defi(client, defi_id) if defi_id else None) or REGLE_INTROUVABLE
+        else:
+            condition = description
         sortie.append((f"dofusdb:{s['id']}", _fr(s.get("name")), condition, i == 0 and not defi(s)))
     return sortie
 

@@ -219,9 +219,19 @@ function filtrer(){
     }
     li.hidden = !voir;
   });
+  // Un repère suit son donjon : visible seulement si le dépliant l'est.
+  document.querySelectorAll("#liste li[data-repere]").forEach(r => { r.hidden = !!$("donjon-" + r.dataset.repere)?.hidden; });
   let n = 0;
-  document.querySelectorAll("#liste .bloc").forEach(b => { const v = !!b.querySelector("li[data-cats]:not([hidden])"); b.hidden = !v; if (v) n++; });
+  document.querySelectorAll("#liste .bloc").forEach(b => { const v = !!b.querySelector("li[data-cats]:not([hidden]), li[data-repere]:not([hidden])"); b.hidden = !v; if (v) n++; });
   const vide = $("filtreVide"); if (vide) vide.hidden = n > 0;
+}
+/* Le repère du fil du guide : fait défiler jusqu'au dépliant du donjon et l'ouvre. */
+function allerAuDonjon(id){
+  const li = $("donjon-" + id); if (!li || li.hidden) return;
+  const det = li.querySelector("details"); if (det) det.open = true;
+  const calme = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  li.scrollIntoView({behavior: calme ? "auto" : "smooth", block: "start"});
+  const sum = det?.querySelector("summary"); if (sum) sum.focus({preventScroll: true});
 }
 function initFiltre(){
   const f = $("filtre"); if (!f) return;
@@ -334,6 +344,8 @@ document.addEventListener("click", e => {
   }
   const tout = e.target.closest("[data-donjon-tout]");
   if (tout){ toutLeDonjon(tout); return; }
+  const vers = e.target.closest("a[data-vers-donjon]");
+  if (vers && !e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0){ e.preventDefault(); allerAuDonjon(vers.dataset.versDonjon); return; }
   const cp = e.target.closest("[data-copier]");
   if (cp){
     const t = cp.dataset.copier, avant = cp.textContent;

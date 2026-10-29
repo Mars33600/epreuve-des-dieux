@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Alle Monster mit maximal 2 Charakteren und in weniger als {1} Runden besiegen.",
+  "en": "Defeat all monsters with 2 characters maximum and in less than {1} turns.",
+  "es": "Vencer a todos los monstruos con 2 personajes como máximo y en menos de {1} turnos.",
+  "fr": "Vaincre tous les monstres avec 2 personnages maximum et en moins de {1} tours.",
+  "id": "852102",
+  "pt": "Derrotar todos os monstros com no máximo 2 personagens e em menos de {1} turnos."
+ },
+ "id": 52,
+ "name": {
+  "de": "Duo",
+  "en": "Duo",
+  "es": "Dúo",
+  "fr": "Duo",
+  "id": "852101",
+  "pt": "Duo"
+ }
+}

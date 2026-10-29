@@ -65,7 +65,7 @@
           <ul class="ticks">
           {%- for c in cases %}
             <li><label class="tick c-{{ 'donjons' if c.est_classique else 'full_succes' }}"><input type="checkbox" data-ref="case:{{ c.id }}"{% if c.id in coches.cases %} checked{% endif %}{% if not b.cochable %} disabled{% endif %}>
-              <span><b>{{ c.nom }}</b><small>{{ c.condition }}{% if c.est_classique %} · compte pour le point Donjons{% endif %}</small></span></label></li>
+              <span><b>{{ c.nom }}</b><small>{{ c.regle }}{% if c.explication_aleatoire %} <span class="alea">aléatoire</span><span class="alea-note">{{ c.explication_aleatoire }}</span>{% endif %}{% if c.est_classique %} · compte pour le point Donjons{% endif %}</small></span></label></li>
           {%- endfor %}
           </ul>
           {% if b.cochable %}<p><button class="btn" type="button" data-donjon-tout="{{ d.id }}">Tout le donjon ({{ cases|length }} cases)</button></p>{% endif %}

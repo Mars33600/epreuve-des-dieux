@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "{0} muss als Erstes besiegt werden.",
+  "en": "{0} must be finished off first.",
+  "es": "{0} debe ser eliminado el primero.",
+  "fr": "{0} doit être achevé en premier.",
+  "id": "1014303",
+  "pt": "{0} deve ser derrotado primeiro."
+ },
+ "id": 118,
+ "name": {
+  "de": "Als Erstes",
+  "en": "First",
+  "es": "Primero",
+  "fr": "Premier",
+  "id": "851151",
+  "pt": "Primeiro"
+ }
+}

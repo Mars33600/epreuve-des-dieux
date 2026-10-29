@@ -21,6 +21,7 @@ from epreuve.contenu.construire import (
     ConfigInvalide,
     ConstructionArretee,
     completer_par_dofusdb,
+    completer_regles,
     construire,
     derniere_aspiration,
     fiches_repli_etage,
@@ -68,7 +69,7 @@ async def _preparer(args: argparse.Namespace, url: str, client: ClientEnCache):
     fiches = await fiches_repli_etage(args.etage, aspi, config, retenus, client)
     e = construire(args.etage, aspi, config, retenus, forcees, ouvertes, forcer=args.forcer,
                    guides_repli=repli, fiches_repli=fiches)
-    return f"aspiration {dossier.name}", await completer_par_dofusdb(e, client)
+    return f"aspiration {dossier.name}", await completer_regles(await completer_par_dofusdb(e, client), client)
 
 
 async def _principal(args: argparse.Namespace) -> int:
