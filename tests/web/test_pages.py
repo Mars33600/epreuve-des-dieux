@@ -670,10 +670,9 @@ def test_gradin_courant_est_une_barre_avec_infobulle_et_pseudos():
 
 def test_phrase_d_accueil():
     tour = monde().connecter(ID_BRINDILLE).get("/").text
-    assert ("Plus on la gravit, plus elle s'élève. Nul n'a vu son sommet&nbsp;: seules s'éveillent les marches que la "
-            "guilde a méritées. Les autres dorment dans la brume, "
-            "et attendent ceux qui oseront monter ensemble.") in tour
-    assert "Nul ne connaît la hauteur" not in tour
+    assert ("Un étage s'éveille quand la guilde en est digne. Combien en reste-t-il&nbsp;? "
+            "Même les Dieux se taisent.") in tour
+    assert "Plus on la gravit" not in tour
 
 
 def test_page_etage_liste_des_grimpeurs_actifs_et_en_pause():
