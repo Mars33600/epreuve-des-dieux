@@ -1,4 +1,5 @@
 {% extends "site.html" %}
+{% from "_macros.html" import lien %}
 {% from "captures/_cp.html" import tete_captures, onglets, liste_qui %}
 {% block titre %}{{ a.nom }} · Avis de recherche · L'Épreuve des Dieux{% endblock %}
 {% block tete %}{{ super() }}{{ tete_captures() }}{% endblock %}
@@ -11,7 +12,7 @@
       {% if a.icone %}<img class="cp-icone grand" src="{{ a.icone }}" alt="" width="96" height="96">{% endif %}
       <div>
         <div class="eyebrow">Avis de recherche{% if a.milice %} · Milice {{ a.milice }}{% endif %}</div>
-        <h2 id="ficheTitre">{{ a.nom }}</h2>
+        <h2 id="ficheTitre">{{ lien(liens, a.nom, "monstre", a.monstre_id) }}</h2>
         <p class="cp-meta">{% if a.niveau_texte %}<span class="tag">{{ a.niveau_texte }}</span>{% endif %}{% if a.recompense %} <span class="tag">{{ a.recompense }} {{ a.recompense_type }}{{ "s" if a.recompense > 1 }}</span>{% endif %}{% if a.zone %} <span>{{ a.zone }}</span>{% endif %}</p>
       </div>
     </header>

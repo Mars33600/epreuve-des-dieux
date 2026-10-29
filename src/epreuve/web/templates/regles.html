@@ -1,60 +1,66 @@
 {% extends "site.html" %}
 {% from "_macros.html" import icone %}
-{# Les règles en clair (DECISIONS-V4 §12). Toutes les valeurs viennent de la configuration (config/regles.yaml)
-   et des étages en base : rien n'est écrit en dur ici. #}
+{# Les règles en clair (DECISIONS-V4 §12), mises en page pour la lecture : une règle par bloc, intertitres nets,
+   exemples chiffrés en encadré. Toutes les valeurs viennent de la configuration (config/regles.yaml) et des
+   étages en base : rien n'est écrit en dur ici. #}
 {% block titre %}Les règles · L'Épreuve des Dieux{% endblock %}
 {% block page %}
-<article class="card" aria-labelledby="reglesTitre">
-  <div class="eyebrow">Comment on monte</div>
-  <h2 id="reglesTitre">Les règles de la tour</h2>
+<article class="card regles" aria-labelledby="reglesTitre">
+  <header class="regles-tete">
+    <div class="eyebrow">Comment on monte</div>
+    <h2 id="reglesTitre">Les règles de la tour</h2>
+    <p class="regles-intro">Sept règles, une par bloc. Les exemples chiffrés sont dans les encadrés dorés.</p>
+  </header>
 
-  <section class="qd-sec"><h3>Les étages</h3>
-    <p>Chaque étage de la tour correspond à une tranche de niveaux du guide Duffus, dans l'ordre du guide.
-      On y trouve les donjons et les quêtes de cette tranche, et rien d'autre.</p>
+  <section class="regle" aria-labelledby="r1"><h3 id="r1"><span class="regle-n">1</span> Les étages</h3>
+    <p>Chaque étage de la tour correspond à une tranche de niveaux du guide Duffus, dans l'ordre du guide.</p>
+    <p>On y trouve les donjons et les quêtes de cette tranche, et rien d'autre.</p>
   </section>
 
-  <section class="qd-sec"><h3>Les 4 catégories</h3>
+  <section class="regle" aria-labelledby="r2"><h3 id="r2"><span class="regle-n">2</span> Les 4 catégories</h3>
     <ul class="items">
       {%- for info in CATS %}
       <li><span class="ic c-{{ info.cle }}">{{ icone(info.icone) }}</span><span><b>{{ info.nom }}</b><small>{{ info.desc }}</small></span><span class="q">1 point</span></li>
       {%- endfor %}
     </ul>
-    <p>Une catégorie rapporte <b>1 point</b> quand elle est <b>complète</b> sur l'étage : tous ses éléments cochés.
-      Chaque grimpeur peut donc rapporter <b>4 points au maximum</b> par étage.</p>
+    <p>Une catégorie rapporte <b>1 point</b> quand elle est <b>complète</b> sur l'étage : tous ses éléments cochés.</p>
+    <p>Chaque grimpeur peut donc rapporter <b>4 points au maximum</b> par étage.</p>
   </section>
 
-  <section class="qd-sec"><h3>La jauge et le palier</h3>
-    <p>Les points des grimpeurs actifs remplissent la jauge de l'étage. Le palier à atteindre vaut
-      <b>{{ m }} × le nombre de grimpeurs actifs</b>.</p>
+  <section class="regle" aria-labelledby="r3"><h3 id="r3"><span class="regle-n">3</span> La jauge et le palier</h3>
+    <p>Les points des grimpeurs actifs remplissent la jauge de l'étage.</p>
+    <p>Le palier à atteindre vaut <b>{{ m }} × le nombre de grimpeurs actifs</b>.</p>
+    <p class="exemple"><b>Exemple</b><span><span class="num">12</span> grimpeurs actifs → palier de <span class="num">{{ palier_12 }}</span> points.</span></p>
     {% if regles.categorie_vide == "offerte" %}
     <p>Si une catégorie est vide sur un étage (aucun élément), son point est offert à chacun.</p>
     {% else %}
     <p>Si une catégorie est vide sur un étage (aucun élément), elle ne compte pas : le palier est réduit
       à proportion des catégories restantes, arrondi au-dessus.</p>
+    <p class="exemple"><b>Exemple</b><span><span class="num">12</span> grimpeurs actifs et une catégorie vide (3 sur 4) → palier de <span class="num">{{ palier_12_trois }}</span> points.</span></p>
     {% endif %}
     <p>Un admin peut aussi fixer le palier à la main, en cas de besoin : la jauge le dit alors.</p>
   </section>
 
-  <section class="qd-sec"><h3>Les cases, en confiance</h3>
-    <p>On coche soi-même ce qu'on a fait, sans capture d'écran : <b>la case cochée vaut preuve</b>.
-      Chaque coche est inscrite au journal. Tout le monde voit les fiches des autres ; seuls toi et les admins
+  <section class="regle" aria-labelledby="r4"><h3 id="r4"><span class="regle-n">4</span> Les cases, en confiance</h3>
+    <p>On coche soi-même ce qu'on a fait, sans capture d'écran : <b>la case cochée vaut preuve</b>.</p>
+    <p>Chaque coche est inscrite au journal. Tout le monde voit les fiches des autres ; seuls toi et les admins
       pouvez modifier la tienne.</p>
   </section>
 
-  <section class="qd-sec"><h3>Le cap de niveau</h3>
-    <p>Chaque étage a un cap : on y joue <b>sans dépasser ce niveau</b>, entre grimpeurs, <b>sans power-leveling</b>.
-      {% if ouvert %}Pour l'étage en cours (étage {{ ouvert.numero }}), le cap est le niveau <b class="num">{{ ouvert.level_cap }}</b>.{% endif %}</p>
+  <section class="regle" aria-labelledby="r5"><h3 id="r5"><span class="regle-n">5</span> Le cap de niveau</h3>
+    <p>Chaque étage a un cap : on y joue <b>sans dépasser ce niveau</b>, entre grimpeurs, <b>sans power-leveling</b>.</p>
+    {% if ouvert %}<p class="exemple"><b>Étage en cours</b><span>Étage {{ ouvert.numero }} : le cap est le niveau <b class="num">{{ ouvert.level_cap }}</b>.</span></p>{% endif %}
   </section>
 
-  <section class="qd-sec"><h3>L'ouverture de l'étage suivant</h3>
+  <section class="regle" aria-labelledby="r6"><h3 id="r6"><span class="regle-n">6</span> L'ouverture de l'étage suivant</h3>
     <p>Quand la jauge est pleine, <b>un admin vérifie et ouvre</b> l'étage suivant à la main
-      {%- if plancher %}, et pas avant le {{ plancher|date_paris }}{% endif %}. Rien ne s'ouvre tout seul,
-      et le site ne poste rien sur Discord : l'admin annonce lui-même l'ouverture.</p>
+      {%- if plancher %}, et pas avant le {{ plancher|date_paris }}{% endif %}.</p>
+    <p>Rien ne s'ouvre tout seul, et le site ne poste rien sur Discord : l'admin annonce lui-même l'ouverture.</p>
   </section>
 
-  <section class="qd-sec"><h3>La pause et la réintégration</h3>
-    <p>Un admin peut <b>mettre en pause</b> un grimpeur qui décroche : il ne compte plus dans le palier.
-      Il peut continuer à cocher pour rattraper son retard, et ses points comptent de nouveau quand
+  <section class="regle" aria-labelledby="r7"><h3 id="r7"><span class="regle-n">7</span> La pause et la réintégration</h3>
+    <p>Un admin peut <b>mettre en pause</b> un grimpeur qui décroche : il ne compte plus dans le palier.</p>
+    <p>Il peut continuer à cocher pour rattraper son retard, et ses points comptent de nouveau quand
       <b>un admin le réintègre</b>. Ces deux décisions sont prises à la main.</p>
   </section>
 </article>

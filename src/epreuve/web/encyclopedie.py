@@ -300,6 +300,7 @@ def brancher(app: FastAPI, source: object, gabarits: Jinja2Templates, horloge: C
         return
     regles = regles or lire_regles()
     ency = DepotEncyclopedie(source.moteur)
+    app.state.ency = ency  # pour les liens d'encyclopédie des autres pages (web/liens.py)
     app.include_router(routeur_encyclopedie(source, ency, gabarits, horloge, regles))
 
     @app.exception_handler(_Redirection)

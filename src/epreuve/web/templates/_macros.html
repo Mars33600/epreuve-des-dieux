@@ -10,6 +10,17 @@
 </svg>
 {%- endmacro %}
 
+{#- Un nom cité qui mène à sa fiche d'encyclopédie : un vrai <a href> (clic molette, Ctrl/Cmd+clic), ou le simple texte
+    quand la correspondance n'est pas sûre (jamais de lien approximatif). `liens` vient de web/liens.py. -#}
+{% macro lien(liens, nom, genres="objet", ident=none, texte=none) -%}
+{%- set u = liens.url(nom, genres, ident) -%}
+{%- if u %}<a class="enc" href="{{ u }}">{{ texte if texte is not none else nom }}</a>{% else %}{{ texte if texte is not none else nom }}{% endif -%}
+{%- endmacro %}
+{#- Une phrase qui contient le nom : seul le nom devient lien. -#}
+{% macro lien_dans(liens, phrase, nom, genres="objet") -%}
+{%- set i = phrase.find(nom) if nom else -1 -%}
+{%- if i >= 0 %}{{ phrase[:i] }}{{ lien(liens, nom, genres) }}{{ phrase[i + nom|length:] }}{% else %}{{ phrase }}{% endif -%}
+{%- endmacro %}
 {% macro icone(id, cls="i") -%}
 <svg class="{{ cls }}" viewBox="0 0 24 24" aria-hidden="true"><use href="#{{ id }}"/></svg>
 {%- endmacro %}

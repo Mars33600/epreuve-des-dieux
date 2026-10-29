@@ -36,8 +36,8 @@
   --f-data:"IBM Plex Mono",ui-monospace,monospace;
   /* Variante A « Nuit du teaser » (DECISIONS-V4 §13). Cartes quasi opaques : texte courant à plus de 7:1. */
   --card:rgba(10,14,28,.96); --card-2:#151b33; --veil:5,8,22; --fog:150,160,200; --glow:255,221,150;
-  /* Échelle typographique (px) : corps 16, secondaire 14, mention 12 ; titres sobres. */
-  --t-xs:12px; --t-sm:14px; --t-base:16px; --t-h3:18px; --t-h2:clamp(21px,2.4vw,26px); --t-h1:clamp(22px,3.4vw,30px);
+  /* Échelle typographique (px) : corps 17, secondaire 15, mention 15 ; titres sobres. */
+  --t-xs:15px; --t-sm:15px; --t-base:17px; --t-h3:19px; --t-h2:clamp(21px,2.4vw,26px); --t-h1:clamp(22px,3.4vw,30px);
   /* Espacements réguliers (4, 8, 12, 16, 24, 32), rayons et ombres discrets. */
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
   --r:8px; --r-lg:12px; --ombre:0 6px 20px rgba(0,0,0,.45);
@@ -70,7 +70,7 @@
 .bar{position:sticky;top:0;z-index:30;background:var(--card);border-bottom:1px solid var(--line-soft);box-shadow:0 4px 16px rgba(0,0,0,.4)}
 .bar-in{max-width:1400px;margin:0 auto;min-height:var(--bar-h);display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--s4);
   padding:0 max(12px,env(safe-area-inset-right)) 0 max(12px,env(safe-area-inset-left))}
-.marque{font:800 19px/1 var(--f-display);color:var(--ink);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap;letter-spacing:.01em}
+.marque{font:800 20px/1 var(--f-display);color:var(--ink);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap;letter-spacing:.01em}
 .marque span{color:var(--gold-hi);margin-left:.3em}
 .bar-menu{order:2;flex:1 1 0;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--s3)}
 .bar .nav{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:2px;min-width:0}
@@ -93,12 +93,12 @@
 /* Recherche globale (suggestions en direct, entete.js) : dans la barre, au-dessus de tout le reste de la page. */
 .rech{position:relative;flex:0 1 220px;min-width:110px;order:2}
 .bar .nav{order:1}.who{order:3}
-.rech-champ{width:100%;min-height:40px;box-sizing:border-box;padding:6px 12px;font:inherit;font-size:15px;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:var(--r)}
+.rech-champ{width:100%;min-height:40px;box-sizing:border-box;padding:6px 12px;font:inherit;font-size:17px;color:var(--ink);background:var(--sunken);border:1px solid var(--line);border-radius:var(--r)}
 .rech-panneau{position:absolute;z-index:40;top:calc(100% + 6px);right:0;width:min(380px,92vw);max-height:min(70vh,520px);overflow-y:auto;overscroll-behavior:contain;
   background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--ombre);padding:var(--s2)}
 .rech-panneau[hidden]{display:none}
 .rech-titre{font:500 var(--t-xs)/1.3 var(--f-data);letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:var(--s2) var(--s2) 2px}
-.rech-item{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s3);min-height:40px;padding:6px var(--s2);border-radius:6px;color:var(--ink);text-decoration:none;border:1px solid transparent;font-size:15px}
+.rech-item{display:flex;align-items:baseline;justify-content:space-between;gap:var(--s3);min-height:40px;padding:6px var(--s2);border-radius:6px;color:var(--ink);text-decoration:none;border:1px solid transparent;font-size:17px}
 .rech-item:hover,.rech-item.actif{background:var(--card-2);border-color:var(--gold-line)}
 .rech-nom{min-width:0;overflow-wrap:anywhere}
 .rech-detail{flex:none;color:var(--muted);font-size:var(--t-sm)}
@@ -117,7 +117,7 @@ form[data-filtres] .rech-panneau{left:0;right:0;width:auto;top:calc(100% + 4px)}
 .page-builder .marque{color:var(--ink)}
 /* Menu déroulant « Monde des Douze » */
 .deroulant{position:relative;display:inline-flex}
-.deroulant-bouton{min-height:44px;display:inline-flex;align-items:center;gap:6px;padding:0 10px;border-radius:var(--r);border:1px solid transparent;background:none;color:var(--ink);font:inherit;font-size:15px;cursor:pointer;transition:background .15s,border-color .15s}
+.deroulant-bouton{min-height:44px;display:inline-flex;align-items:center;gap:6px;padding:0 10px;border-radius:var(--r);border:1px solid transparent;background:none;color:var(--ink);font:inherit;font-size:17px;cursor:pointer;transition:background .15s,border-color .15s}
 .deroulant-bouton:hover,.deroulant-bouton[aria-expanded="true"]{background:var(--card-2);border-color:var(--line-soft)}
 .deroulant.contient-actif > .deroulant-bouton{border-color:var(--gold);background:var(--gold-wash);color:var(--gold-hi)}
 .nav a,.deroulant-bouton{white-space:nowrap}
@@ -148,14 +148,14 @@ form[data-filtres] .rech-panneau{left:0;right:0;width:auto;top:calc(100% + 4px)}
 @media (min-width:1280px){.bar .nav{flex:1 0 auto;flex-wrap:nowrap;align-items:center}.bar-menu{gap:0 var(--s3)}}
 @media (max-width:520px){.clock{display:none}.burger{margin-left:auto}}
 
-.linkbtn{border:0;background:none;padding:6px 0;color:var(--gold-hi);font-size:14px;text-decoration:underline;text-underline-offset:3px;min-height:32px}
-.tag{font:500 11px/1 var(--f-data);letter-spacing:.06em;text-transform:uppercase;padding:3px 6px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
+.linkbtn{border:0;background:none;padding:6px 0;color:var(--gold-hi);font-size:15px;text-decoration:underline;text-underline-offset:3px;min-height:32px}
+.tag{font:500 15px/1 var(--f-data);letter-spacing:.06em;text-transform:uppercase;padding:3px 6px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
 .tag.me{border-color:var(--gold-line);color:var(--gold-hi)}
 footer{position:relative;z-index:1;text-align:center;font-size:var(--t-sm);color:var(--faint);padding:0 16px 24px}
 footer a{color:var(--gold);text-underline-offset:3px}
 .who form{display:inline}
 .who .linkbtn{min-height:auto;padding:0}
-.nav a,.deroulant-liste a{min-height:44px;display:inline-flex;align-items:center;padding:0 10px;border-radius:var(--r);border:1px solid transparent;color:var(--ink);text-decoration:none;font-size:15px;transition:background .15s,border-color .15s}
+.nav a,.deroulant-liste a{min-height:44px;display:inline-flex;align-items:center;padding:0 10px;border-radius:var(--r);border:1px solid transparent;color:var(--ink);text-decoration:none;font-size:17px;transition:background .15s,border-color .15s}
 .nav a:hover,.deroulant-liste a:hover{background:var(--card-2);border-color:var(--line-soft)}
 .nav a[aria-current="page"],.deroulant-liste a[aria-current="page"]{border-color:var(--gold);background:var(--gold-wash);color:var(--gold-hi)}
 footer{background:linear-gradient(180deg,transparent,rgba(5,8,22,.85) 40%);padding-top:28px}
@@ -164,3 +164,12 @@ footer{background:linear-gradient(180deg,transparent,rgba(5,8,22,.85) 40%);paddi
 @media (prefers-reduced-motion:reduce){.fog,.glow,.towermist,.pyr-lueur,.pyr-brume{animation:none!important}.ambiance{transition:none}}
 
 img.img-absente{visibility:hidden}
+
+/* Liens vers l'encyclopédie : un nom cité (objet, monstre, PNJ, panoplie, sort) est un vrai lien <a href>, en
+   surbrillance discrète ; soulignement doré au survol et au clavier. */
+a.enc{color:var(--gold-hi);text-decoration:underline transparent;text-decoration-thickness:2px;text-underline-offset:3px;
+  background:var(--gold-wash);border-radius:3px;padding:0 3px;margin:0 -3px;transition:text-decoration-color .15s}
+a.enc:hover,a.enc:focus-visible{text-decoration-color:var(--gold)}
+/* Aucun texte sous 15 px : <small> (13 px par défaut du navigateur) et exposants compris. */
+small{font-size:15px}
+sub,sup{font-size:15px;line-height:0}
