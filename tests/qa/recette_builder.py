@@ -108,6 +108,12 @@ async def recette_a(navigateur, largeur: int, sortie: Path) -> list[str]:
         problemes.append(f"{largeur} px : {pa} PA au lieu de 7")
     if force != "230":
         problemes.append(f"{largeur} px : Force {force} au lieu de 230")
+    # Navigateur de panoplies : toute la panoplie du Bouftou d'un coup.
+    await page.click("#b-panos-ouvrir")
+    await page.fill("#p-texte", "bouftou")
+    await page.click(".b-objet-pano >> text='Panoplie du Bouftou'")
+    await page.click("#b-pano >> text=Équiper toute la panoplie")
+    await page.wait_for_selector(".b-panoplie >> text=(8/8)")
     await page.fill("#b-nom", "Recette")
     await page.click("#b-enregistrer")
     await page.wait_for_url(lambda u: u.rstrip("/").split("/")[-1].isdigit())

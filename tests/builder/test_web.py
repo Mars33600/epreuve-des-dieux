@@ -377,3 +377,15 @@ def test_variantes_hors_des_totaux_et_enregistrees():
     assert builds.lignes[copie].contenu.variantes == {"coiffe": {"id": 27282, "fm": {"118": 3}}}
     assert '"variantes": {"coiffe": {"fm": {"118": 3}, "id": 27282}}' in moi.get(f"/builder/{bid}").text
     assert moi.post("/api/builder/calcul", json={"variantes": {"coiffe": {"fm": {}}}}).status_code == 422
+
+
+def test_api_panoplies():
+    c = client()
+    d = c.get("/api/builder/panoplies", params={"q": "bouftou", "niveau_max": 20}).json()
+    assert any(p["id"] == 1 for p in d["panoplies"])
+    detail = c.get("/api/builder/panoplies/1").json()
+    assert detail["nom"] == "Panoplie du Bouftou" and len(detail["objets"]) == 8
+    assert c.get("/api/builder/panoplies/999999").status_code == 404
+    assert c.get("/api/builder/panoplies", params={"carac": "Mana"}).status_code == 422
+    assert client(None).get("/api/builder/panoplies").status_code == 401
+    assert client(None).get("/api/builder/panoplies/1").status_code == 401

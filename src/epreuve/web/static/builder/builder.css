@@ -116,6 +116,14 @@ body.page-builder{margin:0;overflow-x:clip;min-height:100vh;color:var(--b-ink);f
 .b-variante{margin:8px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .b-variante h3,.b-variante p{flex-basis:100%;margin:0}
 
+/* Navigateur de panoplies */
+#b-panos-ouvrir{margin-top:8px}
+.b-pano{padding:8px 16px 24px;display:grid;gap:10px}
+.b-pano h3{margin:0;font-family:"Alegreya SC",serif}
+.b-pano-bonus{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:.9rem;color:var(--b-muted)}
+.b-pano-bonus b{color:var(--b-ink);font-family:"IBM Plex Mono",monospace}
+.b-pano-actions{display:flex;flex-wrap:wrap;gap:8px}
+
 /* Forgemagie */
 .b-fm{margin:8px 16px;padding:12px;border:1px solid var(--b-gold-line);border-radius:8px;background:var(--b-surface-2)}
 .b-fm .b-aide{margin:4px 0 8px;font-size:.9rem}

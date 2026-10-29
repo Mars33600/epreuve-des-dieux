@@ -455,6 +455,93 @@
     }
   }
 
+  // --- Navigateur de panoplies ---------------------------------------------------------------------------------
+
+  const panos = { decalage: 0, total: 0, requete: 0, minuteur: null };
+
+  function ouvrirPanos() {
+    $("p-max").value = String(etat.niveau);
+    $("b-pano").hidden = true;
+    $("b-panos-filtres").hidden = false;
+    $("b-panos-liste").hidden = false;
+    $("b-panos").showModal();
+    chercherPanos(true);
+  }
+
+  async function chercherPanos(depuisDebut) {
+    if (depuisDebut) panos.decalage = 0;
+    const params = new URLSearchParams({ q: $("p-texte").value.trim(), decalage: String(panos.decalage) });
+    const min = parseInt($("p-min").value, 10), max = parseInt($("p-max").value, 10);
+    if (!isNaN(min)) params.set("niveau_min", String(min));
+    if (!isNaN(max)) params.set("niveau_max", String(max));
+    if ($("p-carac").value) params.set("carac", $("p-carac").value);
+    const numero = ++panos.requete;
+    const r = await fetch("/api/builder/panoplies?" + params.toString(), { headers: { Accept: "application/json" } });
+    const d = await r.json();
+    if (numero !== panos.requete) return;
+    if (!r.ok) { $("b-panos-compte").textContent = d.message || "Recherche impossible."; return; }
+    const ul = $("b-panos-liste");
+    if (depuisDebut) ul.replaceChildren();
+    for (const p of d.panoplies) {
+      const b = el("button", { type: "button", classe: "b-objet b-objet-pano" }, [el("span", {}, [
+        el("span", { classe: "b-objet-nom", texte: p.nom }), document.createElement("br"),
+        el("span", { classe: "b-objet-meta", texte: "Niv. " + p.niveau + " · " + p.nb_objets + " objets" }), document.createElement("br"),
+        el("span", { classe: "b-objet-caracs", texte: p.bonus_complet.slice(0, 6).map(([c, v]) => signe(v) + " " + c).join(" · ") }),
+      ])]);
+      b.addEventListener("click", () => voirPano(p.id));
+      ul.append(el("li", {}, [b]));
+    }
+    panos.decalage += d.panoplies.length;
+    panos.total = d.total;
+    $("b-panos-compte").textContent = d.total + " panoplie" + (d.total > 1 ? "s" : "");
+    $("b-panos-plus").hidden = panos.decalage >= d.total;
+  }
+
+  async function voirPano(id) {
+    const r = await fetch("/api/builder/panoplies/" + id, { headers: { Accept: "application/json" } });
+    if (!r.ok) return;
+    const p = await r.json();
+    const zone = $("b-pano");
+    zone.replaceChildren();
+    const retour = el("button", { type: "button", classe: "b-bouton", texte: "← Toutes les panoplies" });
+    retour.addEventListener("click", () => {
+      zone.hidden = true; $("b-panos-filtres").hidden = false; $("b-panos-liste").hidden = false;
+      $("b-panos-plus").hidden = panos.decalage >= panos.total;
+    });
+    zone.append(retour, el("h3", { texte: p.nom + " · niv. " + p.niveau }));
+    const objets = el("ul", { classe: "b-resultats" });
+    for (const o of p.objets) {
+      objets.append(el("li", {}, [el("div", { classe: "b-objet" }, [
+        o.icone ? el("img", { src: o.icone, alt: "", loading: "lazy" }) : el("span"),
+        el("span", {}, [el("span", { classe: "b-objet-nom", texte: o.nom }), document.createElement("br"),
+          el("span", { classe: "b-objet-meta", texte: "Niv. " + o.niveau + (o.emplacement ? " · " + NOMS[o.emplacement] : " · non placé") })]),
+      ])]));
+    }
+    zone.append(objets);
+    const bonus = el("ul", { classe: "b-pano-bonus" });
+    for (const [n, caracs] of p.bonus) {
+      bonus.append(el("li", {}, [el("b", { texte: n + " objets : " }), caracs.map(([c, v]) => signe(v) + " " + c).join(" · ")]));
+    }
+    zone.append(el("h3", { classe: "b-surtitre", texte: "Bonus" }), bonus);
+    if (modifiable) {
+      const equiper = el("button", { type: "button", classe: "b-bouton b-bouton-or", texte: "Équiper toute la panoplie" });
+      equiper.addEventListener("click", () => {
+        for (const o of p.objets) {
+          if (!o.emplacement) continue;
+          if (!etat.objets[o.emplacement] || etat.objets[o.emplacement].id !== o.id) delete etat.fm[o.emplacement];
+          etat.objets[o.emplacement] = o;
+        }
+        $("b-panos").close();
+        changement();
+      });
+      zone.append(el("div", { classe: "b-pano-actions" }, [equiper]));
+    }
+    $("b-panos-filtres").hidden = true;
+    $("b-panos-liste").hidden = true;
+    $("b-panos-plus").hidden = true;
+    zone.hidden = false;
+  }
+
   // --- Cycle de mise à jour -----------------------------------------------------------------------------------
 
   const extensions = []; // fonctions appelées à chaque changement (sauvegarde…)
@@ -570,6 +657,15 @@
   }
 
   brancherFormulaire();
+  for (const c of config.caracs) $("p-carac").append(el("option", { value: c, texte: c }));
+  $("b-panos-ouvrir").addEventListener("click", ouvrirPanos);
+  $("b-panos-plus").addEventListener("click", () => chercherPanos(false));
+  for (const id of ["p-texte", "p-min", "p-max"]) $(id).addEventListener("input", () => {
+    clearTimeout(panos.minuteur);
+    panos.minuteur = setTimeout(() => chercherPanos(true), 250);
+  });
+  $("p-carac").addEventListener("change", () => chercherPanos(true));
+  $("b-panos").addEventListener("click", (ev) => { if (ev.target === $("b-panos")) $("b-panos").close(); });
   $("b-sorts-zone").addEventListener("toggle", chargerSorts);
   if ($("b-dupliquer")) $("b-dupliquer").addEventListener("click", dupliquer);
   $("b-note").addEventListener("input", (ev) => { etat.note = ev.target.value; });
