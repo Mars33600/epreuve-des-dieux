@@ -19,7 +19,6 @@
       </div>
       <p class="how">Chaque grimpeur peut rapporter <b>4 points</b> par étage, un par catégorie <b>terminée en entier</b>. L'étage suivant se descelle quand la guilde atteint le palier.</p>
       {{ jauge_bloc(jauge, encoches, formule, texte_jauge, verdict_plein, verdict_pas_plein) }}
-      <p><a class="cta" href="/etages/{{ ouvert.numero }}">Entrer dans l'étage</a></p>
     </section>
     {% else %}
     <section class="card"><h2>La tour se prépare</h2><p class="muted">Aucun étage n'est ouvert pour l'instant.</p></section>

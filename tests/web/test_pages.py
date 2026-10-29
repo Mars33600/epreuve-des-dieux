@@ -524,3 +524,54 @@ def test_base_vide_et_aucun_etage_ouvert():
     assert "La tour se prépare" in c.get("/").text
     assert c.get("/grimpeurs").status_code == 200 and c.get("/regles").status_code == 200
     assert "Aucun étage ouvert" in c.get("/grimpeurs/1").text
+
+
+# ---------------------------------------------------------------- texte des donjons et filtres de l'étage
+
+
+def _depot_avec_donjons(n: int) -> DepotDemo:
+    """Le Seuil (3 donjons dans la démo) ramené ou porté à n donjons, 5 cases chacun."""
+    from epreuve.domaine.modeles import CaseSucces, Donjon
+    depot = DepotDemo()
+    for id_ in [i for i, d in depot._donjons.items() if d.etage_id == 1 and i > n]:
+        depot._donjons.pop(id_)
+        for cid in [c for c, cs in depot._cases.items() if cs.donjon_id == id_]:
+            depot._cases.pop(cid)
+    for id_ in range(4, n + 1):
+        nouv = 100 + id_
+        depot._donjons[nouv] = Donjon(nouv, 1, f"Donjon neuf {id_}", 20, 40 + id_, None, 900 + id_,
+                                    "propose", "duffus", False)
+        for k in range(1, 6):
+            depot._cases[nouv * 10 + k] = CaseSucces(
+                nouv * 10 + k, nouv, k, "Vaincre le boss" if k == 1 else f"Défi {k}", "x", k == 1, False)
+    return depot
+
+
+def test_textes_de_la_regle_des_donjons():
+    from epreuve.web.vues import texte_point_donjons, texte_point_full
+    assert texte_point_donjons(1) == "Vaincre ce donjon rapporte 1 point (Donjons)"
+    assert texte_point_donjons(4) == "Vaincre les 4 donjons de l'étage rapporte 1 point (Donjons)"
+    assert texte_point_full(1).endswith("1 point (Full succès)") and "ce donjon" in texte_point_full(1)
+    assert "des 4 donjons de l'étage" in texte_point_full(4)
+
+
+@pytest.mark.parametrize("n", [1, 4])
+def test_page_etage_dit_la_regle_pour_n_donjons(n):
+    html = monde(depot=_depot_avec_donjons(n)).connecter(ID_BRINDILLE).get("/etages/0").text
+    liste = html.split('id="liste"')[1]
+    if n == 1:
+        assert liste.count("Vaincre ce donjon rapporte 1 point (Donjons)") == 2
+        assert " / 1 vaincu<" in liste
+    else:
+        assert liste.count("Vaincre les 4 donjons de l&#39;étage rapporte 1 point (Donjons)") == 5
+        assert re.search(r"/ 4 vaincus<", liste)
+        assert "des 4 donjons de l&#39;étage rapporte 1 point (Full succès)" in liste
+    assert "si tous les donjons sont vaincus" not in liste
+
+
+def test_filtre_page_etage_a_tout_afficher_et_etat_lu_dans_l_url():
+    c = monde().connecter(ID_BRINDILLE)
+    html = c.get("/etages/0?voir=donjons").text
+    assert 'id="filtreTout"' in html and "Tout afficher" in html
+    app_js = c.get("/static/app.js").text
+    assert "URLSearchParams(location.search)" in app_js and "replaceState" in app_js

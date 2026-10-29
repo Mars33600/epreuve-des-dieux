@@ -78,7 +78,16 @@
 {%- set coches = vue.coches_de(cible.id if cible else none) -%}
 {%- set numero = vue.etage.numero -%}
 {%- if vue.contenu.donjons %}
-<p class="legende-dj">{{ icone("i-donjon") }}<span>Cocher <b>« Vaincre le boss »</b> (la première case, en vert) sur <b>tous les donjons de l'étage</b> rapporte déjà <b>1 point</b>, celui de la catégorie Donjons. Les <b>4 succès en plus</b> de chaque donjon, tous cochés, donnent le point <b>Full succès</b>.</span></p>
+{%- set nd = vue.contenu.donjons|length -%}
+{%- set cpt = namespace(v=0, c=0) -%}
+{%- for d in vue.contenu.donjons %}{% set cs = vue.contenu.cases_du_donjon(d.id) %}{% set cl = vue.classique(d.id) %}
+  {%- if cl and cl.id in coches.cases %}{% set cpt.v = cpt.v + 1 %}{% endif %}
+  {%- if cs and cs|selectattr("id", "in", coches.cases)|list|length == cs|length %}{% set cpt.c = cpt.c + 1 %}{% endif %}
+{%- endfor %}
+<div class="legende-dj">{{ icone("i-donjon") }}<div>
+  <p><b>{{ texte_donjons(nd) }}</b>. La première case de chaque donjon, « Vaincre le boss », compte pour ce point.{% if cible %} <span class="cpt-dj"><span data-vaincus>{{ cpt.v }}</span> / {{ nd }} vaincu{{ "s" if nd > 1 }}</span>{% endif %}</p>
+  <p><b>{{ texte_full(nd) }}</b>. Les 4 autres cases de chaque donjon sont les succès.{% if cible %} <span class="cpt-dj"><span data-complets>{{ cpt.c }}</span> / {{ nd }} complet{{ "s" if nd > 1 }}</span>{% endif %}</p>
+</div></div>
 {%- endif %}
 {%- for bloc in vue.blocs() %}
 <section class="bloc">
@@ -107,7 +116,7 @@
           <ul class="ticks">
           {%- for c in l.cases %}
             <li{% if c.est_classique %} class="premiere"{% endif %}><label class="tick c-{{ 'donjons' if c.est_classique else 'full_succes' }}"><input type="checkbox" data-ref="case:{{ c.id }}"{% if c.id in coches.cases %} checked{% endif %}{% if not cochable %} disabled{% endif %}>
-              <span><b>{{ c.nom }}</b><small>{{ c.condition }}{% if c.est_classique %}<em class="pt-dj">1 point Donjons si tous les donjons sont vaincus</em>{% endif %}</small></span></label>{{ compteur(vue, "case:" ~ c.id) }}</li>
+              <span><b>{{ c.nom }}</b><small>{{ c.condition }}{% if c.est_classique %}<em class="pt-dj">{{ texte_donjons(nd) }}</em>{% endif %}</small></span></label>{{ compteur(vue, "case:" ~ c.id) }}</li>
           {%- endfor %}
           </ul>
           {% if cochable %}<p><button class="btn" type="button" data-donjon-tout="{{ d.id }}">Tout le donjon (5 cases)</button></p>{% endif %}
@@ -127,7 +136,9 @@
   <label class="c-{{ info.cle }}"><input type="checkbox" value="{{ info.cle }}" checked>{{ icone(info.icone) }}{{ info.nom }}</label>
   {%- endfor %}
   <label class="reste"><input type="checkbox" value="reste">Seulement ce qui me reste</label>
+  <button class="btn" type="button" id="filtreTout">Tout afficher</button>
 </fieldset>
+<p class="muted filtre-vide" id="filtreVide" hidden>Rien à afficher avec ces filtres.</p>
 {%- endmacro %}
 
 {% macro personnes(liste, cls) -%}

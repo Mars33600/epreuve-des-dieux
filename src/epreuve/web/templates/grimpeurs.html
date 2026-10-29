@@ -40,7 +40,7 @@
     {%- if reponse and g.statut == "actif" %}{% set _ = cls.append("target" if g.id in cibles else "dim") %}{% endif %}
     {%- set pts = vue.points(g.id) if vue else 0 %}
     <a class="player {{ cls|join(' ') }}" href="/grimpeurs/{{ g.id }}" data-gid="{{ g.id }}" data-statut="{{ g.statut }}">
-      <div class="ptop"><strong>{{ g.pseudo }}</strong><span class="total{% if pts == 4 %} full{% endif %}">{{ pts }}<small>/4</small></span></div>
+      <div class="ptop"><strong>{{ g.pseudo }}</strong><span class="total{% if pts == 4 %} full{% endif %}">{{ pts }}<small>/4{% if ouvert %} · étage {{ ouvert.numero }}{% endif %}</small></span></div>
       <div class="meta">
         {% if regles.afficher_nom_discord %}<span class="discord">{{ g.nom_discord }}</span>{% endif %}
         <span>{{ g.classe or "Classe non précisée" }}</span>
