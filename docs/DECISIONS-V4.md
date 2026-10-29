@@ -96,3 +96,12 @@ Les salons Discord `étage-X` de Shadoaze n'étaient qu'une aide provisoire pour
 - **Q7 (règlement Discord)** : sans objet. Les règles sont publiées **sur le site**, dans une page « Règles », écrite à partir de la conversation. Cette page fait partie du lot B.
 - **Questions à Shadoaze** : il n'en reste aucune.
 - **Fiches de quête absentes de Duffus** (étages 12 à 23 surtout) : on les prend sur DofusDB, **seulement quand Duffus n'a rien**, par nom exact. Au moindre doute, pas de fiche et une alerte. La source de chaque fiche est indiquée dans la revue admin.
+
+## 13. Direction artistique (Marceau, 29/10)
+
+- **Ambiance « Nuit du teaser »** (variante A de `docs/design/maquettes-da.html`) sur tout le site : nuit bleue et or, image de l'étage en fond assombrie, texte très contrasté sur des cartes quasi opaques. Le crépuscule clair du 28/10 est abandonné.
+- **Pyramide mystérieuse** : aucun chiffre ni nombre d'étages visible. Seuls les étages ouverts sont nommés et cliquables ; au-dessus, des gradins anonymes qui se perdent dans la brume.
+- **Accueil = la pyramide en grand**, avec la jauge de l'étage en cours sous la pyramide (pas superposée).
+- **Typographie plus petite, interface moderne.**
+- **L'histoire de Shadoaze** (salon Présentation) : prologue plein écran à la première connexion (passable), puis page « L'histoire » dans le menu.
+- **Fiche de quête** : emplacement de départ et suivi précis étape par étape, à l'identique de Duffus.
