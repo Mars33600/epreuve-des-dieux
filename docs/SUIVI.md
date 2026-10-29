@@ -50,6 +50,11 @@ Détails : `DECISIONS-V4.md`.
 - [x] Menu logique avec « Monde des Douze », recherche globale en direct (grimpeurs, quêtes, monstres, objets…), fiche de quête en fenêtre centrée, page Grimpeurs avec fiche par joueur
 - [x] Recette complète par le testeur : 61 pages, 783 clics, 0 défaut restant à 360 px
 
+- [x] Jauge dans la pyramide (remplissage, trait du palier, infobulle avec les grimpeurs actifs) et bandeau d'étage sans dépliant
+- [x] Donjons dans leur propre section, règle précise de chaque challenge (« aléatoire » quand le jeu choisit la cible)
+- [x] Liens vers l'encyclopédie (objets, monstres, PNJ) ouvrables dans un nouvel onglet ; police plus grande ; page Règles lisible
+- [x] Sauvegarde chiffrée chaque nuit sur GitHub, restauration vérifiée ; retour à la version précédente possible
+
 ## Modules de Duffus « à l'identique »
 
 - [x] Guide (cases, fiches, progression)
