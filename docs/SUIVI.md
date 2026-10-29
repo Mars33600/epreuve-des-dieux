@@ -47,6 +47,9 @@ Détails : `DECISIONS-V4.md`.
 - [x] Histoire de Shadoaze : prologue à la première connexion + page « L'histoire »
 - [x] Accès réservé aux participants
 
+- [x] Menu logique avec « Monde des Douze », recherche globale en direct (grimpeurs, quêtes, monstres, objets…), fiche de quête en fenêtre centrée, page Grimpeurs avec fiche par joueur
+- [x] Recette complète par le testeur : 61 pages, 783 clics, 0 défaut restant à 360 px
+
 ## Modules de Duffus « à l'identique »
 
 - [x] Guide (cases, fiches, progression)
