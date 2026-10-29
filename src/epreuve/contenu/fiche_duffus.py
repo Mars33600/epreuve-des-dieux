@@ -11,14 +11,14 @@ from __future__ import annotations
 import json
 import re
 from collections.abc import Mapping
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from html import escape
 from html.parser import HTMLParser
 
 import nh3
 
 from epreuve.db.depot import ContenuFiche, PrerequisBrut
-from epreuve.domaine.fiche import Besoin, EtapeFiche, Position
+from epreuve.domaine.fiche import Besoin, EtapeFiche, LigneEtape, Position
 
 # --- Nettoyage ----------------------------------------------------------------------------------------------
 
@@ -114,7 +114,8 @@ def arbre(html: str) -> Noeud:
 
 TITRES_ETAPES = {"dialogue": "Dialogue", "move": "Déplacement", "marche": "Déplacement à pied",
                  "clique": "Action", "combat": "Combat", "craft": "Fabrication", "text": "À savoir",
-                 "mob-stats-card": "Monstre"}
+                 "mob-stats-card": "Monstre", "dungeon": "Donjon", "astuce": "Astuce", "prevoir": "À apporter",
+                 "quetes": "Enchaînement", "note": "Attention", "positions": "Positions", "important": "Important"}
 _COORD = re.compile(r"\[\s*(-?\d+)\s*,\s*(-?\d+)\s*\]")
 _QTE = re.compile(r"(\d[\d\s \xa0]*)")
 _VAINCRE = re.compile(r"(\d+)\s*x\s*$")
@@ -130,11 +131,57 @@ def _coord(texte: str) -> tuple[int, int] | None:
     return (int(m.group(1)), int(m.group(2))) if m else None
 
 
+def _coords_de(bloc: Noeud) -> list[tuple[int, int]]:
+    """Les positions [x,y] d'un bloc : `data-coords` du bouton, sinon son texte."""
+    sortie = []
+    for p in bloc.par_classe("qpos"):
+        # Le texte du bouton est ce que le joueur lit ; `data-coords` est parfois resté à « 0,0 ».
+        xy = _coord(p.texte()) or (_coord("[" + p.attrs["data-coords"] + "]") if p.attrs.get("data-coords") else None)
+        if xy:
+            sortie.append(xy)
+    return sortie
+
+
+def _lignes_monstres(bloc: Noeud) -> list[LigneEtape]:
+    """« Vaincre 1 x <a>Chafer</a>, 2 x <a>Piquier</a> » → une ligne par monstre, avec sa quantité."""
+    lignes = []
+    for ligne in bloc.par_classe("combat-line"):
+        avant = ""
+        for e in ligne.enfants:
+            if isinstance(e, str):
+                avant += e
+            elif e.balise == "a":
+                m = _VAINCRE.search(avant)
+                if e.texte():
+                    lignes.append(LigneEtape("monstre", nom=e.texte(), quantite=int(m.group(1)) if m else 1))
+                avant = ""
+            else:
+                avant += e.texte()
+    return lignes
+
+
+def _lignes_objets(bloc: Noeud) -> list[LigneEtape]:
+    """Les objets d'une étape « à apporter » ou « fabriquer » : nom et quantité de chaque ligne."""
+    lignes = []
+    if "craft" in bloc.classes:
+        nom = next((n.texte() for n in bloc.par_classe("craft-item-name")), "")
+        if nom:
+            lignes.append(LigneEtape("objet", "Fabriquer", nom, _entier(bloc.attrs.get("data-qty", ""))))
+    for item in [*bloc.par_classe("prevoir-item"), *bloc.par_classe("recipe-item")]:
+        nom = next((n.texte() for n in [*item.par_classe("prevoir-name"), *item.par_classe("recipe-name")]), "")
+        qte = next((_entier(n.texte()) for n in item.par_classe("prevoir-qty")), 1)
+        if nom:
+            lignes.append(LigneEtape("objet", nom=nom, quantite=qte))
+    return lignes
+
+
 def _etapes(racine: Noeud, ouvertes: Mapping[str, str]) -> tuple[list[EtapeFiche], list[Position]]:
     etapes: list[EtapeFiche] = []
     positions: list[Position] = []
     for carte in racine.par_classe("qk-card"):
-        texte = nettoyer_fiche(carte.html(), ouvertes)
+        # le titre « Objectif » de la carte est déjà celui de l'étape
+        corps = re.sub(r'<div class="qk-title">.*?</div>', "", carte.html(), flags=re.S)
+        texte = nettoyer_fiche(corps, ouvertes)
         if arbre(texte).texte():
             etapes.append(EtapeFiche(len(etapes) + 1, "Objectif", texte))
     for bloc in racine.par_classe("qstep"):
@@ -143,14 +190,15 @@ def _etapes(racine: Noeud, ouvertes: Mapping[str, str]) -> tuple[list[EtapeFiche
         genre = next((c for c in bloc.classes if c in TITRES_ETAPES), None)
         droite = next((n for n in bloc.par_classe("cell-right")), None) or bloc
         texte = nettoyer_fiche(droite.html(), ouvertes)
-        for p in bloc.par_classe("qpos"):
-            xy = _coord(p.texte())
-            if xy:
-                positions.append(Position(droite.texte()[:120] or "Position", xy[0], xy[1], None))
+        libelle = droite.texte()[:120] or "Position"
+        lieux = tuple(Position(libelle, x, y, None) for x, y in _coords_de(bloc))
+        positions.extend(lieux)
         if genre == "mob-stats-card":
             continue  # la fiche de monstre est reprise dans « monstres »
-        if arbre(texte).texte():  # une étape sans aucun texte (« <ul></ul> ») n'apporte rien
-            etapes.append(EtapeFiche(len(etapes) + 1, TITRES_ETAPES.get(genre or "", "Étape"), texte))
+        lignes = tuple([*_lignes_monstres(bloc), *_lignes_objets(bloc)])
+        if arbre(texte).texte() or lieux or lignes:  # une étape vide (« <ul></ul> ») n'apporte rien
+            etapes.append(EtapeFiche(len(etapes) + 1, TITRES_ETAPES.get(genre or "", "Étape"), texte, (),
+                                     lieux, lignes))
     return etapes, positions
 
 
@@ -202,6 +250,38 @@ def _recompenses(r: Mapping | None) -> list[str]:
     return sortie
 
 
+# « Infos rapides » de Duffus (colonne `quick`) : clé → (singulier, pluriel, avec un nombre). Même libellés que le site.
+_RAPIDES = (("solo", "Combat solo", "Combats solo"), ("group", "Combat en groupe", "Combats en groupe"),
+            ("songes", "Combat en Songes", "Combats en Songes"), ("tactic", "Combat tactique", "Combats tactiques"),
+            ("alea", "Combat(s) aléatoire(s)", None), ("tiles", "Dalle à prévoir", "Dalles à prévoir"),
+            ("farm", "Farm ou drop", "Farm ou drop"), ("soloVague", "Combat à vagues solo", "Combats à vagues solo"),
+            ("groupVague", "Combat à vagues en groupe", "Combats à vagues en groupe"))
+
+
+def infos_rapides_de(quick: Mapping | None) -> list[str]:
+    """Les « infos rapides » de la fiche : « Combats en groupe ×2 », « Donjon : X (Uniquement les salles.) »…"""
+    quick = quick or {}
+    sortie = []
+    for cle, singulier, pluriel in _RAPIDES:
+        try:
+            n = int(quick.get(cle) or 0)
+        except (TypeError, ValueError):
+            n = 0
+        if n > 0:
+            sortie.append(singulier if pluriel is None else f"{pluriel if n > 1 else singulier} ×{n}")
+    donjons = quick.get("dungeons")
+    if not isinstance(donjons, list):
+        donjons = [{"name": quick["dungeonName"]}] if quick.get("dungeonName") else []
+    for d in donjons:
+        if isinstance(d, dict) and str(d.get("name") or "").strip():
+            note = str(d.get("description") or "").strip()
+            sortie.append(f"Donjon : {d['name'].strip()}" + (f" ({note})" if note else ""))
+    for c in quick.get("custom") or []:
+        if isinstance(c, dict) and str(c.get("text") or "").strip():
+            sortie.append(str(c["text"]).strip())
+    return sortie
+
+
 def prerequis_de(page: Mapping, slug_vers_id: Mapping[str, str]) -> list[PrerequisBrut]:
     sortie: list[PrerequisBrut] = []
     try:
@@ -220,7 +300,8 @@ def prerequis_de(page: Mapping, slug_vers_id: Mapping[str, str]) -> list[Prerequ
 
 
 def lire_fiche(page: Mapping, entree: Mapping, slug_vers_id: Mapping[str, str],
-               ouvertes: Mapping[str, str], ressources: list[dict] | None = None) -> ContenuFiche:
+               ouvertes: Mapping[str, str], ressources: list[dict] | None = None,
+               infos_rapides: Mapping | None = None) -> ContenuFiche:
     """La fiche Duffus d'une entrée du guide (`quest_list`), de sa page (`quest_pages`) et de ses ressources
     à prévoir (`quest_resources`)."""
     racine = arbre(page.get("content_html") or "")
@@ -230,12 +311,14 @@ def lire_fiche(page: Mapping, entree: Mapping, slug_vers_id: Mapping[str, str],
     note = " ".join(dict.fromkeys(x.strip() for x in (entree.get("note"), entree.get("note2")) if x and x.strip()))
     if note:
         etapes.insert(0, EtapeFiche(0, "Note du guide", nettoyer_fiche(escape(note), ouvertes)))
-    etapes = [EtapeFiche(i, e.titre, e.texte_html, e.objectifs) for i, e in enumerate(etapes, 1)]
+    etapes = [replace(e, ordre=i) for i, e in enumerate(etapes, 1)]
     meta = page.get("meta") or {}
-    depart = _coord(meta.get("startCoords") or "")
+    # Le départ : la méta de la page, sinon la ligne du guide (`quest_list` : pnj, pos, zone).
+    depart = _coord(meta.get("startCoords") or "") or _coord(entree.get("pos") or "")
+    pnj = meta.get("startNpc") or entree.get("pnj") or None
     if depart:
-        positions.insert(0, Position(f"Départ : {meta.get('startNpc') or 'PNJ'}", depart[0], depart[1],
-                                     meta.get("zone")))
+        positions.insert(0, Position(f"Départ : {pnj}" if pnj else "Départ", depart[0], depart[1],
+                                     meta.get("zone") or entree.get("zone")))
     vues = set()
     positions = [p for p in positions if (p.x, p.y, p.libelle) not in vues and not vues.add((p.x, p.y, p.libelle))]
     succes = entree.get("succes") or []
@@ -243,6 +326,7 @@ def lire_fiche(page: Mapping, entree: Mapping, slug_vers_id: Mapping[str, str],
         prerequis=prerequis_de(page, slug_vers_id), etapes=etapes,
         objets=_objets(racine, [*(page.get("manual_resources") or []),
                                 *({"label": r["name"], "qty": r["qty"]} for r in ressources or [])]),
-        monstres=_monstres(racine), positions=positions, succes_lie=", ".join(succes) or None,
-        recompenses=_recompenses(page.get("rewards")),
+        monstres=_monstres(racine), positions=positions, pnj_depart=pnj,
+        succes_lie=", ".join(succes) or None,
+        recompenses=_recompenses(page.get("rewards")), infos_rapides=infos_rapides_de(infos_rapides),
     )  # fmt: skip

@@ -108,8 +108,10 @@ class ContenuFiche(_Strict):
     objets: list[Besoin] = []
     monstres: list[Besoin] = []
     positions: list[Position] = []
+    pnj_depart: str | None = None  # le PNJ de départ, même sans position connue
     succes_lie: str | None = None
     recompenses: list[str] = []
+    infos_rapides: list[str] = []  # « Combats en groupe ×2 », « Donjon : X »… (infos rapides de Duffus)
 
 
 SourceFiche = Literal["duffus", "duffus+dofusdb", "dofusdb"]
@@ -731,8 +733,30 @@ class Depot:
             nature=r.nature, dofus=tuple(r.dofus or ()), jusqu_ou=r.jusqu_ou, a_lier=r.a_lier, prerequis=prerequis,
             etapes=tuple(contenu.etapes), objets=tuple(contenu.objets), monstres=tuple(contenu.monstres),
             positions=tuple(contenu.positions), succes_lie=contenu.succes_lie,
-            recompenses=tuple(contenu.recompenses), source=r.source,
+            recompenses=tuple(contenu.recompenses), source=r.source, pnj_depart_connu=contenu.pnj_depart,
+            infos_rapides=tuple(contenu.infos_rapides),
         )  # fmt: skip
+
+    async def etapes_suivies(self, grimpeur_id: int, quete_id: int) -> frozenset[int]:
+        """Les numéros d'étapes que ce grimpeur a cochées sur cette quête (suivi personnel, sans points)."""
+        async with self._moteur.connect() as c:
+            return frozenset(r.ordre for r in await c.execute(
+                select(t.suivi_etape.c.ordre).where(t.suivi_etape.c.grimpeur_id == grimpeur_id,
+                                                    t.suivi_etape.c.quete_id == quete_id)))
+
+    async def suivre_etape(self, grimpeur_id: int, quete_id: int, ordre: int, faite: bool,
+                           maintenant: datetime) -> None:
+        """Coche ou décoche une étape ; idempotent. Ne touche jamais à `coche_quete` : la quête n'est pas
+        cochée pour autant, même si c'est la dernière étape. Le contrôle des droits est fait par l'appelant."""
+        async with self._moteur.begin() as c:
+            if faite:
+                await c.execute(insert_pg(t.suivi_etape).values(
+                    grimpeur_id=grimpeur_id, quete_id=quete_id, ordre=ordre, cochee_le=maintenant,
+                ).on_conflict_do_nothing())
+            else:
+                await c.execute(delete(t.suivi_etape).where(
+                    t.suivi_etape.c.grimpeur_id == grimpeur_id, t.suivi_etape.c.quete_id == quete_id,
+                    t.suivi_etape.c.ordre == ordre))
 
     async def etage_des_quetes(self) -> dict[int, int]:
         """id de quête → numéro d'étage, pour `masquer_prerequis_scelles`."""

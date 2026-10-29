@@ -470,6 +470,10 @@ details.dj-ligne[open] > summary .nomdj::after{transform:rotate(90deg)}
 .source{font-size:13px;color:var(--faint)}
 .objectifs{margin:6px 0 0;padding-left:18px;color:var(--muted);font-size:14px}
 .etape-texte p{margin:0 0 6px}
+.etape-lieux{margin:6px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.etape-suivi{display:inline-flex;align-items:center;margin-right:8px}
+.objectifs .k{font-size:12px;color:var(--faint);text-transform:uppercase}
+.suivi-note{font-size:13px;margin:0 0 8px}
 .qd-sec .positions li{grid-template-columns:minmax(0,1fr) auto}
 /* Grimpeurs */
 .player{text-decoration:none;color:inherit}

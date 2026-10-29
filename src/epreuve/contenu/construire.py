@@ -173,6 +173,7 @@ class Aspiration:
     guides: list[dict]  # guide_pages
     prerequis: dict[str, list[str]]  # slug → slugs des quêtes prérequises (quest_pages.prereq_quests)
     ressources: dict[int, list[dict]]  # quest_list.id → ressources à prévoir (quest_resources)
+    infos_rapides: dict[str, dict] = field(default_factory=dict)  # slug → « infos rapides » (quest_quick, F4)
 
     @staticmethod
     def lire(dossier: Path) -> Aspiration:
@@ -191,10 +192,21 @@ class Aspiration:
             liens = [x.get("link") or "" for x in _json_liste(p["prereq_quests"])]
             prerequis[p["slug"]] = [lien.removeprefix("/quete/").strip("/") for lien in liens
                                     if lien.startswith("/quete/")]
+        # Absent d'une aspiration antérieure au lot F4 : les fiches sont alors construites sans infos rapides.
+        rapides = {r["slug"]: _json_dict(r["quick"]) for r in charger("quest_quick")} \
+            if (dossier / "quest_quick.json").exists() else {}
         return Aspiration(dossier, charger("guide_ranges"), {q["id"]: q for q in charger("quest_list")},
                           {p["slug"]: p for p in charger("quest_pages")},
                           {d["slug"]: d for d in charger("dungeon_pages")}, charger("achievements"),
-                          charger("dofus_list"), charger("guide_pages"), prerequis, ressources)
+                          charger("dofus_list"), charger("guide_pages"), prerequis, ressources, rapides)
+
+
+def _json_dict(texte: str | None) -> dict:
+    try:
+        valeur = json.loads(texte or "{}")
+    except ValueError:
+        return {}
+    return valeur if isinstance(valeur, dict) else {}
 
 
 def _json_liste(texte: str | None) -> list[dict]:
@@ -413,7 +425,8 @@ def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage]
     for ordre, (entree, bloc) in enumerate(brutes, 1):
         slug = slug_quete(entree)
         page = aspi.pages.get(slug) if slug else None
-        fiche = (lire_fiche(page, entree, slug_vers_id, ouvertes, aspi.ressources.get(entree["id"], []))
+        fiche = (lire_fiche(page, entree, slug_vers_id, ouvertes, aspi.ressources.get(entree["id"], []),
+                              aspi.infos_rapides.get(slug))
                  if page else None)
         source: Literal["duffus", "dofusdb"] | None = "duffus" if fiche else None
         if fiche is None:  # seul cas où DofusDB est consulté
