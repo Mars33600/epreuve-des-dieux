@@ -1,14 +1,15 @@
 {% extends "base.html" %}
-{# Cadre commun des pages du lot E2 : en-tête, menu, onglets de l'encyclopédie. Aucun script ni style en ligne. #}
+{# Cadre commun des pages du lot E2 : décor et barre du site, onglets de l'encyclopédie. Aucun script ni style en ligne. #}
 {% block tete %}
+<link rel="stylesheet" href="/static/commun.css">
 <link rel="stylesheet" href="/static/encyclopedie/encyclopedie.css">
 {% endblock %}
+{% block attributs_body %} data-ouverture="{{ request.app.state.config.site_ouvert_le.isoformat() }}"{% endblock %}
 {% block contenu %}
+{% set chemin = request.url.path %}
+{% include "_decor.html" %}
+{% include "_barre_module.html" %}
 <div class="wrap">
-  <header class="entete">
-    <a class="marque" href="/">L'Épreuve <span>des Dieux</span></a>
-    {% include "menu.html" %}
-  </header>
   {% if rubrique != "stuffs" %}
   <nav class="onglets" aria-label="Encyclopédie">
     {% for cle, libelle in (("accueil", "Recherche"), ("objets", "Objets"), ("ressources", "Ressources"), ("monstres", "Monstres"), ("recettes", "Recettes"), ("panoplies", "Panoplies"), ("sorts", "Sorts"), ("pnj", "PNJ"), ("quetes", "Quêtes")) %}
@@ -21,4 +22,4 @@
   </main>
 </div>
 {% endblock %}
-{% block scripts %}<script src="/static/encyclopedie/encyclopedie.js" defer></script>{% endblock %}
+{% block scripts %}<script src="/static/app.js" defer></script><script src="/static/encyclopedie/encyclopedie.js" defer></script>{% endblock %}

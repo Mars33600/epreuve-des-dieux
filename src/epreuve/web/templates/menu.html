@@ -1,9 +1,0 @@
-{# Le menu du site connecté. Le lot B y ajoute ses liens (la tour, les grimpeurs, l'admin). #}
-<nav class="menu" aria-label="Menu principal">
-  <a href="/"{% if rubrique == "tour" %} aria-current="page"{% endif %}>La tour</a>
-  <a href="/encyclopedie"{% if rubrique in ("accueil", "objets", "ressources", "monstres", "recettes", "panoplies", "sorts", "pnj", "quetes") %} aria-current="page"{% endif %}>Encyclopédie</a>
-  <a href="/stuffs"{% if rubrique == "stuffs" %} aria-current="page"{% endif %}>Stuffs</a>
-  <a href="/builder">Builder</a>
-  <a href="/outils">Outils</a>
-  <a href="/archimonstres">Archis et avis</a>
-</nav>

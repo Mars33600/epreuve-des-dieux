@@ -109,6 +109,17 @@ async def page_etage(request: Request, numero: int):
     return await rendre(request, "etage.html", ctx)
 
 
+@routeur.get("/ambiance")
+async def ambiance_ouverte(request: Request):
+    """L'image de l'étage ouvert, pour le décor des modules (CSS seul, sans script) : jamais un étage scellé."""
+    await exiger_grimpeur(request)
+    ouvert = next((e for e in await _s(request).depot.etages() if e.statut == "ouvert"), None)
+    fichier = IMAGES_ETAGES / f"etage-{ouvert.numero}.webp" if ouvert else None
+    if fichier is None or not fichier.is_file():
+        raise Refus(404, "Image introuvable.")
+    return FileResponse(fichier, media_type="image/webp", headers={"Cache-Control": "private, max-age=3600"})
+
+
 @routeur.get("/etages/{numero}/image")
 async def image_etage(request: Request, numero: int):
     """L'image d'ambiance d'un étage, servie seulement si l'étage est visible (ouvert, terminé, ou admin).

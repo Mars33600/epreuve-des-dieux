@@ -1,0 +1,13 @@
+{# Les liens du menu principal. Attend `chemin`, `grimpeur_id` (None sans fiche), `est_admin` et `modules` (accès aux modules). #}
+      <a href="/" {% if chemin == "/" %}aria-current="page"{% endif %}>La tour</a>
+{% if grimpeur_id %}<a href="/tableau-de-bord" {% if chemin == "/tableau-de-bord" %}aria-current="page"{% endif %}>Tableau de bord</a>{% endif %}
+{% if modules %}<a href="/encyclopedie" {% if chemin.startswith("/encyclopedie") %}aria-current="page"{% endif %}>Encyclopédie</a>
+<a href="/stuffs" {% if chemin.startswith("/stuffs") %}aria-current="page"{% endif %}>Stuffs</a>
+<a href="/builder" {% if chemin.startswith("/builder") %}aria-current="page"{% endif %}>Builder</a>{% endif %}
+<a href="/outils" {% if chemin.startswith("/outils") %}aria-current="page"{% endif %}>Outils</a>
+<a href="/grimpeurs" {% if chemin == "/grimpeurs" %}aria-current="page"{% endif %}>Grimpeurs</a>
+{% if grimpeur_id %}<a href="/grimpeurs/{{ grimpeur_id }}" {% if chemin == "/grimpeurs/" ~ grimpeur_id %}aria-current="page"{% endif %}>Ma fiche</a>{% endif %}
+<a href="/archimonstres" {% if chemin.startswith(("/archimonstres", "/avis-de-recherche")) %}aria-current="page"{% endif %}>Archis et avis</a>
+<a href="/regles" {% if chemin == "/regles" %}aria-current="page"{% endif %}>Règles</a>
+<a href="/histoire" {% if chemin == "/histoire" %}aria-current="page"{% endif %}>L'histoire</a>
+{% if est_admin %}<a href="/admin" {% if chemin.startswith("/admin") %}aria-current="page"{% endif %}>Admin</a>{% endif %}

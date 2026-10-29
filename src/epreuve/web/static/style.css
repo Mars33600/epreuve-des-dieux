@@ -1,53 +1,11 @@
 /* L'Épreuve des Dieux · feuille du site (lot B). Tirée de docs/design/maquette-v2.html et des tokens
    de DA.md. Polices auto-hébergées (SIL OFL), aucun style en ligne (CSP). */
-@font-face{font-family:"Alegreya SC";font-style:normal;font-weight:700;font-display:swap;
-  src:url("fonts/alegreya-sc-700.woff2") format("woff2");
-  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-@font-face{font-family:"Alegreya SC";font-style:normal;font-weight:800;font-display:swap;
-  src:url("fonts/alegreya-sc-800.woff2") format("woff2");
-  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-@font-face{font-family:"Alegreya Sans";font-style:normal;font-weight:400;font-display:swap;
-  src:url("fonts/alegreya-sans-400.woff2") format("woff2");
-  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-@font-face{font-family:"Alegreya Sans";font-style:italic;font-weight:400;font-display:swap;
-  src:url("fonts/alegreya-sans-400-italique.woff2") format("woff2");
-  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-@font-face{font-family:"Alegreya Sans";font-style:normal;font-weight:500;font-display:swap;
-  src:url("fonts/alegreya-sans-500.woff2") format("woff2");
-  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
-@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;
-  src:url("fonts/ibm-plex-mono-500.woff2") format("woff2");
-  unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 /* ==========================================================================
    L'Épreuve des Dieux · maquette v2
    DA immersive (docs/design/DA.md) + modèle des décisions V4 :
    4 catégories à 1 point, seuil = 2 × grimpeurs actifs, fiches à cocher.
    Mise en page inchangée : la tour à gauche, l'étage et ses grimpeurs à droite.
    ========================================================================== */
-:root{
-  color-scheme:dark;
-  --night-0:#05070e; --night-1:#0a0e1c; --night-2:#141a30; --horizon:#2a2240;
-  --surface:#151b33; --surface-2:#1b2340; --sunken:#0c1020;
-  --line:rgba(227,181,82,.4); --line-soft:rgba(227,181,82,.2);
-  --ink:#f1ead9; --muted:#bdb7a7; --faint:#a9a595;
-  --gold:#e3b552; --gold-hi:#f6d58a; --gold-deep:#a8781f;
-  --gold-wash:rgba(227,181,82,.12); --gold-line:rgba(227,181,82,.32);
-  /* Les 4 catégories : chacune a sa couleur ET son icône (lisible sans la couleur). */
-  --c-donjon:#72e0b6; --c-succes:#cdb0ff; --c-princ:#86beff; --c-second:#ffa684;
-  --warn:#ff9d68;
-
-  --f-display:"Alegreya SC",Georgia,serif;
-  --f-body:"Alegreya Sans",system-ui,sans-serif;
-  --f-data:"IBM Plex Mono",ui-monospace,monospace;
-  /* Variante A « Nuit du teaser » (DECISIONS-V4 §13). Cartes quasi opaques : texte courant à plus de 7:1. */
-  --card:rgba(10,14,28,.96); --card-2:#151b33; --veil:5,8,22; --fog:150,160,200; --glow:255,221,150;
-  /* Échelle typographique (px) : corps 16, secondaire 14, mention 12 ; titres sobres. */
-  --t-xs:12px; --t-sm:14px; --t-base:16px; --t-h3:18px; --t-h2:clamp(21px,2.4vw,26px); --t-h1:clamp(22px,3.4vw,30px);
-  /* Espacements réguliers (4, 8, 12, 16, 24, 32), rayons et ombres discrets. */
-  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
-  --r:8px; --r-lg:12px; --ombre:0 6px 20px rgba(0,0,0,.45);
-  --bar-h:52px;
-}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-padding-top:calc(var(--bar-h) + 16px)}
 html{overflow-x:clip}
@@ -60,67 +18,12 @@ button{cursor:pointer}
 .num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
 .eyebrow{font:500 var(--t-xs)/1.3 var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
 .muted{color:var(--muted)}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-/* ---------- Décor fixe (même moteur que le teaser, en plus discret) ---------- */
-.scene{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.scene > *{position:absolute}
-.sky{inset:0;background:radial-gradient(120% 70% at 50% 108%,var(--horizon),transparent 60%),linear-gradient(180deg,var(--night-0),var(--night-1) 45%,var(--night-2))}
-.ambiance{inset:0;background:center/cover no-repeat;opacity:0;transition:opacity 1.6s ease;filter:saturate(.85) brightness(.8)}
-.ambiance.ready{opacity:1}
-#stars,#motes{inset:0;width:100%;height:100%}
-/* La lueur divine tombe sur la tour : en haut à gauche, au-dessus de la colonne de la tour. */
-.glow{left:50%;top:22%;width:150vmax;height:110vmax;transform:translate(-50%,-50%);
-  background:radial-gradient(closest-side,rgba(var(--glow),.26),rgba(var(--glow),.07) 40%,transparent 100%);
-  animation:breathe 12s ease-in-out infinite}
-
-.ridge{left:0;right:0;bottom:0;width:100%;height:26vh;opacity:.9}
-.fog{left:0;width:200%;background-repeat:repeat-x;background-size:50% 100%;will-change:transform}
-.fog-a{top:12vh;height:36vh;opacity:.8;animation:drift 150s linear infinite;
-  background-image:radial-gradient(26% 30% at 20% 50%,rgba(var(--fog),.16),transparent 70%),radial-gradient(30% 26% at 66% 40%,rgba(var(--fog),.12),transparent 70%)}
-.fog-b{bottom:-6vh;height:34vh;animation:drift 110s linear infinite reverse;
-  background-image:radial-gradient(30% 50% at 24% 70%,rgba(var(--fog),.2),transparent 72%),radial-gradient(34% 44% at 70% 60%,rgba(var(--fog),.16),transparent 72%)}
-.veil{inset:0;background:linear-gradient(180deg,rgba(var(--veil),.8) 0%,rgba(var(--veil),.58) 45%,rgba(var(--veil),.82) 100%)}
-.scrim{inset:0;background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.65))}
-@keyframes drift{to{transform:translate3d(-50%,0,0)}}
-@keyframes breathe{0%,100%{opacity:.75}50%{opacity:1}}
 
 /* ---------- Structure ---------- */
 .wrap{overflow-x:clip;position:relative;z-index:1;max-width:1200px;margin:0 auto;display:grid;gap:var(--s5);
   padding:var(--s5) max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
-/* Barre du haut : compacte et collante, la marque, le menu, l'horloge et le compte. */
-.bar{position:sticky;top:0;z-index:30;background:var(--card);border-bottom:1px solid var(--line-soft);box-shadow:0 4px 16px rgba(0,0,0,.4)}
-.bar-in{max-width:1400px;margin:0 auto;min-height:var(--bar-h);display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--s4);
-  padding:0 max(12px,env(safe-area-inset-right)) 0 max(12px,env(safe-area-inset-left))}
-.marque{font:800 19px/1 var(--f-display);color:var(--ink);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;white-space:nowrap;letter-spacing:.01em}
-.marque span{color:var(--gold-hi);margin-left:.3em}
-.bar-menu{order:2;flex:1 1 0;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--s3)}
-.bar .nav{flex:1 1 auto;display:flex;flex-wrap:wrap;gap:2px;min-width:0}
-.clock{order:3;margin-left:auto}
-.marque-h1{order:1;margin:0;font:inherit;display:flex}
-.clock{display:block;padding:0;border:0;background:none;box-shadow:none;text-align:right}
-.clock strong{font:500 var(--t-sm)/1 var(--f-data);color:var(--gold-hi);white-space:nowrap}
-.who{display:flex;align-items:center;gap:var(--s2);font-size:var(--t-sm);color:var(--muted);background:none;padding:0}
-.who b{color:var(--ink);font-weight:500;overflow-wrap:anywhere}
-@media (min-width:1181px){.who b{display:none}.bar-menu{flex-wrap:nowrap}.who{flex:none}}
-.demo{justify-self:start;font-size:var(--t-sm);color:var(--muted);border:1px dashed var(--line);border-radius:var(--r);padding:6px 12px;background:var(--card)}
-.demo b{color:var(--gold-hi);font-weight:700}
-.burger-case{position:absolute;opacity:0;width:1px;height:1px}
-.burger{display:none;order:3;width:44px;height:44px;border-radius:var(--r);border:1px solid var(--line-soft);align-items:center;justify-content:center;cursor:pointer}
-.burger-trait,.burger-trait::before,.burger-trait::after{display:block;width:18px;height:2px;border-radius:1px;background:var(--ink);content:"";position:relative}
-.burger-trait::before{position:absolute;top:-6px}.burger-trait::after{position:absolute;top:6px}
-.burger-case:focus-visible + .burger{outline:3px solid var(--gold-hi);outline-offset:3px}
-@media (max-width:1180px){
-  .clock{order:2}
-  .burger{display:inline-flex}
-  .bar-menu{order:4;flex:1 1 100%;display:none;padding:var(--s2) 0 var(--s3)}
-  .burger-case:checked ~ .bar-menu{display:flex}
-  .bar .nav{flex-basis:100%}
-  .who{padding:var(--s2) 0}
-}
-@media (max-width:520px){.clock{display:none}.burger{margin-left:auto}}
-
 .layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:24px;align-items:start}
 main{display:grid;gap:22px;min-width:0}
 
@@ -183,7 +86,6 @@ main{display:grid;gap:22px;min-width:0}
 .cat .stat b small{color:var(--muted);font-size:var(--t-sm)}
 .mini{grid-column:1 / -1;height:5px;border-radius:3px;background:rgba(241,234,217,.09);overflow:hidden}
 .mini i{display:block;height:100%;width:var(--p);background:var(--c);border-radius:3px;transition:width .5s ease}
-.linkbtn{border:0;background:none;padding:6px 0;color:var(--gold-hi);font-size:14px;text-decoration:underline;text-underline-offset:3px;min-height:32px}
 
 .verdict{padding:12px 14px;border-radius:8px;background:rgba(21,27,51,.92);border:1px solid var(--line-soft);font-size:15px}
 .verdict b{color:var(--gold-hi)}
@@ -230,8 +132,6 @@ select{min-height:44px;width:100%;min-width:0;flex:1 1 220px;padding:8px 12px;bo
 .total.full{color:var(--gold-hi)}
 .meta{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:14px;color:var(--muted)}
 .meta .over{color:var(--warn);font-weight:700}
-.tag{font:500 11px/1 var(--f-data);letter-spacing:.06em;text-transform:uppercase;padding:3px 6px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
-.tag.me{border-color:var(--gold-line);color:var(--gold-hi)}
 
 /* Pastille de catégorie : anneau = progression ; disque plein = point obtenu. */
 .pips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;text-align:center}
@@ -313,8 +213,6 @@ select{min-height:44px;width:100%;min-width:0;flex:1 1 220px;padding:8px 12px;bo
 .feed li.fresh{animation:fresh 1.8s ease}
 @keyframes fresh{from{background:var(--gold-wash)}to{background:transparent}}
 
-footer{position:relative;z-index:1;text-align:center;font-size:var(--t-sm);color:var(--faint);padding:0 16px 24px}
-footer a{color:var(--gold);text-underline-offset:3px}
 
 /* ---------- Fiche de quête : panneau latéral (plein écran sur mobile) ---------- */
 .qd{padding:0;border:0;margin:0 0 0 auto;width:min(560px,100vw);max-width:100vw;height:100vh;max-height:none;
@@ -407,11 +305,6 @@ a{color:var(--gold-hi);text-underline-offset:3px}
 .floor{text-decoration:none}
 a.floor:hover{border-top-color:var(--gold-hi)}
 a.floor.done{color:var(--ink)}
-.who form{display:inline}
-.who .linkbtn{min-height:auto;padding:0}
-.nav a{min-height:44px;display:inline-flex;align-items:center;padding:0 10px;border-radius:var(--r);border:1px solid transparent;color:var(--ink);text-decoration:none;font-size:15px;transition:background .15s,border-color .15s}
-.nav a:hover{background:var(--card-2);border-color:var(--line-soft)}
-.nav a[aria-current="page"]{border-color:var(--gold);background:var(--gold-wash);color:var(--gold-hi)}
 .bandeau{border:1px solid var(--warn);background:rgba(255,157,104,.12);color:var(--ink);border-radius:8px;padding:10px 14px;font-size:15px}
 .bandeau b{color:var(--warn)}
 .alerte{border:1px solid var(--warn);background:rgba(255,157,104,.08);border-radius:8px;padding:10px 14px;font-size:15px}
@@ -529,7 +422,6 @@ article.card > .qd-sec{padding-top:4px}
 .recap-list{margin:0;padding:0;list-style:none;display:grid;gap:4px}
 /* ---------- Voiles locaux derrière le texte posé sur le décor ---------- */
 .pyramide-note{background:rgba(5,8,22,.82);border-radius:var(--r);padding:10px 14px}
-footer{background:linear-gradient(180deg,transparent,rgba(5,8,22,.85) 40%);padding-top:28px}
 .recherche-globale input{background:var(--sunken);color:var(--ink);border:1px solid var(--line);border-radius:var(--r)}
 
 /* ---------- Accueil : la pyramide en grand (DECISIONS-V4 §13) ----------
@@ -584,7 +476,6 @@ a,button,.btn,.chip,.cta,summary,label{transition:background-color .15s,border-c
 .btn:active,.cta:active{transform:translateY(1px)}
 :is(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:3px solid var(--gold-hi);outline-offset:3px;border-radius:var(--r)}
 .btn,.chip,.linkbtn,select,.compteur,.pos-copier{min-height:44px}
-.linkbtn{display:inline-flex;align-items:center}
 .cta{min-height:44px;border-radius:var(--r);font-size:var(--t-base);color:var(--ink);text-decoration:none}
 .cta:hover{border-color:var(--gold-hi);box-shadow:0 0 18px rgba(var(--glow),.35)}
 .card .card{box-shadow:none}

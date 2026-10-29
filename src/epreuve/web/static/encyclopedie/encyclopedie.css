@@ -34,27 +34,17 @@
 }
 *,*::before,*::after{box-sizing:border-box}
 html{overflow-x:clip;-webkit-text-size-adjust:100%}
-body{margin:0;min-height:100vh;color:var(--ink);font:400 16px/1.5 var(--f-body);-webkit-font-smoothing:antialiased;
-  background:radial-gradient(120% 60% at 50% 0%,rgba(227,181,82,.16),transparent 55%),radial-gradient(100% 50% at 50% 100%,rgba(255,150,104,.3),transparent 70%),
-  linear-gradient(180deg,var(--night-0) 0%,var(--night-1) 50%,var(--night-2) 100%) fixed;background-color:var(--night-0)}
+body{margin:0;min-height:100vh;color:var(--ink);font:400 16px/1.5 var(--f-body);-webkit-font-smoothing:antialiased;background:var(--night-0)}
 a{color:var(--gold-hi);text-underline-offset:3px}
 a:hover{color:var(--gold)}
 :focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:4px}
 [hidden]{display:none!important}
 h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.1;text-wrap:balance;margin:0}
-.wrap{max-width:1120px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left));display:grid;gap:16px}
+.wrap{position:relative;z-index:1;overflow-x:clip;max-width:1120px;margin:0 auto;padding:16px max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left));display:grid;gap:16px}
 .eyebrow{font:500 12px/1.2 var(--f-data);letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
 .num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
 .muted{color:var(--muted)} .faint{color:var(--faint)}
 
-/* En-tête et menu */
-.entete{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}
-.marque{font:800 22px/1 var(--f-display);color:var(--ink);text-decoration:none;letter-spacing:.01em}
-.marque span{color:var(--gold)}
-.menu{display:flex;flex-wrap:wrap;gap:4px}
-.menu a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:8px;color:var(--muted);text-decoration:none}
-.menu a:hover{color:var(--ink);background:var(--surface-2)}
-.menu a[aria-current="page"]{color:var(--gold-hi);background:var(--gold-wash)}
 .onglets{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--line);margin:0 -4px;padding:0 4px}
 .onglets a{flex:0 1 auto;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent}
 .onglets a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--gold)}
