@@ -43,7 +43,8 @@ Détails : `DECISIONS-V4.md`.
 - [x] Un seul guide avec code couleur et filtre principales / secondaires
 - [x] Fiche de quête complète comme sur Duffus : départ (zone, position, PNJ), étapes détaillées avec suivi étape par étape, besoins, prérequis, gains (kamas compris), succès lié, qui l'a faite ou non
 - [x] Onglet de validation des succès de donjon, dans la progression du tableau de bord
-- [x] Tour en pyramide et ambiance de la maquette
+- [x] Ambiance « Nuit du teaser » sur tout le site, accueil = pyramide en grand sans aucun chiffre (mystère), jauge dessous
+- [x] Histoire de Shadoaze : prologue à la première connexion + page « L'histoire »
 - [x] Accès réservé aux participants
 
 ## Modules de Duffus « à l'identique »
