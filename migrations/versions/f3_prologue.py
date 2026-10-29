@@ -1,12 +1,12 @@
 """Prologue de Shadoaze : retient la première fois qu'un grimpeur a passé le prologue plein écran.
 
-Révision : f3_prologue, après e3_fm. Référence : docs/DECISIONS-V4.md §13.
+Révision : f3_prologue, après f4_suivi_etapes. Référence : docs/DECISIONS-V4.md §13.
 """
 
 from alembic import op
 
 revision = "f3_prologue"
-down_revision = "e3_fm"
+down_revision = "f4_suivi_etapes"
 branch_labels = None
 depends_on = None
 
