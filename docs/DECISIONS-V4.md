@@ -105,3 +105,7 @@ Les salons Discord `étage-X` de Shadoaze n'étaient qu'une aide provisoire pour
 - **Typographie plus petite, interface moderne.**
 - **L'histoire de Shadoaze** (salon Présentation) : prologue plein écran à la première connexion (passable), puis page « L'histoire » dans le menu.
 - **Fiche de quête** : emplacement de départ et suivi précis étape par étape, à l'identique de Duffus.
+
+## 14. Classement des blocs (Shadoaze, 03/11)
+
+Validé tel que proposé dans SPEC-V5 §5 : par défaut, un bloc est rouge (principal) s'il contient au moins une quête principale ; un admin le passe en jaune à la main s'il juge que c'est « too much ». Citation : « ah bah c'est parfait le truc manuel… ce qu'il a dit c'est pixel ».
