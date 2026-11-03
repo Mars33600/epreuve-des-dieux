@@ -121,7 +121,7 @@ def test_classe_obligatoire_si_le_reglage_le_demande():
 
 
 def test_hors_liste_ne_peut_pas_creer_de_fiche():
-    m = monde()
+    m = monde(regles=Regles(liste_officielle_obligatoire=True))
     c = m.connecter(ID_HORS_LISTE)
     html = c.get("/inscription").text
     assert "Envoie ta validation en MP à Shadoaze" in html

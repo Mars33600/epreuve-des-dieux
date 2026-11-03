@@ -14,6 +14,7 @@ from sqlalchemy import insert
 
 from epreuve.config import Config
 from epreuve.db import tables as t
+from epreuve.domaine.modeles import Regles
 from epreuve.encyclopedie.charger import charger
 from epreuve.web.app import creer_app
 from epreuve.web.securite import CSP
@@ -47,7 +48,8 @@ async def site(depot, moteur):
     for n, admin in ((GRIMPEUR, False), (ADMIN, True), (SANS_FICHE, False), (EXCLU, False)):
         await depot.creer_session(hashlib.sha256(jeton(n).encode()).digest(), n, f"d{n}", admin, "oauth", "csrf",
                                   OUVERTURE, timedelta(days=7))
-    app = creer_app(Config(_env_file=None, SITE_MODE="ouvert"), horloge=lambda: PENDANT, source=depot)
+    app = creer_app(Config(_env_file=None, SITE_MODE="ouvert"), horloge=lambda: PENDANT, source=depot,
+                    regles=Regles(monde_des_douze=True))
     return app
 
 
@@ -95,7 +97,7 @@ async def test_chaque_page_securite_pied_de_page_et_menu(site):
             assert html.count("https://duffus.fr") == 1  # aucun autre lien vers duffus.fr (EX-70)
             assert not re.search(r"<script(?![^>]*\bsrc=)", html), p  # aucun script en ligne
             assert " style=" not in html and "onclick" not in html, p
-            assert 'href="/encyclopedie"' in html and 'href="/stuffs"' in html
+            assert "deroulant-bouton" not in html  # plus de menu « Monde des Douze » (SPEC-V5 §2)
 
 
 async def test_recherche_filtres_et_pagination(site):
@@ -169,7 +171,8 @@ async def test_sans_etage_ouvert_aucun_stuff(site, moteur):
 
 
 async def test_mode_teaser_redirige(depot):
-    app = creer_app(Config(_env_file=None, SITE_MODE="teaser"), horloge=lambda: PENDANT, source=depot)
+    app = creer_app(Config(_env_file=None, SITE_MODE="teaser"), horloge=lambda: PENDANT, source=depot,
+                    regles=Regles(monde_des_douze=True))
     async with client(app) as c:
         for p in ("/encyclopedie", "/stuffs", "/static/encyclopedie/encyclopedie.css"):
             r = await c.get(p)

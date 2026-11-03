@@ -200,8 +200,9 @@ class Regles:
     pause_peut_cocher: bool = True  # T-13
     classe_obligatoire: bool = False  # T-20
     afficher_nom_discord: bool = True  # T-20
-    liste_officielle_obligatoire: bool = True  # T-19
+    liste_officielle_obligatoire: bool = False  # T-19 ; SPEC-V5 §7 : tout membre du serveur peut créer sa fiche
     verrouiller_modules_par_etage: bool = False  # T-08 (lot E)
+    monde_des_douze: bool = False  # SPEC-V5 §2 : encyclopédie, stuffs, builder, outils, archis et avis, fiche de quête
 
 
 @dataclass(frozen=True)

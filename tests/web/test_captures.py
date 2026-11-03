@@ -28,7 +28,7 @@ def test_pages_connectees(m, chemin):
     c = m.connecter(ID_BRINDILLE)
     r = c.get(chemin)
     assert r.status_code == 200
-    assert "Merci Duffus" in r.text and "Archis et avis" in r.text
+    assert "Merci Duffus" in r.text
     assert not re.search(r"<script(?![^>]*\bsrc=)", r.text)  # aucun script en ligne
     assert " style=" not in r.text and "duffus.fr/" not in r.text.replace('href="https://duffus.fr"', "")
     assert "supabase" not in r.text  # jamais les images du stockage de Duffus

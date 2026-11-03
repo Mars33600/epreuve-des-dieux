@@ -160,6 +160,8 @@ async def fiche_pour(request: Request, v: Visiteur, etage: Etage, quete_id: int)
 async def page_quete(request: Request, numero: int, quete_id: int):
     v = await exiger_grimpeur(request)
     s = _s(request)
+    if not s.regles.monde_des_douze:  # SPEC-V5 §2 : la fiche de quête relève de duffus.fr
+        raise Refus(404, INTROUVABLE)
     etage = await etage_visible(request, numero, v)
     vue = await charger_vue_etage(s.depot, etage, s.regles)
     quete = next((q for q in vue.contenu.quetes if q.id == quete_id), None)
@@ -327,8 +329,8 @@ def lire_fiche(form, regles) -> tuple[str, str | None, int | None]:
 
 async def _inscription_permise(request: Request) -> Visiteur:
     v = await exiger_connecte(request)
-    if mode(request) == "teaser":
-        raise Refus(303, "", vers="/")  # aucune fiche avant l'ouverture, même pour un admin
+    if mode(request) == "teaser" and not v.est_admin:
+        raise Refus(303, "", vers="/")  # avant l'ouverture, seuls les admins peuvent créer leur fiche (SPEC-V5 §7)
     if v.grimpeur is not None:
         raise Refus(303, "", vers="/")
     return v

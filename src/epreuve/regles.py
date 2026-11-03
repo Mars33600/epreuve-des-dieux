@@ -52,7 +52,7 @@ class _Coches(_Section):
 
 
 class _Inscription(_Section):
-    liste_officielle_obligatoire: bool = True
+    liste_officielle_obligatoire: bool = False
 
 
 class _Fiche(_Section):
@@ -62,6 +62,7 @@ class _Fiche(_Section):
 
 class _Modules(_Section):
     verrouiller_par_etage: bool = False
+    monde_des_douze: bool = False
 
 
 class _Fichier(_Section):
@@ -88,6 +89,7 @@ def regles_depuis(donnees: object) -> Regles:
         afficher_nom_discord=f.fiche.afficher_nom_discord,
         liste_officielle_obligatoire=f.inscription.liste_officielle_obligatoire,
         verrouiller_modules_par_etage=f.modules.verrouiller_par_etage,
+        monde_des_douze=f.modules.monde_des_douze,
     )
 
 

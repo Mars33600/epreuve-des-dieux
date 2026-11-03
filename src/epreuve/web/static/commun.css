@@ -78,8 +78,8 @@
 .marque-h1{order:1;margin:0;font:inherit;display:flex}
 .clock{display:block;padding:0;border:0;background:none;box-shadow:none;text-align:right}
 .clock strong{font:500 var(--t-sm)/1 var(--f-data);color:var(--gold-hi);white-space:nowrap}
-.who{display:flex;align-items:center;gap:var(--s2);font-size:var(--t-sm);color:var(--muted);background:none;padding:0}
-.who b{color:var(--ink);font-weight:500;overflow-wrap:anywhere}
+.who{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);font-size:var(--t-sm);color:var(--muted);background:none;padding:0}
+.who b{color:var(--ink);font-weight:500;overflow-wrap:break-word}
 @media (min-width:1280px){.bar-menu{flex-wrap:nowrap}.who{flex:none}}
 .demo{justify-self:start;font-size:var(--t-sm);color:var(--muted);border:1px dashed var(--line);border-radius:var(--r);padding:6px 12px;background:var(--card)}
 .demo b{color:var(--gold-hi);font-weight:700}
@@ -128,6 +128,8 @@ form[data-filtres] .rech-panneau{left:0;right:0;width:auto;top:calc(100% + 4px)}
 .deroulant-liste a{display:flex;width:100%;box-sizing:border-box}
 .who .ma-fiche{color:var(--gold-hi);min-height:36px;display:inline-flex;align-items:center;text-underline-offset:3px;padding:0 6px;border-radius:6px;border:1px solid transparent}
 .who .ma-fiche[aria-current="page"]{border-color:var(--gold);background:var(--gold-wash)}
+.who .creer-fiche{min-height:36px;display:inline-flex;align-items:center;padding:0 12px;border-radius:var(--r);border:1px solid var(--gold);background:var(--gold-wash);color:var(--gold-hi);font-weight:600;text-decoration:none;white-space:nowrap}
+.who .creer-fiche:hover,.who .creer-fiche[aria-current="page"]{background:var(--gold);color:var(--night-1)}
 @media (max-width:1279px){
   .clock{order:2}
   .burger{display:inline-flex}

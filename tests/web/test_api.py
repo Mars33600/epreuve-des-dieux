@@ -278,7 +278,6 @@ def test_suivi_des_etapes_perso_sans_cocher_la_quete():
     derniere = len(fiche.etapes)
     html = c.get("/etages/0/quetes/102").text
     assert f'data-etape="{derniere}"' in html and 'data-etape="1"' in html  # des cases d'étape pour ce grimpeur
-    avant = c.get("/etages/0/quetes/102").text
     r = etape(c, t, quete_id=102, ordre=derniere, faite=True)
     assert r.status_code == 200 and r.json() == {"ok": True, "faites": [derniere], "total": derniere}
     assert r.headers["cache-control"] == "no-store"

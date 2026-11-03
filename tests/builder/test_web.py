@@ -12,6 +12,7 @@ from fastapi.testclient import TestClient
 from py_mini_racer import MiniRacer
 
 from epreuve.config import Config
+from epreuve.domaine.modeles import Regles
 from epreuve.web.app import creer_app
 from epreuve.web.builder import ServicesBuilder, Visiteur, identifier_par_session
 
@@ -20,7 +21,7 @@ MOI = Visiteur(discord_id=11, est_admin=False, csrf="jeton-csrf", grimpeur_id=1,
 
 
 def client(visiteur: Visiteur | None = MOI, mode: str = "ouvert", builds=None) -> TestClient:
-    app = creer_app(Config(_env_file=None, SITE_MODE=mode), horloge=lambda: APRES)
+    app = creer_app(Config(_env_file=None, SITE_MODE=mode), horloge=lambda: APRES, regles=Regles(monde_des_douze=True))
 
     async def identifier(_request):
         return visiteur

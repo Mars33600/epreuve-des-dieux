@@ -20,6 +20,7 @@ from playwright.async_api import async_playwright
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from epreuve.config import Config  # noqa: E402
+from epreuve.domaine.modeles import Regles  # noqa: E402
 from epreuve.web.app import creer_app  # noqa: E402
 from epreuve.web.builder import ServicesBuilder, Visiteur  # noqa: E402
 from tests.builder.test_web import FauxBuilds  # noqa: E402
@@ -38,7 +39,7 @@ LARGEUR_PAGE = "[document.documentElement.scrollWidth, document.documentElement.
 
 
 def lancer_serveur() -> uvicorn.Server:
-    app = creer_app(Config(_env_file=None, SITE_MODE="ouvert"))
+    app = creer_app(Config(_env_file=None, SITE_MODE="ouvert"), regles=Regles(monde_des_douze=True))
 
     async def identifier(_requete):
         return Visiteur(11, False, "jeton", 1, "Brindille")

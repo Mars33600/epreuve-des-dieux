@@ -120,7 +120,8 @@ Pourquoi `guilds.members.read` : c'est la portée qui permet au site de lire **l
 Avec le mode développeur (Paramètres utilisateur → Avancés → Mode développeur), faire un clic droit, puis « Copier l'identifiant » :
 - le serveur → `DISCORD_GUILD_ID` ;
 - le rôle « Administrateur » → `DISCORD_ADMIN_ROLE_IDS` ;
-- son propre compte et celui de Shadoaze → `ADMINS_SUPPLEMENTAIRES`, un filet si le rôle était mal réglé.
+- son propre compte et celui de Shadoaze → `ADMINS_SUPPLEMENTAIRES`, un filet si le rôle était mal réglé ;
+- le compte du propriétaire du serveur (Shadoaze) → `DISCORD_OWNER_ID` : admin d'office, sans rôle. C'est une variable plutôt qu'une lecture de l'`owner_id` de la guilde, car Discord ne le donne qu'avec un jeton de bot ou la portée OAuth « guilds », que le site ne demande pas (moins de droits, rien à révoquer).
 
 ### C.4 Un serveur de test (5 min)
 
@@ -175,7 +176,7 @@ Sans ce conteneur, les tests marqués `db` sont sautés. C'est ce qui explique l
 
 ```
 fly secrets set DATABASE_URL=… DISCORD_CLIENT_SECRET=… DISCORD_GUILD_ID=… \
-  DISCORD_ADMIN_ROLE_IDS=… ADMINS_SUPPLEMENTAIRES=…
+  DISCORD_ADMIN_ROLE_IDS=… ADMINS_SUPPLEMENTAIRES=… DISCORD_OWNER_ID=…
 ```
 
 `SITE_MODE=auto`, `SITE_OUVERT_LE`, `SITE_URL` et `DISCORD_CLIENT_ID` sont dans `fly.toml` (non secrets). Les clés Duffus et le jeton du bot ne vont **pas** sur Fly.

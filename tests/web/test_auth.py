@@ -13,6 +13,7 @@ from pydantic import SecretStr
 
 from epreuve.config import Config
 from epreuve.discord.oauth import ClientOAuth, ErreurDiscord, Identite, PasMembre, est_admin
+from epreuve.domaine.modeles import Regles
 from epreuve.web.auth import COOKIE_SESSION, MESSAGE_NON_MEMBRE, MESSAGE_SUSPENDU
 from epreuve.web.demo import ID_HORS_LISTE, ID_MARCEAU, ID_NON_MEMBRE, ID_NOUVELLE, faux_discord
 from tests.web.outils import (
@@ -154,7 +155,7 @@ def test_membre_de_la_liste_sans_fiche_va_creer_sa_fiche():
 
 
 def test_membre_hors_liste_voit_le_message():
-    m = monde()
+    m = monde(regles=Regles(liste_officielle_obligatoire=True))
     c = m.connecter(ID_HORS_LISTE)
     html = c.get("/inscription").text
     assert "Envoie ta validation en MP à Shadoaze" in html and "<form" not in html.split("<main")[0][-1:]
@@ -297,8 +298,9 @@ def test_mode_teaser_l_admin_voit_tout_avec_le_bandeau():
     for chemin in ("/etages/0", "/grimpeurs", "/admin", "/admin/journal", "/regles"):
         r = c.get(chemin)
         assert r.status_code == 200 and "Mode teaser" in r.text, chemin
-    # Même un admin ne crée pas de fiche avant l'ouverture.
-    assert c.get("/inscription").headers["location"] == "/"
+    # Avant l'ouverture, un admin sans fiche peut créer la sienne (SPEC-V5 §7) ; un membre ordinaire, non.
+    assert c.get("/inscription").status_code == 200
+    assert m.connecter(ID_HORS_LISTE).get("/inscription").headers["location"] == "/"
 
 
 def test_admin_retire_perd_la_vue_admin_en_10_minutes_sans_action_d_admin():

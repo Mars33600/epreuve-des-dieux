@@ -10,7 +10,7 @@ coches:
   pause_peut_cocher: true     # T-13 : un grimpeur en pause peut cocher (ses points comptent à la réintégration)
 
 inscription:
-  liste_officielle_obligatoire: true   # T-19
+  liste_officielle_obligatoire: false  # T-19 ; SPEC-V5 §7 : « les officiels sont ceux du Discord »
 
 fiche:
   classe_obligatoire: false   # T-20
@@ -18,3 +18,4 @@ fiche:
 
 modules:
   verrouiller_par_etage: false  # T-08 (lot E)
+  monde_des_douze: false        # SPEC-V5 §2 : true rallume encyclopédie, stuffs, builder, outils, archis, avis, fiche de quête

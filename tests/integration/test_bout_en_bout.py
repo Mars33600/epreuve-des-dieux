@@ -37,7 +37,8 @@ class Site:
                         DISCORD_CLIENT_SECRET="secret-de-test", _env_file=None)
         oauth = ClientOAuth(config.discord_client_id, SecretStr("secret-de-test"), config.redirect_uri, 1,
                             transport=faux_discord(MEMBRES, self.appels))
-        self.app = creer_app(config, horloge=lambda: self.maintenant, source=depot, oauth=oauth, regles=Regles())
+        self.app = creer_app(config, horloge=lambda: self.maintenant, source=depot, oauth=oauth,
+                       regles=Regles(monde_des_douze=True, liste_officielle_obligatoire=True))
 
     def client(self) -> httpx.AsyncClient:
         return httpx.AsyncClient(transport=httpx.ASGITransport(app=self.app), base_url=SITE, follow_redirects=False)

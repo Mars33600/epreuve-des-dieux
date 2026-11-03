@@ -2,7 +2,8 @@
 
 Étage de référence (critère 15 du lot B, repris en v5) : 3 donjons de 5 cases (ids 1-5, 6-10, 11-15 ; la première
 de chaque donjon est la case classique « Vaincre le boss »), 4 blocs principaux (ids 1-4), 5 blocs secondaires
-(ids 5-9), chacun avec une seule quête (mêmes ids), 12 grimpeurs dont 2 en pause (11 et 12). Les coches sont fixées dans COCHES_REFERENCE ; les
+(ids 5-9), chacun avec une seule quête (mêmes ids), 12 grimpeurs dont 2 en pause (11 et 12).
+Les coches sont fixées dans COCHES_REFERENCE ; les
 points attendus sont calculés à la main dans tests/domaine/test_bareme.py.
 """
 

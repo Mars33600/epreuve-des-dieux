@@ -24,8 +24,14 @@ from epreuve.encyclopedie.textes import cle_recherche
 MAX_MOTS = 6
 MAX_LIMITE = 100
 # L'ordre est celui des groupes dans la réponse. (clé, libellé)
+# SPEC-V5 §2 : la recherche se limite aux grimpeurs, donjons, étages et blocs. Pour ajouter un type, on ajoute ici
+# sa clé et son libellé, puis une méthode `_<clé>(mots, q, est_admin, plafond)` qui renvoie (requête, fabrique).
+# Les anciens fournisseurs (quêtes, encyclopédie, outils) restent plus bas, débranchés : le code n'est pas supprimé.
 TYPES: tuple[tuple[str, str], ...] = (
-    ("grimpeurs", "Grimpeurs"), ("quetes", "Quêtes"), ("donjons", "Donjons"), ("monstres", "Monstres"),
+    ("grimpeurs", "Grimpeurs"), ("donjons", "Donjons"), ("etages", "Étages"), ("blocs", "Blocs"),
+)
+TYPES_MONDE_DES_DOUZE: tuple[tuple[str, str], ...] = (
+    ("quetes", "Quêtes"), ("monstres", "Monstres"),
     ("objets", "Objets"), ("ressources", "Ressources"), ("panoplies", "Panoplies"), ("sorts", "Sorts"),
     ("pnj", "PNJ"), ("quetes_jeu", "Quêtes du jeu"), ("outils", "Outils"),
 )
@@ -92,7 +98,10 @@ class DepotRecherche:
         if cle == "outils":
             return [Resultat(nom, f"/outils/{chemin}", resume) for chemin, nom, resume in self._outils
                     if all(m in cle_recherche(nom) for m in mots)][: limite + 1]
-        requete, fabrique = getattr(self, f"_{cle}")(mots, q, est_admin, plafond)
+        fournisseur = getattr(self, f"_{cle}")(mots, q, est_admin, plafond)
+        if fournisseur is None:  # type prévu mais pas encore branché (les blocs)
+            return []
+        requete, fabrique = fournisseur
         return [fabrique(r) for r in await self._lignes(requete, limite)]
 
     # --- Les grimpeurs, quêtes et donjons du défi ---------------------------------------------------------
@@ -120,7 +129,24 @@ class DepotRecherche:
                    .where(_filtrer(cle, mots, conds)).order_by(*_rang(cle, q)))
         return requete, lambda r: Resultat(r.nom, f"/etages/{r.numero}", f"étage {r.numero}")
 
-    # --- L'encyclopédie ------------------------------------------------------------------------------------
+    def _etages(self, mots, q, est_admin, plafond):
+        et = d.etage
+        cle = func.epreuve.cle_recherche(et.c.nom)
+        conds = [] if est_admin else [et.c.statut != "scelle"]
+        requete = (select(et.c.numero, et.c.nom).where(_filtrer(cle, mots, conds)).order_by(*_rang(cle, q)))
+        return requete, lambda r: Resultat(r.nom, f"/etages/{r.numero}", f"étage {r.numero}")
+
+    def _blocs(self, mots, q, est_admin, plafond):
+        """Les blocs du guide (SPEC-V5 §3) : par titre ; un étage scellé et un bloc masqué restent cachés."""
+        bl, et = d.bloc, d.etage
+        cle = func.epreuve.cle_recherche(bl.c.titre)
+        conds = [] if est_admin else [et.c.statut != "scelle", bl.c.masque.is_(False)]
+        requete = (select(bl.c.id, bl.c.titre, bl.c.numero, et.c.numero.label("etage"))
+                   .join(et, et.c.id == bl.c.etage_id).where(_filtrer(cle, mots, conds)).order_by(*_rang(cle, q)))
+        return requete, lambda r: Resultat(r.titre, f"/etages/{r.etage}#bloc-{r.id}",
+                                           f"étage {r.etage}" + (f" · bloc {r.numero}" if r.numero else ""))
+
+    # --- Anciens fournisseurs du Monde des Douze (débranchés, voir TYPES_MONDE_DES_DOUZE) ---------------
 
     @staticmethod
     def _borne(colonne, plafond: int | None) -> list:

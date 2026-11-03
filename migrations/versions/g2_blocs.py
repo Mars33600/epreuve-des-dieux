@@ -73,7 +73,7 @@ SELECT etage_id, bloc,
        '{URL_GUIDE}'
 FROM epreuve.quete GROUP BY etage_id, bloc;
 UPDATE epreuve.quete q SET bloc_id = b.id FROM epreuve.bloc b WHERE b.etage_id = q.etage_id AND b.titre = q.bloc;
-""")
+""")  # noqa: S608 (URL_GUIDE est une constante du module, pas une saisie)
 
 
 def downgrade() -> None:
