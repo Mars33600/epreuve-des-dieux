@@ -78,8 +78,8 @@
 .marque-h1{order:1;margin:0;font:inherit;display:flex}
 .clock{display:block;padding:0;border:0;background:none;box-shadow:none;text-align:right}
 .clock strong{font:500 var(--t-sm)/1 var(--f-data);color:var(--gold-hi);white-space:nowrap}
-.who{display:flex;align-items:center;gap:var(--s2);font-size:var(--t-sm);color:var(--muted);background:none;padding:0}
-.who b{color:var(--ink);font-weight:500;overflow-wrap:anywhere}
+.who{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);font-size:var(--t-sm);color:var(--muted);background:none;padding:0}
+.who b{color:var(--ink);font-weight:500;overflow-wrap:break-word}
 @media (min-width:1280px){.bar-menu{flex-wrap:nowrap}.who{flex:none}}
 .demo{justify-self:start;font-size:var(--t-sm);color:var(--muted);border:1px dashed var(--line);border-radius:var(--r);padding:6px 12px;background:var(--card)}
 .demo b{color:var(--gold-hi);font-weight:700}
