@@ -1,15 +1,15 @@
 """Fabrique de données de test : des objets du domaine aux valeurs par défaut, et l'étage de référence.
 
-Étage de référence (critère 15 du lot B) : 3 donjons de 5 cases (ids 1-5, 6-10, 11-15 ; la première de
-chaque donjon est la case classique « Vaincre le boss »), 4 quêtes principales (ids 1-4), 5 secondaires
-(ids 5-9), 12 grimpeurs dont 2 en pause (11 et 12). Les coches sont fixées dans COCHES_REFERENCE ; les
+Étage de référence (critère 15 du lot B, repris en v5) : 3 donjons de 5 cases (ids 1-5, 6-10, 11-15 ; la première
+de chaque donjon est la case classique « Vaincre le boss »), 4 blocs principaux (ids 1-4), 5 blocs secondaires
+(ids 5-9), chacun avec une seule quête (mêmes ids), 12 grimpeurs dont 2 en pause (11 et 12). Les coches sont fixées dans COCHES_REFERENCE ; les
 points attendus sont calculés à la main dans tests/domaine/test_bareme.py.
 """
 
 from datetime import UTC, datetime, timedelta
 from zoneinfo import ZoneInfo
 
-from epreuve.domaine.modeles import CaseSucces, Coches, ContenuEtage, Donjon, Etage, Grimpeur, Quete
+from epreuve.domaine.modeles import Bloc, CaseSucces, Coches, ContenuEtage, Donjon, Etage, Grimpeur, Quete
 
 PARIS = ZoneInfo("Europe/Paris")
 OUVERTURE = datetime(2026, 10, 30, 17, 0, tzinfo=PARIS).astimezone(UTC)
@@ -47,6 +47,14 @@ def quete(id_: int, nature: str = "secondaire", etage_id: int = 1, **kw) -> Quet
     return Quete(id=id_, etage_id=etage_id, nature=nature, **valeurs)
 
 
+def bloc(id_: int, nature: str = "secondaire", etage_id: int = 1, **kw) -> Bloc:
+    valeurs = dict(titre=f"Bloc {id_}", numero=id_, ordre=id_, nature_origine="construction",
+                   nb_quetes=1, nb_principales=1 if nature == "principale" else 0,
+                   duffus_url="https://duffus.fr/guide-complet", duffus_ancre=None, nature_motif=None, masque=False)
+    valeurs.update(kw)
+    return Bloc(id=id_, etage_id=etage_id, nature=nature, **valeurs)
+
+
 def grimpeur(id_: int, statut: str = "actif", pseudo: str | None = None, classe: str | None = "Iop",
              **kw) -> Grimpeur:
     valeurs = dict(discord_user_id=900_000_000_000_000_000 + id_, nom_discord=f"discord{id_}",
@@ -55,15 +63,16 @@ def grimpeur(id_: int, statut: str = "actif", pseudo: str | None = None, classe:
     return Grimpeur(id=id_, pseudo=pseudo or f"Grimpeur{id_:02d}", classe=classe, statut=statut, **valeurs)
 
 
-def coches(grimpeur_id: int, cases=(), quetes=()) -> Coches:
-    return Coches(grimpeur_id, frozenset(cases), frozenset(quetes))
+def coches(grimpeur_id: int, cases=(), blocs=(), quetes=()) -> Coches:
+    return Coches(grimpeur_id, frozenset(cases), frozenset(quetes), frozenset(blocs))
 
 
 ETAGE_REF = etage()
 DONJONS_REF = tuple(donjon(d) for d in (1, 2, 3))
 CASES_REF = tuple(case((d - 1) * 5 + o, d, o) for d in (1, 2, 3) for o in range(1, 6))
 QUETES_REF = tuple(quete(q, "principale") for q in range(1, 5)) + tuple(quete(q) for q in range(5, 10))
-CONTENU_REF = ContenuEtage.visible(ETAGE_REF, DONJONS_REF, CASES_REF, QUETES_REF)
+BLOCS_REF = tuple(bloc(b, "principale") for b in range(1, 5)) + tuple(bloc(b) for b in range(5, 10))
+CONTENU_REF = ContenuEtage.visible(ETAGE_REF, DONJONS_REF, CASES_REF, QUETES_REF, BLOCS_REF)
 GRIMPEURS_REF = tuple(grimpeur(i, "pause" if i > 10 else "actif") for i in range(1, 13))
 
 CLASSIQUES = (1, 6, 11)

@@ -1,10 +1,10 @@
 /* L'Épreuve des Dieux · le script du site (lot B).
    Tiré de docs/design/maquette-v2.html. Règles :
-   - aucune donnée n'est insérée avec innerHTML : uniquement textContent et createElement (pseudos, libellés) ;
-     le seul HTML inséré est la fiche de quête rendue et échappée par le serveur (Jinja) ;
+   - aucune donnée n'est insérée en HTML : uniquement textContent et createElement (pseudos, libellés) ;
+     (la fiche de quête en fenêtre a disparu avec la v5 : le guide, c'est Duffus) ;
    - la CSP interdit les styles en ligne : couleurs et pourcentages passent par des classes (c-…, p-…) ;
    - tout marche sans JavaScript (formulaires, liens) ; le script ajoute la coche sans rechargement,
-     le filtre mémorisé, le panneau de la fiche de quête et le décor animé. */
+     le filtre mémorisé, le volet « fait par » des blocs et le décor animé. */
 (() => {
 "use strict";
 const $ = id => document.getElementById(id);
@@ -96,7 +96,7 @@ function majMoi(moi){
 function majCompteurs(compteurs){
   Object.entries(compteurs || {}).forEach(([cle, n]) => {
     document.querySelectorAll(`[data-compteur="${cle}"]`).forEach(a => {
-      a.textContent = `${n}/${a.textContent.split("/")[1]}`;
+      a.textContent = a.dataset.actifs ? `${n} sur ${a.dataset.actifs} l'ont fait` : `${n}/${a.textContent.split("/")[1]}`;
     });
   });
 }
@@ -113,7 +113,8 @@ function majLignes(){
   });
   const vn = document.querySelectorAll("li[data-donjon][data-vaincu='1']").length, cn = document.querySelectorAll("li[data-donjon][data-fait='1']").length;
   texte(document.querySelector("[data-vaincus]"), String(vn)); texte(document.querySelector("[data-complets]"), String(cn));
-  document.querySelectorAll("li[data-cats] input[data-ref^='quete:']").forEach(b => { b.closest("li").dataset.fait = b.checked ? "1" : "0"; });
+  document.querySelectorAll("li[data-bloc] input[data-ref^='bloc:']").forEach(b => { b.closest("li").dataset.fait = b.checked ? "1" : "0"; });
+  document.querySelectorAll("details[data-qui-bloc][open]").forEach(rafraichirQui);
   filtrer();
 }
 
@@ -217,7 +218,7 @@ function filtrer(){
     li.hidden = !voir;
   });
   let n = 0;
-  document.querySelectorAll("#liste .bloc").forEach(b => { const v = !!b.querySelector("li[data-cats]:not([hidden])"); b.hidden = !v; if (v) n++; });
+  document.querySelectorAll("#liste [data-section]").forEach(b => { const v = !!b.querySelector("li[data-cats]:not([hidden])"); b.hidden = !v; if (v) n++; });
   const vide = $("filtreVide"); if (vide) vide.hidden = n > 0;
 }
 function initFiltre(){
@@ -233,56 +234,24 @@ function initFiltre(){
   filtrer();
 }
 
-/* =================== Fiche de quête : panneau (dialog) =================== */
-let declencheur = null, pousse = false;
-async function ouvrirQuete(href, depuis){
-  const dlg = $("qd"); if (!dlg){ location.href = href; return; }
+/* =================== « Fait par / Pas encore fait par » (volet d'un bloc) =================== */
+/* Le serveur écrit déjà les deux listes ; à l'ouverture du volet, et après une coche, on les relit. */
+async function rafraichirQui(det){
+  const etage = $("liste")?.dataset.etage; if (!etage) return;
   try{
-    const r = await fetch(href, {headers:{"Accept":"text/html-fragment"}, credentials:"same-origin"});
-    if (!r.ok) throw new Error(String(r.status));
-    const t = document.createElement("template");
-    t.innerHTML = await r.text();   // HTML rendu et échappé par le serveur (Jinja), pas une donnée brute
-    dlg.replaceChildren(t.content);
-  }catch(e){ location.href = href; return; }
-  if (!dlg.open){
-    declencheur = depuis || document.activeElement;
-    dlg.showModal();
-    // Ouverte par « page suivante » (depuis === false), l'entrée d'historique existe déjà : on ne l'empile pas,
-    // mais la fermeture doit quand même revenir à la liste, sinon l'adresse de la fiche reste affichée.
-    if (depuis !== false) history.pushState({quete:href}, "", href);
-    pousse = true;
-  } else {
-    history.replaceState({quete:href}, "", href);
-  }
-  dlg.scrollTop = 0;
-  (dlg.querySelector("[data-qfocus]") || dlg).focus({preventScroll:true});
+    const r = await fetch(`/api/etages/${encodeURIComponent(etage)}/manque?type=bloc&id=${encodeURIComponent(det.dataset.quiBloc)}`, {credentials:"same-origin"});
+    const d = await r.json(); if (!r.ok) return;
+    for (const [cle, liste, cls, vide] of [["pas", d.pas_fait, "miss", "Tout le monde l'a fait."], ["fait", d.fait, "done", "Personne pour l'instant."]]){
+      const zone = det.querySelector(`[data-qui="${cle}"]`), n = det.querySelector(`[data-qui-n="${cle}"]`);
+      if (!zone) continue;
+      const bloc = document.createElement("div"); bloc.className = "people";
+      liste.forEach(g => bloc.append(puce(g, cls)));
+      if (!liste.length) bloc.textContent = vide;
+      zone.replaceChildren(bloc); texte(n, String(liste.length));
+    }
+  }catch(e){ /* les listes écrites par le serveur restent affichées */ }
 }
-function initQuete(){
-  const dlg = $("qd"); if (!dlg) return;
-  dlg.addEventListener("close", () => {
-    if (pousse){ pousse = false; history.back(); }   // l'adresse de la liste revient, sa position de défilement aussi
-    const id = declencheur && declencheur.dataset ? declencheur.dataset.qopen : null;
-    const t = declencheur && document.contains(declencheur) ? declencheur
-      : (id ? document.querySelector(`#liste [data-qopen="${id}"]`) : null);
-    declencheur = null;
-    if (t) t.focus({preventScroll:true});
-  });
-  dlg.addEventListener("click", e => {
-    if (e.target === dlg || e.target.closest("[data-qclose]")) dlg.close();   // clic sur le fond ou la croix
-    const q = e.target.closest("[data-qui]");
-    if (q){ const p = $("quiPanneau"); if (p){ p.hidden = !p.hidden; q.setAttribute("aria-expanded", String(!p.hidden)); } }
-  });
-  // une adresse directe (?quete=id ou #quete-id) ouvre la fiche de cette quête
-  const m = location.search.match(/[?&]quete=(\d+)/) || location.hash.match(/^#quete-(\d+)/);
-  if (m){
-    const a = document.querySelector(`a[data-qopen="${m[1]}"]`);
-    if (a){ history.replaceState(null, "", location.pathname); ouvrirQuete(a.getAttribute("href"), a); }
-  }
-  addEventListener("popstate", e => {   // retour arrière : ferme la fiche ; avant : la rouvre
-    if (dlg.open){ pousse = false; dlg.close(); }
-    else if (e.state && e.state.quete) ouvrirQuete(e.state.quete, false);
-  });
-}
+document.addEventListener("toggle", e => { if (e.target.matches?.("details[data-qui-bloc]") && e.target.open) rafraichirQui(e.target); }, true);
 
 /* =================== « Qui n'a pas fait… ? » (page des grimpeurs) =================== */
 function puce(g, cls){
@@ -325,10 +294,6 @@ function initAsk(){
 
 /* =================== Clics =================== */
 document.addEventListener("click", e => {
-  const qo = e.target.closest("a[data-qopen]");
-  if (qo && !e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0){
-    e.preventDefault(); ouvrirQuete(qo.getAttribute("href"), $("qd")?.open ? null : qo); return;
-  }
   const tout = e.target.closest("[data-donjon-tout]");
   if (tout){ toutLeDonjon(tout); return; }
   const cp = e.target.closest("[data-copier]");
@@ -391,7 +356,6 @@ function ciel(){
 }
 
 initFiltre();
-initQuete();
 initAsk();
 horloge(); setInterval(horloge, 1000);
 ambiance(document.body.dataset.ambiance);

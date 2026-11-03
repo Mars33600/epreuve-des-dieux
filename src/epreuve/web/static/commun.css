@@ -28,7 +28,7 @@
   --gold:#e3b552; --gold-hi:#f6d58a; --gold-deep:#a8781f;
   --gold-wash:rgba(227,181,82,.12); --gold-line:rgba(227,181,82,.32);
   /* Les 4 catégories : chacune a sa couleur ET son icône (lisible sans la couleur). */
-  --c-donjon:#72e0b6; --c-succes:#cdb0ff; --c-princ:#86beff; --c-second:#ffa684;
+  --c-donjon:#72e0b6; --c-succes:#cdb0ff; --c-princ:#ff7a7a; --c-second:#ffe14d;
   --warn:#ff9d68;
 
   --f-display:"Alegreya SC",Georgia,serif;

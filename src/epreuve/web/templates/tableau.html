@@ -30,15 +30,20 @@
   </div>
   <p class="muted">Niveaux {{ vue.etage.niveau_min }} à {{ vue.etage.niveau_max }}{% if vue.etage.statut == "termine" %} · étage terminé{% else %} · jauge {{ vue.jauge.score }}/{{ vue.jauge.palier }}{% endif %}</p>
   <div class="bigpips">{% for info in CATS %}{% set e = cats[info.cle] %}<span class="pipcell">{{ pip(info, e, True) }}<span>{{ info.court }}</span><b>{{ e.faits }}/{{ e.total }}</b></span>{% endfor %}</div>
+  <dl class="resume-etage">
+    <div><dt>Blocs du guide</dt><dd class="num">{{ b.blocs_faits }}/{{ b.blocs_total }}</dd></div>
+    <div><dt>Donjons vaincus</dt><dd class="num">{{ b.donjons_vaincus }}/{{ b.donjons_total }}</dd></div>
+    <div><dt>Succès de donjon</dt><dd class="num">{{ b.succes_faits }}/{{ b.succes_total }}</dd></div>
+  </dl>
   {% if b.donjons_restants %}<p><a class="btn" href="/tableau-de-bord?onglet=succes&amp;reste=1#etage{{ vue.etage.numero }}">{{ b.donjons_restants }} donjon{{ "s" if b.donjons_restants > 1 }} à compléter</a></p>{% endif %}
 </section>
 {% endfor %}
 {% if a_faire %}
 <section class="card" aria-labelledby="tbSuite">
-  <h3 id="tbSuite">À faire ensuite</h3>
+  <h3 id="tbSuite">Blocs à faire ensuite</h3>
   <ul class="suite">
-  {%- for numero, q in a_faire %}
-    <li><a href="/etages/{{ numero }}/quetes/{{ q.id }}"><b>{{ q.nom }}</b></a><small class="muted">niv. {{ q.niveau if q.niveau is not none else "?" }} · {{ "principale" if q.nature == "principale" else "secondaire" }}</small></li>
+  {%- for numero, b in a_faire %}
+    <li><a href="/etages/{{ numero }}#bloc-{{ b.id }}"><b>{{ b.titre_complet }}</b></a><small class="muted">{{ "principal" if b.nature == "principale" else "secondaire" }} · {{ texte_quetes_bloc(b) }}</small></li>
   {%- endfor %}
   </ul>
 </section>

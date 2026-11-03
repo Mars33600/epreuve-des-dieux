@@ -87,6 +87,22 @@ case_succes = Table(
     *_masquage(),
 )
 
+bloc = Table(
+    "bloc", metadata,
+    Column("id", Integer, primary_key=True),
+    Column("etage_id", Integer, ForeignKey("etage.id"), nullable=False),
+    Column("titre", Text, nullable=False),
+    Column("numero", Integer),
+    Column("ordre", Integer, nullable=False),
+    Column("nature", Text, nullable=False),
+    Column("nature_origine", Text, nullable=False),
+    Column("nature_motif", Text),
+    Column("duffus_url", Text),
+    Column("duffus_ancre", Text),
+    Column("masque", Boolean, nullable=False),
+    Column("masque_par", Text),
+)
+
 quete = Table(
     "quete", metadata,
     Column("id", Integer, primary_key=True),
@@ -94,6 +110,7 @@ quete = Table(
     Column("nom", Text, nullable=False),
     Column("niveau", Integer),
     Column("bloc", Text, nullable=False),
+    Column("bloc_id", Integer, ForeignKey("bloc.id")),
     Column("ordre", Integer, nullable=False),
     Column("nature", Text, nullable=False),
     Column("nature_origine", Text, nullable=False),
@@ -147,6 +164,14 @@ coche_quete = Table(
     "coche_quete", metadata,
     Column("grimpeur_id", Integer, ForeignKey("grimpeur.id"), primary_key=True),
     Column("quete_id", Integer, ForeignKey("quete.id"), primary_key=True),
+    Column("cochee_le", Horodatage, nullable=False),
+    Column("cochee_par", BigInteger),
+)
+
+coche_bloc = Table(
+    "coche_bloc", metadata,
+    Column("grimpeur_id", Integer, ForeignKey("grimpeur.id"), primary_key=True),
+    Column("bloc_id", Integer, ForeignKey("bloc.id"), primary_key=True),
     Column("cochee_le", Horodatage, nullable=False),
     Column("cochee_par", BigInteger),
 )

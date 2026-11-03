@@ -1,7 +1,7 @@
 """Les pages des grimpeurs (SPEC §4.2 à §4.6, ARCHITECTURE §9).
 
-    GET  /etages/{n}                 l'onglet d'un étage : ma progression, la jauge, le filtre, la liste unique
-    GET  /etages/{n}/quetes/{id}     la fiche de quête : fragment (Accept: text/html-fragment) ou page complète
+    GET  /etages/{n}                 l'onglet d'un étage : ma progression, la jauge, les donjons, les blocs du guide
+    GET  /etages/{n}/quetes/{id}     la fiche de quête (plus liée depuis le site v5 : le guide, c'est Duffus)
     GET  /histoire                   l'histoire de Shadoaze ; POST /histoire/vu retient le prologue passé
     GET  /grimpeurs                  toutes les fiches + le filtre « qui n'a pas fait… ? » (?quoi=…)
     GET  /grimpeurs/{id}             la fiche d'un grimpeur (?edition=1 : mode édition de l'admin)
@@ -172,7 +172,8 @@ async def page_quete(request: Request, numero: int, quete_id: int):
     suivies = await s.depot.etapes_suivies(v.grimpeur.id, quete_id) if cochable and v.grimpeur else None
     liens = await liens_pour(request, noms_de_fiche(fiche), v.est_admin) if fiche else None
     ctx = {"etage": etage, "quete": quete, "fiche": fiche, "carte": carte, "vue": vue, "liens": liens,
-           "cible": v.grimpeur, "cochable": cochable, "etapes_suivies": suivies,
+           "cible": v.grimpeur, "cochable": False,  # la quête ne se coche plus : on coche le bloc (SPEC v5)
+           "etapes_suivies": suivies,
            "pas_fait": qui(ref, vue.grimpeurs, vue.coches, fait=False),
            "fait": qui(ref, vue.grimpeurs, vue.coches, fait=True)}
     if "text/html-fragment" in request.headers.get("accept", ""):
@@ -213,7 +214,7 @@ async def page_regles(request: Request):
 # ---------------------------------------------------------------- « qui n'a pas fait… ? »
 
 def resoudre_quoi(vue: VueEtage, type_: str, ident: str) -> tuple[str, list[Grimpeur], list[Grimpeur]] | None:
-    """(libellé, pas fait, fait) pour une case, une quête, un donjon (sa case classique) ou une catégorie."""
+    """(libellé, pas fait, fait) pour une case, un bloc, un donjon (sa case classique) ou une catégorie."""
     c = vue.contenu
     if type_ == "categorie":
         if ident not in CATEGORIES:
@@ -236,11 +237,11 @@ def resoudre_quoi(vue: VueEtage, type_: str, ident: str) -> tuple[str, list[Grim
             return None
         d = next(d for d in c.donjons if d.id == case.donjon_id)
         libelle = f"vaincre {d.nom}" if case.est_classique else f"le succès « {case.nom} » ({d.nom})"
-    elif type_ == "quete":
-        q = next((x for x in c.quetes if x.id == n), None)
-        if q is None:
+    elif type_ == "bloc":
+        b = next((x for x in c.blocs if x.id == n), None)
+        if b is None:
             return None
-        libelle = f"la quête « {q.nom} »"
+        libelle = f"le bloc « {b.titre_complet} »"
     else:
         return None
     ref = ElementRef(type_, n)  # type: ignore[arg-type]

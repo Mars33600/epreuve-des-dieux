@@ -17,6 +17,7 @@ from epreuve.domaine.bareme import (
 )
 from epreuve.domaine.modeles import ContenuEtage, Regles
 from tests.fabrique import (
+    BLOCS_REF,
     CASES_REF,
     CLASSIQUES,
     COCHES_REFERENCE,
@@ -39,8 +40,8 @@ R = Regles()
 OFFERTE = Regles(categorie_vide="offerte")
 
 
-def contenu(donjons=DONJONS_REF, cases=CASES_REF, quetes=QUETES_REF, **kw_etage):
-    return ContenuEtage.visible(etage(**kw_etage), donjons, cases, quetes)
+def contenu(donjons=DONJONS_REF, cases=CASES_REF, quetes=QUETES_REF, blocs=BLOCS_REF, **kw_etage):
+    return ContenuEtage.visible(etage(**kw_etage), donjons, cases, quetes, blocs)
 
 
 # --- Catégories et points ------------------------------------------------------------------------------
@@ -89,7 +90,7 @@ def test_donjon_sans_case_classique_visible():
 
 
 def test_categorie_vide_jamais_acquise_sauf_offerte():
-    sans_principale = contenu(quetes=tuple(q for q in QUETES_REF if q.nature == "secondaire"))
+    sans_principale = contenu(blocs=tuple(b for b in BLOCS_REF if b.nature == "secondaire"))
     c = coches(1, (), SECONDAIRES)
     assert not categories_grimpeur(sans_principale, c)["principales"].acquise
     assert points_grimpeur(sans_principale, c, R) == 1
@@ -137,7 +138,7 @@ def test_jauge_de_reference_calculee_a_la_main():
 
 def test_jauge_exclus_ignores_et_palier_manuel():
     gs = [*GRIMPEURS_REF, grimpeur(13, "exclu")]
-    c = ContenuEtage.visible(etage(palier_manuel=15), DONJONS_REF, CASES_REF, QUETES_REF)
+    c = ContenuEtage.visible(etage(palier_manuel=15), DONJONS_REF, CASES_REF, QUETES_REF, BLOCS_REF)
     j = calculer_jauge(c, gs, {**COCHES_REFERENCE, 13: COCHES_REFERENCE[1]}, R)
     assert (j.score, j.palier, j.actifs, j.en_pause) == (17, 15, 10, 2)
     assert j.palier_manuel and j.pleine and j.manquants == 0
@@ -155,7 +156,7 @@ def test_palier_zero_jamais_plein():
 
 
 def test_jauge_offerte_compte_la_categorie_vide_pour_chaque_actif():
-    sans_principale = contenu(quetes=tuple(q for q in QUETES_REF if q.nature == "secondaire"))
+    sans_principale = contenu(blocs=tuple(b for b in BLOCS_REF if b.nature == "secondaire"))
     j = calculer_jauge(sans_principale, [grimpeur(1), grimpeur(2)], {}, OFFERTE)
     assert j.points_par_categorie["principales"] == 2 and j.score == 2 and j.palier == 4
 
@@ -195,3 +196,28 @@ def test_jauge_somme_des_points_des_actifs(lignes):
     j = calculer_jauge(CONTENU_REF, gs, cs, R)
     assert j.score == sum(points_grimpeur(CONTENU_REF, cs[g.id], R) for g in gs if g.statut == "actif")
     assert j.score == sum(j.points_par_categorie.values())
+
+
+def test_v5_point_principales_demande_tous_les_blocs_principaux_et_secondaires_tous_les_secondaires():
+    """SPEC v5 §4 : les coches de quêtes ne comptent plus, seuls les blocs comptent."""
+    principaux, secondaires = (1, 2, 3, 4), (5, 6, 7, 8, 9)
+    manque_un = coches(1, (), (1, 2, 3, *secondaires))
+    etats = categories_grimpeur(CONTENU_REF, manque_un)
+    assert (etats["principales"].faits, etats["principales"].total) == (3, 4) and not etats["principales"].acquise
+    assert etats["secondaires"].acquise
+    tous = coches(1, (), principaux)
+    assert categories_grimpeur(CONTENU_REF, tous)["principales"].acquise
+    assert not categories_grimpeur(CONTENU_REF, tous)["secondaires"].acquise
+    # Une coche de quête n'apporte rien.
+    seulement_quetes = coches(1, (), (), quetes=(1, 2, 3, 4, 5, 6, 7, 8, 9))
+    assert points_grimpeur(CONTENU_REF, seulement_quetes, R) == 0
+
+
+def test_v5_la_nature_corrigee_d_un_bloc_change_le_barème():
+    from dataclasses import replace
+
+    blocs = tuple(replace(b, nature="secondaire", nature_origine="admin", nature_motif="une seule quête utile")
+                  if b.id == 4 else b for b in BLOCS_REF)
+    c = contenu(blocs=blocs)
+    etats = categories_grimpeur(c, coches(1, (), (1, 2, 3)))
+    assert etats["principales"].acquise and (etats["secondaires"].total == 6)

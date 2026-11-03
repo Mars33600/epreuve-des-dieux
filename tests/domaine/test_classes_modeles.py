@@ -4,7 +4,7 @@ import pytest
 
 from epreuve.domaine.classes import CLASSES, repartition_classes
 from epreuve.domaine.modeles import Coches, ContenuEtage, ElementRef, Grimpeur, Session
-from tests.fabrique import AVANT, case, donjon, etage, grimpeur, quete
+from tests.fabrique import AVANT, bloc, case, donjon, etage, grimpeur, quete
 
 
 def test_19_classes_dans_l_ordre_du_jeu():
@@ -57,14 +57,15 @@ def test_contenu_visible_retire_les_masques_et_trie():
     donjons = [donjon(2, ordre=1), donjon(1, ordre=2), donjon(3, masque=True)]
     cases = [case(2, 1, 2), case(1, 1, 1), case(3, 1, 3, masquee=True), case(4, 3, 1), case(5, 2, 1)]
     quetes = [quete(2, ordre=1), quete(1, ordre=2), quete(3, masquee=True)]
-    c = ContenuEtage.visible(e, donjons, cases, quetes)
+    blocs = [bloc(2, ordre=1), bloc(1, ordre=2), bloc(3, masque=True)]
+    c = ContenuEtage.visible(e, donjons, cases, quetes, blocs)
     assert [d.id for d in c.donjons] == [2, 1]
     assert {x.id for x in c.cases} == {1, 2, 5}  # 3 masquée, 4 dans un donjon masqué
     assert [x.id for x in c.cases_du_donjon(1)] == [1, 2]
     assert [q.id for q in c.quetes] == [2, 1]
     assert ElementRef("case", 4) not in c.elements()
     assert set(c.elements()) == {ElementRef("case", 1), ElementRef("case", 2), ElementRef("case", 5),
-                                 ElementRef("quete", 1), ElementRef("quete", 2)}
+                                 ElementRef("bloc", 1), ElementRef("bloc", 2)}
 
 
 def test_coches_contient():

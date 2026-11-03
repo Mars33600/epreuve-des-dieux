@@ -290,7 +290,7 @@ def test_entrees_et_donjons_manquants():
 async def test_ecrire_etages_0_et_1(depot, moteur):
     r0 = await ecrire_etage(moteur, ETAGES[0], MAINTENANT)
     r1 = await ecrire_etage(moteur, ETAGES[1], MAINTENANT)
-    assert r0.cree and r1.cree and r0.ajoutes == 1 + 5 + 27
+    assert r0.cree and r1.cree and r0.ajoutes == 1 + 5 + 27 + 2
     e0, e1 = await depot.etages()
     assert (e0.statut, e0.ouvert_le, e1.statut, e1.ouvert_le) == ("ouvert", ETAGES[0].ouvert_le, "scelle", None)
     c = await depot.contenu_etage(e0.id)

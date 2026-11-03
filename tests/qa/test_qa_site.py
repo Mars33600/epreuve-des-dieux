@@ -51,15 +51,15 @@ def test_xss_par_pseudo_et_libelle_affiches_en_texte(profil):
 def test_xss_dans_le_json_reste_une_donnee():
     m = piege()
     c = m.connecter(ID_BRINDILLE)
-    d = c.get("/api/etages/0/manque?type=quete&id=105").json()
+    d = c.get("/api/etages/0/manque?type=bloc&id=3").json()
     assert XSS in [g["pseudo"] for g in d["pas_fait"]]  # la donnée brute, que app.js affiche avec textContent
-    assert c.get("/api/etages/0/manque?type=quete&id=105").headers["content-type"].startswith("application/json")
+    assert c.get("/api/etages/0/manque?type=bloc&id=3").headers["content-type"].startswith("application/json")
 
 
 def test_app_js_n_insere_jamais_de_donnee_en_html():
     js = APP_JS.read_text()
-    # Le seul innerHTML est celui de la fiche de quête, rendue et échappée par le serveur.
-    assert js.count("innerHTML =") == 1 and "t.innerHTML = await r.text()" in js
+    # Plus aucun innerHTML : la fiche de quête en fenêtre a disparu avec la v5.
+    assert "innerHTML" not in js
     assert "insertAdjacentHTML" not in js and "outerHTML" not in js and "document.write" not in js
     assert "eval(" not in js and "new Function" not in js
     assert re.search(r"s\.textContent = g\.pseudo", js)
@@ -128,7 +128,7 @@ def test_base_sans_etage_ni_grimpeur():
     for chemin in ("/", "/grimpeurs", "/regles", "/admin", "/admin/grimpeurs", "/admin/etages", "/admin/journal"):
         assert c.get(chemin).status_code == 200, chemin
     assert c.get("/etages/0").status_code == 404
-    assert cocher(c, m.csrf(c), type="quete", id=101, cochee=True).status_code == 409
+    assert cocher(c, m.csrf(c), type="bloc", id=1, cochee=True).status_code == 409
 
 
 def test_etage_ouvert_sans_aucun_actif():

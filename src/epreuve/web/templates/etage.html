@@ -1,5 +1,5 @@
 {% extends "site.html" %}
-{% from "_macros.html" import jauge_bloc, bandeau_etage, liste_etage, filtre, pip %}
+{% from "_macros.html" import jauge_bloc, bandeau_etage, liste_donjons, liste_blocs, filtre, pip %}
 {% block titre %}{{ titre_etage(etage) }} · L'Épreuve des Dieux{% endblock %}
 {% block page %}
 <div class="layout">
@@ -23,17 +23,6 @@
       {% if bilan %}<p class="note">Bilan figé le {{ bilan.fige_le|date_paris }} : score {{ bilan.score }} sur un palier de {{ bilan.palier }}, {{ bilan.actifs }} grimpeur{{ "s" if bilan.actifs > 1 }} actif{{ "s" if bilan.actifs > 1 }}.{% if bilan.force %} Ouverture forcée par un admin.{% endif %} Cocher ici complète ta fiche sans changer ce bilan.</p>{% endif %}
     </section>
 
-    <details class="card actifs-etage" id="actifsEtage">
-      <summary><span>Grimpeurs actifs ({{ actifs_liste|length }})</span></summary>
-      {% if actifs_liste %}
-      <ul class="roles">{% for g, pts in actifs_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / 4</b></li>{% endfor %}</ul>
-      {% else %}<p class="muted">Aucun grimpeur actif pour l'instant.</p>{% endif %}
-      {% if pauses_liste %}
-      <h3>En pause ({{ pauses_liste|length }})</h3>
-      <p class="muted">Ils ne comptent pas dans le palier ; leurs points reviendront à leur réintégration.</p>
-      <ul class="roles pause">{% for g, pts in pauses_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / 4</b></li>{% endfor %}</ul>
-      {% endif %}
-    </details>
 
     {% if cible %}
     <section class="card" aria-labelledby="progTitre" id="maProgression">
@@ -50,13 +39,36 @@
     {% endif %}
 
 
-    <section class="card" aria-labelledby="listeTitre" id="liste" data-etage="{{ etage.numero }}">
-      <div class="row"><h2 id="listeTitre">Le guide de l'étage</h2>
-        <span class="muted">{% if not cochable %}Lecture seule{% else %}Touche une case pour la cocher{% endif %}</span></div>
-      {{ filtre() }}
-      <p class="muted">Touche le nom d'une quête pour ouvrir sa fiche : où aller, quoi faire, quoi apporter. Le compteur dit combien de grimpeurs actifs l'ont faite.</p>
-      {{ liste_etage(vue, cible, cochable) }}
-    </section>
+    <div id="liste" data-etage="{{ etage.numero }}">
+      <section class="card" aria-labelledby="filtreTitre">
+        <div class="row"><h2 id="filtreTitre">Filtres</h2>
+          <span class="muted">{% if not cochable %}Lecture seule{% else %}Touche une case pour la cocher{% endif %}</span></div>
+        {{ filtre() }}
+      </section>
+
+      <section class="card" aria-labelledby="donjonsTitre" data-section>
+        <div class="row"><h2 id="donjonsTitre">Donjons de l'étage</h2></div>
+        {{ liste_donjons(vue, cible, cochable) }}
+      </section>
+
+      <section class="card" aria-labelledby="blocsTitre" data-section>
+        <div class="row"><h2 id="blocsTitre">Blocs du guide</h2></div>
+        <p class="muted">Tu fais le guide sur <a href="https://duffus.fr/guide-complet" target="_blank" rel="noopener">Duffus<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span></a>, quête par quête. Quand tu as fini un bloc, coche-le ici : <b class="rouge">cadre rouge</b> = bloc principal, <b class="jaune">cadre jaune</b> = bloc secondaire.</p>
+        {{ liste_blocs(vue, cible, cochable) }}
+      </section>
+    </div>
+
+    <details class="card actifs-etage" id="actifsEtage">
+      <summary><span>Grimpeurs actifs ({{ actifs_liste|length }})</span></summary>
+      {% if actifs_liste %}
+      <ul class="roles">{% for g, pts in actifs_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / 4</b></li>{% endfor %}</ul>
+      {% else %}<p class="muted">Aucun grimpeur actif pour l'instant.</p>{% endif %}
+      {% if pauses_liste %}
+      <h3>En pause ({{ pauses_liste|length }})</h3>
+      <p class="muted">Ils ne comptent pas dans le palier ; leurs points reviendront à leur réintégration.</p>
+      <ul class="roles pause">{% for g, pts in pauses_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / 4</b></li>{% endfor %}</ul>
+      {% endif %}
+    </details>
   </main>
 </div>
 {% endblock %}

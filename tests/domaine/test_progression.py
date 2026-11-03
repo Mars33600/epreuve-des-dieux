@@ -23,7 +23,7 @@ R = Regles()
 def test_compteurs_ne_comptent_que_les_actifs():
     c = compteurs(CONTENU_REF, GRIMPEURS_REF, COCHES_REFERENCE)
     assert c[ElementRef("case", 1)] == 6  # 1, 2, 3, 6, 8, 10 (11 est en pause)
-    assert c[ElementRef("quete", 9)] == 4  # 1, 2, 5, 9
+    assert c[ElementRef("bloc", 9)] == 4  # 1, 2, 5, 9
     assert len(c) == 15 + 9
 
 

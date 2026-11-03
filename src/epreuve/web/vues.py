@@ -8,7 +8,7 @@ que mettre en forme ; ils ne reçoivent jamais un étage scellé (sauf l'admin).
 from __future__ import annotations
 
 from collections.abc import Iterable
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 
 from epreuve.domaine.bareme import (
@@ -25,14 +25,12 @@ from epreuve.domaine.modeles import (
     Categorie,
     Coches,
     ContenuEtage,
-    Donjon,
     ElementRef,
     Etage,
     Grimpeur,
-    Quete,
     Regles,
 )
-from epreuve.domaine.progression import avancement, compteurs
+from epreuve.domaine.progression import avancement, compteurs, qui
 from epreuve.domaine.textes import date_paris
 
 
@@ -50,9 +48,9 @@ INFOS_CATEGORIES: tuple[InfoCategorie, ...] = (
     InfoCategorie("full_succes", NOM_CATEGORIE["full_succes"], "Succès",
                   "Cocher les 5 succès de chaque donjon.", "i-succes"),
     InfoCategorie("principales", NOM_CATEGORIE["principales"], "Princ.",
-                  "Les quêtes qui mènent à un Dofus, l'œuf légendaire du jeu.", "i-princ"),
+                  "Terminer tous les blocs principaux du guide (ceux qui mènent à un Dofus).", "i-princ"),
     InfoCategorie("secondaires", NOM_CATEGORIE["secondaires"], "Second.",
-                  "Toutes les autres quêtes de l'étage.", "i-second"),
+                  "Terminer tous les blocs secondaires du guide de l'étage.", "i-second"),
 )
 assert tuple(i.cle for i in INFOS_CATEGORIES) == CATEGORIES
 
@@ -69,6 +67,15 @@ def texte_point_full(n: int) -> str:
     if n == 1:
         return "Cocher les 5 cases de ce donjon rapporte 1 point (Full succès)"
     return f"Cocher les 5 cases des {n} donjons de l'étage rapporte 1 point (Full succès)"
+
+
+def texte_quetes_bloc(bloc) -> str:
+    """« 24 quêtes, dont 23 principales » : ce que le bloc contient, pour juger sa nature d'un coup d'œil."""
+    n, p = bloc.nb_quetes, bloc.nb_principales
+    total = f"{n} quête{'s' if n > 1 else ''}"
+    if p == 0:
+        return f"{total}, dont aucune principale"
+    return f"{total}, dont {p} principale{'s' if p > 1 else ''}"
 
 
 def pct(faits: int, total: int) -> str:
@@ -89,28 +96,6 @@ def cle(ref: ElementRef) -> str:
     return f"{ref.type}:{ref.id}"
 
 
-@dataclass
-class LigneDonjon:
-    donjon: Donjon
-    cases: tuple[CaseSucces, ...]
-    apres: Quete | None = None  # la quête qui précède le donjon dans le guide : « moment conseillé »
-    type: str = "donjon"
-
-
-@dataclass
-class LigneQuete:
-    quete: Quete
-    type: str = "quete"
-
-
-@dataclass
-class Bloc:
-    nom: str | None
-    lignes: list[LigneDonjon | LigneQuete] = field(default_factory=list)
-    donjons: bool = False
-
-
-NOM_BLOC_DONJONS = "Donjons de l'étage"
 _MASCULINS = {"château", "dojo", "laboratoire", "temple", "clos", "repaire", "palais", "antre", "fort", "manoir",
               "donjon", "marais", "bois", "mont", "col", "pic", "port", "jardin", "sanctuaire", "monastère"}
 
@@ -121,28 +106,6 @@ def avec_article(nom: str) -> str:
     if premier and premier[0] in "aeiouyàâéèêîôû":
         return f"l'{nom}"
     return f"le {nom}" if premier in _MASCULINS else f"la {nom}"
-
-
-def quete_avant(donjon: Donjon, quetes: Iterable[Quete]) -> Quete | None:
-    """La dernière quête du même bloc qui précède le donjon dans l'ordre du guide Duffus, s'il y en a une."""
-    if donjon.bloc is None:
-        return None
-    avant = [q for q in quetes if q.bloc == donjon.bloc and q.ordre < donjon.ordre]
-    return max(avant, key=lambda q: (q.ordre, q.id), default=None)
-
-
-def blocs_du_guide(contenu: ContenuEtage) -> list[Bloc]:
-    """En tête, tous les donjons de l'étage, chacun dans son dépliant (avec le « moment conseillé » : après quelle
-    quête le faire) ; puis le fil du guide, qui ne contient que des quêtes."""
-    ordonnes = sorted(contenu.donjons, key=lambda d: (d.ordre, d.id))
-    tete = Bloc(NOM_BLOC_DONJONS, [LigneDonjon(d, contenu.cases_du_donjon(d.id), quete_avant(d, contenu.quetes))
-                                   for d in ordonnes], donjons=True)
-    par_bloc: dict[str, list[tuple[int, LigneQuete]]] = {}
-    for q in contenu.quetes:
-        par_bloc.setdefault(q.bloc, []).append((q.ordre, LigneQuete(q)))
-    classes = sorted(par_bloc.items(), key=lambda kv: min(o for o, _ in kv[1]))
-    blocs = [Bloc(nom, [ligne for _, ligne in sorted(lignes, key=lambda t: t[0])]) for nom, lignes in classes]
-    return ([tete] if tete.lignes else []) + blocs
 
 
 @dataclass
@@ -171,19 +134,21 @@ class VueEtage:
 
     @property
     def nb_principales(self) -> int:
-        return sum(1 for q in self.contenu.quetes if q.nature == "principale")
+        """Les blocs principaux de l'étage (le point « Quêtes principales » les demande tous)."""
+        return len(self.contenu.blocs_de_nature("principale"))
 
     @property
     def nb_secondaires(self) -> int:
-        return len(self.contenu.quetes) - self.nb_principales
+        return len(self.contenu.blocs_de_nature("secondaire"))
+
+    def qui_bloc(self, bloc_id: int, fait: bool) -> list[Grimpeur]:
+        """Les actifs qui ont (fait=True) ou n'ont pas (fait=False) terminé le bloc, par pseudo."""
+        return qui(ElementRef("bloc", bloc_id), self.grimpeurs, self.coches, fait)
 
     def grimpeurs_par_statut(self, statut: str) -> list[tuple[Grimpeur, int]]:
         """(grimpeur, points sur cet étage), du plus avancé au moins avancé, puis par pseudo."""
         lignes = [(g, self.points(g.id)) for g in self.grimpeurs if g.statut == statut]
         return sorted(lignes, key=lambda t: (-t[1], t[0].pseudo.lower()))
-
-    def blocs(self) -> list[Bloc]:
-        return blocs_du_guide(self.contenu)
 
     def classique(self, donjon_id: int) -> CaseSucces | None:
         return next((c for c in self.contenu.cases_du_donjon(donjon_id) if c.est_classique), None)

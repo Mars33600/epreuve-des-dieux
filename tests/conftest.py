@@ -109,8 +109,9 @@ async def moteur(url_base):
     await m.dispose()
 
 
-TABLES_A_VIDER = ("journal", "session", "bilan_etage", "suivi_etape", "coche_quete", "coche_case", "grimpeur",
-                  "liste_officielle", "fiche_quete", "quete", "case_succes", "donjon", "donjon_disponible", "etage")
+TABLES_A_VIDER = ("journal", "session", "bilan_etage", "suivi_etape", "coche_bloc", "coche_quete", "coche_case",
+                  "grimpeur", "liste_officielle", "fiche_quete", "quete", "bloc", "case_succes", "donjon",
+                  "donjon_disponible", "etage")
 
 
 @pytest.fixture

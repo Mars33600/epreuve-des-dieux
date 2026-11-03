@@ -722,3 +722,44 @@ details.recap[open] .recap-titre::before{transform:rotate(90deg)}
   .qniv .niv-lib{display:none}
 }
 @media (prefers-reduced-motion:reduce){.chap-nom::before,.recap-titre::before{transition:none}}
+
+/* ---------- Blocs du guide (SPEC v5 §3) ----------
+   Cadre rouge = bloc principal, cadre jaune = bloc secondaire (teintes de la DA, AA sur la carte). Le libellé
+   « Principal » / « Secondaire » (badge : trait plein ou pointillé) double la couleur. */
+#liste{display:grid;gap:22px;min-width:0}
+#liste > section[hidden]{display:none}
+.blocs-guide{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.blocs-guide > li[hidden]{display:none}
+.bloc-carte{--c:var(--faint);display:grid;gap:8px;min-width:0;padding:12px 14px;border-radius:12px;border:2px solid var(--c);
+  background:color-mix(in srgb,var(--c) 7%,var(--night-1))}
+.bloc-carte.c-principales{--c:var(--c-princ)}
+.bloc-carte.c-secondaires{--c:var(--c-second)}
+.bloc-carte[data-fait="1"]{background:color-mix(in srgb,var(--c) 14%,var(--night-1))}
+.bloc-titre h3{font-size:19px;line-height:1.25;overflow-wrap:anywhere}
+.bloc-meta{margin:4px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.bloc-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.bloc-termine{flex:0 1 auto}
+.lien-duffus{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid var(--gold-line);background:var(--surface-2);color:var(--gold-hi);text-decoration:none;font-weight:700}
+.lien-duffus::after{content:"↗";margin-left:6px}
+.lien-duffus:hover{border-color:var(--gold-hi)}
+.compteur-bloc{min-height:44px;white-space:normal}
+.qui-bloc > summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--gold-hi);list-style:none}
+.qui-bloc > summary::-webkit-details-marker{display:none}
+.qui-bloc > summary::before{content:"▸";margin-right:8px;color:var(--faint);transition:transform .2s}
+.qui-bloc[open] > summary::before{transform:rotate(90deg)}
+.qui-corps{display:grid;gap:6px;padding:4px 0 6px}
+.qui-corps h4{font:500 15px/1.3 var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.qui-corps small{color:var(--muted)}
+.rouge{color:var(--c-princ)} .jaune{color:var(--c-second)}
+/* Revue d'étage : bloc et nature corrigeable */
+.bloc-revue{display:grid;gap:6px}
+.bloc-revue .ligne-nature{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+@media (max-width:420px){.bloc-carte{padding:10px}}
+/* Fiche du grimpeur : blocs faits ou à faire */
+.etat-liste{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.etat-liste li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:8px 10px;border-radius:8px;border-left:4px solid var(--c,var(--faint));background:var(--surface)}
+.etat-liste .etat{font:500 var(--t-sm)/1 var(--f-data);padding:4px 8px;border-radius:999px;border:1px solid var(--line)}
+.etat-liste li.fait .etat{color:var(--c-donjon);border-color:var(--c-donjon)}
+.etat-liste li.afaire .etat{color:var(--warn);border-style:dashed;border-color:var(--warn)}
+.etat-liste .etat-nom{flex:1 1 220px;min-width:0;overflow-wrap:anywhere}
+.etat-dj{margin:0;padding:0 4px 4px}

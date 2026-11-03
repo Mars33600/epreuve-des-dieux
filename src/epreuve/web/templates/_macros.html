@@ -118,8 +118,8 @@
     <span>Niveaux <b class="num">{{ etage.niveau_min }} à {{ etage.niveau_max }}</b></span>
     <span>Cap <b class="num">{{ etage.level_cap }}</b></span>
     <span><b class="num">{{ vue.contenu.donjons|length }}</b> donjon{{ "s" if vue.contenu.donjons|length > 1 }}</span>
-    <span><b class="num">{{ vue.nb_principales }}</b> quête{{ "s" if vue.nb_principales > 1 }} principale{{ "s" if vue.nb_principales > 1 }}</span>
-    <span><b class="num">{{ vue.nb_secondaires }}</b> quête{{ "s" if vue.nb_secondaires > 1 }} secondaire{{ "s" if vue.nb_secondaires > 1 }}</span>
+    <span><b class="num">{{ vue.nb_principales }}</b> bloc{{ "s" if vue.nb_principales > 1 }} principa{{ "ux" if vue.nb_principales > 1 else "l" }}</span>
+    <span><b class="num">{{ vue.nb_secondaires }}</b> bloc{{ "s" if vue.nb_secondaires > 1 }} secondaire{{ "s" if vue.nb_secondaires > 1 }}</span>
   </p>
   {%- if etage.statut == "ouvert" %}{{ barre_progression(jauge) }}{% endif %}
 </section>
@@ -144,10 +144,9 @@
 <a class="compteur" href="/grimpeurs?quoi={{ ref }}" data-compteur="{{ ref }}" title="Qui ne l'a pas fait ?" aria-label="{{ vue.compteurs.get(ref, 0) }} grimpeurs actifs sur {{ vue.jauge.actifs }} l'ont fait. Qui ne l'a pas fait ?">{{ vue.compteurs.get(ref, 0) }}/{{ vue.jauge.actifs }}</a>
 {%- endmacro %}
 
-{% macro liste_etage(vue, cible, cochable) -%}
+{% macro liste_donjons(vue, cible, cochable) -%}
+{#- Les donjons de l'étage : 5 cases chacun, la première (« Vaincre le boss ») compte pour le point Donjons. -#}
 {%- set coches = vue.coches_de(cible.id if cible else none) -%}
-{%- set numero = vue.etage.numero -%}
-{%- if vue.contenu.donjons %}
 {%- set nd = vue.contenu.donjons|length -%}
 {%- set cpt = namespace(v=0, c=0) -%}
 {%- for d in vue.contenu.donjons %}{% set cs = vue.contenu.cases_du_donjon(d.id) %}{% set cl = vue.classique(d.id) %}
@@ -158,56 +157,78 @@
   <p><b>{{ texte_donjons(nd) }}</b>. La première case de chaque donjon, « Vaincre le boss », compte pour ce point.{% if cible %} <span class="cpt-dj"><span data-vaincus>{{ cpt.v }}</span> / {{ nd }} vaincu{{ "s" if nd > 1 }}</span>{% endif %}</p>
   <p><b>{{ texte_full(nd) }}</b>. Les 4 autres cases de chaque donjon sont les succès.{% if cible %} <span class="cpt-dj"><span data-complets>{{ cpt.c }}</span> / {{ nd }} complet{{ "s" if nd > 1 }}</span>{% endif %}</p>
 </div></div>
-{%- endif %}
-{%- for bloc in vue.blocs() %}
-<section class="bloc{% if bloc.donjons %} bloc-donjons{% endif %}"{% if bloc.donjons %} id="donjons-etage"{% endif %}>
-  {% if bloc.nom %}<h3>{{ bloc.nom }}</h3>{% endif %}
-  <ul class="liste">
-  {%- for l in bloc.lignes %}
-  {%- if l.type == "quete" %}{% set q = l.quete %}{% set cat = "principales" if q.nature == "principale" else "secondaires" %}{% set fait = q.id in coches.quetes %}
-    <li data-cats="{{ cat }}" data-fait="{{ 1 if fait else 0 }}">
-      <div class="ligne">
-        <div class="qrow">
-          <label class="qbox c-{{ cat }}"><input type="checkbox" data-ref="quete:{{ q.id }}"{% if fait %} checked{% endif %}{% if not cochable %} disabled{% endif %}><span class="sr-only">Faite : {{ q.nom }}</span></label>
-          <a class="qname" href="/etages/{{ numero }}/quetes/{{ q.id }}" data-qopen="{{ q.id }}" aria-haspopup="dialog"><b>{{ q.nom }}</b><small>niv. {{ q.niveau if q.niveau is not none else "?" }}{% if q.dofus %} · {{ q.dofus|join(", ") }}{% endif %} · voir la fiche</small>{% if q.jusqu_ou %}<span class="jusqu">Jusqu'où : {{ q.jusqu_ou }}</span>{% endif %}{% if q.a_lier %}<span class="lier">À lier : {{ q.a_lier }}</span>{% endif %}</a>
-        </div>
-        <div class="droite-ligne">{{ badge_nature(q) }}{{ compteur(vue, "quete:" ~ q.id) }}</div>
+<ul class="liste">
+{%- for d in vue.contenu.donjons %}{% set cases = vue.contenu.cases_du_donjon(d.id) %}{% set faits = cases|selectattr("id", "in", coches.cases)|list|length %}{% set classique = cases|selectattr("est_classique")|first %}
+  <li id="donjon-{{ d.id }}" data-cats="donjons full_succes" data-donjon="{{ d.id }}" data-fait="{{ 1 if cases and faits == cases|length else 0 }}" data-vaincu="{{ 1 if classique and classique.id in coches.cases else 0 }}">
+    <details class="dj-ligne">
+      <summary><span class="nomdj">{{ icone("i-donjon") }}{{ d.nom }}</span>
+        <span class="droite-ligne"><span class="num muted">niv. {{ d.niveau if d.niveau is not none else "?" }} · <span data-djcompte>{{ faits }}</span>/{{ cases|length }}</span>
+          <span class="badge donjon{% if classique and classique.id in coches.cases %} on{% endif %}" data-djbadge="donjon">{{ icone("i-donjon") }}Donjon</span>
+          <span class="badge succes{% if cases and faits == cases|length %} on{% endif %}" data-djbadge="succes">{{ icone("i-succes") }}Full succès</span></span>
+      </summary>
+      <div class="dj-corps">
+        <ul class="ticks">
+        {%- for c in cases %}
+          <li{% if c.est_classique %} class="premiere"{% endif %}><label class="tick c-{{ 'donjons' if c.est_classique else 'full_succes' }}"><input type="checkbox" data-ref="case:{{ c.id }}"{% if c.id in coches.cases %} checked{% endif %}{% if not cochable %} disabled{% endif %}>
+            <span><b>{{ c.nom }}</b><small>{{ c.regle }}{% if c.explication_aleatoire %} <span class="alea" title="{{ c.explication_aleatoire }}">aléatoire</span><span class="alea-note">{{ c.explication_aleatoire }}</span>{% endif %}{% if c.est_classique %}<em class="pt-dj">{{ texte_donjons(nd) }}</em>{% endif %}</small></span></label>{{ compteur(vue, "case:" ~ c.id) }}</li>
+        {%- endfor %}
+        </ul>
+        {% if cochable %}<p><button class="btn" type="button" data-donjon-tout="{{ d.id }}">Tout le donjon (5 cases)</button></p>{% endif %}
       </div>
-    </li>
-  {%- else %}{% set d = l.donjon %}{% set faits = l.cases|selectattr("id", "in", coches.cases)|list|length %}{% set classique = l.cases|selectattr("est_classique")|first %}
-    <li id="donjon-{{ d.id }}" data-cats="donjons full_succes" data-donjon="{{ d.id }}" data-fait="{{ 1 if l.cases and faits == l.cases|length else 0 }}" data-vaincu="{{ 1 if classique and classique.id in coches.cases else 0 }}">
-      <details class="dj-ligne">
-        <summary><span class="nomdj">{{ icone("i-donjon") }}{{ d.nom }}</span>
-          <span class="droite-ligne"><span class="num muted">niv. {{ d.niveau if d.niveau is not none else "?" }} · <span data-djcompte>{{ faits }}</span>/{{ l.cases|length }}</span>
-            <span class="badge donjon{% if classique and classique.id in coches.cases %} on{% endif %}" data-djbadge="donjon">{{ icone("i-donjon") }}Donjon</span>
-            <span class="badge succes{% if l.cases and faits == l.cases|length %} on{% endif %}" data-djbadge="succes">{{ icone("i-succes") }}Full succès</span></span>
-        </summary>
-        <div class="dj-corps">
-          {%- if l.apres %}
-          <p class="moment">Moment conseillé : après la quête « <a href="/etages/{{ numero }}/quetes/{{ l.apres.id }}" data-qopen="{{ l.apres.id }}" aria-haspopup="dialog">{{ l.apres.nom }}</a> »</p>
-          {%- endif %}
-          <ul class="ticks">
-          {%- for c in l.cases %}
-            <li{% if c.est_classique %} class="premiere"{% endif %}><label class="tick c-{{ 'donjons' if c.est_classique else 'full_succes' }}"><input type="checkbox" data-ref="case:{{ c.id }}"{% if c.id in coches.cases %} checked{% endif %}{% if not cochable %} disabled{% endif %}>
-              <span><b>{{ c.nom }}</b><small>{{ c.regle }}{% if c.explication_aleatoire %} <span class="alea" title="{{ c.explication_aleatoire }}">aléatoire</span><span class="alea-note">{{ c.explication_aleatoire }}</span>{% endif %}{% if c.est_classique %}<em class="pt-dj">{{ texte_donjons(nd) }}</em>{% endif %}</small></span></label>{{ compteur(vue, "case:" ~ c.id) }}</li>
-          {%- endfor %}
-          </ul>
-          {% if cochable %}<p><button class="btn" type="button" data-donjon-tout="{{ d.id }}">Tout le donjon (5 cases)</button></p>{% endif %}
-        </div>
-      </details>
-    </li>
-  {%- endif %}
-  {%- endfor %}
-  </ul>
-</section>
+    </details>
+  </li>
+{%- else %}
+  <li class="muted">Cet étage n'a pas de donjon.</li>
 {%- endfor %}
+</ul>
+{%- endmacro %}
+
+{% macro liste_blocs(vue, cible, cochable) -%}
+{#- Les blocs du guide Duffus, dans l'ordre du guide : cadre rouge = principal, cadre jaune = secondaire, avec le libellé
+    écrit pour rester lisible sans la couleur. Le grimpeur coche le bloc entier ; le détail quête par quête est sur
+    duffus.fr. -#}
+{%- set coches = vue.coches_de(cible.id if cible else none) -%}
+<ul class="blocs-guide">
+{%- for b in vue.contenu.blocs %}{% set ref = "bloc:" ~ b.id %}{% set cat = "principales" if b.nature == "principale" else "secondaires" %}{% set fait = b.id in coches.blocs %}
+  <li class="bloc-carte c-{{ cat }}" id="bloc-{{ b.id }}" data-cats="{{ cat }}" data-fait="{{ 1 if fait else 0 }}" data-bloc="{{ b.id }}">
+    <div class="bloc-tete">
+      <div class="bloc-titre"><h3>{{ b.titre_complet }}</h3>
+        <p class="bloc-meta">{{ badge_nature(b) }}<span class="muted">{{ texte_quetes_bloc(b) }}</span></p></div>
+    </div>
+    <div class="bloc-actions">
+      <label class="tick c-{{ cat }} bloc-termine"><input type="checkbox" data-ref="{{ ref }}"{% if fait %} checked{% endif %}{% if not cochable %} disabled{% endif %}><span><b>Bloc terminé</b></span></label>
+      {%- if b.lien_duffus %}
+      <a class="lien-duffus" href="{{ b.lien_duffus }}" target="_blank" rel="noopener">Ouvrir sur Duffus<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span></a>
+      {%- endif %}
+      <a class="compteur compteur-bloc" href="/grimpeurs?quoi={{ ref }}" data-compteur="{{ ref }}" data-actifs="{{ vue.jauge.actifs }}">{{ vue.compteurs.get(ref, 0) }} sur {{ vue.jauge.actifs }} l'ont fait</a>
+    </div>
+    <details class="qui-bloc" data-qui-bloc="{{ b.id }}">
+      <summary>Fait par / Pas encore fait par</summary>
+      <div class="qui-corps" data-qui-corps>
+        <h4>Pas encore fait par <small data-qui-n="pas">{{ vue.qui_bloc(b.id, False)|length }}</small></h4>
+        <div data-qui="pas">{{ personnes(vue.qui_bloc(b.id, False), "miss") }}</div>
+        <h4>Fait par <small data-qui-n="fait">{{ vue.qui_bloc(b.id, True)|length }}</small></h4>
+        <div data-qui="fait">{{ personnes(vue.qui_bloc(b.id, True), "done") }}</div>
+      </div>
+    </details>
+  </li>
+{%- else %}
+  <li class="muted">Les blocs de cet étage ne sont pas encore importés.</li>
+{%- endfor %}
+</ul>
+{%- endmacro %}
+
+{% macro liste_etage(vue, cible, cochable) -%}
+{{ liste_donjons(vue, cible, cochable) }}
+{{ liste_blocs(vue, cible, cochable) }}
 {%- endmacro %}
 
 {% macro filtre() -%}
-<fieldset class="filtre" id="filtre" aria-label="Filtrer la liste">
-  {%- for info in CATS %}
-  <label class="c-{{ info.cle }}"><input type="checkbox" value="{{ info.cle }}" checked>{{ icone(info.icone) }}{{ info.nom }}</label>
-  {%- endfor %}
+<fieldset class="filtre" id="filtre" aria-label="Filtrer l'étage">
+  <label class="c-donjons"><input type="checkbox" value="donjons" checked>{{ icone("i-donjon") }}Donjons</label>
+  <label class="c-full_succes"><input type="checkbox" value="full_succes" checked>{{ icone("i-succes") }}Full succès</label>
+  <label class="c-principales"><input type="checkbox" value="principales" checked>{{ icone("i-princ") }}Blocs principaux</label>
+  <label class="c-secondaires"><input type="checkbox" value="secondaires" checked>{{ icone("i-second") }}Blocs secondaires</label>
   <label class="reste"><input type="checkbox" value="reste">Seulement ce qui me reste</label>
   <button class="btn" type="button" id="filtreTout">Tout afficher</button>
 </fieldset>

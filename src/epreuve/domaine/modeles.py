@@ -28,7 +28,7 @@ STATUTS: tuple[Statut, ...] = ("actif", "pause", "exclu")
 StatutEtage = Literal["scelle", "ouvert", "termine"]
 Nature = Literal["principale", "secondaire"]
 OrigineNature = Literal["duffus", "dofusdb", "admin"]
-TypeElement = Literal["case", "quete"]
+TypeElement = Literal["case", "quete", "bloc"]
 
 
 @dataclass(frozen=True)
@@ -106,6 +106,43 @@ class Quete:
 
 
 @dataclass(frozen=True)
+class Bloc:
+    """Un bloc du guide Duffus pour une tranche (SPEC v5 §3 et §5) : l'unité que le grimpeur coche.
+
+    `nature` : « principale » si le bloc contient au moins une quête principale, sinon « secondaire »,
+    sauf correction d'un admin (`nature_origine == "admin"`, qui prime sur la règle)."""
+
+    id: int
+    etage_id: int
+    titre: str
+    numero: int | None  # rang du bloc dans tout le guide Duffus (« Bloc 7 »), None si inconnu
+    ordre: int  # position dans la tranche
+    nature: Nature
+    nature_origine: Literal["construction", "admin"]
+    nb_quetes: int
+    nb_principales: int
+    duffus_url: str | None = None
+    duffus_ancre: str | None = None
+    nature_motif: str | None = None
+    masque: bool = False
+
+    @property
+    def nature_par_defaut(self) -> Nature:
+        return "principale" if self.nb_principales > 0 else "secondaire"
+
+    @property
+    def titre_complet(self) -> str:
+        """« Bloc 7 · Début des quêtes d'alignement » (sans numéro : le titre seul)."""
+        return f"Bloc {self.numero} · {self.titre}" if self.numero is not None else self.titre
+
+    @property
+    def lien_duffus(self) -> str | None:
+        if not self.duffus_url:
+            return None
+        return f"{self.duffus_url}#{self.duffus_ancre}" if self.duffus_ancre else self.duffus_url
+
+
+@dataclass(frozen=True)
 class Grimpeur:
     id: int
     discord_user_id: int
@@ -177,10 +214,11 @@ class ElementRef:
 class Coches:
     grimpeur_id: int
     cases: frozenset[int] = frozenset()
-    quetes: frozenset[int] = frozenset()
+    quetes: frozenset[int] = frozenset()  # ancien suivi par quête : ne compte plus au barème (SPEC v5 §4)
+    blocs: frozenset[int] = frozenset()
 
     def contient(self, ref: ElementRef) -> bool:
-        return ref.id in (self.cases if ref.type == "case" else self.quetes)
+        return ref.id in {"case": self.cases, "bloc": self.blocs}.get(ref.type, self.quetes)
 
 
 @dataclass(frozen=True)
@@ -191,21 +229,27 @@ class ContenuEtage:
     donjons: tuple[Donjon, ...]
     cases: tuple[CaseSucces, ...]
     quetes: tuple[Quete, ...]
+    blocs: tuple[Bloc, ...] = ()
 
     @staticmethod
     def visible(etage: Etage, donjons: Iterable[Donjon], cases: Iterable[CaseSucces],
-                quetes: Iterable[Quete]) -> ContenuEtage:
+                quetes: Iterable[Quete], blocs: Iterable[Bloc] = ()) -> ContenuEtage:
         ds = tuple(sorted((d for d in donjons if not d.masque), key=lambda d: (d.ordre, d.id)))
         ids = {d.id for d in ds}
         cs = tuple(sorted((c for c in cases if not c.masquee and c.donjon_id in ids),
                           key=lambda c: (c.donjon_id, c.ordre, c.id)))
         qs = tuple(sorted((q for q in quetes if not q.masquee), key=lambda q: (q.ordre, q.id)))
-        return ContenuEtage(etage, ds, cs, qs)
+        bs = tuple(sorted((b for b in blocs if not b.masque), key=lambda b: (b.ordre, b.id)))
+        return ContenuEtage(etage, ds, cs, qs, bs)
 
     def cases_du_donjon(self, donjon_id: int) -> tuple[CaseSucces, ...]:
         """Triées par ordre (la case classique, « Vaincre le boss », vient en premier)."""
         return tuple(c for c in self.cases if c.donjon_id == donjon_id)
 
     def elements(self) -> tuple[ElementRef, ...]:
+        """Ce que les grimpeurs cochent : les cases de donjon et les blocs du guide (plus les quêtes une par une)."""
         return (tuple(ElementRef("case", c.id) for c in self.cases)
-                + tuple(ElementRef("quete", q.id) for q in self.quetes))
+                + tuple(ElementRef("bloc", b.id) for b in self.blocs))
+
+    def blocs_de_nature(self, nature: Nature) -> tuple[Bloc, ...]:
+        return tuple(b for b in self.blocs if b.nature == nature)

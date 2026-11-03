@@ -85,6 +85,22 @@
   {% endif %}
 </section>
 
+<section class="card" aria-labelledby="blocsTitre">
+  <h2 id="blocsTitre">Blocs du guide</h2>
+  <p class="muted">Un bloc est <b>principal</b> s'il contient au moins une quête principale, sinon secondaire. Un bloc classé principal pour une seule quête utile se repère dans la colonne « principales ». Ta correction prime sur la règle, reste au journal et survit à la reconstruction de l'étage. Les points « Quêtes principales » et « Quêtes secondaires » demandent tous les blocs de leur nature.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Bloc</th><th>Quêtes principales</th><th>Nature</th><th>Régler</th></tr></thead>
+    <tbody>{% for b in blocs %}
+      <tr class="bloc-revue"><td>{{ b.titre_complet }}{% if b.masque %} <span class="muted">· masqué</span>{% endif %}{% if b.lien_duffus %}<br><a href="{{ b.lien_duffus }}" target="_blank" rel="noopener">Ouvrir sur Duffus<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span></a>{% endif %}</td>
+        <td class="num"><b>{{ b.nb_principales }}</b> sur {{ b.nb_quetes }}</td>
+        <td>{{ b.nature }} <span class="muted">({% if b.nature_origine == "admin" %}corrigé : {{ b.nature_motif }}{% else %}règle : {{ b.nature_par_defaut }}{% endif %})</span></td>
+        <td><form method="post" action="/admin/blocs/{{ b.id }}" class="inline">{{ csrf() }}<input type="hidden" name="etage" value="{{ etage.numero }}">
+          <select name="nature" aria-label="Nature du bloc {{ b.titre }}"><option value="principale"{% if b.nature == "principale" %} selected{% endif %}>Principal</option><option value="secondaire"{% if b.nature == "secondaire" %} selected{% endif %}>Secondaire</option>{% if b.nature_origine == "admin" %}<option value="auto">Revenir à la règle</option>{% endif %}</select>
+          <input type="text" name="motif" required placeholder="Motif" aria-label="Motif du réglage de {{ b.titre }}"><button class="btn" type="submit">Régler</button></form></td></tr>
+    {% else %}<tr><td colspan="4" class="muted">Aucun bloc : relancer « python -m epreuve.contenu construire --etage {{ etage.numero }} ».</td></tr>{% endfor %}</tbody>
+  </table></div>
+</section>
+
 <section class="card" aria-labelledby="quetesTitre">
   <h2 id="quetesTitre">Quêtes</h2>
   <div class="table-wrap"><table>

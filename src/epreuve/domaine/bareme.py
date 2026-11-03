@@ -40,11 +40,12 @@ class EtatCategorie:
 
 def categories_grimpeur(contenu: ContenuEtage, coches: Coches) -> dict[Categorie, EtatCategorie]:
     """donjons : faits/total sur les cases classiques visibles (une par donjon visible qui en a une) ;
-    full_succes : sur toutes les cases visibles ; principales, secondaires : sur les quêtes visibles."""
+    full_succes : sur toutes les cases visibles ; principales, secondaires : sur les BLOCS du guide visibles
+    de cette nature (SPEC v5 §4 : le point demande tous les blocs principaux, ou tous les secondaires)."""
     classiques = [c.id for c in contenu.cases if c.est_classique]
     toutes = [c.id for c in contenu.cases]
-    principales = [q.id for q in contenu.quetes if q.nature == "principale"]
-    secondaires = [q.id for q in contenu.quetes if q.nature == "secondaire"]
+    principales = [b.id for b in contenu.blocs_de_nature("principale")]
+    secondaires = [b.id for b in contenu.blocs_de_nature("secondaire")]
 
     def etat(categorie: Categorie, ids: list[int], cochees: frozenset[int]) -> EtatCategorie:
         return EtatCategorie(categorie, sum(1 for i in ids if i in cochees), len(ids))
@@ -52,8 +53,8 @@ def categories_grimpeur(contenu: ContenuEtage, coches: Coches) -> dict[Categorie
     return {
         "donjons": etat("donjons", classiques, coches.cases),
         "full_succes": etat("full_succes", toutes, coches.cases),
-        "principales": etat("principales", principales, coches.quetes),
-        "secondaires": etat("secondaires", secondaires, coches.quetes),
+        "principales": etat("principales", principales, coches.blocs),
+        "secondaires": etat("secondaires", secondaires, coches.blocs),
     }
 
 

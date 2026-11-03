@@ -1,5 +1,5 @@
 {% extends "site.html" %}
-{% from "_macros.html" import pip, liste_etage, icone %}
+{% from "_macros.html" import pip, liste_etage, icone, badge_nature %}
 {% block titre %}{{ g.pseudo }} · L'Épreuve des Dieux{% endblock %}
 {% block page %}
 <section class="card" aria-labelledby="sheetTitle">
@@ -47,16 +47,26 @@
     <span class="total{% if vue.points(g.id) == 4 %} full{% endif %}">{{ vue.points(g.id) }}<small>/4 points · {{ av[0] }}/{{ av[1] }}{% if av[1] %} ({{ av[0] * 100 // av[1] }} %){% endif %}</small></span>
   </div>
   <div class="bigpips">{% for info in CATS %}{% set e = cats[info.cle] %}<span class="pipcell">{{ pip(info, e, True) }}<span>{{ info.court }}</span><b>{{ e.faits }}/{{ e.total }}</b></span>{% endfor %}</div>
+  {%- set coches = vue.coches_de(g.id) %}
+  {% if vue.contenu.blocs %}
+  <h3 class="section-title">Blocs du guide <small class="muted num">{{ vue.contenu.blocs|selectattr("id", "in", coches.blocs)|list|length }}/{{ vue.contenu.blocs|length }}</small></h3>
+  <ul class="etat-liste">
+    {%- for b in vue.contenu.blocs %}{% set fait = b.id in coches.blocs %}
+    <li class="{{ 'fait' if fait else 'afaire' }} c-{{ 'principales' if b.nature == 'principale' else 'secondaires' }}"><span class="etat">{{ "Fait" if fait else "À faire" }}</span><span class="etat-nom">{{ b.titre_complet }}</span>{{ badge_nature(b) }}</li>
+    {%- endfor %}
+  </ul>
+  {% endif %}
   {% if vue.contenu.donjons %}
-  <h3 class="section-title">Succès de donjon</h3>
+  <h3 class="section-title">Donjons et succès</h3>
   <div class="dungeons">
-    {%- for d in vue.contenu.donjons %}{% set cs = vue.contenu.cases_du_donjon(d.id) %}{% set n = cs|selectattr("id", "in", vue.coches_de(g.id).cases)|list|length %}
-    <article class="dj{% if cs and n == cs|length %} full{% endif %}"><header>{{ icone("i-donjon") }}<h4>{{ d.nom }}</h4><span class="cnt">{{ n }}/{{ cs|length }}</span></header></article>
+    {%- for d in vue.contenu.donjons %}{% set cs = vue.contenu.cases_du_donjon(d.id) %}{% set n = cs|selectattr("id", "in", coches.cases)|list|length %}{% set cl = vue.classique(d.id) %}
+    <article class="dj{% if cs and n == cs|length %} full{% endif %}"><header>{{ icone("i-donjon") }}<h4>{{ d.nom }}</h4><span class="cnt">{{ n }}/{{ cs|length }} succès</span></header>
+      <p class="muted etat-dj">{{ "Donjon vaincu" if cl and cl.id in coches.cases else "Donjon à vaincre" }}</p></article>
     {%- endfor %}
   </div>
   {% endif %}
   <details{% if edition or (soi and loop.first) %} open{% endif %}>
-    <summary class="section-title">Le détail coché</summary>
+    <summary class="section-title">Le détail à cocher</summary>
     {{ liste_etage(vue, g, cochable) }}
   </details>
 </section>

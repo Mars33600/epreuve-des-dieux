@@ -4,8 +4,10 @@
 - un étage existant est mis à jour **par identifiant Duffus** : on ajoute le nouveau, on met à jour les
   libellés de la source, et on **masque** ce qui a disparu au lieu de le supprimer (nos coches pointent vers
   nos identifiants, jamais vers ceux de Duffus) ;
-- les choix d'un admin survivent : nature forcée, masquage (`masque_par = 'admin'`), libellés corrigés
-  (`corrections`), donjon ajouté (`origine = 'admin'`), nom, cap et image d'étage réglés ;
+- les blocs du guide (SPEC v5) sont rapprochés par titre exact, puis par position si Duffus a retitré un bloc ; leur
+  nature calculée est recalculée, sauf correction d'un admin (`nature_origine = 'admin'`) ;
+- les choix d'un admin survivent : nature forcée (d'une quête ou d'un bloc), masquage (`masque_par = 'admin'`),
+  libellés corrigés (`corrections`), donjon ajouté (`origine = 'admin'`), nom, cap et image d'étage réglés ;
 - garde-fou : sur un étage ouvert, si plus de 10 % des éléments disparaîtraient ou changeraient de nature,
   l'écriture est refusée sans `forcer` ;
 - chaque reconstruction d'un étage existant passe au journal (`contenu_maj`), avec le détail.
@@ -20,7 +22,7 @@ from sqlalchemy import insert, select, update
 from sqlalchemy.dialects.postgresql import insert as insert_pg
 from sqlalchemy.ext.asyncio import AsyncConnection, AsyncEngine
 
-from epreuve.contenu.construire import DonjonPrepare, EtagePrepare
+from epreuve.contenu.construire import BlocPrepare, DonjonPrepare, EtagePrepare
 from epreuve.db import tables as t
 from epreuve.db.depot import contenu_fiche_json
 
@@ -75,7 +77,8 @@ async def _synchroniser(c: AsyncConnection, table, existants: dict, voulus: dict
         if getattr(r, champ_masque) and r.masque_par == "construction":
             maj |= {champ_masque: False, "masque_par": None}
             res.demasques += 1
-        ligne = _lisible(quoi, valeurs["nom"], r._mapping, {k: v for k, v in valeurs.items() if k != "ordre"})
+        ligne = _lisible(quoi, valeurs["nom"], r._mapping,
+                         {k: v for k, v in valeurs.items() if k not in ("ordre", "bloc_id")})
         if ligne:
             res.changements.append(ligne)
         await c.execute(update(table).where(table.c.id == r.id).values(**maj))
@@ -88,12 +91,57 @@ async def _synchroniser(c: AsyncConnection, table, existants: dict, voulus: dict
     return ids
 
 
+async def _synchroniser_blocs(c: AsyncConnection, etage_id: int, voulus: list[BlocPrepare],
+                              res: Resultat) -> tuple[dict[str, int], int]:
+    """Ajoute, met à jour et masque les blocs du guide ; renvoie titre → id et le nombre de blocs dont la nature
+    calculée change (pour le garde-fou). Une correction d'admin sur la nature n'est jamais écrasée."""
+    existants = list(await c.execute(select(t.bloc).where(t.bloc.c.etage_id == etage_id)))
+    titres_voulus = {b.titre for b in voulus}
+    utilises: set[int] = set()
+    ids: dict[str, int] = {}
+    changent = 0
+    for b in voulus:
+        r = next((x for x in existants if x.titre == b.titre), None)
+        if r is None:  # Duffus a retitré le bloc : on le reconnaît à sa position, pour garder les coches
+            r = next((x for x in existants if x.ordre == b.ordre and x.titre not in titres_voulus
+                      and x.id not in utilises), None)
+            if r is not None:
+                res.changements.append(f"bloc « {r.titre} » retitré : « {b.titre} »")
+        valeurs = dict(titre=b.titre, numero=b.numero, ordre=b.ordre, duffus_url=b.duffus_url,
+                       duffus_ancre=b.duffus_ancre)
+        if r is None:
+            ids[b.titre] = (await c.execute(insert(t.bloc).values(
+                etage_id=etage_id, nature=b.nature, nature_origine="construction", masque=False, **valeurs)
+                .returning(t.bloc.c.id))).scalar_one()
+            res.ajoutes += 1
+            res.changements.append(f"bloc ajouté : « {b.titre} » ({b.nature})")
+            continue
+        utilises.add(r.id)
+        ids[b.titre] = r.id
+        maj = dict(valeurs)
+        if r.nature_origine != "admin":
+            maj["nature"] = b.nature
+            if r.nature != b.nature and not r.masque:
+                changent += 1
+                res.changements.append(f"bloc « {b.titre} » : nature « {r.nature} » → « {b.nature} »")
+        if r.masque and r.masque_par == "construction":
+            maj |= {"masque": False, "masque_par": None}
+            res.demasques += 1
+        await c.execute(update(t.bloc).where(t.bloc.c.id == r.id).values(**maj))
+    for r in existants:
+        if r.id not in utilises and not r.masque:
+            await c.execute(update(t.bloc).where(t.bloc.c.id == r.id).values(masque=True, masque_par="construction"))
+            res.masques += 1
+            res.changements.append(f"bloc disparu de Duffus, masqué : « {r.titre} »")
+    return ids, changent
+
+
 async def _elements_visibles(c: AsyncConnection, etage_id: int) -> set[tuple[str, int]]:
-    """Les cases (de donjons visibles) et les quêtes visibles : ce que les grimpeurs cochent."""
+    """Les cases (de donjons visibles) et les blocs visibles : ce que les grimpeurs cochent."""
     cases = await c.execute(select(t.case_succes.c.id).select_from(t.case_succes.join(t.donjon)).where(
         t.donjon.c.etage_id == etage_id, t.donjon.c.masque.is_(False), t.case_succes.c.masquee.is_(False)))
-    quetes = await c.execute(select(t.quete.c.id).where(t.quete.c.etage_id == etage_id, t.quete.c.masquee.is_(False)))
-    return {("case", r.id) for r in cases} | {("quete", r.id) for r in quetes}
+    blocs = await c.execute(select(t.bloc.c.id).where(t.bloc.c.etage_id == etage_id, t.bloc.c.masque.is_(False)))
+    return {("case", r.id) for r in cases} | {("bloc", r.id) for r in blocs}
 
 
 async def _disponibles(c: AsyncConnection, donjons: list[DonjonPrepare], maintenant: datetime) -> None:
@@ -150,18 +198,21 @@ async def ecrire_etage(moteur: AsyncEngine, e: EtagePrepare, maintenant: datetim
                             .values(ordre=t.case_succes.c.ordre + 100))
             await _synchroniser(c, t.case_succes, cases, voulues, "masquee", "case", res, {"donjon_id": did})
 
+        # Blocs du guide, puis quêtes (chacune rattachée à son bloc).
+        e_blocs = e.blocs or []
+        ids_blocs, blocs_changes = await _synchroniser_blocs(c, etage_id, e_blocs, res)
+
         # Quêtes : la nature d'origine « admin » n'est jamais écrasée.
         existantes = {r.duffus_id: r for r in await c.execute(select(t.quete).where(t.quete.c.etage_id == etage_id))}
-        changent_de_nature = 0
+        changent_de_nature = blocs_changes
         voulues_q: dict[str, dict] = {}
         for q in e.quetes:
-            v = dict(nom=q.nom, niveau=q.niveau, bloc=q.bloc, ordre=q.ordre, jusqu_ou=q.jusqu_ou, a_lier=q.a_lier,
-                     nature=q.nature, nature_origine=q.nature_origine, dofus=list(q.dofus))
+            v = dict(nom=q.nom, niveau=q.niveau, bloc=q.bloc, bloc_id=ids_blocs.get(q.bloc), ordre=q.ordre,
+                     jusqu_ou=q.jusqu_ou, a_lier=q.a_lier, nature=q.nature, nature_origine=q.nature_origine,
+                     dofus=list(q.dofus))
             ancienne = existantes.get(q.duffus_id)
             if ancienne is not None and ancienne.nature_origine == "admin":
                 v = {k: x for k, x in v.items() if k not in ("nature", "nature_origine", "dofus")}
-            elif ancienne is not None and not ancienne.masquee and ancienne.nature != q.nature:
-                changent_de_nature += 1
             voulues_q[q.duffus_id] = v
         ids_quetes = await _synchroniser(c, t.quete, existantes, voulues_q, "masquee", "quête", res,
                                          {"etage_id": etage_id})

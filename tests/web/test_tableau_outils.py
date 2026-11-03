@@ -54,7 +54,7 @@ def test_tableau_progression_reprend_les_chiffres_de_l_etage():
     etage = c.get("/etages/0").text
     point = re.search(r'data-moi="points">(\d)', etage).group(1)
     assert re.search(rf'<span class="total[^"]*">{point}<small>/4 points', html)
-    assert "À faire ensuite" in html
+    assert "Blocs à faire ensuite" in html and "Blocs du guide" in html
 
 
 def test_onglet_succes_liste_les_5_cases_de_chaque_donjon_et_se_coche_par_l_api():

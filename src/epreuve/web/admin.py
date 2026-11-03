@@ -9,7 +9,7 @@
     POST /admin/etages/{n}/ouvrir              ouvrir l'étage n (forçable avec un motif)
     POST /admin/etages/{n}/reglages            nom, image d'ambiance, level cap
     POST /admin/etages/{n}/donjons             ajouter un donjon aspiré (T-03)
-    POST /admin/quetes/{id}, /admin/donjons/{id}, /admin/cases/{id}   revue du contenu
+    POST /admin/blocs/{id}, /admin/quetes/{id}, /admin/donjons/{id}, /admin/cases/{id}   revue du contenu
 
 Chaque écriture passe par le dépôt, qui l'inscrit au journal. Après un POST, on revient sur la page avec
 un code (`?fait=palier`) traduit en message fixe : aucun texte de l'utilisateur n'est renvoyé tel quel.
@@ -183,6 +183,7 @@ async def admin_etage(request: Request, numero: int, fait: str = "", erreur: str
     grimpeurs = await s.depot.grimpeurs()
     vue = await charger_vue_etage(s.depot, etage, s.regles, grimpeurs)
     ctx = {"etage": etage, "donjons": donjons, "quetes": quetes, "vue": vue,
+           "blocs": await s.depot.blocs_brut(etage.id),
            "cases": {d.id: [c for c in cases if c.donjon_id == d.id] for d in donjons},
            "alertes": await s.depot.alertes_etage(etage.id), "sans_fiche": await s.depot.quetes_sans_fiche(etage.id),
            "disponibles": await s.depot.donjons_disponibles(), "bilan": await s.depot.bilan(etage.id),
@@ -308,6 +309,25 @@ async def admin_quete(request: Request, quete_id: int):
     try:
         await s.depot.modifier_quete(quete_id, v.discord_id, s.horloge(), nature=nature, motif=motif,
                                      masquee=_bool(form, "masquee"), nom=str(form.get("nom", "")).strip() or None)
+    except Introuvable:
+        return retour(chemin, erreur="introuvable")
+    return retour(chemin, fait="contenu")
+
+
+@routeur.post("/blocs/{bloc_id}")
+async def admin_bloc(request: Request, bloc_id: int):
+    """Régler un bloc principal ou secondaire (SPEC v5 §5) : motif obligatoire, journal, prime sur la règle."""
+    v, form = await _ecrire(request)
+    s = _s(request)
+    chemin = _retour_etage(form)
+    nature = form.get("nature")
+    motif = str(form.get("motif", "")).strip() or None
+    if nature not in ("principale", "secondaire", "auto"):
+        return retour(chemin, erreur="nature")
+    if motif is None:
+        return retour(chemin, erreur="motif")
+    try:
+        await s.depot.modifier_bloc(bloc_id, v.discord_id, s.horloge(), nature=nature, motif=motif)
     except Introuvable:
         return retour(chemin, erreur="introuvable")
     return retour(chemin, fait="contenu")

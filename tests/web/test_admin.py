@@ -92,7 +92,7 @@ def test_exclure_demande_motif_et_confirmation_et_reste_reversible():
         "erreur=confirmer")
     assert m.depot._grimpeurs[2].statut == "actif"
     poster(c, t, "/admin/grimpeurs/2/statut", statut="exclu", motif="triche", confirmer="oui")
-    assert m.depot._grimpeurs[2].statut == "exclu" and m.depot._coches_quetes[2]  # coches gardées
+    assert m.depot._grimpeurs[2].statut == "exclu" and m.depot._coches_blocs[2]  # coches gardées
     poster(c, t, "/admin/grimpeurs/2/statut", statut="actif")
     assert m.depot._grimpeurs[2].statut == "actif"
     assert poster(c, t, "/admin/grimpeurs/999/statut", statut="actif").headers["location"].endswith(
@@ -193,8 +193,8 @@ def test_revue_nature_masquage_libelles():
     poster(c, t, "/admin/cases/23", etage="0", masquee="oui")
     poster(c, t, "/admin/quetes/101", etage="0", nom="L'Appel")
     g = m.connecter(ID_BRINDILLE).get("/etages/0").text
-    assert "Lettres pour Incarnam" not in g and "Donjon des Bouftous" not in g and "Duo de choc" in g
-    assert 'data-ref="case:23"' not in g and "L&#39;Appel</b>" in g
+    assert "Donjon des Bouftous" not in g and "Duo de choc" in g
+    assert 'data-ref="case:23"' not in g
     assert {e.type for e in m.depot._journal} >= {"quete", "donjon", "case"}
     poster(c, t, "/admin/donjons/3", etage="0", masque="non")
     assert "Donjon des Bouftous" in m.connecter(ID_BRINDILLE).get("/etages/0").text
@@ -202,6 +202,26 @@ def test_revue_nature_masquage_libelles():
         "erreur=nature")
     assert poster(c, t, "/admin/quetes/999", etage="0", masquee="oui").headers["location"].endswith(
         "erreur=introuvable")
+
+
+def test_revue_des_blocs_nombre_de_principales_et_reglage_journalise():
+    m, c, t = admin()
+    html = c.get("/admin/etages/0").text
+    assert "Bloc 1 · Incarnam" in html and "<b>1</b> sur 3" in html  # une seule quête principale sur 3
+    assert "Bloc 3 · Petits services d&#39;Astrub" in html and "<b>0</b> sur 3" in html
+    assert poster(c, t, "/admin/blocs/1", etage="0", nature="secondaire").headers["location"].endswith("erreur=motif")
+    assert poster(c, t, "/admin/blocs/1", etage="0", nature="bonus", motif="x").headers["location"].endswith(
+        "erreur=nature")
+    assert poster(c, t, "/admin/blocs/999", etage="0", nature="secondaire", motif="x").headers["location"].endswith(
+        "erreur=introuvable")
+    poster(c, t, "/admin/blocs/1", etage="0", nature="secondaire", motif="une seule quête utile")
+    b = m.depot._blocs[1]
+    assert (b.nature, b.nature_origine, b.nature_motif) == ("secondaire", "admin", "une seule quête utile")
+    entree = m.depot._journal[-1]
+    assert entree.type == "contenu_admin" and entree.details["motif"] == "une seule quête utile"
+    assert "corrigé : une seule quête utile" in c.get("/admin/etages/0").text
+    poster(c, t, "/admin/blocs/1", etage="0", nature="auto", motif="retour à la règle")
+    assert m.depot._blocs[1].nature == "principale" and m.depot._blocs[1].nature_origine == "construction"
 
 
 def test_revue_affiche_alertes_sources_et_quetes_sans_fiche():
@@ -237,16 +257,16 @@ def test_journal_auteur_date_details_et_filtres():
     m, c, t = admin()
     poster(c, t, "/admin/grimpeurs/2/statut", statut="pause", motif="vacances")
     b = m.connecter(ID_BRINDILLE)
-    b.post("/api/coches", json={"type": "quete", "id": 107, "cochee": True},
+    b.post("/api/coches", json={"type": "bloc", "id": 3, "cochee": True},
            headers={"X-CSRF-Token": m.csrf(b), "Origin": SITE})
     html = c.get("/admin/journal").text
     assert "vacances" in html and "statut" in html and "coche" in html and str(ID_MARCEAU) in html
     assert "non public" in html
     filtre = c.get("/admin/journal?type=coche").text
-    assert "vacances" not in filtre and "quete:107" in filtre
-    assert "quete:107" in c.get("/admin/journal?grimpeur=1").text
-    assert "quete:107" not in c.get("/admin/journal?grimpeur=2").text
-    assert "quete:107" in c.get("/admin/journal?etage=0").text
+    assert "vacances" not in filtre and "bloc:3" in filtre
+    assert "bloc:3" in c.get("/admin/journal?grimpeur=1").text
+    assert "bloc:3" not in c.get("/admin/journal?grimpeur=2").text
+    assert "bloc:3" in c.get("/admin/journal?etage=0").text
 
 
 @pytest.mark.parametrize("chemin", ["/admin", "/admin/grimpeurs", "/admin/etages", "/admin/etages/0",

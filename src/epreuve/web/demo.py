@@ -7,7 +7,7 @@ règles : coche idempotente avec cascade, élément masqué ou étage scellé «
 motif obligatoire pour l'admin qui coche chez un autre, journal de chaque écriture. Les tests du site
 l'utilisent comme faux dépôt ; le vrai dépôt Postgres (B1) le remplace à l'intégration.
 
-Données fictives : l'étage 0 « Le Seuil » (3 donjons, 4 quêtes principales, 5 secondaires), 12 grimpeurs
+Données fictives : l'étage 0 « Le Seuil » (3 donjons, 3 blocs du guide dont 2 principaux), 12 grimpeurs
 dont 2 en pause, un exclu, et trois étages scellés que personne ne doit voir.
 """
 
@@ -38,6 +38,7 @@ from epreuve.discord.oauth import ClientOAuth
 from epreuve.domaine.bareme import cascade_coche
 from epreuve.domaine.fiche import Besoin, EtapeFiche, FicheQuete, Position, Prerequis
 from epreuve.domaine.modeles import (
+    Bloc,
     CaseSucces,
     Coches,
     ContenuEtage,
@@ -107,6 +108,8 @@ def _donjons_et_cases() -> tuple[dict[int, Donjon], dict[int, CaseSucces]]:
     return donjons, cases
 
 
+TITRE_SERVICES = "Petits services d'Astrub"
+URL_DEMO = "https://duffus.fr/guide-complet"
 A_LIER_105 = "Les pissenlits poussent sur le chemin de « L'Appel d'Incarnam » : fais les deux dans la foulée."
 
 
@@ -121,14 +124,26 @@ def _quetes() -> dict[int, Quete]:
         q(106, 1, "Lettres pour Incarnam", 6, "Incarnam", 13, "secondaire"),
         q(102, 1, "La Graine de Mère Cawotte", 12, "Astrub", 21, "principale", ["Dofus Cawotte"],
           jusqu_ou="S'arrêter à l'étape 3 : la suite demande le niveau 25."),
-        q(107, 1, "Champignons d'Astrub", 10, "Astrub", 22, "secondaire"),
+        q(107, 1, "Champignons d'Astrub", 10, TITRE_SERVICES, 22, "secondaire"),
         q(103, 1, "Le Potager des Dieux", 18, "Astrub", 31, "principale", ["Dofus Cawotte"]),
-        q(108, 1, "Le Grenier du meunier", 15, "Astrub", 32, "secondaire"),
+        q(108, 1, "Le Grenier du meunier", 15, TITRE_SERVICES, 32, "secondaire"),
         q(104, 1, "Les Racines du Ciel", 19, "Astrub", 33, "principale", ["Dofus Cawotte", "Dofus Émeraude"]),
-        q(109, 1, "Le Vieux Puits", 14, "Astrub", 34, "secondaire", fiche=False),
+        q(109, 1, "Le Vieux Puits", 14, TITRE_SERVICES, 34, "secondaire", fiche=False),
         q(201, 2, "Le Secret des Champs Murmurants", 28, "Champs", 11, "principale", ["Dofus Émeraude"]),
     ]
     return {x.id: x for x in liste}
+
+
+def _blocs(quetes: dict[int, Quete]) -> dict[int, Bloc]:
+    """Les blocs du guide de la démo : nature par la règle (principal s'il contient une quête principale)."""
+    brut = [(1, 1, "Incarnam", 1), (2, 1, "Astrub", 2), (3, 1, TITRE_SERVICES, 3), (4, 2, "Champs", 4)]
+    blocs = {}
+    for id_, etage_id, titre, numero in brut:
+        les = [q for q in quetes.values() if q.etage_id == etage_id and q.bloc == titre]
+        princ = sum(1 for q in les if q.nature == "principale")
+        blocs[id_] = Bloc(id_, etage_id, titre, numero, id_ if etage_id == 1 else 1,
+                          "principale" if princ else "secondaire", "construction", len(les), princ, URL_DEMO)
+    return blocs
 
 
 def _fiches() -> dict[int, FicheQuete]:
@@ -219,6 +234,8 @@ BRUT = [
 ]
 PRINCIPALES = (101, 102, 103, 104)
 SECONDAIRES = (105, 106, 107, 108, 109)
+BLOCS_PRINCIPAUX = (1, 2)
+BLOCS_SECONDAIRES = (3,)
 
 
 class DepotDemo:
@@ -228,10 +245,12 @@ class DepotDemo:
         self._etages = _etages()
         self._donjons, self._cases = _donjons_et_cases()
         self._quetes = _quetes()
+        self._blocs = _blocs(self._quetes)
         self._fiches = _fiches()
         self._grimpeurs: dict[int, Grimpeur] = {}
         self._coches_cases: dict[int, set[int]] = {}
         self._coches_quetes: dict[int, set[int]] = {}
+        self._coches_blocs: dict[int, set[int]] = {}
         self._suivi: set[tuple[int, int, int]] = set()
         self._activite: dict[int, datetime] = {}
         self._liste: dict[int, Statut] = {ID_NOUVELLE: "actif"}
@@ -242,7 +261,9 @@ class DepotDemo:
                                             INSCRIPTION, True)
             cases = {dj * 10 + k for dj, n in zip((1, 2, 3), d, strict=True) for k in range(1, n + 1)}
             self._coches_cases[id_] = cases
-            self._coches_quetes[id_] = set(PRINCIPALES[:p]) | set(SECONDAIRES[:s])
+            # p, s : l'ancien nombre de quêtes cochées ; 2 principales font le premier bloc, 4 les deux.
+            self._coches_blocs[id_] = ({BLOCS_PRINCIPAUX[0]} if p >= 2 else set()) \
+                | ({BLOCS_PRINCIPAUX[1]} if p >= 4 else set()) | ({BLOCS_SECONDAIRES[0]} if s >= 5 else set())
             self._activite[id_] = INSCRIPTION + timedelta(hours=id_)
         self._sessions: dict[bytes, Session] = {}
         self._journal: list[EntreeJournal] = []
@@ -274,24 +295,42 @@ class DepotDemo:
         ids = {d.id for d in donjons}
         cases = [c for c in self._cases.values() if c.donjon_id in ids]
         quetes = [q for q in self._quetes.values() if q.etage_id == etage_id]
-        return etage, donjons, cases, quetes
+        return etage, donjons, cases, quetes, self._blocs_de(etage_id)
+
+    def _blocs_de(self, etage_id: int) -> list[Bloc]:
+        """Les blocs de l'étage, avec leurs nombres de quêtes recomptés."""
+        sortie = []
+        for b in self._blocs.values():
+            if b.etage_id == etage_id:
+                les = [q for q in self._quetes.values() if q.etage_id == etage_id and q.bloc == b.titre
+                       and not q.masquee]
+                sortie.append(replace(b, nb_quetes=len(les),
+                                      nb_principales=sum(1 for q in les if q.nature == "principale")))
+        return sorted(sortie, key=lambda b: (b.ordre, b.id))
 
     async def contenu_etage(self, etage_id: int) -> ContenuEtage:
         return ContenuEtage.visible(*self._brut(etage_id))
 
     async def contenu_brut(self, etage_id: int):
-        etage, d, c, q = self._brut(etage_id)
+        etage, d, c, q, _ = self._brut(etage_id)
         return etage, sorted(d, key=lambda x: x.ordre), sorted(c, key=lambda x: (x.donjon_id, x.ordre)), \
             sorted(q, key=lambda x: x.ordre)
+
+    async def blocs_brut(self, etage_id: int) -> list[Bloc]:
+        return self._brut(etage_id)[4]
+
+    async def tout_le_contenu_brut(self, etage_id: int):
+        return self._brut(etage_id)
 
     async def alertes_etage(self, etage_id: int) -> list[str]:
         return list(self._alertes.get(etage_id, []))
 
     async def coches_etage(self, etage_id: int) -> dict[int, Coches]:
-        _, donjons, cases, quetes = self._brut(etage_id)
-        ids_c, ids_q = {c.id for c in cases}, {q.id for q in quetes}
+        _, donjons, cases, quetes, blocs = self._brut(etage_id)
+        ids_c, ids_q, ids_b = {c.id for c in cases}, {q.id for q in quetes}, {b.id for b in blocs}
         return {g: Coches(g, frozenset(self._coches_cases.get(g, set()) & ids_c),
-                          frozenset(self._coches_quetes.get(g, set()) & ids_q)) for g in self._grimpeurs}
+                          frozenset(self._coches_quetes.get(g, set()) & ids_q),
+                          frozenset(self._coches_blocs.get(g, set()) & ids_b)) for g in self._grimpeurs}
 
     async def grimpeurs(self) -> list[Grimpeur]:
         return list(self._grimpeurs.values())
@@ -398,6 +437,11 @@ class DepotDemo:
             if c is None or c.masquee or d is None or d.masque:
                 raise Introuvable("élément inconnu")
             etage = self._etages[d.etage_id]
+        elif ref.type == "bloc":
+            b = self._blocs.get(ref.id)
+            if b is None or b.masque:
+                raise Introuvable("élément inconnu")
+            etage = self._etages[b.etage_id]
         else:
             q = self._quetes.get(ref.id)
             if q is None or q.masquee:
@@ -424,7 +468,8 @@ class DepotDemo:
         contenu = await self.contenu_etage(etage.id)
         changes = []
         for r in (ref, *cascade_coche(contenu, ref, cochee, regles)):
-            ens = (self._coches_cases if r.type == "case" else self._coches_quetes).setdefault(grimpeur_id, set())
+            tous = {"case": self._coches_cases, "bloc": self._coches_blocs}.get(r.type, self._coches_quetes)
+            ens = tous.setdefault(grimpeur_id, set())
             if (r.id in ens) != cochee:
                 (ens.add if cochee else ens.discard)(r.id)
                 changes.append(r)
@@ -507,6 +552,27 @@ class DepotDemo:
         self._journaliser(acteur, maintenant, "quete", etage_id=q.etage_id, quete=quete_id, nature=nature,
                           masquee=masquee, nom=nom, motif=motif)
         return q
+
+    async def modifier_bloc(self, bloc_id, acteur, maintenant, *, nature=None, motif=None, masque=None) -> Bloc:
+        b = self._blocs.get(bloc_id)
+        if b is None:
+            raise Introuvable("bloc inconnu")
+        if nature is not None and (nature not in ("principale", "secondaire", "auto") or not (motif or "").strip()):
+            raise ValueError("changer la nature exige une nature valide et un motif")
+        if nature is None and masque is None:
+            raise ValueError("rien à changer")
+        avant = b.nature
+        vue = next(x for x in self._blocs_de(b.etage_id) if x.id == bloc_id)
+        if nature == "auto":
+            b = replace(b, nature=vue.nature_par_defaut, nature_origine="construction", nature_motif=None)
+        elif nature is not None:
+            b = replace(b, nature=nature, nature_origine="admin", nature_motif=motif.strip())
+        if masque is not None:
+            b = replace(b, masque=masque)
+        self._blocs[bloc_id] = b
+        self._journaliser(acteur, maintenant, "contenu_admin", etage_id=b.etage_id, public=False, quoi="bloc",
+                          id=bloc_id, titre=b.titre, nature_avant=avant, nature=b.nature, motif=motif)
+        return next(x for x in self._blocs_de(b.etage_id) if x.id == bloc_id)
 
     async def modifier_donjon(self, donjon_id, acteur, maintenant, *, masque=None, nom=None) -> Donjon:
         d = self._donjons.get(donjon_id)
@@ -623,25 +689,33 @@ class DepotEtage8(DepotDemo):
                 nom_case = "Vaincre le boss" if k == 1 else d
                 regle = "Succès de base : il valide le donjon" if k == 1 else DEFIS[d]
                 self._cases[did * 10 + k] = CaseSucces(did * 10 + k, did, k, nom_case, regle, k == 1, False)
-        quetes = [(801, "Le Cri du Condor", 161, "Les Pics", 11, "principale", ["Dofus Ocre"]),
-                  (802, "Plumes pour la Vigie", 162, "Les Pics", 12, "secondaire", []),
-                  (803, "Les Marches de Givre", 165, "Les Pics", 21, "principale", ["Dofus Ocre"]),
-                  (804, "Le Colporteur égaré", 166, "Les Pics", 22, "secondaire", []),
-                  (805, "Le Cairn des Disparus", 167, "Les Pics", 23, "secondaire", []),
-                  (806, "Le Pacte des Vents", 170, "La Citadelle", 31, "principale", ["Dofus Ocre"]),
-                  (807, "Les Vitraux fêlés", 171, "La Citadelle", 32, "secondaire", []),
-                  (808, "La Clé de Voûte", 173, "La Citadelle", 41, "principale", ["Dofus Ocre", "Dofus Pourpre"]),
-                  (809, "L'Œil de la Tempête", 178, "La Citadelle", 51, "principale", ["Dofus Pourpre"]),
-                  (810, "Les Parchemins mouillés", 175, "La Citadelle", 52, "secondaire", []),
-                  (811, "Le Dernier Veilleur", 179, "La Citadelle", 53, "secondaire", [])]
+        pics, avant_postes = "Les Pics, première ascension", "Les Pics, avant-postes"
+        citadelle, services = "La Citadelle", "La Citadelle, derniers services"
+        quetes = [(801, "Le Cri du Condor", 161, pics, 11, "principale", ["Dofus Ocre"]),
+                  (802, "Plumes pour la Vigie", 162, pics, 12, "secondaire", []),
+                  (803, "Les Marches de Givre", 165, pics, 21, "principale", ["Dofus Ocre"]),
+                  (804, "Le Colporteur égaré", 166, avant_postes, 22, "secondaire", []),
+                  (805, "Le Cairn des Disparus", 167, avant_postes, 23, "secondaire", []),
+                  (806, "Le Pacte des Vents", 170, citadelle, 31, "principale", ["Dofus Ocre"]),
+                  (807, "Les Vitraux fêlés", 171, citadelle, 32, "secondaire", []),
+                  (808, "La Clé de Voûte", 173, citadelle, 41, "principale", ["Dofus Ocre", "Dofus Pourpre"]),
+                  (809, "L'Œil de la Tempête", 178, citadelle, 51, "principale", ["Dofus Pourpre"]),
+                  (810, "Les Parchemins mouillés", 175, services, 52, "secondaire", []),
+                  (811, "Le Dernier Veilleur", 179, services, 53, "secondaire", [])]
         for id_, nom, niv, bloc, ordre, nature, dofus in quetes:
             self._quetes[id_] = Quete(id_, e8, nom, niv, bloc, ordre, nature, "duffus", tuple(dofus), None, None,
                                       False, False)
-        self._grimpeurs, self._coches_cases, self._coches_quetes = {}, {}, {}
+        for i, (titre, numero) in enumerate([(pics, 41), (avant_postes, 42), (citadelle, 43), (services, 44)],
+                                            start=81):
+            les = [q for q in self._quetes.values() if q.etage_id == e8 and q.bloc == titre]
+            princ_n = sum(1 for q in les if q.nature == "principale")
+            self._blocs[i] = Bloc(i, e8, titre, numero, i - 80, "principale" if princ_n else "secondaire",
+                                  "construction", len(les), princ_n, URL_DEMO)
+        self._grimpeurs, self._coches_cases, self._coches_quetes, self._coches_blocs = {}, {}, {}, {}
         self._liste, self._activite = {ID_NOUVELLE: "actif"}, {}
         cases_boss = [d * 10 + 1 for d in range(81, 85)]
         toutes = [d * 10 + k for d in range(81, 85) for k in range(1, 6)]
-        princ, second = [801, 803, 806, 808, 809], [802, 804, 805, 807, 810, 811]
+        princ, second = [81, 83], [82, 84]  # les blocs principaux et secondaires de l'étage 8
         for i, pseudo in enumerate(PSEUDOS_ETAGE8, start=1):
             statut = "actif" if i <= 22 else "pause"
             rang = i - 1
@@ -650,7 +724,7 @@ class DepotEtage8(DepotDemo):
             classe = CLASSES_ETAGE8[rang % len(CLASSES_ETAGE8)]
             self._grimpeurs[i] = Grimpeur(i, did, f"{pseudo.lower()}#discord", pseudo, classe, statut,
                                           170 + rang % 10, INSCRIPTION, True)
-            cases, quetes_faites = set(), set()
+            cases, blocs_faits = set(), set()
             if rang < SCORE_ETAGE8["full_succes"]:
                 cases.update(toutes)
             elif rang < SCORE_ETAGE8["donjons"]:
@@ -658,14 +732,14 @@ class DepotEtage8(DepotDemo):
             else:  # un peu de progression, jamais assez pour un point de plus
                 cases.update(cases_boss[: rang % 3 + 1])
             if rang < SCORE_ETAGE8["principales"]:
-                quetes_faites.update(princ)
+                blocs_faits.update(princ)
             else:
-                quetes_faites.update(princ[: rang % 4])
+                blocs_faits.update(princ[: rang % 2])
             if rang < SCORE_ETAGE8["secondaires"]:
-                quetes_faites.update(second)
+                blocs_faits.update(second)
             else:
-                quetes_faites.update(second[: rang % 5])
-            self._coches_cases[i], self._coches_quetes[i] = cases, quetes_faites
+                blocs_faits.update(second[: rang % 2])
+            self._coches_cases[i], self._coches_blocs[i] = cases, blocs_faits
             self._activite[i] = INSCRIPTION + timedelta(hours=i)
 
 

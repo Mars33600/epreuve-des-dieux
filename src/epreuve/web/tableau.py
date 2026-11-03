@@ -32,6 +32,12 @@ class BlocEtage:
     faits: int
     total: int
     donjons_restants: int
+    blocs_faits: int
+    blocs_total: int
+    donjons_vaincus: int
+    donjons_total: int
+    succes_faits: int
+    succes_total: int
 
 
 async def blocs_du_grimpeur(request: Request, v) -> list[BlocEtage]:
@@ -47,19 +53,26 @@ async def blocs_du_grimpeur(request: Request, v) -> list[BlocEtage]:
         coches = vue.coches_de(g.id)
         restants = sum(1 for d in vue.contenu.donjons
                        if any(c.id not in coches.cases for c in vue.contenu.cases_du_donjon(d.id)))
-        blocs.append(BlocEtage(vue, peut_cocher_soi(v, e, s.regles), vue.points(g.id), faits, total, restants))
+        contenu = vue.contenu
+        classiques = [vue.classique(d.id) for d in contenu.donjons]
+        blocs.append(BlocEtage(
+            vue, peut_cocher_soi(v, e, s.regles), vue.points(g.id), faits, total, restants,
+            sum(1 for b in contenu.blocs if b.id in coches.blocs), len(contenu.blocs),
+            sum(1 for c in classiques if c and c.id in coches.cases), len(contenu.donjons),
+            sum(1 for c in contenu.cases if c.id in coches.cases), len(contenu.cases)))
     return blocs
 
 
 def a_faire(blocs: list[BlocEtage], grimpeur_id: int) -> list[tuple[int, object]]:
-    """Les premières quêtes principales non faites de l'étage ouvert (sinon du plus récent), dans l'ordre du guide."""
+    """Les premiers blocs pas encore terminés de l'étage ouvert (sinon du plus récent), les principaux d'abord,
+    puis dans l'ordre du guide."""
     ouvert = next((b for b in blocs if b.vue.etage.statut == "ouvert"), blocs[0] if blocs else None)
     if ouvert is None:
         return []
     coches = ouvert.vue.coches_de(grimpeur_id)
-    restantes = [q for q in sorted(ouvert.vue.contenu.quetes, key=lambda q: (q.nature != "principale", q.ordre))
-                 if q.id not in coches.quetes]
-    return [(ouvert.vue.etage.numero, q) for q in restantes[:NB_A_FAIRE]]
+    restants = [b for b in sorted(ouvert.vue.contenu.blocs, key=lambda b: (b.nature != "principale", b.ordre))
+                if b.id not in coches.blocs]
+    return [(ouvert.vue.etage.numero, b) for b in restants[:NB_A_FAIRE]]
 
 
 @routeur.get("/tableau-de-bord")

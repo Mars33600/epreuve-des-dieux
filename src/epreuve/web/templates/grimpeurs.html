@@ -12,12 +12,12 @@
     <label for="askSel">Qui a fait, qui n'a pas fait… ? <span class="muted">(étage {{ ouvert.numero }})</span></label>
     <div class="askrow">
       <select id="askSel" name="quoi">
-        <option value="">Choisir une catégorie, un donjon, un succès ou une quête…</option>
-        <optgroup label="Catégories (le point entier)">{% for info in CATS %}<option value="categorie:{{ info.cle }}"{% if quoi == "categorie:" ~ info.cle %} selected{% endif %}>{{ info.nom }}</option>{% endfor %}</optgroup>
+        <option value="">Choisir un bloc, un donjon, un succès ou une catégorie…</option>
+        <optgroup label="Les points (tout l'étage)">{% for info in CATS %}<option value="categorie:{{ info.cle }}"{% if quoi == "categorie:" ~ info.cle %} selected{% endif %}>{{ info.nom }}</option>{% endfor %}</optgroup>
         <optgroup label="Donjons vaincus">{% for d in vue.contenu.donjons %}<option value="donjon:{{ d.id }}"{% if quoi == "donjon:" ~ d.id %} selected{% endif %}>{{ d.nom }}</option>{% endfor %}</optgroup>
         {% for d in vue.contenu.donjons %}<optgroup label="Succès · {{ d.nom }}">{% for c in vue.contenu.cases_du_donjon(d.id) if not c.est_classique %}<option value="case:{{ c.id }}"{% if quoi == "case:" ~ c.id %} selected{% endif %}>{{ c.nom }} ({{ d.nom }})</option>{% endfor %}</optgroup>{% endfor %}
-        <optgroup label="Quêtes principales">{% for q in vue.contenu.quetes if q.nature == "principale" %}<option value="quete:{{ q.id }}"{% if quoi == "quete:" ~ q.id %} selected{% endif %}>{{ q.nom }}</option>{% endfor %}</optgroup>
-        <optgroup label="Quêtes secondaires">{% for q in vue.contenu.quetes if q.nature == "secondaire" %}<option value="quete:{{ q.id }}"{% if quoi == "quete:" ~ q.id %} selected{% endif %}>{{ q.nom }}</option>{% endfor %}</optgroup>
+        <optgroup label="Blocs principaux">{% for b in vue.contenu.blocs if b.nature == "principale" %}<option value="bloc:{{ b.id }}"{% if quoi == "bloc:" ~ b.id %} selected{% endif %}>{{ b.titre_complet }}</option>{% endfor %}</optgroup>
+        <optgroup label="Blocs secondaires">{% for b in vue.contenu.blocs if b.nature == "secondaire" %}<option value="bloc:{{ b.id }}"{% if quoi == "bloc:" ~ b.id %} selected{% endif %}>{{ b.titre_complet }}</option>{% endfor %}</optgroup>
       </select>
       <button class="btn" type="submit" id="askVoir">Voir</button>
       <a class="btn" href="/grimpeurs" id="askClear">Effacer</a>

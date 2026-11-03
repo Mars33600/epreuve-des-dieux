@@ -28,6 +28,7 @@ from epreuve.db import tables as t
 from epreuve.domaine.bareme import cascade_coche
 from epreuve.domaine.fiche import Besoin, EtapeFiche, FicheQuete, Position, Prerequis
 from epreuve.domaine.modeles import (
+    Bloc,
     CaseSucces,
     Categorie,
     Coches,
@@ -147,6 +148,11 @@ def _quete(r) -> Quete:
                  r.source_fiche)
 
 
+def _bloc(r) -> Bloc:
+    return Bloc(r.id, r.etage_id, r.titre, r.numero, r.ordre, r.nature, r.nature_origine, r.nb_quetes,
+                r.nb_principales, r.duffus_url, r.duffus_ancre, r.nature_motif, r.masque)
+
+
 def _grimpeur(r) -> Grimpeur:
     return Grimpeur(r.id, r.discord_user_id, r.nom_discord, r.pseudo_ig, r.classe, r.statut, r.niveau_declare,
                     r.inscrit_le, r.prologue_vu_le is not None)
@@ -169,6 +175,13 @@ _A_UNE_FICHE = exists().where(and_(t.fiche_quete.c.quete_id == t.quete.c.id, or_
 _SOURCE_FICHE = (select(t.fiche_quete.c.source).where(t.fiche_quete.c.quete_id == t.quete.c.id)
                  .scalar_subquery().label("source_fiche"))
 _TYPES_COCHE = ("coche", "coche_donjon")
+# Les quêtes d'un bloc (visibles) et parmi elles les principales : comptées à la lecture, jamais stockées.
+_NB_QUETES = (select(func.count()).where(t.quete.c.bloc_id == t.bloc.c.id, t.quete.c.masquee.is_(False))
+              .scalar_subquery().label("nb_quetes"))
+_NB_PRINCIPALES = (select(func.count()).where(t.quete.c.bloc_id == t.bloc.c.id, t.quete.c.masquee.is_(False),
+                                              t.quete.c.nature == "principale")
+                   .scalar_subquery().label("nb_principales"))
+_BLOCS = select(t.bloc, _NB_QUETES, _NB_PRINCIPALES)
 
 
 class Depot:
@@ -203,7 +216,7 @@ class Depot:
 
     @staticmethod
     async def _contenu_brut(c: AsyncConnection, etage_id: int
-                            ) -> tuple[Etage, list[Donjon], list[CaseSucces], list[Quete]]:
+                            ) -> tuple[Etage, list[Donjon], list[CaseSucces], list[Quete], list[Bloc]]:
         e = (await c.execute(select(t.etage).where(t.etage.c.id == etage_id))).one_or_none()
         if e is None:
             raise Introuvable("étage introuvable")
@@ -213,16 +226,28 @@ class Depot:
                                 .order_by(t.case_succes.c.donjon_id, t.case_succes.c.ordre))
         quetes = await c.execute(select(t.quete, _A_UNE_FICHE, _SOURCE_FICHE).where(t.quete.c.etage_id == etage_id)
                                  .order_by(t.quete.c.ordre, t.quete.c.id))
-        return (_etage(e), [_donjon(r) for r in donjons], [_case(r) for r in cases], [_quete(r) for r in quetes])
+        blocs = await c.execute(_BLOCS.where(t.bloc.c.etage_id == etage_id).order_by(t.bloc.c.ordre, t.bloc.c.id))
+        return (_etage(e), [_donjon(r) for r in donjons], [_case(r) for r in cases], [_quete(r) for r in quetes],
+                [_bloc(r) for r in blocs])
 
     async def contenu_brut(self, etage_id: int) -> tuple[Etage, list[Donjon], list[CaseSucces], list[Quete]]:
-        """Masqués compris (revue admin)."""
+        """Masqués compris (revue admin). Les blocs : `blocs_brut`."""
+        async with self._moteur.connect() as c:
+            return (await self._contenu_brut(c, etage_id))[:4]
+
+    async def blocs_brut(self, etage_id: int) -> list[Bloc]:
+        """Les blocs de l'étage, masqués compris (revue admin)."""
+        async with self._moteur.connect() as c:
+            return (await self._contenu_brut(c, etage_id))[4]
+
+    async def tout_le_contenu_brut(self, etage_id: int):
+        """Étage, donjons, cases, quêtes et blocs, masqués compris : de quoi appeler `ContenuEtage.visible`."""
         async with self._moteur.connect() as c:
             return await self._contenu_brut(c, etage_id)
 
     async def contenu_etage(self, etage_id: int) -> ContenuEtage:
         """Visible seulement (ContenuEtage.visible)."""
-        return ContenuEtage.visible(*await self.contenu_brut(etage_id))
+        return ContenuEtage.visible(*await self.tout_le_contenu_brut(etage_id))
 
     async def alertes_etage(self, etage_id: int) -> list[str]:
         """Les alertes de la dernière construction."""
@@ -235,6 +260,7 @@ class Depot:
     async def coches_etage(self, etage_id: int) -> dict[int, Coches]:
         cases: dict[int, set[int]] = defaultdict(set)
         quetes: dict[int, set[int]] = defaultdict(set)
+        blocs: dict[int, set[int]] = defaultdict(set)
         async with self._moteur.connect() as c:
             for r in await c.execute(
                     select(t.coche_case.c.grimpeur_id, t.coche_case.c.case_id)
@@ -245,7 +271,12 @@ class Depot:
                     select(t.coche_quete.c.grimpeur_id, t.coche_quete.c.quete_id)
                     .select_from(t.coche_quete.join(t.quete)).where(t.quete.c.etage_id == etage_id)):
                 quetes[r.grimpeur_id].add(r.quete_id)
-        return {g: Coches(g, frozenset(cases[g]), frozenset(quetes[g])) for g in sorted(cases.keys() | quetes)}
+            for r in await c.execute(
+                    select(t.coche_bloc.c.grimpeur_id, t.coche_bloc.c.bloc_id)
+                    .select_from(t.coche_bloc.join(t.bloc)).where(t.bloc.c.etage_id == etage_id)):
+                blocs[r.grimpeur_id].add(r.bloc_id)
+        return {g: Coches(g, frozenset(cases[g]), frozenset(quetes[g]), frozenset(blocs[g]))
+                for g in sorted(cases.keys() | quetes.keys() | blocs.keys())}
 
     # --- Lecture : grimpeurs, liste, journal ----------------------------------------------------------------
 
@@ -422,6 +453,9 @@ class Depot:
             q = (select(t.donjon.c.etage_id).select_from(t.case_succes.join(t.donjon).join(t.etage))
                  .where(t.case_succes.c.id == ref.id, t.case_succes.c.masquee.is_(False),
                         t.donjon.c.masque.is_(False)))
+        elif ref.type == "bloc":
+            q = (select(t.bloc.c.etage_id).select_from(t.bloc.join(t.etage))
+                 .where(t.bloc.c.id == ref.id, t.bloc.c.masque.is_(False)))
         else:
             q = (select(t.quete.c.etage_id).select_from(t.quete.join(t.etage))
                  .where(t.quete.c.id == ref.id, t.quete.c.masquee.is_(False)))
@@ -434,7 +468,8 @@ class Depot:
     async def _appliquer(c: AsyncConnection, grimpeur_id: int, ref: ElementRef, cochee: bool, acteur: int,
                          maintenant: datetime) -> bool:
         """Coche ou décoche une ligne ; vrai si la base a vraiment changé (idempotent)."""
-        table, col = (t.coche_case, "case_id") if ref.type == "case" else (t.coche_quete, "quete_id")
+        table, col = {"case": (t.coche_case, "case_id"), "bloc": (t.coche_bloc, "bloc_id"),
+                      "quete": (t.coche_quete, "quete_id")}[ref.type]
         if cochee:
             q = (insert_pg(table).values(grimpeur_id=grimpeur_id, **{col: ref.id}, cochee_le=maintenant,
                                          cochee_par=acteur)
@@ -661,6 +696,35 @@ class Depot:
         async with self._moteur.connect() as c:
             requete = select(t.quete, _A_UNE_FICHE, _SOURCE_FICHE).where(t.quete.c.id == quete_id)
             return _quete((await c.execute(requete)).one())
+
+    async def modifier_bloc(self, bloc_id: int, acteur: int, maintenant: datetime, *,
+                            nature: Literal["principale", "secondaire", "auto"] | None = None,
+                            motif: str | None = None, masque: bool | None = None) -> Bloc:
+        """Corriger la nature d'un bloc (SPEC v5 §5) : un motif est obligatoire, la correction est journalisée et
+        survit aux reconstructions. « auto » revient à la règle (principal s'il contient une quête principale)."""
+        motif_ = self._motif(motif)
+        if nature is not None and (nature not in ("principale", "secondaire", "auto") or motif_ is None):
+            raise ValueError("changer la nature exige une nature valide et un motif")
+        if nature is None and masque is None:
+            raise ValueError("rien à changer")
+        async with self._moteur.begin() as c:
+            avant = (await c.execute(_BLOCS.where(t.bloc.c.id == bloc_id).with_for_update(of=t.bloc))).one_or_none()
+            if avant is None:
+                raise Introuvable("bloc introuvable")
+            valeurs: dict = self._masquage("masque", masque)
+            if nature == "auto":
+                defaut = "principale" if avant.nb_principales > 0 else "secondaire"
+                valeurs |= {"nature": defaut, "nature_origine": "construction", "nature_motif": None}
+            elif nature is not None:
+                valeurs |= {"nature": nature, "nature_origine": "admin", "nature_motif": motif_}
+            await c.execute(update(t.bloc).where(t.bloc.c.id == bloc_id).values(**valeurs))
+            details: dict[str, object] = {"quoi": "bloc", "id": bloc_id, "titre": avant.titre,
+                                          "nature_avant": avant.nature, **{k: v for k, v in valeurs.items()
+                                                                             if k != "nature_motif"}}
+            if motif_ is not None:
+                details["motif"] = motif_
+            await self._journaliser(c, "contenu_admin", acteur, maintenant, details, etage_id=avant.etage_id)
+            return _bloc((await c.execute(_BLOCS.where(t.bloc.c.id == bloc_id))).one())
 
     async def modifier_donjon(self, donjon_id: int, acteur: int, maintenant: datetime, *,
                               masque: bool | None = None, nom: str | None = None) -> Donjon:

@@ -27,6 +27,10 @@ from epreuve.domaine.modeles import Nature, OrigineNature
 from epreuve.domaine.nature import classer, fermeture
 
 RACINE = Path(__file__).resolve().parents[3]
+# Le guide de Duffus est une seule page (/guide-complet) dont la tranche se choisit à l'écran et se mémorise dans le
+# navigateur (localStorage) : ni la tranche ni le bloc n'ont d'adresse ou d'ancre (relevé du 03/11/2026 dans le code
+# public du site). Tous les blocs mènent donc à cette page ; `duffus_ancre` reste vide jusqu'à ce que Duffus en offre.
+URL_GUIDE_DUFFUS = "https://duffus.fr/guide-complet"
 SEUIL_SANS_FICHE = 0.05  # au-delà, la construction s'arrête sans --forcer (décision de Marceau)
 
 
@@ -79,6 +83,36 @@ class QuetePreparee:
     source_fiche: Literal["duffus", "duffus+dofusdb", "dofusdb"] | None
 
 
+@dataclass(frozen=True)
+class BlocPrepare:
+    """Un bloc du guide d'une tranche (SPEC v5 §3). `nature` : principale si au moins une quête principale."""
+
+    titre: str  # le titre exact de Duffus
+    numero: int | None  # rang du bloc dans tout le guide (« Bloc 7 »)
+    ordre: int  # position dans la tranche
+    nature: Nature
+    nb_quetes: int
+    nb_principales: int
+    duffus_url: str | None = URL_GUIDE_DUFFUS
+    duffus_ancre: str | None = None
+
+
+def blocs_depuis_quetes(quetes: list[QuetePreparee], numeros: Mapping[str, int | None] | None = None,
+                        titres: list[str] | None = None) -> list[BlocPrepare]:
+    """Un bloc par titre de quête, dans l'ordre du guide (`titres`) ; sans titre donné, dans l'ordre des quêtes.
+    Un bloc sans aucune quête cochable n'existe pas : il n'y aurait rien à cocher."""
+    ordre_titres = list(dict.fromkeys([*(titres or []), *(q.bloc for q in quetes)]))
+    blocs = []
+    for titre in ordre_titres:
+        les = [q for q in quetes if q.bloc == titre]
+        if not les:
+            continue
+        principales = sum(1 for q in les if q.nature == "principale")
+        blocs.append(BlocPrepare(titre, (numeros or {}).get(titre), len(blocs) + 1,
+                                 "principale" if principales else "secondaire", len(les), principales))
+    return blocs
+
+
 @dataclass
 class EtagePrepare:
     numero: int
@@ -92,6 +126,7 @@ class EtagePrepare:
     date_plancher_suivant: datetime | None
     donjons: list[DonjonPrepare] = field(default_factory=list)
     quetes: list[QuetePreparee] = field(default_factory=list)
+    blocs: list[BlocPrepare] = field(default_factory=list)
     disponibles: list[DonjonPrepare] = field(default_factory=list)  # tous les donjons aspirés (T-03)
     alertes: list[str] = field(default_factory=list)
     sans_fiche: list[str] = field(default_factory=list)
@@ -106,10 +141,13 @@ class EtagePrepare:
         lignes = [f"Étage {self.numero} « {self.nom} » = tranche {self.tranche} (niveaux {self.niveau_min} à "
                   f"{self.niveau_max}, cap {self.level_cap})",
                   f"  {len(self.donjons)} donjons, {sum(len(d.cases) for d in self.donjons)} cases, "
-                  f"{len(self.quetes)} quêtes ({sum(1 for q in self.quetes if q.nature == 'principale')} principales)",
+                  f"{len(self.quetes)} quêtes ({sum(1 for q in self.quetes if q.nature == 'principale')} principales), "
+                  f"{len(self.blocs)} blocs ({sum(1 for b in self.blocs if b.nature == 'principale')} principaux)",
                   f"  fiches : {self.nb_fiches['duffus']} Duffus, {self.nb_fiches['dofusdb']} DofusDB, "
                   f"{len(self.sans_fiche)} sans fiche"
                   + (f" ({', '.join(self.sans_fiche)})" if self.sans_fiche else "")]
+        lignes += [f"  bloc {b.numero or '?'} · {b.titre} : {b.nature}, {b.nb_principales}/{b.nb_quetes} principales"
+                   for b in self.blocs]
         lignes += [f"  alerte : {a}" for a in self.alertes]
         return "\n".join(lignes)
 
@@ -380,6 +418,10 @@ def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage]
     else:
         raise ConfigInvalide(f"étage {numero} : le guide n'a que {len(actives)} tranches "
                              f"(étages 0 à {len(actives) - 1})")
+    # Le rang d'un bloc compte tous les blocs des tranches précédentes (le « bloc 7 » de Shadoaze).
+    avant = sum(len(r.get("categories") or []) for r in actives[:actives.index(tranche)])
+    titres_tranche = [(b.get("title") or "Quêtes") for b in tranche["categories"]]
+    numeros = {titre: avant + i for i, titre in reversed(list(enumerate(titres_tranche, 1)))}
     bas, haut = bornes(tranche["range_key"])
     e = EtagePrepare(numero, cfg.nom or f"Étage {numero}", tranche["range_key"], bas, haut, cfg.level_cap or haut,
                      cfg.ambiance_url, cfg.ouvert_le, cfg.date_plancher_suivant)
@@ -446,6 +488,12 @@ def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage]
         e.quetes.append(QuetePreparee(str(entree["id"]), entree["title"].strip(), niveau_quete(entree, page), bloc,
                                       ordre, c.nature, c.origine, c.dofus, jusqu, lier, fiche,
                                       source))
+    e.blocs = blocs_depuis_quetes(e.quetes, numeros, titres_tranche)
+    vides = [t for t in titres_tranche if t not in {b.titre for b in e.blocs}]
+    if vides:
+        e.alertes.append(f"blocs sans aucune quête cochable, ignorés : {', '.join(vides)}")
+    if len(set(titres_tranche)) != len(titres_tranche):
+        e.alertes.append("deux blocs de la tranche portent le même titre : ils sont fusionnés")
     if e.quetes and len(e.sans_fiche) / len(e.quetes) > SEUIL_SANS_FICHE:
         message = (f"{len(e.sans_fiche)} quêtes sur {len(e.quetes)} sans aucune fiche (plus de 5 %) : "
                    "décision de Marceau nécessaire, relancer avec --forcer pour passer outre")

@@ -83,11 +83,11 @@ def test_origine_trompeuse_refusee_sans_ecrire(origine):
     m = monde()
     c = m.connecter(ID_BRINDILLE)
     jeton = m.csrf(c)
-    r = c.post("/api/coches", json={"type": "quete", "id": 107, "cochee": True},
+    r = c.post("/api/coches", json={"type": "bloc", "id": 3, "cochee": True},
                headers={"X-CSRF-Token": jeton, "Origin": origine})
     assert r.status_code == 403
-    assert 107 not in m.depot._coches_quetes.get(1, set())
-    assert cocher(c, jeton, type="quete", id=107, cochee=True).json()["changement"] is True  # rien n'avait été écrit
+    assert 3 not in m.depot._coches_blocs.get(1, set())
+    assert cocher(c, jeton, type="bloc", id=3, cochee=True).json()["changement"] is True  # rien n'avait été écrit
 
 
 @pytest.mark.parametrize("referer", ["https://epreuve.test.evil.test/", "https://epreuve.test@evil.test/",
@@ -95,7 +95,7 @@ def test_origine_trompeuse_refusee_sans_ecrire(origine):
 def test_referer_trompeur_refuse_sans_origin(referer):
     m = monde()
     c = m.connecter(ID_BRINDILLE)
-    r = c.post("/api/coches", json={"type": "quete", "id": 107, "cochee": True},
+    r = c.post("/api/coches", json={"type": "bloc", "id": 3, "cochee": True},
                headers={"X-CSRF-Token": m.csrf(c), "Referer": referer})
     assert r.status_code == 403
 
@@ -104,7 +104,7 @@ def test_jeton_csrf_vide_dans_l_url_ou_dans_le_corps_json_refuse():
     m = monde()
     c = m.connecter(ID_BRINDILLE)
     jeton = m.csrf(c)
-    corps = {"type": "quete", "id": 107, "cochee": True}
+    corps = {"type": "bloc", "id": 3, "cochee": True}
     assert c.post("/api/coches", json=corps, headers={"X-CSRF-Token": "", "Origin": SITE}).status_code == 403
     assert c.post(f"/api/coches?csrf={jeton}", json=corps, headers={"Origin": SITE}).status_code == 403
     assert c.post("/api/coches", json={**corps, "csrf": jeton}, headers={"Origin": SITE}).status_code == 403
@@ -133,7 +133,7 @@ def test_un_joueur_ne_modifie_que_sa_propre_fiche():
                headers={"Origin": SITE})
     assert r.status_code == 403 and m.depot._grimpeurs[2].statut != "exclu"
     # Cocher pour un autre, même avec un motif : 403.
-    assert cocher(c, jeton, type="quete", id=107, cochee=True, grimpeur_id=2, motif="parce que").status_code == 403
+    assert cocher(c, jeton, type="bloc", id=3, cochee=True, grimpeur_id=2, motif="parce que").status_code == 403
 
 
 def test_teaser_un_joueur_connecte_n_ecrit_rien():
@@ -144,7 +144,7 @@ def test_teaser_un_joueur_connecte_n_ecrit_rien():
     assert '<meta name="csrf"' not in c.get("/").text  # le teaser, pas le site
     for chemin in ("/etages/0", "/grimpeurs", "/grimpeurs/1", "/regles", "/inscription", "/admin"):
         assert c.get(chemin).status_code == 303, chemin
-    r = c.post("/api/coches", json={"type": "quete", "id": 107, "cochee": True}, headers={"Origin": SITE})
+    r = c.post("/api/coches", json={"type": "bloc", "id": 3, "cochee": True}, headers={"Origin": SITE})
     assert r.status_code == 404
     assert c.post("/grimpeurs/moi", data={"pseudo": "Pirate"}, headers={"Origin": SITE}).status_code == 303
     assert m.depot._grimpeurs[1].pseudo != "Pirate"
@@ -274,7 +274,7 @@ class _Audit(HTMLParser):
 def test_accessibilite_de_base(profil):
     m = monde()
     c = m.connecter(profil)
-    chemins = ["/", "/etages/0", "/etages/0/quetes/101", "/grimpeurs", "/grimpeurs?quoi=quete:101", "/grimpeurs/1",
+    chemins = ["/", "/etages/0", "/etages/0/quetes/101", "/grimpeurs", "/grimpeurs?quoi=bloc:1", "/grimpeurs/1",
                "/grimpeurs/1?edition=1", "/regles", "/n-existe-pas"]
     if profil == ID_MARCEAU:
         chemins += ["/grimpeurs/2?edition=1", "/admin", "/admin/grimpeurs", "/admin/etages", "/admin/etages/0",

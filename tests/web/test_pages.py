@@ -59,7 +59,7 @@ def test_grimpeur_gele_voit_et_peut_cocher():
     c = monde().connecter(ID_OMBREVIVE)
     html = c.get("/etages/0").text
     assert "Tu es en pause" in html
-    assert re.search(r'data-ref="quete:105"(?: checked)?>', html)  # case active (pas disabled)
+    assert re.search(r'data-ref="bloc:3"(?: checked)?>', html)  # case active (pas disabled)
 
 
 def test_admin_sans_fiche_consulte_tout_en_lecture_seule():
@@ -208,27 +208,31 @@ def test_admin_voit_un_etage_scelle():
 # ---------------------------------------------------------------- l'étage (critères 9 à 11, 15, 16)
 
 
-def test_liste_dans_l_ordre_du_guide_avec_badges():
+def test_etage_donjons_puis_blocs_du_guide_avec_cadres_et_libelles():
     html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
     liste = html.split('id="liste"')[1]
-    # Les donjons sont en tête, chacun dans son dépliant ; le fil du guide ne garde qu'un repère par donjon.
-    ordre = [liste.index(n) for n in ("<h3>Donjons de l&#39;étage</h3>", 'id="donjon-1"', 'id="donjon-2"',
-                                      'id="donjon-3"', "<h3>Incarnam</h3>", "L&#39;Appel d&#39;Incarnam",
-                                      "Le Bouftou égaré", "<h3>Astrub</h3>", "La Graine de Mère Cawotte",
-                                      "Le Vieux Puits")]
+    # Les donjons d'abord, puis les blocs du guide dans l'ordre, avec leur numéro et le titre de Duffus.
+    ordre = [liste.index(n) for n in ("Donjons de l'étage</h2>", 'id="donjon-1"', 'id="donjon-2"', 'id="donjon-3"',
+                                      "Blocs du guide</h2>", "Bloc 1 · Incarnam", "Bloc 2 · Astrub",
+                                      "Bloc 3 · Petits services d&#39;Astrub")]
     assert ordre == sorted(ordre)
-    assert liste.count("<details") == 3
-    # Plus de repère « C'est le moment de faire… » dans le fil : ce n'est pas une quête.
-    assert "C'est le moment" not in html and 'class="repere"' not in html
-    # Le « moment conseillé » est dans le dépliant du donjon, avec un lien vers la quête qui le précède.
-    crypte = re.search(r'<li id="donjon-2".*?</li>\s*<li id="donjon-3"', liste, re.S).group(0)
-    assert "Moment conseillé : après la quête « <a href=\"/etages/0/quetes/106\"" in crypte
-    assert "Lettres pour Incarnam</a> »" in crypte
-    assert "Moment conseillé" not in re.search(r'<li id="donjon-1".*?</li>', liste, re.S).group(0)  # sans bloc
-    # Badges lisibles sans la couleur : texte et icône.
-    assert liste.count('<span class="badge princ"><svg') == 4 and liste.count(">Principale</span>") == 4
-    assert liste.count('<span class="badge second"><svg') == 5 and liste.count(">Secondaire</span>") == 5
-    assert "Jusqu'où : S&#39;arrêter à l&#39;étape 3" in liste
+    assert liste.count("<details class=\"dj-ligne\"") == 3
+    # Plus de liste de quêtes ni de fiche de quête dans la page d'étage.
+    assert "data-qopen" not in html and 'id="qd"' not in html and "/quetes/" not in liste
+    assert "Le Bouftou égaré" not in liste and "Jusqu'où" not in liste
+    # Cadre rouge (principal) ou jaune (secondaire) ET libellé écrit, lisible sans la couleur.
+    cartes = re.findall(r'<li class="bloc-carte c-(\w+)"', liste)
+    assert cartes == ["principales", "principales", "secondaires"]
+    assert liste.count('<span class="badge princ"><svg') == 2 and liste.count(">Principale</span>") == 2
+    assert liste.count('<span class="badge second"><svg') == 1 and liste.count(">Secondaire</span>") == 1
+    # Nombre de quêtes, dont les principales.
+    assert "3 quêtes, dont 1 principale" in liste and "3 quêtes, dont 3 principales" in liste
+    assert "3 quêtes, dont aucune principale" in liste
+    # Case « Bloc terminé », lien Duffus sûr, compteur et volet « fait par ».
+    assert liste.count("<b>Bloc terminé</b>") == 3 and 'data-ref="bloc:1"' in liste
+    assert liste.count('href="https://duffus.fr/guide-complet" target="_blank" rel="noopener">Ouvrir sur Duffus') == 3
+    assert "5 sur 10 l'ont fait" in liste
+    assert liste.count("Fait par / Pas encore fait par") == 3 and "Pas encore fait par <small" in liste
 
 
 def test_donjon_cinq_sous_cases_classique_en_premier():
@@ -248,7 +252,8 @@ def test_filtre_cumulatif_present_avec_les_4_categories_et_le_reste():
     assert "Seulement ce qui me reste" in filtre
     # Chaque ligne porte ses catégories : le filtre (app.js) n'a qu'à les comparer.
     assert html.count('data-cats="donjons full_succes"') == 3
-    assert html.count('data-cats="principales"') == 4 and html.count('data-cats="secondaires"') == 5
+    assert html.count('data-cats="principales"') == 2 and html.count('data-cats="secondaires"') == 1
+    assert "Blocs principaux" in filtre and "Blocs secondaires" in filtre
 
 
 def test_jauge_de_reference_calculee_a_la_main():
@@ -274,9 +279,7 @@ def test_formule_du_palier_suit_les_regles():
     html = m.connecter(ID_BRINDILLE).get("/etages/0").text
     assert "Palier = 5/2 × 10 grimpeurs actifs" in html and "sur un palier de 25" in html
     m = monde()
-    for q in list(m.depot._quetes.values()):
-        if q.nature == "secondaire":
-            m.depot._quetes[q.id] = replace(q, masquee=True)
+    m.depot._blocs[3] = replace(m.depot._blocs[3], masque=True)  # plus aucun bloc secondaire
     html = m.connecter(ID_BRINDILLE).get("/etages/0").text
     assert "× 3 catégories sur 4, arrondi au-dessus" in html and "sur un palier de 15" in html
 
@@ -304,7 +307,7 @@ def test_ma_progression():
     prog = html.split('id="maProgression"')[1].split("</section>")[0]
     assert '<span data-moi="points">2</span>' in prog
     assert re.findall(r'data-moi-cat="(\w+)">([^<]+)<', prog) == [
-        ("donjons", "3/3 ✓"), ("full_succes", "13/15"), ("principales", "4/4 ✓"), ("secondaires", "2/5")]
+        ("donjons", "3/3 ✓"), ("full_succes", "13/15"), ("principales", "2/2 ✓"), ("secondaires", "0/1")]
     assert 'aria-label="Donjons : point obtenu"' in prog and 'aria-label="Full succès : 13 sur 15"' in prog
 
 
@@ -434,9 +437,9 @@ def test_nom_discord_selon_le_reglage():
 
 def test_filtre_par_element_sans_javascript():
     c = monde().connecter(ID_BRINDILLE)
-    html = c.get("/grimpeurs?quoi=quete:101").text
+    html = c.get("/grimpeurs?quoi=bloc:1").text
     rep = html.split('id="answer"')[1].split("</form>")[0]
-    assert "Qui ne l'a pas fait <small>5 sur 10 · la quête « L&#39;Appel d&#39;Incarnam »" in rep
+    assert "Qui ne l'a pas fait <small>5 sur 10 · le bloc « Bloc 1 · Incarnam »" in rep
     assert "Qui l'a fait (peut accompagner)" in rep
     assert html.count("player target") == 5 and len(re.findall(r"class=\"player[^\"]* dim\"", html)) == 5
     rep = c.get("/grimpeurs?quoi=donjon:3").text.split('id="answer"')[1]
@@ -453,9 +456,10 @@ def test_lien_qui_manque_de_chaque_tuile():
 
 def test_fiche_d_un_grimpeur():
     html = monde().connecter(ID_BRINDILLE).get("/grimpeurs/3").text
-    assert "Mirelune" in html and "Étage 0 · Le Seuil" in html and "Succès de donjon" in html
-    assert "Avancement global" in html and "17/24" in html  # 15 cases + 2 principales sur 24 éléments
-    assert "/4 points · 17/24 (70 %)" in html
+    assert "Mirelune" in html and "Étage 0 · Le Seuil" in html and "Donjons et succès" in html
+    assert "Blocs du guide" in html and "Bloc 1 · Incarnam" in html
+    assert "Avancement global" in html and "16/18" in html  # 15 cases + 1 bloc sur 18 éléments (15 cases, 3 blocs)
+    assert "/4 points · 16/18 (88 %)" in html
     assert all("disabled" in m for m in re.findall(r'data-ref="[^"]+"[^>]*>', html))  # pas la sienne
 
 
@@ -633,8 +637,8 @@ def test_bandeau_etage_sans_depliant_avec_barre_et_faits():
     bandeau = html.split('id="enteteEtage"')[1].split("</section>")[0]
     assert "<details" not in html.split('id="enteteEtage"')[0][-60:] and "Niveaux 1 à 20" in bandeau
     assert bandeau.count("Étage 0") == 1
-    assert '<b class="num">3</b> donjons' in bandeau and '<b class="num">4</b> quêtes principales' in bandeau
-    assert '<b class="num">5</b> quêtes secondaires' in bandeau
+    assert '<b class="num">3</b> donjons' in bandeau and '<b class="num">2</b> blocs principaux' in bandeau
+    assert '<b class="num">1</b> bloc secondaire' in bandeau
     assert 'role="progressbar"' in bandeau and "pg-palier" in bandeau and ">palier</small>" in bandeau
     assert re.search(r'data-pg="score">\d+ / \d+ points</strong>', bandeau) and "Il manque" in bandeau
     tour = c.get("/").text.split('id="enteteEtage"')[1].split("</section>")[0]

@@ -97,7 +97,7 @@ async def test_parcours_complet_du_lot_b(site, depot, moteur):
     tour = (await brindille.get("/")).text
     assert "L'anneau de tous les dangers" not in tour and 'href="/etages/0"' in tour
     etage0 = await brindille.get("/etages/0")
-    assert etage0.status_code == 200 and "L&#39;anneau de tous les dangers" in etage0.text
+    assert etage0.status_code == 200 and "Bloc 2 · Quêtes d&#39;Incarnam" in etage0.text
     assert "Crypte de Kardorim" in etage0.text
     assert (await brindille.get("/etages/1")).status_code == 404
     assert "Grange du Tournesol" not in etage0.text  # rien de l'étage scellé
@@ -114,25 +114,14 @@ async def test_parcours_complet_du_lot_b(site, depot, moteur):
     assert r.status_code == 200 and corps["ok"] and corps["moi"]["categories"]["donjons"]["faits"] == 1
     assert corps["moi"]["points"] == 1 and corps["jauge"]["score"] == 1 and corps["jauge"]["palier"] == 2
     assert set(corps["compteurs"]) == {f"case:{zombie.id}", f"case:{contenu.cases_du_donjon(donjon.id)[0].id}"}
-    principale = next(q for q in contenu.quetes if q.nature == "principale")
-    r = await brindille.post("/api/coches", json={"type": "quete", "id": principale.id, "cochee": True},
+    bloc = contenu.blocs[1]
+    r = await brindille.post("/api/coches", json={"type": "bloc", "id": bloc.id, "cochee": True},
                              headers={"X-CSRF-Token": t, "Origin": SITE})
-    assert r.json()["compteurs"] == {f"quete:{principale.id}": 1}
-
-    # La fiche de quête réelle, en page complète : parité, aucun lien vers duffus.fr hors pied de page.
-    avec_prerequis = None
-    for q in contenu.quetes:
-        if (await depot.fiche_quete(q.id)).prerequis:
-            avec_prerequis = q
-            break
-    fiche = await brindille.get(f"/etages/0/quetes/{avec_prerequis.id}")
-    assert fiche.status_code == 200 and avec_prerequis.nom.replace("'", "&#39;") in fiche.text
-    corps_fiche = fiche.text.split("<footer")[0]
-    assert "duffus" not in corps_fiche.lower() and "supabase" not in corps_fiche.lower()
-    assert "<script>" not in corps_fiche
+    assert r.json()["compteurs"] == {f"bloc:{bloc.id}": 1}
+    assert r.json()["moi"]["categories"]["principales"]["faits"] == 1
 
     # Qui ne l'a pas fait ? (actifs seulement)
-    m = await brindille.get(f"/api/etages/0/manque?type=quete&id={principale.id}")
+    m = await brindille.get(f"/api/etages/0/manque?type=bloc&id={bloc.id}")
     assert [x["pseudo"] for x in m.json()["fait"]] == ["Brindille"]
 
     # L'admin ouvre l'étage 1 en forçant (jauge non pleine), avec un motif.

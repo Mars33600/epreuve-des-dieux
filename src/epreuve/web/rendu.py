@@ -29,6 +29,7 @@ from epreuve.web.vues import (
     pct1,
     texte_point_donjons,
     texte_point_full,
+    texte_quetes_bloc,
     titre_etage,
 )
 
@@ -60,7 +61,7 @@ def creer_gabarits() -> Jinja2Templates:
                          fiche_propre=fiche_propre)
     g.env.globals.update(CATS=INFOS_CATEGORIES, texte_donjons=texte_point_donjons, texte_full=texte_point_full,
                          titre_etage=titre_etage, avec_article=avec_article, decouper_quantite=decouper_quantite,
-                         LIENS_VIDES=Liens())
+                         texte_quetes_bloc=texte_quetes_bloc, LIENS_VIDES=Liens())
     return g
 
 

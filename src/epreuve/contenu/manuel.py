@@ -15,7 +15,14 @@ from pathlib import Path
 import yaml
 from pydantic import BaseModel, ConfigDict, ValidationError
 
-from epreuve.contenu.construire import CasePreparee, ConfigInvalide, DonjonPrepare, EtagePrepare, QuetePreparee
+from epreuve.contenu.construire import (
+    CasePreparee,
+    ConfigInvalide,
+    DonjonPrepare,
+    EtagePrepare,
+    QuetePreparee,
+    blocs_depuis_quetes,
+)
 from epreuve.dofusdb.repli import ClientEnCache, guides_repli, succes_du_donjon
 from epreuve.domaine.modeles import Nature
 from epreuve.domaine.nature import classer
@@ -82,5 +89,6 @@ async def construire_manuel(m: _EtageManuel, client: ClientEnCache, dofus_retenu
                                           "admin" if c.origine == "admin" else "dofusdb", c.dofus,
                                           q.jusqu_ou, q.a_lier, None, None))
             e.sans_fiche.append(e.quetes[-1].nom)
+    e.blocs = blocs_depuis_quetes(e.quetes)
     e.alertes.append(f"étage saisi à la main (repli) : {len(e.quetes)} quêtes sans fiche, nature tirée de DofusDB")
     return e

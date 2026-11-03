@@ -1,6 +1,7 @@
 """L'API JSON consommée par `app.js` (LOTS, lot B, « API JSON » : forme et codes figés).
 
-    POST /api/coches                         cocher ou décocher (soi-même ; un admin pour un autre, avec motif)
+    POST /api/coches                         cocher ou décocher une case, un bloc ou un donjon (soi-même ; un admin
+                                             pour un autre, avec motif)
     POST /api/etapes                         cocher ou décocher une étape d'une quête (suivi perso, sans points)
     GET  /api/etages/{n}/manque?type=&id=    « qui ne l'a pas fait ? » pour un élément ou une catégorie
 
@@ -40,7 +41,7 @@ async def lire_corps(request: Request) -> dict:
         raise _corps_invalide()
     type_, id_, cochee = corps.get("type"), corps.get("id"), corps.get("cochee")
     gid, motif = corps.get("grimpeur_id"), corps.get("motif")
-    if (type_ not in ("case", "quete", "donjon") or type(id_) is not int or type(cochee) is not bool
+    if (type_ not in ("case", "bloc", "donjon") or type(id_) is not int or type(cochee) is not bool
             or (gid is not None and type(gid) is not int) or (motif is not None and not isinstance(motif, str))):
         raise _corps_invalide()
     if type_ == "donjon" and not cochee:
@@ -54,7 +55,8 @@ async def etage_de_l_element(depot, type_: str, id_: int) -> Etage:
         if not etage_cochable(etage):
             continue
         c = await depot.contenu_etage(etage.id)
-        ids = {"case": {x.id for x in c.cases}, "quete": {x.id for x in c.quetes}, "donjon": {x.id for x in c.donjons}}
+        ids = {"case": {x.id for x in c.cases}, "quete": {x.id for x in c.quetes}, "bloc": {x.id for x in c.blocs},
+               "donjon": {x.id for x in c.donjons}}
         if id_ in ids[type_]:
             return etage
     raise Refus(404, INTROUVABLE)
@@ -157,7 +159,7 @@ async def manque(request: Request, numero: int, type: str = "", id: str = ""):  
     v = await exiger_grimpeur(request)
     s = request.app.state
     etage = await etage_visible(request, numero, v)
-    if type not in ("case", "quete", "donjon", "categorie") or not id:
+    if type not in ("case", "bloc", "donjon", "categorie") or not id:
         raise Refus(422, "Requête invalide.")
     vue = await charger_vue_etage(s.depot, etage, s.regles)
     trouve = resoudre_quoi(vue, type, id)

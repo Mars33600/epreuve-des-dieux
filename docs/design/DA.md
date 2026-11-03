@@ -18,13 +18,13 @@ Référence pour le site et le teaser. Les exemples vivants sont `teaser.html` e
 | Décor | `--veil`, `--fog`, `--glow` | `5,8,22` `150,160,200` `255,221,150` | Voile, brume, lueur (triplets RVB pour `rgba()`) |
 | Donjons | `--c-donjon` | `#72e0b6` jade | Catégorie 1 |
 | Full succès | `--c-succes` | `#cdb0ff` améthyste | Catégorie 2 |
-| Quêtes principales | `--c-princ` | `#86beff` azur | Catégorie 3 |
-| Quêtes secondaires | `--c-second` | `#ffa684` corail | Catégorie 4 |
+| Quêtes principales (blocs principaux) | `--c-princ` | `#ff7a7a` rouge | Catégorie 3 ; cadre rouge d'un bloc principal (v5) |
+| Quêtes secondaires (blocs secondaires) | `--c-second` | `#ffe14d` jaune | Catégorie 4 ; cadre jaune d'un bloc secondaire (v5) |
 | Alerte | `--warn` | `#ff9d68` | Hors cap, « pas encore fait » |
 
 **Échelle typographique** : `--t-xs` 12, `--t-sm` 14, `--t-base` 16 (corps), `--t-h3` 18, `--t-h2` 21 à 26, `--t-h1` 22 à 30 px. **Espacements** `--s1` à `--s6` : 4, 8, 12, 16, 24, 32 px. **Rayons** 8 px (`--r`) et 12 px ; une seule ombre douce (`--ombre`).
 
-Contraste mesuré sur une carte (`#0a0e1c`) : texte courant `--ink` environ 15:1, `--muted` environ 9:1 (au-dessus de 7:1, AAA), `--faint` environ 7:1, or et couleurs de catégorie au-dessus de 7:1. Le **focus** est un contour de 3 px en `--gold-hi`, décalé de 3 px, sur tous les éléments. Les cibles tactiles font au moins 44 px.
+Contraste mesuré sur une carte (`#0a0e1c`) : le rouge `--c-princ` fait 7,6:1 et le jaune `--c-second` 14,8:1 (sur `#1b2340`, 6,1:1 et 11,9:1 : AA partout) ; texte courant `--ink` environ 15:1, `--muted` environ 9:1 (au-dessus de 7:1, AAA), `--faint` environ 7:1, or et couleurs de catégorie au-dessus de 7:1. Le **focus** est un contour de 3 px en `--gold-hi`, décalé de 3 px, sur tous les éléments. Les cibles tactiles font au moins 44 px.
 
 ## Le décor de la page
 
@@ -72,7 +72,7 @@ Du fond vers l'avant, dans un conteneur `position: fixed` en `aria-hidden` et `p
 - **Pastille de catégorie** : un disque de 36 px (48 px dans la fiche) avec l'icône de la catégorie. L'**anneau** (`conic-gradient`) montre la progression ; le **disque plein** signifie que le point est obtenu. On lit la forme sans la couleur, et un `aria-label` donne « Donjons : 2 sur 3 ».
 - **Icônes** (trait de 1,8, SVG `<symbol>`) : porte en arche pour les donjons, étoile pour le full succès, œuf (le Dofus) pour les quêtes principales, parchemin pour les quêtes secondaires.
 - **Case à cocher** : la case native, restylée (`appearance: none`). C'est un carré gravé de 22 px, rayon 5 px, qui se remplit de la couleur de sa catégorie avec une coche sombre. La ligne entière (libellé et explication) est cliquable, sur 44 px de haut minimum. La première case d'un donjon (« Vaincre le boss ») est en jade, **mise en surbrillance** (liseré épais, fond jade, mention « 1 point Donjons »), avec une légende au-dessus de la liste : cocher le boss de tous les donjons de l'étage rapporte déjà le point Donjons ; les 4 autres succès sont en améthyste. Une case désactivée signale une fiche en lecture seule.
-- **Badge principal / secondaire** : une pilule mono de 12 px. **Principale** : fond azur teinté, bordure pleine, icône œuf. **Secondaire** : contour corail **en pointillés**, icône parchemin. Le trait plein ou pointillé distingue les deux sans la couleur.
+- **Badge principal / secondaire** : une pilule mono de 12 px. **Principale** (rouge) : fond teinté, bordure pleine, icône œuf. **Secondaire** (jaune) : contour **en pointillés**, icône parchemin. Le trait plein ou pointillé distingue les deux sans la couleur.
 - **Filtre « qui n'a pas fait… ? »** : un `select` groupé (catégories, donjons, succès, quêtes). Il affiche deux listes de pastilles : « Pas encore fait » (✗, bordure alerte) et « Déjà fait, ils peuvent accompagner » (✓). Les cartes concernées sont entourées, les autres estompées.
 - **Fiche de quête** : on touche le nom d'une quête (un bouton souligné d'or, distinct de sa case de 44 px) pour l'ouvrir. C'est un `<dialog>` ouvert par `showModal()`, avec `aria-modal` et `aria-labelledby`. Sur ordinateur, c'est un panneau latéral à droite (560 px, liseré or à gauche) ; sous 640 px, il passe en plein écran. Le fond est assombri à 66 %. Il se ferme par la croix (44 px), par Échap ou par un clic sur le fond. Le focus va au titre, reste piégé dans le panneau, puis revient au déclencheur. L'en-tête est collant : sur-titre, nom, badge, niveau, zone, PNJ de départ avec sa position en mono or `[x,y]`, et la case « Faite », synchronisée avec la liste et en lecture seule sur la fiche d'un autre grimpeur. Le corps est découpé en sections à sur-titre mono or :
   - **Pourquoi la faire** : pour une principale, la chaîne cliquable jusqu'au Dofus ; pour une secondaire, une phrase.
