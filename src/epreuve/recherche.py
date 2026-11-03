@@ -14,7 +14,7 @@ from __future__ import annotations
 import asyncio
 from dataclasses import dataclass
 
-from sqlalchemy import Select, and_, func, select
+from sqlalchemy import Select, String, and_, cast, func, select
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from epreuve.db import tables as d
@@ -139,7 +139,8 @@ class DepotRecherche:
     def _blocs(self, mots, q, est_admin, plafond):
         """Les blocs du guide (SPEC-V5 §3) : par titre ; un étage scellé et un bloc masqué restent cachés."""
         bl, et = d.bloc, d.etage
-        cle = func.epreuve.cle_recherche(bl.c.titre)
+        # « bloc 7 » retrouve le bloc 7 : on cherche dans le titre complet, tel que les joueurs le disent (« bloc 7 ce soir »).
+        cle = func.epreuve.cle_recherche(func.concat("bloc ", func.coalesce(cast(bl.c.numero, String), ""), " ", bl.c.titre))
         conds = [] if est_admin else [et.c.statut != "scelle", bl.c.masque.is_(False)]
         requete = (select(bl.c.id, bl.c.titre, bl.c.numero, et.c.numero.label("etage"))
                    .join(et, et.c.id == bl.c.etage_id).where(_filtrer(cle, mots, conds)).order_by(*_rang(cle, q)))
