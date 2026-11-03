@@ -5,6 +5,7 @@ Profils : visiteur, membre sans fiche, grimpeur, gelé, exclu (voir test_auth), 
 
 from __future__ import annotations
 
+import html as html_mod
 import re
 from dataclasses import replace
 from fractions import Fraction
@@ -223,7 +224,7 @@ def test_etage_donjons_puis_blocs_du_guide_avec_cadres_et_libelles():
     # Cadre rouge (principal) ou jaune (secondaire) ET libellé écrit, lisible sans la couleur.
     cartes = re.findall(r'<li class="bloc-carte c-(\w+)"', liste)
     assert cartes == ["principales", "principales", "secondaires"]
-    assert liste.count('<span class="badge princ"><svg') == 2 and liste.count(">Principale</span>") == 2
+    assert liste.count('<span class="badge princ"><svg') == 2 and liste.count(">Principal</span>") == 2
     assert liste.count('<span class="badge second"><svg') == 1 and liste.count(">Secondaire</span>") == 1
     # Nombre de quêtes, dont les principales.
     assert "3 quêtes, dont 1 principale" in liste and "3 quêtes, dont 3 principales" in liste
@@ -720,3 +721,42 @@ def test_maquette_etage8_autonome():
     assert (dossier / "maquette-etage8" / "etage-8.webp").stat().st_size <= 300_000
     pyramide = html[html.index('<nav class="pyramide"'):html.index('<div class="pyr-brume"')]
     assert "Étage 8" not in pyramide and not re.search(r"\d+ étages", html) and "Étage scellé" not in html
+
+
+# --------------------------------------------- bloc jaune rétrogradé qui garde des quêtes utiles (consigne du chef de projet)
+
+
+def _monde_bloc_retrograde():
+    m = monde()
+    bloc = m.depot._blocs[2]  # « Astrub » : principal par la règle, avec des quêtes principales
+    noms = [q.nom for q in m.depot._quetes.values() if q.etage_id == bloc.etage_id and q.bloc == bloc.titre
+            and q.nature == "principale"]
+    assert noms
+    m.depot._blocs[2] = replace(bloc, nature="secondaire", nature_origine="admin", nature_motif="test")
+    return m, noms
+
+
+def test_bloc_jaune_avec_quetes_utiles_affiche_un_avertissement():
+    m, noms = _monde_bloc_retrograde()
+    html = m.connecter(ID_BRINDILLE).get("/etages/0").text
+    liste = html.split('id="liste"')[1]
+    assert f"⚠ Contient {len(noms)} quête{'s' if len(noms) > 1 else ''} utile{'s' if len(noms) > 1 else ''} pour un Dofus :" in liste
+    for nom in noms:
+        assert html_mod.escape(nom, quote=True) in liste
+    # Un seul avertissement : le bloc secondaire naturel (aucune quête principale) n'en a pas, ni les blocs rouges.
+    assert liste.count("avert-utiles") == 1
+    assert "dont aucune principale" in liste
+    # Le barème ne change pas : le bloc compte désormais dans les secondaires.
+    assert 'data-cats="secondaires"' in liste
+
+
+def test_pas_d_avertissement_sans_retrogradation():
+    liste = monde().connecter(ID_BRINDILLE).get("/etages/0").text.split('id="liste"')[1]
+    assert "avert-utiles" not in liste
+
+
+def test_revue_admin_montre_les_quetes_utiles_du_bloc():
+    m, noms = _monde_bloc_retrograde()
+    html = m.connecter(ID_MARCEAU).get("/admin/etages/0").text
+    assert "⚠ Contient" in html and "pour un Dofus" in html
+    assert html_mod.escape(noms[0], quote=True) in html

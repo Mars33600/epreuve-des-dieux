@@ -32,7 +32,7 @@
 
 {% macro badge_nature(q) -%}
 {%- if q.nature == "principale" -%}
-<span class="badge princ">{{ icone("i-princ") }}Principale</span>
+<span class="badge princ">{{ icone("i-princ") }}Principal</span>
 {%- else -%}
 <span class="badge second">{{ icone("i-second") }}Secondaire</span>
 {%- endif -%}
@@ -195,6 +195,9 @@
       <div class="bloc-titre"><h3>{{ b.titre_complet }}</h3>
         <p class="bloc-meta">{{ badge_nature(b) }}<span class="muted">{{ texte_quetes_bloc(b) }}</span></p></div>
     </div>
+    {%- if b.nature == "secondaire" %}{% set utiles = vue.contenu.quetes_utiles_du_bloc(b) %}{% if utiles %}
+    <p class="avert-utiles" role="note"><b>⚠ Contient {{ utiles|length }} quête{{ "s" if utiles|length > 1 }} utile{{ "s" if utiles|length > 1 }} pour un Dofus :</b> {{ utiles|join(", ") }}</p>
+    {%- endif %}{% endif %}
     <div class="bloc-actions">
       <label class="tick c-{{ cat }} bloc-termine"><input type="checkbox" data-ref="{{ ref }}"{% if fait %} checked{% endif %}{% if not cochable %} disabled{% endif %}><span><b>Bloc terminé</b></span></label>
       {%- if b.lien_duffus %}

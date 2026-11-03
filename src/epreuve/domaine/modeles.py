@@ -252,5 +252,9 @@ class ContenuEtage:
         return (tuple(ElementRef("case", c.id) for c in self.cases)
                 + tuple(ElementRef("bloc", b.id) for b in self.blocs))
 
+    def quetes_utiles_du_bloc(self, bloc: Bloc) -> tuple[str, ...]:
+        """Les noms des quêtes principales (utiles pour un Dofus) d'un bloc, dans l'ordre du guide."""
+        return tuple(q.nom for q in self.quetes if q.bloc == bloc.titre and q.nature == "principale")
+
     def blocs_de_nature(self, nature: Nature) -> tuple[Bloc, ...]:
         return tuple(b for b in self.blocs if b.nature == nature)
