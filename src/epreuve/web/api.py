@@ -122,6 +122,8 @@ async def coches(request: Request):
 async def etapes(request: Request):
     """Le suivi étape par étape d'une quête : le grimpeur connecté, sur SA fiche seulement. Ne coche jamais la
     quête (la case « Faite » reste seule à compter), même pour la dernière étape."""
+    if not request.app.state.regles.monde_des_douze:  # SPEC-V5 §2 : le suivi par étape relève de duffus.fr
+        raise Refus(404, INTROUVABLE)
     v = await verifier_ecriture(request)
     corps = await lire_corps_etape(request)
     v = await exiger_grimpeur(request)

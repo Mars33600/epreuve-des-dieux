@@ -31,6 +31,14 @@ def test_monde_des_douze_desactive_repond_404():
     assert c.get("/etages/0/quetes/1").status_code == 404  # fiche de quête, aussi
 
 
+def test_suivi_par_etape_desactive_repond_404():
+    m = monde(regles=Regles())
+    c = m.connecter(ID_BRINDILLE)
+    r = c.post("/api/etapes", json={"quete_id": 102, "ordre": 1, "faite": True},
+               headers={"X-CSRF-Token": m.csrf(c), "Origin": SITE})
+    assert r.status_code == 404
+
+
 def test_monde_des_douze_active_rallume_les_routes():
     c = monde(regles=Regles(monde_des_douze=True)).connecter(ID_BRINDILLE)
     assert c.get("/outils").status_code == 200 and c.get("/archimonstres").status_code == 200
