@@ -50,7 +50,7 @@ def noms(r) -> dict[str, list[str]]:
 async def test_sans_accent_sans_casse_et_mot_partiel(monde):
     r = await chercher(monde, "ECLAIR")
     assert r.status_code == 200
-    assert noms(r)["quetes"] == ["Éclaireur de la Tour"]
+    assert "quetes" not in noms(r)  # SPEC-V5 §2 : plus de quêtes dans la recherche
     assert noms(await chercher(monde, "gelax"))["donjons"] == ["Gelaxième Dimension"]
     assert "Gelaxième Dimension" in noms(await chercher(monde, "dimens"))["donjons"]  # milieu de nom
 
@@ -61,11 +61,25 @@ async def test_groupes_limites_et_voir_tout(monde):
     assert r.json()["groupes"][0]["resultats"][0]["lien"].startswith("/grimpeurs/")
     gros = await chercher(monde, "a", limite=2)  # tous les types, 2 par groupe au plus
     assert all(len(g["resultats"]) <= 2 for g in gros.json()["groupes"])
-    assert any(g["plus"] and g["voir_tout"].startswith("/recherche?q=a&type=") for g in gros.json()["groupes"])
+    assert all(g["voir_tout"].startswith("/recherche?q=a&type=") for g in gros.json()["groupes"])
 
 
-async def test_outils_et_recherche_vide(monde):
-    assert noms(await chercher(monde, "alman"))["outils"] == ["Almanax"]
+async def test_seuls_grimpeurs_donjons_etages_et_blocs(monde):
+    from epreuve.recherche import LIBELLES
+
+    assert list(LIBELLES) == ["grimpeurs", "donjons", "etages", "blocs"]
+    assert "outils" not in noms(await chercher(monde, "alman"))
+    assert "monstres" not in noms(await chercher(monde, "a"))
+
+
+async def test_etages_trouves_par_leur_nom(monde, moteur):
+    async with moteur.connect() as c:
+        nom = (await c.execute(select(t.etage.c.nom).where(t.etage.c.numero == 0))).scalar_one()
+    r = await chercher(monde, nom[:5])
+    assert any(x["lien"] == "/etages/0" for g in r.json()["groupes"] if g["type"] == "etages" for x in g["resultats"])
+
+
+async def test_recherche_vide(monde):
     assert (await chercher(monde, "   ")).json()["groupes"] == []
 
 
@@ -84,7 +98,6 @@ async def test_etage_scelle_jamais_visible_pour_un_grimpeur(monde):
 async def test_admin_voit_les_etages_scelles(monde):
     r = await chercher(monde, "gelax", ADMIN)
     assert set(noms(r)["donjons"]) == {"Gelaxième Dimension", "Gelaxème Scellée", "Gelaxie masquée"}
-    assert noms(await chercher(monde, "eclat", ADMIN))["quetes"] == ["Éclat secret du sommet"]
 
 
 async def client_get(app, chemin, qui=GRIMPEUR):
@@ -101,6 +114,6 @@ async def test_acces_reserve_aux_grimpeurs(monde):
 async def test_page_voir_tout_et_en_tete_sur_toutes_les_pages(monde):
     html = await client_get(monde, "/recherche?q=gelax&type=donjons")
     assert "Gelaxième Dimension" in html
-    for chemin in ("/", "/encyclopedie", "/builder", "/outils", "/regles"):
+    for chemin in ("/", "/regles"):
         page = await client_get(monde, chemin)
-        assert 'data-suggest="global"' in page and "Monde des Douze" in page, chemin
+        assert 'data-suggest="global"' in page and "deroulant-bouton" not in page, chemin

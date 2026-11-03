@@ -145,10 +145,13 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
     app.include_router(pages.routeur)
     app.include_router(api.routeur)
     app.include_router(tableau.routeur)
-    app.include_router(outils.routeur)
     app.include_router(recherche.routeur)  # recherche globale de l'en-tête
     app.include_router(admin.routeur)
-    app.include_router(captures.routeur)  # module E1 : archimonstres et avis de recherche
-    builder.brancher(app, source)  # module E3 : le builder (/builder, /api/builder/…), sur connexion
-    brancher_encyclopedie(app, source, gabarits, horloge, app.state.regles)  # module E2 : encyclopédie et stuffs
+    # SPEC-V5 §2 : le « Monde des Douze » est désactivé, pas supprimé. Routes non branchées = 404 comme une adresse
+    # inconnue (jamais de 500) ; `modules.monde_des_douze: true` dans config/regles.yaml les rallume toutes.
+    if app.state.regles.monde_des_douze:
+        app.include_router(outils.routeur)
+        app.include_router(captures.routeur)  # module E1 : archimonstres et avis de recherche
+        builder.brancher(app, source)  # module E3 : le builder (/builder, /api/builder/…), sur connexion
+        brancher_encyclopedie(app, source, gabarits, horloge, app.state.regles)  # module E2 : encyclopédie et stuffs
     return app

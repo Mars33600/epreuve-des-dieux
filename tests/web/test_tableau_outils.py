@@ -41,7 +41,7 @@ def test_pages_sans_script_ni_style_en_ligne_et_merci_duffus():
         assert "Merci Duffus" in r.text and "duffus.fr" in r.text
         assert not re.search(r"<script(?![^>]*\bsrc=)", r.text), chemin
         assert " style=" not in r.text and "onclick=" not in r.text, chemin
-        assert 'href="/outils"' in r.text and 'href="/tableau-de-bord"' in r.text
+        assert 'href="/outils"' not in r.text and 'href="/tableau-de-bord"' in r.text
         assert "unsafe-inline" not in r.headers["content-security-policy"]
 
 

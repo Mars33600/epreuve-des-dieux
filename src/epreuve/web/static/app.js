@@ -272,12 +272,7 @@ function initQuete(){
     const q = e.target.closest("[data-qui]");
     if (q){ const p = $("quiPanneau"); if (p){ p.hidden = !p.hidden; q.setAttribute("aria-expanded", String(!p.hidden)); } }
   });
-  // une adresse directe (?quete=id ou #quete-id) ouvre la fiche de cette quête
-  const m = location.search.match(/[?&]quete=(\d+)/) || location.hash.match(/^#quete-(\d+)/);
-  if (m){
-    const a = document.querySelector(`a[data-qopen="${m[1]}"]`);
-    if (a){ history.replaceState(null, "", location.pathname); ouvrirQuete(a.getAttribute("href"), a); }
-  }
+  // SPEC-V5 §2 : plus d'ouverture par adresse directe (?quete=id) ; la fiche de quête est sur duffus.fr
   addEventListener("popstate", e => {   // retour arrière : ferme la fiche ; avant : la rouvre
     if (dlg.open){ pousse = false; dlg.close(); }
     else if (e.state && e.state.quete) ouvrirQuete(e.state.quete, false);
