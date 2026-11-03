@@ -46,6 +46,9 @@ class Config(BaseSettings):
     # Listes d'identifiants séparés par des virgules (lues en texte : pydantic-settings attendrait du JSON).
     discord_admin_role_ids_texte: str = Field(default="", alias="DISCORD_ADMIN_ROLE_IDS")
     admins_supplementaires_texte: str = Field(default="", alias="ADMINS_SUPPLEMENTAIRES")
+    # Propriétaire du serveur : admin d'office (SPEC-V5 §7). Un seul identifiant, lu ici plutôt qu'auprès de Discord :
+    # l'`owner_id` de la guilde exigerait un jeton de bot ou la portée « guilds » (qu'on ne demande pas).
+    discord_owner_id: int | None = Field(default=None, alias="DISCORD_OWNER_ID")
 
     @staticmethod
     def _ids(texte: str) -> frozenset[int]:
@@ -57,7 +60,9 @@ class Config(BaseSettings):
 
     @property
     def admins_supplementaires(self) -> frozenset[int]:
-        return self._ids(self.admins_supplementaires_texte)
+        """Les admins sans rôle : la liste ADMINS_SUPPLEMENTAIRES, plus le propriétaire du serveur s'il est connu."""
+        extra = self._ids(self.admins_supplementaires_texte)
+        return extra | {self.discord_owner_id} if self.discord_owner_id else extra
 
     @property
     def redirect_uri(self) -> str:

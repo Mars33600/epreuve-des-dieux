@@ -364,7 +364,7 @@ Toute autre requête reçoit une redirection 303 vers `/`, et les requêtes `/ap
    - échange le code : `POST https://discord.com/api/v10/oauth2/token` (formulaire : `grant_type=authorization_code`, `code`, `redirect_uri`, avec `client_id` et `client_secret`). Il reçoit un jeton d'accès valable 7 jours ;
    - `GET /api/v10/users/@me` donne l'identifiant et le nom affiché ;
    - `GET /api/v10/users/@me/guilds/{DISCORD_GUILD_ID}/member` (portée `guilds.members.read`, vérifié dans la documentation Discord le 27/10) donne le membre et ses **rôles**. Une erreur 404 veut dire « pas membre du serveur » : refus ;
-   - **admin** ⇔ un des rôles est dans `DISCORD_ADMIN_ROLE_IDS`, ou l'identifiant est dans `ADMINS_SUPPLEMENTAIRES`. Ce dernier est un filet pour Marceau et Shadoaze si le rôle était mal réglé, parce que l'objet membre donne les rôles mais pas les permissions calculées ;
+   - **admin** ⇔ un des rôles est dans `DISCORD_ADMIN_ROLE_IDS`, ou l'identifiant est dans `ADMINS_SUPPLEMENTAIRES`, ou c'est `DISCORD_OWNER_ID` (le propriétaire du serveur). Ce dernier est un filet pour Marceau et Shadoaze si le rôle était mal réglé, parce que l'objet membre donne les rôles mais pas les permissions calculées ;
    - crée la **session** en base, avec un jeton aléatoire de 256 bits dans le cookie `__Host-session` (`Secure`, `HttpOnly`, `SameSite=Lax`, `Path=/`, 7 jours), et ne stocke que son empreinte SHA-256 ;
    - redirige vers `/inscription` s'il n'y a pas de fiche, sinon vers `/`.
 3. **Revérification des droits d'admin** : avant toute action d'admin, si `roles_verifies_le` date de plus de 10 minutes, le serveur rappelle `/users/@me/guilds/{id}/member` avec le jeton OAuth stocké dans la session. Si le jeton a expiré ou que le rôle a disparu, la session redevient non-admin. **Aucun bot n'est nécessaire.**
@@ -433,7 +433,7 @@ Le pied de page « Merci Duffus » est dans `base.html`, que toutes les pages é
 | `DATABASE_URL` | **oui** | Fly secrets, `.env`, secret GitHub (sauvegarde) | B |
 | `DISCORD_CLIENT_ID` (1564210808509038622) | non | `fly.toml` | B |
 | `DISCORD_CLIENT_SECRET` | **oui** | Fly secrets, `.env` | B |
-| `DISCORD_GUILD_ID`, `DISCORD_ADMIN_ROLE_IDS`, `ADMINS_SUPPLEMENTAIRES` | non | Fly secrets (pour ne pas les publier dans le dépôt) | B |
+| `DISCORD_GUILD_ID`, `DISCORD_ADMIN_ROLE_IDS`, `ADMINS_SUPPLEMENTAIRES`, `DISCORD_OWNER_ID` (propriétaire du serveur, admin d'office) | non | Fly secrets (pour ne pas les publier dans le dépôt) | B |
 | `DISCORD_TOKEN` (jeton du bot) | **oui** | `.env` de Marceau seulement (bot d'atelier, EX-93), **jamais sur Fly** | — (aucun bot sur le site) |
 | `DUFFUS_SUPABASE_URL`, `DUFFUS_SUPABASE_CLE` | publique, mais appartient à l'auteur | `.env` de l'admin qui aspire, **jamais** sur Fly ni dans le dépôt | B |
 | `AGE_RECIPIENT` | clé publique | secret GitHub | B |

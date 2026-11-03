@@ -235,7 +235,7 @@ async def retour(request: Request, code: str = "", state: str = "", error: str =
     await s.depot.creer_session(hacher(jeton), identite.discord_user_id, identite.nom, admin, jeton_oauth,
                                 secrets.token_urlsafe(32), maintenant, DUREE_SESSION)
     grimpeur = await s.depot.grimpeur_par_discord(identite.discord_user_id)
-    vers = "/" if grimpeur is not None or mode(request) == "teaser" else "/inscription"
+    vers = "/" if grimpeur is not None or (mode(request) == "teaser" and not admin) else "/inscription"
     reponse = RedirectResponse(vers, status_code=303)
     _poser_cookie(reponse, COOKIE_SESSION, jeton, DUREE_SESSION)
     reponse.delete_cookie(COOKIE_STATE, path="/", secure=True, httponly=True, samesite="lax")

@@ -75,7 +75,7 @@ class Monde:
 
 
 def monde(*, mode: str = "ouvert", maintenant: datetime | None = None, regles: Regles | None = None,
-          depot: DepotDemo | None = None) -> Monde:
+          owner_id: int | None = None, depot: DepotDemo | None = None) -> Monde:
     depot = depot or DepotDemo()
     appels: list[str] = []
     membres = membres_demo(depot)
@@ -84,10 +84,12 @@ def monde(*, mode: str = "ouvert", maintenant: datetime | None = None, regles: R
     if maintenant is not None:
         m.maintenant[0] = maintenant
     config = Config(SITE_MODE=mode, SITE_URL=SITE, DISCORD_GUILD_ID=1, DISCORD_ADMIN_ROLE_IDS=str(ROLE_ADMIN),
-                    ADMINS_SUPPLEMENTAIRES=str(ID_ADMIN_SUP), DISCORD_CLIENT_SECRET="secret-de-test", _env_file=None)
+                    ADMINS_SUPPLEMENTAIRES=str(ID_ADMIN_SUP), DISCORD_CLIENT_SECRET="secret-de-test",
+                    DISCORD_OWNER_ID=owner_id, _env_file=None)
     oauth = ClientOAuth(config.discord_client_id, SecretStr("secret-de-test"), config.redirect_uri, 1,
                         transport=faux_discord(membres, appels))
-    m.app = creer_app(config, horloge=m.horloge, source=depot, oauth=oauth, regles=regles)
+    m.app = creer_app(config, horloge=m.horloge, source=depot, oauth=oauth,
+                       regles=regles or Regles(monde_des_douze=True))  # les tests des modules les allument
     return m
 
 

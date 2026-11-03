@@ -33,6 +33,10 @@
   <p class="bandeau" role="status"><b>Mode teaser</b> : les grimpeurs ne voient pas encore cette page.</p>
   {% endif %}
 
+  {% if v.connecte and not v.grimpeur and (chemin.startswith("/etages") or chemin.startswith("/grimpeurs/")) %}
+  <p class="note" role="status" id="sansFiche">Tu n'as pas encore de fiche : tu peux regarder, mais tu ne peux rien cocher. <a href="/inscription">Créer ma fiche</a> pour suivre ta progression.</p>
+  {% endif %}
+
   {% block page %}{% endblock %}
 </div>
 <dialog class="qd" id="qd" aria-modal="true" aria-labelledby="qdTitle"></dialog>
