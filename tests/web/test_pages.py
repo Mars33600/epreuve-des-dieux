@@ -232,6 +232,8 @@ def test_etage_donjons_puis_blocs_du_guide_avec_cadres_et_libelles():
     # Case « Bloc terminé », lien Duffus sûr, compteur et volet « fait par ».
     assert liste.count("<b>Bloc terminé</b>") == 3 and 'data-ref="bloc:1"' in liste
     assert liste.count('href="https://duffus.fr/guide-complet" target="_blank" rel="noopener">Ouvrir sur Duffus') == 3
+    # Duffus ne sait pas ouvrir un bloc par lien : chaque bouton dit où cliquer (tranche, chapitre = numéro du bloc).
+    assert liste.count("puis tranche ") == 3 and " · chapitre " in liste
     assert "5 sur 10 l'ont fait" in liste
     assert liste.count("Fait par / Pas encore fait par") == 3 and "Pas encore fait par <small" in liste
 

@@ -767,3 +767,6 @@ details.recap[open] .recap-titre::before{transform:rotate(90deg)}
 .etat-liste li.afaire .etat{color:var(--warn);border-style:dashed;border-color:var(--warn)}
 .etat-liste .etat-nom{flex:1 1 220px;min-width:0;overflow-wrap:anywhere}
 .etat-dj{margin:0;padding:0 4px 4px}
+/* Lien Duffus d'un bloc : le bouton, puis où cliquer une fois sur le guide (tranche et chapitre). */
+.duffus-ou{display:inline-flex;flex-direction:column;align-items:flex-start;gap:4px}
+.duffus-ou small{font-size:var(--t-sm)}

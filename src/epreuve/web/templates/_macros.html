@@ -201,7 +201,10 @@
     <div class="bloc-actions">
       <label class="tick c-{{ cat }} bloc-termine"><input type="checkbox" data-ref="{{ ref }}"{% if fait %} checked{% endif %}{% if not cochable %} disabled{% endif %}><span><b>Bloc terminé</b></span></label>
       {%- if b.lien_duffus %}
-      <a class="lien-duffus" href="{{ b.lien_duffus }}" target="_blank" rel="noopener">Ouvrir sur Duffus<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span></a>
+      {#- Duffus mémorise la tranche et le chapitre dans le navigateur : aucun lien ne peut ouvrir un bloc précis,
+          on indique donc où cliquer (nos numéros de bloc sont ceux des chapitres Duffus). #}
+      <span class="duffus-ou"><a class="lien-duffus" href="{{ b.lien_duffus }}" target="_blank" rel="noopener">Ouvrir sur Duffus<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span></a>
+        <small class="muted">puis tranche {{ vue.etage.niveau_min }}-{{ vue.etage.niveau_max }}{% if b.numero %} · chapitre {{ b.numero }}{% endif %}</small></span>
       {%- endif %}
       <a class="compteur compteur-bloc" href="/grimpeurs?quoi={{ ref }}" data-compteur="{{ ref }}" data-actifs="{{ vue.jauge.actifs }}">{{ vue.compteurs.get(ref, 0) }} sur {{ vue.jauge.actifs }} l'ont fait</a>
     </div>
