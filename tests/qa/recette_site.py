@@ -1,20 +1,30 @@
 # ruff: noqa: E501, UP031, S310, B904, S110
-"""Recette automatisée du site entier dans Chromium sans tête, hors pytest (Playwright n'est pas une dépendance).
+"""Recette automatisée du site v5 dans Chromium sans tête, hors pytest (Playwright n'est pas une dépendance).
 
     uv run --with playwright python tests/qa/recette_site.py [--mode demo|base|les-deux] [--captures DOSSIER]
                                                               [--largeurs 360,768,1440] [--limite 60]
 
 À chaque largeur (360, 768 et 1440 px) et pour chaque profil (grimpeur, admin) :
-- parcourt le menu, le menu déroulant « Monde des Douze », puis chaque lien interne en profondeur 2 (échantillon
-  borné par modèle d'adresse), en cliquant le lien depuis la page précédente et en vérifiant le retour arrière ;
+- vérifie le menu réduit (La Tour, L'histoire, Règles, Tableau de bord, Grimpeurs, Admin : plus de « Monde des Douze »),
+  parcourt chaque entrée, puis chaque lien interne en profondeur 2 (échantillon borné par modèle d'adresse), en cliquant
+  le lien depuis la page précédente et en vérifiant le retour arrière ;
 - contrôle chaque page : statut 200, aucune erreur JS ni CSP ni requête en échec, aucun défilement horizontal,
-  aucun lien ou bouton recouvert (`elementFromPoint` au centre), images cassées ;
-- clique les boutons, onglets, filtres, listes déroulantes et fiches de la page, puis recontrôle ;
-- teste la recherche globale (saisie progressive, sans Entrée, moins d'une seconde, étage scellé invisible), les
-  cases à cocher (jauge, compteurs, persistance, lecture seule chez l'autre) et les fenêtres modales.
+  aucun lien ou bouton recouvert (`elementFromPoint` au centre), images cassées, texte coupé ;
+- clique les boutons, onglets, filtres, listes déroulantes de la page, puis recontrôle ;
+- attend 404 (jamais 500) sur les modules désactivés : encyclopédie, stuffs, builder, outils, archimonstres, avis de
+  recherche, fiche de quête, et leurs API ;
+- parcours v5 en grimpeur : structure des blocs (titre Duffus, cadre et libellé, case « Bloc terminé », nombre de
+  quêtes, lien « Ouvrir sur Duffus » en nouvel onglet), cocher et décocher un bloc (jauge, compteurs, volet « Fait par »,
+  persistance), point « Quêtes principales » et catégorie secondaire vide, donjons et succès, filtres dans l'URL et
+  retour arrière, refus de cocher la fiche d'un autre, fiche, tableau de bord, filtre « qui a fait » sur un bloc ;
+- en admin : correction de la nature d'un bloc (motif obligatoire, journal, effet, retour à la règle) ;
+- un membre du Discord sans fiche et hors liste crée sa fiche (« Créer ma fiche ») ;
+- la recherche globale (saisie progressive, grimpeurs, blocs, donjons, jamais de quête).
 
 `demo` : données fictives en mémoire. `base` : TEST_DATABASE_URL (ou DATABASE_URL, jamais `.env`) remplie par
-`python -m epreuve.contenu construire --etage 0|1`, `epreuve.encyclopedie charger` et `epreuve.captures charger`.
+`python -m epreuve.contenu construire --etage 0` puis `--etage 1` (base migrée par `alembic upgrade head`) ; le
+serveur de recette ouvre l'étage 1, ce qui termine le 0, et efface les fiches « Novice<largeur> » créées par la
+recette précédente. Les coches de Brindille sont remises comme avant par chaque scénario.
 Code de sortie 1 s'il reste un défaut ; le détail est écrit dans <captures>/rapport.json.
 """
 
@@ -42,6 +52,8 @@ HAUTEUR = {360: 740, 768: 1024, 1440: 900}
 IGNORES = ("/deconnexion", "/static/", "/api/", "/donnees/", "/auth/", "/demo/", "/connexion", "/etages/0/image",
            "/image", "mailto:", "https://", "http://")  # liens sortants (Duffus) : pas notre site
 CLIQUABLES = "a[href], button, input:not([type=hidden]), select, textarea, summary, [role=tab], [role=option]"
+HORS_V5 = ("/encyclopedie", "/stuffs", "/builder", "/outils", "/archimonstres", "/avis-de-recherche")
+MENU = ["La Tour", "L'histoire", "Règles", "Tableau de bord", "Grimpeurs"]
 DANGEREUX = re.compile(r"déconnecter|supprimer|exclure|geler|réintégrer|ouvrir l'étage|forcer|reset|vider", re.I)
 
 JS_DEBORDEMENT = "[document.documentElement.scrollWidth, document.documentElement.clientWidth]"
@@ -65,6 +77,7 @@ JS_RECOUVERTS = """
     const r = e.getBoundingClientRect();
     const x = Math.min(innerWidth - 1, Math.max(0, r.left + r.width / 2));
     const y = Math.min(innerHeight - 1, Math.max(0, r.top + r.height / 2));
+    if (e.closest('.table-wrap') && (r.left > innerWidth || r.right < 0)) continue;  // tableau d'admin : défilement horizontal voulu
     if (r.right < 0 || r.left > innerWidth || r.bottom < 0 || r.top > innerHeight) {
       sortie.push('hors écran : ' + decrire(e)); continue; }
     const h = document.elementFromPoint(x, y);
@@ -159,9 +172,9 @@ def noms_scelles(mode: str) -> list[str]:
         c = await asyncpg.connect(url)
         try:
             lignes = await c.fetch("""select q.nom from epreuve.quete q join epreuve.etage e on e.id = q.etage_id
-                                      where e.statut = 'scelle' order by q.id limit 4""")
+                                      where e.statut = 'scelle' and e.numero > 1 order by q.id limit 4""")
             lignes += await c.fetch("""select d.nom from epreuve.donjon d join epreuve.etage e on e.id = d.etage_id
-                                       where e.statut = 'scelle' order by d.id limit 3""")
+                                       where e.statut = 'scelle' and e.numero > 1 order by d.id limit 3""")
             return [r["nom"] for r in lignes]
         finally:
             await c.close()
@@ -258,9 +271,11 @@ class Contexte:
     mode = ""
 
     def attendu(self, chemin: str, defaut: int = 200) -> int:
-        # La démo n'a ni encyclopédie ni stuffs (pas de base) : 404 voulu.
-        if self.mode == "demo" and chemin.startswith(("/encyclopedie", "/stuffs", "/recherche")):
+        # SPEC-V5 §2 : les modules du « Monde des Douze » et la fiche de quête répondent 404.
+        if chemin.startswith(HORS_V5) or re.match(r"/etages/\d+/quetes/", chemin):
             return 404
+        if self.mode == "demo" and chemin.startswith("/recherche"):
+            return 404  # la démo n'a pas de base de recherche
         return defaut
 
     def aller(self, chemin: str, attendu: int = 200) -> int:
@@ -369,7 +384,7 @@ def interactions(ctx: Contexte, maximum: int = 14) -> None:
     """Clique les boutons, onglets, filtres, listes et résumés de la page, hors cases cochées (testées à part)."""
     p = ctx.page
     url = ctx.chemin
-    selecteur = ("main button:not([type=submit]):not([data-ref]), main summary, main [role=tab], "
+    selecteur = ("main button:not([type=submit]):not([data-ref]):not([data-donjon-tout]), main summary, main [role=tab], "
                  "main input[type=checkbox]:not([data-ref]):not([data-etape]), main input[type=radio], main select, "
                  ".bar .deroulant-bouton, #burger")
     total = p.locator(selecteur).count()
@@ -410,12 +425,22 @@ def interactions(ctx: Contexte, maximum: int = 14) -> None:
 # ---------------------------------------------------------------------------------------------- scénarios
 
 
-def parcours_menu(ctx: Contexte) -> None:
-    """Chaque entrée du menu et du menu déroulant : clic, 200, retour arrière."""
+def parcours_menu(ctx: Contexte, a_fiche: bool, admin: bool) -> None:
+    """Le menu réduit de la v5, puis chaque entrée : clic, 200, retour arrière."""
     p = ctx.page
     ctx.aller("/")
-    liens = p.eval_on_selector_all(".bar .nav a[href], .bar .deroulant-liste a[href], .bar .who a[href]",
-                                   "els => els.map(e => e.getAttribute('href'))")
+    attendu = [m for m in MENU if a_fiche or m != "Tableau de bord"] + (["Admin"] if admin else [])
+    menu = p.eval_on_selector_all(".bar .nav a", "els => els.map(e => e.textContent.trim())")
+    if menu != attendu:
+        ctx.defaut(f"menu {menu} au lieu de {attendu}")
+    if p.locator(".bar .deroulant-bouton, .bar .deroulant-liste").count():
+        ctx.defaut("le menu déroulant « Monde des Douze » est encore dans la barre")
+    if "Monde des Douze" in p.inner_text(".bar") or p.locator("a[href^='/encyclopedie'], a[href^='/outils'], a[href^='/builder']").count():
+        ctx.defaut("une trace du Monde des Douze reste sur l'accueil")
+    creer = p.locator(".bar .who a", has_text="Créer ma fiche").count()
+    if bool(creer) == a_fiche:
+        ctx.defaut(f"« Créer ma fiche » {'présent' if creer else 'absent'} alors que le profil {'a' if a_fiche else 'n a pas'} de fiche")
+    liens = p.eval_on_selector_all(".bar .nav a[href], .bar .who a[href]", "els => els.map(e => e.getAttribute('href'))")
     for h in dict.fromkeys(liens):
         visiter_en_cliquant(ctx, "/", h)
 
@@ -507,236 +532,589 @@ def recherche(ctx: Contexte, requetes: list[tuple[str, str | None]], scelles: li
         ctx.defaut("recherche « zzzzqx » : pas de message « aucun résultat »")
 
 
-def cases(ctx: Contexte, autre_id: str | None) -> None:
-    """Cocher : jauge et compteurs, persistance, lecture seule chez un autre grimpeur."""
+def lire_etat(p: Page) -> dict:
+    """Ce que la page d'un étage affiche de ma progression et de la jauge, pour comparer avant / après une coche."""
+    return p.evaluate("""() => ({
+      cats: Object.fromEntries([...document.querySelectorAll('[data-moi-cat]')].map(e => [e.dataset.moiCat, e.textContent.trim()])),
+      points: (document.querySelector('[data-moi=points]') || {}).textContent,
+      jauge: Object.fromEntries([...document.querySelectorAll('[data-jcat]')].map(e => [e.dataset.jcat, e.textContent.trim()])),
+    })""")
+
+
+def entier(texte: str) -> int:
+    m = re.search(r"\d+", texte or "")
+    return int(m.group()) if m else -1
+
+
+def structure_blocs(ctx: Contexte, numero: int) -> int:
+    """Chaque carte de bloc : titre « Bloc N · … » dans l'ordre du guide, libellé et cadre, case, quêtes, lien Duffus."""
     p = ctx.page
-    ctx.aller("/etages/0")
-    boite = p.locator("#liste li[data-cats]:not([data-donjon]) input[data-ref^='quete:']:not(:checked)").first
+    cartes = p.locator("li.bloc-carte")
+    n = cartes.count()
+    numeros = []
+    for i in range(n):
+        c = cartes.nth(i)
+        titre = c.locator("h3").inner_text().strip()
+        m = re.match(r"^Bloc (\d+) · \S.+", titre)
+        if not m:
+            ctx.defaut(f"bloc {i + 1} de l'étage {numero} : titre « {titre} » sans le numéro de Duffus")
+        else:
+            numeros.append(int(m.group(1)))
+        classe = c.get_attribute("class") or ""
+        lib = c.locator(".badge").first.inner_text().strip()
+        if "c-principales" in classe and lib != "Principal":
+            ctx.defaut(f"« {titre} » : cadre rouge mais libellé « {lib} » au lieu de « Principal »")
+        if "c-secondaires" in classe and lib != "Secondaire":
+            ctx.defaut(f"« {titre} » : cadre jaune mais libellé « {lib} » au lieu de « Secondaire »")
+        couleur = c.evaluate("e => getComputedStyle(e).borderTopColor")
+        rgb = [int(x) for x in re.findall(r"\d+", couleur)[:3]]
+        rouge = rgb[0] > 200 and rgb[1] < 160 and rgb[2] < 160
+        jaune = rgb[0] > 200 and rgb[1] > 200 and rgb[2] < 120
+        if ("c-principales" in classe and not rouge) or ("c-secondaires" in classe and not jaune):
+            ctx.defaut(f"« {titre} » : couleur du cadre {couleur} inattendue pour {classe}")
+        if c.locator("label.bloc-termine", has_text="Bloc terminé").count() != 1:
+            ctx.defaut(f"« {titre} » : pas de case « Bloc terminé »")
+        if not re.search(r"\d+ quêtes?", c.locator(".bloc-meta").inner_text()):
+            ctx.defaut(f"« {titre} » : nombre de quêtes absent ({c.locator('.bloc-meta').inner_text()!r})")
+        lien = c.locator("a.lien-duffus")
+        if lien.count() != 1:
+            ctx.defaut(f"« {titre} » : pas de lien « Ouvrir sur Duffus »")
+        else:
+            href = lien.get_attribute("href") or ""
+            if not href.startswith("https://duffus.fr"):
+                ctx.defaut(f"« {titre} » : le lien Duffus mène à {href!r}")
+            if lien.get_attribute("target") != "_blank" or "noopener" not in (lien.get_attribute("rel") or ""):
+                ctx.defaut(f"« {titre} » : le lien Duffus ne s'ouvre pas dans un nouvel onglet (target/rel)")
+        if c.locator("details.qui-bloc summary", has_text="Fait par / Pas encore fait par").count() != 1:
+            ctx.defaut(f"« {titre} » : pas de volet « Fait par / Pas encore fait par »")
+        if not re.search(r"\d+ sur \d+ l'ont fait", c.locator("a.compteur").inner_text()):
+            ctx.defaut(f"« {titre} » : compteur « x sur N l'ont fait » absent")
+    if numeros != sorted(numeros):
+        ctx.defaut(f"étage {numero} : blocs dans le désordre {numeros} (ordre du guide attendu)")
+    return n
+
+
+def lien_duffus(ctx: Contexte) -> None:
+    """« Ouvrir sur Duffus » : un nouvel onglet vers duffus.fr, la page de l'étage reste ouverte."""
+    p = ctx.page
+    lien = p.locator("li.bloc-carte a.lien-duffus").first
+    if lien.count() == 0:
+        return
+    avant = ctx.chemin
+    try:
+        with p.context.expect_page(timeout=5000) as nouvelle:
+            lien.scroll_into_view_if_needed()
+            lien.click()
+        onglet = nouvelle.value
+        onglet.wait_for_load_state("domcontentloaded")
+        if "duffus.fr" not in onglet.url:
+            ctx.defaut(f"« Ouvrir sur Duffus » ouvre {onglet.url}")
+        if onglet.evaluate("window.opener") is not None:
+            ctx.defaut("« Ouvrir sur Duffus » : le nouvel onglet garde window.opener (noopener manquant)")
+        onglet.close()
+        ctx.r.clics += 1
+    except Exception as e:  # noqa: BLE001
+        ctx.defaut(f"« Ouvrir sur Duffus » n'ouvre pas de nouvel onglet ({str(e).splitlines()[0][:100]})")
+    if ctx.chemin != avant:
+        ctx.defaut(f"« Ouvrir sur Duffus » a changé la page courante : {ctx.chemin}")
+
+
+def cocher_un_bloc(ctx: Contexte, numero: int, pseudo: str) -> None:
+    """Cocher puis décocher un bloc : case, carte, compteur, volet « fait par », progression, persistance."""
+    p = ctx.page
+    ctx.aller(f"/etages/{numero}")
+    boite = p.locator("li.bloc-carte input[data-ref^='bloc:']:not(:checked)").first
     if boite.count() == 0:
-        ctx.defaut("aucune quête à cocher sur /etages/0")
+        ctx.defaut(f"étage {numero} : aucun bloc à cocher")
         return
     ref = boite.get_attribute("data-ref")
-    etat0 = p.eval_on_selector_all("#liste input[data-ref]", "els => els.map(e => [e.dataset.ref, e.checked])")
-    avant_cats = {c: p.inner_text(f"[data-moi-cat='{c}']") for c in ("principales", "secondaires")}
-    compteur = p.locator(f"[data-compteur='{ref}']").first
-    avant_compteur = compteur.inner_text()
-    avant_score = p.inner_text("[data-j='score']")
-    p.locator(f"input[data-ref='{ref}']").first.check(force=True)
+    carte = p.locator(f"li.bloc-carte:has(input[data-ref='{ref}'])")
+    cat = "principales" if "c-principales" in (carte.get_attribute("class") or "") else "secondaires"
+    compteur = p.locator(f"[data-compteur='{ref}']")
+    avant = lire_etat(p)
+    n0 = entier(compteur.inner_text())
+    actifs = entier(compteur.get_attribute("data-actifs"))
+    boite.check(force=True)
     ctx.r.clics += 1
     p.wait_for_timeout(700)
-    if not p.locator(f"input[data-ref='{ref}']").first.is_checked():
-        ctx.defaut(f"la case {ref} s'est décochée toute seule")
-    if compteur.inner_text() == avant_compteur:
-        ctx.defaut(f"compteur de {ref} inchangé après la coche ({avant_compteur})")
-    apres_cats = {c: p.inner_text(f"[data-moi-cat='{c}']") for c in avant_cats}
-    if apres_cats == avant_cats:
-        ctx.defaut(f"« Ma progression » inchangée après la coche de {ref}")
+    apres = lire_etat(p)
+    if carte.get_attribute("data-fait") != "1":
+        ctx.defaut(f"{ref} : la carte n'est pas marquée faite après la coche")
+    if entier(compteur.inner_text()) != n0 + 1:
+        ctx.defaut(f"{ref} : compteur {compteur.inner_text()!r} au lieu de {n0 + 1}")
+    f0, f1 = (entier(x["cats"][cat].split("/")[0]) for x in (avant, apres))
+    if f1 != f0 + 1:
+        ctx.defaut(f"« Ma progression » {cat} : {avant['cats'][cat]} → {apres['cats'][cat]} (+1 attendu)")
     if p.locator("#messageCoche:visible").count():
         ctx.defaut(f"message d'échec après la coche : {p.inner_text('#messageCoche')}")
-    ctx.controler("après une coche")
-    ctx.photo("coche-faite")
+    # le volet « fait par »
+    carte.locator("details.qui-bloc summary").click()
+    p.wait_for_timeout(600)
+    fait = [t.strip() for t in carte.locator("[data-qui=fait] .person").all_inner_texts()]
+    pas = carte.locator("[data-qui=pas] .person").count()
+    if not any(pseudo in t for t in fait):
+        ctx.defaut(f"{ref} : {pseudo} absent de « Fait par » {fait[:5]}")
+    if len(fait) != n0 + 1 or len(fait) + pas != actifs:
+        ctx.defaut(f"{ref} : volet incohérent ({len(fait)} ont fait, {pas} pas encore, {actifs} actifs, compteur {n0 + 1})")
+    if entier(carte.locator("[data-qui-n=fait]").inner_text()) != len(fait):
+        ctx.defaut(f"{ref} : le petit nombre du volet « Fait par » ne suit pas la liste")
+    ctx.controler(f"après la coche de {ref}")
+    ctx.photo("bloc-coche")
+    # persistance
     p.reload()
     p.wait_for_load_state("load")
     if not p.locator(f"input[data-ref='{ref}']").first.is_checked():
         ctx.defaut(f"la coche de {ref} n'a pas survécu au rechargement")
-    if p.inner_text(f"[data-compteur='{ref}']") == avant_compteur:
-        ctx.defaut("le compteur est revenu à sa valeur d'avant après rechargement")
-    # le donjon : « Tout le donjon »
-    d = p.locator("li[data-donjon] summary").first
-    if d.count():
-        d.click()
-        tout = p.locator("[data-donjon-tout]").first
-        avant_dj = p.inner_text("li[data-donjon] [data-djcompte]")
-        if tout.is_visible():
-            tout.click()
-            ctx.r.clics += 1
-            p.wait_for_timeout(700)
-            if p.inner_text("li[data-donjon] [data-djcompte]") != "5" and avant_dj != "5":
-                ctx.defaut(f"« Tout le donjon » : compte {p.inner_text('li[data-donjon] [data-djcompte]')} au lieu de 5")
-            p.reload()
-            p.wait_for_load_state("load")
-            if p.inner_text("li[data-donjon] [data-djcompte]") != "5":
-                ctx.defaut("« Tout le donjon » n'a pas persisté après rechargement")
-            # retour à l'état initial (case par case, depuis le premier donjon)
-            p.locator("li[data-donjon] summary").first.click()
-            restantes = p.locator("li[data-donjon]").first.locator("input[data-ref]:checked")
-            for _ in range(5):
-                if restantes.count() == 0:
-                    break
-                restantes.first.uncheck(force=True)
-                p.wait_for_timeout(300)
-    # on remet toutes les cases dans leur état d'origine (la cascade peut en toucher plusieurs)
-    for _ in range(3):
-        p.reload()
-        p.wait_for_load_state("load")
-        courant = dict(p.eval_on_selector_all("#liste input[data-ref]", "els => els.map(e => [e.dataset.ref, e.checked])"))
-        ecart = [(r, v) for r, v in etat0 if courant.get(r) != v]
-        if not ecart:
-            break
-        for r, v in ecart:
-            p.locator("li[data-donjon] summary").evaluate_all("els => els.forEach(e => e.parentElement.open = true)")
-            (p.locator(f"input[data-ref='{r}']").first.check if v else p.locator(f"input[data-ref='{r}']").first.uncheck)(force=True)
-            p.wait_for_timeout(300)
+    if entier(p.locator(f"[data-compteur='{ref}']").inner_text()) != n0 + 1:
+        ctx.defaut(f"{ref} : compteur faux après rechargement")
+    if lire_etat(p)["cats"][cat] != apres["cats"][cat]:
+        ctx.defaut(f"« Ma progression » {cat} change au rechargement : {apres['cats'][cat]} → {lire_etat(p)['cats'][cat]}")
+    # décocher
+    p.locator(f"input[data-ref='{ref}']").first.uncheck(force=True)
+    p.wait_for_timeout(700)
+    retour = lire_etat(p)
+    if retour != avant:
+        ctx.defaut(f"{ref} : décochée, la progression/jauge ne revient pas à l'état d'avant ({avant} → {retour})")
+    if entier(p.locator(f"[data-compteur='{ref}']").inner_text()) != n0:
+        ctx.defaut(f"{ref} : compteur non revenu à {n0} après la décoche")
     p.reload()
+    p.wait_for_load_state("load")
     if p.locator(f"input[data-ref='{ref}']").first.is_checked():
         ctx.defaut(f"la décoche de {ref} n'a pas persisté")
-    if p.inner_text("[data-j='score']") != avant_score:
-        ctx.defaut("le score de la jauge ne revient pas à sa valeur d'origine")
-    # filtre : état dans l'URL, conservé au rechargement
-    p.locator("#filtre input[value=principales]").uncheck()
-    p.wait_for_timeout(150)
-    visibles = p.locator("#liste li[data-cats]:not([hidden])").count()
+
+
+def point_principales(ctx: Contexte, numero: int) -> None:
+    """Tous les blocs principaux cochés : le point « Quêtes principales » tombe ; catégorie secondaire vide ou non."""
+    p = ctx.page
+    ctx.aller(f"/etages/{numero}")
+    refs = p.eval_on_selector_all("li.bloc-carte.c-principales input[data-ref]", "els => els.map(e => [e.dataset.ref, e.checked])")
+    if not refs:
+        ctx.defaut(f"étage {numero} : aucun bloc principal pour tester le point")
+        return
+    secondaires = p.locator("li.bloc-carte.c-secondaires").count()
+    avant = lire_etat(p)
+    a_cocher = [r for r, c in refs if not c]
+    for i, r in enumerate(a_cocher):
+        p.locator(f"input[data-ref='{r}']").first.check(force=True)
+        p.wait_for_timeout(500)
+        etat = lire_etat(p)
+        derniere = i == len(a_cocher) - 1
+        got = "✓" in etat["cats"]["principales"]
+        if derniere and not got:
+            ctx.defaut(f"étage {numero} : tous les blocs principaux cochés mais pas de point ({etat['cats']['principales']})")
+        if not derniere and got:
+            ctx.defaut(f"étage {numero} : point « principales » accordé avant le dernier bloc principal ({etat['cats']['principales']})")
+    if a_cocher:
+        fin = lire_etat(p)
+        if entier(fin["points"]) != entier(avant["points"]) + 1:
+            ctx.defaut(f"étage {numero} : points {avant['points']} → {fin['points']} (+1 attendu)")
+        if entier(fin["jauge"]["principales"]) != entier(avant["jauge"]["principales"]) + 1:
+            ctx.defaut(f"étage {numero} : jauge principales {avant['jauge']['principales']} → {fin['jauge']['principales']}")
+        ctx.photo("point-principales")
+        ctx.controler(f"point principales de l'étage {numero}")
+    sec = lire_etat(p)["cats"]["secondaires"]
+    if secondaires == 0 and (sec.startswith("0/0") is False or "✓" in sec):
+        ctx.defaut(f"étage {numero} : catégorie secondaire vide mais affichée « {sec} » (« 0/0 » sans point attendu)")
+    if p.locator("body").inner_text().count("NaN") or "undefined" in p.inner_text("body"):
+        ctx.defaut(f"étage {numero} : NaN ou undefined avec une catégorie vide")
+    # on remet tout dans l'état d'avant
+    for r in a_cocher:
+        p.locator(f"input[data-ref='{r}']").first.uncheck(force=True)
+        p.wait_for_timeout(400)
     p.reload()
-    if p.locator("#filtre input[value=principales]").is_checked():
-        ctx.defaut("le filtre décoché n'est pas retrouvé après rechargement")
-    if p.locator("#liste li[data-cats]:not([hidden])").count() != visibles:
-        ctx.defaut("le filtre ne masque pas les mêmes lignes après rechargement")
+    p.wait_for_load_state("load")
+    if lire_etat(p) != avant:
+        ctx.defaut(f"étage {numero} : l'état ne revient pas après décoche de tous les blocs ({avant} → {lire_etat(p)})")
+
+
+def donjons_et_succes(ctx: Contexte, numero: int) -> None:
+    """Un donjon : ses cases, « Tout le donjon », le compteur x/5, la persistance ; on remet à zéro."""
+    p = ctx.page
+    ctx.aller(f"/etages/{numero}")
+    li = p.locator("li[data-donjon]").first
+    if li.count() == 0:
+        ctx.defaut(f"étage {numero} : aucun donjon")
+        return
+    li.locator("summary").first.click()
+    boites = li.locator("input[data-ref]")
+    total = boites.count()
+    if total != 5:
+        ctx.defaut(f"étage {numero} : le premier donjon a {total} cases au lieu de 5")
+    etat0 = lire_etat(p)
+    compte = li.locator("[data-djcompte]")
+    avant = entier(compte.inner_text())
+    cible = boites.nth(0)
+    if cible.is_checked():
+        ctx.defaut("donjon : la première case est cochée sur une base de recette neuve")
+    cible.check(force=True)  # le boss du donjon (la case « Donjon »)
+    p.wait_for_timeout(600)
+    if entier(compte.inner_text()) != avant + 1:
+        ctx.defaut(f"donjon : compteur {compte.inner_text()} après une case (attendu {avant + 1})")
+    cible.uncheck(force=True)
+    p.wait_for_timeout(600)
+    tout = li.locator("[data-donjon-tout]")
+    if tout.is_visible():
+        tout.click()
+        ctx.r.clics += 1
+        p.wait_for_timeout(800)
+        if compte.inner_text() != "5":
+            ctx.defaut(f"« Tout le donjon » : compte {compte.inner_text()} au lieu de 5")
+        ctx.photo("donjon-complet")
+        p.reload()
+        p.wait_for_load_state("load")
+        li = p.locator("li[data-donjon]").first
+        li.locator("summary").first.click()
+        if li.locator("[data-djcompte]").inner_text() != "5":
+            ctx.defaut("« Tout le donjon » n'a pas persisté après rechargement")
+        for i in range(5):
+            li.locator("input[data-ref]").nth(i).uncheck(force=True)
+            p.wait_for_timeout(350)
+    p.reload()
+    p.wait_for_load_state("load")
+    if lire_etat(p) != etat0:
+        ctx.defaut(f"donjon : l'état ne revient pas après remise à zéro ({etat0} → {lire_etat(p)})")
+
+
+def filtres_url(ctx: Contexte, numero: int) -> None:
+    """Les filtres vivent dans l'URL, survivent au rechargement et au retour arrière depuis une autre page."""
+    p = ctx.page
+    ctx.aller(f"/etages/{numero}")
+    p.locator("#filtre input[value=donjons]").uncheck()
+    p.locator("#filtre input[value=full_succes]").uncheck()
+    p.wait_for_timeout(150)
+    if "voir=" not in p.url:
+        ctx.defaut(f"filtre : l'URL ne porte pas l'état ({p.url})")
+    if p.locator("li[data-donjon]:not([hidden])").count():
+        ctx.defaut("filtre : les donjons restent visibles malgré Donjons et Full succès décochés")
+    visibles = p.locator("#liste li[data-cats]:not([hidden])").count()
+    if p.locator("li.bloc-carte:not([hidden])").count() != p.locator("li.bloc-carte").count():
+        ctx.defaut("filtre : des blocs sont masqués alors que leurs filtres sont cochés")
+    url = ctx.chemin
+    p.reload()
+    p.wait_for_load_state("load")
+    if p.locator("#filtre input[value=donjons]").is_checked() or p.locator("#liste li[data-cats]:not([hidden])").count() != visibles:
+        ctx.defaut("filtre : état non retrouvé après rechargement")
+    # aller ailleurs puis revenir
+    lien = p.locator("a.compteur-bloc").first
+    if lien.count():
+        lien.click()
+        p.wait_for_load_state("load")
+        if "/grimpeurs?quoi=bloc:" not in p.url:
+            ctx.defaut(f"le compteur d'un bloc mène à {p.url}")
+        p.go_back()
+        p.wait_for_load_state("load")
+        p.wait_for_timeout(250)
+        if ctx.chemin != url:
+            ctx.defaut(f"retour arrière : {ctx.chemin} au lieu de {url}")
+        if p.locator("#filtre input[value=donjons]").is_checked() or p.locator("li[data-donjon]:not([hidden])").count():
+            ctx.defaut("retour arrière : le filtre n'est pas retrouvé")
+    # blocs principaux seulement, puis « ce qui me reste »
+    p.click("#filtreTout")
+    if "voir=" in p.url or "reste=" in p.url:
+        ctx.defaut(f"« Tout afficher » laisse des filtres dans l'URL ({p.url})")
+    p.locator("#filtre input[value=secondaires]").uncheck()
+    p.wait_for_timeout(100)
+    if p.locator("li.bloc-carte.c-secondaires:not([hidden])").count():
+        ctx.defaut("filtre : des blocs secondaires restent visibles, Blocs secondaires étant décoché")
+    p.click("#filtreTout")
+    ctx.aller(f"/etages/{numero}?voir=principales&reste=1")
+    if p.locator("#filtre input[value=principales]").is_checked() is False or p.locator("#filtre input[value=reste]").is_checked() is False:
+        ctx.defaut("filtre : l'URL ?voir=principales&reste=1 n'est pas relue")
+    if p.locator("#filtre input[value=donjons]").is_checked():
+        ctx.defaut("filtre : ?voir=principales laisse Donjons coché")
+    # tout décoché : message
+    ctx.aller(f"/etages/{numero}")
     p.locator("#filtre input").evaluate_all("els => els.forEach(e => { if (e.value !== 'reste') e.checked = false })")
     p.locator("#filtre input[value=reste]").check()
     p.wait_for_timeout(100)
-    if not p.locator("#filtreVide").is_visible() and p.locator("#liste li[data-cats]:not([hidden])").count():
-        ctx.defaut("tout décoché : ni liste vide ni message « Rien à afficher »")
+    if not p.locator("#filtreVide").is_visible():
+        ctx.defaut("tout décoché : pas de message « Rien à afficher »")
     p.click("#filtreTout")
-    # la fiche d'un autre grimpeur : lecture seule
-    if autre_id:
-        ctx.aller(f"/grimpeurs/{autre_id}")
-        ctx.photo("fiche-autre")
-        activees = p.locator("input[data-ref]:not([disabled])").count()
-        if activees:
-            ctx.defaut(f"fiche de l'autre grimpeur : {activees} cases modifiables (lecture seule attendue)")
-        ctx.controler("fiche d'un autre grimpeur")
-        ctx.aller(f"/etages/0?grimpeur={autre_id}")
+    ctx.aller(f"/etages/{numero}?voir=n-importe-quoi")  # une valeur inconnue ne casse rien
+    ctx.controler("filtre d'URL invalide")
 
 
-def modales(ctx: Contexte) -> None:
-    """Fenêtre de fiche de quête : Échap, clic sur le fond, retour arrière, croix, focus."""
+def refus_autre_fiche(ctx: Contexte, autre_id: str | None, numero: int) -> None:
+    """On ne coche pas la fiche d'un autre : cases désactivées, et l'API refuse (403)."""
     p = ctx.page
-    ctx.aller("/etages/0")
-    lien = p.locator("#liste a[data-qopen]").first
-    if lien.count() == 0:
-        ctx.defaut("aucune quête à ouvrir en fenêtre sur /etages/0")
+    if not autre_id:
         return
-    liste_url = ctx.chemin
-    qhref = lien.get_attribute("href")
-
-    def ouvrir():
-        lien.scroll_into_view_if_needed()
-        lien.click()
-        ctx.r.clics += 1
-        p.wait_for_selector("dialog#qd[open] .qd-in", timeout=3000)
-        p.wait_for_timeout(150)
-
-    def ferme(contexte: str) -> None:
-        p.wait_for_timeout(300)
-        if p.locator("dialog#qd[open]").count():
-            ctx.defaut(f"fenêtre : toujours ouverte après {contexte}")
-        if ctx.chemin != liste_url:
-            ctx.defaut(f"fenêtre : après {contexte} l'adresse est {ctx.chemin} au lieu de {liste_url}")
-
-    ouvrir()
-    if urlparse(p.url).path != qhref:
-        ctx.defaut(f"fenêtre : adresse {ctx.chemin} au lieu de {qhref}")
-    foc = p.evaluate("document.activeElement && (document.activeElement.closest('dialog#qd') ? 'dans' : document.activeElement.tagName)")
-    if foc != "dans":
-        ctx.defaut(f"fenêtre : le focus n'est pas dans la fenêtre à l'ouverture ({foc})")
-    ctx.controler("fiche de quête ouverte")
-    ctx.photo("modale-quete")
-    # onglet / qui l'a faite
-    qui = p.locator("dialog#qd [data-qui]")
-    if qui.count():
-        qui.click()
-        ctx.r.clics += 1
-        if p.locator("#quiPanneau").is_hidden():
-            ctx.defaut("« Qui l'a faite » n'ouvre pas le volet")
-        ctx.photo("modale-quete-qui")
-        qui.click()
-    # tab reste piégé dans la fenêtre
-    for _ in range(40):
-        p.keyboard.press("Tab")
-    if p.evaluate("(() => { const a = document.activeElement; return a !== document.body && !a.closest('dialog#qd'); })()"):
-        ctx.defaut("fenêtre : Tab fait sortir le focus de la fenêtre modale")
-    p.keyboard.press("Escape")
-    ferme("Échap")
-    if p.evaluate("document.activeElement && document.activeElement.dataset && document.activeElement.dataset.qopen") != qhref.split("/")[-1]:
-        ctx.defaut("fenêtre : le focus ne revient pas sur la quête ouverte après Échap")
-    ouvrir()
-    plein_ecran = p.evaluate("(() => { const r = document.getElementById('qd').getBoundingClientRect(); return r.left < 4 && r.top < 4; })()")
-    if plein_ecran:  # sur téléphone la fiche occupe tout l'écran : il n'y a pas de fond à toucher, on utilise la croix
-        p.click("dialog#qd [data-qclose]")
-    else:
-        p.mouse.click(2, 2)
-    ferme("clic sur le fond")
-    ouvrir()
-    p.go_back()
-    ferme("retour arrière")
-    p.go_forward()
-    p.wait_for_timeout(500)
-    if not p.locator("dialog#qd[open]").count():
-        ctx.defaut("fenêtre : « page suivante » ne rouvre pas la fiche")
-    else:
-        p.keyboard.press("Escape")
-        ferme("Échap après page suivante")
-    ouvrir()
-    p.click("dialog#qd [data-qclose]")
-    ferme("la croix")
-    # prérequis cliquable dans la fiche : remplace la fiche sans empiler une fenêtre
-    for i in range(min(12, p.locator("#liste a[data-qopen]").count())):
-        p.locator("#liste a[data-qopen]").nth(i).click()
-        p.wait_for_selector("dialog#qd[open] .qd-in", timeout=3000)
-        pre = p.locator("dialog#qd .recap-list a.qlink")
-        if pre.count():
-            pre.first.click()
-            ctx.r.clics += 1
-            p.wait_for_timeout(500)
-            if p.locator("dialog#qd[open]").count() != 1:
-                ctx.defaut("fenêtre : le prérequis cliqué a fermé la fiche")
-            ctx.photo("modale-prerequis")
-            p.keyboard.press("Escape")
-            p.wait_for_timeout(300)
-            if ctx.chemin != liste_url:
-                ctx.defaut(f"fenêtre : après prérequis puis Échap l'adresse est {ctx.chemin}")
-            break
-        p.keyboard.press("Escape")
-        p.wait_for_timeout(300)
-    # page complète sans JS : /etages/0/quetes/N
-    ctx.aller(qhref)
-    ctx.controler("fiche de quête en page complète")
+    ctx.aller(f"/grimpeurs/{autre_id}")
+    ctx.photo("fiche-autre")
+    activees = p.locator("input[data-ref]:not([disabled])").count()
+    if activees:
+        ctx.defaut(f"fiche de l'autre grimpeur : {activees} cases modifiables (lecture seule attendue)")
+    ctx.controler("fiche d'un autre grimpeur")
+    ctx.aller(f"/etages/{numero}?grimpeur={autre_id}")
+    if p.locator("li.bloc-carte input[data-ref]:not([disabled])").count() and p.locator("li.bloc-carte input[data-ref]:disabled").count():
+        ctx.defaut("?grimpeur=autre : des cases de blocs sont actives")
+    # l'API : un grimpeur ne peut pas cocher pour un autre
+    ref = p.locator("li.bloc-carte input[data-ref^='bloc:']").first.get_attribute("data-ref")
+    csrf = p.evaluate("(document.querySelector('meta[name=csrf]') || {}).content || ''")
+    rep = p.request.post(ctx.base + "/api/coches", data=json.dumps(
+        {"type": "bloc", "id": int(ref.split(":")[1]), "cochee": True, "grimpeur_id": int(autre_id), "motif": "test"}),
+        headers={"Content-Type": "application/json", "X-CSRF-Token": csrf, "Origin": ctx.base})
+    if rep.status not in (403, 400):
+        ctx.defaut(f"cocher le bloc d'un autre grimpeur par l'API : statut {rep.status} (403 attendu)")
+    p.reload()
+    if p.locator(f"input[data-ref='{ref}']").first.is_checked():
+        ctx.defaut("le bloc d'un autre grimpeur est devenu coché")
 
 
-def filtres_instantanes(ctx: Contexte) -> None:
-    """Barres de recherche des listes : le filtre agit à la frappe, sans bouton, et affiche l'état vide."""
+def fiche_et_tableau(ctx: Contexte, numero: int) -> None:
+    """Ma fiche, le tableau de bord et la page Grimpeurs avec le filtre « qui a fait » sur un bloc."""
     p = ctx.page
-    for chemin, mot in (("/encyclopedie/monstres", "bouf"), ("/encyclopedie/objets", "bouf"),
-                        ("/encyclopedie/panoplies", "bouf"), ("/encyclopedie/sorts", "feu"),
-                        ("/encyclopedie/quetes", "bouf"), ("/encyclopedie/pnj", "mer"),
-                        ("/encyclopedie/recettes", "bouf"), ("/archimonstres", "kar"),
-                        ("/avis-de-recherche", "ar"), ("/outils/craft", "bouf")):
-        st = ctx.aller(chemin, attendu=200)
-        if st != 200:
-            continue
-        champ = p.locator("main input[type=search]:visible").first
-        if champ.count() == 0:
-            ctx.defaut(f"{chemin} : pas de champ de recherche visible")
-            continue
-        avant = p.inner_text("main")
-        champ.click()
-        champ.press_sequentially(mot, delay=60)
-        p.wait_for_timeout(900)
-        p.wait_for_load_state("load")  # la liste se recharge parfois par navigation
-        apres = p.inner_text("main")
-        ctx.r.verifs += 1
-        if avant == apres:
-            ctx.defaut(f"{chemin} : la saisie « {mot} » ne change rien sans validation")
-        ctx.controler(f"filtre {chemin} « {mot} »")
-        ctx.photo(f"filtre-{slug(chemin)}")
-        champ.fill("")
-        champ.press_sequentially("zzzzqx", delay=40)
-        p.wait_for_timeout(900)
+    ctx.aller(f"/etages/{numero}")
+    ref = p.locator("li.bloc-carte input[data-ref^='bloc:']").first.get_attribute("data-ref")
+    p.locator(f"input[data-ref='{ref}']").first.check(force=True)
+    p.wait_for_timeout(600)
+    titre = p.locator(f"li.bloc-carte:has(input[data-ref='{ref}']) h3").inner_text().strip()
+    ma = p.locator(".bar .ma-fiche").get_attribute("href")
+    pseudo = p.locator(".bar .ma-fiche").text_content().split("(")[-1].strip(" )")
+    ctx.aller(ma)
+    ctx.photo("fiche-moi")
+    corps = p.inner_text("body")
+    if "Blocs du guide" not in corps:
+        ctx.defaut("fiche : pas de section « Blocs du guide »")
+    ligne = p.locator("ul.etat-liste li", has_text=titre).first
+    if ligne.count() == 0 or "Fait" not in ligne.inner_text() or "À faire" in ligne.inner_text():
+        ctx.defaut(f"fiche : le bloc « {titre} » n'apparaît pas comme fait")
+    if p.locator("input[data-ref]:not([disabled])").count() == 0:
+        ctx.defaut("ma fiche : aucune case modifiable")
+    nb_f = entier(p.locator("h3.section-title", has_text="Blocs du guide").first.inner_text())
+    if nb_f < 1:
+        ctx.defaut("fiche : le compteur de blocs ne compte pas le bloc coché")
+    ctx.controler("ma fiche")
+    # tableau de bord
+    ctx.aller("/tableau-de-bord")
+    ctx.photo("tableau")
+    dt = p.locator("dl.resume-etage").first
+    if "Blocs du guide" not in dt.inner_text():
+        ctx.defaut("tableau de bord : « Blocs du guide » absent du résumé d'étage")
+    ctx.controler("tableau de bord")
+    ctx.aller("/tableau-de-bord?onglet=succes")
+    ctx.controler("tableau de bord, succès de donjon")
+    ctx.aller("/tableau-de-bord?onglet=succes&reste=1")
+    ctx.controler("tableau de bord, succès restants")
+    # page Grimpeurs : le filtre porte sur les blocs
+    ctx.aller("/grimpeurs")
+    options = p.locator("#askSel option[value^='bloc:']")
+    if options.count() == 0:
+        ctx.defaut("page Grimpeurs : aucun bloc dans le filtre « qui a fait »")
+    else:
+        p.select_option("#askSel", ref)  # le bouton « Voir » est masqué par le script : le choix suffit
+        p.wait_for_selector("#answer h3", timeout=4000)
+        p.wait_for_timeout(300)
+        if f"quoi={ref}".replace(":", "%3A") not in p.url and f"quoi={ref}" not in p.url:
+            ctx.defaut(f"filtre « qui a fait » : URL {p.url}")
+        reponse = p.inner_text("#answer")
+        if "Qui l'a fait" not in reponse or pseudo not in " ".join(p.locator("#answer .person.done").all_inner_texts()):
+            ctx.defaut(f"filtre « qui a fait » sur {ref} : {pseudo} absent de la liste « fait » ({reponse[:120]!r})")
+        if p.locator("#roster .player.target").count() + p.locator("#roster .player.dim").count() == 0:
+            ctx.defaut("filtre « qui a fait » : aucune carte mise en avant ou estompée")
+        ctx.photo("grimpeurs-qui")
+        ctx.controler("page Grimpeurs avec filtre")
+        p.click("#askClear")
         p.wait_for_load_state("load")
-        corps = p.inner_text("main").lower()
-        if not any(m in corps for m in ("aucun", "rien", "pas de résultat", "0 résultat", "introuvable")) and "0" not in corps:
-            ctx.defaut(f"{chemin} : aucun message d'état vide pour un mot introuvable")
-        ctx.photo(f"filtre-vide-{slug(chemin)}")
+        if "quoi=" in p.url:
+            ctx.defaut("« Effacer » laisse le filtre dans l'URL")
+    # remise à zéro
+    ctx.aller(f"/etages/{numero}")
+    p.locator(f"input[data-ref='{ref}']").first.uncheck(force=True)
+    p.wait_for_timeout(600)
+
+
+def sans_trace_de_quete(ctx: Contexte) -> None:
+    """Aucune quête unitaire, aucune fiche de quête, aucune fenêtre : sur les pages principales."""
+    p = ctx.page
+    for chemin in ("/", "/etages/0", "/etages/1", "/grimpeurs", "/tableau-de-bord", "/regles"):
+        if chemin == "/etages/1" and ctx.mode == "demo":
+            continue  # scellé dans la démo
+        if chemin == "/tableau-de-bord" and p.locator(".bar .ma-fiche").count() == 0:
+            continue
+        ctx.aller(chemin)
+        traces = p.evaluate("""() => [...document.querySelectorAll(
+          "a[data-qopen], dialog#qd, [data-etape], [data-qui]:not([data-qui='fait']):not([data-qui='pas']), input[data-ref^='quete:'], a[href*='/quetes/'], a[href^='/encyclopedie'], a[href^='/outils'], a[href^='/builder'], a[href^='/archimonstres'], a[href^='/avis-de-recherche'], a[href^='/stuffs']"
+        )].map(e => e.outerHTML.slice(0, 90))""")
+        if traces:
+            ctx.defaut(f"{chemin} : traces de quête unitaire ou de module désactivé {traces[:3]}")
+        texte = p.evaluate("""() => { const c = document.body.cloneNode(true); c.querySelectorAll('footer, script').forEach(e => e.remove());
+                                      return c.innerText; }""")  # le pied de page et l'histoire citent le Monde des Douze (jeu)
+        for motif in (r"[Ff]iche de quête", r"Encyclop", r"Builder", r"Archimonstre", r"Avis de recherche", r"Quête faite", r"Étape\b"):
+            if re.search(motif, texte):
+                ctx.defaut(f"{chemin} : texte « {motif} » encore présent")
+
+
+def desactives(ctx: Contexte) -> None:
+    """Les modules désactivés répondent 404 (page d'erreur propre, jamais 500) ; l'API aussi."""
+    p = ctx.page
+    for chemin in ("/encyclopedie", "/encyclopedie/quetes", "/encyclopedie/monstres", "/encyclopedie/objets", "/stuffs",
+                   "/builder", "/outils", "/outils/craft", "/outils/almanax", "/archimonstres", "/avis-de-recherche",
+                   "/etages/0/quetes/101", "/etages/1/quetes/1"):
+        ctx.aller(chemin, attendu=404)
+        if p.locator("text=Traceback").count():
+            ctx.defaut(f"{chemin} : trace d'erreur dans la 404")
+    ctx.controler("une 404", recouvrements=False)
+    for chemin in ("/api/builder/objets", "/api/archimonstres/monstre/1/qui", "/outils/donnees/almanax.json"):
+        rep = p.request.get(ctx.base + chemin)
+        if rep.status != 404:
+            ctx.defaut(f"{chemin} : statut {rep.status} au lieu de 404")
+    # le suivi par étape (SPEC-V5 §2) : l'API ne répond plus, même à un POST bien formé
+    ctx.aller("/etages/0" if ctx.mode == "demo" else "/etages/1")
+    csrf = p.evaluate("(document.querySelector('meta[name=csrf]') || {}).content || ''")
+    rep = p.request.post(ctx.base + "/api/etapes", data=json.dumps({"quete_id": 101, "ordre": 1, "faite": True}),
+                         headers={"Content-Type": "application/json", "X-CSRF-Token": csrf, "Origin": ctx.base})
+    if rep.status != 404:
+        ctx.defaut(f"POST /api/etapes : statut {rep.status} au lieu de 404 (suivi par étape désactivé)")
+    rep = p.request.post(ctx.base + "/api/coches", data=json.dumps({"type": "quete", "id": 101, "cochee": True}),
+                         headers={"Content-Type": "application/json", "X-CSRF-Token": csrf, "Origin": ctx.base})
+    if rep.status not in (400, 404, 422):
+        ctx.defaut(f"POST /api/coches sur une quête : statut {rep.status} (la coche de quête n'existe plus)")
+
+
+def recherche_v5(ctx: Contexte, admin: bool) -> None:
+    """La recherche ne sort que des grimpeurs, blocs, donjons et étages : jamais une quête, jamais un objet."""
+    p = ctx.page
+    ctx.aller("/")
+    permis = {"grimpeurs", "blocs", "donjons", "etages"}
+    for q, attendu in (("cryptologie", None), ("incarnam", "blocs"), ("tutoriel", "blocs"), ("brin", "grimpeurs"),
+                       ("bouftou", "donjons"), ("étage", None), ("bloc 2", "blocs"), ("épée", None)):
+        rep = p.request.get(ctx.base + f"/api/recherche?q={q}&limite=20")
+        if rep.status != 200:
+            ctx.defaut(f"recherche « {q} » : statut {rep.status}")
+            continue
+        groupes = rep.json()["groupes"]
+        types = {g["type"] for g in groupes}
+        if not types <= permis:
+            ctx.defaut(f"recherche « {q} » : types inattendus {types - permis}")
+        if attendu and attendu not in types:
+            ctx.defaut(f"recherche « {q} » : aucun résultat de type {attendu} (types {types})")
+        for g in groupes:
+            for r in g["resultats"]:
+                if "/quetes/" in r["lien"] or r["lien"].startswith(("/encyclopedie", "/outils", "/builder")):
+                    ctx.defaut(f"recherche « {q} » : lien vers un module désactivé {r['lien']}")
+    rep = p.request.get(ctx.base + "/api/recherche?q=cryptologie")
+    if rep.ok and any(g["resultats"] for g in rep.json()["groupes"]):
+        ctx.defaut("recherche « cryptologie » (nom d'une quête) renvoie quand même des résultats : " + str(rep.json()["groupes"])[:150])
+
+
+def correction_admin(ctx: Contexte, numero: int) -> None:
+    """Un admin corrige la nature d'un bloc : motif obligatoire, journal, effet sur la page d'étage, retour à la règle."""
+    p = ctx.page
+    ctx.aller(f"/admin/etages/{numero}")
+    ctx.photo("admin-etage")
+    ctx.controler("revue d'étage (admin)")
+    lignes = p.locator("tr.bloc-revue")
+    if lignes.count() == 0:
+        ctx.defaut(f"admin étage {numero} : aucun bloc dans la revue")
+        return
+    if not re.search(r"\d+\s+sur\s+\d+", lignes.first.locator("td.num").inner_text()):
+        ctx.defaut("revue : « principales sur total » absent")
+    ligne = lignes.last
+    titre = ligne.locator("td").first.inner_text().split("\n")[0].strip()
+    nature0 = ligne.locator("select[name=nature]").input_value()
+    nouvelle = "secondaire" if nature0 == "principale" else "principale"
+    motif = f"recette v5 {int(time.time())}"
+    # sans motif : refusé (le champ est « required » : on contourne pour viser le serveur)
+    ligne.locator("input[name=motif]").evaluate("e => e.removeAttribute('required')")
+    ligne.locator("select[name=nature]").select_option(nouvelle)
+    ligne.locator("button[type=submit]").click()
+    p.wait_for_load_state("load")
+    if p.locator("tr.bloc-revue").last.locator("select[name=nature]").input_value() != nature0:
+        ctx.defaut("correction de bloc acceptée sans motif")
+    ctx.controler("correction refusée sans motif", recouvrements=False)
+    # avec motif
+    ligne = p.locator("tr.bloc-revue").last
+    ligne.locator("select[name=nature]").select_option(nouvelle)
+    ligne.locator("input[name=motif]").fill(motif)
+    ligne.locator("button[type=submit]").click()
+    p.wait_for_load_state("load")
+    ligne = p.locator("tr.bloc-revue").last
+    if ligne.locator("select[name=nature]").input_value() != nouvelle:
+        ctx.defaut(f"correction de nature : {nouvelle} non retenue")
+    if motif not in ligne.inner_text():
+        ctx.defaut("correction de nature : le motif n'est pas rappelé dans la revue")
+    ctx.photo("admin-bloc-corrige")
+    ctx.aller("/admin/journal")
+    if motif not in p.inner_text("body"):
+        ctx.defaut("correction de nature : absente du journal admin")
+    ctx.controler("journal admin", recouvrements=False)
+    ctx.aller(f"/etages/{numero}")
+    carte = p.locator("li.bloc-carte").last
+    attendu_lib = "Principal" if nouvelle == "principale" else "Secondaire"
+    if carte.locator(".badge").first.inner_text().strip() != attendu_lib or f"c-{'principales' if nouvelle == 'principale' else 'secondaires'}" not in (carte.get_attribute("class") or ""):
+        ctx.defaut(f"« {titre} » : la page d'étage n'affiche pas la correction ({attendu_lib})")
+    if nouvelle == "secondaire" and p.locator("[data-moi-cat=secondaires]").count() and "0/0" in p.inner_text("[data-moi-cat=secondaires]"):
+        ctx.defaut("une catégorie secondaire non vide s'affiche 0/0 après correction")
+    ctx.photo("etage-bloc-secondaire" if nouvelle == "secondaire" else "etage-bloc-principal")
+    # retour à la règle
+    ctx.aller(f"/admin/etages/{numero}")
+    ligne = p.locator("tr.bloc-revue").last
+    if ligne.locator("select[name=nature] option[value=auto]").count() == 0:
+        ctx.defaut("pas d'option « Revenir à la règle » sur un bloc corrigé")
+        return
+    ligne.locator("select[name=nature]").select_option("auto")
+    ligne.locator("input[name=motif]").fill("retour à la règle (recette)")
+    ligne.locator("button[type=submit]").click()
+    p.wait_for_load_state("load")
+    if p.locator("tr.bloc-revue").last.locator("select[name=nature]").input_value() != nature0:
+        ctx.defaut(f"retour à la règle : nature {p.locator('tr.bloc-revue').last.locator('select[name=nature]').input_value()} au lieu de {nature0}")
+
+
+def creer_fiche(ctx: Contexte, nom: str, ouvert: int) -> None:
+    """Un membre du Discord sans fiche : « Créer ma fiche » dans l'en-tête, formulaire, pseudo déjà pris, première coche."""
+    p = ctx.page
+    ctx.aller("/")
+    lien = p.locator(".bar a", has_text="Créer ma fiche")
+    if p.locator("#burger:visible").count() and lien.count() and not lien.first.is_visible():
+        p.click("#burger")
+    if lien.count() == 0:
+        ctx.defaut(f"{nom} : pas de lien « Créer ma fiche » dans l'en-tête")
+        ctx.aller("/inscription")
+    else:
+        if not lien.first.is_visible():
+            ctx.defaut("« Créer ma fiche » est présent mais invisible")
+        lien.first.click()
+        p.wait_for_load_state("load")
+    if "/inscription" not in p.url:
+        ctx.defaut(f"« Créer ma fiche » mène à {p.url}")
+    if "pas encore inscrit" in p.inner_text("body") or "liste des grimpeurs" in p.inner_text("body"):
+        ctx.defaut("la liste officielle est exigée alors qu'elle ne l'est plus (message « pas inscrit »)")
+        return
+    ctx.photo("inscription")
+    ctx.controler("formulaire de fiche")
+    p.fill("#pseudo", "Brindille")  # déjà pris
+    p.click("button:has-text('Créer ma fiche')")
+    p.wait_for_load_state("load")
+    if not p.locator("[role=alert]").count():
+        ctx.defaut("pseudo déjà pris : aucun message d'erreur")
+    pseudo = f"Neuf{ctx.largeur}"
+    p.fill("#pseudo", pseudo)
+    p.select_option("#classe", "Iop")
+    p.click("button:has-text('Créer ma fiche')")
+    p.wait_for_load_state("load")
+    if "/inscription" in p.url:
+        ctx.defaut(f"la fiche n'est pas créée ({p.inner_text('main')[:150]!r})")
+        return
+    if p.locator(".bar a", has_text="Créer ma fiche").count():
+        ctx.defaut("« Créer ma fiche » reste affiché après la création")
+    if p.locator(".bar .ma-fiche").count() == 0:
+        ctx.defaut("pas de lien « Ma fiche » après la création")
+    ctx.aller(f"/etages/{ouvert}")
+    cases = p.locator("li.bloc-carte input[data-ref]:not([disabled])")
+    if cases.count() == 0:
+        ctx.defaut("la nouvelle fiche ne peut pas cocher de bloc")
+    else:
+        cases.first.check(force=True)
+        p.wait_for_timeout(600)
+        p.reload()
+        if not p.locator("li.bloc-carte input[data-ref]").first.is_checked():
+            ctx.defaut("la première coche de la nouvelle fiche n'est pas conservée")
+        p.locator("li.bloc-carte input[data-ref]").first.uncheck(force=True)
+        p.wait_for_timeout(500)
+    ctx.aller("/grimpeurs")
+    if pseudo not in p.inner_text("#roster"):
+        ctx.defaut(f"{pseudo} absent de la page Grimpeurs")
 
 
 def crawler(ctx: Contexte, limite: int) -> None:
@@ -771,13 +1149,19 @@ def crawler(ctx: Contexte, limite: int) -> None:
 def scenario(playwright, serveur: Serveur, mode: str, largeur: int, captures: Path, rapport: Rapport,
              limite: int, scelles: list[str]) -> None:
     navigateur = playwright.chromium.launch()
-    grimpeur, admin = ("Brindille", "Marceau")
-    for profil, est_admin in ((grimpeur, False), (admin, True)):
-        etiquette = f"{mode}-{'admin' if est_admin else 'grimpeur'}"
+    # Le serveur de recette `base` ouvre l'étage 1 (le 0 est terminé) ; la démo garde le 0 seul ouvert.
+    ouvert = 0 if mode == "demo" else 1
+    nouveau = f"Novice{largeur}" if mode == "base" else {360: "Passant", 768: "Nouvelle"}.get(largeur)
+    profils = [("Brindille", False), ("Marceau", True)] + ([(nouveau, False)] if nouveau else [])
+    for profil, est_admin in profils:
+        novice = profil == nouveau
+        etiquette = f"{mode}-{'admin' if est_admin else ('nouveau' if novice else 'grimpeur')}"
         print(f"== {etiquette} à {largeur} px")
         contexte = navigateur.new_context(viewport={"width": largeur, "height": HAUTEUR[largeur]}, locale="fr-FR",
                                           has_touch=largeur < 768, is_mobile=largeur < 768,
                                           reduced_motion="reduce")  # le décor animé ne sert à rien ici
+        contexte.route(re.compile(r"https://(www\.)?duffus\.fr/.*"), lambda r: r.fulfill(
+            status=200, content_type="text/html", body="<title>Duffus (simulé)</title><p>guide</p>"))
         page = contexte.new_page()
         page.set_default_timeout(15000)
         ctx = Contexte(page, rapport, etiquette, serveur.adresse, captures, largeur)
@@ -786,35 +1170,51 @@ def scenario(playwright, serveur: Serveur, mode: str, largeur: int, captures: Pa
                              "console.error('Content Security Policy : ' + e.violatedDirective + ' ' + e.blockedURI))")
         connecter(ctx, profil)
         try:
+            if novice:
+                creer_fiche(ctx, profil, ouvert)
+                continue
             ctx.aller("/")
             ctx.photo("accueil")
-            parcours_menu(ctx)
+            parcours_menu(ctx, a_fiche=not est_admin, admin=est_admin)
             crawler(ctx, limite)
-            requetes = [("kar", "kar"), ("bouf", "bouf"), ("tour", None), ("dofus", None),
-                        ("brin" if not est_admin else "karam", None), ("eleonore", "éléonore"),
-                        ("brindil", None)]
+            desactives(ctx)
+            sans_trace_de_quete(ctx)
             if mode == "base":
+                requetes = [("kar", "kar"), ("bouf", "bouf"), ("incarnam", "incarnam"), ("tour", None),
+                            ("brin" if not est_admin else "karam", None), ("eleonore", "éléonore")]
                 recherche(ctx, requetes, scelles, est_admin)
+                recherche_v5(ctx, est_admin)
             if not est_admin:
                 # un étage scellé : introuvable pour un grimpeur
-                ctx.aller("/etages/1", attendu=404)
-                ctx.aller("/etages/25", attendu=404)
-                ctx.aller("/etages/9999", attendu=404)
+                for n in (ouvert + 1, 25, 9999):
+                    ctx.aller(f"/etages/{n}", attendu=404)
             autre = None
             ctx.aller("/grimpeurs")
+            moi = page.locator(".bar .ma-fiche").get_attribute("href") if page.locator(".bar .ma-fiche").count() else ""
             for h in liens_internes(page, serveur.adresse):
-                if re.fullmatch(r"/grimpeurs/\d+", h):
+                if re.fullmatch(r"/grimpeurs/\d+", h) and h != moi:
                     autre = h.rsplit("/", 1)[1]
-                    if profil == "Brindille":
-                        moi = page.locator(".bar .ma-fiche").get_attribute("href") if page.locator(".bar .ma-fiche").count() else ""
-                        if h == moi:
-                            continue
                     break
-            if not est_admin:
-                cases(ctx, autre)
-            modales(ctx)
-            if mode == "base":
-                filtres_instantanes(ctx)
+            if est_admin:
+                if mode == "base":
+                    correction_admin(ctx, ouvert)
+            else:
+                pseudo = page.locator(".bar .ma-fiche").text_content().split("(")[-1].strip(" )") if moi else profil
+                ctx.aller(f"/etages/{ouvert}")
+                if structure_blocs(ctx, ouvert) == 0:
+                    ctx.defaut(f"étage {ouvert} sans bloc")
+                ctx.controler(f"étage {ouvert}")
+                lien_duffus(ctx)
+                cocher_un_bloc(ctx, ouvert, pseudo)
+                point_principales(ctx, ouvert)
+                donjons_et_succes(ctx, ouvert)
+                filtres_url(ctx, ouvert)
+                refus_autre_fiche(ctx, autre, ouvert)
+                fiche_et_tableau(ctx, ouvert)
+                if mode == "base":  # l'étage 0 est terminé : on peut encore y compléter sa fiche
+                    ctx.aller("/etages/0")
+                    structure_blocs(ctx, 0)
+                    ctx.controler("étage 0 (terminé)")
         except Exception as e:  # noqa: BLE001 — un scénario qui plante est lui-même un défaut
             ctx.defaut(f"le scénario a planté (ligne {e.__traceback__.tb_next.tb_lineno if e.__traceback__.tb_next else '?'}) : "
                        f"{type(e).__name__} {' | '.join(str(e).splitlines()[:6])[:500]}")
