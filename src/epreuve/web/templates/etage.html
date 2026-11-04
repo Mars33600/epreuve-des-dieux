@@ -27,7 +27,7 @@
     {% if cible %}
     <section class="card" aria-labelledby="progTitre" id="maProgression">
       <div class="row"><h2 id="progTitre">Ma progression</h2>
-        <span class="total{% if vue.points(cible.id) == 4 %} full{% endif %}"><span data-moi="points">{{ vue.points(cible.id) }}</span><small> point(s) sur 4</small></span></div>
+        <span class="total{% if vue.points(cible.id) == vue.points_max %} full{% endif %}"><span data-moi="points">{{ vue.points(cible.id) }}</span><small> point(s) sur {{ vue.points_max }}</small></span></div>
       <div class="mesprog">
         {%- set cats = vue.categories(cible.id) %}
         {%- for info in CATS %}{% set e = cats[info.cle] %}
@@ -61,12 +61,12 @@
     <details class="card actifs-etage" id="actifsEtage">
       <summary><span>Grimpeurs actifs ({{ actifs_liste|length }})</span></summary>
       {% if actifs_liste %}
-      <ul class="roles">{% for g, pts in actifs_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / 4</b></li>{% endfor %}</ul>
+      <ul class="roles">{% for g, pts in actifs_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / {{ vue.points_max }}</b></li>{% endfor %}</ul>
       {% else %}<p class="muted">Aucun grimpeur actif pour l'instant.</p>{% endif %}
       {% if pauses_liste %}
       <h3>En pause ({{ pauses_liste|length }})</h3>
       <p class="muted">Ils ne comptent pas dans le palier ; leurs points reviendront à leur réintégration.</p>
-      <ul class="roles pause">{% for g, pts in pauses_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / 4</b></li>{% endfor %}</ul>
+      <ul class="roles pause">{% for g, pts in pauses_points %}<li><span class="pseudo">{{ g.pseudo }}</span><b class="num">{{ pts }} / {{ vue.points_max }}</b></li>{% endfor %}</ul>
       {% endif %}
     </details>
   </main>

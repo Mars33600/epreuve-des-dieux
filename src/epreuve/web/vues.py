@@ -129,6 +129,11 @@ class VueEtage:
     def points(self, grimpeur_id: int | None) -> int:
         return points_grimpeur(self.contenu, self.coches_de(grimpeur_id), self.regles)
 
+    @property
+    def points_max(self) -> int:
+        """Points qu'un grimpeur peut rapporter sur cet étage : une par catégorie non vide (4 au plus)."""
+        return self.jauge.nb_categories
+
     def avancement(self, grimpeur_id: int | None) -> tuple[int, int]:
         return avancement(self.contenu, self.coches_de(grimpeur_id))
 

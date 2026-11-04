@@ -86,5 +86,5 @@ async def tableau_de_bord(request: Request, onglet: str = "progression", reste: 
     faits, total = sum(b.faits for b in blocs), sum(b.total for b in blocs)
     return await rendre(request, "tableau.html", {
         "onglet": onglet, "reste": bool(reste), "g": v.grimpeur, "blocs": blocs, "faits": faits, "total": total,
-        "points": sum(b.points for b in blocs), "points_max": 4 * len(blocs),
+        "points": sum(b.points for b in blocs), "points_max": sum(b.vue.points_max for b in blocs),
         "a_faire": a_faire(blocs, v.grimpeur.id)})

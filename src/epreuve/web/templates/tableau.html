@@ -26,7 +26,7 @@
 <section class="card" aria-labelledby="tb{{ vue.etage.numero }}">
   <div class="row">
     <h3 id="tb{{ vue.etage.numero }}"><a href="/etages/{{ vue.etage.numero }}">{{ titre_etage(vue.etage) }}</a></h3>
-    <span class="total{% if b.points == 4 %} full{% endif %}">{{ b.points }}<small>/4 points · {{ b.faits }}/{{ b.total }}</small></span>
+    <span class="total{% if b.points == vue.points_max %} full{% endif %}">{{ b.points }}<small>/{{ vue.points_max }} points · {{ b.faits }}/{{ b.total }}</small></span>
   </div>
   <p class="muted">Niveaux {{ vue.etage.niveau_min }} à {{ vue.etage.niveau_max }}{% if vue.etage.statut == "termine" %} · étage terminé{% else %} · jauge {{ vue.jauge.score }}/{{ vue.jauge.palier }}{% endif %}</p>
   <div class="bigpips">{% for info in CATS %}{% set e = cats[info.cle] %}<span class="pipcell">{{ pip(info, e, True) }}<span>{{ info.court }}</span><b>{{ e.faits }}/{{ e.total }}</b></span>{% endfor %}</div>
