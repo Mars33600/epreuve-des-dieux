@@ -144,13 +144,15 @@ select{min-height:44px;width:100%;min-width:0;flex:1 1 220px;padding:8px 12px;bo
 .section-title{display:flex;align-items:center;gap:10px;font-size:19px}
 .section-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold-line),transparent)}
 .dungeons{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
-.dj{border-radius:8px;background:rgba(21,27,51,.92);border:1px solid var(--line-soft);padding:12px;display:grid;gap:8px;align-content:start}
+.dj{border-radius:8px;background:rgba(21,27,51,.92);border:1px solid var(--line-soft);padding:12px;display:grid;gap:8px;align-content:start;min-width:0}
+.dj > *{min-width:0}
 .dj.full{border-color:color-mix(in srgb,var(--c-succes) 60%,transparent)}
 .dj header{display:flex;align-items:center;gap:8px}
 .dj header svg{color:var(--c-donjon)}
 .dj h4{font-size:18px;flex:1}
 .dj .cnt{font:500 var(--t-sm)/1 var(--f-data);color:var(--muted);white-space:nowrap}
 .ticks{margin:0;padding:0;list-style:none;display:grid;gap:2px}
+.ticks > li{min-width:0}
 .tick{display:flex;gap:10px;align-items:flex-start;padding:7px 6px;border-radius:6px;cursor:pointer;min-height:44px}
 .tick:hover{background:rgba(241,234,217,.09)}
 .tick span{display:grid;gap:1px;font-size:17px;line-height:1.3}
@@ -313,7 +315,7 @@ textarea{min-height:96px;resize:vertical}
 .formrow > *{flex:1 1 160px;min-width:0}
 .formrow > .btn{flex:0 0 auto}
 form.inline{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-form.inline input[type=text]{flex:1 1 140px;width:auto}
+form.inline input[type=text]{flex:1 1 140px;width:auto;min-width:0}
 /* La jauge sans style en ligne : autant de colonnes que d'encoches, sans connaître leur nombre. */
 .cat .stat a.linkbtn{display:inline-flex;align-items:center}
 .cl.none .mini i{width:0}
