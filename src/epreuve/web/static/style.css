@@ -546,7 +546,7 @@ h1,h2,h3{font-weight:700}
 .story-carte{max-width:760px;width:100%;margin:0 auto;padding:var(--s6) var(--s5)}
 .prologue{position:relative;display:block;border:1px solid var(--line-soft);border-radius:var(--r-lg);background:linear-gradient(180deg,rgba(5,8,22,.9),rgba(5,8,22,.96));scroll-margin-top:calc(var(--bar-h) + 16px)}
 .prologue-in{padding:var(--s6) var(--s4) var(--s5)}
-.prologue-pied{position:sticky;bottom:0;z-index:2;display:flex;justify-content:center;padding:var(--s3) var(--s4) max(var(--s3),env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line-soft);border-radius:0 0 var(--r-lg) var(--r-lg)}
+.prologue-pied{display:flex;justify-content:center;padding:var(--s3) var(--s4) max(var(--s3),env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line-soft);border-radius:0 0 var(--r-lg) var(--r-lg)}
 .prologue-pied .cta{min-width:min(100%,280px)}
 @media (min-width:720px){.story-carte{padding:var(--s6) 48px}}
 
