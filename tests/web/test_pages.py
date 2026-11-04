@@ -86,7 +86,7 @@ def test_inscription_cree_la_fiche_au_statut_de_la_liste():
     r = inscrire(m, c, pseudo="  Nouvelle  Lune ", classe="", niveau="")
     assert r.status_code == 303 and r.headers["location"] == "/"
     g = m.depot._grimpeurs[14]
-    assert (g.pseudo, g.classe, g.niveau_declare, g.statut) == ("Nouvelle Lune", None, None, "pause")
+    assert (g.pseudo, g.classe, g.niveau_declare, g.statut) == ("Nouvelle Lune", None, 1, "pause")
     assert g.nom_discord == "Nouvelle"
     assert c.get("/inscription").headers["location"] == "/"  # déjà inscrite
 
@@ -113,6 +113,14 @@ def test_inscription_avec_classe_et_niveau():
     c = m.connecter(ID_NOUVELLE)
     inscrire(m, c, pseudo="Lune", classe="Huppermage", niveau="12")
     assert (m.depot._grimpeurs[14].classe, m.depot._grimpeurs[14].niveau_declare) == ("Huppermage", 12)
+
+
+def test_inscription_sans_niveau_part_du_niveau_1():
+    m = monde()
+    c = m.connecter(ID_NOUVELLE)
+    assert 'name="niveau"' not in c.get("/inscription").text
+    inscrire(m, c, pseudo="Lune", classe="Huppermage")
+    assert m.depot._grimpeurs[14].niveau_declare == 1
 
 
 def test_classe_obligatoire_si_le_reglage_le_demande():

@@ -63,12 +63,11 @@ def test_teaser_contrat_du_gabarit():
     assert 'id="opened" hidden' in html  # l'état « portes ouvertes » attend la fin du compte à rebours
 
 
-def test_pied_de_page_mention_de_fans_et_merci_duffus():
+def test_pied_de_page_mention_de_fans_sans_lien_duffus():
     html = client().get("/").text
     pied = re.search(r"<footer>(.*?)</footer>", html, re.S).group(1)
     assert "Projet de fans, non officiel et sans lien avec Ankama" in pied
-    assert '<a href="https://duffus.fr" rel="noopener">Merci Duffus</a>' in pied
-    assert html.count("duffus.fr") == 1  # aucun autre lien vers Duffus (T-09)
+    assert "duffus" not in html.lower()  # rien qui mène au guide avant l'ouverture (Shadoaze, 04/11)
 
 
 @pytest.mark.parametrize("lien", ["https://epreuve.example/tour", 'https://x.example/"><script>alert(1)</script>'])

@@ -355,6 +355,7 @@ async def inscrire(request: Request):
     valeurs = {k: str(form.get(k, "")) for k in ("pseudo", "classe", "niveau")}
     try:
         pseudo, classe, niveau = lire_fiche(form, s.regles)
+        niveau = niveau or 1  # le formulaire ne demande plus le niveau : tout le monde part du niveau 1
         await s.depot.creer_grimpeur(v.discord_id, v.session.nom_discord, pseudo, classe, niveau, s.horloge(),
                                      liste_obligatoire=s.regles.liste_officielle_obligatoire)
     except ValueError as e:

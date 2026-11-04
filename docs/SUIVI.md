@@ -59,6 +59,7 @@ Détails : `DECISIONS-V4.md`.
 - [ ] Webhook Discord des annonces : Shadoaze le crée, Marceau fait `fly secrets set DISCORD_WEBHOOK_ANNONCES=…`
 - [x] Les 100 quêtes d'alignement comptent pour le Dofus Ivoire ; Règles §1 : Donjon en mousse et Tour du monde en fil rouge (04/11)
 - [ ] Quêtes d'alignement « en secondaire » vues par Shadoaze : préciser l'étage et le bloc (non reproduit en local)
+- [x] Créer sa fiche : plus de niveau (départ niveau 1), classe obligatoire (04/11)
 
 ## Modules de Duffus « à l'identique »
 
@@ -74,5 +75,5 @@ Détails : `DECISIONS-V4.md`.
 
 ## Crédit
 
-- [x] « Merci Duffus » avec lien en pied de page (teaser)
+- [x] Teaser : plus aucun lien vers Duffus (demande de Shadoaze, 04/11)
 - [x] « Merci Duffus » sur toutes les pages du site

@@ -17,7 +17,7 @@ inscription:
   liste_officielle_obligatoire: false  # T-19 ; SPEC-V5 §7 : « les officiels sont ceux du Discord »
 
 fiche:
-  classe_obligatoire: false   # T-20
+  classe_obligatoire: true    # T-20 ; obligatoire depuis le 04/11 (Shadoaze)
   afficher_nom_discord: true  # T-20
 
 modules:
