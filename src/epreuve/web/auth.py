@@ -105,7 +105,9 @@ async def visiteur(request: HTTPConnection) -> Visiteur:
         session = await s.depot.session(id_hache, s.horloge())
         if session is not None:
             v = Visiteur(session, id_hache, await s.depot.grimpeur_par_discord(session.discord_user_id))
-            if session.est_admin and s.horloge() - session.roles_verifies_le > REVERIFICATION:
+            # Toutes les sessions sont revérifiées : un admin peut perdre son droit, et une personne
+            # devenue admin (rôle ou réglage ajouté après sa connexion) doit l'obtenir sans se reconnecter.
+            if s.horloge() - session.roles_verifies_le > REVERIFICATION:
                 await _reverifier(s, v)
     request.state.visiteur = v
     return v
@@ -125,13 +127,17 @@ async def _reverifier(s, v: Visiteur) -> None:
     except (PasMembre, ErreurDiscord):
         admin = False  # jeton expiré, rôle ou appartenance retirés : la session redevient non-admin
     except httpx.HTTPError:
-        v.session = replace(v.session, est_admin=False)
-        v.discord_injoignable = True
+        if v.session.est_admin:
+            v.session = replace(v.session, est_admin=False)
+            v.discord_injoignable = True
         return
+    avant = v.session.est_admin
     await s.depot.maj_roles_session(v.id_hache, admin, maintenant)
     v.session = replace(v.session, est_admin=admin, roles_verifies_le=maintenant)
-    if not admin:
+    if avant and not admin:
         journal.info("droits d'admin retirés après revérification")
+    elif admin and not avant:
+        journal.info("droits d'admin accordés après revérification")
 
 
 async def admin_pour_le_filtre(scope: Scope) -> bool:

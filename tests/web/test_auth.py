@@ -21,6 +21,7 @@ from tests.web.outils import (
     ID_ADMIN_SUP,
     ID_BRINDILLE,
     ID_FOURBE,
+    ROLE_ADMIN,
     SITE,
     monde,
 )
@@ -315,6 +316,17 @@ def test_admin_retire_perd_la_vue_admin_en_10_minutes_sans_action_d_admin():
     r = c.get("/etages/0")
     assert r.status_code == 303 and r.headers["location"] == "/"  # plus que le teaser
     assert not any(s.est_admin for s in m.depot._sessions.values())
+
+
+def test_membre_devenu_admin_obtient_la_vue_admin_en_10_minutes_sans_se_reconnecter():
+    """Cas de Shadoaze : connecté avant d'être déclaré admin, il obtient ses droits à la revérification."""
+    m = monde(mode="teaser", maintenant=AVANT_OUVERTURE)
+    c = m.connecter(ID_HORS_LISTE)
+    assert c.get("/etages/0").status_code == 303  # simple membre : le teaser
+    m.membres[ID_HORS_LISTE] = ("Promu", frozenset({ROLE_ADMIN}))  # rôle accordé sur Discord
+    m.avancer(minutes=11)
+    assert c.get("/etages/0").status_code == 200
+    assert any(s.est_admin for s in m.depot._sessions.values())
 
 
 def test_discord_injoignable_page_servie_sans_vue_admin():
