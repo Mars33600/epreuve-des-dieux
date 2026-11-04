@@ -65,8 +65,13 @@ class _Modules(_Section):
     monde_des_douze: bool = False
 
 
+class _Ouverture(_Section):
+    automatique: bool = True
+
+
 class _Fichier(_Section):
     palier: _Palier = _Palier()
+    ouverture: _Ouverture = _Ouverture()
     coches: _Coches = _Coches()
     inscription: _Inscription = _Inscription()
     fiche: _Fiche = _Fiche()
@@ -90,6 +95,7 @@ def regles_depuis(donnees: object) -> Regles:
         liste_officielle_obligatoire=f.inscription.liste_officielle_obligatoire,
         verrouiller_modules_par_etage=f.modules.verrouiller_par_etage,
         monde_des_douze=f.modules.monde_des_douze,
+        ouverture_automatique=f.ouverture.automatique,
     )
 
 

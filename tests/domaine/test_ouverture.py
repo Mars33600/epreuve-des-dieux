@@ -1,11 +1,12 @@
-"""peut_ouvrir() et bilan_etage() (SPEC §5.2, §5.5, critère 27)."""
+"""peut_ouvrir(), ouvrir_automatiquement() et bilan_etage() (SPEC §5.2, §5.5, critère 27)."""
 
 from datetime import timedelta
 
 import pytest
 
 from epreuve.domaine.bareme import EtatJauge
-from epreuve.domaine.ouverture import bilan_etage, peut_ouvrir
+from epreuve.domaine.modeles import Regles
+from epreuve.domaine.ouverture import ACTEUR_SYSTEME, bilan_etage, ouvrir_automatiquement, peut_ouvrir
 from tests.fabrique import PENDANT, PLANCHER, etage
 
 EN_COURS = etage(1, 0, "ouvert")
@@ -61,3 +62,24 @@ def test_bilan_etage():
 def test_bilan_force_sans_motif_refuse(motif):
     with pytest.raises(ValueError, match="motif"):
         bilan_etage(jauge(), PENDANT, True, motif)
+
+
+@pytest.mark.parametrize(("regles", "mode", "j", "maintenant", "attendu"), [
+    (Regles(), "ouvert", jauge(), PLANCHER, True),
+    (Regles(ouverture_automatique=False), "ouvert", jauge(), PLANCHER, False),  # réglage coupé : admin seul
+    (Regles(), "teaser", jauge(), PLANCHER, False),  # pendant le teaser, rien ne bouge
+    (Regles(), "ouvert", jauge(score=23), PLANCHER, False),  # jauge pas pleine
+    (Regles(), "ouvert", jauge(), PLANCHER - timedelta(seconds=1), False),  # date plancher pas passée
+])
+def test_ouverture_automatique(regles, mode, j, maintenant, attendu):
+    assert ouvrir_automatiquement(j, EN_COURS, PROCHAIN, maintenant, regles, mode) is attendu
+
+
+def test_ouverture_automatique_sans_etage_scelle():
+    assert not ouvrir_automatiquement(jauge(), EN_COURS, None, PLANCHER, Regles(), "ouvert")
+    assert not ouvrir_automatiquement(jauge(), EN_COURS, etage(2, 1, "ouvert"), PLANCHER, Regles(), "ouvert")
+
+
+def test_acteur_systeme_est_vide():
+    # NULL au journal : jamais un identifiant Discord inventé qui pourrait être celui de quelqu'un.
+    assert ACTEUR_SYSTEME is None

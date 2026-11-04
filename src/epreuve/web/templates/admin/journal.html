@@ -13,7 +13,7 @@
   <div class="table-wrap"><table>
     <thead><tr><th>Date</th><th>Auteur</th><th>Type</th><th>Grimpeur</th><th>Étage</th><th>Détails</th></tr></thead>
     <tbody>{% for l in lignes %}
-      <tr><td>{{ l.horodatage|heure_paris }}</td><td class="num">{{ l.acteur_discord_id or "—" }}</td><td>{{ l.type }}{% if not l.public %} <span class="tag">non public</span>{% endif %}</td>
+      <tr><td>{{ l.horodatage|heure_paris }}</td><td class="num">{{ l.acteur_discord_id or "système" }}</td><td>{{ l.type }}{% if not l.public %} <span class="tag">non public</span>{% endif %}</td>
         <td>{{ grimpeurs[l.grimpeur_id].pseudo if l.grimpeur_id in grimpeurs else "—" }}</td>
         <td>{{ etages_par_id[l.etage_id].numero if l.etage_id in etages_par_id else "—" }}</td>
         <td class="journal-details">{% for k, val in l.details.items() if val is not none %}{{ k }} : {{ val }}{% if not loop.last %} · {% endif %}{% endfor %}</td></tr>

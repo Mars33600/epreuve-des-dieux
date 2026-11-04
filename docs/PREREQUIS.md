@@ -179,6 +179,8 @@ fly secrets set DATABASE_URL=… DISCORD_CLIENT_SECRET=… DISCORD_GUILD_ID=… 
   DISCORD_ADMIN_ROLE_IDS=… ADMINS_SUPPLEMENTAIRES=… DISCORD_OWNER_ID=…
 ```
 
+Facultatif : `DISCORD_WEBHOOK_ANNONCES=…` pour que le « Gardien de la Tour » annonce chaque ouverture d'étage (création du webhook : docs/RESTAURATION.md).
+
 `SITE_MODE=auto`, `SITE_OUVERT_LE`, `SITE_URL` et `DISCORD_CLIENT_ID` sont dans `fly.toml` (non secrets). Les clés Duffus et le jeton du bot ne vont **pas** sur Fly.
 
 ---

@@ -49,6 +49,7 @@
   <form method="post" action="/admin/etages/{{ prochain.numero }}/ouvrir">{{ csrf() }}
     <button class="btn or" type="submit"{% if not decision.ok %} disabled{% endif %}>Ouvrir le prochain étage (étage {{ prochain.numero }})</button>
   </form>
+  {% if regles.ouverture_automatique %}<p class="note">Ouverture automatique active : dès que les raisons ci-dessous sont levées, la tour ouvre cet étage d'elle-même (sous une minute).</p>{% endif %}
   {% endif %}
   {% if decision.raisons %}<ul class="raisons">{% for r in decision.raisons %}<li>{{ r }}</li>{% endfor %}</ul>{% endif %}
   {% if prochain and not decision.ok %}

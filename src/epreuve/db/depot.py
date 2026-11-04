@@ -615,10 +615,13 @@ class Depot:
         return await self._maj_etage(etage_id, valeurs, "etage_regle", dict(valeurs), acteur, maintenant,
                                      corrections={k: True for k in valeurs})
 
-    async def ouvrir_etage(self, numero: int, bilan_precedent: Bilan, acteur: int, maintenant: datetime) -> Etage:
+    async def ouvrir_etage(self, numero: int, bilan_precedent: Bilan, acteur: int | None,
+                           maintenant: datetime) -> Etage:
         """Une transaction, verrou FOR UPDATE sur les étages : précédent → termine + bilan, numero → ouvert.
 
-        EtatInvalide si `numero` n'est pas scellé, ou si un autre admin vient d'ouvrir.
+        EtatInvalide si `numero` n'est pas scellé, ou si un autre admin (ou l'ouverture automatique) vient
+        d'ouvrir : le verrou fait attendre la seconde tentative, qui relit alors « ouvert » et s'arrête.
+        `acteur` None : l'ouverture automatique (`ouverture.ACTEUR_SYSTEME`).
         """
         async with self._moteur.begin() as c:
             etages = [_etage(r) for r in await c.execute(select(t.etage).order_by(t.etage.c.numero).with_for_update())]

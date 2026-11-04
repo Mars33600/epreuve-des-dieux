@@ -45,6 +45,13 @@ def test_tous_les_reglages_sont_lus():
     assert r == Regles(Fraction(1), "offerte", False, False, True, False, False, True)
 
 
+def test_ouverture_automatique_par_defaut_et_desactivable(tmp_path):
+    assert Regles().ouverture_automatique and lire_regles(CHEMIN_PAR_DEFAUT).ouverture_automatique
+    assert not lire_regles(ecrire(tmp_path, "ouverture:\n  automatique: false\n")).ouverture_automatique
+    with pytest.raises(ReglesInvalides, match="ouverture.automatique"):
+        lire_regles(ecrire(tmp_path, "ouverture:\n  automatique: bientot\n"))
+
+
 @pytest.mark.parametrize("texte", [
     "palier:\n  categorie_vide: perdue\n",  # valeur inconnue
     "palier:\n  points_par_joueur: 0\n",

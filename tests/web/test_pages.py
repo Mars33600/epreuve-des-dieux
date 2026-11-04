@@ -488,11 +488,16 @@ def test_page_des_regles_lit_la_configuration():
     assert "<b>5/2 × le nombre de grimpeurs actifs</b>" in html
     assert "le cap est le niveau <b class=\"num\">20</b>" in html
     for theme in ("tranche", "4 points au maximum", "sans capture d'écran", "sans power-leveling",
-                  "un admin vérifie et ouvre", "mettre en pause", "réintègre"):
+                  "s'ouvre tout seul", "mettre en pause", "réintègre"):
         assert theme in html, theme
     assert "bonus" not in html.lower()
     assert "point est offert" in monde(regles=Regles(categorie_vide="offerte")).connecter(ID_BRINDILLE).get(
         "/regles").text
+    # Sans webhook (le monde de test n'en a pas), la page ne promet pas d'annonce du Gardien.
+    assert "Gardien de la Tour" not in html and "ne poste rien sur Discord" in html
+    # `ouverture.automatique: false` : la règle redevient l'ouverture par un admin.
+    manuel = monde(regles=Regles(ouverture_automatique=False)).connecter(ID_BRINDILLE).get("/regles").text
+    assert "un admin vérifie et ouvre" in manuel and "s'ouvre tout seul" not in manuel
 
 
 # ---------------------------------------------------------------- transverse (critère 34)

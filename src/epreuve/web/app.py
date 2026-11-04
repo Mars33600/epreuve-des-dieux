@@ -23,6 +23,7 @@ from pathlib import Path
 from typing import Protocol
 from zoneinfo import ZoneInfo
 
+import httpx
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
@@ -64,12 +65,13 @@ def jour_en_clair(d: datetime) -> str:
 
 def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
               source: SourceEtat | None = None, *, oauth: ClientOAuth | None = None,
-              regles: Regles | None = None) -> FastAPI:
-    """Fabrique l'application. `horloge`, `source` et `oauth` sont injectables : les tests simulent la date,
-    la base et Discord."""
+              regles: Regles | None = None, transport_webhook: httpx.AsyncBaseTransport | None = None) -> FastAPI:
+    """Fabrique l'application. `horloge`, `source`, `oauth` et `transport_webhook` (les annonces Discord) sont
+    injectables : les tests simulent la date, la base et Discord."""
     app = FastAPI(title="L'Épreuve des Dieux", docs_url=None, redoc_url=None, openapi_url=None)
     app.state.config, app.state.horloge, app.state.depot = config, horloge, source
     app.state.oauth, app.state.regles = oauth, regles or Regles()
+    app.state.transport_webhook = transport_webhook
     app.state.gabarits = gabarits = creer_gabarits()
     app.mount("/static", StaticFiles(directory=ICI / "static"), name="static")
     # Ordre : le dernier ajouté enveloppe les autres. Les en-têtes s'ajoutent donc aussi aux 303 et 404 du filtre.

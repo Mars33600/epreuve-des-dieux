@@ -53,9 +53,19 @@
   </section>
 
   <section class="regle" aria-labelledby="r6"><h3 id="r6"><span class="regle-n">6</span> L'ouverture de l'étage suivant</h3>
+    {% if regles.ouverture_automatique %}
+    <p>Quand la jauge est pleine, <b>l'étage suivant s'ouvre tout seul</b>
+      {%- if plancher %}, mais pas avant le {{ plancher|date_paris }} : s'il est plein plus tôt, il s'ouvre à cette heure-là{% endif %}.</p>
+    <p>Un admin peut aussi ouvrir l'étage à la main, en cas de besoin, en donnant un motif.</p>
+    {% else %}
     <p>Quand la jauge est pleine, <b>un admin vérifie et ouvre</b> l'étage suivant à la main
       {%- if plancher %}, et pas avant le {{ plancher|date_paris }}{% endif %}.</p>
-    <p>Rien ne s'ouvre tout seul, et le site ne poste rien sur Discord : l'admin annonce lui-même l'ouverture.</p>
+    {% endif %}
+    {% if annonce_discord %}
+    <p>Le <b>Gardien de la Tour</b> annonce chaque ouverture sur le Discord de la guilde.</p>
+    {% else %}
+    <p>Le site ne poste rien sur Discord : l'ouverture s'annonce sur le serveur, à la main.</p>
+    {% endif %}
   </section>
 
   <section class="regle" aria-labelledby="r7"><h3 id="r7"><span class="regle-n">7</span> La pause et la réintégration</h3>

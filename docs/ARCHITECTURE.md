@@ -434,6 +434,7 @@ Le pied de page « Merci Duffus » est dans `base.html`, que toutes les pages é
 | `DISCORD_CLIENT_ID` (1564210808509038622) | non | `fly.toml` | B |
 | `DISCORD_CLIENT_SECRET` | **oui** | Fly secrets, `.env` | B |
 | `DISCORD_GUILD_ID`, `DISCORD_ADMIN_ROLE_IDS`, `ADMINS_SUPPLEMENTAIRES`, `DISCORD_OWNER_ID` (propriétaire du serveur, admin d'office) | non | Fly secrets (pour ne pas les publier dans le dépôt) | B |
+| `DISCORD_WEBHOOK_ANNONCES` (annonces d'ouverture d'étage du « Gardien de la Tour » ; vide = aucune annonce) | **oui** (l'adresse suffit pour poster) | Fly secrets | ouverture auto |
 | `DISCORD_TOKEN` (jeton du bot) | **oui** | `.env` de Marceau seulement (bot d'atelier, EX-93), **jamais sur Fly** | — (aucun bot sur le site) |
 | `DUFFUS_SUPABASE_URL`, `DUFFUS_SUPABASE_CLE` | publique, mais appartient à l'auteur | `.env` de l'admin qui aspire, **jamais** sur Fly ni dans le dépôt | B |
 | `AGE_RECIPIENT` | clé publique | secret GitHub | B |

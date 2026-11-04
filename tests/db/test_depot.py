@@ -300,6 +300,17 @@ async def test_deux_ouvertures_simultanees_une_seule_passe(base):
     assert len(await base.journal(type_="ouverture")) == 1
 
 
+async def test_ouverture_automatique_concurrente_acteur_systeme(base):
+    # Deux ouvertures automatiques (acteur NULL) en même temps : le verrou n'en laisse passer qu'une (la
+    # seconde relit l'étage « ouvert » après le verrou et s'arrête), un seul bilan, une seule ligne au journal.
+    r = await asyncio.gather(*(base.ouvrir_etage(1, BILAN, None, PENDANT) for _ in range(2)),
+                             return_exceptions=True)
+    assert sum(1 for x in r if isinstance(x, EtatInvalide)) == 1
+    (o,) = await base.journal(type_="ouverture")
+    assert o.acteur_discord_id is None
+    assert await base.bilan(1) == BILAN
+
+
 # --- Admin : revue du contenu ----------------------------------------------------------------------------
 
 

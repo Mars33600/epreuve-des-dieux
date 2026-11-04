@@ -5,6 +5,10 @@ palier:
   points_par_joueur: 2        # palier = ⌈ m × N × K ÷ 4 ⌉ ; « 5/2 » est accepté (fraction exacte)
   categorie_vide: ignoree     # T-11 : ignoree (K = catégories non vides) | offerte (point donné à tous, K = 4)
 
+ouverture:
+  automatique: true           # jauge pleine + étage suivant préparé + date plancher passée → le site l'ouvre seul ;
+                              # false : seul un admin ouvre (l'ouverture manuelle, forcée ou non, reste toujours)
+
 coches:
   succes_coche_vaincu: true   # T-16 : cocher un succès coche « Vaincre le boss » ; décocher celle-ci décoche les autres
   pause_peut_cocher: true     # T-13 : un grimpeur en pause peut cocher (ses points comptent à la réintégration)
