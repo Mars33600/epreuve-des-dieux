@@ -1,4 +1,5 @@
-"""Peut-on ouvrir l'étage suivant ? Et le bilan figé de l'étage qui se termine (SPEC §5.2, §5.5)."""
+"""Peut-on ouvrir l'étage suivant ? Le site l'ouvre-t-il seul ? Et le bilan figé de l'étage qui se termine
+(SPEC §5.2, §5.5)."""
 
 from __future__ import annotations
 
@@ -6,8 +7,14 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from epreuve.domaine.bareme import EtatJauge
-from epreuve.domaine.modeles import Categorie, Etage
+from epreuve.domaine.mode_site import ModeEffectif
+from epreuve.domaine.modeles import Categorie, Etage, Regles
 from epreuve.domaine.textes import date_paris
+
+# L'ouverture automatique n'a pas d'auteur humain : le journal note un acteur vide (`acteur_discord_id` NULL,
+# affiché « système » dans le journal admin). Pas 0 ni un faux identifiant : un identifiant Discord inventé
+# pourrait un jour coïncider avec un vrai compte, NULL ne le peut pas.
+ACTEUR_SYSTEME: int | None = None
 
 
 @dataclass(frozen=True)
@@ -47,6 +54,14 @@ def peut_ouvrir(jauge: EtatJauge, en_cours: Etage, prochain: Etage | None, maint
     if plancher is not None and maintenant < plancher:
         raisons.append(f"pas avant le {date_paris(plancher)}")
     return Decision(not raisons, tuple(raisons))
+
+
+def ouvrir_automatiquement(jauge: EtatJauge, en_cours: Etage, prochain: Etage | None, maintenant: datetime,
+                           regles: Regles, mode: ModeEffectif) -> bool:
+    """Le site ouvre-t-il seul l'étage suivant ? Seulement si la règle est active, le site ouvert (pendant le
+    teaser rien ne bouge : les admins y font leur recette) et `peut_ouvrir` d'accord. Jamais de force : une
+    ouverture qui demanderait un motif reste une décision d'admin."""
+    return regles.ouverture_automatique and mode == "ouvert" and peut_ouvrir(jauge, en_cours, prochain, maintenant).ok
 
 
 def bilan_etage(jauge: EtatJauge, maintenant: datetime, force: bool, motif: str | None) -> Bilan:

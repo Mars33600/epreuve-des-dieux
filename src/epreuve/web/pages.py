@@ -210,7 +210,8 @@ async def page_regles(request: Request):
         "m": str(m.numerator) if m.denominator == 1 else f"{m.numerator}/{m.denominator}",
         # Les exemples chiffrés viennent de la même fonction que la vraie jauge : jamais de nombre écrit en dur.
         "palier_12": palier(12, 4, s.regles), "palier_12_trois": palier(12, 3, s.regles),
-        "ouvert": ouvert, "plancher": ouvert.date_plancher_suivant if ouvert else None})
+        "ouvert": ouvert, "plancher": ouvert.date_plancher_suivant if ouvert else None,
+        "annonce_discord": s.config.discord_webhook_annonces is not None})
 
 
 # ---------------------------------------------------------------- « qui n'a pas fait… ? »

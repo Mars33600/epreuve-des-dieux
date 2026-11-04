@@ -11,6 +11,10 @@
     POST /admin/etages/{n}/donjons             ajouter un donjon aspiré (T-03)
     POST /admin/blocs/{id}, /admin/quetes/{id}, /admin/donjons/{id}, /admin/cases/{id}   revue du contenu
 
+Les écritures qui peuvent remplir la jauge (statut, palier, date plancher, revue du contenu) tentent ensuite
+l'ouverture automatique de l'étage suivant (`ouverture_auto.py`) ; toute ouverture, manuelle ou non, est
+annoncée sur Discord si le webhook est réglé.
+
 Chaque écriture passe par le dépôt, qui l'inscrit au journal. Après un POST, on revient sur la page avec
 un code (`?fait=palier`) traduit en message fixe : aucun texte de l'utilisateur n'est renvoyé tel quel.
 """
@@ -20,7 +24,7 @@ from __future__ import annotations
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, BackgroundTasks, Depends, Request
 from fastapi.responses import RedirectResponse
 
 from epreuve.db.depot import EtatInvalide, Introuvable, PseudoDejaPris
@@ -31,6 +35,7 @@ from epreuve.domaine.modeles import Etage
 from epreuve.domaine.ouverture import bilan_etage, peut_ouvrir
 from epreuve.domaine.progression import moins_avance
 from epreuve.web.auth import Refus, Visiteur, exiger_admin, verifier_ecriture
+from epreuve.web.ouverture_auto import annoncer, apres_ecriture
 from epreuve.web.pages import lire_fiche
 from epreuve.web.rendu import rendre
 from epreuve.web.vues import charger_vue_etage
@@ -42,6 +47,7 @@ MESSAGES = {
     "liste": "Liste officielle mise à jour.", "statut": "Statut changé.", "fiche": "Fiche corrigée.",
     "palier": "Palier enregistré.", "plancher": "Date plancher enregistrée.", "ouvert": "Étage ouvert.",
     "reglages": "Réglages de l'étage enregistrés.", "donjon": "Donjon ajouté.", "contenu": "Contenu modifié.",
+    "auto": "Enregistré. La jauge est pleine : l'étage suivant s'est ouvert automatiquement.",
 }
 ERREURS = {
     "motif": "Un motif est obligatoire.", "confirmer": "Coche « Je confirme » pour exclure.",
@@ -49,7 +55,7 @@ ERREURS = {
     "cap": "Le level cap est un entier de 1 à 200.", "pseudo": "Le pseudo doit faire entre 2 et 30 caractères.",
     "pris": "Ce pseudo est déjà pris.", "classe": "Classe inconnue.", "niveau": "Le niveau va de 1 à 200.",
     "ouverture": "Ouverture refusée : voir les raisons ci-dessous.", "concurrence":
-        "Un autre admin vient d'ouvrir cet étage : rien n'a été fait en double.",
+        "Un autre admin vient d'ouvrir cet étage, ou la tour l'a ouvert d'elle-même : rien n'a été fait en double.",
     "introuvable": "Élément introuvable.", "statut": "Statut inconnu.", "ids": "Aucun identifiant Discord reconnu.",
     "nature": "Nature inconnue.", "url": "L'adresse de l'image doit commencer par https:// (ou être /etages/N/image).",
 }
@@ -66,6 +72,12 @@ def retour(chemin: str, *, fait: str = "", erreur: str = "", extra: str = "") ->
 
 def messages(fait: str, erreur: str) -> dict:
     return {"message": MESSAGES.get(fait, ""), "erreur": ERREURS.get(erreur, "")}
+
+
+async def fait_ou_auto(request: Request, taches: BackgroundTasks, fait: str) -> str:
+    """Après une écriture qui peut remplir la jauge (statut, palier, date plancher, contenu) : tente l'ouverture
+    automatique et choisit le message de retour (« auto » si l'étage suivant vient de s'ouvrir)."""
+    return "auto" if await apres_ecriture(request, taches) is not None else fait
 
 
 async def _etage(request: Request, numero: int) -> Etage:
@@ -131,7 +143,7 @@ async def admin_liste(request: Request):
 
 
 @routeur.post("/grimpeurs/{grimpeur_id}/statut")
-async def admin_statut(request: Request, grimpeur_id: int):
+async def admin_statut(request: Request, grimpeur_id: int, taches: BackgroundTasks):
     v, form = await _ecrire(request)
     statut = form.get("statut")
     motif = str(form.get("motif", "")).strip() or None
@@ -146,7 +158,7 @@ async def admin_statut(request: Request, grimpeur_id: int):
         await s.depot.changer_statut(grimpeur_id, statut, motif, v.discord_id, s.horloge())
     except Introuvable:
         return retour("/admin/grimpeurs", erreur="introuvable")
-    return retour("/admin/grimpeurs", fait="statut")
+    return retour("/admin/grimpeurs", fait=await fait_ou_auto(request, taches, "statut"))  # moins d'actifs
 
 
 @routeur.post("/grimpeurs/{grimpeur_id}")
@@ -200,7 +212,7 @@ async def admin_etage(request: Request, numero: int, fait: str = "", erreur: str
 
 
 @routeur.post("/etages/{numero}/palier")
-async def admin_palier(request: Request, numero: int):
+async def admin_palier(request: Request, numero: int, taches: BackgroundTasks):
     v, form = await _ecrire(request)
     s = _s(request)
     etage = await _etage(request, numero)
@@ -211,11 +223,11 @@ async def admin_palier(request: Request, numero: int):
     if not motif:
         return retour(chemin, erreur="motif")
     await s.depot.regler_palier(etage.id, int(brut) if brut else None, motif, v.discord_id, s.horloge())
-    return retour(chemin, fait="palier")
+    return retour(chemin, fait=await fait_ou_auto(request, taches, "palier"))
 
 
 @routeur.post("/etages/{numero}/date-plancher")
-async def admin_plancher(request: Request, numero: int):
+async def admin_plancher(request: Request, numero: int, taches: BackgroundTasks):
     v, form = await _ecrire(request)
     s = _s(request)
     etage = await _etage(request, numero)
@@ -225,11 +237,11 @@ async def admin_plancher(request: Request, numero: int):
     except ValueError:
         return retour(f"/admin/etages/{numero}", erreur="date")
     await s.depot.regler_date_plancher(etage.id, date, v.discord_id, s.horloge())
-    return retour(f"/admin/etages/{numero}", fait="plancher")
+    return retour(f"/admin/etages/{numero}", fait=await fait_ou_auto(request, taches, "plancher"))
 
 
 @routeur.post("/etages/{numero}/ouvrir")
-async def admin_ouvrir(request: Request, numero: int):
+async def admin_ouvrir(request: Request, numero: int, taches: BackgroundTasks):
     """Ouvrir l'étage `numero` : l'étage en cours doit être `numero - 1`, et `peut_ouvrir` vrai, sauf force."""
     v, form = await _ecrire(request)
     s = _s(request)
@@ -248,10 +260,11 @@ async def admin_ouvrir(request: Request, numero: int):
     if force and motif is None:
         return retour(chemin, erreur="motif")
     try:
-        await s.depot.ouvrir_etage(numero, bilan_etage(vue.jauge, maintenant, force, motif), v.discord_id,
-                                   maintenant)
+        ouvert = await s.depot.ouvrir_etage(numero, bilan_etage(vue.jauge, maintenant, force, motif), v.discord_id,
+                                            maintenant)
     except EtatInvalide:
         return retour(chemin, erreur="concurrence")
+    taches.add_task(annoncer, s, ouvert)  # l'annonce Discord, comme pour une ouverture automatique
     return retour(f"/admin/etages/{numero}", fait="ouvert")
 
 
@@ -296,7 +309,7 @@ def _bool(form, nom: str) -> bool | None:
 
 
 @routeur.post("/quetes/{quete_id}")
-async def admin_quete(request: Request, quete_id: int):
+async def admin_quete(request: Request, quete_id: int, taches: BackgroundTasks):
     v, form = await _ecrire(request)
     s = _s(request)
     chemin = _retour_etage(form)
@@ -311,11 +324,11 @@ async def admin_quete(request: Request, quete_id: int):
                                      masquee=_bool(form, "masquee"), nom=str(form.get("nom", "")).strip() or None)
     except Introuvable:
         return retour(chemin, erreur="introuvable")
-    return retour(chemin, fait="contenu")
+    return retour(chemin, fait=await fait_ou_auto(request, taches, "contenu"))  # un masquage peut compléter
 
 
 @routeur.post("/blocs/{bloc_id}")
-async def admin_bloc(request: Request, bloc_id: int):
+async def admin_bloc(request: Request, bloc_id: int, taches: BackgroundTasks):
     """Régler un bloc principal ou secondaire (SPEC v5 §5) : motif obligatoire, journal, prime sur la règle."""
     v, form = await _ecrire(request)
     s = _s(request)
@@ -330,11 +343,11 @@ async def admin_bloc(request: Request, bloc_id: int):
         await s.depot.modifier_bloc(bloc_id, v.discord_id, s.horloge(), nature=nature, motif=motif)
     except Introuvable:
         return retour(chemin, erreur="introuvable")
-    return retour(chemin, fait="contenu")
+    return retour(chemin, fait=await fait_ou_auto(request, taches, "contenu"))  # un masquage peut compléter
 
 
 @routeur.post("/donjons/{donjon_id}")
-async def admin_donjon(request: Request, donjon_id: int):
+async def admin_donjon(request: Request, donjon_id: int, taches: BackgroundTasks):
     v, form = await _ecrire(request)
     s = _s(request)
     chemin = _retour_etage(form)
@@ -343,11 +356,11 @@ async def admin_donjon(request: Request, donjon_id: int):
                                       nom=str(form.get("nom", "")).strip() or None)
     except Introuvable:
         return retour(chemin, erreur="introuvable")
-    return retour(chemin, fait="contenu")
+    return retour(chemin, fait=await fait_ou_auto(request, taches, "contenu"))  # un masquage peut compléter
 
 
 @routeur.post("/cases/{case_id}")
-async def admin_case(request: Request, case_id: int):
+async def admin_case(request: Request, case_id: int, taches: BackgroundTasks):
     v, form = await _ecrire(request)
     s = _s(request)
     chemin = _retour_etage(form)
@@ -357,7 +370,7 @@ async def admin_case(request: Request, case_id: int):
                                     condition=str(form.get("condition", "")).strip() or None)
     except Introuvable:
         return retour(chemin, erreur="introuvable")
-    return retour(chemin, fait="contenu")
+    return retour(chemin, fait=await fait_ou_auto(request, taches, "contenu"))  # un masquage peut compléter
 
 
 # ---------------------------------------------------------------- journal

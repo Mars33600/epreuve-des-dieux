@@ -203,6 +203,7 @@ class Regles:
     liste_officielle_obligatoire: bool = False  # T-19 ; SPEC-V5 §7 : tout membre du serveur peut créer sa fiche
     verrouiller_modules_par_etage: bool = False  # T-08 (lot E)
     monde_des_douze: bool = False  # SPEC-V5 §2 : encyclopédie, stuffs, builder, outils, archis et avis, fiche de quête
+    ouverture_automatique: bool = True  # Shadoaze : jauge pleine et date plancher passée → étage suivant ouvert seul
 
 
 @dataclass(frozen=True)

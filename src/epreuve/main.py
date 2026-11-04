@@ -55,14 +55,20 @@ async def lancer(config: Config) -> None:
     app = creer_app(config, source=source, oauth=oauth, regles=lire_regles())  # regles.yaml lu au démarrage
     serveur = uvicorn.Server(uvicorn.Config(app, host="0.0.0.0", port=config.site_port,  # noqa: S104
                                             log_level=config.journal_niveau.lower(), proxy_headers=True))
-    purge = asyncio.create_task(purger_chaque_jour(source)) if source is not None else None
+    taches = []
+    if source is not None:
+        from epreuve.web.ouverture_auto import veiller
+
+        # La veille d'ouverture : une jauge pleine avant la date plancher ouvre l'étage à l'heure dite, même si
+        # plus personne ne coche (voir web/ouverture_auto.py).
+        taches = [asyncio.create_task(purger_chaque_jour(source)), asyncio.create_task(veiller(app.state))]
     try:
         await serveur.serve()
     finally:
-        if purge is not None:
-            purge.cancel()
+        for tache in taches:
+            tache.cancel()
             with contextlib.suppress(asyncio.CancelledError):
-                await purge
+                await tache
         if moteur is not None:
             await moteur.dispose()
 

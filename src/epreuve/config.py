@@ -49,6 +49,10 @@ class Config(BaseSettings):
     # Propriétaire du serveur : admin d'office (SPEC-V5 §7). Un seul identifiant, lu ici plutôt qu'auprès de Discord :
     # l'`owner_id` de la guilde exigerait un jeton de bot ou la portée « guilds » (qu'on ne demande pas).
     discord_owner_id: int | None = Field(default=None, alias="DISCORD_OWNER_ID")
+    # Annonces d'ouverture d'étage par le « Gardien de la Tour » : un webhook de salon, pas un bot (rien à héberger,
+    # aucun jeton). L'adresse contient son propre secret : qui la connaît peut poster, d'où le SecretStr.
+    # Absente ou vide : aucune annonce, le reste du site fonctionne pareil.
+    discord_webhook_annonces: SecretStr | None = Field(default=None, alias="DISCORD_WEBHOOK_ANNONCES")
 
     @staticmethod
     def _ids(texte: str) -> frozenset[int]:

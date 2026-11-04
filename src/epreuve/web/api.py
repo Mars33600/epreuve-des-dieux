@@ -14,13 +14,14 @@ from __future__ import annotations
 
 import json
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, BackgroundTasks, Request
 from fastapi.responses import JSONResponse
 
 from epreuve.db.depot import CocheRefusee, Introuvable
 from epreuve.domaine.modeles import ElementRef, Etage, Grimpeur
 from epreuve.domaine.visibilite import etage_cochable, peut_modifier_coches
 from epreuve.web.auth import MESSAGE_SUSPENDU, Refus, exiger_grimpeur, verifier_ecriture
+from epreuve.web.ouverture_auto import apres_ecriture
 from epreuve.web.pages import etage_visible, resoudre_quoi
 from epreuve.web.vues import categories_json, charger_vue_etage, cle, jauge_json
 
@@ -63,7 +64,7 @@ async def etage_de_l_element(depot, type_: str, id_: int) -> Etage:
 
 
 @routeur.post("/api/coches")
-async def coches(request: Request):
+async def coches(request: Request, taches: BackgroundTasks):
     v = await verifier_ecriture(request)
     corps = await lire_corps(request)
     autre = corps["grimpeur_id"] is not None and corps["grimpeur_id"] != v.grimpeur_id
@@ -109,6 +110,8 @@ async def coches(request: Request):
         raise Refus(403, "Cette fiche ne peut pas être modifiée pour l'instant.") from e
     except ValueError as e:
         raise Refus(422, "Un motif est obligatoire pour modifier la fiche d'un autre grimpeur.") from e
+    if changes:  # une coche qui ne change rien ne peut pas remplir la jauge
+        await apres_ecriture(request, taches)  # la coche qui remplit la jauge ouvre l'étage suivant
     vue = await charger_vue_etage(s.depot, etage, s.regles)
     return JSONResponse({
         "ok": True, "changement": bool(changes),
