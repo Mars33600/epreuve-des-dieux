@@ -19,3 +19,9 @@ def test_le_corps_n_est_pas_un_conteneur_de_defilement_et_couvre_l_ecran():
     corps = regle((STATIC / "style.css").read_text(), "body")
     assert "overflow-x:hidden" not in corps and "overflow:hidden" not in corps
     assert "min-height:100vh" in corps
+
+
+def test_pied_de_page_apres_le_contenu_et_prologue_dans_le_flux():
+    commun, style = (STATIC / "commun.css").read_text(), (STATIC / "style.css").read_text()
+    assert "flex-direction:column" in regle(commun, "body") and "flex:1 0 auto" in regle(commun, "body > .wrap")
+    assert "position:fixed" not in regle(style, ".prologue")  # fixe, il passait sous le pied de page et la barre

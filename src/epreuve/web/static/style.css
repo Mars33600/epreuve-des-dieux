@@ -544,9 +544,9 @@ h1,h2,h3{font-weight:700}
 .story .story-quote{border-left:3px solid var(--gold);padding:var(--s1) 0 var(--s1) var(--s4);font:500 20px/1.45 var(--f-body);color:var(--gold-hi);margin:var(--s5) 0}
 .story .story-final{font:800 clamp(24px,5vw,32px)/1.2 var(--f-display);color:var(--gold-hi);text-align:center;margin:var(--s6) 0 var(--s1);padding-top:var(--s5);border-top:1px solid var(--line)}
 .story-carte{max-width:760px;width:100%;margin:0 auto;padding:var(--s6) var(--s5)}
-.prologue{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(5,8,22,.9),rgba(5,8,22,.96))}
-.prologue-in{flex:1;overflow-y:auto;overflow-x:hidden;padding:var(--s6) max(16px,env(safe-area-inset-left)) var(--s5)}
-.prologue-pied{display:flex;justify-content:center;padding:var(--s3) var(--s4) max(var(--s3),env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line-soft)}
+.prologue{position:relative;display:block;border:1px solid var(--line-soft);border-radius:var(--r-lg);background:linear-gradient(180deg,rgba(5,8,22,.9),rgba(5,8,22,.96));scroll-margin-top:calc(var(--bar-h) + 16px)}
+.prologue-in{padding:var(--s6) var(--s4) var(--s5)}
+.prologue-pied{position:sticky;bottom:0;z-index:2;display:flex;justify-content:center;padding:var(--s3) var(--s4) max(var(--s3),env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--line-soft);border-radius:0 0 var(--r-lg) var(--r-lg)}
 .prologue-pied .cta{min-width:min(100%,280px)}
 @media (min-width:720px){.story-carte{padding:var(--s6) 48px}}
 
