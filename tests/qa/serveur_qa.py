@@ -4,8 +4,8 @@
 
 `base` lit TEST_DATABASE_URL ou DATABASE_URL (jamais `.env`), crée quelques grimpeurs fictifs s'il n'y en a pas,
 et connecte par un faux Discord (page « qui es-tu ? »). L'horloge est figée au 15/11/2026, étage 1 ouvert
-(l'étage 0 est donc terminé ; la base de recette est jetable). « Novice360 », « Novice768 » et « Novice1440 » sont des membres du Discord sans
-fiche ni liste officielle : ils servent à tester « Créer ma fiche » (SPEC-V5 §7), un par largeur.
+(l'étage 0 est donc terminé ; la base de recette est jetable). « Novice360 », « Novice768 » et « Novice1440 » sont
+des membres du Discord sans fiche ni liste officielle : ils servent à tester « Créer ma fiche » (SPEC-V5 §7), un par largeur.
 """
 
 import asyncio
@@ -15,8 +15,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import uvicorn
-from sqlalchemy import text
 from pydantic import SecretStr
+from sqlalchemy import text
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from epreuve.config import Config  # noqa: E402
@@ -57,7 +57,7 @@ async def _preparer(url: str):
     async with moteur.begin() as c:  # les novices repartent sans fiche : la recette peut être rejouée sur la même base
         ids_novices = {"ids": list(IDS_NOVICES.values())}
         for table in ("coche_case", "coche_bloc", "journal"):
-            await c.execute(text(f"delete from epreuve.{table} where grimpeur_id in "
+            await c.execute(text(f"delete from epreuve.{table} where grimpeur_id in "  # noqa: S608 — noms fixes
                                  "(select id from epreuve.grimpeur where discord_user_id = any(:ids))"), ids_novices)
         await c.execute(text("delete from epreuve.grimpeur where discord_user_id = any(:ids)"), ids_novices)
     etage1 = await depot.etage_par_numero(1)

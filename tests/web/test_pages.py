@@ -723,7 +723,7 @@ def test_maquette_etage8_autonome():
     assert "Étage 8" not in pyramide and not re.search(r"\d+ étages", html) and "Étage scellé" not in html
 
 
-# --------------------------------------------- bloc jaune rétrogradé qui garde des quêtes utiles (consigne du chef de projet)
+# ------------------------------ bloc jaune rétrogradé qui garde des quêtes utiles (consigne du chef de projet)
 
 
 def _monde_bloc_retrograde():
@@ -740,7 +740,8 @@ def test_bloc_jaune_avec_quetes_utiles_affiche_un_avertissement():
     m, noms = _monde_bloc_retrograde()
     html = m.connecter(ID_BRINDILLE).get("/etages/0").text
     liste = html.split('id="liste"')[1]
-    assert f"⚠ Contient {len(noms)} quête{'s' if len(noms) > 1 else ''} utile{'s' if len(noms) > 1 else ''} pour un Dofus :" in liste
+    s = "s" if len(noms) > 1 else ""
+    assert f"⚠ Contient {len(noms)} quête{s} utile{s} pour un Dofus :" in liste
     for nom in noms:
         assert html_mod.escape(nom, quote=True) in liste
     # Un seul avertissement : le bloc secondaire naturel (aucune quête principale) n'en a pas, ni les blocs rouges.
