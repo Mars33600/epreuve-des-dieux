@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 import re
 import unicodedata
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field, replace
 from datetime import datetime
 from pathlib import Path
@@ -198,6 +198,24 @@ def lire_dofus_retenus(chemin: Path = RACINE / "config" / "dofus.yaml") -> froze
     return frozenset(dofus)
 
 
+def lire_prerequis_implicites(chemin: Path = RACINE / "config" / "prerequis-implicites.yaml"
+                              ) -> dict[str, frozenset[int]]:
+    """Dofus → ids des quêtes qu'un guide exige en toutes lettres sans les lister (« les 100 quêtes
+    d'alignement »). Fichier absent : aucun ajout."""
+    if not chemin.exists():
+        return {}
+    try:
+        brut = yaml.safe_load(chemin.read_text(encoding="utf-8")) or {}
+    except (OSError, yaml.YAMLError) as e:
+        raise ConfigInvalide(f"{chemin.name} illisible : {e}") from None
+    prerequis = brut.get("prerequis") if isinstance(brut, dict) else None
+    if not isinstance(prerequis, dict) or not all(
+            isinstance(d, str) and isinstance(ids, list) and all(isinstance(i, int) for i in ids)
+            for d, ids in prerequis.items()):
+        raise ConfigInvalide(f"{chemin.name} : « prerequis: » attend, par Dofus, une liste d'ids de quêtes")
+    return {d: frozenset(ids) for d, ids in prerequis.items()}
+
+
 # --- Lecture de l'aspiration ----------------------------------------------------------------------------------
 
 
@@ -257,9 +275,13 @@ def _json_liste(texte: str | None) -> list[dict]:
     return [x for x in valeur if isinstance(x, dict)] if isinstance(valeur, list) else []
 
 
-def guides_par_dofus(aspi: Aspiration) -> dict[str, frozenset[int]]:
-    """Dofus → ids `quest_list` de son guide Duffus (`guide_pages`, blocs et blocs de prérequis), fermé par les
-    prérequis des fiches (`prereq_quests`). Données explicites de Duffus, aucune supposition (addendum B0)."""
+def guides_par_dofus(aspi: Aspiration, implicites: Mapping[str, Iterable[int]] | None = None
+                     ) -> dict[str, frozenset[int]]:
+    """Dofus → ids `quest_list` de son guide Duffus (`guide_pages`, blocs et blocs de prérequis), plus les
+    prérequis que le guide écrit sans les lister (`implicites`, par défaut config/prerequis-implicites.yaml),
+    fermé par les prérequis des fiches (`prereq_quests`)."""
+    if implicites is None:
+        implicites = lire_prerequis_implicites()
     par_slug: dict[str, set[int]] = {}
     for q in aspi.quetes.values():
         if s := slug_quete(q):
@@ -270,6 +292,7 @@ def guides_par_dofus(aspi: Aspiration) -> dict[str, frozenset[int]]:
             continue  # les guides d'événement (Halouine…) restent : seuls les Dofus retenus comptent dans classer
         ids = {i["id"] for bloc in (g.get("categories") or []) + (g.get("prerequis_categories") or [])
                for i in bloc.get("items", []) if i.get("type") == "quest" and isinstance(i.get("id"), int)}
+        ids |= set(implicites.get(g["title"], ()))
         racines = [s for i in ids if i in aspi.quetes and (s := slug_quete(aspi.quetes[i]))]
         for s in fermeture(racines, aspi.prerequis):
             ids |= par_slug.get(s, set())

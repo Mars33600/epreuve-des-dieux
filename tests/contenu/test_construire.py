@@ -85,6 +85,22 @@ def test_nature_par_les_guides_par_dofus():
     assert (forcee.quetes[0].nature, forcee.quetes[0].nature_origine) == ("secondaire", "admin")
 
 
+def test_les_100_quetes_d_alignement_sont_des_prerequis_du_dofus_ivoire():
+    # Duffus ne liste que la 100e quête (845) ; les 99 autres viennent de config/prerequis-implicites.yaml.
+    ivoire = k.guides_par_dofus(ASPI)["Dofus Ivoire"]
+    assert {845, 98, 476} <= ivoire
+    assert 98 not in k.guides_par_dofus(ASPI, implicites={})["Dofus Ivoire"]
+
+
+def test_prerequis_implicites_absents_ou_invalides(tmp_path):
+    assert k.lire_prerequis_implicites(tmp_path / "absent.yaml") == {}
+    f = tmp_path / "p.yaml"
+    for contenu in ("prerequis: [1]\n", "prerequis:\n  X: [a]\n", "prerequis: [\n"):
+        f.write_text(contenu, encoding="utf-8")
+        with pytest.raises(k.ConfigInvalide):
+            k.lire_prerequis_implicites(f)
+
+
 def test_nature_par_le_repli_pour_un_dofus_sans_guide():
     q = next(x for x in ETAGES[0].quetes if x.nature == "secondaire")
     e = etage(0, guides_repli={"Dofus Kaliptus": frozenset({int(q.duffus_id)})})
