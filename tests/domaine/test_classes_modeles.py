@@ -3,7 +3,7 @@
 import pytest
 
 from epreuve.domaine.classes import CLASSES, repartition_classes
-from epreuve.domaine.modeles import Coches, ContenuEtage, ElementRef, Grimpeur, Session
+from epreuve.domaine.modeles import Bloc, Coches, ContenuEtage, ElementRef, Grimpeur, Session
 from tests.fabrique import AVANT, bloc, case, donjon, etage, grimpeur, quete
 
 
@@ -72,3 +72,14 @@ def test_coches_contient():
     c = Coches(1, frozenset({3}), frozenset({7}))
     assert c.contient(ElementRef("case", 3)) and not c.contient(ElementRef("quete", 3))
     assert c.contient(ElementRef("quete", 7)) and not c.contient(ElementRef("case", 7))
+
+
+def test_bloc_lien_duffus():
+    b = Bloc(1, 1, "Quêtes d'Incarnam", 2, 1, "principale", "construction", 24, 23)
+    assert b.lien_duffus is None  # pas d'adresse Duffus connue : pas de lien
+    avec = Bloc(1, 1, "Quêtes d'Incarnam", 2, 1, "principale", "construction", 24, 23,
+                duffus_url="https://duffus.fr/guide-complet")
+    assert avec.lien_duffus == "https://duffus.fr/guide-complet"
+    ancre = Bloc(1, 1, "Quêtes d'Incarnam", 2, 1, "principale", "construction", 24, 23,
+                 duffus_url="https://duffus.fr/guide-complet", duffus_ancre="bloc-2")
+    assert ancre.lien_duffus == "https://duffus.fr/guide-complet#bloc-2"
