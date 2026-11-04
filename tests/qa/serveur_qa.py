@@ -5,7 +5,8 @@
 `base` lit TEST_DATABASE_URL ou DATABASE_URL (jamais `.env`), crée quelques grimpeurs fictifs s'il n'y en a pas,
 et connecte par un faux Discord (page « qui es-tu ? »). L'horloge est figée au 15/11/2026, étage 1 ouvert
 (l'étage 0 est donc terminé ; la base de recette est jetable). « Novice360 », « Novice768 » et « Novice1440 » sont
-des membres du Discord sans fiche ni liste officielle : ils servent à tester « Créer ma fiche » (SPEC-V5 §7), un par largeur.
+des membres du Discord sans fiche ni liste officielle : ils servent à tester
+« Créer ma fiche » (SPEC-V5 §7), un par largeur.
 """
 
 import asyncio
