@@ -65,6 +65,10 @@ async def _preparer(url: str):
     if etage1 is not None and etage1.statut == "scelle":  # l'étage 0 devient « terminé » : on teste les deux premiers
         quand = datetime(2026, 11, 14, 12, tzinfo=UTC)
         await depot.ouvrir_etage(1, Bilan(quand, 5, 10, 10, {}, True, "recette"), ID_MARCEAU, quand)
+    # Comme en production (le contenu fixe `/etages/N/image`) : sans cela la base de test n'a aucune image de fond.
+    for etage in await depot.etages():
+        if etage.ambiance_url is None:
+            await depot.regler_etage(etage.id, ID_MARCEAU, maintenant, ambiance_url=f"/etages/{etage.numero}/image")
     await moteur.dispose()  # le pool est lié à cette boucle : le serveur crée le sien
     return membres
 

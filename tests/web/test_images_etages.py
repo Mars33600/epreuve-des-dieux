@@ -42,3 +42,15 @@ def test_admin_voit_l_image_d_un_etage_scelle():
 def test_aucune_image_sous_static():
     statiques = Path(__file__).resolve().parents[2] / "src" / "epreuve" / "web" / "static"
     assert not list(statiques.rglob("etage-*"))
+
+
+def test_accueil_etage_et_admin_referencent_l_image_de_fond_et_la_route_repond():
+    m = monde()
+    grimpeur, admin = m.connecter(ID_BRINDILLE), m.connecter(ID_MARCEAU)
+    for client, chemin in ((grimpeur, "/"), (grimpeur, "/etages/0"), (admin, "/"), (admin, "/admin/etages/0")):
+        page = client.get(chemin)
+        assert page.status_code == 200, chemin
+        assert 'data-ambiance="/etages/0/image"' in page.text, chemin
+        assert 'id="ambiance"' in page.text, chemin
+    assert grimpeur.get("/etages/0/image").status_code == 200
+    assert grimpeur.get("/ambiance").status_code == 200
