@@ -58,7 +58,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] Ouverture automatique de l'étage suivant (jauge pleine + date plancher) et annonce @everyone du « Gardien de la Tour » (04/11, retour Shadoaze)
 - [ ] Webhook Discord des annonces : Shadoaze le crée, Marceau fait `fly secrets set DISCORD_WEBHOOK_ANNONCES=…`
 - [x] Les 100 quêtes d'alignement comptent pour le Dofus Ivoire ; Règles §1 : Donjon en mousse et Tour du monde en fil rouge (04/11)
-- [ ] Quêtes d'alignement en secondaire en ligne (confirmé) : corrigé, reste fly deploy + reconstruction des étages 0 à 23
+- [x] Quêtes d'alignement en secondaire en ligne : corrigé, déployé (v22) et étages reconstruits (04/11)
 - [x] Créer sa fiche : plus de niveau (départ niveau 1), classe obligatoire (04/11)
 
 ## Modules de Duffus « à l'identique »
