@@ -57,11 +57,13 @@ def peut_ouvrir(jauge: EtatJauge, en_cours: Etage, prochain: Etage | None, maint
 
 
 def ouvrir_automatiquement(jauge: EtatJauge, en_cours: Etage, prochain: Etage | None, maintenant: datetime,
-                           regles: Regles, mode: ModeEffectif) -> bool:
+                           regles: Regles, mode: ModeEffectif, pendant_teaser: bool = False) -> bool:
     """Le site ouvre-t-il seul l'étage suivant ? Seulement si la règle est active, le site ouvert (pendant le
-    teaser rien ne bouge : les admins y font leur recette) et `peut_ouvrir` d'accord. Jamais de force : une
-    ouverture qui demanderait un motif reste une décision d'admin."""
-    return regles.ouverture_automatique and mode == "ouvert" and peut_ouvrir(jauge, en_cours, prochain, maintenant).ok
+    teaser rien ne bouge, sauf `pendant_teaser` pour la recette des admins : les annonces restent coupées)
+    et `peut_ouvrir` d'accord. Jamais de force : une ouverture qui demanderait un motif reste une décision
+    d'admin."""
+    return (regles.ouverture_automatique and (mode == "ouvert" or pendant_teaser)
+            and peut_ouvrir(jauge, en_cours, prochain, maintenant).ok)
 
 
 def bilan_etage(jauge: EtatJauge, maintenant: datetime, force: bool, motif: str | None) -> Bilan:

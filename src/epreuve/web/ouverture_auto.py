@@ -61,7 +61,8 @@ async def ouvrir_si_pret(s) -> Etage | None:
     vue = await charger_vue_etage(s.depot, en_cours, s.regles)
     maintenant = s.horloge()
     mode = mode_effectif(s.config.site_mode, s.config.site_ouvert_le, maintenant)
-    if prochain is None or not ouvrir_automatiquement(vue.jauge, en_cours, prochain, maintenant, s.regles, mode):
+    if prochain is None or not ouvrir_automatiquement(vue.jauge, en_cours, prochain, maintenant, s.regles, mode,
+                                                       s.config.ouverture_auto_teaser):
         return None
     try:
         ouvert = await s.depot.ouvrir_etage(prochain.numero, bilan_etage(vue.jauge, maintenant, False, None),

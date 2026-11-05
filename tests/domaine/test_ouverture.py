@@ -77,6 +77,8 @@ def test_ouverture_automatique(regles, mode, j, maintenant, attendu):
 
 def test_ouverture_automatique_sans_etage_scelle():
     assert not ouvrir_automatiquement(jauge(), EN_COURS, None, PLANCHER, Regles(), "ouvert")
+    assert ouvrir_automatiquement(jauge(), EN_COURS, PROCHAIN, PLANCHER, Regles(), "teaser", pendant_teaser=True)
+    assert not ouvrir_automatiquement(jauge(), EN_COURS, PROCHAIN, PLANCHER, Regles(), "teaser")
     assert not ouvrir_automatiquement(jauge(), EN_COURS, etage(2, 1, "ouvert"), PLANCHER, Regles(), "ouvert")
 
 
