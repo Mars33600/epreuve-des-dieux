@@ -275,6 +275,17 @@ def _json_liste(texte: str | None) -> list[dict]:
     return [x for x in valeur if isinstance(x, dict)] if isinstance(valeur, list) else []
 
 
+def slug_donjon(dj: Mapping, aspi: Aspiration) -> str:
+    """Le slug de la page Duffus d'un donjon cité par une quête. Duffus laisse parfois un lien bidon
+    (« https://liendudonjon1.com » pour le Minotoror) : on reprend alors le lien `/donjon/…` qu'une autre
+    quête donne pour le même donjon (même nom affiché)."""
+    url = dj.get("url") or ""
+    if not url.startswith("/donjon/"):
+        url = next((a.get("url") for q in aspi.quetes.values() for a in q.get("dungeons") or []
+                    if a.get("info") == dj.get("info") and (a.get("url") or "").startswith("/donjon/")), url)
+    return url.removeprefix("/donjon/").strip("/")
+
+
 def guides_par_dofus(aspi: Aspiration, implicites: Mapping[str, Iterable[int]] | None = None
                      ) -> dict[str, frozenset[int]]:
     """Dofus → ids `quest_list` de son guide Duffus (`guide_pages`, blocs et blocs de prérequis), plus les
@@ -463,7 +474,7 @@ def construire(numero: int, aspi: Aspiration, config: Mapping[int, _ConfigEtage]
                 e.alertes.append(f"entrée {item['id']} du bloc « {titre} » absente de quest_list")
                 continue
             for dj in entree.get("dungeons") or []:
-                slug = (dj.get("url") or "").removeprefix("/donjon/").strip("/")
+                slug = slug_donjon(dj, aspi)
                 if slug and all(d.duffus_id != slug for d in e.donjons):
                     page = aspi.donjons.get(slug)
                     if page is None:

@@ -92,6 +92,13 @@ def test_les_100_quetes_d_alignement_sont_des_prerequis_du_dofus_ivoire():
     assert 98 not in k.guides_par_dofus(ASPI, implicites={})["Dofus Ivoire"]
 
 
+def test_lien_de_donjon_bidon_repris_d_une_autre_quete():
+    # Duffus donne « https://liendudonjon1.com » pour le Minotoror dans la quête 415 ; la 414 a le bon lien.
+    dj = next(d for d in ASPI.quetes[415]["dungeons"] if "Minotoror" in d["info"])
+    assert k.slug_donjon(dj, ASPI) == "centre-du-labyrinthe-du-minotoror"
+    assert k.slug_donjon({"info": "Inconnu", "url": "https://x"}, ASPI) == "https://x"
+
+
 def test_prerequis_implicites_absents_ou_invalides(tmp_path):
     assert k.lire_prerequis_implicites(tmp_path / "absent.yaml") == {}
     f = tmp_path / "p.yaml"
