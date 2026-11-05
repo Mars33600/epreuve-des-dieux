@@ -448,15 +448,15 @@ def test_nom_discord_selon_le_reglage():
 
 def test_filtre_par_element_sans_javascript():
     c = monde().connecter(ID_BRINDILLE)
-    html = c.get("/grimpeurs?quoi=bloc:1").text
-    rep = html.split('id="answer"')[1].split("</form>")[0]
-    assert "Qui ne l'a pas fait <small>5 sur 10 · le bloc « Bloc 1 · Incarnam »" in rep
+    html = c.get("/grimpeurs?quoi=bloc:1").text  # sans ?etage= : l'étage ouvert, comme les anciens liens
+    rep = html.split('id="qui-0-bloc-1"')[1].split("</details>")[0]
+    assert "Qui ne l'a pas fait <small>5 sur 10 actifs · le bloc « Bloc 1 · Incarnam »" in rep
     assert "Qui l'a fait (peut accompagner)" in rep
     assert html.count("player target") == 5 and len(re.findall(r"class=\"player[^\"]* dim\"", html)) == 5
-    rep = c.get("/grimpeurs?quoi=donjon:3").text.split('id="answer"')[1]
+    rep = c.get("/grimpeurs?quoi=donjon:3").text.split('id="qui-0-donjon-3"')[1]
     assert "vaincre Donjon des Bouftous" in rep
-    rep = c.get("/grimpeurs?quoi=categorie:principales").text.split('id="answer"')[1]
-    assert "Qui ne l'a pas fait <small>6 sur 10 · le point Quêtes principales" in rep
+    rep = c.get("/grimpeurs?quoi=categorie:principales").text.split('id="qui-0-categorie-principales"')[1]
+    assert "Qui ne l'a pas fait <small>6 sur 10 actifs · le point Quêtes principales" in rep
 
 
 def test_lien_qui_manque_de_chaque_tuile():

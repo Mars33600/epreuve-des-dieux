@@ -871,17 +871,21 @@ def fiche_et_tableau(ctx: Contexte, numero: int) -> None:
     titre = p.locator(f"li.bloc-carte:has(input[data-ref='{ref}']) h3").inner_text().strip()
     ma = p.locator(".bar .ma-fiche").get_attribute("href")
     pseudo = p.locator(".bar .ma-fiche").text_content().split("(")[-1].strip(" )")
-    ctx.aller(ma)
+    ctx.aller(f"{ma}#etage{numero}")  # l'ancre déplie l'étage s'il est dans « Étages précédents » (recette v4)
     ctx.photo("fiche-moi")
     corps = p.inner_text("body")
     if "Blocs du guide" not in corps:
         ctx.defaut("fiche : pas de section « Blocs du guide »")
-    ligne = p.locator("ul.etat-liste li", has_text=titre).first
+    etage = p.locator(f"#etage{numero}").locator("xpath=ancestor-or-self::*[self::section or self::details][1]")
+    resume = etage.locator("details.pli > summary", has_text="Blocs du guide").first  # plié par défaut
+    if resume.count():
+        resume.click()
+    ligne = etage.locator("ul.etat-liste li", has_text=titre).first
     if ligne.count() == 0 or "Fait" not in ligne.inner_text() or "À faire" in ligne.inner_text():
         ctx.defaut(f"fiche : le bloc « {titre} » n'apparaît pas comme fait")
     if p.locator("input[data-ref]:not([disabled])").count() == 0:
         ctx.defaut("ma fiche : aucune case modifiable")
-    nb_f = entier(p.locator("h3.section-title", has_text="Blocs du guide").first.inner_text())
+    nb_f = entier(resume.locator(".pli-cpt").inner_text()) if resume.count() else 0
     if nb_f < 1:
         ctx.defaut("fiche : le compteur de blocs ne compte pas le bloc coché")
     ctx.controler("ma fiche")
@@ -896,28 +900,29 @@ def fiche_et_tableau(ctx: Contexte, numero: int) -> None:
     ctx.controler("tableau de bord, succès de donjon")
     ctx.aller("/tableau-de-bord?onglet=succes&reste=1")
     ctx.controler("tableau de bord, succès restants")
-    # page Grimpeurs : le filtre porte sur les blocs
-    ctx.aller("/grimpeurs")
-    options = p.locator("#askSel option[value^='bloc:']")
-    if options.count() == 0:
-        ctx.defaut("page Grimpeurs : aucun bloc dans le filtre « qui a fait »")
+    # page Grimpeurs : « qui a fait » rangé par étage, réponse chargée à l'ouverture du dépliant de l'objectif.
+    # L'ancre déplie l'objectif et ses ancêtres (app.js), ce qui déclenche le chargement du morceau de page.
+    ancre = f"qui-{numero}-{ref.replace(':', '-')}"
+    ctx.aller(f"/grimpeurs?etage={numero}#{ancre}")
+    if p.locator(f"#{ancre}").count() == 0:
+        ctx.defaut(f"page Grimpeurs : {ref} absent du « qui a fait » de l'étage {numero}")
     else:
-        p.select_option("#askSel", ref)  # le bouton « Voir » est masqué par le script : le choix suffit
-        p.wait_for_selector("#answer h3", timeout=4000)
-        p.wait_for_timeout(300)
-        if f"quoi={ref}".replace(":", "%3A") not in p.url and f"quoi={ref}" not in p.url:
-            ctx.defaut(f"filtre « qui a fait » : URL {p.url}")
-        reponse = p.inner_text("#answer")
-        if "Qui l'a fait" not in reponse or pseudo not in " ".join(p.locator("#answer .person.done").all_inner_texts()):
-            ctx.defaut(f"filtre « qui a fait » sur {ref} : {pseudo} absent de la liste « fait » ({reponse[:120]!r})")
+        try:
+            p.wait_for_selector(f"#{ancre} .answer h4", timeout=4000)
+        except Exception:  # noqa: BLE001 — un défaut de recette, pas une erreur du script
+            ctx.defaut(f"« qui a fait » : la réponse de {ref} n'arrive pas à l'ouverture")
+        reponse = p.inner_text(f"#{ancre}")
+        if "Qui l'a fait" not in reponse or pseudo not in " ".join(
+                p.locator(f"#{ancre} .person.done").all_inner_texts()):
+            ctx.defaut(f"« qui a fait » sur {ref} : {pseudo} absent de la liste « fait » ({reponse[:120]!r})")
         if p.locator("#roster .player.target").count() + p.locator("#roster .player.dim").count() == 0:
-            ctx.defaut("filtre « qui a fait » : aucune carte mise en avant ou estompée")
+            ctx.defaut("« qui a fait » : aucune carte mise en avant ou estompée")
         ctx.photo("grimpeurs-qui")
-        ctx.controler("page Grimpeurs avec filtre")
-        p.click("#askClear")
-        p.wait_for_load_state("load")
-        if "quoi=" in p.url:
-            ctx.defaut("« Effacer » laisse le filtre dans l'URL")
+        ctx.controler("page Grimpeurs avec « qui a fait »")
+        p.click(f"#{ancre} > summary")
+        p.wait_for_timeout(200)
+        if p.locator("#roster .player.target").count():
+            ctx.defaut("« qui a fait » : les cartes restent mises en avant après fermeture de l'objectif")
     # remise à zéro
     ctx.aller(f"/etages/{numero}")
     p.locator(f"input[data-ref='{ref}']").first.uncheck(force=True)

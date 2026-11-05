@@ -19,15 +19,9 @@
   </nav>
 </section>
 
-{% if not blocs %}
-<section class="card"><p class="muted">Aucun étage ouvert pour l'instant.</p></section>
-{% elif onglet == "progression" %}
-{% for b in blocs %}{% set vue = b.vue %}{% set cats = vue.categories(g.id) %}
-<section class="card" aria-labelledby="tb{{ vue.etage.numero }}">
-  <div class="row">
-    <h3 id="tb{{ vue.etage.numero }}"><a href="/etages/{{ vue.etage.numero }}">{{ titre_etage(vue.etage) }}</a></h3>
-    <span class="total{% if b.points == vue.points_max %} full{% endif %}">{{ b.points }}<small>/{{ vue.points_max }} points · {{ b.faits }}/{{ b.total }}</small></span>
-  </div>
+{#- Retour de recette v4 : l'étage en cours reste au premier niveau ; les étages précédents sont pliés dans
+    « Étages précédents », un <details> par étage dont le résumé tient sur une ligne. Rien n'est ouvert en dur. -#}
+{% macro corps_progression(b) %}{% set vue = b.vue %}{% set cats = vue.categories(g.id) %}
   <p class="muted">Niveaux {{ vue.etage.niveau_min }} à {{ vue.etage.niveau_max }}{% if vue.etage.statut == "termine" %} · étage terminé{% else %} · jauge {{ vue.jauge.score }}/{{ vue.jauge.palier }}{% endif %}</p>
   <div class="bigpips">{% for info in CATS %}{% set e = cats[info.cle] %}<span class="pipcell">{{ pip(info, e, True) }}<span>{{ info.court }}</span><b>{{ e.faits }}/{{ e.total }}</b></span>{% endfor %}</div>
   <dl class="resume-etage">
@@ -36,34 +30,14 @@
     <div><dt>Succès de donjon</dt><dd class="num">{{ b.succes_faits }}/{{ b.succes_total }}</dd></div>
   </dl>
   {% if b.donjons_restants %}<p><a class="btn" href="/tableau-de-bord?onglet=succes&amp;reste=1#etage{{ vue.etage.numero }}">{{ b.donjons_restants }} donjon{{ "s" if b.donjons_restants > 1 }} à compléter</a></p>{% endif %}
-</section>
-{% endfor %}
-{% if a_faire %}
-<section class="card" aria-labelledby="tbSuite">
-  <h3 id="tbSuite">Blocs à faire ensuite</h3>
-  <ul class="suite">
-  {%- for numero, b in a_faire %}
-    <li><a href="/etages/{{ numero }}#bloc-{{ b.id }}"><b>{{ b.titre_complet }}</b></a><small class="muted">{{ "principal" if b.nature == "principale" else "secondaire" }} · {{ texte_quetes_bloc(b) }}</small></li>
-  {%- endfor %}
-  </ul>
-</section>
-{% endif %}
+{% endmacro %}
 
-{% else %}
-<section class="card" aria-labelledby="tbSucces">
-  <div class="row"><h3 id="tbSucces">Succès de donjon</h3>
-    <a class="linkbtn" href="/tableau-de-bord?onglet=succes{% if not reste %}&amp;reste=1{% endif %}">{{ "Tout afficher" if reste else "Seulement ce qui me reste" }}</a></div>
-  <p class="muted">Les 5 cases de chaque donjon : vaincre le boss (compte pour le point Donjons), le Duo, puis les trois défis. Le point Full succès demande les cinq cases de tous les donjons de l'étage.</p>
-</section>
-{% for b in blocs %}{% set vue = b.vue %}{% set coches = vue.coches_de(g.id) %}
-<section class="card" aria-labelledby="titre{{ vue.etage.numero }}" id="etage{{ vue.etage.numero }}">
-  <div class="row"><h3 id="titre{{ vue.etage.numero }}">{{ titre_etage(vue.etage) }}</h3>
-    <span class="muted num">{{ vue.categories(g.id)["full_succes"].faits }}/{{ vue.categories(g.id)["full_succes"].total }} donjons en full succès</span></div>
+{% macro donjons_succes(b) %}{% set vue = b.vue %}{% set coches = vue.coches_de(g.id) %}
   <ul class="liste">
   {%- for d in vue.contenu.donjons %}{% set cases = vue.contenu.cases_du_donjon(d.id) %}{% set n = cases|selectattr("id", "in", coches.cases)|list|length %}
   {%- if not reste or n < cases|length %}
     <li data-donjon="{{ d.id }}">
-      <details class="dj-ligne" open>
+      <details class="dj-ligne">
         <summary><span class="nomdj">{{ icone("i-donjon") }}{{ d.nom }}</span>
           <span class="droite-ligne"><span class="num muted">niv. {{ d.niveau if d.niveau is not none else "?" }} · <span data-djcompte>{{ n }}</span>/{{ cases|length }}</span></span></summary>
         <div class="dj-corps">
@@ -82,8 +56,77 @@
     <li class="muted">Cet étage n'a pas de donjon.</li>
   {%- endfor %}
   </ul>
+{% endmacro %}
+
+{% macro full_succes(b) %}{% set fs = b.vue.categories(g.id)["full_succes"] %}{{ fs.faits }}/{{ fs.total }} donjons en full succès{% endmacro %}
+
+{% if not blocs %}
+<section class="card"><p class="muted">Aucun étage ouvert pour l'instant.</p></section>
+{% elif onglet == "progression" %}
+{% set b = courant %}{% set vue = b.vue %}
+<section class="card" aria-labelledby="tb{{ vue.etage.numero }}">
+  <div class="row">
+    <h3 id="tb{{ vue.etage.numero }}"><a href="/etages/{{ vue.etage.numero }}">{{ titre_etage(vue.etage) }}</a></h3>
+    <span class="total{% if b.points == vue.points_max %} full{% endif %}">{{ b.points }}<small>/{{ vue.points_max }} points · {{ b.faits }}/{{ b.total }}</small></span>
+  </div>
+{{ corps_progression(b) }}
 </section>
-{% endfor %}
+{% if a_faire %}
+{#- Pas plié : au plus NB_A_FAIRE blocs de l'étage en cours, la liste ne grossit pas avec les étages. #}
+<section class="card" aria-labelledby="tbSuite">
+  <h3 id="tbSuite">Blocs à faire ensuite</h3>
+  <ul class="suite">
+  {%- for numero, b in a_faire %}
+    <li><a href="/etages/{{ numero }}#bloc-{{ b.id }}"><b>{{ b.titre_complet }}</b></a><small class="muted">{{ "principal" if b.nature == "principale" else "secondaire" }} · {{ texte_quetes_bloc(b) }}</small></li>
+  {%- endfor %}
+  </ul>
+</section>
+{% endif %}
+{% if precedents %}
+<details class="card pli" id="precedents">
+  <summary><span class="pli-titre">Étages précédents ({{ precedents|length }})</span><span class="pli-cpt">terminés, du plus récent au plus ancien</span></summary>
+  <div class="pli-corps">
+  {%- for b in precedents %}{% set vue = b.vue %}
+    <details class="pli" id="tb{{ vue.etage.numero }}">
+      <summary><span class="pli-titre">{{ titre_etage(vue.etage) }}</span>
+        <span class="pli-cpt num">{{ b.points }}/{{ vue.points_max }} points · {{ b.faits }}/{{ b.total }}</span></summary>
+      <div class="pli-corps">
+        <p><a class="linkbtn" href="/etages/{{ vue.etage.numero }}">Ouvrir la page de l'étage</a></p>
+{{ corps_progression(b) }}
+      </div>
+    </details>
+  {%- endfor %}
+  </div>
+</details>
+{% endif %}
+
+{% else %}
+<section class="card" aria-labelledby="tbSucces">
+  <div class="row"><h3 id="tbSucces">Succès de donjon</h3>
+    <a class="linkbtn" href="/tableau-de-bord?onglet=succes{% if not reste %}&amp;reste=1{% endif %}">{{ "Tout afficher" if reste else "Seulement ce qui me reste" }}</a></div>
+  <p class="muted">Les 5 cases de chaque donjon : vaincre le boss (compte pour le point Donjons), le Duo, puis les trois défis. Le point Full succès demande les cinq cases de tous les donjons de l'étage.</p>
+</section>
+{% set b = courant %}{% set vue = b.vue %}
+<section class="card" aria-labelledby="titre{{ vue.etage.numero }}" id="etage{{ vue.etage.numero }}">
+  <div class="row"><h3 id="titre{{ vue.etage.numero }}">{{ titre_etage(vue.etage) }}</h3>
+    <span class="muted num">{{ full_succes(b) }}</span></div>
+{{ donjons_succes(b) }}
+</section>
+{% if precedents %}
+<details class="card pli" id="precedents">
+  <summary><span class="pli-titre">Étages précédents ({{ precedents|length }})</span><span class="pli-cpt">terminés, du plus récent au plus ancien</span></summary>
+  <div class="pli-corps">
+  {%- for b in precedents %}{% set vue = b.vue %}
+    <details class="pli" id="etage{{ vue.etage.numero }}">
+      <summary><span class="pli-titre">{{ titre_etage(vue.etage) }}</span><span class="pli-cpt num">{{ full_succes(b) }}</span></summary>
+      <div class="pli-corps">
+{{ donjons_succes(b) }}
+      </div>
+    </details>
+  {%- endfor %}
+  </div>
+</details>
+{% endif %}
 {% endif %}
 </main>
 {% endblock %}

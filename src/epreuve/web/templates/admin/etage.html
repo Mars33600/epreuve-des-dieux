@@ -102,9 +102,10 @@
   </table></div>
 </section>
 
-<section class="card" aria-labelledby="quetesTitre">
-  <h2 id="quetesTitre">Quêtes</h2>
-  <div class="table-wrap"><table>
+{#- Liste longue (des dizaines de quêtes par étage) : pliée par défaut (retour de recette v4). #}
+<details class="card pli" id="quetes">
+  <summary><span class="pli-titre" id="quetesTitre">Quêtes</span><span class="pli-cpt num">{{ quetes|length }}</span></summary>
+  <div class="pli-corps"><div class="table-wrap"><table>
     <thead><tr><th>Quête</th><th>Bloc</th><th>Nature</th><th>Actions</th></tr></thead>
     <tbody>{% for q in quetes %}
       <tr><td>{{ q.nom }}<br><span class="muted">niv. {{ q.niveau or "?" }}{% if not q.a_une_fiche %} · sans fiche{% elif q.source_fiche %} · fiche {{ "Duffus" if q.source_fiche == "duffus" else "DofusDB" }}{% endif %}{% if q.masquee %} · masquée{% endif %}</span></td>
@@ -117,6 +118,6 @@
           <form method="post" action="/admin/quetes/{{ q.id }}" class="inline">{{ csrf() }}<input type="text" name="nom" value="{{ q.nom }}" aria-label="Nom de la quête"><button class="btn" type="submit">Renommer</button></form>
         </td></tr>
     {% endfor %}</tbody>
-  </table></div>
-</section>
+  </table></div></div>
+</details>
 {% endblock %}

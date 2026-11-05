@@ -324,7 +324,9 @@ async def admin_quete(request: Request, quete_id: int, taches: BackgroundTasks):
                                      masquee=_bool(form, "masquee"), nom=str(form.get("nom", "")).strip() or None)
     except Introuvable:
         return retour(chemin, erreur="introuvable")
-    return retour(chemin, fait=await fait_ou_auto(request, taches, "contenu"))  # un masquage peut compléter
+    # Retour sur la liste des quêtes, pliée par défaut : l'ancre la déplie (app.js) pour enchaîner les corrections.
+    return retour(chemin, fait=await fait_ou_auto(request, taches, "contenu"),  # un masquage peut compléter
+                  extra="#quetes")
 
 
 @routeur.post("/blocs/{bloc_id}")

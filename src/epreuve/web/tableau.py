@@ -4,6 +4,10 @@
     GET /tableau-de-bord?onglet=succes      onglet « Succès de donjon » : les 5 cases de chaque donjon, tous les
                                             étages ouverts ou terminés (?reste=1 : seulement ce qui reste)
 
+L'étage en cours s'affiche au premier niveau ; les étages précédents sont pliés dans « Étages précédents »
+(un `<details>` par étage) : la page ne grossit pas d'une carte par semaine. Le lien « N donjons à
+compléter » vise l'ancre `#etageN`, que `app.js` déplie à l'arrivée.
+
 Rien de nouveau en base : les chiffres viennent de `charger_vue_etage` (la même source que les pages d'étage)
 et les cases sont celles du lot B, cochées par `POST /api/coches` via `app.js` (mêmes attributs `data-ref`).
 """
@@ -18,7 +22,7 @@ from epreuve.domaine.visibilite import etage_cochable
 from epreuve.web.auth import exiger_grimpeur
 from epreuve.web.pages import peut_cocher_soi
 from epreuve.web.rendu import rendre
-from epreuve.web.vues import VueEtage, charger_vue_etage
+from epreuve.web.vues import VueEtage, charger_vue_etage, separer_courant
 
 routeur = APIRouter()
 NB_A_FAIRE = 6
@@ -84,7 +88,9 @@ async def tableau_de_bord(request: Request, onglet: str = "progression", reste: 
                                                      "tu n'as pas de fiche.", "statut": 409}, 409)
     blocs = await blocs_du_grimpeur(request, v)
     faits, total = sum(b.faits for b in blocs), sum(b.total for b in blocs)
+    courant, precedents = separer_courant(blocs, lambda b: b.vue.etage)
     return await rendre(request, "tableau.html", {
-        "onglet": onglet, "reste": bool(reste), "g": v.grimpeur, "blocs": blocs, "faits": faits, "total": total,
+        "onglet": onglet, "reste": bool(reste), "g": v.grimpeur, "blocs": blocs, "courant": courant,
+        "precedents": precedents, "faits": faits, "total": total,
         "points": sum(b.points for b in blocs), "points_max": sum(b.vue.points_max for b in blocs),
         "a_faire": a_faire(blocs, v.grimpeur.id)})

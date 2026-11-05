@@ -89,8 +89,8 @@ select{min-height:44px;width:100%;min-width:0;flex:1 1 220px;padding:8px 12px;bo
 .btn{min-height:44px;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface-2);font-size:17px}
 .btn:hover{border-color:var(--gold-line)}
 .answer{display:grid;gap:10px}
-.answer h3{font:700 17px/1.3 var(--f-body);display:flex;gap:8px;align-items:baseline}
-.answer h3 small{font-weight:400;color:var(--muted)}
+.answer h3,.answer h4{font:700 17px/1.3 var(--f-body);display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+.answer h3 small,.answer h4 small{font-weight:400;color:var(--muted)}
 .people{display:flex;flex-wrap:wrap;gap:6px}
 .person{font-size:15px;border-radius:999px;padding:4px 10px;border:1px solid var(--line);background:var(--surface-2)}
 .person.miss{border-color:var(--warn);color:var(--ink)}
@@ -686,6 +686,29 @@ details.recap[open] .recap-titre::before{transform:rotate(90deg)}
 .recap-liste li{display:flex;align-items:baseline;gap:8px;min-width:0;padding:3px 0;border-bottom:1px solid var(--line-soft)}
 .recap-liste .q{flex:none;min-width:3.4ch;text-align:right;color:var(--gold-hi);font-size:var(--t-sm)}
 .recap-liste .qn{min-width:0;overflow-wrap:anywhere}
+
+/* Dépliants (retour de recette v4) : tout ce qui grossit avec les étages est plié par défaut. Même dessin que le
+   récapitulatif d'un chapitre ; `.card.pli` en fait une carte entière (« Étages précédents »), et les dépliants
+   s'emboîtent (étage › rubrique › objectif) en restant lisibles à 375 px. */
+details.pli{display:block;min-width:0;border:1px solid var(--line-soft);border-radius:var(--r);background:rgba(10,14,28,.55)}
+details.pli[open]{border-color:var(--line)}
+details.pli > summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2px 12px;
+  min-height:44px;padding:6px 12px;border-radius:var(--r)}
+details.pli > summary::-webkit-details-marker{display:none}
+details.pli > summary:hover{background:rgba(241,234,217,.06)}
+.pli-titre{display:flex;align-items:center;gap:8px;min-width:0;font:700 17px/1.25 var(--f-display);color:var(--gold-hi);overflow-wrap:anywhere}
+.pli-titre::before{content:"▸";flex:none;color:var(--gold);transition:transform .2s}
+details.pli[open] > summary > .pli-titre::before{transform:rotate(90deg)}
+.pli-cpt{font-size:var(--t-sm);color:var(--muted)}
+.pli-corps{display:grid;gap:10px;min-width:0;padding:4px 12px 12px}
+.pli .pli .pli-titre{font:600 16px/1.3 var(--f-body);color:var(--ink)}
+.pli-liste{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.card.pli{padding:0}
+details.pli,.card[id]{scroll-margin-top:calc(var(--bar-h) + 12px)}
+.card.pli > summary{padding:12px 18px;min-height:56px}
+.card.pli > summary > .pli-titre{font-size:var(--t-h3)}
+.card.pli > .pli-corps{padding:0 18px 18px}
+@media (max-width:640px){.pli-corps{padding:4px 8px 10px}.card.pli > summary{padding:10px 14px}.card.pli > .pli-corps{padding:0 10px 14px}}
 
 /* Sommaire des chapitres : menu déroulant collant sur mobile, barre latérale collante sur grand écran */
 .sommaire{position:sticky;top:var(--bar-h);z-index:25;padding:6px 0;background:var(--card)}

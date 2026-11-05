@@ -1,0 +1,62 @@
+{#- « Qui a fait, qui n'a pas fait… ? » rangé par étage (retour de recette v4), pour /grimpeurs.
+
+    Trois niveaux de dépliants, tous pliés : rubrique › (donjon ›) objectif. La réponse d'un objectif n'est
+    pas écrite dans la page (24 étages × des dizaines d'objectifs × une trentaine de grimpeurs) : app.js la
+    demande à l'ouverture (`data-qui-url`, Accept: text/html-fragment). Sans script, le lien du dépliant rend
+    la page entière avec la réponse en place ; `sel` dit alors quoi déplier (étage, quoi, réponse). -#}
+{% from "_macros.html" import personnes %}
+
+{% macro reponse_qui(vue, reponse) -%}
+{%- set libelle, pas_fait, fait = reponse %}
+<div class="answer" data-manque="{{ pas_fait|map(attribute='id')|join(' ') }}" data-fait="{{ fait|map(attribute='id')|join(' ') }}">
+  <h4>Qui ne l'a pas fait <small>{{ pas_fait|length }} sur {{ vue.jauge.actifs }} actifs · {{ libelle }}</small></h4>
+  {% if pas_fait %}{{ personnes(pas_fait, "miss") }}{% else %}<p class="muted">Tout le monde l'a fait.</p>{% endif %}
+  <h4>Qui l'a fait (peut accompagner) <small>{{ fait|length }}</small></h4>
+  {% if fait %}{{ personnes(fait, "done") }}{% else %}<p class="muted">Personne pour l'instant.</p>{% endif %}
+</div>
+{%- endmacro %}
+
+{% macro ancre(n, ref) %}qui-{{ n }}-{{ ref|replace(":", "-") }}{% endmacro %}
+
+{% macro objectif(vue, sel, ref, libelle) -%}
+{%- set n = vue.etage.numero %}{% set ici = sel and sel.etage == n and sel.quoi == ref %}
+<li><details class="pli" id="{{ ancre(n, ref) }}" data-qui-url="/grimpeurs?etage={{ n }}&amp;quoi={{ ref|urlencode }}"{% if ici %} open data-charge="1"{% endif %}>
+  <summary><span class="pli-titre">{{ libelle }}</span></summary>
+  <div class="pli-corps" data-qui-corps>
+  {%- if ici %}{{ reponse_qui(vue, sel.reponse) }}
+  {%- else %}<p><a class="linkbtn" href="/grimpeurs?etage={{ n }}&amp;quoi={{ ref|urlencode }}#{{ ancre(n, ref) }}">Voir qui l'a fait</a></p>{% endif %}
+  </div>
+</details></li>
+{%- endmacro %}
+
+{#- Une rubrique : `items` est une liste de (ref, libellé) ; elle s'ouvre seule si elle contient l'objectif demandé. #}
+{% macro rubrique(vue, sel, titre, items, id) -%}
+{%- set q = sel.quoi if sel and sel.etage == vue.etage.numero else "" %}
+<details class="pli" id="{{ id }}"{% if q and q in items|map("first")|list %} open{% endif %}>
+  <summary><span class="pli-titre">{{ titre }}</span><span class="pli-cpt num">{{ items|length }}</span></summary>
+  <div class="pli-corps">
+  {%- if caller is defined %}{{ caller() }}{% else %}
+    <ul class="pli-liste">{% for ref, libelle in items %}{{ objectif(vue, sel, ref, libelle) }}{% endfor %}</ul>
+  {%- endif %}
+  </div>
+</details>
+{%- endmacro %}
+
+{% macro corps_etage(vue, sel) -%}
+{%- set n = vue.etage.numero %}{% set c = vue.contenu %}
+{%- set points, vaincus, succes, principaux, secondaires = [], [], [], [], [] %}
+{%- for info in CATS %}{% set _ = points.append(("categorie:" ~ info.cle, info.nom)) %}{% endfor %}
+{%- for d in c.donjons if vue.classique(d.id) %}{% set _ = vaincus.append(("donjon:" ~ d.id, d.nom)) %}{% endfor %}
+{%- for d in c.donjons %}{% for x in c.cases_du_donjon(d.id) if not x.est_classique %}{% set _ = succes.append(("case:" ~ x.id, x.nom)) %}{% endfor %}{% endfor %}
+{%- for b in c.blocs %}{% set _ = (principaux if b.nature == "principale" else secondaires).append(("bloc:" ~ b.id, b.titre_complet)) %}{% endfor %}
+{{ rubrique(vue, sel, "Les points (catégories)", points, "qui-" ~ n ~ "-points") }}
+{% if vaincus %}{{ rubrique(vue, sel, "Donjons vaincus", vaincus, "qui-" ~ n ~ "-vaincus") }}{% endif %}
+{% if succes %}{% call rubrique(vue, sel, "Succès de donjon", succes, "qui-" ~ n ~ "-succes") %}
+  {%- for d in c.donjons %}{% set defis = [] %}
+  {%- for x in c.cases_du_donjon(d.id) if not x.est_classique %}{% set _ = defis.append(("case:" ~ x.id, x.nom)) %}{% endfor %}
+  {%- if defis %}{{ rubrique(vue, sel, d.nom, defis, "qui-" ~ n ~ "-dj-" ~ d.id) }}{% endif %}
+  {%- endfor %}
+{% endcall %}{% endif %}
+{% if principaux %}{{ rubrique(vue, sel, "Blocs principaux", principaux, "qui-" ~ n ~ "-principaux") }}{% endif %}
+{% if secondaires %}{{ rubrique(vue, sel, "Blocs secondaires", secondaires, "qui-" ~ n ~ "-secondaires") }}{% endif %}
+{%- endmacro %}

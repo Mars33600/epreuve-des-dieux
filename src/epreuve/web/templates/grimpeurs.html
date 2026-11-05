@@ -1,5 +1,6 @@
 {% extends "site.html" %}
-{% from "_macros.html" import pip, personnes %}
+{% from "_macros.html" import pip %}
+{% from "_qui.html" import corps_etage %}
 {% block titre %}Les grimpeurs · L'Épreuve des Dieux{% endblock %}
 {% block page %}
 <section class="roster" aria-labelledby="rosterTitle">
@@ -7,30 +8,26 @@
     <h2 id="rosterTitle">Les grimpeurs</h2>
     <span class="muted">{{ actifs }} actifs · {{ en_pause }} en pause</span>
   </div>
-  {% if vue %}
-  <form class="card ask" method="get" action="/grimpeurs" id="ask" data-etage="{{ ouvert.numero }}">
-    <label for="askSel">Qui a fait, qui n'a pas fait… ? <span class="muted">(étage {{ ouvert.numero }})</span></label>
-    <div class="askrow">
-      <select id="askSel" name="quoi">
-        <option value="">Choisir un bloc, un donjon, un succès ou une catégorie…</option>
-        <optgroup label="Les points (tout l'étage)">{% for info in CATS %}<option value="categorie:{{ info.cle }}"{% if quoi == "categorie:" ~ info.cle %} selected{% endif %}>{{ info.nom }}</option>{% endfor %}</optgroup>
-        <optgroup label="Donjons vaincus">{% for d in vue.contenu.donjons %}<option value="donjon:{{ d.id }}"{% if quoi == "donjon:" ~ d.id %} selected{% endif %}>{{ d.nom }}</option>{% endfor %}</optgroup>
-        {% for d in vue.contenu.donjons %}<optgroup label="Succès · {{ d.nom }}">{% for c in vue.contenu.cases_du_donjon(d.id) if not c.est_classique %}<option value="case:{{ c.id }}"{% if quoi == "case:" ~ c.id %} selected{% endif %}>{{ c.nom }} ({{ d.nom }})</option>{% endfor %}</optgroup>{% endfor %}
-        <optgroup label="Blocs principaux">{% for b in vue.contenu.blocs if b.nature == "principale" %}<option value="bloc:{{ b.id }}"{% if quoi == "bloc:" ~ b.id %} selected{% endif %}>{{ b.titre_complet }}</option>{% endfor %}</optgroup>
-        <optgroup label="Blocs secondaires">{% for b in vue.contenu.blocs if b.nature == "secondaire" %}<option value="bloc:{{ b.id }}"{% if quoi == "bloc:" ~ b.id %} selected{% endif %}>{{ b.titre_complet }}</option>{% endfor %}</optgroup>
-      </select>
-      <button class="btn" type="submit" id="askVoir">Voir</button>
-      <a class="btn" href="/grimpeurs" id="askClear">Effacer</a>
-    </div>
-    <div class="answer" id="answer" aria-live="polite">
-      {% if reponse %}{% set libelle, pas_fait, fait = reponse %}
-      <h3>Qui ne l'a pas fait <small>{{ pas_fait|length }} sur {{ vue.jauge.actifs }} · {{ libelle }}</small></h3>
-      {% if pas_fait %}{{ personnes(pas_fait, "miss") }}{% else %}<p class="muted">Tout le monde l'a fait.</p>{% endif %}
-      <h3>Qui l'a fait (peut accompagner) <small>{{ fait|length }}</small></h3>
-      {% if fait %}{{ personnes(fait, "done") }}{% else %}<p class="muted">Personne pour l'instant.</p>{% endif %}
-      {% else %}<p class="muted">Choisis un objectif pour voir qui l'a fait et qui ne l'a pas encore fait.</p>{% endif %}
-    </div>
-  </form>
+  {% if etages_qui %}
+  {#- Retour de recette v4 : un dépliant par étage ouvert ou terminé, du plus récent au plus ancien. Seul l'étage
+      en cours est déplié (c'est l'usage principal) ; ses rubriques restent pliées. Le corps des autres étages et
+      chaque réponse arrivent à l'ouverture (app.js) ; sans script, leurs liens rendent la page avec le bon dépliant. #}
+  <section class="card ask" id="ask" aria-labelledby="askTitre">
+    <h3 id="askTitre">Qui a fait, qui n'a pas fait… ?</h3>
+    <p class="muted">Déplie un étage, une rubrique puis un objectif : tu vois qui ne l'a pas fait et qui peut t'accompagner.</p>
+    {%- for e in etages_qui %}{% set deroule = e.numero in vues_qui %}
+    <details class="pli" id="qui-e{{ e.numero }}"{% if e == courant or (sel and sel.etage == e.numero) %} open{% endif %}{% if not deroule %} data-qui-url="/grimpeurs?etage={{ e.numero }}"{% else %} data-charge="1"{% endif %}>
+      <summary><span class="pli-titre">{{ titre_etage(e) }}</span><span class="pli-cpt">{{ "en cours" if e.statut == "ouvert" else "terminé" }}</span></summary>
+      <div class="pli-corps" data-qui-corps>
+      {%- if deroule %}
+        {{ corps_etage(vues_qui[e.numero], sel) }}
+      {%- else %}
+        <p><a class="linkbtn" href="/grimpeurs?etage={{ e.numero }}#qui-e{{ e.numero }}">Voir les objectifs de cet étage</a></p>
+      {%- endif %}
+      </div>
+    </details>
+    {%- endfor %}
+  </section>
   {% endif %}
   <div class="grid" id="roster">
     {%- for g in grimpeurs %}

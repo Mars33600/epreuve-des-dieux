@@ -3,7 +3,8 @@
     GET  /etages/{n}                 l'onglet d'un étage : ma progression, la jauge, les donjons, les blocs du guide
     GET  /etages/{n}/quetes/{id}     la fiche de quête (plus liée depuis le site v5 : le guide, c'est Duffus)
     GET  /histoire                   l'histoire de Shadoaze ; POST /histoire/vu retient le prologue passé
-    GET  /grimpeurs                  toutes les fiches + le filtre « qui n'a pas fait… ? » (?quoi=…)
+    GET  /grimpeurs                  toutes les fiches + « qui a fait, qui n'a pas fait… ? » par étage
+                                     (?etage=N&quoi=… ; morceaux de page avec Accept: text/html-fragment)
     GET  /grimpeurs/{id}             la fiche d'un grimpeur (?edition=1 : mode édition de l'admin)
     POST /grimpeurs/moi              modifier son pseudo, sa classe, son niveau
     GET/POST /inscription            créer sa fiche (membre de la liste officielle, après l'ouverture)
@@ -37,6 +38,7 @@ from epreuve.web.vues import (
     charger_vue_etage,
     encoches,
     formule_palier,
+    separer_courant,
     texte_jauge,
     tri_grimpeurs,
     verdicts,
@@ -251,23 +253,66 @@ def resoudre_quoi(vue: VueEtage, type_: str, ident: str) -> tuple[str, list[Grim
     return libelle, qui(ref, vue.grimpeurs, vue.coches, False), qui(ref, vue.grimpeurs, vue.coches, True)
 
 
+def _fragment(request: Request) -> bool:
+    """Le script demande un morceau de page (`Accept: text/html-fragment`), comme pour la fiche de quête."""
+    return "text/html-fragment" in request.headers.get("accept", "")
+
+
+async def etage_qui(request: Request, v: Visiteur, numero: int) -> Etage:
+    """L'étage d'un « qui a fait… ? » : visible pour ce visiteur et ouvert ou terminé, sinon 404 (un étage scellé
+    n'a rien à montrer, même à un admin : la page ne le liste pas)."""
+    etage = await etage_visible(request, numero, v)
+    if not etage_cochable(etage):
+        raise Refus(404, INTROUVABLE)
+    return etage
+
+
 @routeur.get("/grimpeurs")
-async def page_grimpeurs(request: Request, quoi: str = ""):
+async def page_grimpeurs(request: Request, quoi: str = "", etage: int | None = None):
+    """Les fiches et « qui a fait, qui n'a pas fait… ? », rangé par étage (retour de recette v4).
+
+    La page ne déroule que l'étage en cours (rubriques et objectifs pliés) et l'étage demandé par `?etage=` ;
+    les autres étages et chaque réponse arrivent à l'ouverture de leur dépliant : `app.js` redemande cette
+    même adresse avec `Accept: text/html-fragment` et n'en reçoit que le morceau (`_qui_etage.html` sans
+    `quoi`, `_qui_reponse.html` avec). Sans script, chaque dépliant porte un lien `?etage=N&quoi=…` qui rend
+    la page entière avec la réponse en place et ses dépliants ouverts. Même contrôle d'accès partout :
+    grimpeur connecté (ou admin), site ouvert (le teaser est filtré avant, par `securite.FiltreMode`).
+    """
     v = await exiger_grimpeur(request)
     s = _s(request)
+    if _fragment(request):
+        if etage is None:
+            raise Refus(422, "Requête invalide.")
+        vue = await charger_vue_etage(s.depot, await etage_qui(request, v, etage), s.regles)
+        if not quoi:
+            return await rendre(request, "_qui_etage.html", {"vue": vue, "sel": None, "courant": False})
+        reponse = resoudre_quoi(vue, *quoi.split(":", 1)) if ":" in quoi else None
+        if reponse is None:
+            raise Refus(404, INTROUVABLE)
+        return await rendre(request, "_qui_reponse.html", {"vue": vue, "reponse": reponse})
     grimpeurs = await s.depot.grimpeurs()
-    ouvert = next((e for e in await s.depot.etages() if e.statut == "ouvert"), None)
-    vue = await charger_vue_etage(s.depot, ouvert, s.regles, grimpeurs) if ouvert else None
-    reponse = None
-    if vue is not None and ":" in quoi:
-        reponse = resoudre_quoi(vue, *quoi.split(":", 1))
+    tous = await s.depot.etages()
+    ouvert = next((e for e in tous if e.statut == "ouvert"), None)
+    listes = sorted((e for e in tous if etage_cochable(e)), key=lambda e: -e.numero)
+    courant, _ = separer_courant(listes, lambda e: e)
+    # Sans `etage`, un ancien lien `?quoi=` (tuiles de la page d'étage) vise l'étage ouvert, comme avant.
+    choisi = next((e for e in listes if e.numero == etage), None) if etage is not None else ouvert
+    vues = {}  # numéro → vue, chargée une seule fois : l'étage en cours, l'étage demandé, l'étage ouvert (fiches)
+    for e in (courant, choisi, ouvert):
+        if e is not None and e.numero not in vues:
+            vues[e.numero] = await charger_vue_etage(s.depot, e, s.regles, grimpeurs)
+    vue_ouvert = vues[ouvert.numero] if ouvert else None
+    reponse = sel = None
+    if choisi is not None and ":" in quoi:
+        reponse = resoudre_quoi(vues[choisi.numero], *quoi.split(":", 1))
+    if reponse is not None or (choisi is not None and etage is not None):
+        sel = {"etage": choisi.numero, "quoi": quoi if reponse else "", "reponse": reponse}
     cibles = {g.id for g in reponse[1]} if reponse else set()
-    faits = {g.id for g in reponse[2]} if reponse else set()
     liste = tri_grimpeurs(grimpeurs, v.est_admin)
     return await rendre(request, "grimpeurs.html", {
-        "grimpeurs": liste, "vue": vue, "ouvert": ouvert, "quoi": quoi, "reponse": reponse,
-        "cibles": cibles, "faits": faits, "actifs": sum(g.statut == "actif" for g in liste),
-        "en_pause": sum(g.statut == "pause" for g in liste)})
+        "grimpeurs": liste, "vue": vue_ouvert, "ouvert": ouvert, "etages_qui": listes, "vues_qui": vues,
+        "courant": courant, "sel": sel, "reponse": reponse, "cibles": cibles,
+        "actifs": sum(g.statut == "actif" for g in liste), "en_pause": sum(g.statut == "pause" for g in liste)})
 
 
 @routeur.get("/grimpeurs/{grimpeur_id}")
@@ -285,8 +330,10 @@ async def page_fiche(request: Request, grimpeur_id: int, edition: int = 0, fait:
     faits = sum(vu.avancement(g.id)[0] for vu in vues)
     total = sum(vu.avancement(g.id)[1] for vu in vues)
     cochable = (soi and peut_cocher_soi(v, etages[0], s.regles)) if etages else False
+    courant, precedents = separer_courant(vues, lambda vu: vu.etage)  # les précédents sont pliés (recette v4)
     return await rendre(request, "fiche.html", {
-        "g": g, "vues": vues, "soi": soi, "edition": edition_admin, "global": (faits, total),
+        "g": g, "vues": vues, "courant": courant, "precedents": precedents, "soi": soi, "edition": edition_admin,
+        "global": (faits, total),
         "cochable": cochable or edition_admin, "classes": CLASSES,
         "message": "Fiche enregistrée." if fait else "", "erreur": MESSAGES_FICHE.get(erreur, "")})
 

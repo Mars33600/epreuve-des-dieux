@@ -186,6 +186,19 @@ def titre_etage(etage) -> str:
     return f"Étage {etage.numero} · {nom}"
 
 
+def separer_courant[T](elements: list[T], etage_de) -> tuple[T | None, list[T]]:
+    """(l'élément de l'étage en cours, les autres) sur une liste du plus récent au plus ancien.
+
+    L'étage en cours est l'étage ouvert ; s'il n'y en a plus (fin de l'épreuve), le plus récent, comme
+    `tableau.a_faire`. Les pages l'affichent au premier niveau et plient les autres : la liste grossit
+    d'un étage par semaine, la page ne doit pas grossir avec elle (retour de recette v4).
+    """
+    if not elements:
+        return None, []
+    courant = next((x for x in elements if etage_de(x).statut == "ouvert"), elements[0])
+    return courant, [x for x in elements if x is not courant]
+
+
 def texte_jauge(jauge: EtatJauge) -> str:
     """Toujours présent et lisible sans la couleur (SPEC §4.5)."""
     pause = f", {jauge.en_pause} en pause" if jauge.en_pause else ""

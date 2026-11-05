@@ -1,6 +1,7 @@
 /* L'Épreuve des Dieux · le script du site (lot B).
    Tiré de docs/design/maquette-v2.html. Règles :
    - aucune donnée n'est insérée en HTML : uniquement textContent et createElement (pseudos, libellés) ;
+     seule exception, les morceaux de page du « qui a fait… ? », rendus et échappés par le serveur (Jinja) ;
      (la fiche de quête en fenêtre a disparu avec la v5 : le guide, c'est Duffus) ;
    - la CSP interdit les styles en ligne : couleurs et pourcentages passent par des classes (c-…, p-…) ;
    - tout marche sans JavaScript (formulaires, liens) ; le script ajoute la coche sans rechargement,
@@ -259,37 +260,63 @@ function puce(g, cls){
   if (g.classe){ const c = document.createElement("span"); c.className = "muted"; c.textContent = " " + g.classe; s.append(c); }
   return s;
 }
-function titre(t, petit){
-  const h = document.createElement("h3"); h.textContent = t + " ";
-  const s = document.createElement("small"); s.textContent = petit; h.append(s); return h;
-}
-async function demander(quoi){
-  const form = $("ask"), ans = $("answer"); if (!form || !ans) return;
-  const roster = [...document.querySelectorAll("#roster .player")];
-  roster.forEach(p => p.classList.remove("target", "dim"));
-  history.replaceState(null, "", quoi ? `/grimpeurs?quoi=${encodeURIComponent(quoi)}` : "/grimpeurs");
-  ans.textContent = "";
-  if (!quoi){ const p = document.createElement("p"); p.className = "muted"; p.textContent = "Choisis un objectif pour voir qui l'a fait et qui ne l'a pas encore fait."; ans.append(p); return; }
-  const [type, id] = quoi.split(":");
+
+/* Le « qui a fait… ? » des grimpeurs est rangé par étage (retour de recette v4) : étage › rubrique › objectif, tous
+   pliés. Le corps d'un dépliant `data-qui-url` (un étage passé, la réponse d'un objectif) arrive à sa première
+   ouverture : un morceau de page rendu par le serveur avec les gabarits du rendu sans script (données échappées
+   par Jinja), lu par DOMParser, qui n'exécute rien. Une fois là, il reste dans la page : c'est le cache. */
+async function chargerPli(det){
+  const corps = det.querySelector(":scope > [data-qui-corps]");
+  if (!corps || det.dataset.charge) return;
+  det.dataset.charge = "1";
   try{
-    const r = await fetch(`/api/etages/${encodeURIComponent(form.dataset.etage)}/manque?type=${encodeURIComponent(type)}&id=${encodeURIComponent(id)}`, {credentials:"same-origin"});
-    const d = await r.json(); if (!r.ok) throw new Error(d.message || "");
-    const libelle = $("askSel").selectedOptions[0]?.textContent || "";
-    const l1 = document.createElement("div"); l1.className = "people"; d.pas_fait.forEach(g => l1.append(puce(g, "miss")));
-    if (!d.pas_fait.length) l1.textContent = "Tout le monde l'a fait.";
-    const l2 = document.createElement("div"); l2.className = "people"; d.fait.forEach(g => l2.append(puce(g, "done")));
-    if (!d.fait.length) l2.textContent = "Personne pour l'instant.";
-    ans.append(titre("Qui ne l'a pas fait", `${d.pas_fait.length} sur ${d.pas_fait.length + d.fait.length} · ${libelle}`), l1,
-               titre("Qui l'a fait (peut accompagner)", String(d.fait.length)), l2);
-    const manque = new Set(d.pas_fait.map(g => g.id)), fait = new Set(d.fait.map(g => g.id));
-    roster.forEach(p => { const n = Number(p.dataset.gid);
-      if (manque.has(n)) p.classList.add("target"); else if (fait.has(n)) p.classList.add("dim"); });
-  }catch(e){ const p = document.createElement("p"); p.className = "alerte"; p.textContent = "Réponse indisponible, réessaie."; ans.append(p); }
+    const r = await fetch(det.dataset.quiUrl, {credentials:"same-origin", headers:{Accept:"text/html-fragment"}});
+    // Une redirection (session expirée, teaser) rendrait une page entière : on garde le lien de repli.
+    if (!r.ok || r.redirected) throw new Error(String(r.status));
+    const doc = new DOMParser().parseFromString(await r.text(), "text/html");
+    corps.replaceChildren(...doc.body.childNodes);
+  }catch(e){
+    delete det.dataset.charge;  // la prochaine ouverture réessaiera
+    corps.querySelector(":scope > .alerte")?.remove();
+    const p = document.createElement("p"); p.className = "alerte"; p.textContent = "Réponse indisponible, réessaie.";
+    corps.prepend(p);
+  }
 }
-function initAsk(){
-  const sel = $("askSel"); if (!sel) return;
-  sel.addEventListener("change", e => { e.stopPropagation(); demander(sel.value); });
-  $("askVoir")?.setAttribute("hidden", "");
+/* Les fiches du dessous suivent le dernier objectif ouvert : en avant ceux qui ne l'ont pas fait. */
+let surligne = null;
+function surligner(det){
+  const rep = det?.querySelector(":scope > [data-qui-corps] > .answer");
+  const roster = document.querySelectorAll("#roster .player");
+  roster.forEach(p => p.classList.remove("target", "dim"));
+  surligne = rep ? det : null;
+  if (!rep) return;
+  const ids = cle => new Set((rep.dataset[cle] || "").split(" ").filter(Boolean));
+  const manque = ids("manque"), fait = ids("fait");
+  roster.forEach(p => { if (manque.has(p.dataset.gid)) p.classList.add("target"); else if (fait.has(p.dataset.gid)) p.classList.add("dim"); });
+}
+document.addEventListener("toggle", async e => {
+  const det = e.target;
+  if (!det.matches?.("details[data-qui-url]")) return;
+  if (!det.open){ if (det === surligne) surligner(null); return; }
+  await chargerPli(det);
+  if (det.open && det.querySelector(":scope > [data-qui-corps] > .answer")) surligner(det);
+}, true);
+
+/* =================== Ancres vers un dépliant =================== */
+/* « 3 donjons à compléter » vise #etage3, un lien de repli #qui-0-bloc-12 : la cible peut être pliée, ou dans un
+   dépliant plié. On la déplie avec tous ses ancêtres (ce qui charge aussi ceux qui arrivent à l'ouverture). */
+function ouvrirAncre(){
+  let id = "";
+  try{ id = decodeURIComponent(location.hash.slice(1)); }catch(e){ return; }
+  const cible = id ? document.getElementById(id) : null;
+  if (!cible) return;
+  for (let d = cible.closest("details"); d; d = d.parentElement?.closest("details")) d.open = true;
+  cible.scrollIntoView({block:"start"});
+}
+addEventListener("hashchange", ouvrirAncre);
+/* Un ancien lien « Qui manque ? » (/grimpeurs?quoi=…, sans ancre) rend la réponse dans l'étage en cours : on y va. */
+function versReponse(){
+  if (!location.hash) document.querySelector("#ask .answer")?.closest("details")?.scrollIntoView({block:"start"});
 }
 
 /* =================== Clics =================== */
@@ -356,7 +383,8 @@ function ciel(){
 }
 
 initFiltre();
-initAsk();
+ouvrirAncre();
+versReponse();
 horloge(); setInterval(horloge, 1000);
 ambiance(document.body.dataset.ambiance);
 ciel();
