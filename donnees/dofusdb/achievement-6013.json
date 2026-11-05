@@ -1,0 +1,32 @@
+{
+ "categoryId": 142,
+ "description": {
+  "de": "Die Herausforderung [challenge,1275] abschließen und damit Maunzaug in seinem Dungeon besiegen.",
+  "en": "Defeat the Catseye in this boss's dungeon while completing the [challenge,1275] challenge.",
+  "es": "Vencer al Miauvizor en su mazmorra validando el reto [challenge,1275].",
+  "fr": "Vaincre Chalœil dans son donjon en validant le challenge [challenge,1275]",
+  "id": "1046440",
+  "pt": "Derrotar Gatolho em seu calabouço completando o desafio [challenge,1275]"
+ },
+ "id": 6013,
+ "name": {
+  "de": "Maunzaug (Begleiter)",
+  "en": "Catseye (Sidekick)",
+  "es": "Miauvizor (compañero)",
+  "fr": "Chalœil (Compagnon)",
+  "id": "1000615",
+  "pt": "Gatolho (Companheiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>939,0)",
+   "id": 13370,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 13371,
+   "order": 1
+  }
+ ]
+}

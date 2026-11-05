@@ -48,6 +48,17 @@ class ClientDofusDB:
         """Les donjons dont le nom français est exactement `nom`."""
         return (await self._get("/dungeons", {"name.fr": nom})).get("data", [])
 
+    async def index_donjons(self) -> list[dict]:
+        """Tous les donjons du jeu, réduits à `id` et `name` (quatre requêtes) : la recherche par nom exact
+        ne tolère aucune variante d'écriture (« Maitre » chez Duffus, « Maître » en jeu)."""
+        donjons: list[dict] = []
+        while True:
+            page = await self._get("/dungeons", [("$select[]", "id"), ("$select[]", "name"), ("$limit", 50),
+                                                 ("$skip", len(donjons)), ("$sort[id]", 1)])
+            donjons.extend(page.get("data", []))
+            if not page.get("data") or len(donjons) >= page.get("total", 0):
+                return donjons
+
     async def succes(self, id_: int) -> dict:
         """Un succès, avec `categoryId` et ses `objectives` (critères `Qf=…`, `OA=…`)."""
         return await self._get(f"/achievements/{id_}")

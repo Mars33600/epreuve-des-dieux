@@ -1,0 +1,32 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,1009] abschließen und damit Le Tschuck in seinem Dungeon besiegen.",
+  "en": "Defeat LeChouque in this boss's dungeon while completing the [challenge,1009] challenge.",
+  "es": "Vencer a Le Chuko en su mazmorra validando el reto [challenge,1009].",
+  "fr": "Vaincre Le Chouque dans son donjon en validant le challenge [challenge,1009].",
+  "id": "1009951",
+  "pt": "Derrotar o Tchuke em seu calabouço completando o desafio [challenge,1009]."
+ },
+ "id": 6174,
+ "name": {
+  "de": "Le Tschuck (Spezial)",
+  "en": "LeChouque (Special)",
+  "es": "Le Chuko (especial)",
+  "fr": "Le Chouque (Spécial)",
+  "id": "1009950",
+  "pt": "O Tchuke (Especial)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>1009,0)",
+   "id": 13837,
+   "order": 0
+  },
+  {
+   "criterion": "PL>89",
+   "id": 13838,
+   "order": 1
+  }
+ ]
+}

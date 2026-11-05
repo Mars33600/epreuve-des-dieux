@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Kein Gegner außer die Reißerin darf die Wirkungen des Altars der Jagd erleiden.",
+  "en": "No enemy other than the Ripper may suffer the effects of the Hunting Altar.",
+  "es": "Ningún enemigo que no sea la Despedazadora debe sufrir los efectos del altar de caza.",
+  "fr": "Aucun ennemi autre que la Déchireuse ne doit subir les effets de l'Autel de la Chasse",
+  "id": "1142008",
+  "pt": "Nenhum inimigo além da Dilaceradora deve sofrer os efeitos do Altar da Caça"
+ },
+ "id": 2086,
+ "name": {
+  "de": "Altarierin",
+  "en": "Altared",
+  "es": "Altarera",
+  "fr": "Autelière",
+  "id": "1135059",
+  "pt": "Altarneira"
+ }
+}

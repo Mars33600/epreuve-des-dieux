@@ -1,0 +1,32 @@
+{
+ "categoryId": 11,
+ "description": {
+  "de": "Die Herausforderung [challenge,129] abschließen und damit den Ronin-Chafer in seinem Dungeon besiegen.",
+  "en": "Defeat the Ronin Chafer in this boss's dungeon while completing the [challenge,129] challenge.",
+  "es": "Vencer al chafer Rōnin en su mazmorra validando el reto [challenge,129].",
+  "fr": "Vaincre le Chafer Rōnin dans son donjon en validant le challenge [challenge,129].",
+  "id": "852770",
+  "pt": "Derrotar o Chafer Ronin em seu calabouço completando o desafio [challenge,129]."
+ },
+ "id": 666,
+ "name": {
+  "de": "Ronin-Chafer (Nomade)",
+  "en": "Ronin Chafer (Nomad)",
+  "es": "Chafer Rōnin (nómada)",
+  "fr": "Chafer Rōnin (Nomade)",
+  "id": "1121832",
+  "pt": "Chafer Ronin (Nômade)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>129,0)",
+   "id": 1752,
+   "order": 0
+  },
+  {
+   "criterion": "PL>39",
+   "id": 1753,
+   "order": 1
+  }
+ ]
+}

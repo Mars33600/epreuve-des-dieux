@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Kwurkenbomben dürfen keinen Schaden erleiden.",
+  "en": "Cucumbombs must not suffer any damage.",
+  "es": "Los pepinobuses no deben sufrir ningún daño.",
+  "fr": "Les Bombombres ne doivent subir aucun dommage.",
+  "id": "1026577",
+  "pt": "Os Bombinos não devem sofrer dano."
+ },
+ "id": 1036,
+ "name": {
+  "de": "Damengambit",
+  "en": "The Queen's Gambit",
+  "es": "Cinturón de la reina del azar",
+  "fr": "Le jeu de la Dame",
+  "id": "1012221",
+  "pt": "O jogo da Dama"
+ }
+}

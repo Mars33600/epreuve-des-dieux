@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Kein Verbündeter darf den Zauber Laterne der Geistreichen verwenden.",
+  "en": "No ally may use the Slayspirit Lantern spell.",
+  "es": "Ningún aliado debe usar el hechizo Farol de los Espiritasesinos.",
+  "fr": "Aucun allié ne doit utiliser le sort Lanterne des Spiritueurs.",
+  "id": "1009807",
+  "pt": "Nenhum aliado deve utilizar o feitiço Lanterna dos Assassispíritos."
+ },
+ "id": 1057,
+ "name": {
+  "de": "Es ward kein Licht",
+  "en": "Don't Let There Be Light",
+  "es": "La luz nunca se hizo",
+  "fr": "La lumière ne fut jamais",
+  "id": "1009806",
+  "pt": "Não se fez luz"
+ }
+}

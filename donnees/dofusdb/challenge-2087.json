@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Wenn ein verbündeter Kämpfer einen oder mehrere Gegner tötet, muss er seine Runde auf dem Feld beenden, auf dem einer dieser Gegner gestanden hat.",
+  "en": "When an allied fighter kills one or more enemies, they must finish their turn on the cell previously occupied by one of those enemies.",
+  "es": "Cuando un luchador aliado mate a uno o varios enemigos, debe terminar su turno en la casilla que ocupaba alguno de estos enemigos.",
+  "fr": "Lorsqu'un combattant allié tue un ou plusieurs ennemis, il doit finir son tour sur la case qu'occupait l'un de ce ou ces ennemis.",
+  "id": "1135440",
+  "pt": "Quando um combatente aliado mata um inimigo ou mais, ele precisa terminar o turno na célula que algum desses inimigos ocupava."
+ },
+ "id": 2087,
+ "name": {
+  "de": "Eroberer",
+  "en": "Conqueror",
+  "es": "Conquistador",
+  "fr": "Conquérant",
+  "id": "1135439",
+  "pt": "Conquistador"
+ }
+}

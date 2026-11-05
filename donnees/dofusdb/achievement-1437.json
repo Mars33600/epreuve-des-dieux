@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Maunzaug in seinem Dungeon besiegen.",
+  "en": "Defeat the Catseye in this boss's dungeon.",
+  "es": "Vencer a Miauvizor en su mazmorra.",
+  "fr": "Vaincre le Chalœil dans son donjon.",
+  "id": "615679",
+  "pt": "Derrotar o Gatolho em seu calabouço."
+ },
+ "id": 1437,
+ "name": {
+  "de": "Maunzaugs Herausforderung",
+  "en": "Catseye Challenge",
+  "es": "Reto de Miauvizor",
+  "fr": "Défi du Chalœil",
+  "id": "615651",
+  "pt": "Desafio do Gatolho"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>4263,0,d)",
+   "id": 4483,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 4484,
+   "order": 1
+  }
+ ]
+}

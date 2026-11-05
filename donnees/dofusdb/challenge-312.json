@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Während des Kampfes darf kein Versuch unternommen werden, Gegnern BP zu entziehen.",
+  "en": "Do not attempt to reduce your enemies' MP for the duration of the combat.",
+  "es": "No quites PM a los adversarios mientras dure el combate.",
+  "fr": "Ne pas tenter de retirer de PM aux adversaires pendant toute la durée du combat.",
+  "id": "853208",
+  "pt": "Não tentar retirar PM dos adversários durante todo o combate."
+ },
+ "id": 312,
+ "name": {
+  "de": "Geht weiter!",
+  "en": "Keep Moving!",
+  "es": "¡Circulando!",
+  "fr": "Circulez !",
+  "id": "853212",
+  "pt": "Circulando!"
+ }
+}

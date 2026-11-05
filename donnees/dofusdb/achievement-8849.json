@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Den Ehrwürdigen Schläfer in seinem Dungeon besiegen.",
+  "en": "Defeat the Sleeping Venerable One in this boss's dungeon.",
+  "es": "Vencer al Venerable Durmiente en su mazmorra.",
+  "fr": "Vaincre Le Vénérable Endormi dans son donjon.",
+  "id": "1136151",
+  "pt": "Derrotar o Venerável Adormecido em seu calabouço."
+ },
+ "id": 8849,
+ "name": {
+  "de": "Unterholz des Ehrwürdigen",
+  "en": "The Venerable One's Thicket",
+  "es": "Coto del Venerable",
+  "fr": "Breuil du Vénérable",
+  "id": "1136150",
+  "pt": "Bosque do Venerável"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>8047,0,d)",
+   "id": 17758,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 17759,
+   "order": 1
+  }
+ ]
+}

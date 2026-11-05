@@ -1,0 +1,21 @@
+[
+ {
+  "achievements": [
+   1398,
+   1399,
+   1402,
+   1403,
+   6174
+  ],
+  "id": 91,
+  "name": {
+   "de": "Le Tschucks Schiff",
+   "en": "LeChouque's Boat",
+   "es": "Navío de Le Chuko",
+   "fr": "Bateau du Chouque",
+   "id": "563306",
+   "pt": "Barco do Tchuke"
+  },
+  "optimalPlayerLevel": 90
+ }
+]

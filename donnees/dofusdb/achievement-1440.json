@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Die Herausforderung [challenge,358] abschließen und damit Maunzaug in seinem Dungeon besiegen.",
+  "en": "Defeat the Catseye in this boss's dungeon while completing the [challenge,358] challenge.",
+  "es": "Vencer al Miauvizor en su mazmorra validando el reto [challenge,358].",
+  "fr": "Vaincre le Chalœil dans son donjon en validant le challenge [challenge,358].",
+  "id": "852840",
+  "pt": "Derrotar o Gatolho em seu calabouço completando o desafio [challenge,358]."
+ },
+ "id": 1440,
+ "name": {
+  "de": "Maunzaug (Trio)",
+  "en": "Catseye (Trio)",
+  "es": "Miauvizor (trío)",
+  "fr": "Chalœil (Trio)",
+  "id": "615672",
+  "pt": "Gatolho (Trio)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>358,0)",
+   "id": 4489,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 4490,
+   "order": 1
+  }
+ ]
+}

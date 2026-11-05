@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Die Challenge [challenge,2083] abschließen und damit die Reißerin in ihrem Dungeon besiegen.",
+  "en": "Defeat the Ripper in this boss's dungeon while completing the [challenge,2083] challenge.",
+  "es": "Vencer a la Despedazadora en su mazmorra validando el reto [challenge,2083].",
+  "fr": "Vaincre La Déchireuse dans son donjon en validant le challenge [challenge,2083].",
+  "id": "1132152",
+  "pt": "Derrotar a Dilaceradora em seu calabouço completando o desafio [challenge,2083]."
+ },
+ "id": 8834,
+ "name": {
+  "de": "Die Reißerin (Nomade)",
+  "en": "The Ripper (Nomad)",
+  "es": "La Despedazadora (nómada)",
+  "fr": "La Déchireuse (Nomade)",
+  "id": "1132151",
+  "pt": "A Dilaceradora (Nômade)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>2083,0)",
+   "id": 17713,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 17714,
+   "order": 1
+  }
+ ]
+}

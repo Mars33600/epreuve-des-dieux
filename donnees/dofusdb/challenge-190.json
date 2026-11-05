@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Wenn ein verbündeter Kämpfer einen Gegner angegriffen hat, darf dieser Gegner während des Kampfes von keinem anderen verbündeten Kämpfer angegriffen werden.",
+  "en": "When an allied fighter attacks an enemy, no other allied fighter must attack that enemy for the duration of the fight.",
+  "es": "Cuando un luchador aliado ataca a un enemigo, ningún otro luchador aliado debe atacar a dicho enemigo hasta que acabe el combate.",
+  "fr": "Lorsqu'un combattant allié attaque un ennemi, aucun autre combattant allié ne doit attaquer cet ennemi pendant toute la durée du combat.",
+  "id": "1182056",
+  "pt": "Quando um combatente aliado ataca um inimigo, nenhum outro combatente aliado pode atacar esse inimigo durante todo o combate."
+ },
+ "id": 190,
+ "name": {
+  "de": "Duell",
+  "en": "Duel",
+  "es": "Duelo",
+  "fr": "Duel",
+  "id": "851552",
+  "pt": "Duelo"
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer müssen ihren Spielzug während des Kampfes stets auf dem Feld beenden, auf dem sie ihn begonnen haben.",
+  "en": "Allied fighters must finish every turn on the same cell that they started on, for the duration of the fight.",
+  "es": "Los luchadores aliados deben acabar su turno en la misma casilla donde lo empezaron hasta que acabe el combate.",
+  "fr": "Les combattants alliés doivent finir leur tour sur la même case que celle où ils l'ont commencé, pendant toute la durée du combat.",
+  "id": "1014349",
+  "pt": "Os combatentes aliados devem terminar seus turnos na mesma célula em que começaram, durante todo o combate."
+ },
+ "id": 224,
+ "name": {
+  "de": "Statue",
+  "en": "Statue",
+  "es": "Estatua",
+  "fr": "Statue",
+  "id": "851693",
+  "pt": "Estátua"
+ }
+}

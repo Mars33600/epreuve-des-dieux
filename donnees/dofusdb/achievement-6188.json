@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,1023] abschließen und damit Meister Rab in seinem Dungeon besiegen.",
+  "en": "Defeat Lord Crow in this boss's dungeon while completing the [challenge,1023] challenge.",
+  "es": "Vencer al Maestro Cuerbok en su mazmorra validando el reto [challenge,1023].",
+  "fr": "Vaincre Maître Corbac dans son donjon en validant le challenge [challenge,1023].",
+  "id": "1009979",
+  "pt": "Derrotar Mestre Corvoc em seu calabouço completando o desafio [challenge,1023]."
+ },
+ "id": 6188,
+ "name": {
+  "de": "Meister Rab (Spezial)",
+  "en": "Lord Crow (Special)",
+  "es": "Maestro Cuerbok (especial)",
+  "fr": "Maître Corbac (Spécial)",
+  "id": "1009978",
+  "pt": "Mestre Corvoc (Especial)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>1023,0)",
+   "id": 13865,
+   "order": 0
+  },
+  {
+   "criterion": "PL>109",
+   "id": 13866,
+   "order": 1
+  }
+ ]
+}

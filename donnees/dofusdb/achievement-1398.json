@@ -1,0 +1,32 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Le Tschuck in seinem Dungeon besiegen",
+  "en": "Defeat LeChouque in this boss's dungeon.",
+  "es": "Vencer a Le Chuko en su mazmorra.",
+  "fr": "Vaincre le Chouque dans son donjon.",
+  "id": "564841",
+  "pt": "Derrotar o Tchuke em seu calabouço."
+ },
+ "id": 1398,
+ "name": {
+  "de": "Le Tschucks Schiff",
+  "en": "LeChouque's Boat",
+  "es": "Navío de Le Chuko",
+  "fr": "Bateau du Chouque",
+  "id": "564840",
+  "pt": "Barco do Tchuke"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>230,0,d)",
+   "id": 4356,
+   "order": 0
+  },
+  {
+   "criterion": "PL>89",
+   "id": 4357,
+   "order": 1
+  }
+ ]
+}

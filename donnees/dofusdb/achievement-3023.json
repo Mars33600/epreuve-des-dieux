@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,450] abschließen und damit Nagate, die Herrin über die Gewässer, in ihrem Dungeon besiegen.",
+  "en": "Defeat Lady of the Water Nagate in this boss's dungeon while completing the [challenge,450] challenge.",
+  "es": "Vencer a la dama del agua Nagate en su mazmorra validando el reto [challenge,450].",
+  "fr": "Vaincre Nagate la Dame des eaux dans son donjon en validant le challenge [challenge,450].",
+  "id": "853025",
+  "pt": "Derrotar Nagate, Dama das Águas, em seu calabouço completando o desafio [challenge,450]."
+ },
+ "id": 3023,
+ "name": {
+  "de": "Nagate, die Herrin über die Gewässer (Duo)",
+  "en": "Lady of the Water Nagate (Duo)",
+  "es": "Dama del agua Nagate (dúo)",
+  "fr": "Nagate la Dame des eaux (Duo)",
+  "id": "852575",
+  "pt": "Nagate, Dama das Águas (Duo)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>450,0)",
+   "id": 8740,
+   "order": 0
+  },
+  {
+   "criterion": "PL>129",
+   "id": 8741,
+   "order": 1
+  }
+ ]
+}

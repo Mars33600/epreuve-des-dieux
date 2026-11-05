@@ -1,0 +1,19 @@
+{
+ "achievements": [
+  8849,
+  8850,
+  8851,
+  8852,
+  8853
+ ],
+ "id": 164,
+ "name": {
+  "de": "Unterholz des Ehrwürdigen",
+  "en": "The Venerable One's Thicket",
+  "es": "Coto del Venerable",
+  "fr": "Breuil du Vénérable",
+  "id": "1134060",
+  "pt": "Bosque do Venerável"
+ },
+ "optimalPlayerLevel": 200
+}

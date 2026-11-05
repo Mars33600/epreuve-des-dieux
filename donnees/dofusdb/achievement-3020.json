@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Nagate, die Herrin über die Gewässer, in ihrem Dungeon besiegen.",
+  "en": "Defeat Lady of the Water Nagate in this boss's dungeon.",
+  "es": "Vencer a la dama del agua Nagate en su mazmorra.",
+  "fr": "Vaincre Nagate la Dame des eaux dans son donjon.",
+  "id": "841698",
+  "pt": "Derrotar Nagate, Dama das Águas, em seu calabouço."
+ },
+ "id": 3020,
+ "name": {
+  "de": "Tal der Herrin über die Gewässer",
+  "en": "Valley of the Lady of the Water",
+  "es": "Valle de la Dama del Agua",
+  "fr": "Vallée de la Dame des eaux",
+  "id": "841697",
+  "pt": "Vale da Dama das Águas"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>6256,0,d)",
+   "id": 8734,
+   "order": 0
+  },
+  {
+   "criterion": "PL>129",
+   "id": 8735,
+   "order": 1
+  }
+ ]
+}

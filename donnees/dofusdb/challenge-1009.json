@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Wenn Le Tschuck den Platz mit einem seiner Verbündeten tauscht, muss dieser Verbündete in weniger als zwei Runden besiegt werden.",
+  "en": "When LeChouque switches places with one of his allies, that ally must be finished off in less than two turns.",
+  "es": "Cuando Le Chuko intercambia de posición con uno de sus aliados, hay que matar a este último en menos de dos turnos.",
+  "fr": "Lorsque le Chouque échange de place avec un de ses alliés, ce dernier doit être achevé en moins de deux tours.",
+  "id": "1009711",
+  "pt": "Quando o Tchuke troca de posição com um de seus aliados, ele deve ser derrotado em menos de dois turnos."
+ },
+ "id": 1009,
+ "name": {
+  "de": "Piratenspringen",
+  "en": "Swappin' Swabbie Swatter",
+  "es": "Pídola",
+  "fr": "Saute-pirate",
+  "id": "1011566",
+  "pt": "Pula-pirata"
+ }
+}

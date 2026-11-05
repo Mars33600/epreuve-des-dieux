@@ -1,0 +1,32 @@
+{
+ "categoryId": 11,
+ "description": {
+  "de": "Die Herausforderung [challenge,983] abschließen und damit den Ronin-Chafer in seinem Dungeon besiegen",
+  "en": "Defeat the Ronin Chafer in this boss's dungeon while completing the [challenge,983] challenge.",
+  "es": "Vencer al chafer Rōnin en su mazmorra validando el reto [challenge,983].",
+  "fr": "Vaincre le Chafer Rōnin dans son donjon en validant le challenge [challenge,983].",
+  "id": "1058159",
+  "pt": "Derrotar o Chafer Ronin em seu calabouço completando o desafio [challenge,983]."
+ },
+ "id": 6154,
+ "name": {
+  "de": "Ronin-Chafer (Spezial)",
+  "en": "Ronin Chafer (Special)",
+  "es": "Chafer Rōnin (especial)",
+  "fr": "Chafer Rōnin (Spécial)",
+  "id": "1121835",
+  "pt": "Chafer Ronin (Especial)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>983,0)",
+   "id": 13797,
+   "order": 0
+  },
+  {
+   "criterion": "PL>39",
+   "id": 13798,
+   "order": 1
+  }
+ ]
+}

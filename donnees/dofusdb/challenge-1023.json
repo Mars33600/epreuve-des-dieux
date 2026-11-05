@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer müssen ihre Runde maximal 5 Felder von einem Gegner entfernt beenden.",
+  "en": "Allied fighters must finish their turn within 5 cells or less of an enemy.",
+  "es": "Los luchadores aliados deben terminar su turno a 5 casillas o menos de un enemigo.",
+  "fr": "Les combattants alliés doivent terminer leur tour à 5 cases ou moins d'un ennemi.",
+  "id": "1121941",
+  "pt": "Os combatentes aliados devem terminar seu turno a até 5 células de um inimigo."
+ },
+ "id": 1023,
+ "name": {
+  "de": "Meister Rab auf dem Baume",
+  "en": "Lord Crow Perched on a Tree One Day",
+  "es": "En la rama de un árbol, bien ufano y contento Maestro Cuerbok",
+  "fr": "Maître Corbac sur un arbre perché",
+  "id": "1012259",
+  "pt": "Mestre Corvoc em uma árvore pousado"
+ }
+}

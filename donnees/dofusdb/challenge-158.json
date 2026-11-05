@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer dürfen während des Kampfes jede Aktion insgesamt nur einmal ausführen.",
+  "en": "Allied fighters must not use the same action more than once for the duration of the fight.",
+  "es": "Los luchadores aliados solo pueden realizar cada acción una única vez hasta que acabe el combate.",
+  "fr": "Les combattants alliés ne doivent utiliser qu'une seule fois la même action durant toute la durée du combat.",
+  "id": "1014235",
+  "pt": "Os combatentes aliados só podem utilizar a mesma ação uma única vez durante o combate."
+ },
+ "id": 158,
+ "name": {
+  "de": "Wirtschaftlichkeit",
+  "en": "Scanty",
+  "es": "Ahorrador",
+  "fr": "Econome",
+  "id": "901540",
+  "pt": "Econômico"
+ }
+}

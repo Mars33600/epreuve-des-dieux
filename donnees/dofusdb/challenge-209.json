@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer dürfen keine Lebenspunkte verlieren.",
+  "en": "Allied fighters must not lose any health points.",
+  "es": "Los luchadores aliados no deben perder puntos de vida.",
+  "fr": "Les combattants alliés ne doivent pas perdre de points de vie.",
+  "id": "1057307",
+  "pt": "Os combatentes aliados não podem perder pontos de vida."
+ },
+ "id": 209,
+ "name": {
+  "de": "Unberührbarkeit",
+  "en": "Untouchable",
+  "es": "Intocable",
+  "fr": "Intouchable",
+  "id": "851901",
+  "pt": "Intocável"
+ }
+}

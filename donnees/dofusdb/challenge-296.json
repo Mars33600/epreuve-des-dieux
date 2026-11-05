@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Verbündete Kämpfer dürfen während ihrer Spielrunden nur durch Zaubersprüche Schaden verursachen und heilen.",
+  "en": "Allied fighters must only inflict spell damage and healing during their turns.",
+  "es": "Los luchadores aliados deben infligir solo daños y curas de hechizo durante sus turnos de juego.",
+  "fr": "Les combattants alliés ne doivent infliger que des dégâts et soins de sorts durant leurs tours de jeu.",
+  "id": "1118359",
+  "pt": "Os combatentes aliados só devem infligir danos e curas de feitiço em seus turnos."
+ },
+ "id": 296,
+ "name": {
+  "de": "Mystiker",
+  "en": "Mystique",
+  "es": "Místico",
+  "fr": "Mystique",
+  "id": "1054932",
+  "pt": "Místico"
+ }
+}

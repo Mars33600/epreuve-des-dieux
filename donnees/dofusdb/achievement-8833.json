@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Die Reißerin in ihrem Dungeon besiegen",
+  "en": "Defeat the Ripper in this boss's dungeon.",
+  "es": "Vencer a la Despedazadora en su mazmorra.",
+  "fr": "Vaincre La Déchireuse dans son donjon.",
+  "id": "1132126",
+  "pt": "Derrotar a Dilaceradora em seu calabouço."
+ },
+ "id": 8833,
+ "name": {
+  "de": "Altar der Reißerin",
+  "en": "The Ripper's Altar",
+  "es": "Altar de la Despedazadora",
+  "fr": "Autel de la Déchireuse",
+  "id": "1132125",
+  "pt": "Altar da Dilaceradora"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>8037,0,d)",
+   "id": 17711,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 17712,
+   "order": 1
+  }
+ ]
+}

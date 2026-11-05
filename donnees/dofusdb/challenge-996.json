@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die feindlichen Beschwörungen dürfen keinen Schaden erleiden.",
+  "en": "Enemy summons must not suffer any damage.",
+  "es": "Las invocaciones enemigas no deben sufrir ningún daño.",
+  "fr": "Les invocations ennemies ne doivent subir aucun dommage.",
+  "id": "1013546",
+  "pt": "As invocações inimigas não devem sofrer dano."
+ },
+ "id": 996,
+ "name": {
+  "de": "Hände weg von meinem Blob",
+  "en": "Hands off My Blop",
+  "es": "No toques a mi blop",
+  "fr": "Touche pas à mon blop",
+  "id": "1011554",
+  "pt": "Não encoste no meu Blop"
+ }
+}

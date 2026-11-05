@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Zu Beginn der Runde des Ronin-Chafers dürfen keine seiner Illusionen zugegen sein.",
+  "en": "The Ronin Chafer must never have an illusion in play at the start of his turn.",
+  "es": "Ninguna ilusión del Chafer Rōnin debe estar presente al principio de su turno.",
+  "fr": "Aucune illusion du Chafer Rōnin ne doit être présente au début de son tour.",
+  "id": "1009659",
+  "pt": "Nenhuma ilusão do Chafer Ronin deve estar presente no início do turno dele."
+ },
+ "id": 983,
+ "name": {
+  "de": "Desillusion",
+  "en": "Disillusion",
+  "es": "Desilusión",
+  "fr": "Désillusion",
+  "id": "1009658",
+  "pt": "Desilusão"
+ }
+}

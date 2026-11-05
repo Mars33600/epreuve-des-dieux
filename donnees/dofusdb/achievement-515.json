@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,89] abschließen und damit Meister Rab in seinem Dungeon besiegen.",
+  "en": "Defeat Lord Crow in this boss's dungeon while completing the [challenge,89] challenge.",
+  "es": "Vencer al Maestro Cuerbok en su mazmorra validando el reto [challenge,89].",
+  "fr": "Vaincre le Maître Corbac dans son donjon en validant le challenge [challenge,89].",
+  "id": "852942",
+  "pt": "Derrotar o Mestre Corvoc em seu calabouço completando o desafio [challenge,89]."
+ },
+ "id": 515,
+ "name": {
+  "de": "Meister Rab (Duo)",
+  "en": "Lord Crow (Duo)",
+  "es": "Maestro Cuerbok (dúo)",
+  "fr": "Maître Corbac (Duo)",
+  "id": "276068",
+  "pt": "Mestre Corvoc (Duo)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>89,0)",
+   "id": 1261,
+   "order": 0
+  },
+  {
+   "criterion": "PL>109",
+   "id": 1262,
+   "order": 1
+  }
+ ]
+}

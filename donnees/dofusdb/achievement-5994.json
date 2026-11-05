@@ -1,0 +1,32 @@
+{
+ "categoryId": 142,
+ "description": {
+  "de": "Die Herausforderung [challenge,1273] abschließen und damit den Ronin-Chafer in seinem Dungeon besiegen.",
+  "en": "Defeat the Ronin Chafer in this boss's dungeon while completing the [challenge,1273] challenge.",
+  "es": "Vencer al chafer Rōnin en su mazmorra validando el reto [challenge,1273].",
+  "fr": "Vaincre le Chafer Rōnin dans son donjon en validant le challenge [challenge,1273]",
+  "id": "1058160",
+  "pt": "Derrotar o Chafer Ronin em seu calabouço completando o desafio [challenge,1273]."
+ },
+ "id": 5994,
+ "name": {
+  "de": "Ronin-Chafer (Begleiter)",
+  "en": "Ronin Chafer (Sidekick)",
+  "es": "Chafer Rōnin (compañero)",
+  "fr": "Chafer Rōnin (Compagnon)",
+  "id": "1144813",
+  "pt": "Chafer Ronin (Companheiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>929,0)",
+   "id": 13324,
+   "order": 0
+  },
+  {
+   "criterion": "PL>39",
+   "id": 13325,
+   "order": 1
+  }
+ ]
+}

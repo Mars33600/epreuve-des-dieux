@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer müssen ihre Runde immer auf dem Feld beenden, dessen Nummer dem Feld entspricht, auf dem sie den Kampf begonnen haben.",
+  "en": "Allied fighters must always end their turn on a cell that matches the number of the cell where they started the fight.",
+  "es": "Los luchadores aliados deben terminar siempre su turno en una casilla correspondiente al número de su casilla de inicio de combate.",
+  "fr": "Les combattants alliés doivent toujours terminer leur tour sur une cellule correspondant au numéro de leur cellule de début de combat.",
+  "id": "1121864",
+  "pt": "Os combatentes aliados devem sempre terminar seu turno em uma célula correspondente ao número de sua célula no começo do combate."
+ },
+ "id": 1079,
+ "name": {
+  "de": "Immer schön aufpassen",
+  "en": "Enemies You Can Count On",
+  "es": "Los enemigos no se pagan sus deudas",
+  "fr": "Les bons comptes font les bons ennemis",
+  "id": "1026618",
+  "pt": "Quem conta seus inimigos espanta"
+ }
+}

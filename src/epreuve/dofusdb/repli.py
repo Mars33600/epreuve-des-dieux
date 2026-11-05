@@ -1,7 +1,8 @@
 """Les replis DofusDB (T-02, SPEC §6.3, ARCHITECTURE §6.7), quand Duffus ne donne pas une donnée.
 
 - **succès d'un donjon** : `GET /dungeons/{id}` → `achievements`, sans la catégorie Compagnons (142) ; la
-  classique est le succès sans défi (pas de `[challenge,` dans sa description) ;
+  classique est le succès sans défi (pas de `[challenge,` dans sa description). Un donjon à deux boss (Tanière
+  Givrefoux : Tengu et Fuji) liste les deux jeux de succès : on garde celui du boss que nomme Duffus ;
 - **nature** pour un Dofus retenu sans guide Duffus : l'objet Dofus (type 23) → `questsThatReward` et
   `achievementsThatReward` → objectifs `Qf=<quête>` / `OA=<succès>` suivis récursivement → prérequis lus dans
   `startCriterion` (les « ET » seulement, `nature.quetes_obligatoires`).
@@ -14,6 +15,7 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from collections.abc import Collection
 from pathlib import Path
 
@@ -78,6 +80,10 @@ class ClientEnCache:
     async def chercher_donjon(self, nom: str) -> list[dict]:
         cle = re.sub(r"[^a-z0-9]+", "-", nom.lower()).strip("-")
         return await self._lire(f"dungeon-recherche-{cle}", lambda n: self._c().chercher_donjon(n), nom)
+
+    async def index_donjons(self) -> list[dict]:
+        """Tous les donjons du jeu (`id`, `name`), en un seul fichier de cache."""
+        return await self._lire("dungeon-index", lambda: self._c().index_donjons())
 
     async def succes(self, id_: int) -> dict:
         return await self._lire(f"achievement-{id_}", lambda i: self._c().succes(i), id_)
@@ -211,14 +217,33 @@ async def regle_du_defi(client: ClientEnCache, defi_id: int) -> str | None:
 REGLE_INTROUVABLE = "Règle introuvable (ni chez Duffus ni chez DofusDB)."
 
 
-async def succes_du_donjon(client: ClientEnCache, dofusdb_id: int) -> list[tuple[str, str, str, bool]]:
-    """(id, nom, condition, est_classique) dans l'ordre : la classique, « (Duo) », puis les autres par id."""
+def normaliser_nom(nom: str) -> str:
+    """Un nom comparable d'une source à l'autre : sans accents ni ligatures, en minuscules, ponctuation en espaces.
+    « Bibliothèque du Maitre Corbac » (Duffus) et « Bibliothèque du Maître Corbac » (jeu) se rejoignent."""
+    nom = nom.replace("œ", "oe").replace("Œ", "Oe").replace("æ", "ae").replace("Æ", "Ae")
+    sans_accent = "".join(c for c in unicodedata.normalize("NFD", nom) if not unicodedata.combining(c))
+    return " ".join(re.sub(r"[^\w]+", " ", sans_accent.casefold()).split())
+
+
+async def succes_du_donjon(client: ClientEnCache, dofusdb_id: int,
+                           boss: str | None = None) -> list[tuple[str, str, str, bool]]:
+    """(id, nom, condition, est_classique) dans l'ordre : la classique, « (Duo) », puis les autres par id.
+
+    `boss` (le boss de la page Duffus) ne sert que si DofusDB range plusieurs classiques sous ce donjon : on garde
+    alors les succès dont le nom ou la description cite ce boss, à condition qu'il en reste une seule classique."""
     donjon = await client.donjon(dofusdb_id)
-    succes = [await client.succes(i) for i in donjon.get("achievements", [])]
+    # dict.fromkeys : un id listé deux fois par DofusDB ne donne qu'une case.
+    succes = [await client.succes(i) for i in dict.fromkeys(donjon.get("achievements", []))]
     succes = [s for s in succes if s.get("categoryId") != CATEGORIE_COMPAGNONS]
 
     def defi(s: dict) -> bool:
         return "[challenge," in _fr(s.get("description"))
+
+    if boss and sum(1 for s in succes if not defi(s)) > 1:
+        cle = normaliser_nom(boss)
+        du_boss = [s for s in succes if cle in normaliser_nom(f"{_fr(s.get('name'))} {_fr(s.get('description'))}")]
+        if sum(1 for s in du_boss if not defi(s)) == 1:
+            succes = du_boss
 
     succes.sort(key=lambda s: (defi(s), not _fr(s.get("name")).endswith("(Duo)"), s["id"]))
     sortie = []
@@ -234,8 +259,14 @@ async def succes_du_donjon(client: ClientEnCache, dofusdb_id: int) -> list[tuple
 
 
 async def id_du_donjon(client: ClientEnCache, nom: str) -> int | None:
+    """L'id DofusDB du donjon nommé `nom` : recherche exacte, puis, à défaut, l'index de tous les donjons comparé
+    sans accents ni casse (`normaliser_nom`). None si aucun ou plusieurs donjons répondent."""
     trouves = await client.chercher_donjon(nom)
-    return trouves[0]["id"] if len(trouves) == 1 else None
+    if len(trouves) == 1:
+        return trouves[0]["id"]
+    cle = normaliser_nom(nom)
+    proches = [d["id"] for d in await client.index_donjons() if normaliser_nom(_fr(d.get("name"))) == cle]
+    return proches[0] if len(proches) == 1 else None
 
 
 async def quetes_du_succes(client: ClientEnCache, succes_id: int, vus: set[int]) -> set[int]:

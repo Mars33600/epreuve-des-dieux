@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Die Herausforderung [challenge,183] abschließen und damit Meister Rab im Team in seinem Dungeon besiegen.",
+  "en": "Defeat Lord Crow in this boss's dungeon as a team while completing the [challenge,183] challenge.",
+  "es": "Vencer al Maestro Cuerbok en equipo en su mazmorra validando el reto [challenge,183].",
+  "fr": "Vaincre le Maître Corbac en équipe dans son donjon en validant le challenge [challenge,183].",
+  "id": "852939",
+  "pt": "Derrotar o Mestre Corvoc em equipe em seu calabouço completando o desafio [challenge,183]."
+ },
+ "id": 708,
+ "name": {
+  "de": "Meister Rab (Anhängsel)",
+  "en": "Lord Crow (Tight)",
+  "es": "Maestro Cuerbok (pegajoso)",
+  "fr": "Maître Corbac (Collant)",
+  "id": "276076",
+  "pt": "Mestre Corvoc (Pegajoso)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>183,0)",
+   "id": 1848,
+   "order": 0
+  },
+  {
+   "criterion": "PL>109",
+   "id": 1849,
+   "order": 1
+  }
+ ]
+}

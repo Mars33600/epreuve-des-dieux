@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Die Herausforderung [challenge,2091] abschließen und damit den Ehrwürdigen Schläfer in seinem Dungeon besiegen.",
+  "en": "Defeat the Sleeping Venerable One in this boss's dungeon while completing the [challenge,2091] challenge.",
+  "es": "Vencer al Venerable Durmiente en su mazmorra validando el reto [challenge,2091].",
+  "fr": "Vaincre Le Vénérable Endormi dans son donjon en validant le challenge [challenge,2091].",
+  "id": "1136190",
+  "pt": "Derrotar o Venerável Adormecido em seu calabouço completando o desafio [challenge,2091]."
+ },
+ "id": 8850,
+ "name": {
+  "de": "Der Ehrwürdige Schläfer (Als Erstes)",
+  "en": "The Sleeping Venerable One (First)",
+  "es": "El Venerable Durmiente (primera posición)",
+  "fr": "Le Vénérable Endormi (Premier)",
+  "id": "1136175",
+  "pt": "O Venerável Adormecido (Primeiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>2091,0)",
+   "id": 17760,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 17761,
+   "order": 1
+  }
+ ]
+}

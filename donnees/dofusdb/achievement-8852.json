@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Die Herausforderung [challenge,2094] abschließen und damit den Ehrwürdigen Schläfer in seinem Dungeon besiegen.",
+  "en": "Defeat the Sleeping Venerable One in this boss's dungeon while completing the [challenge,2094] challenge.",
+  "es": "Vencer al Venerable Durmiente en su mazmorra validando el reto [challenge,2094].",
+  "fr": "Vaincre Le Vénérable Endormi dans son donjon en validant le challenge [challenge,2094].",
+  "id": "1136197",
+  "pt": "Derrotar o Venerável Adormecido em seu calabouço completando o desafio [challenge,2094]."
+ },
+ "id": 8852,
+ "name": {
+  "de": "Der Ehrwürdige Schläfer (Trio)",
+  "en": "The Sleeping Venerable One (Trio)",
+  "es": "El Venerable Durmiente (trío)",
+  "fr": "Le Vénérable Endormi (Trio)",
+  "id": "1136162",
+  "pt": "O Venerável Adormecido (Trio)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>2094,0)",
+   "id": 17764,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 17765,
+   "order": 1
+  }
+ ]
+}

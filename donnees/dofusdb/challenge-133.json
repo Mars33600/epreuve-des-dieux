@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer müssen während des Kampfes in jeder Spielrunde all ihre Bewegungspunkte nutzen.\n\nTeilweises Ausweichen führt zum Scheitern der Challenge.",
+  "en": "Allied fighters must use all of their Movement Points every turn for the entire fight.\n\nA partial escape will cause you to fail the challenge.",
+  "es": "Los luchadores aliados deben utilizar todos sus puntos de movimiento en cada turno hasta que acabe el combate.\n\nLa huida parcial hace que el reto fracase.",
+  "fr": "Les combattants alliés doivent utiliser tous leurs points de mouvement à chaque tour pendant toute la durée du combat.\n\nLa fuite partielle fait échouer le challenge.",
+  "id": "1127117",
+  "pt": "Os combatentes aliados devem utilizar todos os seus pontos de movimento em cada turno durante todo o combate.\n\nA fuga parcial implica fracasso no desafio."
+ },
+ "id": 133,
+ "name": {
+  "de": "Nomade",
+  "en": "Nomad",
+  "es": "Nómada",
+  "fr": "Nomade",
+  "id": "851213",
+  "pt": "Nômade"
+ }
+}

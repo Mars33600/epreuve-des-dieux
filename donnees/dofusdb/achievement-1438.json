@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Die Herausforderung [challenge,356] abschließen und damit Maunzaug in seinem Dungeon besiegen.",
+  "en": "Defeat the Catseye in this boss's dungeon while completing the [challenge,356] challenge.",
+  "es": "Vencer al Miauvizor en su mazmorra validando el reto [challenge,356].",
+  "fr": "Vaincre le Chalœil dans son donjon en validant le challenge [challenge,356].",
+  "id": "852836",
+  "pt": "Derrotar o Gatolho em seu calabouço completando o desafio [challenge,356]."
+ },
+ "id": 1438,
+ "name": {
+  "de": "Maunzaug (Freiheit)",
+  "en": "Catseye (Freedom)",
+  "es": "Miauvizor (libertad)",
+  "fr": "Chalœil (Liberté)",
+  "id": "615668",
+  "pt": "Gatolho (Liberdade)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>356,0)",
+   "id": 4485,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 4486,
+   "order": 1
+  }
+ ]
+}

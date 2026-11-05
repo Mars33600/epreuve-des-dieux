@@ -1,0 +1,22 @@
+[
+ {
+  "achievements": [
+   49,
+   494,
+   6154,
+   667,
+   666,
+   5994
+  ],
+  "id": 47,
+  "name": {
+   "de": "Dungeon der Skelette",
+   "en": "Skeleton Dungeon",
+   "es": "Mazmorra de los Esqueletos",
+   "fr": "Donjon des Squelettes",
+   "id": "220657",
+   "pt": "Calabouço dos Skeletos"
+  },
+  "optimalPlayerLevel": 40
+ }
+]

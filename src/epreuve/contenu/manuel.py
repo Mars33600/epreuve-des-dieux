@@ -9,6 +9,7 @@ même `EtagePrepare` que celui de `construire.py`, écrit par `ecrire.py` sans r
 from __future__ import annotations
 
 from collections.abc import Collection, Mapping
+from dataclasses import replace
 from datetime import datetime
 from pathlib import Path
 
@@ -22,6 +23,7 @@ from epreuve.contenu.construire import (
     EtagePrepare,
     QuetePreparee,
     blocs_depuis_quetes,
+    case_classique_seule,
 )
 from epreuve.dofusdb.repli import ClientEnCache, guides_repli, succes_du_donjon
 from epreuve.domaine.modeles import Nature
@@ -70,8 +72,10 @@ async def construire_manuel(m: _EtageManuel, client: ClientEnCache, dofus_retenu
         succes = await succes_du_donjon(client, dofusdb_id)
         cases = tuple(CasePreparee(i, n, nom, cond, cl) for n, (i, nom, cond, cl) in enumerate(succes, 1))
         nom = (donnees.get("name") or {}).get("fr", f"Donjon {dofusdb_id}")
-        e.donjons.append(DonjonPrepare(f"dofusdb:{dofusdb_id}", nom, donnees.get("optimalPlayerLevel"), ordre, None,
-                                       dofusdb_id, "dofusdb", cases))
+        d = DonjonPrepare(f"dofusdb:{dofusdb_id}", nom, donnees.get("optimalPlayerLevel"), ordre, None,
+                          dofusdb_id, "dofusdb", cases)
+        # Sans aucun succès, le donjon garde sa case « vaincre le boss » : sinon il ne compterait pas (point Donjons).
+        e.donjons.append(d if cases else replace(d, cases=(case_classique_seule(d),)))
         if len(cases) != 5:
             e.alertes.append(f"donjon « {nom} » : {len(cases)} succès au lieu de 5")
     guides = {d: frozenset(q) for d, q in (await guides_repli(client, dofus_retenus)).items()}

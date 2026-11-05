@@ -1,0 +1,19 @@
+{
+ "achievements": [
+  25,
+  515,
+  708,
+  709,
+  6188
+ ],
+ "id": 3,
+ "name": {
+  "de": "Meister Rabs Bibliothek",
+  "en": "Lord Crow's Library",
+  "es": "Biblioteca del Maestro Cuerbok",
+  "fr": "Bibliothèque du Maître Corbac",
+  "id": "220621",
+  "pt": "Biblioteca do Mestre Corvoc"
+ },
+ "optimalPlayerLevel": 110
+}

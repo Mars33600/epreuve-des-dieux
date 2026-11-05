@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Es darf kein Versuch unternommen werden, Gegnern BP, AP oder RW zu entziehen, und sie dürfen auch nicht von Verbündeten bewegt werden.",
+  "en": "Enemies must not suffer any attempt to remove MP, AP or Range, or to move them made by allies.",
+  "es": "Los enemigos no deben sufrir ningún intento de retirada de PM, PA o AL, o de desplazamiento por parte de los aliados.",
+  "fr": "Les ennemis ne doivent subir aucune tentative de retrait de PM, de PA, de PO, ou de déplacement par les alliés.",
+  "id": "1121923",
+  "pt": "Os inimigos não devem sofrer nenhuma tentativa de retirada de PM, PA, AL ou de deslocamento dos aliados."
+ },
+ "id": 1064,
+ "name": {
+  "de": "Barbärige Gefälligkeit",
+  "en": "Bearbaric Complacency",
+  "es": "Amabilidad golosona",
+  "fr": "Complaisance gloursonne",
+  "id": "1012235",
+  "pt": "Cortesia Glursona"
+ }
+}

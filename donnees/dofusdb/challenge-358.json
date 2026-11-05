@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Alle Monster mit maximal 3 Charakteren und in weniger als {1} Runden besiegen.",
+  "en": "Defeat all monsters with 3 characters maximum and in less than {1} turns.",
+  "es": "Vencer a todos los monstruos con 3 personajes como máximo y en menos de {1} turnos.",
+  "fr": "Vaincre tous les monstres avec 3 personnages maximum et en moins de {1} tours.",
+  "id": "852372",
+  "pt": "Derrotar todos os monstros com no máximo 3 personagens e em menos de {1} turnos."
+ },
+ "id": 358,
+ "name": {
+  "de": "Trio",
+  "en": "Trio",
+  "es": "Trío",
+  "fr": "Trio",
+  "id": "852371",
+  "pt": "Trio"
+ }
+}

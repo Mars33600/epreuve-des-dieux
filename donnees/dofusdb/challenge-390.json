@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Greift ein Verbündeter einen Gegner an, muss er diesen besiegen, bevor er einen anderen Gegner angreifen kann.",
+  "en": "Once an enemy has been attacked by an ally, it must be finished off before any other enemy is attacked.",
+  "es": "Cuando un aliado ataca a un enemigo, hay que acabar con este antes de atacar a otro enemigo.",
+  "fr": "Lorsqu'un ennemi est attaqué par un allié, il doit être achevé avant qu'un autre ennemi ne soit attaqué.",
+  "id": "1014370",
+  "pt": "Quando um inimigo é atacado por um aliado, ele deve ser derrotado antes que outro inimigo seja atacado."
+ },
+ "id": 390,
+ "name": {
+  "de": "Fokus",
+  "en": "Focus",
+  "es": "Focalización",
+  "fr": "Focus",
+  "id": "851986",
+  "pt": "Foco"
+ }
+}

@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Die Herausforderung [challenge,357] abschließen und damit Maunzaug in seinem Dungeon besiegen.",
+  "en": "Defeat the Catseye in this boss's dungeon while completing the [challenge,357] challenge.",
+  "es": "Vencer al Miauvizor en su mazmorra validando el reto [challenge,357].",
+  "fr": "Vaincre le Chalœil dans son donjon en validant le challenge [challenge,357].",
+  "id": "852838",
+  "pt": "Derrotar o Gatolho em seu calabouço completando o desafio [challenge,357]."
+ },
+ "id": 1439,
+ "name": {
+  "de": "Maunzaug (Vorsichtig)",
+  "en": "Catseye (Cautious)",
+  "es": "Miauvizor (prudente)",
+  "fr": "Chalœil (Prudent)",
+  "id": "1013993",
+  "pt": "Gatolho (Prudente)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>357,0)",
+   "id": 4487,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 4488,
+   "order": 1
+  }
+ ]
+}

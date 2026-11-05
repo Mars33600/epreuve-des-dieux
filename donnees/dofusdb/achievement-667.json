@@ -1,0 +1,32 @@
+{
+ "categoryId": 11,
+ "description": {
+  "de": "Die Herausforderung [challenge,130] abschließen und damit den Ronin-Chafer in seinem Dungeon besiegen.",
+  "en": "Defeat the Ronin Chafer in this boss's dungeon while completing the [challenge,130] challenge.",
+  "es": "Vencer al chafer Rōnin en su mazmorra validando el reto [challenge,130].",
+  "fr": "Vaincre le Chafer Rōnin dans son donjon en validant le challenge [challenge,130].",
+  "id": "852771",
+  "pt": "Derrotar o Chafer Ronin em seu calabouço completando o desafio [challenge,130]."
+ },
+ "id": 667,
+ "name": {
+  "de": "Ronin-Chafer (Als Erstes)",
+  "en": "Ronin Chafer (First)",
+  "es": "Chafer Rōnin (primera posición)",
+  "fr": "Chafer Rōnin (Premier)",
+  "id": "1121833",
+  "pt": "Chafer Ronin (Primeiro)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>130,0)",
+   "id": 1754,
+   "order": 0
+  },
+  {
+   "criterion": "PL>39",
+   "id": 1755,
+   "order": 1
+  }
+ ]
+}

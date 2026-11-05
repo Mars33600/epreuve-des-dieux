@@ -60,7 +60,13 @@ async def test_nouvelles_methodes_du_client():
 
 from pathlib import Path  # noqa: E402
 
-from epreuve.dofusdb.repli import alleger, guides_repli, id_du_donjon, quetes_du_succes  # noqa: E402
+from epreuve.dofusdb.repli import (  # noqa: E402
+    alleger,
+    guides_repli,
+    id_du_donjon,
+    normaliser_nom,
+    quetes_du_succes,
+)
 
 CACHE_REEL = Path(__file__).resolve().parents[2] / "donnees" / "dofusdb"
 
@@ -83,9 +89,15 @@ async def test_succes_oa_recursifs_et_cycles(tmp_path):
 
 async def test_id_du_donjon_par_recherche(tmp_path):
     vus = []
+    index = [{"id": 3, "name": {"fr": "Bibliothèque du Maître Corbac"}},
+             {"id": 149, "name": {"fr": "Expédition - Bibliothèque du Maître Corbac"}},
+             {"id": 7, "name": {"fr": "Jumeau"}}, {"id": 8, "name": {"fr": "Jumeau"}}]
 
     def repondre(req):
         vus.append(dict(req.url.params))
+        if "name.fr" not in req.url.params:  # l'index, par pages de 2
+            skip = int(req.url.params["$skip"])
+            return httpx.Response(200, json={"total": len(index), "data": index[skip:skip + 2]})
         n = req.url.params["name.fr"]
         return httpx.Response(200, json={"data": [{"id": 34, "name": {"fr": n}, "mapIds": [1]}] if n == "Maison"
                                          else []})
@@ -95,7 +107,40 @@ async def test_id_du_donjon_par_recherche(tmp_path):
         assert await id_du_donjon(cache, "Maison") == 34
         assert await id_du_donjon(cache, "Absent du jeu") is None
         assert await id_du_donjon(cache, "Maison") == 34  # relu dans le cache
-    assert len(vus) == 2 and (tmp_path / "dungeon-recherche-maison.json").exists()
+        # La recherche exacte échoue (« Maitre » chez Duffus) : l'index, comparé sans accents, retrouve le donjon,
+        # et lui seul (pas l'« Expédition » homonyme).
+        assert await id_du_donjon(cache, "Bibliothèque du Maitre Corbac") == 3
+        assert await id_du_donjon(cache, "jumeau") is None  # deux donjons répondent : on ne choisit pas
+    # 2 recherches exactes, 2 pages d'index (lues une fois, puis cache), 2 recherches exactes encore.
+    assert len(vus) == 6 and (tmp_path / "dungeon-recherche-maison.json").exists()
+    assert (tmp_path / "dungeon-index.json").exists()
+
+
+def test_normaliser_nom():
+    assert normaliser_nom("Bibliothèque du Maitre Corbac") == normaliser_nom("Bibliothèque du  Maître Corbac")
+    assert normaliser_nom("Défi du Chalœil") == "defi du chaloeil"
+    assert normaliser_nom("Chafer Rōnin (Duo)") == "chafer ronin duo"
+
+
+async def test_donjon_a_deux_boss_garde_celui_de_duffus():
+    """Tanière Givrefoux (58) : DofusDB range sous ce donjon les succès du Tengu ET de la Fuji Givrefoux
+    Nourricière (anciennes « Cavernes Givrefoux » et « Cavernes Nourricières »), deux classiques, 10 cases."""
+    cache = ClientEnCache(None, CACHE_REEL)
+    tous = await succes_du_donjon(cache, 58)
+    assert len(tous) == 10 and sum(1 for *_, cl in tous if cl) == 1  # l'ancien bug : deux jeux fusionnés
+    tengu = await succes_du_donjon(cache, 58, "Tengu Givrefoux")
+    assert [i for i, *_ in tengu] == ["dofusdb:31", "dofusdb:538", "dofusdb:748", "dofusdb:749", "dofusdb:6218"]
+    assert [cl for *_, cl in tengu] == [True, False, False, False, False]
+    assert len(await succes_du_donjon(cache, 58, "Boss inconnu")) == 10  # aucun ne le cite : rien n'est retiré
+    # Un donjon à une seule classique ne filtre jamais, même si le boss Duffus s'écrit autrement.
+    assert len(await succes_du_donjon(cache, 47, "Chafer Ronin")) == 5
+
+
+async def test_succes_liste_deux_fois_une_seule_case(tmp_path):
+    (tmp_path / "dungeon-1.json").write_text(json.dumps({"achievements": [1, 1]}))
+    (tmp_path / "achievement-1.json").write_text(json.dumps(
+        {"id": 1, "categoryId": 11, "name": {"fr": "S1"}, "description": {"fr": "Vaincre X."}}))
+    assert len(await succes_du_donjon(ClientEnCache(None, tmp_path), 1)) == 1
 
 
 def test_alleger():

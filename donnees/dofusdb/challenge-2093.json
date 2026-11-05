@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "{0} als Letztes besiegen",
+  "en": "Kill {0} last.",
+  "es": "Matar a {0} en último lugar.",
+  "fr": "Tuer {0} en dernier.",
+  "id": "1151708",
+  "pt": "Matar {0} por último."
+ },
+ "id": 2093,
+ "name": {
+  "de": "Da schnarcht aber jemand ganz schön laut",
+  "en": "Snore Score",
+  "es": "Vaya si ronca",
+  "fr": "Ça ronfle fort",
+  "id": "1151707",
+  "pt": "Que ronco é esse?"
+ }
+}

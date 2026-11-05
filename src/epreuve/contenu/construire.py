@@ -65,6 +65,7 @@ class DonjonPrepare:
     dofusdb_id: int | None
     succes_source: Literal["duffus", "dofusdb"]
     cases: tuple[CasePreparee, ...]
+    boss: str | None = None  # le boss de la page Duffus : départage un donjon à deux boss chez DofusDB
 
 
 @dataclass(frozen=True)
@@ -423,7 +424,8 @@ def donjon_prepare(page: Mapping, aspi: Aspiration, ordre: int, bloc: str | None
         alertes.append(f"donjon « {nom} » : succès introuvables chez Duffus, repli DofusDB à faire")
     elif len(cases) != 5:
         alertes.append(f"donjon « {nom} » : {len(cases)} succès au lieu de 5")
-    d = DonjonPrepare(page["slug"], nom, _niveau(meta.get("level")), ordre, bloc, None, "duffus", tuple(cases))
+    d = DonjonPrepare(page["slug"], nom, _niveau(meta.get("level")), ordre, bloc, None, "duffus", tuple(cases),
+                      meta.get("bossName") or None)
     return d, alertes
 
 
@@ -585,29 +587,72 @@ async def completer_regles(e: EtagePrepare, client) -> EtagePrepare:
     return e
 
 
+CASES_ATTENDUES = 5  # la classique, le Duo, puis les trois défis (dont le « Spécial »)
+
+
+def case_classique_seule(d: DonjonPrepare) -> CasePreparee:
+    """La case « vaincre le boss » d'un donjon dont aucune source ne donne les succès (Caverne de Cire Momore,
+    Temple de Gargandyas) : sans elle, le donjon ne compterait pas pour le point Donjons, qui ne lit que les
+    classiques (`domaine.bareme`). Le nom et le boss viennent de la page Duffus ; aucun défi n'est inventé."""
+    condition = f"Vaincre {d.boss} dans son donjon." if d.boss else "Vaincre le boss du donjon."
+    return CasePreparee(f"classique:{d.duffus_id}", 1, d.nom, condition, True)
+
+
+def fusionner_cases(duffus: tuple[CasePreparee, ...], dofusdb: tuple[CasePreparee, ...]
+                    ) -> tuple[CasePreparee, ...] | None:
+    """Les cases DofusDB dans leur ordre, où chaque succès déjà lu chez Duffus garde sa case Duffus (même id de
+    succès du jeu : les coches posées dessus survivent). None si un succès Duffus manque chez DofusDB : les deux
+    sources se contredisent, on ne mélange pas."""
+    par_id = {c.duffus_id: c for c in duffus}
+    if not par_id.keys() <= {c.duffus_id.removeprefix("dofusdb:") for c in dofusdb}:
+        return None
+    vues: set[str] = set()
+    cases = []
+    for c in dofusdb:
+        cle = c.duffus_id.removeprefix("dofusdb:")
+        if cle not in vues:
+            vues.add(cle)
+            cases.append(replace(par_id.get(cle, c), ordre=len(cases) + 1))
+    return tuple(cases)
+
+
 async def completer_par_dofusdb(e: EtagePrepare, client) -> EtagePrepare:
-    """Repli T-02 : les donjons sans succès Duffus prennent ceux de DofusDB (`dofusdb.repli`), source notée."""
+    """Repli T-02 : un donjon dont Duffus ne donne pas les 5 succès (classique, Duo, défis) prend ceux de DofusDB
+    (`dofusdb.repli`), source notée. Duffus rate un donjon quand son nom de page ou de boss diffère du jeu
+    (« Maitre », « Chafer Ronin », « Chouque » pour « Le Chouque »…) : il trouve alors la classique, rien d'autre.
+    Un donjon que ni Duffus ni DofusDB ne connaît garde au moins sa case classique (`case_classique_seule`)."""
     from epreuve.dofusdb.repli import id_du_donjon, succes_du_donjon
 
     async def completer(d: DonjonPrepare) -> tuple[DonjonPrepare, str | None]:
-        if d.cases:
+        if len(d.cases) >= CASES_ATTENDUES:
             return d, None
         dofusdb_id = d.dofusdb_id or await id_du_donjon(client, d.nom)
+        lus = () if dofusdb_id is None else tuple(
+            CasePreparee(i, n, nom, cond, cl)
+            for n, (i, nom, cond, cl) in enumerate(await succes_du_donjon(client, dofusdb_id, d.boss), 1))
+        cases = fusionner_cases(d.cases, lus) if lus else None
+        if cases is not None and len(cases) > len(d.cases):
+            alerte = f"donjon « {d.nom} » : succès pris chez DofusDB (repli)"
+            if len(cases) != CASES_ATTENDUES:
+                alerte += f", {len(cases)} succès au lieu de {CASES_ATTENDUES}"
+            return replace(d, dofusdb_id=dofusdb_id, succes_source="dofusdb", cases=cases), alerte
+        if d.cases:
+            return d, None  # DofusDB n'apporte rien de plus : l'alerte de la construction reste
         if dofusdb_id is None:
-            return d, f"donjon « {d.nom} » : introuvable chez DofusDB, aucune case"
-        cases = tuple(CasePreparee(i, n, nom, cond, cl)
-                      for n, (i, nom, cond, cl) in enumerate(await succes_du_donjon(client, dofusdb_id), 1))
-        alerte = f"donjon « {d.nom} » : succès pris chez DofusDB (repli)"
-        if len(cases) != 5:
-            alerte += f", {len(cases)} succès au lieu de 5"
-        return replace(d, dofusdb_id=dofusdb_id, succes_source="dofusdb", cases=cases), alerte
+            alerte = f"donjon « {d.nom} » : introuvable chez DofusDB, seule la case classique « vaincre le boss »"
+        else:
+            alerte = f"donjon « {d.nom} » : aucun succès chez DofusDB, seule la case classique « vaincre le boss »"
+        return replace(d, dofusdb_id=dofusdb_id, cases=(case_classique_seule(d),)), alerte
 
     donjons = []
     for d in e.donjons:
         nouveau, alerte = await completer(d)
         donjons.append(nouveau)
         if alerte:
-            e.alertes = [a for a in e.alertes if not a.startswith(f"donjon « {d.nom} » : succès introuvables")]
+            # Les alertes de `donjon_prepare` (succès introuvables, « N succès au lieu de 5 ») sont remplacées.
+            prefixe = f"donjon « {d.nom} » : "
+            perimees = (f"{prefixe}succès introuvables", f"{prefixe}{len(d.cases)} succès au lieu de 5")
+            e.alertes = [a for a in e.alertes if not a.startswith(perimees)]
             e.alertes.append(alerte)
     e.donjons = donjons
     return e

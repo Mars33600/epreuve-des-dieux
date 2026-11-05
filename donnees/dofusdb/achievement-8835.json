@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Die Challenge [challenge,2085] abschließen und damit die Reißerin in ihrem Dungeon besiegen.",
+  "en": "Defeat the Ripper in this boss's dungeon while completing the [challenge,2085] challenge.",
+  "es": "Vencer a la Despedazadora en su mazmorra validando el reto [challenge,2085].",
+  "fr": "Vaincre La Déchireuse dans son donjon en validant le challenge [challenge,2085].",
+  "id": "1132373",
+  "pt": "Derrotar a Dilaceradora em seu calabouço completando o desafio [challenge,2085]."
+ },
+ "id": 8835,
+ "name": {
+  "de": "Die Reißerin (Trio)",
+  "en": "The Ripper (Trio)",
+  "es": "La Despedazadora (trío)",
+  "fr": "La Déchireuse (Trio)",
+  "id": "1134906",
+  "pt": "A Dilaceradora (Trio)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>2085,0)",
+   "id": 17715,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 17716,
+   "order": 1
+  }
+ ]
+}

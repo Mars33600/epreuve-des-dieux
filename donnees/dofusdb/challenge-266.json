@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die verbündeten Kämpfer müssen alle Gegner erledigen, die eine Waffe tragen.",
+  "en": "Allied characters must finish off enemies with a weapon.",
+  "es": "Los personajes aliados deben acabar con los enemigos usando un arma.",
+  "fr": "Les personnages alliés doivent achever les ennemis avec une arme.",
+  "id": "1013852",
+  "pt": "Os personagens aliados devem derrotar os inimigos com uma arma."
+ },
+ "id": 266,
+ "name": {
+  "de": "Barbar",
+  "en": "Barbaric",
+  "es": "Bárbaro",
+  "fr": "Barbare",
+  "id": "851808",
+  "pt": "Bárbaro"
+ }
+}

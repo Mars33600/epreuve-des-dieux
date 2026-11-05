@@ -1,0 +1,19 @@
+{
+ "achievements": [
+  8833,
+  8834,
+  8836,
+  8837,
+  8835
+ ],
+ "id": 165,
+ "name": {
+  "de": "Altar der Reißerin",
+  "en": "The Ripper's Altar",
+  "es": "Altar de la Despedazadora",
+  "fr": "Autel de la Déchireuse",
+  "id": "1134061",
+  "pt": "Altar da Dilaceradora"
+ },
+ "optimalPlayerLevel": 200
+}

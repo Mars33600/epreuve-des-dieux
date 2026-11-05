@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Verbündete Kämpfer müssen ihre Runden in Sichtlinie mindestens eines Gegners beenden.",
+  "en": "Allied fighters must end their turns in at least one enemy's line of sight.",
+  "es": "Los luchadores aliados deben terminar sus turnos en la línea de visión de al menos un enemigo.",
+  "fr": "Les combattants alliés doivent terminer leurs tours en ligne de vue d'au moins un ennemi.",
+  "id": "1132159",
+  "pt": "Os combatentes aliados precisam terminar seu turno na linha de visão de pelo menos um inimigo."
+ },
+ "id": 2084,
+ "name": {
+  "de": "In Schusslinie",
+  "en": "In the Line of Fire",
+  "es": "En línea de mira",
+  "fr": "En ligne de mire",
+  "id": "1132158",
+  "pt": "Na linha de tiro"
+ }
+}

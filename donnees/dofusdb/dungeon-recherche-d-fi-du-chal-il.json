@@ -1,0 +1,22 @@
+[
+ {
+  "achievements": [
+   1437,
+   1438,
+   1439,
+   1440,
+   6244,
+   6013
+  ],
+  "id": 95,
+  "name": {
+   "de": "Maunzaugs Herausforderung",
+   "en": "Catseye Challenge",
+   "es": "Reto de Miauvizor",
+   "fr": "Défi du Chalœil",
+   "id": "605685",
+   "pt": "Desafio do Gatolho"
+  },
+  "optimalPlayerLevel": 200
+ }
+]

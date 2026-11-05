@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die Verbündeten (statische Beschwörungen ausgenommen) müssen ihre Runde mehr als 4 Felder entfernt von allen anderen Verbündeten beenden.",
+  "en": "Allies (excluding static summons) must end their turn more than 4 cells from all other allies.",
+  "es": "Los aliados (salvo invocaciones estáticas) deben terminar su turno a más de 4 casillas de los demás aliados.",
+  "fr": "Les alliés (hors invocations statiques) doivent terminer leur tour à plus de 4 cases de tous les autres alliés.",
+  "id": "1122088",
+  "pt": "Os aliados (exceto as invocações estáticas) devem terminar seu turno a mais de 4 células de todos os outros aliados."
+ },
+ "id": 1053,
+ "name": {
+  "de": "Frostige Selbstständigkeit",
+  "en": "Frozen Autonomy",
+  "es": "Autonomía helada",
+  "fr": "Autonomie givrée",
+  "id": "1012231",
+  "pt": "Autonomia gélida"
+ }
+}

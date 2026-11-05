@@ -1,0 +1,32 @@
+{
+ "categoryId": 59,
+ "description": {
+  "de": "Die Challenge [challenge,1079] abschließen und damit Maunzaug in seinem Dungeon besiegen.",
+  "en": "Defeat the Catseye in this boss's dungeon while completing the [challenge,1079] challenge.",
+  "es": "Vencer a Miauvizor en su mazmorra validando el reto [challenge,1079].",
+  "fr": "Vaincre le Chalœil dans son donjon en validant le challenge [challenge,1079].",
+  "id": "1121852",
+  "pt": "Derrotar o Gatolho em seu calabouço completando o desafio [challenge,1079]."
+ },
+ "id": 6244,
+ "name": {
+  "de": "Maunzaug (Spezial)",
+  "en": "Catseye (Special)",
+  "es": "Miauvizor (especial)",
+  "fr": "Chalœil (Spécial)",
+  "id": "1121851",
+  "pt": "Gatolho (Especial)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>1079,0)",
+   "id": 13977,
+   "order": 0
+  },
+  {
+   "criterion": "PL>189",
+   "id": 13978,
+   "order": 1
+  }
+ ]
+}

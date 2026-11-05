@@ -1,0 +1,32 @@
+{
+ "categoryId": 11,
+ "description": {
+  "de": "Ronin-Chafer in seinem Dungeon besiegen.",
+  "en": "Defeat the Ronin Chafer in this boss's dungeon.",
+  "es": "Vencer al chafer Rōnin en su mazmorra.",
+  "fr": "Vaincre le Chafer Rōnin dans son donjon.",
+  "id": "276415",
+  "pt": "Derrotar o Chafer Ronin em seu calabouço."
+ },
+ "id": 49,
+ "name": {
+  "de": "Dungeon der Skelette",
+  "en": "Skeleton Dungeon",
+  "es": "Mazmorra de los Esqueletos",
+  "fr": "Donjon des Squelettes",
+  "id": "276414",
+  "pt": "Calabouço dos Skeletos"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>3238,0,d)",
+   "id": 205,
+   "order": 0
+  },
+  {
+   "criterion": "PL>39",
+   "id": 206,
+   "order": 1
+  }
+ ]
+}

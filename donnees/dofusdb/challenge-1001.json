@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Die feindlichen Beschwörungen dürfen keinen Schaden erleiden.",
+  "en": "Enemy summons must not suffer any damage.",
+  "es": "Las invocaciones enemigas no deben sufrir ningún daño.",
+  "fr": "Les invocations ennemies ne doivent subir aucun dommage.",
+  "id": "1013550",
+  "pt": "As invocações inimigas não devem sofrer dano."
+ },
+ "id": 1001,
+ "name": {
+  "de": "Kein Nachtisch für dich!",
+  "en": "No Pudding for You",
+  "es": "Sin desierto",
+  "fr": "Privé de dessert",
+  "id": "1011552",
+  "pt": "Sem sobremesa"
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Gegner dürfen weder wegbewegt werden noch dürfen Verbündete den Versuch unternehmen, ihnen BP zu entziehen.",
+  "en": "Enemies may not be moved or suffer an attempt to remove MP made by allies.",
+  "es": "Los enemigos no deben ser desplazados ni sufrir ningún intento de retirada de PM por parte de aliados.",
+  "fr": "Les ennemis ne doivent ni être déplacés, ni subir de tentative de retrait PM par les alliés.",
+  "id": "1121964",
+  "pt": "Os inimigos não devem ser deslocados nem sofrer tentativa de retirada de PM pelos aliados."
+ },
+ "id": 1039,
+ "name": {
+  "de": "Wurzeln schlagen",
+  "en": "Putting Down Roots",
+  "es": "Acomodarse",
+  "fr": "Prendre racine",
+  "id": "1011818",
+  "pt": "Fincar raízes"
+ }
+}

@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Den Groß-Shilf in seinem Dungeon besiegen. Dabei dürfen Gegnern keine Aktionspunkte entzogen werden.",
+  "en": "Defeat Silf the Greater Bherb in this boss's dungeon. Characters must not reduce their opponents' AP.",
+  "es": "Vencer a Silf el Rasgabola Mayor en su mazmorra. Los personajes no deben retirar PA a sus adversarios.",
+  "fr": "Vaincre Silf le Rasboul Majeur dans son donjon. Les personnages ne doivent pas retirer de PA aux adversaires.",
+  "id": "851489",
+  "pt": "Derrotar Silf, o Rasgabola Maior, em seu calabouço. Os personagens não devem retirar PA dos adversários."
+ },
+ "id": 182,
+ "name": {
+  "de": "Die Zeit rennt",
+  "en": "Time Flies",
+  "es": "El tiempo pasa",
+  "fr": "Temps qui court",
+  "id": "901542",
+  "pt": "O tempo voa"
+ }
+}

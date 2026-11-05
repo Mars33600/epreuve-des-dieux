@@ -1,0 +1,32 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,347] abschließen und damit Le Tschuck in seinem Dungeon besiegen.",
+  "en": "Defeat LeChouque in this boss's dungeon while completing the [challenge,347] challenge.",
+  "es": "Vencer a Le Chuko en su mazmorra validando el reto [challenge,347].",
+  "fr": "Vaincre le Chouque dans son donjon en validant le challenge [challenge,347].",
+  "id": "852886",
+  "pt": "Derrotar o Tchuke em seu calabouço completando o desafio [challenge,347]."
+ },
+ "id": 1399,
+ "name": {
+  "de": "Le Tschuck (Duo)",
+  "en": "LeChouque (Duo)",
+  "es": "Le Chuko (dúo)",
+  "fr": "Le Chouque (Duo)",
+  "id": "564842",
+  "pt": "O Tchuke (Duo)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>347,0)",
+   "id": 4358,
+   "order": 0
+  },
+  {
+   "criterion": "PL>89",
+   "id": 4359,
+   "order": 1
+  }
+ ]
+}

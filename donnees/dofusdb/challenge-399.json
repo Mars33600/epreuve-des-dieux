@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Während des Kampfes darf kein Versuch unternommen werden, Gegnern BP oder RW zu entziehen.",
+  "en": "Do not attempt to reduce your opponents' MP or Range for the duration of the combat.",
+  "es": "No quites PM o AL a los adversarios mientras dure el combate.",
+  "fr": "Ne pas tenter de retirer de PM ou de PO aux adversaires pendant toute la durée du combat.",
+  "id": "852018",
+  "pt": "Não tentar retirar PM ou AL dos adversários durante todo o combate."
+ },
+ "id": 399,
+ "name": {
+  "de": "Freiheit",
+  "en": "Freedom",
+  "es": "Libertad",
+  "fr": "Liberté",
+  "id": "852017",
+  "pt": "Liberdade"
+ }
+}

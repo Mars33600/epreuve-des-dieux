@@ -1,0 +1,19 @@
+{
+ "description": {
+  "de": "Gegner, die den Hauch des Wukin beherrschen, dürfen nur Nahkampfschaden erleiden; Gegner, die den Hauch des Wukang beherrschen, nur Fernkampfschaden.",
+  "en": "Enemies who master the Wukin Breeze must only suffer close-combat damage, and enemies who master the Wukang Breeze must only suffer ranged damage.",
+  "es": "Los enemigos que dominan Aliento del Wukin solo deben sufrir daños en cuerpo a cuerpo, y los enemigos que dominan Aliento del Wukang solo deben sufrir daños a distancia.",
+  "fr": "Les ennemis qui maitrisent le souffle du Wukin ne doivent subir que des dommages en mêlée et les ennemis qui maitrisent le souffle du Wukang ne doivent subir que des dommages à distance.",
+  "id": "1012371",
+  "pt": "Os inimigos que dominam o Sopro do Wukin só devem sofrer danos no corpo a corpo, e os que dominam o Sopro do Wukang só devem sofrer danos a distância."
+ },
+ "id": 1041,
+ "name": {
+  "de": "Gegenwind",
+  "en": "Headwinds",
+  "es": "Viento en Contra",
+  "fr": "Vents contraires",
+  "id": "1011820",
+  "pt": "Ventos Contrários"
+ }
+}

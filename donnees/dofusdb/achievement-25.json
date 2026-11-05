@@ -1,0 +1,32 @@
+{
+ "categoryId": 13,
+ "description": {
+  "de": "Meister Rab in seinem Dungeon besiegen.",
+  "en": "Defeat Lord Crow in this boss's dungeon.",
+  "es": "Vencer al Maestro Cuerbok en su mazmorra.",
+  "fr": "Vaincre le Maître Corbac dans son donjon.",
+  "id": "276829",
+  "pt": "Derrotar o Mestre Corvoc em seu calabouço."
+ },
+ "id": 25,
+ "name": {
+  "de": "Meister Rabs Bibliothek",
+  "en": "Lord Crow's Library",
+  "es": "Biblioteca del Maestro Cuerbok",
+  "fr": "Bibliothèque du Maître Corbac",
+  "id": "276828",
+  "pt": "Biblioteca do Mestre Corvoc"
+ },
+ "objectives": [
+  {
+   "criterion": "(EM>289,0,d)",
+   "id": 253,
+   "order": 0
+  },
+  {
+   "criterion": "PL>109",
+   "id": 254,
+   "order": 1
+  }
+ ]
+}

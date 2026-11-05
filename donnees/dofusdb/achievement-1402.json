@@ -1,0 +1,32 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,348] abschließen und damit Le Tschuck in seinem Dungeon besiegen.",
+  "en": "Defeat LeChouque in this boss's dungeon while completing the [challenge,348] challenge.",
+  "es": "Vencer a Le Chuko en su mazmorra validando el reto [challenge,348].",
+  "fr": "Vaincre Le Chouque dans son donjon  en validant le challenge [challenge,348].",
+  "id": "852882",
+  "pt": "Derrotar o Tchuke em seu calabouço completando o desafio [challenge,348]."
+ },
+ "id": 1402,
+ "name": {
+  "de": "Le Tschuck (als Letztes)",
+  "en": "LeChouque (Last)",
+  "es": "Le Chuko (última posición)",
+  "fr": "Le Chouque (Dernier)",
+  "id": "575171",
+  "pt": "O Tchuke (Último)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>348,0)",
+   "id": 4376,
+   "order": 0
+  },
+  {
+   "criterion": "PL>89",
+   "id": 4377,
+   "order": 1
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "categoryId": 12,
+ "description": {
+  "de": "Die Herausforderung [challenge,349] abschließen und damit Le Tschuck in seinem Dungeon besiegen.",
+  "en": "Defeat LeChouque in this boss's dungeon while completing the [challenge,349] challenge.",
+  "es": "Vencer a Le Chuko en su mazmorra validando el reto [challenge,349].",
+  "fr": "Vaincre Le Chouque dans son donjon en validant le challenge [challenge,349].",
+  "id": "852884",
+  "pt": "Derrotar o Tchuke em seu calabouço completando o desafio [challenge,349]."
+ },
+ "id": 1403,
+ "name": {
+  "de": "Le Tschuck (Nomade)",
+  "en": "LeChouque (Nomad)",
+  "es": "Le Chuko (nómada)",
+  "fr": "Le Chouque (Nomade)",
+  "id": "575177",
+  "pt": "O Tchuke (Nômade)"
+ },
+ "objectives": [
+  {
+   "criterion": "(EH>349,0)",
+   "id": 4378,
+   "order": 0
+  },
+  {
+   "criterion": "PL>89",
+   "id": 4379,
+   "order": 1
+  }
+ ]
+}
