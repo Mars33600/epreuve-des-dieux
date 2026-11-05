@@ -9,6 +9,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] Page compte à rebours en ligne : https://epreuve-des-dieux.fr
 - [ ] Reveal de la page vers le 6/11 (lien donné sur le Discord par Shadoaze et Marceau)
 - [ ] Trailer (option, géré par Marceau)
+- [ ] 12/11, remise à zéro après la recette des admins : `fly secrets unset OUVERTURE_AUTO_TEASER`, étages 1 à 23 rescellés, bilans, coches et fiches de test supprimés, date plancher de l'étage 0 au 13/11 17 h, palier manuel retiré, corrections de nature des blocs GARDÉES ; sauvegarde avant
 - [ ] Ouverture du site le vendredi 13/11 à 17 h, tout prêt « nickel au démarrage »
 
 ## Règles du jeu
