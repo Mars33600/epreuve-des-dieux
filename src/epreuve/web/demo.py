@@ -35,6 +35,7 @@ from epreuve.db.depot import (
     PseudoDejaPris,
 )
 from epreuve.discord.oauth import ClientOAuth
+from epreuve.domaine.annonce import JOURNAL_LANCEMENT
 from epreuve.domaine.bareme import cascade_coche
 from epreuve.domaine.fiche import Besoin, EtapeFiche, FicheQuete, Position, Prerequis
 from epreuve.domaine.modeles import (
@@ -623,6 +624,13 @@ class DepotDemo:
         self._journaliser(acteur, maintenant, "ouverture", etage_id=cible.id, force=bilan_precedent.force,
                           motif=bilan_precedent.motif)
         return ouvert
+
+    async def reserver_annonce_lancement(self, maintenant) -> bool:
+        """Même contrat que le dépôt Postgres : une seule réservation (ici, sans concurrence possible)."""
+        if any(e.type == JOURNAL_LANCEMENT for e in self._journal):
+            return False
+        self._journaliser(None, maintenant, JOURNAL_LANCEMENT, public=False)
+        return True
 
     # ------------------------------------------------------------------ sessions
     async def creer_session(self, id_hache: bytes, discord_user_id, nom_discord, est_admin, jeton_oauth, csrf,

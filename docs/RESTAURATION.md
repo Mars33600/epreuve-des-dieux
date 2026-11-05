@@ -41,3 +41,5 @@ Chaque ouverture, automatique ou manuelle, est annoncée sur Discord par le « G
 3. La déposer sur Fly : `fly secrets set DISCORD_WEBHOOK_ANNONCES=https://discord.com/api/webhooks/… -a epreuve-des-dieux` (la machine redémarre en quelques secondes).
 
 Sans cette variable, ou vide, aucune annonce ne part et tout le reste fonctionne pareil. Si Discord ne répond pas (délai de 5 s), l'ouverture est quand même faite et le journal du serveur note « annonce Discord non envoyée » ou « refusée : HTTP … », sans jamais écrire l'adresse. En cas de fuite de l'URL : supprimer le webhook dans Discord, en créer un autre, refaire l'étape 3.
+
+Le Gardien annonce aussi le **lancement du site**, une seule fois, à `SITE_OUVERT_LE` (17 h 00 pile : la veille se réveille à l'heure) : « La tour s’éveille », `@everyone` et lien vers `/connexion`. La ligne `annonce_lancement` est inscrite au journal AVANT l'envoi (index unique, migration g3) : ni redémarrage ni seconde machine ne la renvoient, un échec de Discord n'est pas réessayé, et un serveur relancé plus de 6 h après l'heure n'annonce plus rien. Pour la renvoyer exceptionnellement : supprimer cette ligne du journal pendant la fenêtre.

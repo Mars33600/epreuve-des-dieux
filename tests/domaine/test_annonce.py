@@ -1,7 +1,25 @@
 """L'annonce Discord d'une ouverture d'étage : le corps exact posté sur le webhook (demande de Shadoaze)."""
 
-from epreuve.domaine.annonce import COULEUR_OR, NOM_GARDIEN, annonce_ouverture, image_publique, lien_etage
-from tests.fabrique import PENDANT, etage
+from datetime import timedelta
+from pathlib import Path
+
+import pytest
+
+from epreuve.domaine.annonce import (
+    COULEUR_OR,
+    FENETRE_LANCEMENT,
+    NOM_GARDIEN,
+    annonce_lancement,
+    annonce_ouverture,
+    delai_avant_regard,
+    doit_annoncer_lancement,
+    image_publique,
+    lien_connexion,
+    lien_etage,
+)
+from tests.fabrique import PENDANT, PLANCHER, etage
+
+HISTOIRE = (Path(__file__).parents[2] / "src/epreuve/web/contenu/histoire.md").read_text(encoding="utf-8")
 
 CHAMPS = etage(2, 1, "ouvert", nom="Les Champs Murmurants", niveau_min=21, niveau_max=40, level_cap=40,
                ouvert_le=PENDANT)
@@ -38,3 +56,56 @@ def test_image_seulement_si_publique():
     externe = etage(2, 1, ambiance_url="https://images.example/champs.webp")
     assert image_publique(externe) == "https://images.example/champs.webp"
     assert annonce_ouverture(externe, None)["embeds"][0]["image"] == {"url": "https://images.example/champs.webp"}
+
+
+# ---------------------------------------------------------------- le lancement du site (13/11, 17 h)
+
+LANCEMENT = PLANCHER  # le 13/11 à 17 h, heure de Paris
+
+
+def test_annonce_lancement_complete():
+    a = annonce_lancement("https://epreuve.test/")
+    assert a["username"] == NOM_GARDIEN
+    assert a["content"] == "@everyone L’Épreuve des Dieux commence.\nhttps://epreuve.test/connexion"
+    assert a["allowed_mentions"] == {"parse": ["everyone"]}
+    (e,) = a["embeds"]
+    assert e["title"] == "La tour s’éveille" and e["color"] == 0xD4A84B
+    assert e["url"] == "https://epreuve.test/connexion"
+    # Les phrases de Shadoaze, telles quelles ; pas celles déjà dites par le teaser vidéo.
+    for phrase in ("Ses portes s’entrouvrent à nouveau.",
+                   "Gravissez les étages. Surmontez les épreuves. Prouvez votre valeur.",
+                   "Cette fois, nul ne pourra triompher seul."):
+        assert phrase in e["description"] and phrase in HISTOIRE
+    assert "premier étage vous attend" not in e["description"] and "seuil" not in e["description"]
+
+
+def test_annonce_lancement_sans_site_url():
+    a = annonce_lancement(None)
+    assert "url" not in a["embeds"][0] and "http" not in a["content"]
+    assert lien_connexion("") is None
+
+
+@pytest.mark.parametrize(("decalage", "deja", "attendu"), [
+    (-timedelta(seconds=1), False, False),          # avant l'heure
+    (timedelta(0), False, True),                     # pile à l'heure
+    (timedelta(hours=5, minutes=59), False, True),   # dans la fenêtre (serveur relancé dans l'après-midi)
+    (FENETRE_LANCEMENT, False, False),               # fenêtre close : pas d'annonce en retard
+    (timedelta(days=2), False, False),
+    (timedelta(minutes=1), True, False),             # déjà annoncé
+])
+def test_doit_annoncer_lancement(decalage, deja, attendu):
+    assert doit_annoncer_lancement(LANCEMENT + decalage, LANCEMENT, deja) is attendu
+
+
+def test_fenetre_reglable():
+    assert doit_annoncer_lancement(LANCEMENT + timedelta(hours=1), LANCEMENT, False, timedelta(minutes=30)) is False
+
+
+@pytest.mark.parametrize(("decalage", "attendu"), [
+    (timedelta(seconds=-20), 20.0),   # l'ouverture tombe avant la fin de la période : réveil pile à l'heure
+    (timedelta(minutes=-5), 60.0),    # loin avant : une période normale
+    (timedelta(0), 60.0),             # à l'heure ou après : une période normale
+    (timedelta(hours=1), 60.0),
+])
+def test_delai_avant_regard(decalage, attendu):
+    assert delai_avant_regard(LANCEMENT + decalage, LANCEMENT, 60.0) == attendu

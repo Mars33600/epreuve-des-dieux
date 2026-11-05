@@ -25,6 +25,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncConnection, AsyncEngine
 
 from epreuve.db import tables as t
+from epreuve.domaine.annonce import JOURNAL_LANCEMENT
 from epreuve.domaine.bareme import cascade_coche
 from epreuve.domaine.fiche import Besoin, EtapeFiche, FicheQuete, Position, Prerequis
 from epreuve.domaine.modeles import (
@@ -646,6 +647,17 @@ class Depot:
                 "force": bilan_precedent.force, "motif": bilan_precedent.motif,
             }, etage_id=cible.id, public=True)  # fmt: skip
             return _etage(r)
+
+    async def reserver_annonce_lancement(self, maintenant: datetime) -> bool:
+        """Inscrit au journal l'annonce du lancement du site ; True si c'est nous qui l'avons inscrite, False si
+        elle l'était déjà. L'index unique partiel (migration g3) refuse une seconde ligne, même écrite au même
+        instant par une autre veille : seul celui qui reçoit True envoie. On réserve AVANT d'envoyer : un échec
+        de Discord coûte l'annonce, jamais un doublon avec @everyone."""
+        async with self._moteur.begin() as c:
+            r = await c.execute(insert_pg(t.journal).values(
+                horodatage=maintenant, acteur_discord_id=None, type=JOURNAL_LANCEMENT, details={}, public=False,
+            ).on_conflict_do_nothing().returning(t.journal.c.id))  # fmt: skip
+            return r.first() is not None
 
     # --- Écritures d'admin : revue du contenu ----------------------------------------------------------------
 

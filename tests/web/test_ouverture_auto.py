@@ -22,7 +22,7 @@ from epreuve.discord.webhook import poster_webhook
 from epreuve.domaine.modeles import Regles
 from epreuve.web import ouverture_auto
 from epreuve.web.demo import _id_discord
-from epreuve.web.ouverture_auto import annoncer, ouvrir_si_pret, veiller
+from epreuve.web.ouverture_auto import annoncer, annoncer_lancement, ouvrir_si_pret, veiller
 from epreuve.web.vues import charger_vue_etage
 from tests.web.outils import SITE, cocher, monde
 from tests.web.test_admin import admin, poster
@@ -275,3 +275,121 @@ def test_la_veille_survit_a_une_panne(monkeypatch, caplog):
     with caplog.at_level(logging.ERROR, logger="epreuve.ouverture"), pytest.raises(Arret):
         asyncio.run(veiller(m.app.state, attendre=attendre))
     assert "ouverture automatique impossible" in caplog.text
+
+
+# ---------------------------------------------------------------- le lancement du site (13/11, 17 h)
+
+
+def lancement(**kw):
+    """Le site en mode auto, l'horloge pile à l'heure du lancement (SITE_OUVERT_LE par défaut)."""
+    m = monde(mode="auto")
+    m.maintenant[0] = m.app.state.config.site_ouvert_le + kw.get("decalage", timedelta(0))
+    return m
+
+
+def annonces_lancement(m) -> list:
+    return [x for x in m.depot._journal if x.type == "annonce_lancement"]
+
+
+def test_le_lancement_est_annonce_une_seule_fois():
+    m = lancement()
+    recues = avec_webhook(m)
+    assert asyncio.run(annoncer_lancement(m.app.state)) is True
+    assert asyncio.run(annoncer_lancement(m.app.state)) is False  # deuxième regard : déjà inscrit
+    (req,) = recues
+    corps = json.loads(req.content)
+    assert corps["content"].startswith("@everyone") and corps["allowed_mentions"] == {"parse": ["everyone"]}
+    assert corps["embeds"][0]["url"] == f"{SITE}/connexion"
+    (ligne,) = annonces_lancement(m)
+    assert ligne.acteur_discord_id is None and ligne.public is False
+
+
+def test_deux_veilles_simultanees_un_seul_envoi():
+    m = lancement()
+    recues = avec_webhook(m)
+
+    async def deux():
+        return await asyncio.gather(annoncer_lancement(m.app.state), annoncer_lancement(m.app.state))
+
+    assert sorted(asyncio.run(deux())) == [False, True] and len(recues) == 1
+
+
+def test_la_reservation_perdue_n_envoie_rien(monkeypatch):
+    # Une autre machine a réservé entre notre lecture du journal et notre écriture.
+    m = lancement()
+    recues = avec_webhook(m)
+
+    async def deja_prise(_maintenant):
+        return False
+
+    monkeypatch.setattr(m.depot, "reserver_annonce_lancement", deja_prise)
+    assert asyncio.run(annoncer_lancement(m.app.state)) is False and not recues
+
+
+@pytest.mark.parametrize("decalage", [-timedelta(seconds=1), timedelta(hours=6)])
+def test_pas_d_annonce_hors_de_la_fenetre(decalage):
+    m = lancement(decalage=decalage)
+    recues = avec_webhook(m)
+    assert asyncio.run(annoncer_lancement(m.app.state)) is False
+    assert not recues and not annonces_lancement(m)
+
+
+def test_lancement_sans_webhook_ni_reservation():
+    m = lancement()
+    assert asyncio.run(annoncer_lancement(m.app.state)) is False
+    assert not annonces_lancement(m)  # configuré plus tard dans la fenêtre, il annoncera encore
+    m.app.state.depot = None
+    avec_webhook(m)
+    assert asyncio.run(annoncer_lancement(m.app.state)) is False
+
+
+def test_lancement_tenu_en_teaser_force():
+    m = lancement()
+    m.app.state.config = m.app.state.config.model_copy(update={"site_mode": "teaser"})
+    recues = avec_webhook(m)
+    assert asyncio.run(annoncer_lancement(m.app.state)) is False and not recues
+
+
+@pytest.mark.parametrize("panne", [{"statut": 500}, {"erreur": httpx.ConnectTimeout("délai dépassé")}])
+def test_lancement_discord_en_panne_journalise_sans_nouvel_essai(panne, caplog):
+    m = lancement()
+    recues = avec_webhook(m, **panne)
+    with caplog.at_level(logging.WARNING):
+        assert asyncio.run(annoncer_lancement(m.app.state)) is False
+        assert asyncio.run(annoncer_lancement(m.app.state)) is False
+    assert len(recues) == 1 and len(annonces_lancement(m)) == 1  # la ligne reste prise : pas de second @everyone
+    assert "annonce du lancement non envoyée" in caplog.text and "secret-du-webhook" not in caplog.text
+
+
+def test_la_veille_se_reveille_pile_a_l_heure_du_lancement():
+    m = lancement(decalage=-timedelta(seconds=20))
+    recues = avec_webhook(m)
+    attentes: list[float] = []
+
+    async def attendre(duree):
+        attentes.append(duree)
+        m.maintenant[0] += timedelta(seconds=duree)  # l'horloge avance de l'attente, sans sommeil réel
+        if len(attentes) == 3:
+            raise Arret
+
+    with pytest.raises(Arret):
+        asyncio.run(veiller(m.app.state, attendre=attendre, periode=60))
+    assert attentes == [20, 60, 60] and len(recues) == 1  # envoyé au deuxième regard, à 17 h 00 pile
+    assert annonces_lancement(m)[0].horodatage == m.app.state.config.site_ouvert_le
+
+
+def test_une_panne_du_lancement_n_arrete_pas_la_veille(monkeypatch, caplog):
+    m = monde()
+
+    async def panne(_s):
+        raise RuntimeError("base indisponible")
+
+    monkeypatch.setattr(ouverture_auto, "annoncer_lancement", panne)
+    m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)
+
+    async def attendre(_duree):
+        raise Arret
+
+    with caplog.at_level(logging.ERROR, logger="epreuve.ouverture"), pytest.raises(Arret):
+        asyncio.run(veiller(m.app.state, attendre=attendre))
+    assert "annonce du lancement impossible" in caplog.text and statuts(m)[1] == "ouvert"

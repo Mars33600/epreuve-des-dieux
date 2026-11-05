@@ -56,6 +56,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] Sauvegarde chiffrée chaque nuit sur GitHub, restauration vérifiée ; retour à la version précédente possible
 
 - [x] Ouverture automatique de l'étage suivant (jauge pleine + date plancher) et annonce @everyone du « Gardien de la Tour » (04/11, retour Shadoaze)
+- [x] Annonce du lancement du site par le Gardien, une seule fois, le 13/11 à 17 h 00 (05/11)
 - [ ] Webhook Discord des annonces : Shadoaze le crée, Marceau fait `fly secrets set DISCORD_WEBHOOK_ANNONCES=…`
 - [x] Les 100 quêtes d'alignement comptent pour le Dofus Ivoire ; Règles §1 : Donjon en mousse et Tour du monde en fil rouge (04/11)
 - [x] Quêtes d'alignement en secondaire en ligne : corrigé, déployé (v22) et étages reconstruits (04/11)

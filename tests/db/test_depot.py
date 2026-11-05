@@ -300,6 +300,19 @@ async def test_deux_ouvertures_simultanees_une_seule_passe(base):
     assert len(await base.journal(type_="ouverture")) == 1
 
 
+async def test_annonce_lancement_reservee_une_seule_fois(base, moteur):
+    # Cinq veilles réservent au même instant : l'index unique partiel (g3) n'en laisse passer qu'une.
+    r = await asyncio.gather(*(base.reserver_annonce_lancement(PLANCHER) for _ in range(5)))
+    assert sorted(r) == [False] * 4 + [True]
+    assert await base.reserver_annonce_lancement(PLANCHER + timedelta(hours=1)) is False  # après un redémarrage
+    (ligne,) = await base.journal(type_="annonce_lancement")
+    assert ligne.acteur_discord_id is None and not ligne.public and ligne.horodatage == PLANCHER
+    # L'index est partiel : les autres types gardent autant de lignes qu'ils veulent.
+    async with moteur.begin() as c:
+        for _ in range(2):
+            await c.execute(insert(t.journal).values(horodatage=PLANCHER, type="coche", details={}, public=True))
+
+
 async def test_ouverture_automatique_concurrente_acteur_systeme(base):
     # Deux ouvertures automatiques (acteur NULL) en même temps : le verrou n'en laisse passer qu'une (la
     # seconde relit l'étage « ouvert » après le verrou et s'arrête), un seul bilan, une seule ligne au journal.
