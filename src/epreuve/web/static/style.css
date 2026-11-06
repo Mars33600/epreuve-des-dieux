@@ -812,6 +812,6 @@ details.pli,.card[id]{scroll-margin-top:calc(var(--bar-h) + 12px)}
 .avert-utiles b{color:var(--c-princ)}
 .rouge{color:var(--c-princ)} .jaune{color:var(--c-second)}
 /* Revue d'étage : bloc et nature corrigeable */
-.bloc-revue{display:grid;gap:6px}
+.bloc-revue > td:first-child > * + *{margin-top:6px}
 .bloc-revue .ligne-nature{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
 @media (max-width:420px){.bloc-carte{padding:10px}}
