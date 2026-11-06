@@ -34,7 +34,9 @@ dl.faits dd{margin:2px 0 0;font-size:19px}
 .ligne-alm span{display:grid;gap:1px}
 .ligne-alm small{font-size:15px}
 .suite{list-style:none;margin:0;padding:0;display:grid;gap:6px}
-.suite li{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:space-between;align-items:baseline;min-height:44px;align-content:center}
+/* Le compte suit le titre, entre parenthèses (retour de Marceau, 06/11 : en bout de ligne, il ne se lisait pas). */
+.suite li{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:flex-start;align-items:baseline;min-height:44px;align-content:center}
+.aide-suite{margin:0 0 6px;font-size:15px;line-height:1.4}
 .mini.glob{margin:10px 0 0}
 .sort{border-bottom:1px solid var(--line-soft);padding:2px 0}
 .sort summary{min-height:44px;display:flex;align-items:center;cursor:pointer}

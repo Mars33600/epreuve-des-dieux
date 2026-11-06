@@ -4,8 +4,9 @@
 - un étage existant est mis à jour **par identifiant Duffus** : on ajoute le nouveau, on met à jour les
   libellés de la source, et on **masque** ce qui a disparu au lieu de le supprimer (nos coches pointent vers
   nos identifiants, jamais vers ceux de Duffus) ;
-- les blocs du guide (SPEC v5) sont rapprochés par titre exact, puis par position si Duffus a retitré un bloc ; leur
-  nature calculée est recalculée, sauf correction d'un admin (`nature_origine = 'admin'`) ;
+- les blocs du guide (SPEC v5) sont rapprochés par (titre, partie), puis par titre seul (un bloc entier qui change de
+  nature), puis par position si Duffus a retitré un bloc ; un bloc hybride a deux lignes, une par partie ; leur
+  nature calculée est recalculée, sauf correction d'un admin sur un bloc entier (`nature_origine = 'admin'`) ;
 - les choix d'un admin survivent : nature forcée (d'une quête ou d'un bloc), masquage (`masque_par = 'admin'`),
   libellés corrigés (`corrections`), donjon ajouté (`origine = 'admin'`), nom, cap et image d'étage réglés ;
 - garde-fou : sur un étage ouvert, si plus de 10 % des éléments disparaîtraient ou changeraient de nature,
@@ -91,48 +92,88 @@ async def _synchroniser(c: AsyncConnection, table, existants: dict, voulus: dict
     return ids
 
 
-async def _synchroniser_blocs(c: AsyncConnection, etage_id: int, voulus: list[BlocPrepare],
-                              res: Resultat) -> tuple[dict[str, int], int]:
-    """Ajoute, met à jour et masque les blocs du guide ; renvoie titre → id et le nombre de blocs dont la nature
-    calculée change (pour le garde-fou). Une correction d'admin sur la nature n'est jamais écrasée."""
-    existants = list(await c.execute(select(t.bloc).where(t.bloc.c.etage_id == etage_id)))
+def _rapprocher_blocs(existants: list, voulus: list[BlocPrepare]) -> dict[int, object]:
+    """Indice du bloc voulu → ligne existante qui le porte (absent : ligne à créer). Par ordre de préférence :
+
+    1. même titre, même partie, ligne visible ; 2. même titre, ligne visible (un bloc entier qui change de nature garde
+    sa ligne et ses coches), si aucune ligne de ce titre ne porte déjà cette partie (la clé (étage, titre, partie) est
+    unique) ; 3. et 4. les mêmes, ligne masquée comprise ; 5. et 6. même position et titre disparu de la tranche (Duffus
+    a retitré le bloc), même partie d'abord. Chaque ligne ne sert qu'une fois."""
     titres_voulus = {b.titre for b in voulus}
+    cles = {(x.titre, x.partie) for x in existants}
+
+    def meme_partie(b, x):
+        return x.titre == b.titre and x.partie == b.nature
+
+    def meme_titre(b, x):
+        return x.titre == b.titre and (b.titre, b.nature) not in cles
+
+    def retitre(b, x):
+        return x.ordre == b.ordre and x.titre not in titres_voulus and (b.titre, b.nature) not in cles
+
+    etapes = [(meme_partie, True), (meme_titre, True), (meme_partie, False), (meme_titre, False),
+              (lambda b, x: retitre(b, x) and x.partie == b.nature, False), (retitre, False)]
+    pris: dict[int, object] = {}
     utilises: set[int] = set()
-    ids: dict[str, int] = {}
-    changent = 0
-    for b in voulus:
-        r = next((x for x in existants if x.titre == b.titre), None)
-        if r is None:  # Duffus a retitré le bloc : on le reconnaît à sa position, pour garder les coches
-            r = next((x for x in existants if x.ordre == b.ordre and x.titre not in titres_voulus
-                      and x.id not in utilises), None)
+    for critere, visibles_seulement in etapes:
+        for i, b in enumerate(voulus):
+            if i in pris:
+                continue
+            r = next((x for x in existants if x.id not in utilises and not (visibles_seulement and x.masque)
+                      and critere(b, x)), None)
             if r is not None:
-                res.changements.append(f"bloc « {r.titre} » retitré : « {b.titre} »")
-        valeurs = dict(titre=b.titre, numero=b.numero, ordre=b.ordre, duffus_url=b.duffus_url,
+                pris[i] = r
+                utilises.add(r.id)
+    return pris
+
+
+async def _synchroniser_blocs(c: AsyncConnection, etage_id: int, voulus: list[BlocPrepare],
+                              res: Resultat) -> tuple[dict[tuple[str, str], int], int]:
+    """Ajoute, met à jour et masque les blocs du guide ; renvoie (titre, partie) → id et le nombre de blocs dont la
+    nature change (pour le garde-fou). Une correction d'admin sur un bloc entier n'est jamais écrasée ; sur un bloc
+    devenu hybride, elle ne s'applique plus : chaque moitié prend la nature de ses quêtes (règle du 06/11)."""
+    existants = list(await c.execute(select(t.bloc).where(t.bloc.c.etage_id == etage_id)))
+    hybrides = {b.titre for b in voulus if b.moitie}
+    pris = _rapprocher_blocs(existants, voulus)
+    ids: dict[tuple[str, str], int] = {}
+    changent = 0
+    for i, b in enumerate(voulus):
+        r = pris.get(i)
+        nom = f"bloc « {b.titre} »" + (f" (moitié {b.nature})" if b.moitie else "")
+        valeurs = dict(titre=b.titre, numero=b.numero, ordre=b.ordre, partie=b.nature, duffus_url=b.duffus_url,
                        duffus_ancre=b.duffus_ancre)
         if r is None:
-            ids[b.titre] = (await c.execute(insert(t.bloc).values(
+            ids[(b.titre, b.nature)] = (await c.execute(insert(t.bloc).values(
                 etage_id=etage_id, nature=b.nature, nature_origine="construction", masque=False, **valeurs)
                 .returning(t.bloc.c.id))).scalar_one()
             res.ajoutes += 1
-            res.changements.append(f"bloc ajouté : « {b.titre} » ({b.nature})")
+            res.changements.append(f"{nom} ajouté ({b.nature})")
             continue
-        utilises.add(r.id)
-        ids[b.titre] = r.id
+        ids[(b.titre, b.nature)] = r.id
+        if r.titre != b.titre:
+            res.changements.append(f"bloc « {r.titre} » retitré : « {b.titre} »")
         maj = dict(valeurs)
-        if r.nature_origine != "admin":
+        if r.nature_origine == "admin" and b.titre in hybrides:
+            maj |= {"nature_origine": "construction", "nature_motif": None}
+            res.changements.append(f"{nom} : bloc coupé en deux, la correction d'admin « {r.nature_motif} » "
+                                   "ne s'applique plus (corriger la nature des quêtes)")
+        if r.nature_origine != "admin" or b.titre in hybrides:
             maj["nature"] = b.nature
             if r.nature != b.nature and not r.masque:
                 changent += 1
-                res.changements.append(f"bloc « {b.titre} » : nature « {r.nature} » → « {b.nature} »")
+                res.changements.append(f"{nom} : nature « {r.nature} » → « {b.nature} »")
         if r.masque and r.masque_par == "construction":
             maj |= {"masque": False, "masque_par": None}
             res.demasques += 1
         await c.execute(update(t.bloc).where(t.bloc.c.id == r.id).values(**maj))
+    gardes = {r.id for r in pris.values()}
+    titres = {b.titre for b in voulus}
     for r in existants:
-        if r.id not in utilises and not r.masque:
+        if r.id not in gardes and not r.masque:
             await c.execute(update(t.bloc).where(t.bloc.c.id == r.id).values(masque=True, masque_par="construction"))
             res.masques += 1
-            res.changements.append(f"bloc disparu de Duffus, masqué : « {r.titre} »")
+            res.changements.append(f"bloc « {r.titre} » : plus de quête {r.partie}, moitié masquée" if r.titre in titres
+                                   else f"bloc disparu de Duffus, masqué : « {r.titre} »")
     return ids, changent
 
 
@@ -207,11 +248,16 @@ async def ecrire_etage(moteur: AsyncEngine, e: EtagePrepare, maintenant: datetim
         changent_de_nature = blocs_changes
         voulues_q: dict[str, dict] = {}
         for q in e.quetes:
-            v = dict(nom=q.nom, niveau=q.niveau, bloc=q.bloc, bloc_id=ids_blocs.get(q.bloc), ordre=q.ordre,
+            ancienne = existantes.get(q.duffus_id)
+            admin = ancienne is not None and ancienne.nature_origine == "admin"
+            # La quête va dans la partie de sa nature (celle de l'admin s'il l'a corrigée) ; à défaut, dans la
+            # partie de la nature calculée, qui existe toujours.
+            nature = ancienne.nature if admin else q.nature
+            v = dict(nom=q.nom, niveau=q.niveau, bloc=q.bloc,
+                     bloc_id=ids_blocs.get((q.bloc, nature), ids_blocs.get((q.bloc, q.nature))), ordre=q.ordre,
                      jusqu_ou=q.jusqu_ou, a_lier=q.a_lier, nature=q.nature, nature_origine=q.nature_origine,
                      dofus=list(q.dofus))
-            ancienne = existantes.get(q.duffus_id)
-            if ancienne is not None and ancienne.nature_origine == "admin":
+            if admin:
                 v = {k: x for k, x in v.items() if k not in ("nature", "nature_origine", "dofus")}
             voulues_q[q.duffus_id] = v
         ids_quetes = await _synchroniser(c, t.quete, existantes, voulues_q, "masquee", "quête", res,

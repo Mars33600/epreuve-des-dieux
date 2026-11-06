@@ -143,10 +143,15 @@ class DepotRecherche:
         complet = func.concat("bloc ", func.coalesce(cast(bl.c.numero, String), ""), " ", bl.c.titre)
         cle = func.epreuve.cle_recherche(complet)
         conds = [] if est_admin else [et.c.statut != "scelle", bl.c.masque.is_(False)]
-        requete = (select(bl.c.id, bl.c.titre, bl.c.numero, et.c.numero.label("etage"))
+        # Les deux moitiés d'un bloc hybride portent le même titre : la partie les distingue dans les résultats.
+        soeur = bl.alias("soeur")
+        moitie = (select(soeur.c.id).where(soeur.c.etage_id == bl.c.etage_id, soeur.c.titre == bl.c.titre,
+                                           soeur.c.id != bl.c.id, soeur.c.masque.is_(False)).exists().label("moitie"))
+        requete = (select(bl.c.id, bl.c.titre, bl.c.numero, bl.c.partie, moitie, et.c.numero.label("etage"))
                    .join(et, et.c.id == bl.c.etage_id).where(_filtrer(cle, mots, conds)).order_by(*_rang(cle, q)))
         return requete, lambda r: Resultat(r.titre, f"/etages/{r.etage}#bloc-{r.id}",
-                                           f"étage {r.etage}" + (f" · bloc {r.numero}" if r.numero else ""))
+                                           f"étage {r.etage}" + (f" · bloc {r.numero}" if r.numero else "")
+                                           + (f" · partie {r.partie}" if r.moitie else ""))
 
     # --- Anciens fournisseurs du Monde des Douze (débranchés, voir TYPES_MONDE_DES_DOUZE) ---------------
 

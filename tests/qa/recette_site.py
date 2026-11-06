@@ -13,8 +13,8 @@
 - clique les boutons, onglets, filtres, listes déroulantes de la page, puis recontrôle ;
 - attend 404 (jamais 500) sur les modules désactivés : encyclopédie, stuffs, builder, outils, archimonstres, avis de
   recherche, fiche de quête, et leurs API ;
-- parcours v5 en grimpeur : structure des blocs (titre Duffus, cadre et libellé, case « Bloc terminé », nombre de
-  quêtes, lien « Ouvrir sur Duffus » en nouvel onglet), cocher et décocher un bloc (jauge, compteurs, volet « Fait par »,
+- parcours v5 en grimpeur : structure des blocs (titre Duffus, cadre et libellé, case « Bloc terminé » ou de moitié,
+  menu plié des quêtes au compte accordé, paires de moitiés rouge puis jaune, lien général Duffus en nouvel onglet), cocher et décocher un bloc (jauge, compteurs, volet « Fait par »,
   persistance), point « Quêtes principales » et catégorie secondaire vide, donjons et succès, filtres dans l'URL et
   retour arrière, refus de cocher pour un autre (son tableau de bord en lecture seule), mon tableau de bord,
   filtre « qui a fait » sur un bloc ;
@@ -565,7 +565,8 @@ def entier(texte: str) -> int:
 
 
 def structure_blocs(ctx: Contexte, numero: int) -> int:
-    """Chaque carte de bloc : titre « Bloc N · … » dans l'ordre du guide, libellé et cadre, case, quêtes, lien Duffus."""
+    """Chaque carte de bloc (ou moitié de bloc hybride) : titre « Bloc N · … » dans l'ordre du guide, libellé et cadre,
+    case, menu plié des quêtes au compte accordé, aucun lien Duffus par bloc ; une paire = une rouge puis une jaune."""
     p = ctx.page
     cartes = p.locator("li.bloc-carte")
     n = cartes.count()
@@ -590,33 +591,46 @@ def structure_blocs(ctx: Contexte, numero: int) -> int:
         jaune = rgb[0] > 200 and rgb[1] > 200 and rgb[2] < 120
         if ("c-principales" in classe and not rouge) or ("c-secondaires" in classe and not jaune):
             ctx.defaut(f"« {titre} » : couleur du cadre {couleur} inattendue pour {classe}")
-        if c.locator("label.bloc-termine", has_text="Bloc terminé").count() != 1:
-            ctx.defaut(f"« {titre} » : pas de case « Bloc terminé »")
-        if not re.search(r"\d+ quêtes?", c.locator(".bloc-meta").inner_text()):
-            ctx.defaut(f"« {titre} » : nombre de quêtes absent ({c.locator('.bloc-meta').inner_text()!r})")
-        lien = c.locator("a.lien-duffus")
-        if lien.count() != 1:
-            ctx.defaut(f"« {titre} » : pas de lien « Ouvrir sur Duffus »")
-        else:
-            href = lien.get_attribute("href") or ""
-            if not href.startswith("https://duffus.fr"):
-                ctx.defaut(f"« {titre} » : le lien Duffus mène à {href!r}")
-            if lien.get_attribute("target") != "_blank" or "noopener" not in (lien.get_attribute("rel") or ""):
-                ctx.defaut(f"« {titre} » : le lien Duffus ne s'ouvre pas dans un nouvel onglet (target/rel)")
+        moitie = "moitie" in classe
+        attendu = f"Partie {'principale' if 'c-principales' in classe else 'secondaire'} terminée" if moitie \
+            else "Bloc terminé"
+        if c.locator("label.bloc-termine", has_text=attendu).count() != 1:
+            ctx.defaut(f"« {titre} » : pas de case « {attendu} »")
+        boite = c.locator("input[data-ref^='bloc:']")
+        if moitie and not re.match(r"^Bloc \d+, partie (principale|secondaire) terminée$",
+                                   boite.get_attribute("aria-label") or ""):
+            ctx.defaut(f"« {titre} » : case de moitié sans aria-label « Bloc N, partie … »")
+        menu = c.locator("details.quetes-bloc")
+        resume = menu.locator("summary").inner_text().strip() if menu.count() == 1 else ""
+        n_quetes = menu.locator("li").count() if menu.count() == 1 else -1
+        accord = rf"{n_quetes} (principale|secondaire){'s' if n_quetes > 1 else ''}"
+        if menu.count() != 1 or menu.get_attribute("open") is not None:
+            ctx.defaut(f"« {titre} » : menu des quêtes absent ou déplié par défaut")
+        elif not re.fullmatch(accord, resume) and not re.fullmatch(r"\d+ quêtes, dont \d+ principales?", resume):
+            ctx.defaut(f"« {titre} » : menu « {resume} » pour {n_quetes} quête(s) (vrai compte, accordé)")
+        if c.locator("a", has_text="Ouvrir sur Duffus").count() or "puis tranche" in c.inner_text():
+            ctx.defaut(f"« {titre} » : lien Duffus par bloc encore là (retiré le 06/11)")
         if c.locator("details.qui-bloc summary", has_text="Fait par / Pas encore fait par").count() != 1:
             ctx.defaut(f"« {titre} » : pas de volet « Fait par / Pas encore fait par »")
         if not re.search(r"\d+ sur \d+ l'ont fait", c.locator("a.compteur").inner_text()):
             ctx.defaut(f"« {titre} » : compteur « x sur N l'ont fait » absent")
     if numeros != sorted(numeros):
         ctx.defaut(f"étage {numero} : blocs dans le désordre {numeros} (ordre du guide attendu)")
+    for paire in p.locator("li[data-paire]").all():
+        moities = paire.locator("li.bloc-carte")
+        classes = [moities.nth(k).get_attribute("class") or "" for k in range(moities.count())]
+        titres = {moities.nth(k).locator("h3").inner_text().strip() for k in range(moities.count())}
+        if len(classes) != 2 or "c-principales" not in classes[0] or "c-secondaires" not in classes[1] or len(titres) != 1:
+            ctx.defaut(f"étage {numero} : paire de moitiés mal formée ({classes}, {titres})")
     return n
 
 
 def lien_duffus(ctx: Contexte) -> None:
-    """« Ouvrir sur Duffus » : un nouvel onglet vers duffus.fr, la page de l'étage reste ouverte."""
+    """Le lien général « Duffus » en tête des blocs : un nouvel onglet vers duffus.fr, la page de l'étage reste ouverte."""
     p = ctx.page
-    lien = p.locator("li.bloc-carte a.lien-duffus").first
+    lien = p.locator("section:has(#blocsTitre) p a[href^='https://duffus.fr']").first
     if lien.count() == 0:
+        ctx.defaut("blocs du guide : le lien général vers Duffus a disparu")
         return
     avant = ctx.chemin
     try:
@@ -626,15 +640,15 @@ def lien_duffus(ctx: Contexte) -> None:
         onglet = nouvelle.value
         onglet.wait_for_load_state("domcontentloaded")
         if "duffus.fr" not in onglet.url:
-            ctx.defaut(f"« Ouvrir sur Duffus » ouvre {onglet.url}")
+            ctx.defaut(f"lien Duffus : ouvre {onglet.url}")
         if onglet.evaluate("window.opener") is not None:
-            ctx.defaut("« Ouvrir sur Duffus » : le nouvel onglet garde window.opener (noopener manquant)")
+            ctx.defaut("lien Duffus : le nouvel onglet garde window.opener (noopener manquant)")
         onglet.close()
         ctx.r.clics += 1
     except Exception as e:  # noqa: BLE001
-        ctx.defaut(f"« Ouvrir sur Duffus » n'ouvre pas de nouvel onglet ({str(e).splitlines()[0][:100]})")
+        ctx.defaut(f"lien Duffus : pas de nouvel onglet ({str(e).splitlines()[0][:100]})")
     if ctx.chemin != avant:
-        ctx.defaut(f"« Ouvrir sur Duffus » a changé la page courante : {ctx.chemin}")
+        ctx.defaut(f"lien Duffus : a changé la page courante : {ctx.chemin}")
 
 
 def cocher_un_bloc(ctx: Contexte, numero: int, pseudo: str) -> None:
@@ -908,8 +922,9 @@ def fiche_et_tableau(ctx: Contexte, numero: int) -> None:
         p.locator(f"input[data-ref='{ref}']").first.check(force=True)
         p.wait_for_timeout(600)
     titre = p.locator(f"li.bloc-carte:has(input[data-ref='{ref}']) h3").inner_text().strip()
+    bid = ref.split(":")[1]
     pseudo = p.locator(".bar .who b").first.inner_text().strip()
-    # Mon tableau de bord : le résumé de l'étage en cours compte le bloc, qui n'est plus dans « à faire ensuite ».
+    # Mon tableau de bord : le résumé de l'étage en cours compte le bloc, qui n'est plus dans « Il te reste à cocher ».
     # Sur son propre tableau, les blocs se cochent sur la page de l'étage (contrôlé plus haut).
     ctx.aller("/tableau-de-bord")
     ctx.photo("tableau")
@@ -919,8 +934,9 @@ def fiche_et_tableau(ctx: Contexte, numero: int) -> None:
     elif entier(dt.locator("div", has_text="Blocs du guide").locator("dd").inner_text()) < 1:
         ctx.defaut("tableau de bord : le compteur de blocs ne compte pas le bloc coché")
     suite = p.locator("#tbSuite").locator("xpath=..")
-    if suite.count() and titre in suite.inner_text():
-        ctx.defaut(f"tableau de bord : le bloc « {titre} », fait, reste dans « Blocs à faire ensuite »")
+    # Par l'ancre et non par le titre : les deux moitiés d'un bloc hybride partagent leur titre.
+    if suite.count() and suite.locator(f"a[href$='#bloc-{bid}']").count():
+        ctx.defaut(f"tableau de bord : le bloc « {titre} », fait, reste dans « Il te reste à cocher »")
     ctx.controler("tableau de bord")
     ctx.aller("/tableau-de-bord?onglet=succes")
     if p.locator("input[data-ref]:not([disabled])").count() == 0:

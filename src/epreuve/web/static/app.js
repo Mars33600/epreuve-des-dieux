@@ -218,6 +218,8 @@ function filtrer(){
     }
     li.hidden = !voir;
   });
+  // Les deux moitiés d'un bloc hybride : la paire disparaît quand le filtre cache l'une et l'autre.
+  document.querySelectorAll("#liste li[data-paire]").forEach(p => { p.hidden = !p.querySelector("li[data-cats]:not([hidden])"); });
   let n = 0;
   document.querySelectorAll("#liste [data-section]").forEach(b => { const v = !!b.querySelector("li[data-cats]:not([hidden])"); b.hidden = !v; if (v) n++; });
   const vide = $("filtreVide"); if (vide) vide.hidden = n > 0;

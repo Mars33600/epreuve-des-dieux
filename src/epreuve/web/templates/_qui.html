@@ -1,6 +1,7 @@
 {#- « Qui a fait, qui n'a pas fait… ? » rangé par étage (retour de recette v4), pour /grimpeurs.
 
-    Trois niveaux de dépliants, tous pliés : rubrique › (donjon ›) objectif. La réponse d'un objectif n'est
+    Trois niveaux de dépliants, tous pliés, dessinés comme des chapitres (style.css, `.pli-1` à `.pli-3`) : l'étage
+    (chapitre, grimpeurs.html) › la rubrique (sous-chapitre) › l'objectif (élément ; un donjon des succès aussi). La réponse d'un objectif n'est
     pas écrite dans la page (24 étages × des dizaines d'objectifs × une trentaine de grimpeurs) : app.js la
     demande à l'ouverture (`data-qui-url`, Accept: text/html-fragment). Sans script, le lien du dépliant rend
     la page entière avec la réponse en place ; `sel` dit alors quoi déplier (étage, quoi, réponse). -#}
@@ -20,7 +21,7 @@
 
 {% macro objectif(vue, sel, ref, libelle) -%}
 {%- set n = vue.etage.numero %}{% set ici = sel and sel.etage == n and sel.quoi == ref %}
-<li><details class="pli" id="{{ ancre(n, ref) }}" data-qui-url="/grimpeurs?etage={{ n }}&amp;quoi={{ ref|urlencode }}"{% if ici %} open data-charge="1"{% endif %}>
+<li><details class="pli pli-3" id="{{ ancre(n, ref) }}" data-qui-url="/grimpeurs?etage={{ n }}&amp;quoi={{ ref|urlencode }}"{% if ici %} open data-charge="1"{% endif %}>
   <summary><span class="pli-titre">{{ libelle }}</span></summary>
   <div class="pli-corps" data-qui-corps>
   {%- if ici %}{{ reponse_qui(vue, sel.reponse) }}
@@ -29,11 +30,12 @@
 </details></li>
 {%- endmacro %}
 
-{#- Une rubrique : `items` est une liste de (ref, libellé) ; elle s'ouvre seule si elle contient l'objectif demandé. #}
-{% macro rubrique(vue, sel, titre, items, id) -%}
+{#- Une rubrique : `items` est une liste de (ref, libellé) ; elle s'ouvre seule si elle contient l'objectif demandé.
+    Son compte suit le libellé, entre parenthèses (« Donjons vaincus (6) ») : en bout de ligne, il ne se lisait pas. #}
+{% macro rubrique(vue, sel, titre, items, id, niveau=2) -%}
 {%- set q = sel.quoi if sel and sel.etage == vue.etage.numero else "" %}
-<details class="pli" id="{{ id }}"{% if q and q in items|map("first")|list %} open{% endif %}>
-  <summary><span class="pli-titre">{{ titre }}</span><span class="pli-cpt num">{{ items|length }}</span></summary>
+<details class="pli pli-{{ niveau }}" id="{{ id }}"{% if q and q in items|map("first")|list %} open{% endif %}>
+  <summary><span class="pli-titre">{{ titre }} <span class="pli-cpt num">({{ items|length }})</span></span></summary>
   <div class="pli-corps">
   {%- if caller is defined %}{{ caller() }}{% else %}
     <ul class="pli-liste">{% for ref, libelle in items %}{{ objectif(vue, sel, ref, libelle) }}{% endfor %}</ul>
@@ -48,13 +50,13 @@
 {%- for info in CATS %}{% set _ = points.append(("categorie:" ~ info.cle, info.nom)) %}{% endfor %}
 {%- for d in c.donjons if vue.classique(d.id) %}{% set _ = vaincus.append(("donjon:" ~ d.id, d.nom)) %}{% endfor %}
 {%- for d in c.donjons %}{% for x in c.cases_du_donjon(d.id) if not x.est_classique %}{% set _ = succes.append(("case:" ~ x.id, x.nom)) %}{% endfor %}{% endfor %}
-{%- for b in c.blocs %}{% set _ = (principaux if b.nature == "principale" else secondaires).append(("bloc:" ~ b.id, b.titre_complet)) %}{% endfor %}
+{%- for b in c.blocs %}{% set _ = (principaux if b.nature == "principale" else secondaires).append(("bloc:" ~ b.id, b.titre_partie)) %}{% endfor %}
 {{ rubrique(vue, sel, "Les points (catégories)", points, "qui-" ~ n ~ "-points") }}
 {% if vaincus %}{{ rubrique(vue, sel, "Donjons vaincus", vaincus, "qui-" ~ n ~ "-vaincus") }}{% endif %}
 {% if succes %}{% call rubrique(vue, sel, "Succès de donjon", succes, "qui-" ~ n ~ "-succes") %}
   {%- for d in c.donjons %}{% set defis = [] %}
   {%- for x in c.cases_du_donjon(d.id) if not x.est_classique %}{% set _ = defis.append(("case:" ~ x.id, x.nom)) %}{% endfor %}
-  {%- if defis %}{{ rubrique(vue, sel, d.nom, defis, "qui-" ~ n ~ "-dj-" ~ d.id) }}{% endif %}
+  {%- if defis %}{{ rubrique(vue, sel, d.nom, defis, "qui-" ~ n ~ "-dj-" ~ d.id, 3) }}{% endif %}
   {%- endfor %}
 {% endcall %}{% endif %}
 {% if principaux %}{{ rubrique(vue, sel, "Blocs principaux", principaux, "qui-" ~ n ~ "-principaux") }}{% endif %}

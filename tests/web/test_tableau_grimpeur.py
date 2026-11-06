@@ -25,7 +25,7 @@ def test_mon_tableau_cochable_avec_le_profil():
     c = monde().connecter(ID_BRINDILLE)
     html = c.get("/tableau-de-bord").text
     assert '<form method="post" action="/grimpeurs/moi"' in html and 'id="niveau"' in html  # niveau : comme la fiche
-    assert "Modifier mon pseudo, ma classe ou mon niveau" in html and "Blocs à faire ensuite" in html
+    assert "Modifier mon pseudo, ma classe ou mon niveau" in html and "Il te reste à cocher (étage" in html
     assert "data-cible" not in html and 'id="motif"' not in html and "Ses blocs du guide" not in html
     succes = c.get("/tableau-de-bord?onglet=succes").text
     assert cases(succes) and not any("disabled" in x for x in cases(succes))
@@ -72,7 +72,7 @@ def test_autre_grimpeur_en_lecture_seule():
         assert "Lecture seule" in html and "Tableau de bord de Mirelune</h2>" in html, chemin
         assert cases(html) and all("disabled" in x for x in cases(html)), chemin
         assert "data-cible" not in html and 'id="motif"' not in html and "data-donjon-tout" not in html, chemin
-        assert 'action="/grimpeurs/moi"' not in html and "Blocs à faire ensuite" not in html, chemin
+        assert 'action="/grimpeurs/moi"' not in html and "Il te reste à cocher (étage" not in html, chemin
 
 
 def test_onglets_par_query_string_sur_la_vue_d_un_autre():
@@ -138,3 +138,25 @@ def test_teaser_reserve_aux_admins():
     assert m.connecter(ID_BRINDILLE).get("/grimpeurs/moi").status_code == 303
     r = m.connecter(ID_MARCEAU).get("/grimpeurs/3")
     assert r.status_code == 200 and "Mode teaser" in r.text and 'data-cible="3"' in r.text
+
+
+def test_il_te_reste_a_cocher_une_ligne_par_partie_puis_tout_est_coche():
+    """La carte de l'étage en cours : ce que je n'ai pas encore coché, les rouges d'abord. Une moitié de bloc hybride
+    a sa ligne avec sa partie ; le compte est celui de la partie (« 2 secondaires »), plus « n quêtes, dont… »."""
+    m = monde()
+    m.depot._coches_blocs[1] = set()  # Brindille n'a encore rien coché
+    html = m.connecter(ID_BRINDILLE).get("/tableau-de-bord").text
+    carte = html.split('id="tbSuite"')[1].split("</section>")[0]
+    assert ">Il te reste à cocher (étage 0)</h3>" in carte
+    assert ("Les blocs de l'étage en cours que tu n'as pas encore cochés : les rouges d'abord, "
+            "dans l'ordre du guide.") in carte
+    lignes = re.findall(r'<a href="/etages/0#bloc-(\d+)"><b>([^<]+)</b></a> <small class="muted">\(([^<]+)\)</small>',
+                        carte)
+    assert lignes == [("1", "Bloc 1 · Incarnam · partie principale", "1 principale"),
+                      ("2", "Bloc 2 · Astrub", "3 principales"),
+                      ("5", "Bloc 1 · Incarnam · partie secondaire", "2 secondaires"),
+                      ("3", "Bloc 3 · Petits services d&#39;Astrub", "3 secondaires")]
+    assert "dont" not in carte
+    m.depot._coches_blocs[1] = {1, 2, 3, 5}
+    carte = m.connecter(ID_BRINDILLE).get("/tableau-de-bord").text.split('id="tbSuite"')[1].split("</section>")[0]
+    assert "Tout est coché à cet étage." in carte and "<ul" not in carte

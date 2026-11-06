@@ -207,21 +207,32 @@ def test_revue_nature_masquage_libelles():
 def test_revue_des_blocs_nombre_de_principales_et_reglage_journalise():
     m, c, t = admin()
     html = c.get("/admin/etages/0").text
-    assert "Bloc 1 · Incarnam" in html and "<b>1</b> sur 3" in html  # une seule quête principale sur 3
+    # « Incarnam » est hybride : ses deux moitiés apparaissent, chacune avec ses quêtes, sans réglage de nature.
+    assert "Bloc 1 · Incarnam · <b>moitié principale</b>" in html and "<b>1</b> sur 1" in html
+    assert "Bloc 1 · Incarnam · <b>moitié secondaire</b>" in html and "<b>0</b> sur 2" in html
+    assert html.count("Moitié d'un bloc coupé en deux : change la nature d'une de ses quêtes.") == 2
+    assert 'action="/admin/blocs/1"' not in html and 'action="/admin/blocs/5"' not in html
+    assert "<summary>2 secondaires</summary><ol><li>Le Bouftou égaré</li><li>Lettres pour Incarnam</li></ol>" in html
     assert "Bloc 3 · Petits services d&#39;Astrub" in html and "<b>0</b> sur 3" in html
-    assert poster(c, t, "/admin/blocs/1", etage="0", nature="secondaire").headers["location"].endswith("erreur=motif")
-    assert poster(c, t, "/admin/blocs/1", etage="0", nature="bonus", motif="x").headers["location"].endswith(
+    # Le lien Duffus par bloc reste dans l'admin (4 parties).
+    assert html.count('>Ouvrir sur Duffus<span class="sr-only">') == 4
+    # Régler la nature d'une moitié est refusé, même en forgeant la requête.
+    assert poster(c, t, "/admin/blocs/1", etage="0", nature="secondaire", motif="x").headers["location"].endswith(
+        "erreur=hybride")
+    assert "Ce bloc est coupé en deux moitiés" in c.get("/admin/etages/0?erreur=hybride").text
+    assert poster(c, t, "/admin/blocs/2", etage="0", nature="secondaire").headers["location"].endswith("erreur=motif")
+    assert poster(c, t, "/admin/blocs/2", etage="0", nature="bonus", motif="x").headers["location"].endswith(
         "erreur=nature")
     assert poster(c, t, "/admin/blocs/999", etage="0", nature="secondaire", motif="x").headers["location"].endswith(
         "erreur=introuvable")
-    poster(c, t, "/admin/blocs/1", etage="0", nature="secondaire", motif="une seule quête utile")
-    b = m.depot._blocs[1]
+    poster(c, t, "/admin/blocs/2", etage="0", nature="secondaire", motif="une seule quête utile")
+    b = m.depot._blocs[2]
     assert (b.nature, b.nature_origine, b.nature_motif) == ("secondaire", "admin", "une seule quête utile")
     entree = m.depot._journal[-1]
     assert entree.type == "contenu_admin" and entree.details["motif"] == "une seule quête utile"
     assert "corrigé : une seule quête utile" in c.get("/admin/etages/0").text
-    poster(c, t, "/admin/blocs/1", etage="0", nature="auto", motif="retour à la règle")
-    assert m.depot._blocs[1].nature == "principale" and m.depot._blocs[1].nature_origine == "construction"
+    poster(c, t, "/admin/blocs/2", etage="0", nature="auto", motif="retour à la règle")
+    assert m.depot._blocs[2].nature == "principale" and m.depot._blocs[2].nature_origine == "construction"
 
 
 def test_revue_affiche_alertes_sources_et_quetes_sans_fiche():
@@ -274,3 +285,21 @@ def test_journal_auteur_date_details_et_filtres():
 def test_pages_d_admin(chemin):
     m, c, t = admin()
     assert c.get(chemin).status_code == 200
+
+
+def test_changer_la_nature_d_une_quete_la_fait_passer_dans_l_autre_moitie():
+    """Démo comme vrai dépôt : la quête change de moitié aussitôt ; une moitié vide est masquée ; un bloc entier qui
+    devient hybride perd la correction d'admin posée sur lui."""
+    m, c, t = admin()
+    poster(c, t, "/admin/quetes/105", etage="0", nature="principale", motif="utile")
+    assert m.depot._quetes[105].bloc_id == 1 and not m.depot._blocs[5].masque  # 106 reste dans la moitié jaune
+    poster(c, t, "/admin/quetes/106", etage="0", nature="principale", motif="utile aussi")
+    assert m.depot._blocs[5].masque  # Incarnam redevient un bloc entier
+    html = m.connecter(ID_BRINDILLE).get("/etages/0").text
+    assert 'data-paire' not in html and 'data-ref="bloc:5"' not in html
+    poster(c, t, "/admin/blocs/2", etage="0", nature="secondaire", motif="trop long")
+    poster(c, t, "/admin/quetes/102", etage="0", nature="secondaire", motif="facultative")
+    astrub = [b for b in m.depot._blocs.values() if b.titre == "Astrub"]
+    assert sorted((b.partie, b.nature, b.nature_origine) for b in astrub) == [
+        ("principale", "principale", "construction"), ("secondaire", "secondaire", "construction")]
+    assert m.connecter(ID_BRINDILLE).get("/etages/0").text.count("data-paire") == 1

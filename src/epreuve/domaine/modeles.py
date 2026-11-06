@@ -9,8 +9,9 @@ Tous les `datetime` portent un fuseau, en UTC. Signatures figées : docs/LOTS.md
 
 from __future__ import annotations
 
+from collections import Counter
 from collections.abc import Iterable, Mapping
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime
 from fractions import Fraction
 from typing import Literal
@@ -103,20 +104,25 @@ class Quete:
     a_une_fiche: bool  # la fiche elle-même se lit à part (FicheQuete)
     masquee: bool = False
     source_fiche: str | None = None  # « duffus », « dofusdb » ou None (revue admin)
+    bloc_id: int | None = None  # la partie de bloc qui contient la quête (None : rattachée par le seul titre)
 
 
 @dataclass(frozen=True)
 class Bloc:
-    """Un bloc du guide Duffus pour une tranche (SPEC v5 §3 et §5) : l'unité que le grimpeur coche.
+    """Un bloc du guide Duffus pour une tranche (SPEC v5 §3 et §5), ou une moitié de bloc : ce que le grimpeur coche.
 
-    `nature` : « principale » si le bloc contient au moins une quête principale, sinon « secondaire »,
-    sauf correction d'un admin (`nature_origine == "admin"`, qui prime sur la règle)."""
+    Un bloc « hybride » (des quêtes principales ET secondaires) est coupé en deux lignes de même titre et de même
+    numéro : la moitié rouge porte ses quêtes principales, la moitié jaune ses secondaires, et chacune se coche à part
+    (décision de Marceau et Shadoaze, 06/11). `partie` est la nature des quêtes de la ligne : c'est elle qui retrouve
+    la même ligne à la reconstruction. `nature` est celle qui compte au barème : `partie`, sauf correction d'un admin
+    sur un bloc entier (`nature_origine == "admin"`). `moitie` dit si la ligne est l'une des deux moitiés d'un
+    hybride ; elle se déduit des blocs visibles (`marquer_moities`), elle n'est pas stockée."""
 
     id: int
     etage_id: int
     titre: str
     numero: int | None  # rang du bloc dans tout le guide Duffus (« Bloc 7 »), None si inconnu
-    ordre: int  # position dans la tranche
+    ordre: int  # position dans la tranche (les deux moitiés d'un hybride partagent la leur)
     nature: Nature
     nature_origine: Literal["construction", "admin"]
     nb_quetes: int
@@ -125,9 +131,13 @@ class Bloc:
     duffus_ancre: str | None = None
     nature_motif: str | None = None
     masque: bool = False
+    partie: Nature | None = None  # None (données de test) : déduite des quêtes
+    moitie: bool = False
 
     @property
     def nature_par_defaut(self) -> Nature:
+        if self.partie is not None:
+            return self.partie
         return "principale" if self.nb_principales > 0 else "secondaire"
 
     @property
@@ -136,10 +146,31 @@ class Bloc:
         return f"Bloc {self.numero} · {self.titre}" if self.numero is not None else self.titre
 
     @property
+    def titre_partie(self) -> str:
+        """Le titre complet, suivi de « (principale) » ou « (secondaire) » pour une moitié : deux moitiés portent le
+        même titre, ce suffixe les distingue dans une liste (« qui a fait quoi », par exemple)."""
+        return f"{self.titre_complet} ({self.nature})" if self.moitie else self.titre_complet
+
+    @property
+    def libelle_coche(self) -> str:
+        """Le nom de la case à cocher pour un lecteur d'écran : « Bloc 7 », ou « Bloc 7, partie principale »."""
+        nom = f"Bloc {self.numero}" if self.numero is not None else f"Bloc « {self.titre} »"
+        return f"{nom}, partie {self.nature}" if self.moitie else nom
+
+    @property
     def lien_duffus(self) -> str | None:
         if not self.duffus_url:
             return None
         return f"{self.duffus_url}#{self.duffus_ancre}" if self.duffus_ancre else self.duffus_url
+
+
+def marquer_moities(blocs: Iterable[Bloc]) -> tuple[Bloc, ...]:
+    """Les blocs, avec `moitie` vrai pour chaque bloc visible dont un autre bloc visible du même étage porte le titre.
+
+    Calculé à la lecture plutôt que stocké : masquer une moitié refait aussitôt de l'autre un bloc entier."""
+    blocs = tuple(blocs)
+    visibles = Counter((b.etage_id, b.titre) for b in blocs if not b.masque)
+    return tuple(replace(b, moitie=not b.masque and visibles[(b.etage_id, b.titre)] > 1) for b in blocs)
 
 
 @dataclass(frozen=True)
@@ -242,7 +273,9 @@ class ContenuEtage:
         cs = tuple(sorted((c for c in cases if not c.masquee and c.donjon_id in ids),
                           key=lambda c: (c.donjon_id, c.ordre, c.id)))
         qs = tuple(sorted((q for q in quetes if not q.masquee), key=lambda q: (q.ordre, q.id)))
-        bs = tuple(sorted((b for b in blocs if not b.masque), key=lambda b: (b.ordre, b.id)))
+        # Les deux moitiés d'un hybride partagent leur ordre : la rouge passe d'abord (à gauche à l'écran).
+        bs = tuple(sorted(marquer_moities(b for b in blocs if not b.masque),
+                          key=lambda b: (b.ordre, b.nature_par_defaut != "principale", b.id)))
         return ContenuEtage(etage, ds, cs, qs, bs)
 
     def cases_du_donjon(self, donjon_id: int) -> tuple[CaseSucces, ...]:
@@ -254,9 +287,27 @@ class ContenuEtage:
         return (tuple(ElementRef("case", c.id) for c in self.cases)
                 + tuple(ElementRef("bloc", b.id) for b in self.blocs))
 
+    def quetes_du_bloc(self, bloc: Bloc) -> tuple[Quete, ...]:
+        """Les quêtes visibles d'un bloc ou d'une moitié, dans l'ordre du guide (le menu « 7 principales »). Une quête
+        rattachée à une ligne (`bloc_id`) y va ; sans rattachement, on retombe sur le titre du bloc."""
+        return tuple(q for q in self.quetes
+                     if (q.bloc_id == bloc.id if q.bloc_id is not None else q.bloc == bloc.titre))
+
     def quetes_utiles_du_bloc(self, bloc: Bloc) -> tuple[str, ...]:
         """Les noms des quêtes principales (utiles pour un Dofus) d'un bloc, dans l'ordre du guide."""
-        return tuple(q.nom for q in self.quetes if q.bloc == bloc.titre and q.nature == "principale")
+        return tuple(q.nom for q in self.quetes_du_bloc(bloc) if q.nature == "principale")
+
+    def groupes_blocs(self) -> tuple[tuple[Bloc, ...], ...]:
+        """Les blocs dans l'ordre du guide, les deux moitiés d'un hybride réunies : un groupe d'un bloc entier, ou de
+        deux moitiés (rouge puis jaune), affichées côte à côte."""
+        groupes: list[list[Bloc]] = []
+        for b in self.blocs:
+            precedent = groupes[-1][-1] if groupes else None
+            if b.moitie and precedent is not None and precedent.moitie and precedent.titre == b.titre:
+                groupes[-1].append(b)
+            else:
+                groupes.append([b])
+        return tuple(tuple(g) for g in groupes)
 
     def blocs_de_nature(self, nature: Nature) -> tuple[Bloc, ...]:
         return tuple(b for b in self.blocs if b.nature == nature)

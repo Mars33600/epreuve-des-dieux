@@ -57,7 +57,10 @@ ERREURS = {
     "ouverture": "Ouverture refusée : voir les raisons ci-dessous.", "concurrence":
         "Un autre admin vient d'ouvrir cet étage, ou la tour l'a ouvert d'elle-même : rien n'a été fait en double.",
     "introuvable": "Élément introuvable.", "statut": "Statut inconnu.", "ids": "Aucun identifiant Discord reconnu.",
-    "nature": "Nature inconnue.", "url": "L'adresse de l'image doit commencer par https:// (ou être /etages/N/image).",
+    "nature": "Nature inconnue.",
+    "hybride": "Ce bloc est coupé en deux moitiés : leur nature suit leurs quêtes. Change la nature d'une quête "
+               "(liste « Quêtes ») pour la faire passer dans l'autre moitié.",
+    "url": "L'adresse de l'image doit commencer par https:// (ou être /etages/N/image).",
 }
 
 
@@ -345,6 +348,8 @@ async def admin_bloc(request: Request, bloc_id: int, taches: BackgroundTasks):
         await s.depot.modifier_bloc(bloc_id, v.discord_id, s.horloge(), nature=nature, motif=motif)
     except Introuvable:
         return retour(chemin, erreur="introuvable")
+    except ValueError:  # une moitié de bloc hybride : sa nature suit ses quêtes
+        return retour(chemin, erreur="hybride")
     return retour(chemin, fait=await fait_ou_auto(request, taches, "contenu"))  # un masquage peut compléter
 
 

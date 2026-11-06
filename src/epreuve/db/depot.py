@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import re
 from collections import defaultdict
+from collections.abc import Awaitable, Callable
 from datetime import datetime, timedelta
 from typing import Literal
 
@@ -44,6 +45,7 @@ from epreuve.domaine.modeles import (
     Regles,
     Session,
     Statut,
+    marquer_moities,
 )
 from epreuve.domaine.ouverture import Bilan
 from epreuve.domaine.textes import valider_pseudo
@@ -146,12 +148,12 @@ def _case(r) -> CaseSucces:
 def _quete(r) -> Quete:
     return Quete(r.id, r.etage_id, r.corrections.get("nom", r.nom), r.niveau, r.bloc, r.ordre, r.nature,
                  r.nature_origine, tuple(r.dofus or ()), r.jusqu_ou, r.a_lier, bool(r.a_une_fiche), r.masquee,
-                 r.source_fiche)
+                 r.source_fiche, r.bloc_id)
 
 
 def _bloc(r) -> Bloc:
     return Bloc(r.id, r.etage_id, r.titre, r.numero, r.ordre, r.nature, r.nature_origine, r.nb_quetes,
-                r.nb_principales, r.duffus_url, r.duffus_ancre, r.nature_motif, r.masque)
+                r.nb_principales, r.duffus_url, r.duffus_ancre, r.nature_motif, r.masque, r.partie)
 
 
 def _grimpeur(r) -> Grimpeur:
@@ -183,6 +185,9 @@ _NB_PRINCIPALES = (select(func.count()).where(t.quete.c.bloc_id == t.bloc.c.id, 
                                               t.quete.c.nature == "principale")
                    .scalar_subquery().label("nb_principales"))
 _BLOCS = select(t.bloc, _NB_QUETES, _NB_PRINCIPALES)
+# Les quêtes qui font exister une partie de bloc : toutes, sauf celles que la construction a masquées (disparues de
+# Duffus). Une quête masquée par un admin est toujours dans le guide : la reconstruction la compte (migration h1).
+_QUETE_DU_GUIDE = or_(t.quete.c.masquee.is_(False), t.quete.c.masque_par.is_distinct_from("construction"))
 
 
 class Depot:
@@ -227,9 +232,11 @@ class Depot:
                                 .order_by(t.case_succes.c.donjon_id, t.case_succes.c.ordre))
         quetes = await c.execute(select(t.quete, _A_UNE_FICHE, _SOURCE_FICHE).where(t.quete.c.etage_id == etage_id)
                                  .order_by(t.quete.c.ordre, t.quete.c.id))
-        blocs = await c.execute(_BLOCS.where(t.bloc.c.etage_id == etage_id).order_by(t.bloc.c.ordre, t.bloc.c.id))
+        # « principale » < « secondaire » : la moitié rouge d'un hybride vient avant la jaune.
+        blocs = await c.execute(_BLOCS.where(t.bloc.c.etage_id == etage_id)
+                                .order_by(t.bloc.c.ordre, t.bloc.c.partie, t.bloc.c.id))
         return (_etage(e), [_donjon(r) for r in donjons], [_case(r) for r in cases], [_quete(r) for r in quetes],
-                [_bloc(r) for r in blocs])
+                list(marquer_moities(_bloc(r) for r in blocs)))
 
     async def contenu_brut(self, etage_id: int) -> tuple[Etage, list[Donjon], list[CaseSucces], list[Quete]]:
         """Masqués compris (revue admin). Les blocs : `blocs_brut`."""
@@ -662,8 +669,10 @@ class Depot:
     # --- Écritures d'admin : revue du contenu ----------------------------------------------------------------
 
     async def _corriger(self, table, id_: int, acteur: int, maintenant: datetime, valeurs: dict,
-                        corrections: dict, quoi: str):
-        """Met à jour une ligne de contenu ; les libellés vont dans `corrections` (survivent à la reconstruction)."""
+                        corrections: dict, quoi: str,
+                        apres: Callable[[AsyncConnection, int], Awaitable[dict]] | None = None):
+        """Met à jour une ligne de contenu ; les libellés vont dans `corrections` (survivent à la reconstruction).
+        `apres` complète l'écriture dans la même transaction ; ce qu'il renvoie s'ajoute au journal."""
         if corrections:
             valeurs["corrections"] = table.c.corrections.op("||")(literal(corrections, table.c.corrections.type))
         if not valeurs:
@@ -678,6 +687,8 @@ class Depot:
             else:
                 etage_id = r.etage_id
             details = {k: v for k, v in valeurs.items() if k != "corrections"} | corrections
+            if apres is not None:
+                details |= await apres(c, id_)
             await self._journaliser(c, "contenu_admin", acteur, maintenant, {"quoi": quoi, "id": id_, **details},
                                     etage_id=etage_id, public=False)
             return r
@@ -707,16 +718,57 @@ class Depot:
             if nature not in ("principale", "secondaire") or motif_ is None:
                 raise ValueError("changer la nature exige une nature valide et un motif")
             valeurs |= {"nature": nature, "nature_origine": "admin", "nature_motif": motif_}
-        await self._corriger(t.quete, quete_id, acteur, maintenant, valeurs, self._libelles(nom=nom), "quête")
+        await self._corriger(t.quete, quete_id, acteur, maintenant, valeurs, self._libelles(nom=nom), "quête",
+                             apres=self._ranger_dans_sa_partie if nature is not None else None)
         async with self._moteur.connect() as c:
             requete = select(t.quete, _A_UNE_FICHE, _SOURCE_FICHE).where(t.quete.c.id == quete_id)
             return _quete((await c.execute(requete)).one())
+
+    @staticmethod
+    async def _ranger_dans_sa_partie(c: AsyncConnection, quete_id: int) -> dict:
+        """Après un changement de nature, la quête passe tout de suite dans la partie de bloc de sa nouvelle nature,
+        comme la prochaine reconstruction le ferait (même clé (étage, titre, partie), donc mêmes lignes) : l'admin voit
+        aussitôt le résultat. La partie d'arrivée est créée au besoin (titre, numéro, ordre et lien du bloc) ; celle de
+        départ est masquée si plus aucune quête du guide n'y reste. Un bloc qui devient hybride perd la correction
+        d'admin posée sur le bloc entier (règle du 06/11). Renvoie de quoi compléter le journal."""
+        q = (await c.execute(select(t.quete).where(t.quete.c.id == quete_id))).one()
+        if q.bloc_id is None:
+            return {}
+        depart = (await c.execute(select(t.bloc).where(t.bloc.c.id == q.bloc_id).with_for_update())).one()
+        if depart.partie == q.nature:
+            return {}
+        arrivee = (await c.execute(select(t.bloc).where(
+            t.bloc.c.etage_id == depart.etage_id, t.bloc.c.titre == depart.titre, t.bloc.c.partie == q.nature,
+        ).with_for_update())).one_or_none()  # fmt: skip
+        if arrivee is None:
+            arrivee_id = (await c.execute(insert(t.bloc).values(
+                etage_id=depart.etage_id, titre=depart.titre, numero=depart.numero, ordre=depart.ordre,
+                nature=q.nature, nature_origine="construction", partie=q.nature, duffus_url=depart.duffus_url,
+                duffus_ancre=depart.duffus_ancre, masque=False,
+            ).returning(t.bloc.c.id))).scalar_one()  # fmt: skip
+            arrivee_visible = True
+        else:
+            arrivee_id = arrivee.id
+            arrivee_visible = not arrivee.masque or arrivee.masque_par == "construction"
+            if arrivee.masque and arrivee.masque_par == "construction":
+                await c.execute(update(t.bloc).where(t.bloc.c.id == arrivee_id).values(masque=False, masque_par=None))
+        await c.execute(update(t.quete).where(t.quete.c.id == quete_id).values(bloc_id=arrivee_id))
+        reste = (await c.execute(select(func.count()).where(t.quete.c.bloc_id == depart.id, _QUETE_DU_GUIDE))).scalar()
+        if not reste:
+            await c.execute(update(t.bloc).where(t.bloc.c.id == depart.id, t.bloc.c.masque.is_(False))
+                            .values(masque=True, masque_par="construction"))
+        elif arrivee_visible and not depart.masque:  # le bloc est désormais hybride
+            await c.execute(update(t.bloc).where(t.bloc.c.id.in_((depart.id, arrivee_id)),
+                                                 t.bloc.c.nature_origine == "admin")
+                            .values(nature=t.bloc.c.partie, nature_origine="construction", nature_motif=None))
+        return {"partie": q.nature, "bloc_id": arrivee_id}
 
     async def modifier_bloc(self, bloc_id: int, acteur: int, maintenant: datetime, *,
                             nature: Literal["principale", "secondaire", "auto"] | None = None,
                             motif: str | None = None, masque: bool | None = None) -> Bloc:
         """Corriger la nature d'un bloc (SPEC v5 §5) : un motif est obligatoire, la correction est journalisée et
-        survit aux reconstructions. « auto » revient à la règle (principal s'il contient une quête principale)."""
+        survit aux reconstructions. « auto » revient à la règle (la nature de ses quêtes). La nature d'une moitié de
+        bloc hybride ne se règle pas : elle suit ses quêtes, l'admin corrige donc la nature d'une quête (ValueError)."""
         motif_ = self._motif(motif)
         if nature is not None and (nature not in ("principale", "secondaire", "auto") or motif_ is None):
             raise ValueError("changer la nature exige une nature valide et un motif")
@@ -726,10 +778,14 @@ class Depot:
             avant = (await c.execute(_BLOCS.where(t.bloc.c.id == bloc_id).with_for_update(of=t.bloc))).one_or_none()
             if avant is None:
                 raise Introuvable("bloc introuvable")
+            soeur = (await c.execute(select(t.bloc.c.id).where(
+                t.bloc.c.etage_id == avant.etage_id, t.bloc.c.titre == avant.titre, t.bloc.c.id != bloc_id,
+                t.bloc.c.masque.is_(False)))).first()  # fmt: skip
+            if nature is not None and soeur is not None and not avant.masque:
+                raise ValueError("bloc coupé en deux : corrige la nature de ses quêtes, pas celle d'une moitié")
             valeurs: dict = self._masquage("masque", masque)
             if nature == "auto":
-                defaut = "principale" if avant.nb_principales > 0 else "secondaire"
-                valeurs |= {"nature": defaut, "nature_origine": "construction", "nature_motif": None}
+                valeurs |= {"nature": avant.partie, "nature_origine": "construction", "nature_motif": None}
             elif nature is not None:
                 valeurs |= {"nature": nature, "nature_origine": "admin", "nature_motif": motif_}
             await c.execute(update(t.bloc).where(t.bloc.c.id == bloc_id).values(**valeurs))

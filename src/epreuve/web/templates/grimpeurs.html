@@ -16,8 +16,8 @@
     <h3 id="askTitre">Qui a fait, qui n'a pas fait… ?</h3>
     <p class="muted">Déplie un étage, une rubrique puis un objectif : tu vois qui ne l'a pas fait et qui peut t'accompagner.</p>
     {%- for e in etages_qui %}{% set deroule = e.numero in vues_qui %}
-    <details class="pli" id="qui-e{{ e.numero }}"{% if e == courant or (sel and sel.etage == e.numero) %} open{% endif %}{% if not deroule %} data-qui-url="/grimpeurs?etage={{ e.numero }}"{% else %} data-charge="1"{% endif %}>
-      <summary><span class="pli-titre">{{ titre_etage(e) }}</span><span class="pli-cpt">{{ "en cours" if e.statut == "ouvert" else "terminé" }}</span></summary>
+    <details class="pli pli-1" id="qui-e{{ e.numero }}"{% if e == courant or (sel and sel.etage == e.numero) %} open{% endif %}{% if not deroule %} data-qui-url="/grimpeurs?etage={{ e.numero }}"{% else %} data-charge="1"{% endif %}>
+      <summary><span class="pli-titre">{{ titre_etage(e) }} <span class="pli-cpt">({{ "en cours" if e.statut == "ouvert" else "terminé" }})</span></span></summary>
       <div class="pli-corps" data-qui-corps>
       {%- if deroule %}
         {{ corps_etage(vues_qui[e.numero], sel) }}

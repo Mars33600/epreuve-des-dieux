@@ -221,3 +221,23 @@ def test_v5_la_nature_corrigee_d_un_bloc_change_le_barème():
     c = contenu(blocs=blocs)
     etats = categories_grimpeur(c, coches(1, (), (1, 2, 3)))
     assert etats["principales"].acquise and (etats["secondaires"].total == 6)
+
+
+def test_bloc_hybride_chaque_moitie_compte_pour_sa_nature_et_cree_la_categorie():
+    """Décision du 06/11 : un bloc hybride est coupé en deux moitiés. La rouge compte pour « Quêtes principales », la
+    jaune pour « Quêtes secondaires » ; une seule moitié jaune suffit à faire compter la catégorie (K monte)."""
+    from tests.fabrique import bloc, quete
+
+    rouges = (bloc(1, "principale", titre="Incarnam", ordre=1, partie="principale"),
+              bloc(2, "principale", titre="Astrub", ordre=2, partie="principale"))
+    seul_rouge = contenu(blocs=rouges, quetes=(quete(1, "principale"),))
+    assert categories_comptees(seul_rouge, R) == 3 and palier(10, 3, R) == 15
+    jaune = bloc(3, "secondaire", titre="Incarnam", ordre=1, partie="secondaire")
+    coupe = contenu(blocs=(*rouges, jaune))
+    assert categories_comptees(coupe, R) == 4 and palier(10, 4, R) == 20
+    # Cocher la seule moitié rouge ne donne pas le point secondaire, et réciproquement.
+    etats = categories_grimpeur(coupe, coches(1, (), (1, 2)))
+    assert etats["principales"].acquise and (etats["secondaires"].faits, etats["secondaires"].total) == (0, 1)
+    etats = categories_grimpeur(coupe, coches(1, (), (3,)))
+    assert etats["secondaires"].acquise and (etats["principales"].faits, etats["principales"].total) == (0, 2)
+    assert points_grimpeur(coupe, coches(1, TOUTES_CASES, (1, 2, 3)), R) == 4

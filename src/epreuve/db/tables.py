@@ -97,6 +97,7 @@ bloc = Table(
     Column("nature", Text, nullable=False),
     Column("nature_origine", Text, nullable=False),
     Column("nature_motif", Text),
+    Column("partie", Text, nullable=False),  # la nature de ses quêtes : clé (étage, titre, partie) d'une moitié
     Column("duffus_url", Text),
     Column("duffus_ancre", Text),
     Column("masque", Boolean, nullable=False),

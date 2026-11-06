@@ -86,31 +86,39 @@ class QuetePreparee:
 
 @dataclass(frozen=True)
 class BlocPrepare:
-    """Un bloc du guide d'une tranche (SPEC v5 §3). `nature` : principale si au moins une quête principale."""
+    """Un bloc du guide d'une tranche (SPEC v5 §3), ou l'une des deux moitiés d'un bloc hybride. `nature` est celle
+    de ses quêtes : un bloc qui mêle principales et secondaires donne deux `BlocPrepare` de même titre et de même
+    ordre (`moitie` vrai), la principale d'abord. La paire (titre, nature) est la clé qui retrouve la ligne en base."""
 
     titre: str  # le titre exact de Duffus
     numero: int | None  # rang du bloc dans tout le guide (« Bloc 7 »)
-    ordre: int  # position dans la tranche
+    ordre: int  # position dans la tranche, partagée par les deux moitiés
     nature: Nature
     nb_quetes: int
     nb_principales: int
     duffus_url: str | None = URL_GUIDE_DUFFUS
     duffus_ancre: str | None = None
+    moitie: bool = False
 
 
 def blocs_depuis_quetes(quetes: list[QuetePreparee], numeros: Mapping[str, int | None] | None = None,
                         titres: list[str] | None = None) -> list[BlocPrepare]:
     """Un bloc par titre de quête, dans l'ordre du guide (`titres`) ; sans titre donné, dans l'ordre des quêtes.
-    Un bloc sans aucune quête cochable n'existe pas : il n'y aurait rien à cocher."""
+    Un bloc sans aucune quête cochable n'existe pas : il n'y aurait rien à cocher. Un bloc hybride est coupé en deux
+    moitiés (principale, puis secondaire), chacune avec ses seules quêtes : le grimpeur coche l'une sans l'autre."""
     ordre_titres = list(dict.fromkeys([*(titres or []), *(q.bloc for q in quetes)]))
-    blocs = []
+    blocs: list[BlocPrepare] = []
+    ordre = 0
     for titre in ordre_titres:
         les = [q for q in quetes if q.bloc == titre]
         if not les:
             continue
-        principales = sum(1 for q in les if q.nature == "principale")
-        blocs.append(BlocPrepare(titre, (numeros or {}).get(titre), len(blocs) + 1,
-                                 "principale" if principales else "secondaire", len(les), principales))
+        ordre += 1
+        parties = [(n, [q for q in les if q.nature == n]) for n in ("principale", "secondaire")]
+        parties = [(n, qs) for n, qs in parties if qs]
+        for nature, qs in parties:
+            blocs.append(BlocPrepare(titre, (numeros or {}).get(titre), ordre, nature, len(qs),
+                                     len(qs) if nature == "principale" else 0, moitie=len(parties) == 2))
     return blocs
 
 
@@ -143,12 +151,14 @@ class EtagePrepare:
                   f"{self.niveau_max}, cap {self.level_cap})",
                   f"  {len(self.donjons)} donjons, {sum(len(d.cases) for d in self.donjons)} cases, "
                   f"{len(self.quetes)} quêtes ({sum(1 for q in self.quetes if q.nature == 'principale')} principales), "
-                  f"{len(self.blocs)} blocs ({sum(1 for b in self.blocs if b.nature == 'principale')} principaux)",
+                  f"{len({b.titre for b in self.blocs})} blocs, dont {sum(1 for b in self.blocs if b.moitie) // 2} "
+                  f"hybride(s) coupé(s) en deux ({sum(1 for b in self.blocs if b.nature == 'principale')} parties "
+                  f"principales, {sum(1 for b in self.blocs if b.nature == 'secondaire')} secondaires)",
                   f"  fiches : {self.nb_fiches['duffus']} Duffus, {self.nb_fiches['dofusdb']} DofusDB, "
                   f"{len(self.sans_fiche)} sans fiche"
                   + (f" ({', '.join(self.sans_fiche)})" if self.sans_fiche else "")]
-        lignes += [f"  bloc {b.numero or '?'} · {b.titre} : {b.nature}, {b.nb_principales}/{b.nb_quetes} principales"
-                   for b in self.blocs]
+        lignes += [f"  bloc {b.numero or '?'} · {b.titre}{' (moitié)' if b.moitie else ''} : {b.nature}, "
+                   f"{b.nb_quetes} quête(s)" for b in self.blocs]
         lignes += [f"  alerte : {a}" for a in self.alertes]
         return "\n".join(lignes)
 

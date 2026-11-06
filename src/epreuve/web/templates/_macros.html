@@ -183,29 +183,26 @@
 </ul>
 {%- endmacro %}
 
-{% macro liste_blocs(vue, cible, cochable) -%}
-{#- Les blocs du guide Duffus, dans l'ordre du guide : cadre rouge = principal, cadre jaune = secondaire, avec le libellé
-    écrit pour rester lisible sans la couleur. Le grimpeur coche le bloc entier ; le détail quête par quête est sur
-    duffus.fr. -#}
-{%- set coches = vue.coches_de(cible.id if cible else none) -%}
-<ul class="blocs-guide">
-{%- for b in vue.contenu.blocs %}{% set ref = "bloc:" ~ b.id %}{% set cat = "principales" if b.nature == "principale" else "secondaires" %}{% set fait = b.id in coches.blocs %}
-  <li class="bloc-carte c-{{ cat }}" id="bloc-{{ b.id }}" data-cats="{{ cat }}" data-fait="{{ 1 if fait else 0 }}" data-bloc="{{ b.id }}">
+{% macro carte_bloc(vue, b, coches, cochable) -%}
+{#- Un bloc entier, ou une moitié de bloc hybride (même numéro, même titre, ses seules quêtes) : cadre rouge = principal,
+    cadre jaune = secondaire, avec le libellé écrit pour rester lisible sans la couleur. Le grimpeur coche la carte ;
+    le détail quête par quête se fait sur duffus.fr (lien général en tête de la section). -#}
+{%- set ref = "bloc:" ~ b.id %}{% set cat = "principales" if b.nature == "principale" else "secondaires" %}{% set fait = b.id in coches.blocs %}
+  <li class="bloc-carte c-{{ cat }}{% if b.moitie %} moitie{% endif %}" id="bloc-{{ b.id }}" data-cats="{{ cat }}" data-fait="{{ 1 if fait else 0 }}" data-bloc="{{ b.id }}">
     <div class="bloc-tete">
       <div class="bloc-titre"><h3>{{ b.titre_complet }}</h3>
-        <p class="bloc-meta">{{ badge_nature(b) }}<span class="muted">{{ texte_quetes_bloc(b) }}</span></p></div>
+        <p class="bloc-meta">{{ badge_nature(b) }}{% if b.moitie %}<span class="muted">partie {{ b.nature }} du bloc</span>{% endif %}</p></div>
     </div>
+    {#- Les noms des quêtes de cette partie, dans l'ordre du guide : plié par défaut, le compte suffit d'un coup d'œil. #}
+    <details class="quetes-bloc">
+      <summary>{{ texte_quetes_bloc(b) }}</summary>
+      <ol>{% for q in vue.contenu.quetes_du_bloc(b) %}<li>{{ q.nom }}</li>{% endfor %}</ol>
+    </details>
     {%- if b.nature == "secondaire" %}{% set utiles = vue.contenu.quetes_utiles_du_bloc(b) %}{% if utiles %}
     <p class="avert-utiles" role="note"><b>⚠ Contient {{ utiles|length }} quête{{ "s" if utiles|length > 1 }} utile{{ "s" if utiles|length > 1 }} pour un Dofus :</b> {{ utiles|join(", ") }}</p>
     {%- endif %}{% endif %}
     <div class="bloc-actions">
-      <label class="tick c-{{ cat }} bloc-termine"><input type="checkbox" data-ref="{{ ref }}"{% if fait %} checked{% endif %}{% if not cochable %} disabled{% endif %}><span><b>Bloc terminé</b></span></label>
-      {%- if b.lien_duffus %}
-      {#- Duffus mémorise la tranche et le chapitre dans le navigateur : aucun lien ne peut ouvrir un bloc précis,
-          on indique donc où cliquer (nos numéros de bloc sont ceux des chapitres Duffus). #}
-      <span class="duffus-ou"><a class="lien-duffus" href="{{ b.lien_duffus }}" target="_blank" rel="noopener">Ouvrir sur Duffus<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span></a>
-        <small class="muted">puis tranche {{ vue.etage.niveau_min }}-{{ vue.etage.niveau_max }}{% if b.numero %} · chapitre {{ b.numero }}{% endif %}</small></span>
-      {%- endif %}
+      <label class="tick c-{{ cat }} bloc-termine"><input type="checkbox" data-ref="{{ ref }}"{% if b.moitie %} aria-label="{{ b.libelle_coche }} terminée"{% endif %}{% if fait %} checked{% endif %}{% if not cochable %} disabled{% endif %}><span><b>{% if b.moitie %}Partie {{ b.nature }} terminée{% else %}Bloc terminé{% endif %}</b></span></label>
       <a class="compteur compteur-bloc" href="/grimpeurs?quoi={{ ref }}" data-compteur="{{ ref }}" data-actifs="{{ vue.jauge.actifs }}">{{ vue.compteurs.get(ref, 0) }} sur {{ vue.jauge.actifs }} l'ont fait</a>
     </div>
     <details class="qui-bloc" data-qui-bloc="{{ b.id }}">
@@ -218,6 +215,20 @@
       </div>
     </details>
   </li>
+{%- endmacro %}
+
+{% macro liste_blocs(vue, cible, cochable) -%}
+{#- Les blocs du guide Duffus, dans l'ordre du guide. Un bloc hybride (des quêtes principales ET secondaires) est coupé
+    en deux moitiés côte à côte, la rouge à gauche, la jaune à droite, empilées sur un écran étroit ; chacune se coche
+    à part. La paire est un <li data-paire> sans catégorie : le filtre (app.js) la cache quand ses deux moitiés le sont. -#}
+{%- set coches = vue.coches_de(cible.id if cible else none) -%}
+<ul class="blocs-guide">
+{%- for groupe in vue.contenu.groupes_blocs() %}
+  {%- if groupe|length > 1 %}
+  <li class="bloc-paire" data-paire><ul class="bloc-moities" aria-label="{{ groupe[0].titre_complet }}, coupé en deux parties">
+    {%- for b in groupe %}{{ carte_bloc(vue, b, coches, cochable) }}{% endfor %}
+  </ul></li>
+  {%- else %}{{ carte_bloc(vue, groupe[0], coches, cochable) }}{% endif %}
 {%- else %}
   <li class="muted">Les blocs de cet étage ne sont pas encore importés.</li>
 {%- endfor %}

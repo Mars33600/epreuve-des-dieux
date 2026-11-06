@@ -34,8 +34,8 @@ Dans l'ordre :
    - **cadre rouge = bloc principal**, **cadre jaune = bloc secondaire**, comme sur le dessin de Shadoaze. La couleur s'accompagne d'un libellé « Principal » ou « Secondaire », pour rester lisible sans la couleur ;
    - pour chaque bloc :
      - une case **« Bloc terminé »** ;
-     - le nombre de quêtes du bloc ;
-     - un lien **« Ouvrir sur Duffus »**, qui mène à la page du guide de cette tranche, et au bloc si Duffus le permet. Il s'ouvre dans un nouvel onglet ;
+     - le nombre de quêtes du bloc, accordé (« 7 principales »), dans un menu plié qui liste leurs noms dans l'ordre du guide ;
+     - plus de lien Duffus par bloc (retiré le 06/11, Duffus ne sait pas ouvrir un bloc précis) : un seul lien vers le guide Duffus, en tête de la section. La revue d'étage de l'admin garde le lien par bloc ;
      - le compteur « x grimpeurs l'ont fait » et le volet **« Fait par / Pas encore fait par »**.
 4. **Filtres** : Donjons, Full succès, Blocs principaux, Blocs secondaires, « Seulement ce qui me reste ». Leur état est gardé dans l'URL.
 5. **Grimpeurs actifs** : le dépliant reste inchangé.
@@ -43,8 +43,8 @@ Dans l'ordre :
 ## 4. Le barème (« le système de point reste »)
 
 - **Donjons** et **Full succès** : inchangés.
-- **Quêtes principales** : 1 point quand **tous les blocs principaux** de l'étage sont cochés.
-- **Quêtes secondaires** : 1 point quand **tous les blocs secondaires** de l'étage sont cochés.
+- **Quêtes principales** : 1 point quand **tous les blocs principaux** de l'étage sont cochés (moitiés rouges des blocs hybrides comprises, §5 bis).
+- **Quêtes secondaires** : 1 point quand **tous les blocs secondaires** de l'étage sont cochés (moitiés jaunes comprises).
 - Le palier reste à 2 × grimpeurs actifs. Une catégorie vide est traitée comme en v4.
 - En base : une nouvelle table `coche_bloc` (grimpeur, bloc, date). Les coches de quêtes ne servent plus au barème. La production n'en contient pas encore, donc il n'y a rien à migrer.
 
@@ -54,6 +54,13 @@ Dans l'ordre :
 - **Chaque bloc peut être corrigé par un admin** dans la revue d'étage. La correction est journalisée et prime sur la règle.
 - La revue affiche, pour chaque bloc, le nombre de quêtes principales sur le total. L'admin voit ainsi d'un coup d'œil un bloc classé principal pour une seule quête utile, qui était la crainte de Shadoaze le 26/10.
 - À faire valider par Shadoaze, étage par étage, avant chaque ouverture. Son exemple : « dans cette tranche, seul le bloc 7, début des quêtes d'alignement, est principal ».
+
+### 5 bis. Blocs hybrides (décision de Marceau et Shadoaze, 06/11)
+
+- Un bloc qui contient des quêtes principales **et** des quêtes secondaires est **coupé en deux moitiés côte à côte** (empilées sur un petit écran), même numéro et même titre : à gauche la **moitié rouge** (ses quêtes principales), à droite la **moitié jaune** (ses secondaires). Chacune se coche à part (case « Partie principale terminée », nommée « Bloc N, partie principale » pour un lecteur d'écran). Un bloc entièrement principal ou secondaire reste d'un seul morceau.
+- Barème : « Quêtes principales » demande toutes les parties rouges (blocs entiers et moitiés), « Quêtes secondaires » toutes les parties jaunes. Une catégorie compte dès qu'elle a une partie : un étage dont un bloc est hybride a une catégorie secondaire, donc K et le palier montent (étages 0 et 1 : K passe de 3 à 4, le palier de ⌈1,5 × actifs⌉ à 2 × actifs).
+- En base, une moitié est une ligne `bloc` de plus, de clé (étage, titre, `partie`) : la reconstruction retrouve les mêmes lignes, sans doublon et avec leurs coches ; chaque quête est rattachée à la moitié de sa nature. Coches, « qui a fait quoi » (une option par partie, « Bloc N · titre (principale) »), tableau de bord et recherche fonctionnent sans cas spécial. Migration `h1_blocs_hybrides`.
+- Corrections d'admin : la nature d'une moitié suit ses quêtes ; l'admin **change la nature d'une quête**, qui passe aussitôt dans l'autre moitié (créée au besoin, masquée si elle se vide), comme le ferait la reconstruction. Une correction posée sur un **bloc entier** reste valable tant qu'il est entier ; si le bloc devient hybride, elle ne s'applique plus (journalisé à la reconstruction).
 
 ## 6. Le suivi entre joueurs
 

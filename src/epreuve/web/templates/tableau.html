@@ -48,7 +48,7 @@
 
 {#- Retour de recette v4 : l'étage en cours reste au premier niveau ; les étages précédents sont pliés dans
     « Étages précédents », un <details> par étage dont le résumé tient sur une ligne. Rien n'est ouvert en dur. -#}
-{% macro corps_progression(b) %}{% set vue = b.vue %}{% set cats = vue.categories(g.id) %}
+{% macro corps_progression(b, niveau=2) %}{% set vue = b.vue %}{% set cats = vue.categories(g.id) %}
   <p class="muted">Niveaux {{ vue.etage.niveau_min }} à {{ vue.etage.niveau_max }}{% if vue.etage.statut == "termine" %} · étage terminé{% else %} · jauge {{ vue.jauge.score }}/{{ vue.jauge.palier }}{% endif %}</p>
   <div class="bigpips">{% for info in CATS %}{% set e = cats[info.cle] %}<span class="pipcell">{{ pip(info, e, True) }}<span>{{ info.court }}</span><b>{{ e.faits }}/{{ e.total }}</b></span>{% endfor %}</div>
   <dl class="resume-etage">
@@ -60,8 +60,8 @@
   {#- Chez un autre : ses blocs du guide, faits ou non (cases désactivées), cochables pour l'admin. Plié : la liste
       est longue. Sur son propre tableau, on coche ses blocs sur la page de l'étage. #}
   {% if not soi and vue.contenu.blocs %}
-  <details class="pli">
-    <summary><span class="pli-titre">Ses blocs du guide</span><span class="pli-cpt num">{{ b.blocs_faits }}/{{ b.blocs_total }}</span></summary>
+  <details class="pli pli-{{ niveau }}">
+    <summary><span class="pli-titre">Ses blocs du guide <span class="pli-cpt num">({{ b.blocs_faits }}/{{ b.blocs_total }})</span></span></summary>
     <div class="pli-corps">{{ liste_blocs(vue, g, b.cochable) }}</div>
   </details>
   {% endif %}
@@ -106,28 +106,34 @@
   </div>
 {{ corps_progression(b) }}
 </section>
-{% if a_faire %}
-{#- Pas plié : au plus NB_A_FAIRE blocs de l'étage en cours, la liste ne grossit pas avec les étages. #}
+{% if a_faire %}{% set numero, restants = a_faire %}
+{#- Pas plié : au plus NB_A_FAIRE blocs de l'étage en cours, la liste ne grossit pas avec les étages. Une moitié de bloc
+    hybride a sa ligne, avec sa partie. #}
 <section class="card" aria-labelledby="tbSuite">
-  <h3 id="tbSuite">Blocs à faire ensuite</h3>
+  <h3 id="tbSuite">Il te reste à cocher (étage {{ numero }})</h3>
+  <p class="muted aide-suite">Les blocs de l'étage en cours que tu n'as pas encore cochés : les rouges d'abord, dans l'ordre du guide.</p>
+  {%- if restants %}
   <ul class="suite">
-  {%- for numero, b in a_faire %}
-    <li><a href="/etages/{{ numero }}#bloc-{{ b.id }}"><b>{{ b.titre_complet }}</b></a><small class="muted">{{ "principal" if b.nature == "principale" else "secondaire" }} · {{ texte_quetes_bloc(b) }}</small></li>
+  {%- for b in restants %}
+    <li><a href="/etages/{{ numero }}#bloc-{{ b.id }}"><b>{{ b.titre_complet }}{% if b.moitie %} · partie {{ b.nature }}{% endif %}</b></a> <small class="muted">({{ texte_quetes_bloc(b) }})</small></li>
   {%- endfor %}
   </ul>
+  {%- else %}
+  <p>Tout est coché à cet étage.</p>
+  {%- endif %}
 </section>
 {% endif %}
 {% if precedents %}
-<details class="card pli" id="precedents">
-  <summary><span class="pli-titre">Étages précédents ({{ precedents|length }})</span><span class="pli-cpt">terminés, du plus récent au plus ancien</span></summary>
+<details class="card pli pli-1" id="precedents">
+  <summary><span class="pli-titre">Étages précédents <span class="pli-cpt num">({{ precedents|length }})</span></span><span class="pli-sous">terminés, du plus récent au plus ancien</span></summary>
   <div class="pli-corps">
   {%- for b in precedents %}{% set vue = b.vue %}
-    <details class="pli" id="tb{{ vue.etage.numero }}">
-      <summary><span class="pli-titre">{{ titre_etage(vue.etage) }}</span>
-        <span class="pli-cpt num">{{ b.points }}/{{ vue.points_max }} points · {{ b.faits }}/{{ b.total }}</span></summary>
+    <details class="pli pli-2" id="tb{{ vue.etage.numero }}">
+      <summary><span class="pli-titre">{{ titre_etage(vue.etage) }}
+        <span class="pli-cpt num">({{ b.points }}/{{ vue.points_max }} points · {{ b.faits }}/{{ b.total }})</span></span></summary>
       <div class="pli-corps">
         <p><a class="linkbtn" href="/etages/{{ vue.etage.numero }}">Ouvrir la page de l'étage</a></p>
-{{ corps_progression(b) }}
+{{ corps_progression(b, 3) }}
       </div>
     </details>
   {%- endfor %}
@@ -148,12 +154,12 @@
 {{ donjons_succes(b) }}
 </section>
 {% if precedents %}
-<details class="card pli" id="precedents">
-  <summary><span class="pli-titre">Étages précédents ({{ precedents|length }})</span><span class="pli-cpt">terminés, du plus récent au plus ancien</span></summary>
+<details class="card pli pli-1" id="precedents">
+  <summary><span class="pli-titre">Étages précédents <span class="pli-cpt num">({{ precedents|length }})</span></span><span class="pli-sous">terminés, du plus récent au plus ancien</span></summary>
   <div class="pli-corps">
   {%- for b in precedents %}{% set vue = b.vue %}
-    <details class="pli" id="etage{{ vue.etage.numero }}">
-      <summary><span class="pli-titre">{{ titre_etage(vue.etage) }}</span><span class="pli-cpt num">{{ full_succes(b) }}</span></summary>
+    <details class="pli pli-2" id="etage{{ vue.etage.numero }}">
+      <summary><span class="pli-titre">{{ titre_etage(vue.etage) }} <span class="pli-cpt num">({{ full_succes(b) }})</span></span></summary>
       <div class="pli-corps">
 {{ donjons_succes(b) }}
       </div>

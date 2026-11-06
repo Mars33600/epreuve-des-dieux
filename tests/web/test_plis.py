@@ -60,14 +60,14 @@ def test_progression_etage_en_cours_visible_et_precedents_plies():
     html = deux_etages().connecter(ID_BRINDILLE).get("/tableau-de-bord").text
     assert balise(html, "tb1").startswith("<h3")  # l'étage en cours : sa carte, comme avant
     bloc = balise(html, "precedents")
-    assert bloc.startswith('<details class="card pli"') and " open" not in bloc
-    assert "Étages précédents (1)" in html
+    assert bloc.startswith('<details class="card pli pli-1"') and " open" not in bloc
+    assert 'Étages précédents <span class="pli-cpt num">(1)</span>' in html
     # L'étage 0 est dans le bloc replié, lui-même plié, avec l'essentiel sur une ligne.
     assert html.index('id="precedents"') < html.index('id="tb0"')
-    assert balise(html, "tb0") == '<details class="pli" id="tb0">'
+    assert balise(html, "tb0") == '<details class="pli pli-2" id="tb0">'
     resume = apres(html, "tb0").split("</summary>")[0]
     assert "Étage 0 · Le Seuil" in resume and re.search(r"\d/4 points · \d+/\d+", resume)
-    assert "Blocs à faire ensuite" in html  # au plus 6 blocs de l'étage en cours : pas plié
+    assert "Il te reste à cocher (étage" in html  # au plus 6 blocs de l'étage en cours : pas plié
 
 
 def test_progression_sans_etage_precedent_pas_de_bloc():
@@ -80,7 +80,7 @@ def test_succes_donjons_plies_et_etages_precedents_replies():
     assert html.count('<details class="dj-ligne">') == 4 and "dj-ligne\" open" not in html
     assert balise(html, "etage1").startswith("<section")  # l'étage en cours : visible
     assert " open" not in balise(html, "precedents")
-    assert balise(html, "etage0") == '<details class="pli" id="etage0">'
+    assert balise(html, "etage0") == '<details class="pli pli-2" id="etage0">'
     assert "donjons en full succès" in apres(html, "etage0").split("</summary>")[0]
     assert html.index('id="precedents"') < html.index('id="etage0"')
 
@@ -122,7 +122,8 @@ def test_fragment_d_un_etage_precedent_et_de_sa_reponse():
         assert ident in r.text and " open" not in balise(r.text, ident)
     r = c.get("/grimpeurs?etage=0&quoi=bloc:1", headers=FRAGMENT)
     assert r.status_code == 200 and "<html" not in r.text
-    assert "Qui ne l'a pas fait <small>5 sur 10 actifs · le bloc « Bloc 1 · Incarnam »" in r.text
+    assert ("Qui ne l'a pas fait <small>5 sur 10 actifs · la partie principale du bloc « Bloc 1 · Incarnam »"
+            in r.text)
     assert "Qui l'a fait (peut accompagner)" in r.text and 'class="person miss"' in r.text
     assert re.search(r'data-manque="[\d ]+" data-fait="[\d ]+"', r.text)
     # Le même nombre d'actifs que la page d'étage (la même vue)
@@ -194,8 +195,8 @@ def test_tableau_d_un_autre_etages_precedents_et_blocs_plies():
     # L'ancienne fiche est devenue le tableau de bord d'un autre grimpeur : même règle de pliage que le sien.
     html = deux_etages().connecter(ID_BRINDILLE).get("/grimpeurs/3").text
     assert balise(html, "tb1").startswith("<h3")
-    assert " open" not in balise(html, "precedents") and balise(html, "tb0") == '<details class="pli" id="tb0">'
-    assert "Étages précédents (1)" in html
+    assert " open" not in balise(html, "precedents") and balise(html, "tb0") == '<details class="pli pli-2" id="tb0">'
+    assert 'Étages précédents <span class="pli-cpt num">(1)</span>' in html
     # Ses blocs du guide, une longue liste : pliés partout, rien n'est ouvert en dur.
     assert html.count("Ses blocs du guide") == 2 and " open" not in html.split('<main', 1)[1]
 
@@ -204,7 +205,26 @@ def test_admin_quetes_pliees_et_retour_sur_l_ancre():
     m = monde()
     c = m.connecter(ID_MARCEAU)
     html = c.get("/admin/etages/0").text
-    assert balise(html, "quetes") == '<details class="card pli" id="quetes">'
+    assert balise(html, "quetes") == '<details class="card pli pli-1" id="quetes">'
     t = m.csrf(c)
     r = c.post("/admin/quetes/101", data={"csrf": t, "etage": "0", "nom": "L'Appel"}, headers={"Origin": SITE})
     assert r.status_code == 303 and r.headers["location"].endswith("#quetes")
+
+
+def test_trois_niveaux_de_depliants_et_comptes_entre_parentheses():
+    """Retour de Marceau (06/11) : chapitre › sous-chapitre › élément, chacun sa classe (et son dessin) ; le compte
+    suit le libellé entre parenthèses (« Donjons vaincus (3) »), au lieu d'être rejeté en bout de ligne."""
+    html = deux_etages().connecter(ID_BRINDILLE).get("/grimpeurs").text
+    assert balise(html, "qui-e1").startswith('<details class="pli pli-1"')
+    assert re.search(r'Étage 1 · [^<]+ <span class="pli-cpt">\(en cours\)</span>', html)
+    for ident in ("qui-1-points", "qui-1-vaincus", "qui-1-succes", "qui-1-principaux"):
+        assert balise(html, ident).startswith('<details class="pli pli-2"'), ident
+    assert balise(html, "qui-1-dj-4").startswith('<details class="pli pli-3"')  # un donjon dans « Succès de donjon »
+    assert balise(html, "qui-1-categorie-donjons").startswith('<details class="pli pli-3"')
+    assert 'Les points (catégories) <span class="pli-cpt num">(4)</span></span></summary>' in html
+    tableau = deux_etages().connecter(ID_BRINDILLE).get("/tableau-de-bord").text
+    assert 'Étages précédents <span class="pli-cpt num">(1)</span>' in tableau
+    assert re.search(r'Étage 0 · Le Seuil\s+<span class="pli-cpt num">\(\d/4 points · \d+/\d+\)</span>', tableau)
+    css = (Path(__file__).parents[2] / "src/epreuve/web/static/style.css").read_text(encoding="utf-8")
+    for niveau in ("pli-1", "pli-2", "pli-3"):
+        assert f"details.{niveau} > summary > .pli-titre{{" in css, niveau

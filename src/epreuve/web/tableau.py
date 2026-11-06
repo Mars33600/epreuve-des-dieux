@@ -1,6 +1,7 @@
 """Le tableau de bord du grimpeur (E4) : sa progression personnelle, comme le tableau de bord de duffus.fr.
 
-    GET /tableau-de-bord                    onglet « Progression » : vue d'ensemble, un bloc par étage, à faire ensuite
+    GET /tableau-de-bord                    onglet « Progression » : vue d'ensemble, un bloc par étage, ce qui reste
+                                            à cocher
     GET /tableau-de-bord?onglet=succes      onglet « Succès de donjon » : les 5 cases de chaque donjon, tous les
                                             étages ouverts ou terminés (?reste=1 : seulement ce qui reste)
     GET /grimpeurs/{id}                     le tableau de bord d'un autre grimpeur (mêmes onglets) : lecture seule,
@@ -8,7 +9,7 @@
     GET /grimpeurs/moi                      ancienne adresse de « Ma fiche » → /tableau-de-bord
 
 Retour de recette v4 : « Ma fiche » et le tableau de bord faisaient doublon. Il ne reste qu'une présentation,
-qui s'adapte à qui la regarde : soi (cochable, formulaire de profil, blocs à faire ensuite), un autre grimpeur
+qui s'adapte à qui la regarde : soi (cochable, formulaire de profil, blocs qui restent à cocher), un autre grimpeur
 (cases désactivées, ses blocs du guide en lecture), un admin (le mode édition de l'ancienne fiche : `data-cible`
 sur la page, `app.js` envoie `grimpeur_id` et le motif, l'API contrôle et journalise).
 
@@ -79,16 +80,17 @@ async def blocs_du_grimpeur(request: Request, g: Grimpeur, cochable: Callable[[E
     return blocs
 
 
-def a_faire(blocs: list[BlocEtage], grimpeur_id: int) -> list[tuple[int, object]]:
-    """Les premiers blocs pas encore terminés de l'étage ouvert (sinon du plus récent), les principaux d'abord,
-    puis dans l'ordre du guide."""
+def a_faire(blocs: list[BlocEtage], grimpeur_id: int) -> tuple[int, list] | None:
+    """La carte « Il te reste à cocher (étage N) » : (N, les premiers blocs ou moitiés de bloc pas encore cochés de
+    l'étage ouvert, sinon du plus récent), les rouges d'abord, puis dans l'ordre du guide. Une liste vide dit « tout
+    est coché » ; None quand il n'y a rien à montrer (aucun étage, ou un étage sans bloc importé)."""
     ouvert = next((b for b in blocs if b.vue.etage.statut == "ouvert"), blocs[0] if blocs else None)
-    if ouvert is None:
-        return []
+    if ouvert is None or not ouvert.vue.contenu.blocs:
+        return None
     coches = ouvert.vue.coches_de(grimpeur_id)
     restants = [b for b in sorted(ouvert.vue.contenu.blocs, key=lambda b: (b.nature != "principale", b.ordre))
                 if b.id not in coches.blocs]
-    return [(ouvert.vue.etage.numero, b) for b in restants[:NB_A_FAIRE]]
+    return ouvert.vue.etage.numero, restants[:NB_A_FAIRE]
 
 
 def onglet_valide(onglet: str) -> str:
@@ -97,7 +99,7 @@ def onglet_valide(onglet: str) -> str:
 
 async def rendre_tableau(request: Request, g: Grimpeur, onglet: str, reste: int, cochable: Callable[[Etage], bool],
                          *, soi: bool, edition: bool = False, plus: dict | None = None):
-    """Le gabarit commun : `soi` ajoute le profil et les blocs à faire ensuite ; `edition` (admin) pose
+    """Le gabarit commun : `soi` ajoute le profil et les blocs qui restent à cocher ; `edition` (admin) pose
     `data-cible` et le champ motif. `base` est l'adresse des onglets, pour qu'ils restent sur la même vue."""
     blocs = await blocs_du_grimpeur(request, g, cochable)
     faits, total = sum(b.faits for b in blocs), sum(b.total for b in blocs)
@@ -107,7 +109,7 @@ async def rendre_tableau(request: Request, g: Grimpeur, onglet: str, reste: int,
         "precedents": precedents, "faits": faits, "total": total, "soi": soi, "edition": edition,
         "base": "/tableau-de-bord" if soi else f"/grimpeurs/{g.id}",
         "points": sum(b.points for b in blocs), "points_max": sum(b.vue.points_max for b in blocs),
-        "a_faire": a_faire(blocs, g.id) if soi else [], **(plus or {})})
+        "a_faire": a_faire(blocs, g.id) if soi else None, **(plus or {})})
 
 
 @routeur.get("/tableau-de-bord")

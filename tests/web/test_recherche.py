@@ -32,10 +32,13 @@ async def monde(site, moteur, depot):  # noqa: F811
             await c.execute(insert(t.quete).values(
                 etage_id=ids[etage], nom=nom, bloc="b", ordre=1, **QUETE, dofus=[],
                 masquee=False))
-        for etage, titre, masque in ((0, "Début des quêtes d'alignement", False), (1, "Alignement scellé", False),
-                                     (0, "Alignement masqué", True)):
+        # « Début des quêtes d'alignement » est hybride : deux moitiés, même titre.
+        for etage, titre, masque, partie in ((0, "Début des quêtes d'alignement", False, "principale"),
+                                             (0, "Début des quêtes d'alignement", False, "secondaire"),
+                                             (1, "Alignement scellé", False, "principale"),
+                                             (0, "Alignement masqué", True, "principale")):
             await c.execute(insert(t.bloc).values(
-                etage_id=ids[etage], titre=titre, numero=7, ordre=1, nature="principale",
+                etage_id=ids[etage], titre=titre, numero=7, ordre=1, nature=partie, partie=partie,
                 nature_origine="construction", masque=masque))
     await depot.creer_session(hashlib.sha256(jeton(ADMIN).encode()).digest(), ADMIN, "admin", True, "oauth", "csrf",
                               PENDANT, timedelta(days=7))
@@ -86,12 +89,17 @@ async def test_etages_trouves_par_leur_nom(monde, moteur):
 
 async def test_blocs_trouves_scelles_et_masques_caches(monde):
     r = await chercher(monde, "alignement")
-    assert [x["nom"] for g in r.json()["groupes"] if g["type"] == "blocs" for x in g["resultats"]] == [
-        "Début des quêtes d'alignement"]
-    lien = next(x for g in r.json()["groupes"] if g["type"] == "blocs" for x in g["resultats"])["lien"]
-    assert lien.startswith("/etages/0#bloc-")
-    assert set(noms(await chercher(monde, "alignement", ADMIN))["blocs"]) == {
-        "Début des quêtes d'alignement", "Alignement scellé", "Alignement masqué"}
+    blocs = [x for g in r.json()["groupes"] if g["type"] == "blocs" for x in g["resultats"]]
+    assert [x["nom"] for x in blocs] == ["Début des quêtes d'alignement"] * 2
+    assert all(x["lien"].startswith("/etages/0#bloc-") for x in blocs)
+    # Les deux moitiés d'un bloc hybride se distinguent par leur partie ; un bloc entier n'en dit rien.
+    assert sorted(x["detail"] for x in blocs) == ["étage 0 · bloc 7 · partie principale",
+                                                  "étage 0 · bloc 7 · partie secondaire"]
+    admin = [x for g in (await chercher(monde, "alignement", ADMIN)).json()["groupes"] if g["type"] == "blocs"
+             for x in g["resultats"]]
+    assert {x["nom"] for x in admin} == {"Début des quêtes d'alignement", "Alignement scellé", "Alignement masqué"}
+    assert {x["detail"] for x in admin if x["nom"] != "Début des quêtes d'alignement"} == {
+        "étage 1 · bloc 7", "étage 0 · bloc 7"}
 
 
 async def test_recherche_vide(monde):

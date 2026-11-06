@@ -246,7 +246,8 @@ def resoudre_quoi(vue: VueEtage, type_: str, ident: str) -> tuple[str, list[Grim
         b = next((x for x in c.blocs if x.id == n), None)
         if b is None:
             return None
-        libelle = f"le bloc « {b.titre_complet} »"
+        libelle = (f"la partie {b.nature} du bloc « {b.titre_complet} »" if b.moitie
+                   else f"le bloc « {b.titre_complet} »")
     else:
         return None
     ref = ElementRef(type_, n)  # type: ignore[arg-type]

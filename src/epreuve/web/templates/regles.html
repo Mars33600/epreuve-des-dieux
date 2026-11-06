@@ -25,6 +25,7 @@
       {%- endfor %}
     </ul>
     <p>Une catégorie rapporte <b>1 point</b> quand elle est <b>complète</b> sur l'étage : tous ses éléments cochés.</p>
+    <p>Un bloc du guide qui mêle quêtes principales et secondaires est <b>coupé en deux moitiés</b> qui se cochent à part : la rouge compte pour les Quêtes principales, la jaune pour les Quêtes secondaires.</p>
     <p>Chaque grimpeur peut donc rapporter <b>4 points au maximum</b> par étage.</p>
   </section>
 
@@ -36,7 +37,7 @@
     <p>Si une catégorie est vide sur un étage (aucun élément), son point est offert à chacun.</p>
     {% else %}
     <p>Si une catégorie est vide sur un étage (aucun élément), elle ne compte pas : le palier est réduit
-      à proportion des catégories restantes, arrondi au-dessus.</p>
+      à proportion des catégories restantes, arrondi au-dessus. Une seule moitié jaune suffit à la faire compter.</p>
     <p class="exemple"><b>Exemple</b><span><span class="num">12</span> grimpeurs actifs et une catégorie vide (3 sur 4) → palier de <span class="num">{{ palier_12_trois }}</span> points.</span></p>
     {% endif %}
     <p>Un admin peut aussi fixer le palier à la main, en cas de besoin : la jauge le dit alors.</p>

@@ -226,24 +226,32 @@ def test_etage_donjons_puis_blocs_du_guide_avec_cadres_et_libelles():
                                       "Bloc 3 · Petits services d&#39;Astrub")]
     assert ordre == sorted(ordre)
     assert liste.count("<details class=\"dj-ligne\"") == 3
-    # Plus de liste de quêtes ni de fiche de quête dans la page d'étage.
+    # Plus de fiche de quête dans la page d'étage : les noms des quêtes seulement, dans un menu plié.
     assert "data-qopen" not in html and 'id="qd"' not in html and "/quetes/" not in liste
-    assert "Le Bouftou égaré" not in liste and "Jusqu'où" not in liste
-    # Cadre rouge (principal) ou jaune (secondaire) ET libellé écrit, lisible sans la couleur.
-    cartes = re.findall(r'<li class="bloc-carte c-(\w+)"', liste)
-    assert cartes == ["principales", "principales", "secondaires"]
+    assert "Jusqu'où" not in liste
+    # Cadre rouge (principal) ou jaune (secondaire) ET libellé écrit, lisible sans la couleur. « Incarnam » est
+    # hybride : deux moitiés côte à côte dans une paire, la rouge puis la jaune, même numéro et même titre.
+    cartes = re.findall(r'<li class="bloc-carte c-(\w+)( moitie)?"', liste)
+    assert cartes == [("principales", " moitie"), ("secondaires", " moitie"), ("principales", ""), ("secondaires", "")]
+    assert liste.count('<li class="bloc-paire" data-paire>') == 1 and liste.count("Bloc 1 · Incarnam</h3>") == 2
+    paire = liste.split('<li class="bloc-paire" data-paire>')[1].split('id="bloc-2"')[0]
+    assert paire.index('data-ref="bloc:1"') < paire.index('data-ref="bloc:5"')
     assert liste.count('<span class="badge princ"><svg') == 2 and liste.count(">Principal</span>") == 2
-    assert liste.count('<span class="badge second"><svg') == 1 and liste.count(">Secondaire</span>") == 1
-    # Nombre de quêtes, dont les principales.
-    assert "3 quêtes, dont 1 principale" in liste and "3 quêtes, dont 3 principales" in liste
-    assert "3 quêtes, dont aucune principale" in liste
-    # Case « Bloc terminé », lien Duffus sûr, compteur et volet « fait par ».
-    assert liste.count("<b>Bloc terminé</b>") == 3 and 'data-ref="bloc:1"' in liste
-    assert liste.count('href="https://duffus.fr/guide-complet" target="_blank" rel="noopener">Ouvrir sur Duffus') == 3
-    # Duffus ne sait pas ouvrir un bloc par lien : chaque bouton dit où cliquer (tranche, chapitre = numéro du bloc).
-    assert liste.count("puis tranche ") == 3 and " · chapitre " in liste
+    assert liste.count('<span class="badge second"><svg') == 2 and liste.count(">Secondaire</span>") == 2
+    # Le vrai compte de chaque partie, accordé, dans un menu plié qui liste les quêtes dans l'ordre du guide.
+    menus = re.findall(r'<details class="quetes-bloc">\s*<summary>([^<]+)</summary>\s*<ol>(.*?)</ol>', liste)
+    assert [m[0] for m in menus] == ["1 principale", "2 secondaires", "3 principales", "3 secondaires"]
+    assert menus[1][1] == "<li>Le Bouftou égaré</li><li>Lettres pour Incarnam</li>"
+    assert '<details class="quetes-bloc" open' not in liste
+    # La case de chaque moitié se nomme pour un lecteur d'écran ; un bloc entier garde « Bloc terminé ».
+    assert 'aria-label="Bloc 1, partie principale terminée"' in liste
+    assert 'aria-label="Bloc 1, partie secondaire terminée"' in liste
+    assert liste.count("<b>Bloc terminé</b>") == 2 and "<b>Partie principale terminée</b>" in liste
+    # Plus de bouton Duffus par bloc (ni d'indication de tranche) : seul le lien général de la section reste.
+    assert "Ouvrir sur Duffus" not in liste and "puis tranche " not in liste and "chapitre" not in liste
+    assert liste.count('href="https://duffus.fr/guide-complet"') == 1
     assert "5 sur 10 l'ont fait" in liste
-    assert liste.count("Fait par / Pas encore fait par") == 3 and "Pas encore fait par <small" in liste
+    assert liste.count("Fait par / Pas encore fait par") == 4 and "Pas encore fait par <small" in liste
 
 
 def test_donjon_cinq_sous_cases_classique_en_premier():
@@ -263,7 +271,7 @@ def test_filtre_cumulatif_present_avec_les_4_categories_et_le_reste():
     assert "Seulement ce qui me reste" in filtre
     # Chaque ligne porte ses catégories : le filtre (app.js) n'a qu'à les comparer.
     assert html.count('data-cats="donjons full_succes"') == 3
-    assert html.count('data-cats="principales"') == 2 and html.count('data-cats="secondaires"') == 1
+    assert html.count('data-cats="principales"') == 2 and html.count('data-cats="secondaires"') == 2
     assert "Blocs principaux" in filtre and "Blocs secondaires" in filtre
 
 
@@ -290,7 +298,8 @@ def test_formule_du_palier_suit_les_regles():
     html = m.connecter(ID_BRINDILLE).get("/etages/0").text
     assert "Palier = 5/2 × 10 grimpeurs actifs" in html and "sur un palier de 25" in html
     m = monde()
-    m.depot._blocs[3] = replace(m.depot._blocs[3], masque=True)  # plus aucun bloc secondaire
+    for b in (3, 5):  # plus aucune partie secondaire (bloc 3 et moitié jaune d'Incarnam)
+        m.depot._blocs[b] = replace(m.depot._blocs[b], masque=True)
     html = m.connecter(ID_BRINDILLE).get("/etages/0").text
     assert "× 3 catégories sur 4, arrondi au-dessus" in html and "sur un palier de 15" in html
 
@@ -318,7 +327,7 @@ def test_ma_progression():
     prog = html.split('id="maProgression"')[1].split("</section>")[0]
     assert '<span data-moi="points">2</span>' in prog
     assert re.findall(r'data-moi-cat="(\w+)">([^<]+)<', prog) == [
-        ("donjons", "3/3 ✓"), ("full_succes", "13/15"), ("principales", "2/2 ✓"), ("secondaires", "0/1")]
+        ("donjons", "3/3 ✓"), ("full_succes", "13/15"), ("principales", "2/2 ✓"), ("secondaires", "0/2")]
     assert 'aria-label="Donjons : point obtenu"' in prog and 'aria-label="Full succès : 13 sur 15"' in prog
 
 
@@ -450,8 +459,12 @@ def test_filtre_par_element_sans_javascript():
     c = monde().connecter(ID_BRINDILLE)
     html = c.get("/grimpeurs?quoi=bloc:1").text  # sans ?etage= : l'étage ouvert, comme les anciens liens
     rep = html.split('id="qui-0-bloc-1"')[1].split("</details>")[0]
-    assert "Qui ne l'a pas fait <small>5 sur 10 actifs · le bloc « Bloc 1 · Incarnam »" in rep
+    assert ("Qui ne l'a pas fait <small>5 sur 10 actifs · la partie principale du bloc « Bloc 1 · Incarnam »"
+            in rep)
     assert "Qui l'a fait (peut accompagner)" in rep
+    # Une option par partie : les deux moitiés d'Incarnam se distinguent par leur nature, un bloc entier non.
+    assert "Bloc 1 · Incarnam (principale)" in html and "Bloc 1 · Incarnam (secondaire)" in html
+    assert "Bloc 2 · Astrub (" not in html and "Bloc 2 · Astrub" in html
     assert html.count("player target") == 5 and len(re.findall(r"class=\"player[^\"]* dim\"", html)) == 5
     rep = c.get("/grimpeurs?quoi=donjon:3").text.split('id="qui-0-donjon-3"')[1]
     assert "vaincre Donjon des Bouftous" in rep
@@ -470,9 +483,10 @@ def test_fiche_d_un_grimpeur():
     html = monde().connecter(ID_BRINDILLE).get("/grimpeurs/3").text
     assert "Tableau de bord de Mirelune" in html and "Étage 0 · Le Seuil" in html
     assert "Ses blocs du guide" in html and "Bloc 1 · Incarnam" in html
-    assert "16 sur 18 éléments faits (88 %)" in html  # 15 cases + 1 bloc sur 18 éléments (15 cases, 3 blocs)
-    assert "/4 points · 16/18" in html
+    assert "16 sur 19 éléments faits (84 %)" in html  # 15 cases + 1 bloc sur 19 (15 cases, 4 parties de bloc)
+    assert "/4 points · 16/19" in html
     assert all("disabled" in m for m in re.findall(r'data-ref="[^"]+"[^>]*>', html))  # pas la sienne
+    assert html.count('<li class="bloc-paire" data-paire>') == 1  # les deux moitiés d'Incarnam, en lecture seule
 
 
 def test_fiche_exclu_introuvable_pour_un_grimpeur():
@@ -661,7 +675,7 @@ def test_bandeau_etage_sans_depliant_avec_barre_et_faits():
     assert "<details" not in html.split('id="enteteEtage"')[0][-60:] and "Niveaux 1 à 20" in bandeau
     assert bandeau.count("Étage 0") == 1
     assert '<b class="num">3</b> donjons' in bandeau and '<b class="num">2</b> blocs principaux' in bandeau
-    assert '<b class="num">1</b> bloc secondaire' in bandeau
+    assert '<b class="num">2</b> blocs secondaires' in bandeau  # le bloc 3 et la moitié jaune d'Incarnam
     assert 'role="progressbar"' in bandeau and "pg-palier" in bandeau and ">palier</small>" in bandeau
     assert re.search(r'data-pg="score">\d+ / \d+ points</strong>', bandeau) and "Il manque" in bandeau
     tour = c.get("/").text.split('id="enteteEtage"')[1].split("</section>")[0]
@@ -768,7 +782,8 @@ def test_bloc_jaune_avec_quetes_utiles_affiche_un_avertissement():
         assert html_mod.escape(nom, quote=True) in liste
     # Un seul avertissement : le bloc secondaire naturel (aucune quête principale) n'en a pas, ni les blocs rouges.
     assert liste.count("avert-utiles") == 1
-    assert "dont aucune principale" in liste
+    # Le vrai compte : le bloc rétrogradé garde « 3 principales », le bloc secondaire naturel « 3 secondaires ».
+    assert "<summary>3 principales</summary>" in liste and "<summary>3 secondaires</summary>" in liste
     # Le barème ne change pas : le bloc compte désormais dans les secondaires.
     assert 'data-cats="secondaires"' in liste
 

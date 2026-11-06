@@ -7,7 +7,8 @@ règles : coche idempotente avec cascade, élément masqué ou étage scellé «
 motif obligatoire pour l'admin qui coche chez un autre, journal de chaque écriture. Les tests du site
 l'utilisent comme faux dépôt ; le vrai dépôt Postgres (B1) le remplace à l'intégration.
 
-Données fictives : l'étage 0 « Le Seuil » (3 donjons, 3 blocs du guide dont 2 principaux), 12 grimpeurs
+Données fictives : l'étage 0 « Le Seuil » (3 donjons, 3 blocs du guide dont 2 principaux, le premier hybride donc
+coupé en deux moitiés), 12 grimpeurs
 dont 2 en pause, un exclu, et trois étages scellés que personne ne doit voir.
 """
 
@@ -52,6 +53,7 @@ from epreuve.domaine.modeles import (
     Regles,
     Session,
     Statut,
+    marquer_moities,
 )
 from epreuve.domaine.ouverture import Bilan
 
@@ -135,15 +137,27 @@ def _quetes() -> dict[int, Quete]:
     return {x.id: x for x in liste}
 
 
-def _blocs(quetes: dict[int, Quete]) -> dict[int, Bloc]:
-    """Les blocs du guide de la démo : nature par la règle (principal s'il contient une quête principale)."""
-    brut = [(1, 1, "Incarnam", 1), (2, 1, "Astrub", 2), (3, 1, TITRE_SERVICES, 3), (4, 2, "Champs", 4)]
-    blocs = {}
-    for id_, etage_id, titre, numero in brut:
+def _parties(quetes: dict[int, Quete], etage_id: int, brut: list[tuple[int, str, int, int, int | None]],
+             blocs: dict[int, Bloc]) -> None:
+    """Range les quêtes de l'étage dans ses blocs, comme la construction : un bloc hybride donne deux moitiés (la
+    principale reçoit l'id donné, la secondaire `id_jaune`). `brut` : (id, titre, numéro, ordre, id_jaune)."""
+    for id_, titre, numero, ordre, id_jaune in brut:
         les = [q for q in quetes.values() if q.etage_id == etage_id and q.bloc == titre]
-        princ = sum(1 for q in les if q.nature == "principale")
-        blocs[id_] = Bloc(id_, etage_id, titre, numero, id_ if etage_id == 1 else 1,
-                          "principale" if princ else "secondaire", "construction", len(les), princ, URL_DEMO)
+        natures = sorted({q.nature for q in les})  # « principale » avant « secondaire »
+        for nature in natures:
+            bid = id_jaune if nature == "secondaire" and len(natures) == 2 else id_
+            blocs[bid] = Bloc(bid, etage_id, titre, numero, ordre, nature, "construction", 0, 0, URL_DEMO,
+                              partie=nature)
+            for q in les:
+                if q.nature == nature:
+                    quetes[q.id] = replace(q, bloc_id=bid)
+
+
+def _blocs(quetes: dict[int, Quete]) -> dict[int, Bloc]:
+    """Les blocs du guide de la démo. « Incarnam » est hybride : sa moitié secondaire porte l'id 5."""
+    blocs: dict[int, Bloc] = {}
+    _parties(quetes, 1, [(1, "Incarnam", 1, 1, 5), (2, "Astrub", 2, 2, None), (3, TITRE_SERVICES, 3, 3, None)], blocs)
+    _parties(quetes, 2, [(4, "Champs", 4, 1, None)], blocs)
     return blocs
 
 
@@ -236,7 +250,7 @@ BRUT = [
 PRINCIPALES = (101, 102, 103, 104)
 SECONDAIRES = (105, 106, 107, 108, 109)
 BLOCS_PRINCIPAUX = (1, 2)
-BLOCS_SECONDAIRES = (3,)
+BLOCS_SECONDAIRES = (3, 5)  # 5 : la moitié secondaire du bloc hybride « Incarnam »
 
 
 class DepotDemo:
@@ -264,7 +278,7 @@ class DepotDemo:
             self._coches_cases[id_] = cases
             # p, s : l'ancien nombre de quêtes cochées ; 2 principales font le premier bloc, 4 les deux.
             self._coches_blocs[id_] = ({BLOCS_PRINCIPAUX[0]} if p >= 2 else set()) \
-                | ({BLOCS_PRINCIPAUX[1]} if p >= 4 else set()) | ({BLOCS_SECONDAIRES[0]} if s >= 5 else set())
+                | ({BLOCS_PRINCIPAUX[1]} if p >= 4 else set()) | (set(BLOCS_SECONDAIRES) if s >= 5 else set())
             self._activite[id_] = INSCRIPTION + timedelta(hours=id_)
         self._sessions: dict[bytes, Session] = {}
         self._journal: list[EntreeJournal] = []
@@ -299,15 +313,14 @@ class DepotDemo:
         return etage, donjons, cases, quetes, self._blocs_de(etage_id)
 
     def _blocs_de(self, etage_id: int) -> list[Bloc]:
-        """Les blocs de l'étage, avec leurs nombres de quêtes recomptés."""
+        """Les blocs de l'étage, avec leurs nombres de quêtes recomptés et leurs moitiés marquées."""
         sortie = []
         for b in self._blocs.values():
             if b.etage_id == etage_id:
-                les = [q for q in self._quetes.values() if q.etage_id == etage_id and q.bloc == b.titre
-                       and not q.masquee]
+                les = [q for q in self._quetes.values() if q.bloc_id == b.id and not q.masquee]
                 sortie.append(replace(b, nb_quetes=len(les),
                                       nb_principales=sum(1 for q in les if q.nature == "principale")))
-        return sorted(sortie, key=lambda b: (b.ordre, b.id))
+        return list(marquer_moities(sorted(sortie, key=lambda b: (b.ordre, b.partie or "", b.id))))
 
     async def contenu_etage(self, etage_id: int) -> ContenuEtage:
         return ContenuEtage.visible(*self._brut(etage_id))
@@ -550,8 +563,31 @@ class DepotDemo:
         q = replace(q, nature=nature or q.nature, nature_origine="admin" if nature else q.nature_origine,
                     masquee=q.masquee if masquee is None else masquee, nom=nom or q.nom)
         self._quetes[quete_id] = q
+        if nature is not None:
+            q = self._ranger_dans_sa_partie(q)
         self._journaliser(acteur, maintenant, "quete", etage_id=q.etage_id, quete=quete_id, nature=nature,
                           masquee=masquee, nom=nom, motif=motif)
+        return q
+
+    def _ranger_dans_sa_partie(self, q: Quete) -> Quete:
+        """Comme le vrai dépôt : la quête passe dans la partie de bloc de sa nature, créée au besoin ; la partie
+        quittée est masquée si elle est vide ; un bloc devenu hybride perd la correction d'admin du bloc entier."""
+        depart = self._blocs.get(q.bloc_id)
+        if depart is None or depart.partie == q.nature:
+            return q
+        arrivee = next((b for b in self._blocs.values() if b.etage_id == depart.etage_id and b.titre == depart.titre
+                        and b.partie == q.nature), None)
+        if arrivee is None:
+            arrivee = replace(depart, id=next(self._ids), nature=q.nature, nature_origine="construction",
+                              nature_motif=None, partie=q.nature, masque=False)
+        self._blocs[arrivee.id] = replace(arrivee, masque=False)
+        q = self._quetes[q.id] = replace(q, bloc_id=arrivee.id)
+        if not any(x.bloc_id == depart.id for x in self._quetes.values()):
+            self._blocs[depart.id] = replace(depart, masque=True)
+        else:
+            for b in (depart, self._blocs[arrivee.id]):
+                if b.nature_origine == "admin":
+                    self._blocs[b.id] = replace(b, nature=b.partie, nature_origine="construction", nature_motif=None)
         return q
 
     async def modifier_bloc(self, bloc_id, acteur, maintenant, *, nature=None, motif=None, masque=None) -> Bloc:
@@ -564,6 +600,8 @@ class DepotDemo:
             raise ValueError("rien à changer")
         avant = b.nature
         vue = next(x for x in self._blocs_de(b.etage_id) if x.id == bloc_id)
+        if nature is not None and vue.moitie:
+            raise ValueError("bloc coupé en deux : corrige la nature de ses quêtes, pas celle d'une moitié")
         if nature == "auto":
             b = replace(b, nature=vue.nature_par_defaut, nature_origine="construction", nature_motif=None)
         elif nature is not None:
@@ -713,17 +751,14 @@ class DepotEtage8(DepotDemo):
         for id_, nom, niv, bloc, ordre, nature, dofus in quetes:
             self._quetes[id_] = Quete(id_, e8, nom, niv, bloc, ordre, nature, "duffus", tuple(dofus), None, None,
                                       False, False)
-        for i, (titre, numero) in enumerate([(pics, 41), (avant_postes, 42), (citadelle, 43), (services, 44)],
-                                            start=81):
-            les = [q for q in self._quetes.values() if q.etage_id == e8 and q.bloc == titre]
-            princ_n = sum(1 for q in les if q.nature == "principale")
-            self._blocs[i] = Bloc(i, e8, titre, numero, i - 80, "principale" if princ_n else "secondaire",
-                                  "construction", len(les), princ_n, URL_DEMO)
+        # « Les Pics, première ascension » et « La Citadelle » sont hybrides : moitiés secondaires 85 et 86.
+        _parties(self._quetes, e8, [(81, pics, 41, 1, 85), (82, avant_postes, 42, 2, None), (83, citadelle, 43, 3, 86),
+                                    (84, services, 44, 4, None)], self._blocs)
         self._grimpeurs, self._coches_cases, self._coches_quetes, self._coches_blocs = {}, {}, {}, {}
         self._liste, self._activite = {ID_NOUVELLE: "actif"}, {}
         cases_boss = [d * 10 + 1 for d in range(81, 85)]
         toutes = [d * 10 + k for d in range(81, 85) for k in range(1, 6)]
-        princ, second = [81, 83], [82, 84]  # les blocs principaux et secondaires de l'étage 8
+        princ, second = [81, 83], [82, 84, 85, 86]  # les parties principales et secondaires de l'étage 8
         for i, pseudo in enumerate(PSEUDOS_ETAGE8, start=1):
             statut = "actif" if i <= 22 else "pause"
             rang = i - 1

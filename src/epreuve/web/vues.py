@@ -48,9 +48,9 @@ INFOS_CATEGORIES: tuple[InfoCategorie, ...] = (
     InfoCategorie("full_succes", NOM_CATEGORIE["full_succes"], "Succès",
                   "Cocher les 5 succès de chaque donjon.", "i-succes"),
     InfoCategorie("principales", NOM_CATEGORIE["principales"], "Princ.",
-                  "Terminer tous les blocs principaux du guide (ceux qui mènent à un Dofus).", "i-princ"),
+                  "Terminer toutes les parties rouges du guide : blocs et moitiés principales.", "i-princ"),
     InfoCategorie("secondaires", NOM_CATEGORIE["secondaires"], "Second.",
-                  "Terminer tous les blocs secondaires du guide de l'étage.", "i-second"),
+                  "Terminer toutes les parties jaunes du guide : blocs et moitiés secondaires.", "i-second"),
 )
 assert tuple(i.cle for i in INFOS_CATEGORIES) == CATEGORIES
 
@@ -70,12 +70,15 @@ def texte_point_full(n: int) -> str:
 
 
 def texte_quetes_bloc(bloc) -> str:
-    """« 24 quêtes, dont 23 principales » : ce que le bloc contient, pour juger sa nature d'un coup d'œil."""
+    """Le vrai compte des quêtes d'un bloc ou d'une moitié, accordé : « 1 principale », « 7 principales »,
+    « 12 secondaires ». Une partie ne porte que des quêtes de sa nature ; un mélange (bloc pas encore reconstruit)
+    s'écrit « 24 quêtes, dont 23 principales »."""
     n, p = bloc.nb_quetes, bloc.nb_principales
-    total = f"{n} quête{'s' if n > 1 else ''}"
-    if p == 0:
-        return f"{total}, dont aucune principale"
-    return f"{total}, dont {p} principale{'s' if p > 1 else ''}"
+    if n == 0:
+        return "aucune quête"
+    if p in (0, n):
+        return f"{n} {'principale' if p else 'secondaire'}{'s' if n > 1 else ''}"
+    return f"{n} quêtes, dont {p} principale{'s' if p > 1 else ''}"
 
 
 def pct(faits: int, total: int) -> str:
