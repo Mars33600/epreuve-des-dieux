@@ -18,7 +18,7 @@ from epreuve.web.demo import ID_HORS_LISTE, ID_MARCEAU, ID_NOUVELLE, DepotDemo
 from tests.web.outils import ID_BRINDILLE, ID_OMBREVIVE, SITE, monde, routes_declarees
 
 PAGES_GRIMPEUR = ["/", "/etages/0", "/etages/0/quetes/101", "/etages/0/quetes/104", "/etages/0/quetes/109",
-                  "/grimpeurs", "/grimpeurs?quoi=categorie:donjons", "/grimpeurs/1", "/grimpeurs/3", "/regles"]
+                  "/grimpeurs", "/grimpeurs?quoi=categorie:donjons", "/grimpeurs/2", "/grimpeurs/3", "/regles"]
 # Ce que les grimpeurs ne doivent jamais voir : les étages scellés 1 à 3, leur contenu, leurs ids.
 SCELLES = ["Les Champs Murmurants", "La Forêt des Abraknydes", "Le Vallon Interdit", "Repaire des Murmures",
            "Le Secret des Champs Murmurants", "/etages/1", "/etages/2", "/etages/3", "quetes/201", "case:41"]
@@ -144,10 +144,10 @@ def test_modifier_sa_fiche():
     t = m.csrf(c)
     r = c.post("/grimpeurs/moi", data={"csrf": t, "pseudo": "Brindille", "classe": "Iop", "niveau": "21"},
                headers={"Origin": SITE})
-    assert r.headers["location"] == "/grimpeurs/1?fait=1"
+    assert r.headers["location"] == "/tableau-de-bord?fait=1"
     assert m.depot._grimpeurs[1].classe == "Iop"
     r = c.post("/grimpeurs/moi", data={"csrf": t, "pseudo": "kaskarot"}, headers={"Origin": SITE})
-    assert r.headers["location"] == "/grimpeurs/1?erreur=pris"
+    assert r.headers["location"] == "/tableau-de-bord?erreur=pris"
     assert "déjà pris" in c.get(r.headers["location"]).text
 
 
@@ -466,11 +466,12 @@ def test_lien_qui_manque_de_chaque_tuile():
 
 
 def test_fiche_d_un_grimpeur():
+    # Son tableau de bord en lecture seule (l'ancienne fiche) : web/tableau.py.
     html = monde().connecter(ID_BRINDILLE).get("/grimpeurs/3").text
-    assert "Mirelune" in html and "Étage 0 · Le Seuil" in html and "Donjons et succès" in html
-    assert "Blocs du guide" in html and "Bloc 1 · Incarnam" in html
-    assert "Avancement global" in html and "16/18" in html  # 15 cases + 1 bloc sur 18 éléments (15 cases, 3 blocs)
-    assert "/4 points · 16/18 (88 %)" in html
+    assert "Tableau de bord de Mirelune" in html and "Étage 0 · Le Seuil" in html
+    assert "Ses blocs du guide" in html and "Bloc 1 · Incarnam" in html
+    assert "16 sur 18 éléments faits (88 %)" in html  # 15 cases + 1 bloc sur 18 éléments (15 cases, 3 blocs)
+    assert "/4 points · 16/18" in html
     assert all("disabled" in m for m in re.findall(r'data-ref="[^"]+"[^>]*>', html))  # pas la sienne
 
 

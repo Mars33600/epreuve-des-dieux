@@ -5,8 +5,8 @@
     GET  /histoire                   l'histoire de Shadoaze ; POST /histoire/vu retient le prologue passé
     GET  /grimpeurs                  toutes les fiches + « qui a fait, qui n'a pas fait… ? » par étage
                                      (?etage=N&quoi=… ; morceaux de page avec Accept: text/html-fragment)
-    GET  /grimpeurs/{id}             la fiche d'un grimpeur (?edition=1 : mode édition de l'admin)
-    POST /grimpeurs/moi              modifier son pseudo, sa classe, son niveau
+    POST /grimpeurs/moi              modifier son pseudo, sa classe, son niveau (le formulaire est sur le
+                                     tableau de bord ; GET /grimpeurs/{id} est dans `tableau.py`)
     GET/POST /inscription            créer sa fiche (membre de la liste officielle, après l'ouverture)
 
 Brouillard de guerre : un étage scellé répond 404 comme un étage inexistant (sauf admin), et les
@@ -315,29 +315,6 @@ async def page_grimpeurs(request: Request, quoi: str = "", etage: int | None = N
         "actifs": sum(g.statut == "actif" for g in liste), "en_pause": sum(g.statut == "pause" for g in liste)})
 
 
-@routeur.get("/grimpeurs/{grimpeur_id}")
-async def page_fiche(request: Request, grimpeur_id: int, edition: int = 0, fait: str = "", erreur: str = ""):
-    v = await exiger_grimpeur(request)
-    s = _s(request)
-    g = await s.depot.grimpeur(grimpeur_id)
-    if g is None or (g.statut == "exclu" and not v.est_admin):
-        raise Refus(404, INTROUVABLE)
-    edition_admin = bool(edition) and v.est_admin and v.grimpeur_id != g.id
-    soi = v.grimpeur_id == g.id
-    grimpeurs = await s.depot.grimpeurs()
-    etages = sorted((e for e in await s.depot.etages() if etage_cochable(e)), key=lambda e: -e.numero)
-    vues = [await charger_vue_etage(s.depot, e, s.regles, grimpeurs) for e in etages]
-    faits = sum(vu.avancement(g.id)[0] for vu in vues)
-    total = sum(vu.avancement(g.id)[1] for vu in vues)
-    cochable = (soi and peut_cocher_soi(v, etages[0], s.regles)) if etages else False
-    courant, precedents = separer_courant(vues, lambda vu: vu.etage)  # les précédents sont pliés (recette v4)
-    return await rendre(request, "fiche.html", {
-        "g": g, "vues": vues, "courant": courant, "precedents": precedents, "soi": soi, "edition": edition_admin,
-        "global": (faits, total),
-        "cochable": cochable or edition_admin, "classes": CLASSES,
-        "message": "Fiche enregistrée." if fait else "", "erreur": MESSAGES_FICHE.get(erreur, "")})
-
-
 @routeur.post("/grimpeurs/moi")
 async def modifier_moi(request: Request):
     v = await verifier_ecriture(request)
@@ -346,16 +323,17 @@ async def modifier_moi(request: Request):
     s = _s(request)
     form = await request.form()
     gid = v.grimpeur.id
+    # Retour sur le tableau de bord, qui porte le formulaire depuis que « Ma fiche » n'existe plus.
     try:
         pseudo, classe, niveau = lire_fiche(form, s.regles)
     except ValueError as e:
-        return RedirectResponse(f"/grimpeurs/{gid}?erreur={e.args[0]}", status_code=303)
+        return RedirectResponse(f"/tableau-de-bord?erreur={e.args[0]}", status_code=303)
     try:
         await s.depot.modifier_grimpeur(gid, v.discord_id, s.horloge(), pseudo=pseudo, classe=classe,
                                         niveau_declare=niveau)
     except PseudoDejaPris:
-        return RedirectResponse(f"/grimpeurs/{gid}?erreur=pris", status_code=303)
-    return RedirectResponse(f"/grimpeurs/{gid}?fait=1", status_code=303)
+        return RedirectResponse("/tableau-de-bord?erreur=pris", status_code=303)
+    return RedirectResponse("/tableau-de-bord?fait=1", status_code=303)
 
 
 def lire_fiche(form, regles) -> tuple[str, str | None, int | None]:

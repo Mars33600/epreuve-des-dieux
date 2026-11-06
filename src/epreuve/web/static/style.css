@@ -133,9 +133,7 @@ select{min-height:44px;width:100%;min-width:0;flex:1 1 220px;padding:8px 12px;bo
 .pip.big svg{width:22px;height:22px}
 .pip.big::before{inset:4px}
 
-/* ---------- Fiche détaillée ---------- */
-.sheethead{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;align-items:flex-end}
-.sheethead h2{font-size:var(--t-h1)}
+/* ---------- Tableau de bord : pastilles des 4 points, notes, donjons de l'admin ---------- */
 .bigpips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;text-align:center}
 .bigpips .pipcell{font-size:var(--t-sm)}
 .bigpips .pipcell b{color:var(--ink);font:500 var(--t-sm)/1 var(--f-data)}
@@ -143,7 +141,6 @@ select{min-height:44px;width:100%;min-width:0;flex:1 1 220px;padding:8px 12px;bo
 .note.mine{border-color:var(--gold-line)}
 .section-title{display:flex;align-items:center;gap:10px;font-size:19px}
 .section-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold-line),transparent)}
-.dungeons{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
 .dj{border-radius:8px;background:rgba(21,27,51,.92);border:1px solid var(--line-soft);padding:12px;display:grid;gap:8px;align-content:start;min-width:0}
 .dj > *{min-width:0}
 .dj.full{border-color:color-mix(in srgb,var(--c-succes) 60%,transparent)}
@@ -782,14 +779,6 @@ details.pli,.card[id]{scroll-margin-top:calc(var(--bar-h) + 12px)}
 .bloc-revue{display:grid;gap:6px}
 .bloc-revue .ligne-nature{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
 @media (max-width:420px){.bloc-carte{padding:10px}}
-/* Fiche du grimpeur : blocs faits ou à faire */
-.etat-liste{margin:0;padding:0;list-style:none;display:grid;gap:6px}
-.etat-liste li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:8px 10px;border-radius:8px;border-left:4px solid var(--c,var(--faint));background:var(--surface)}
-.etat-liste .etat{font:500 var(--t-sm)/1 var(--f-data);padding:4px 8px;border-radius:999px;border:1px solid var(--line)}
-.etat-liste li.fait .etat{color:var(--c-donjon);border-color:var(--c-donjon)}
-.etat-liste li.afaire .etat{color:var(--warn);border-style:dashed;border-color:var(--warn)}
-.etat-liste .etat-nom{flex:1 1 220px;min-width:0;overflow-wrap:anywhere}
-.etat-dj{margin:0;padding:0 4px 4px}
 /* Lien Duffus d'un bloc : le bouton, puis où cliquer une fois sur le guide (tranche et chapitre). */
 .duffus-ou{display:inline-flex;flex-direction:column;align-items:flex-start;gap:4px}
 .duffus-ou small{font-size:var(--t-sm)}

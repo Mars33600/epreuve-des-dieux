@@ -187,20 +187,17 @@ def test_qui_a_fait_page_et_fragments_sans_script_en_ligne():
         assert "<script>" not in r.text and " style=" not in r.text and "onclick" not in r.text, chemin
 
 
-# ---------------------------------------------------------------- fiche d'un grimpeur, admin
+# ---------------------------------------------------------------- tableau d'un autre grimpeur, admin
 
 
-def test_fiche_etages_precedents_plies():
-    c = deux_etages().connecter(ID_BRINDILLE)
-    html = c.get("/grimpeurs/1").text
-    assert balise(html, "etage1").startswith("<h2")
-    assert " open" not in balise(html, "precedents") and balise(html, "etage0") == '<details class="pli" id="etage0">'
+def test_tableau_d_un_autre_etages_precedents_et_blocs_plies():
+    # L'ancienne fiche est devenue le tableau de bord d'un autre grimpeur : même règle de pliage que le sien.
+    html = deux_etages().connecter(ID_BRINDILLE).get("/grimpeurs/3").text
+    assert balise(html, "tb1").startswith("<h3")
+    assert " open" not in balise(html, "precedents") and balise(html, "tb0") == '<details class="pli" id="tb0">'
     assert "Étages précédents (1)" in html
-    # Dans l'étage en cours, les longues listes sont pliées ; « Le détail à cocher » reste ouvert sur sa fiche.
-    courant = html[html.index('id="etage1"'):html.index('id="precedents"')]
-    assert '<details class="pli">' in courant and "<details class=\"pli\" open" not in courant
-    assert "<details open>" in courant
-    assert "<details open>" not in html[html.index('id="precedents"'):]
+    # Ses blocs du guide, une longue liste : pliés partout, rien n'est ouvert en dur.
+    assert html.count("Ses blocs du guide") == 2 and " open" not in html.split('<main', 1)[1]
 
 
 def test_admin_quetes_pliees_et_retour_sur_l_ancre():

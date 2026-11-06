@@ -191,9 +191,9 @@ def test_admin_coche_pour_un_autre_avec_motif():
     entree = m.depot._journal[-1]
     assert entree.public is False and entree.details["motif"] == "validation contraire aux règles"
     assert entree.acteur_discord_id == ID_MARCEAU and entree.grimpeur_id == 1
-    # La fiche du grimpeur ne montre ni le motif ni l'auteur (critère 28 bis).
+    # Son tableau de bord ne montre ni le motif ni l'auteur (critère 28 bis).
     b = m.connecter(ID_BRINDILLE)
-    html = b.get("/grimpeurs/1").text
+    html = b.get("/tableau-de-bord").text
     assert "validation contraire" not in html and "Marceau" not in html
 
 

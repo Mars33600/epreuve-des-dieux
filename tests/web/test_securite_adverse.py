@@ -124,7 +124,7 @@ def test_un_joueur_ne_modifie_que_sa_propre_fiche():
     # Un identifiant glissé dans le formulaire est ignoré : c'est la fiche de la session qui change.
     r = c.post("/grimpeurs/moi", data={"csrf": jeton, "pseudo": "Brindille Bis", "grimpeur_id": "2", "id": "2"},
                headers={"Origin": SITE})
-    assert r.status_code == 303 and r.headers["location"].startswith("/grimpeurs/1")
+    assert r.status_code == 303 and r.headers["location"].startswith("/tableau-de-bord")
     assert m.depot._grimpeurs[2].pseudo == avant and m.depot._grimpeurs[1].pseudo == "Brindille Bis"
     # Les écritures d'admin restent fermées, même avec un jeton CSRF valide.
     r = c.post("/admin/grimpeurs/2", data={"csrf": jeton, "pseudo": "Pirate"}, headers={"Origin": SITE})
@@ -274,8 +274,8 @@ class _Audit(HTMLParser):
 def test_accessibilite_de_base(profil):
     m = monde()
     c = m.connecter(profil)
-    chemins = ["/", "/etages/0", "/etages/0/quetes/101", "/grimpeurs", "/grimpeurs?quoi=bloc:1", "/grimpeurs/1",
-               "/grimpeurs/1?edition=1", "/regles", "/n-existe-pas"]
+    chemins = ["/", "/etages/0", "/etages/0/quetes/101", "/grimpeurs", "/grimpeurs?quoi=bloc:1", "/grimpeurs/3",
+               "/tableau-de-bord", "/regles", "/n-existe-pas"]
     if profil == ID_MARCEAU:
         chemins += ["/grimpeurs/2?edition=1", "/admin", "/admin/grimpeurs", "/admin/etages", "/admin/etages/0",
                     "/admin/journal"]

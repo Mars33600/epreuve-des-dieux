@@ -224,11 +224,6 @@
 </ul>
 {%- endmacro %}
 
-{% macro liste_etage(vue, cible, cochable) -%}
-{{ liste_donjons(vue, cible, cochable) }}
-{{ liste_blocs(vue, cible, cochable) }}
-{%- endmacro %}
-
 {% macro filtre() -%}
 <fieldset class="filtre" id="filtre" aria-label="Filtrer l'étage">
   <label class="c-donjons"><input type="checkbox" value="donjons" checked>{{ icone("i-donjon") }}Donjons</label>

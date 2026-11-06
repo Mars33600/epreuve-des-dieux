@@ -1,21 +1,48 @@
 {% extends "site.html" %}
-{% from "_macros.html" import pip, icone %}
-{% block titre %}Tableau de bord · L'Épreuve des Dieux{% endblock %}
+{% from "_macros.html" import pip, icone, liste_blocs %}
+{#- Une seule présentation pour trois regards (web/tableau.py) : `soi` (cochable selon son statut, profil, blocs à
+    faire ensuite), un autre grimpeur (lecture seule), un admin (`edition` : cochable pour ce grimpeur, avec motif).
+    `base` garde les onglets sur la même adresse. -#}
+{% block titre %}Tableau de bord{% if not soi %} de {{ g.pseudo }}{% endif %} · L'Épreuve des Dieux{% endblock %}
 {% block tete %}{{ super() }}<link rel="stylesheet" href="/static/outils.css">{% endblock %}
 {% block page %}
-<main class="outil">
+<main class="outil"{% if edition %} data-cible="{{ g.id }}"{% endif %}>
 <section class="card" aria-labelledby="tbTitre">
   <div class="row">
-    <div><div class="eyebrow">Tableau de bord</div><h2 id="tbTitre">{{ g.pseudo }}</h2>
-      <div class="meta"><span>{{ g.classe or "Classe non précisée" }}</span>{% if g.niveau_declare %}<span class="num">niveau {{ g.niveau_declare }}</span>{% endif %}<span>{{ {"actif": "Actif", "pause": "En pause", "exclu": "Exclu"}[g.statut] }}</span></div></div>
+    <div>{% if soi %}<div class="eyebrow">Tableau de bord</div><h2 id="tbTitre">{{ g.pseudo }}</h2>
+      {%- else %}<div class="eyebrow">{{ "Mode édition (admin)" if edition else "Lecture seule" }}</div><h2 id="tbTitre">Tableau de bord de {{ g.pseudo }}</h2>{% endif %}
+      <div class="meta">{% if regles.afficher_nom_discord %}<span>{{ g.nom_discord }}</span>{% endif %}<span>{{ g.classe or "Classe non précisée" }}</span>{% if g.niveau_declare %}<span class="num">niveau {{ g.niveau_declare }}</span>{% endif %}<span>{{ {"actif": "Actif", "pause": "En pause", "exclu": "Exclu"}[g.statut] }}</span></div></div>
     <span class="total{% if points_max and points == points_max %} full{% endif %}">{{ points }}<small>/{{ points_max }} points</small></span>
   </div>
   {% if total %}<div class="mini glob" role="img" aria-label="{{ faits }} éléments faits sur {{ total }}"><i class="{{ faits|pct(total) }}"></i></div>
   <p class="muted">{{ faits }} sur {{ total }} éléments faits ({{ faits * 100 // total }} %), tous étages ouverts confondus.</p>{% endif %}
-  {% if g.statut == "pause" %}<p class="note">Tu es en pause : tu peux cocher pour rattraper ton retard, tes points compteront à ta réintégration.</p>{% endif %}
+  {% if soi and g.statut == "pause" %}<p class="note">Tu es en pause : tu peux cocher pour rattraper ton retard, tes points compteront à ta réintégration.</p>{% endif %}
+  {% if message %}<p class="succes-msg" role="status">{{ message }}</p>{% endif %}
+  {% if erreur %}<p class="alerte" role="alert">{{ erreur }}</p>{% endif %}
+  {% if soi %}
+  {#- Repris de l'ancienne « Ma fiche » : plié, il ne sert que de temps en temps. Le niveau reste modifiable ici
+      (l'inscription ne le demande plus et part du niveau 1). #}
+  <details class="profil">
+    <summary class="linkbtn">Modifier mon pseudo, ma classe ou mon niveau</summary>
+    <form method="post" action="/grimpeurs/moi" class="formrow">
+      <input type="hidden" name="csrf" value="{{ v.csrf }}">
+      <div class="champ"><label for="pseudo">Pseudo</label><input type="text" id="pseudo" name="pseudo" value="{{ g.pseudo }}" required minlength="2" maxlength="30"></div>
+      <div class="champ"><label for="classe">Classe</label><select id="classe" name="classe"><option value="">—</option>{% for c in classes %}<option{% if c == g.classe %} selected{% endif %}>{{ c }}</option>{% endfor %}</select></div>
+      <div class="champ"><label for="niveau">Niveau</label><input type="number" id="niveau" name="niveau" min="1" max="200" value="{{ g.niveau_declare or '' }}"></div>
+      <button class="btn or" type="submit">Enregistrer</button>
+    </form>
+  </details>
+  {% endif %}
+  {% if edition %}
+  <div class="force">
+    <label class="champ" for="motif"><span>Motif de la modification (obligatoire)</span>
+      <input type="text" id="motif" maxlength="300" placeholder="ex. validation contraire aux règles convenues"></label>
+    <small class="muted">Le motif et l'auteur restent au journal (non public) : {{ g.pseudo }} ne les voit pas sur son tableau de bord.</small>
+  </div>
+  {% endif %}
   <nav class="onglets" aria-label="Onglets du tableau de bord">
-    <a href="/tableau-de-bord"{% if onglet == "progression" %} aria-current="page"{% endif %}>Progression</a>
-    <a href="/tableau-de-bord?onglet=succes"{% if onglet == "succes" %} aria-current="page"{% endif %}>Succès de donjon</a>
+    <a href="{{ base }}"{% if onglet == "progression" %} aria-current="page"{% endif %}>Progression</a>
+    <a href="{{ base }}?onglet=succes"{% if onglet == "succes" %} aria-current="page"{% endif %}>Succès de donjon</a>
   </nav>
 </section>
 
@@ -29,7 +56,15 @@
     <div><dt>Donjons vaincus</dt><dd class="num">{{ b.donjons_vaincus }}/{{ b.donjons_total }}</dd></div>
     <div><dt>Succès de donjon</dt><dd class="num">{{ b.succes_faits }}/{{ b.succes_total }}</dd></div>
   </dl>
-  {% if b.donjons_restants %}<p><a class="btn" href="/tableau-de-bord?onglet=succes&amp;reste=1#etage{{ vue.etage.numero }}">{{ b.donjons_restants }} donjon{{ "s" if b.donjons_restants > 1 }} à compléter</a></p>{% endif %}
+  {% if b.donjons_restants %}<p><a class="btn" href="{{ base }}?onglet=succes&amp;reste=1#etage{{ vue.etage.numero }}">{{ b.donjons_restants }} donjon{{ "s" if b.donjons_restants > 1 }} à compléter</a></p>{% endif %}
+  {#- Chez un autre : ses blocs du guide, faits ou non (cases désactivées), cochables pour l'admin. Plié : la liste
+      est longue. Sur son propre tableau, on coche ses blocs sur la page de l'étage. #}
+  {% if not soi and vue.contenu.blocs %}
+  <details class="pli">
+    <summary><span class="pli-titre">Ses blocs du guide</span><span class="pli-cpt num">{{ b.blocs_faits }}/{{ b.blocs_total }}</span></summary>
+    <div class="pli-corps">{{ liste_blocs(vue, g, b.cochable) }}</div>
+  </details>
+  {% endif %}
 {% endmacro %}
 
 {% macro donjons_succes(b) %}{% set vue = b.vue %}{% set coches = vue.coches_de(g.id) %}
@@ -103,7 +138,7 @@
 {% else %}
 <section class="card" aria-labelledby="tbSucces">
   <div class="row"><h3 id="tbSucces">Succès de donjon</h3>
-    <a class="linkbtn" href="/tableau-de-bord?onglet=succes{% if not reste %}&amp;reste=1{% endif %}">{{ "Tout afficher" if reste else "Seulement ce qui me reste" }}</a></div>
+    <a class="linkbtn" href="{{ base }}?onglet=succes{% if not reste %}&amp;reste=1{% endif %}">{{ "Tout afficher" if reste else ("Seulement ce qui me reste" if soi else "Seulement ce qui lui reste") }}</a></div>
   <p class="muted">Les 5 cases de chaque donjon : vaincre le boss (compte pour le point Donjons), le Duo, puis les trois défis. Le point Full succès demande les cinq cases de tous les donjons de l'étage.</p>
 </section>
 {% set b = courant %}{% set vue = b.vue %}

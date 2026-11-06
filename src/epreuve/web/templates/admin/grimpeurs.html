@@ -58,7 +58,7 @@
               <select name="classe" aria-label="Classe"><option value="">—</option>{% for c in classes %}<option{% if c == g.classe %} selected{% endif %}>{{ c }}</option>{% endfor %}</select>
               <input type="number" name="niveau" min="1" max="200" value="{{ g.niveau_declare or '' }}" aria-label="Niveau">
               <button class="btn" type="submit">Corriger</button></form></details>
-          <a href="/grimpeurs/{{ g.id }}?edition=1">Coches…</a>
+          <a href="/grimpeurs/{{ g.id }}">Coches…</a>
         </td>
       </tr>
     {%- endfor %}

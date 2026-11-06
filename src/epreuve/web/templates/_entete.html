@@ -2,7 +2,8 @@
    et, par `with` : bar_connecte, bar_membre (accès au site), bar_admin, bar_gid (fiche du grimpeur ou None),
    bar_pseudo, bar_csrf (None : pas de bouton de déconnexion). Ordre : La Tour · L'histoire · Règles · Tableau de bord
    · Grimpeurs · Admin (SPEC-V5 §2 : le menu « Monde des Douze » est retiré). Le burger est piloté par /static/entete.js.
-   Connecté sans fiche : le lien « Créer ma fiche » (SPEC-V5 §7), sauf avant l'ouverture pour les non-admins. #}
+   Connecté sans fiche : le lien « Créer ma fiche » (SPEC-V5 §7), sauf avant l'ouverture pour les non-admins.
+   Plus de lien « Ma fiche » : elle faisait doublon avec le tableau de bord, qui porte désormais le profil. #}
 {% macro actif(prefixes) -%}{% if chemin.startswith(prefixes) %} aria-current="page"{% endif %}{%- endmacro %}
 <header class="bar">
   <div class="bar-in">
@@ -35,7 +36,7 @@
     {% endif %}
       {% if bar_connecte %}
       <div class="who">
-        {% if bar_gid %}<a class="ma-fiche" href="/grimpeurs/{{ bar_gid }}"{% if chemin == "/grimpeurs/" ~ bar_gid %} aria-current="page"{% endif %}>Ma fiche<span class="sr-only"> ({{ bar_pseudo }})</span></a>{% else %}<b>{{ bar_pseudo or "" }}</b>{% if mode is not defined or mode != "teaser" or bar_admin %}<a class="creer-fiche" href="/inscription"{% if chemin == "/inscription" %} aria-current="page"{% endif %}>Créer ma fiche</a>{% endif %}{% endif %}
+        <b>{{ bar_pseudo or "" }}</b>{% if not bar_gid and (mode is not defined or mode != "teaser" or bar_admin) %}<a class="creer-fiche" href="/inscription"{% if chemin == "/inscription" %} aria-current="page"{% endif %}>Créer ma fiche</a>{% endif %}
         {% if bar_admin %}<span class="tag me">admin</span>{% endif %}
         {% if bar_csrf %}<form method="post" action="/deconnexion"><input type="hidden" name="csrf" value="{{ bar_csrf }}"><button class="linkbtn" type="submit">Se déconnecter</button></form>{% endif %}
       </div>

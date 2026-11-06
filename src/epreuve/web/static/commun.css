@@ -113,7 +113,7 @@ form[data-filtres] .rech-panneau{left:0;right:0;width:auto;top:calc(100% + 4px)}
 /* Le builder pose sa propre couleur sur tous les liens : on la reprend dans la barre. */
 .page-builder .nav a,.page-builder .deroulant-liste a,.page-builder .rech-item{color:var(--ink)}
 .page-builder .nav a[aria-current="page"],.page-builder .deroulant-liste a[aria-current="page"]{color:var(--gold-hi)}
-.page-builder .who .ma-fiche,.page-builder .rech-tout,.page-builder .marque{color:var(--gold-hi)}
+.page-builder .rech-tout,.page-builder .marque{color:var(--gold-hi)}
 .page-builder .marque{color:var(--ink)}
 /* Menu déroulant « Monde des Douze » */
 .deroulant{position:relative;display:inline-flex}
@@ -126,8 +126,6 @@ form[data-filtres] .rech-panneau{left:0;right:0;width:auto;top:calc(100% + 4px)}
 .deroulant-liste{position:absolute;z-index:40;top:calc(100% + 4px);left:0;min-width:200px;margin:0;padding:var(--s2);list-style:none;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--ombre)}
 .deroulant-liste[hidden]{display:none}
 .deroulant-liste a{display:flex;width:100%;box-sizing:border-box}
-.who .ma-fiche{color:var(--gold-hi);min-height:36px;display:inline-flex;align-items:center;text-underline-offset:3px;padding:0 6px;border-radius:6px;border:1px solid transparent}
-.who .ma-fiche[aria-current="page"]{border-color:var(--gold);background:var(--gold-wash)}
 .who .creer-fiche{min-height:36px;display:inline-flex;align-items:center;padding:0 12px;border-radius:var(--r);border:1px solid var(--gold);background:var(--gold-wash);color:var(--gold-hi);font-weight:600;text-decoration:none;white-space:nowrap}
 .who .creer-fiche:hover,.who .creer-fiche[aria-current="page"]{background:var(--gold);color:var(--night-1)}
 @media (max-width:1279px){
