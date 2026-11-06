@@ -63,6 +63,8 @@ Détails : `DECISIONS-V4.md`.
 - [x] Quêtes d'alignement en secondaire en ligne : corrigé, déployé (v22) et étages reconstruits (04/11)
 - [x] Créer sa fiche : plus de niveau (départ niveau 1), classe obligatoire (04/11)
 
+- [x] 06/11 : blocs mixtes coupés en deux moitiés (rouge / jaune, cochables séparément, menu « n principales / n secondaires »), plus de lien Duffus par bloc ; dépliants à 3 niveaux, comptes entre parenthèses ; « Il te reste à cocher » ; fiche fusionnée dans le tableau de bord ; délai de grâce d'1 min avant l'ouverture auto ; 144/146 donjons à 5 cases (Cire Momore, Gargandyas : aucun succès en jeu)
+
 ## Modules de Duffus « à l'identique »
 
 - [x] Guide (cases, fiches, progression)
