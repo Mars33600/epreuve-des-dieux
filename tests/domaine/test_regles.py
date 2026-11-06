@@ -53,6 +53,14 @@ def test_ouverture_automatique_par_defaut_et_desactivable(tmp_path):
         lire_regles(ecrire(tmp_path, "ouverture:\n  automatique: bientot\n"))
 
 
+def test_delai_de_grace_par_defaut_reglable_jamais_negatif(tmp_path):
+    assert Regles().delai_grace_secondes == 60 == lire_regles(CHEMIN_PAR_DEFAUT).delai_grace_secondes
+    assert lire_regles(ecrire(tmp_path, "ouverture:\n  delai_grace_secondes: 0\n")).delai_grace_secondes == 0
+    for texte in ("-1", "une minute"):
+        with pytest.raises(ReglesInvalides, match="ouverture.delai_grace_secondes"):
+            lire_regles(ecrire(tmp_path, f"ouverture:\n  delai_grace_secondes: {texte}\n"))
+
+
 @pytest.mark.parametrize("texte", [
     "palier:\n  categorie_vide: perdue\n",  # valeur inconnue
     "palier:\n  points_par_joueur: 0\n",

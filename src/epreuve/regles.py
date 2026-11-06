@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Literal
 
 import yaml
-from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
 from epreuve.domaine.modeles import Regles
 
@@ -67,6 +67,7 @@ class _Modules(_Section):
 
 class _Ouverture(_Section):
     automatique: bool = True
+    delai_grace_secondes: int = Field(60, ge=0)  # 0 : ouverture dès la coche qui remplit la jauge
 
 
 class _Fichier(_Section):
@@ -96,6 +97,7 @@ def regles_depuis(donnees: object) -> Regles:
         verrouiller_modules_par_etage=f.modules.verrouiller_par_etage,
         monde_des_douze=f.modules.monde_des_douze,
         ouverture_automatique=f.ouverture.automatique,
+        delai_grace_secondes=f.ouverture.delai_grace_secondes,
     )
 
 

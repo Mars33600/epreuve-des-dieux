@@ -57,6 +57,20 @@ def pepin(**kw):
     return m, c, t
 
 
+def sans_delai(m):
+    """Délai de grâce à 0 : l'ancienne ouverture immédiate, pour les tests de l'annonce et des routes admin."""
+    m.app.state.regles = replace(m.app.state.regles, delai_grace_secondes=0)
+    return m
+
+
+def plus_tard(m, secondes: float) -> None:
+    m.maintenant[0] += timedelta(seconds=secondes)  # l'horloge injectée avance, sans sommeil réel
+
+
+def regarder(m):
+    return asyncio.run(ouvrir_si_pret(m.app.state))
+
+
 def statuts(m) -> dict[int, str]:
     return {e.numero: e.statut for e in m.depot._etages.values()}
 
@@ -68,18 +82,72 @@ def ouvertures(m) -> list:
 # ---------------------------------------------------------------- l'ouverture
 
 
-def test_la_coche_qui_remplit_la_jauge_ouvre_l_etage_suivant():
+def test_la_coche_qui_remplit_la_jauge_ouvre_l_etage_suivant_une_minute_apres():
     m, c, t = pepin()
     r = cocher(c, t, type="bloc", id=2, cochee=True)
-    assert r.status_code == 200 and r.json()["ok"]
+    assert r.status_code == 200 and r.json()["ok"] and r.json()["jauge"]["score"] == 20
+    assert statuts(m)[1] == "scelle"  # pas tout de suite : le temps de rattraper une coche par erreur
+    plus_tard(m, 59)
+    assert regarder(m) is None and statuts(m)[1] == "scelle"
+    plus_tard(m, 1)
+    assert regarder(m).numero == 1  # pleine depuis 60 s d'affilée
     assert statuts(m) == {0: "termine", 1: "ouvert", 2: "scelle", 3: "scelle"}  # un seul étage, le suivant
     b = m.depot._bilans[1]
     assert (b.score, b.palier, b.force, b.motif) == (20, 20, False, None)  # bilan non forcé
     (o,) = ouvertures(m)
     assert o.acteur_discord_id is None and o.etage_id == 2  # acteur système : NULL au journal
+    assert m.app.state.pleine_depuis == {}  # la note de l'étage 0 ne compte pas pour l'étage 1
     # Une seconde coche ne rouvre rien : l'étage 1 vient d'ouvrir, sa jauge est vide.
     cocher(c, t, type="bloc", id=1, cochee=False)
-    assert len(ouvertures(m)) == 1 and statuts(m)[2] == "scelle"
+    plus_tard(m, 3600)
+    assert regarder(m) is None and len(ouvertures(m)) == 1 and statuts(m)[2] == "scelle"
+
+
+def test_decocher_avant_la_minute_n_ouvre_rien_et_le_compte_repart_de_zero():
+    m, c, t = pepin()
+    cocher(c, t, type="bloc", id=2, cochee=True)  # la coche par erreur qui remplit la jauge
+    plus_tard(m, 30)
+    assert cocher(c, t, type="bloc", id=2, cochee=False).json()["jauge"]["score"] == 19  # rattrapée
+    assert m.app.state.pleine_depuis == {}
+    plus_tard(m, 30)
+    assert regarder(m) is None and statuts(m)[1] == "scelle" and not ouvertures(m)
+    # Recochée : une nouvelle minute pleine, comptée depuis cette coche-ci, pas depuis la première.
+    cocher(c, t, type="bloc", id=2, cochee=True)
+    plus_tard(m, 59)
+    assert regarder(m) is None
+    plus_tard(m, 1)
+    assert regarder(m).numero == 1 and len(ouvertures(m)) == 1
+
+
+def test_apres_un_redemarrage_le_compte_repart_de_zero():
+    m, c, t = pepin()
+    cocher(c, t, type="bloc", id=2, cochee=True)
+    plus_tard(m, 59)
+    m.app.state.pleine_depuis = {}  # redémarrage : la note vivait en mémoire
+    plus_tard(m, 1)
+    assert regarder(m) is None  # premier regard après le redémarrage : il note, il n'ouvre pas
+    plus_tard(m, 60)
+    assert regarder(m).numero == 1  # une minute de retard au pire
+
+
+def test_la_veille_se_reveille_pile_a_la_fin_du_delai():
+    m, c, t = pepin()
+    cocher(c, t, type="bloc", id=2, cochee=True)
+    rempli_le = m.horloge()
+    plus_tard(m, 25)  # la veille dormait pendant la coche : elle la voit à son regard suivant
+    attentes: list[float] = []
+
+    async def attendre(duree):
+        attentes.append(duree)
+        plus_tard(m, duree)
+        if len(attentes) == 2:
+            raise Arret
+
+    with pytest.raises(Arret):
+        asyncio.run(veiller(m.app.state, attendre=attendre, periode=60))
+    assert attentes == [35, 60]  # 25 + 35 : ouverte 60 s après la coche, pas 119 s
+    (o,) = ouvertures(m)
+    assert o.horodatage == rempli_le + timedelta(seconds=60) and statuts(m)[1] == "ouvert"
 
 
 def test_pas_d_ouverture_avant_la_date_plancher_puis_la_veille_ouvre_a_l_heure():
@@ -106,13 +174,30 @@ def test_pas_d_ouverture_si_le_reglage_est_coupe():
     m, c, t = pepin(regles=Regles(monde_des_douze=True, ouverture_automatique=False))
     recues = avec_webhook(m)
     cocher(c, t, type="bloc", id=2, cochee=True)
+    plus_tard(m, 3600)  # même pleine depuis une heure
+    assert regarder(m) is None
     assert statuts(m)[1] == "scelle" and not ouvertures(m) and not recues
+
+
+def test_ouverture_auto_teaser_attend_aussi_la_minute():
+    # La recette des admins pendant le teaser (OUVERTURE_AUTO_TEASER) suit le même délai, sans annonce.
+    m = monde(mode="teaser")
+    m.app.state.config = m.app.state.config.model_copy(update={"ouverture_auto_teaser": True})
+    recues = avec_webhook(m)
+    m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)  # jauge pleine
+    assert regarder(m) is None
+    plus_tard(m, 60)
+    ouvert = regarder(m)
+    assert ouvert.numero == 1 and statuts(m)[1] == "ouvert"
+    assert asyncio.run(annoncer(m.app.state, ouvert)) is False and not recues
 
 
 def test_rien_pendant_le_teaser():
     m = monde(mode="teaser")
     recues = avec_webhook(m)
     m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)  # jauge pleine
+    assert asyncio.run(ouvrir_si_pret(m.app.state)) is None
+    plus_tard(m, 3600)
     assert asyncio.run(ouvrir_si_pret(m.app.state)) is None
     assert statuts(m)[1] == "scelle"
     # Une ouverture de recette par un admin pendant le teaser ne prévient pas tout le serveur.
@@ -122,6 +207,8 @@ def test_rien_pendant_le_teaser():
 def test_deux_coches_simultanees_une_seule_ouverture(monkeypatch):
     m = monde()
     m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)
+    assert regarder(m) is None  # la jauge pleine est notée…
+    plus_tard(m, 60)  # … et le délai de grâce est écoulé pour les deux tentatives
     vrai = m.depot.ouvrir_etage
 
     async def lent(*a, **k):  # les deux tentatives lisent l'état avant que l'une n'écrive
@@ -165,6 +252,7 @@ def test_une_erreur_de_l_ouverture_auto_ne_casse_pas_la_coche(monkeypatch, caplo
 
 def test_un_palier_baisse_par_l_admin_ouvre_et_le_dit():
     m, c, t = admin()
+    sans_delai(m)
     recues = avec_webhook(m)
     r = poster(c, t, "/admin/etages/0/palier", palier="12", motif="catégorie vide")
     assert r.headers["location"] == "/admin/etages/0?fait=auto"
@@ -175,6 +263,7 @@ def test_un_palier_baisse_par_l_admin_ouvre_et_le_dit():
 
 def test_geler_un_grimpeur_peut_ouvrir():
     m, c, t = admin()
+    sans_delai(m)
     # Jauge 19/20 avec 10 actifs : geler l'actif qui a le moins de points (au plus 1) baisse le palier de 2.
     vue = asyncio.run(charger_vue_etage(m.depot, m.depot._etages[1], m.app.state.regles))
     g = min((g for g in vue.grimpeurs if g.statut == "actif"), key=lambda g: vue.points(g.id))
@@ -196,6 +285,7 @@ def test_l_ouverture_manuelle_est_annoncee_aussi():
 
 def test_l_ouverture_est_annoncee_avec_everyone():
     m, c, t = pepin()
+    sans_delai(m)
     recues = avec_webhook(m)
     cocher(c, t, type="bloc", id=2, cochee=True)
     (req,) = recues
@@ -209,6 +299,7 @@ def test_l_ouverture_est_annoncee_avec_everyone():
 @pytest.mark.parametrize("panne", [{"statut": 500}, {"erreur": httpx.ConnectTimeout("délai dépassé")}])
 def test_un_webhook_en_panne_n_empeche_pas_l_ouverture(panne, caplog):
     m, c, t = pepin()
+    sans_delai(m)
     recues = avec_webhook(m, **panne)
     with caplog.at_level(logging.WARNING, logger="epreuve.discord.webhook"):
         r = cocher(c, t, type="bloc", id=2, cochee=True)
@@ -218,6 +309,7 @@ def test_un_webhook_en_panne_n_empeche_pas_l_ouverture(panne, caplog):
 
 def test_sans_webhook_aucun_appel():
     m, c, t = pepin()
+    sans_delai(m)
     recues = avec_webhook(m)
     m.app.state.config = m.app.state.config.model_copy(update={"discord_webhook_annonces": None})
     cocher(c, t, type="bloc", id=2, cochee=True)
@@ -253,12 +345,14 @@ def test_la_veille_regarde_au_demarrage_puis_a_chaque_periode():
 
     async def attendre(duree):
         attentes.append(duree)
-        if len(attentes) == 2:
+        plus_tard(m, duree)
+        if len(attentes) == 3:
             raise Arret
 
     with pytest.raises(Arret):
         asyncio.run(veiller(m.app.state, attendre=attendre, periode=60))
-    assert attentes == [60, 60] and statuts(m)[1] == "ouvert" and len(recues) == 1  # une seule ouverture
+    # 1er regard : la jauge pleine est notée ; 2e, une minute plus tard : ouverture ; 3e : rien en double.
+    assert attentes == [60, 60, 60] and statuts(m)[1] == "ouvert" and len(recues) == 1
 
 
 def test_la_veille_survit_a_une_panne(monkeypatch, caplog):
@@ -386,6 +480,7 @@ def test_une_panne_du_lancement_n_arrete_pas_la_veille(monkeypatch, caplog):
 
     monkeypatch.setattr(ouverture_auto, "annoncer_lancement", panne)
     m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=1)
+    sans_delai(m)
 
     async def attendre(_duree):
         raise Arret

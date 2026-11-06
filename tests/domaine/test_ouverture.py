@@ -1,4 +1,4 @@
-"""peut_ouvrir(), ouvrir_automatiquement() et bilan_etage() (SPEC §5.2, §5.5, critère 27)."""
+"""peut_ouvrir(), ouvrir_automatiquement(), le délai de grâce et bilan_etage() (SPEC §5.2, §5.5, critère 27)."""
 
 from datetime import timedelta
 
@@ -6,11 +6,19 @@ import pytest
 
 from epreuve.domaine.bareme import EtatJauge
 from epreuve.domaine.modeles import Regles
-from epreuve.domaine.ouverture import ACTEUR_SYSTEME, bilan_etage, ouvrir_automatiquement, peut_ouvrir
+from epreuve.domaine.ouverture import (
+    ACTEUR_SYSTEME,
+    bilan_etage,
+    ouvrir_automatiquement,
+    peut_ouvrir,
+    pleine_depuis,
+    reste_avant_ouverture,
+)
 from tests.fabrique import PENDANT, PLANCHER, etage
 
 EN_COURS = etage(1, 0, "ouvert")
 PROCHAIN = etage(2, 1, "scelle")
+MINUTE = timedelta(seconds=60)
 PTS = {"donjons": 8, "full_succes": 4, "principales": 6, "secondaires": 6}
 
 
@@ -72,14 +80,54 @@ def test_bilan_force_sans_motif_refuse(motif):
     (Regles(), "ouvert", jauge(), PLANCHER - timedelta(seconds=1), False),  # date plancher pas passée
 ])
 def test_ouverture_automatique(regles, mode, j, maintenant, attendu):
-    assert ouvrir_automatiquement(j, EN_COURS, PROCHAIN, maintenant, regles, mode) is attendu
+    # La jauge est pleine depuis bien plus que le délai de grâce : seules les autres conditions décident.
+    depuis = PLANCHER - timedelta(days=1)
+    assert ouvrir_automatiquement(j, EN_COURS, PROCHAIN, maintenant, regles, mode, pleine_depuis=depuis) is attendu
 
 
 def test_ouverture_automatique_sans_etage_scelle():
-    assert not ouvrir_automatiquement(jauge(), EN_COURS, None, PLANCHER, Regles(), "ouvert")
-    assert ouvrir_automatiquement(jauge(), EN_COURS, PROCHAIN, PLANCHER, Regles(), "teaser", pendant_teaser=True)
-    assert not ouvrir_automatiquement(jauge(), EN_COURS, PROCHAIN, PLANCHER, Regles(), "teaser")
-    assert not ouvrir_automatiquement(jauge(), EN_COURS, etage(2, 1, "ouvert"), PLANCHER, Regles(), "ouvert")
+    d = PLANCHER - MINUTE
+    assert not ouvrir_automatiquement(jauge(), EN_COURS, None, PLANCHER, Regles(), "ouvert", pleine_depuis=d)
+    assert ouvrir_automatiquement(jauge(), EN_COURS, PROCHAIN, PLANCHER, Regles(), "teaser", pendant_teaser=True,
+                                  pleine_depuis=d)
+    assert not ouvrir_automatiquement(jauge(), EN_COURS, PROCHAIN, PLANCHER, Regles(), "teaser", pleine_depuis=d)
+    assert not ouvrir_automatiquement(jauge(), EN_COURS, etage(2, 1, "ouvert"), PLANCHER, Regles(), "ouvert",
+                                      pleine_depuis=d)
+
+
+# ---------------------------------------------------------------- le délai de grâce (une coche par erreur)
+
+
+def test_pleine_depuis_note_garde_et_efface():
+    assert pleine_depuis(jauge(), None, PLANCHER) == PLANCHER  # elle vient de se remplir
+    assert pleine_depuis(jauge(), PENDANT, PLANCHER) == PENDANT  # toujours pleine : l'instant d'origine reste
+    assert pleine_depuis(jauge(score=23), PENDANT, PLANCHER) is None  # décochée : le compte repart de zéro
+    assert pleine_depuis(jauge(0, 0, 0), None, PLANCHER) is None
+
+
+def test_reste_avant_ouverture():
+    assert reste_avant_ouverture(None, PLANCHER, Regles()) is None
+    assert reste_avant_ouverture(PLANCHER, PLANCHER, Regles()) == 60
+    assert reste_avant_ouverture(PLANCHER - timedelta(seconds=45), PLANCHER, Regles()) == 15
+    assert reste_avant_ouverture(PLANCHER - MINUTE, PLANCHER, Regles()) is None  # écoulé pile à la minute
+    assert reste_avant_ouverture(PLANCHER, PLANCHER, Regles(delai_grace_secondes=0)) is None
+
+
+@pytest.mark.parametrize(("depuis", "attendu"), [
+    (None, False),  # jauge pas pleine au dernier regard
+    (PLANCHER, False),  # pleine à l'instant : pas d'ouverture immédiate
+    (PLANCHER - timedelta(seconds=59), False),  # une seconde trop tôt
+    (PLANCHER - MINUTE, True),  # pleine depuis une minute d'affilée
+])
+def test_ouverture_automatique_attend_le_delai_de_grace(depuis, attendu):
+    assert ouvrir_automatiquement(jauge(), EN_COURS, PROCHAIN, PLANCHER, Regles(), "ouvert",
+                                  pleine_depuis=depuis) is attendu
+
+
+def test_delai_nul_ouvre_des_la_coche():
+    regles = Regles(delai_grace_secondes=0)
+    assert ouvrir_automatiquement(jauge(), EN_COURS, PROCHAIN, PLANCHER, regles, "ouvert", pleine_depuis=PLANCHER)
+    assert not ouvrir_automatiquement(jauge(), EN_COURS, PROCHAIN, PLANCHER, regles, "ouvert", pleine_depuis=None)
 
 
 def test_acteur_systeme_est_vide():

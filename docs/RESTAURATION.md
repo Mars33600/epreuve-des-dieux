@@ -32,6 +32,7 @@ Si la version fautive a changé le schéma, redescendre aussi la migration : `fl
 Quand la jauge de l'étage en cours est pleine, qu'un étage scellé suit et que la date plancher est passée, le site ouvre l'étage suivant tout seul : juste après la coche (ou le gel, le palier, le masquage) qui remplit la jauge, et sinon dans la minute qui suit la date plancher (une veille tourne en fond). Rien ne se passe pendant le teaser. Au journal admin, l'auteur de ces ouvertures est « système ».
 
 - **Couper l'ouverture automatique** : `ouverture: automatique: false` dans `config/regles.yaml`, puis redéployer. L'ouverture manuelle (bouton de l'admin, forcée ou non) reste toujours possible.
+- **Délai de grâce de l'ouverture automatique** : `ouverture: delai_grace_secondes` (60 par défaut) ; l'étage suivant s'ouvre quand la jauge est restée pleine aussi longtemps (le temps de rattraper une coche par erreur). `0` rend l'ouverture immédiate. Le compte vit en mémoire : un redémarrage le remet à zéro (une minute de retard au pire).
 - **Une ouverture de trop** : il n'y a pas de bouton « refermer » ; la base se corrige à la main (statut des deux étages, ligne de `bilan_etage`), d'où l'intérêt de bien régler palier et date plancher avant.
 
 Chaque ouverture, automatique ou manuelle, est annoncée sur Discord par le « Gardien de la Tour » (un `@everyone` avec le nom, les niveaux et le lien de l'étage), si le webhook est réglé. Un webhook, c'est une adresse de salon à laquelle le site poste un message : aucun bot à héberger.

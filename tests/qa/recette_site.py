@@ -16,7 +16,8 @@
 - parcours v5 en grimpeur : structure des blocs (titre Duffus, cadre et libellé, case « Bloc terminé », nombre de
   quêtes, lien « Ouvrir sur Duffus » en nouvel onglet), cocher et décocher un bloc (jauge, compteurs, volet « Fait par »,
   persistance), point « Quêtes principales » et catégorie secondaire vide, donjons et succès, filtres dans l'URL et
-  retour arrière, refus de cocher la fiche d'un autre, fiche, tableau de bord, filtre « qui a fait » sur un bloc ;
+  retour arrière, refus de cocher pour un autre (son tableau de bord en lecture seule), mon tableau de bord,
+  filtre « qui a fait » sur un bloc ;
 - en admin : correction de la nature d'un bloc (motif obligatoire, journal, effet, retour à la règle) ;
 - un membre du Discord sans fiche et hors liste crée sa fiche (« Créer ma fiche ») ;
 - la recherche globale (saisie progressive, grimpeurs, blocs, donjons, jamais de quête).
@@ -24,7 +25,9 @@
 `demo` : données fictives en mémoire. `base` : TEST_DATABASE_URL (ou DATABASE_URL, jamais `.env`) remplie par
 `python -m epreuve.contenu construire --etage 0` puis `--etage 1` (base migrée par `alembic upgrade head`) ; le
 serveur de recette ouvre l'étage 1, ce qui termine le 0, et efface les fiches « Novice<largeur> » créées par la
-recette précédente. Les coches de Brindille sont remises comme avant par chaque scénario.
+recette précédente. Les coches de Brindille sont remises comme avant par chaque scénario : chaque case revient à
+son état de départ (la démo part de fiches déjà cochées). Une coche qui remplit la jauge n'ouvre pas l'étage suivant :
+le délai de grâce (60 s) ne s'écoule jamais sous l'horloge figée du serveur de recette, et la recette décoche aussitôt.
 Code de sortie 1 s'il reste un défaut ; le détail est écrit dans <captures>/rapport.json.
 """
 
@@ -269,6 +272,7 @@ class Contexte:
             pass
 
     mode = ""
+    moi = ""  # ma page /grimpeurs/{id} : depuis la fusion fiche/tableau, elle redirige (303) vers /tableau-de-bord
 
     def attendu(self, chemin: str, defaut: int = 200) -> int:
         # SPEC-V5 §2 : les modules du « Monde des Douze » et la fiche de quête répondent 404.
@@ -301,6 +305,17 @@ def connecter(ctx: Contexte, profil: str) -> None:
     ctx.statuts.clear()
     if "/histoire" in ctx.page.url or ctx.page.locator("#prologue, .prologue").count():
         ctx.page.goto(ctx.base + "/")  # le prologue ne bloque pas l'accès : on passe à l'accueil
+
+
+def ma_page(ctx: Contexte) -> str:
+    """Ma page /grimpeurs/{id}, celle qui redirige vers /tableau-de-bord ; « » sans fiche (admin, novice)."""
+    ctx.aller("/grimpeurs")
+    for h in liens_internes(ctx.page, ctx.base):
+        if re.fullmatch(r"/grimpeurs/\d+", h):
+            r = ctx.page.request.get(ctx.base + h, max_redirects=0)
+            if r.status == 303 and r.headers.get("location", "").startswith("/tableau-de-bord"):
+                return h
+    return ""
 
 
 def liens_internes(page: Page, base: str) -> list[str]:
@@ -366,8 +381,11 @@ def visiter_en_cliquant(ctx: Contexte, depart: str, href: str) -> bool:
     p.wait_for_timeout(150)
     docs = [(u, s) for u, s in ctx.statuts if not u.startswith(("/static", "/api"))]
     cible_statut = next((s for u, s in docs if u.split("#")[0] == href.split("#")[0]), None)
-    if cible_statut is not None and cible_statut != ctx.attendu(href):
+    attendu = 303 if ctx.moi and href.split("#")[0] == ctx.moi else ctx.attendu(href)
+    if cible_statut is not None and cible_statut != attendu:
         ctx.defaut(f"clic sur {href} (depuis {avant}) : statut {cible_statut}")
+    if attendu == 303 and ctx.chemin != "/tableau-de-bord":
+        ctx.defaut(f"clic sur ma page {href} : on arrive sur {ctx.chemin} au lieu de /tableau-de-bord")
     ctx.r.pages.add((ctx.etiquette, ctx.largeur, urlparse(href).path))
     ctx.controler(f"après clic vers {href}")
     ctx.photo(slug(href))
@@ -647,6 +665,10 @@ def cocher_un_bloc(ctx: Contexte, numero: int, pseudo: str) -> None:
         ctx.defaut(f"« Ma progression » {cat} : {avant['cats'][cat]} → {apres['cats'][cat]} (+1 attendu)")
     if p.locator("#messageCoche:visible").count():
         ctx.defaut(f"message d'échec après la coche : {p.inner_text('#messageCoche')}")
+    # En démo, le seul bloc libre de Brindille remplit la jauge : le délai de grâce (60 s, horloge de recette
+    # figée) laisse l'étage suivant fermé, et la décoche plus bas rattrape la coche comme un vrai misclic.
+    if p.locator("#verdict.open").count() and p.request.get(ctx.base + f"/etages/{numero + 1}").status != 404:
+        ctx.defaut(f"{ref} : la coche qui remplit la jauge a ouvert l'étage {numero + 1} sans délai de grâce")
     # le volet « fait par »
     carte.locator("details.qui-bloc summary").click()
     p.wait_for_timeout(600)
@@ -728,30 +750,38 @@ def point_principales(ctx: Contexte, numero: int) -> None:
 
 
 def donjons_et_succes(ctx: Contexte, numero: int) -> None:
-    """Un donjon : ses cases, « Tout le donjon », le compteur x/5, la persistance ; on remet à zéro."""
+    """Un donjon : ses cases, « Tout le donjon », le compteur x/5, la persistance ; on remet chaque case comme
+    elle était au départ (en démo, Brindille a déjà des donjons cochés : la recette ne doit pas les effacer)."""
     p = ctx.page
     ctx.aller(f"/etages/{numero}")
-    li = p.locator("li[data-donjon]").first
-    if li.count() == 0:
+    donjons = p.locator("li[data-donjon]")
+    if donjons.count() == 0:
         ctx.defaut(f"étage {numero} : aucun donjon")
         return
+    # Un donjon pas encore complet, pour que cocher une case change le compteur ; le premier, faute de mieux.
+    comptes = [entier(t) for t in donjons.locator("[data-djcompte]").all_inner_texts()]
+    rang = next((i for i, n in enumerate(comptes) if n < 5), 0)
+    li = donjons.nth(rang)
     li.locator("summary").first.click()
     boites = li.locator("input[data-ref]")
     total = boites.count()
     if total != 5:
-        ctx.defaut(f"étage {numero} : le premier donjon a {total} cases au lieu de 5")
+        ctx.defaut(f"étage {numero} : le donjon {rang + 1} a {total} cases au lieu de 5")
     etat0 = lire_etat(p)
+    cases0 = [boites.nth(i).is_checked() for i in range(total)]
     compte = li.locator("[data-djcompte]")
     avant = entier(compte.inner_text())
-    cible = boites.nth(0)
-    if cible.is_checked():
-        ctx.defaut("donjon : la première case est cochée sur une base de recette neuve")
-    cible.check(force=True)  # le boss du donjon (la case « Donjon »)
-    p.wait_for_timeout(600)
-    if entier(compte.inner_text()) != avant + 1:
-        ctx.defaut(f"donjon : compteur {compte.inner_text()} après une case (attendu {avant + 1})")
-    cible.uncheck(force=True)
-    p.wait_for_timeout(600)
+    # La première case libre : le boss (case « Donjon ») sur une fiche neuve, sinon un succès (le boss est
+    # alors déjà coché, la coche n'entraîne rien d'autre et le compteur prend exactement +1).
+    libre = next((i for i, c in enumerate(cases0) if not c), None)
+    if libre is not None:
+        cible = boites.nth(libre)
+        cible.check(force=True)
+        p.wait_for_timeout(600)
+        if entier(compte.inner_text()) != avant + 1:
+            ctx.defaut(f"donjon : compteur {compte.inner_text()} après une case (attendu {avant + 1})")
+        cible.uncheck(force=True)
+        p.wait_for_timeout(600)
     tout = li.locator("[data-donjon-tout]")
     if tout.is_visible():
         tout.click()
@@ -762,13 +792,16 @@ def donjons_et_succes(ctx: Contexte, numero: int) -> None:
         ctx.photo("donjon-complet")
         p.reload()
         p.wait_for_load_state("load")
-        li = p.locator("li[data-donjon]").first
+        li = p.locator("li[data-donjon]").nth(rang)
         li.locator("summary").first.click()
         if li.locator("[data-djcompte]").inner_text() != "5":
             ctx.defaut("« Tout le donjon » n'a pas persisté après rechargement")
-        for i in range(5):
-            li.locator("input[data-ref]").nth(i).uncheck(force=True)
-            p.wait_for_timeout(350)
+        # Retour à l'état de départ : on ne décoche que les cases libres au départ, les succès d'abord, le boss en
+        # dernier (décocher le boss décoche tout le donjon, T-16 : il n'était libre que si tout l'était).
+        for i in reversed(range(len(cases0))):
+            if not cases0[i]:
+                li.locator("input[data-ref]").nth(i).uncheck(force=True)
+                p.wait_for_timeout(350)
     p.reload()
     p.wait_for_load_state("load")
     if lire_etat(p) != etat0:
@@ -835,12 +868,12 @@ def filtres_url(ctx: Contexte, numero: int) -> None:
 
 
 def refus_autre_fiche(ctx: Contexte, autre_id: str | None, numero: int) -> None:
-    """On ne coche pas la fiche d'un autre : cases désactivées, et l'API refuse (403)."""
+    """On ne coche pas pour un autre : son tableau de bord est en lecture seule, et l'API refuse (403)."""
     p = ctx.page
     if not autre_id:
         return
     ctx.aller(f"/grimpeurs/{autre_id}")
-    ctx.photo("fiche-autre")
+    ctx.photo("tableau-autre")
     activees = p.locator("input[data-ref]:not([disabled])").count()
     if activees:
         ctx.defaut(f"fiche de l'autre grimpeur : {activees} cases modifiables (lecture seule attendue)")
@@ -849,54 +882,49 @@ def refus_autre_fiche(ctx: Contexte, autre_id: str | None, numero: int) -> None:
     if p.locator("li.bloc-carte input[data-ref]:not([disabled])").count() and p.locator("li.bloc-carte input[data-ref]:disabled").count():
         ctx.defaut("?grimpeur=autre : des cases de blocs sont actives")
     # l'API : un grimpeur ne peut pas cocher pour un autre
-    ref = p.locator("li.bloc-carte input[data-ref^='bloc:']").first.get_attribute("data-ref")
+    # On demande l'inverse de l'état actuel de son bloc (en démo, l'autre a souvent déjà ses blocs) : un refus
+    # se voit alors à ce que l'état n'a pas bougé, pas à « coché ou non ».
+    boite = p.locator("li.bloc-carte input[data-ref^='bloc:']").first
+    ref, avant = boite.get_attribute("data-ref"), boite.is_checked()
     csrf = p.evaluate("(document.querySelector('meta[name=csrf]') || {}).content || ''")
     rep = p.request.post(ctx.base + "/api/coches", data=json.dumps(
-        {"type": "bloc", "id": int(ref.split(":")[1]), "cochee": True, "grimpeur_id": int(autre_id), "motif": "test"}),
+        {"type": "bloc", "id": int(ref.split(":")[1]), "cochee": not avant, "grimpeur_id": int(autre_id), "motif": "test"}),
         headers={"Content-Type": "application/json", "X-CSRF-Token": csrf, "Origin": ctx.base})
     if rep.status not in (403, 400):
         ctx.defaut(f"cocher le bloc d'un autre grimpeur par l'API : statut {rep.status} (403 attendu)")
     p.reload()
-    if p.locator(f"input[data-ref='{ref}']").first.is_checked():
-        ctx.defaut("le bloc d'un autre grimpeur est devenu coché")
+    if p.locator(f"input[data-ref='{ref}']").first.is_checked() != avant:
+        ctx.defaut(f"le bloc {ref} d'un autre grimpeur a changé d'état ({'coché' if avant else 'libre'} au départ)")
 
 
 def fiche_et_tableau(ctx: Contexte, numero: int) -> None:
-    """Ma fiche, le tableau de bord et la page Grimpeurs avec le filtre « qui a fait » sur un bloc."""
+    """Mon tableau de bord (l'ancienne « Ma fiche » y est fusionnée) et la page Grimpeurs avec le filtre « qui a
+    fait » sur un bloc."""
     p = ctx.page
     ctx.aller(f"/etages/{numero}")
     ref = p.locator("li.bloc-carte input[data-ref^='bloc:']").first.get_attribute("data-ref")
-    p.locator(f"input[data-ref='{ref}']").first.check(force=True)
-    p.wait_for_timeout(600)
+    deja = p.locator(f"input[data-ref='{ref}']").first.is_checked()  # état de départ, remis à la fin
+    if not deja:
+        p.locator(f"input[data-ref='{ref}']").first.check(force=True)
+        p.wait_for_timeout(600)
     titre = p.locator(f"li.bloc-carte:has(input[data-ref='{ref}']) h3").inner_text().strip()
-    ma = p.locator(".bar .ma-fiche").get_attribute("href")
-    pseudo = p.locator(".bar .ma-fiche").text_content().split("(")[-1].strip(" )")
-    ctx.aller(f"{ma}#etage{numero}")  # l'ancre déplie l'étage s'il est dans « Étages précédents » (recette v4)
-    ctx.photo("fiche-moi")
-    corps = p.inner_text("body")
-    if "Blocs du guide" not in corps:
-        ctx.defaut("fiche : pas de section « Blocs du guide »")
-    etage = p.locator(f"#etage{numero}").locator("xpath=ancestor-or-self::*[self::section or self::details][1]")
-    resume = etage.locator("details.pli > summary", has_text="Blocs du guide").first  # plié par défaut
-    if resume.count():
-        resume.click()
-    ligne = etage.locator("ul.etat-liste li", has_text=titre).first
-    if ligne.count() == 0 or "Fait" not in ligne.inner_text() or "À faire" in ligne.inner_text():
-        ctx.defaut(f"fiche : le bloc « {titre} » n'apparaît pas comme fait")
-    if p.locator("input[data-ref]:not([disabled])").count() == 0:
-        ctx.defaut("ma fiche : aucune case modifiable")
-    nb_f = entier(resume.locator(".pli-cpt").inner_text()) if resume.count() else 0
-    if nb_f < 1:
-        ctx.defaut("fiche : le compteur de blocs ne compte pas le bloc coché")
-    ctx.controler("ma fiche")
-    # tableau de bord
+    pseudo = p.locator(".bar .who b").first.inner_text().strip()
+    # Mon tableau de bord : le résumé de l'étage en cours compte le bloc, qui n'est plus dans « à faire ensuite ».
+    # Sur son propre tableau, les blocs se cochent sur la page de l'étage (contrôlé plus haut).
     ctx.aller("/tableau-de-bord")
     ctx.photo("tableau")
     dt = p.locator("dl.resume-etage").first
     if "Blocs du guide" not in dt.inner_text():
         ctx.defaut("tableau de bord : « Blocs du guide » absent du résumé d'étage")
+    elif entier(dt.locator("div", has_text="Blocs du guide").locator("dd").inner_text()) < 1:
+        ctx.defaut("tableau de bord : le compteur de blocs ne compte pas le bloc coché")
+    suite = p.locator("#tbSuite").locator("xpath=..")
+    if suite.count() and titre in suite.inner_text():
+        ctx.defaut(f"tableau de bord : le bloc « {titre} », fait, reste dans « Blocs à faire ensuite »")
     ctx.controler("tableau de bord")
     ctx.aller("/tableau-de-bord?onglet=succes")
+    if p.locator("input[data-ref]:not([disabled])").count() == 0:
+        ctx.defaut("mon tableau de bord, succès de donjon : aucune case modifiable")
     ctx.controler("tableau de bord, succès de donjon")
     ctx.aller("/tableau-de-bord?onglet=succes&reste=1")
     ctx.controler("tableau de bord, succès restants")
@@ -923,10 +951,11 @@ def fiche_et_tableau(ctx: Contexte, numero: int) -> None:
         p.wait_for_timeout(200)
         if p.locator("#roster .player.target").count():
             ctx.defaut("« qui a fait » : les cartes restent mises en avant après fermeture de l'objectif")
-    # remise à zéro
-    ctx.aller(f"/etages/{numero}")
-    p.locator(f"input[data-ref='{ref}']").first.uncheck(force=True)
-    p.wait_for_timeout(600)
+    # remise dans l'état de départ : on ne décoche que ce que la recette a coché
+    if not deja:
+        ctx.aller(f"/etages/{numero}")
+        p.locator(f"input[data-ref='{ref}']").first.uncheck(force=True)
+        p.wait_for_timeout(600)
 
 
 def sans_trace_de_quete(ctx: Contexte) -> None:
@@ -935,8 +964,8 @@ def sans_trace_de_quete(ctx: Contexte) -> None:
     for chemin in ("/", "/etages/0", "/etages/1", "/grimpeurs", "/tableau-de-bord", "/regles"):
         if chemin == "/etages/1" and ctx.mode == "demo":
             continue  # scellé dans la démo
-        if chemin == "/tableau-de-bord" and p.locator(".bar .ma-fiche").count() == 0:
-            continue
+        if chemin == "/tableau-de-bord" and p.locator(".bar a[href='/tableau-de-bord']").count() == 0:
+            continue  # pas de fiche, pas de tableau de bord
         ctx.aller(chemin)
         traces = p.evaluate("""() => [...document.querySelectorAll(
           "a[data-qopen], dialog#qd, [data-etape], [data-qui]:not([data-qui='fait']):not([data-qui='pas']), input[data-ref^='quete:'], a[href*='/quetes/'], a[href^='/encyclopedie'], a[href^='/outils'], a[href^='/builder'], a[href^='/archimonstres'], a[href^='/avis-de-recherche'], a[href^='/stuffs']"
@@ -1103,8 +1132,8 @@ def creer_fiche(ctx: Contexte, nom: str, ouvert: int) -> None:
         return
     if p.locator(".bar a", has_text="Créer ma fiche").count():
         ctx.defaut("« Créer ma fiche » reste affiché après la création")
-    if p.locator(".bar .ma-fiche").count() == 0:
-        ctx.defaut("pas de lien « Ma fiche » après la création")
+    if p.locator(".bar a[href='/tableau-de-bord']").count() == 0:
+        ctx.defaut("pas de lien « Tableau de bord » après la création")
     ctx.aller(f"/etages/{ouvert}")
     cases = p.locator("li.bloc-carte input[data-ref]:not([disabled])")
     if cases.count() == 0:
@@ -1181,6 +1210,7 @@ def scenario(playwright, serveur: Serveur, mode: str, largeur: int, captures: Pa
             ctx.aller("/")
             ctx.photo("accueil")
             parcours_menu(ctx, a_fiche=not est_admin, admin=est_admin)
+            ctx.moi = ma_page(ctx)
             crawler(ctx, limite)
             desactives(ctx)
             sans_trace_de_quete(ctx)
@@ -1195,16 +1225,16 @@ def scenario(playwright, serveur: Serveur, mode: str, largeur: int, captures: Pa
                     ctx.aller(f"/etages/{n}", attendu=404)
             autre = None
             ctx.aller("/grimpeurs")
-            moi = page.locator(".bar .ma-fiche").get_attribute("href") if page.locator(".bar .ma-fiche").count() else ""
+            a_fiche = page.locator(".bar a[href='/tableau-de-bord']").count() > 0
             for h in liens_internes(page, serveur.adresse):
-                if re.fullmatch(r"/grimpeurs/\d+", h) and h != moi:
+                if re.fullmatch(r"/grimpeurs/\d+", h) and h != ctx.moi:
                     autre = h.rsplit("/", 1)[1]
                     break
             if est_admin:
                 if mode == "base":
                     correction_admin(ctx, ouvert)
             else:
-                pseudo = page.locator(".bar .ma-fiche").text_content().split("(")[-1].strip(" )") if moi else profil
+                pseudo = page.locator(".bar .who b").first.inner_text().strip() if a_fiche else profil
                 ctx.aller(f"/etages/{ouvert}")
                 if structure_blocs(ctx, ouvert) == 0:
                     ctx.defaut(f"étage {ouvert} sans bloc")

@@ -3,7 +3,8 @@
     GET /        le teaser (mode teaser, sauf admin connecté) ; sinon l'accueil (visiteur) ou la tour
     GET /sante   {"statut": "ok", "base": "absente"|"ok"|"erreur", "mode": "teaser"|"ouvert"}
     auth.py      /connexion, /auth/discord/retour, /deconnexion
-    pages.py     /etages/{n}, /etages/{n}/quetes/{id}, /grimpeurs, /grimpeurs/{id}, /inscription
+    pages.py     /etages/{n}, /etages/{n}/quetes/{id}, /grimpeurs, /inscription
+    tableau.py   /tableau-de-bord, /grimpeurs/{id} (le tableau de bord d'un autre, en lecture seule)
     api.py       POST /api/coches, GET /api/etages/{n}/manque
     admin.py     /admin/…
 
@@ -72,6 +73,7 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
     app.state.config, app.state.horloge, app.state.depot = config, horloge, source
     app.state.oauth, app.state.regles = oauth, regles or Regles()
     app.state.transport_webhook = transport_webhook
+    app.state.pleine_depuis = {}  # depuis quand la jauge est pleine (délai de grâce, web/ouverture_auto.py)
     app.state.gabarits = gabarits = creer_gabarits()
     app.mount("/static", StaticFiles(directory=ICI / "static"), name="static")
     # Ordre : le dernier ajouté enveloppe les autres. Les en-têtes s'ajoutent donc aussi aux 303 et 404 du filtre.

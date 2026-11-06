@@ -8,6 +8,8 @@ palier:
 ouverture:
   automatique: true           # jauge pleine + étage suivant préparé + date plancher passée → le site l'ouvre seul ;
                               # false : seul un admin ouvre (l'ouverture manuelle, forcée ou non, reste toujours)
+  delai_grace_secondes: 60    # la jauge doit rester pleine 60 s d'affilée avant l'ouverture (rattraper une coche
+                              # par erreur) ; 0 : ouverture dès la coche qui la remplit
 
 coches:
   succes_coche_vaincu: true   # T-16 : cocher un succès coche « Vaincre le boss » ; décocher celle-ci décoche les autres

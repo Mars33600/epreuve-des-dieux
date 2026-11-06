@@ -507,6 +507,12 @@ def test_page_des_regles_lit_la_configuration():
     # `ouverture.automatique: false` : la règle redevient l'ouverture par un admin.
     manuel = monde(regles=Regles(ouverture_automatique=False)).connecter(ID_BRINDILLE).get("/regles").text
     assert "un admin vérifie et ouvre" in manuel and "s'ouvre tout seul" not in manuel
+    # Le délai de grâce : dit en une phrase, en minute s'il vaut 60 s, absent s'il est coupé.
+    assert "s'ouvre une minute après que la jauge est pleine (le temps de rattraper une coche par erreur)" in html
+    sans = monde(regles=Regles(delai_grace_secondes=0)).connecter(ID_BRINDILLE).get("/regles").text
+    assert "rattraper une coche" not in sans
+    assert "s'ouvre 90 secondes après" in monde(regles=Regles(delai_grace_secondes=90)).connecter(
+        ID_BRINDILLE).get("/regles").text
 
 
 # ---------------------------------------------------------------- transverse (critère 34)

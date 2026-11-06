@@ -204,6 +204,7 @@ class Regles:
     verrouiller_modules_par_etage: bool = False  # T-08 (lot E)
     monde_des_douze: bool = False  # SPEC-V5 §2 : encyclopédie, stuffs, builder, outils, archis et avis, fiche de quête
     ouverture_automatique: bool = True  # Shadoaze : jauge pleine et date plancher passée → étage suivant ouvert seul
+    delai_grace_secondes: int = 60  # Marceau : la jauge reste pleine une minute avant l'ouverture (coche par erreur)
 
 
 @dataclass(frozen=True)
