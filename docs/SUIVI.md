@@ -13,6 +13,8 @@ Détails : `DECISIONS-V4.md`.
 - [x] 10/11 : pré-inscription du 11/11 17 h au 13/11 17 h (bouton sur le compte à rebours, page seule, reste du site fermé, fiches closes à l'ouverture sauf admin), question de dispo pour la guilde (migration i1), serveur Mikhal dans les règles, pied de page « Réalisé par Shadoaze et Mars »
 - [x] 10/11 : tableau de bord, carte profil dorée (initiale) et carte « Étage en cours » sombre à bandeau ; récapitulatif des dispos guilde dans /admin/grimpeurs
 - [x] 10/11 : tableau de bord, catégories en clair, lien « N blocs du guide à cocher », points par catégorie et profil de jeu (« Plutôt donjons ») ; règles, Duffus pour les quêtes une à une, le site pour le bloc entier
+- [x] 10/11 : « Il te reste à cocher » liste aussi les donjons pas complets ; encadré « Mode teaser » compact ; « guide Duffus » en lien dans les règles
+- [ ] Avant le 13/11 17 h : vérifier que les coches d'admins faites pendant la recette sont voulues (sinon les retirer)
 - [ ] Ouverture du site le vendredi 13/11 à 17 h, tout prêt « nickel au démarrage »
 
 ## Règles du jeu
