@@ -151,6 +151,7 @@ grimpeur = Table(
     Column("niveau_declare", Integer),
     Column("inscrit_le", Horodatage, nullable=False),
     Column("prologue_vu_le", Horodatage),  # première fois que le grimpeur a passé le prologue
+    Column("dispo_guilde", Text),  # « oui » (vendredi 16 h-17 h pour la guilde) ou « à partir de quand »
 )
 
 coche_case = Table(

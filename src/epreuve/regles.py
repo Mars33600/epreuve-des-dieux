@@ -70,6 +70,10 @@ class _Ouverture(_Section):
     delai_grace_secondes: int = Field(60, ge=0)  # 0 : ouverture dès la coche qui remplit la jauge
 
 
+class _Aventure(_Section):
+    serveur: str | None = None
+
+
 class _Fichier(_Section):
     palier: _Palier = _Palier()
     ouverture: _Ouverture = _Ouverture()
@@ -77,6 +81,7 @@ class _Fichier(_Section):
     inscription: _Inscription = _Inscription()
     fiche: _Fiche = _Fiche()
     modules: _Modules = _Modules()
+    aventure: _Aventure = _Aventure()
 
 
 def regles_depuis(donnees: object) -> Regles:
@@ -98,6 +103,7 @@ def regles_depuis(donnees: object) -> Regles:
         monde_des_douze=f.modules.monde_des_douze,
         ouverture_automatique=f.ouverture.automatique,
         delai_grace_secondes=f.ouverture.delai_grace_secondes,
+        serveur=f.aventure.serveur,
     )
 
 

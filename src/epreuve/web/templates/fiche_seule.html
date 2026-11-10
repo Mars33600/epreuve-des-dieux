@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{# La fiche de pré-inscription (11/11 17 h → 13/11 17 h), servie seule derrière le compte à rebours : ni
+   navigation ni lien vers le reste du site, qui reste fermé jusqu'à l'ouverture. Pas de lien Duffus non plus. #}
+{% block tete %}
+<link rel="stylesheet" href="/static/commun.css">
+<link rel="stylesheet" href="/static/style.css">
+{% endblock %}
+{% block script_entete %}{% endblock %}
+{% block contenu %}
+<div class="scene" aria-hidden="true"><div class="sky"></div><div class="glow"></div><div class="scrim"></div></div>
+<div class="wrap">
+  {% block page %}{% endblock %}
+  <p class="solo retour"><a href="/">← Retour au compte à rebours</a></p>
+</div>
+{% endblock %}
+{% block merci %}{% endblock %}

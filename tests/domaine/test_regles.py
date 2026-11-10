@@ -22,7 +22,7 @@ def test_fichier_absent_donne_les_defauts(tmp_path):
 
 def test_fichier_du_depot_vaut_les_defauts():
     # Seul écart voulu : la classe est obligatoire en production depuis le 04/11 (Shadoaze).
-    assert lire_regles(CHEMIN_PAR_DEFAUT) == Regles(classe_obligatoire=True)
+    assert lire_regles(CHEMIN_PAR_DEFAUT) == Regles(classe_obligatoire=True, serveur="Mikhal")
 
 
 def test_fichier_vide_donne_les_defauts(tmp_path):

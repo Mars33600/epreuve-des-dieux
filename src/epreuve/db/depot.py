@@ -158,7 +158,7 @@ def _bloc(r) -> Bloc:
 
 def _grimpeur(r) -> Grimpeur:
     return Grimpeur(r.id, r.discord_user_id, r.nom_discord, r.pseudo_ig, r.classe, r.statut, r.niveau_declare,
-                    r.inscrit_le, r.prologue_vu_le is not None)
+                    r.inscrit_le, r.prologue_vu_le is not None, r.dispo_guilde)
 
 
 def _entree(r) -> EntreeJournal:
@@ -362,7 +362,7 @@ class Depot:
 
     async def creer_grimpeur(self, discord_user_id: int, nom_discord: str, pseudo: str, classe: str | None,
                              niveau_declare: int | None, maintenant: datetime, *,
-                             liste_obligatoire: bool = True) -> Grimpeur:
+                             liste_obligatoire: bool = True, dispo_guilde: str | None = None) -> Grimpeur:
         """PasSurLaListe, DejaInscrit, PseudoDejaPris ; statut = statut initial de la liste officielle.
 
         `liste_obligatoire` reprend `Regles.liste_officielle_obligatoire` (T-19) : faux, un membre hors liste
@@ -379,7 +379,7 @@ class Depot:
                 statut = liste.statut_initial if liste else "actif"
                 r = (await c.execute(insert(t.grimpeur).values(
                     discord_user_id=discord_user_id, nom_discord=nom_discord, pseudo_ig=pseudo, classe=classe,
-                    statut=statut, niveau_declare=niveau_declare, inscrit_le=maintenant,
+                    statut=statut, niveau_declare=niveau_declare, inscrit_le=maintenant, dispo_guilde=dispo_guilde,
                 ).returning(t.grimpeur))).one()  # fmt: skip
                 await self._journaliser(c, "inscription", discord_user_id, maintenant,
                                         {"pseudo": pseudo, "classe": classe, "statut": statut},

@@ -47,7 +47,7 @@
 
 <main class="stage">
   <div class="halo" aria-hidden="true"></div>
-  <p class="eyebrow">Monde des Douze · Serveur Kourial</p>
+  <p class="eyebrow">Monde des Douze</p>
   <h1><span class="l1">L'Épreuve</span> <span class="l2">des Dieux</span></h1>
   <svg class="rule" viewBox="0 0 240 12" aria-hidden="true"><path d="M0 6 H104 M136 6 H240" stroke="currentColor" stroke-width="1" opacity=".55"/><path d="M120 0 L126 6 L120 12 L114 6Z" fill="currentColor"/></svg>
   <p class="lore">
@@ -68,6 +68,20 @@
       <span class="local" id="localTime"></span></p>
   </section>
 
+  {#- La pré-inscription (11/11 17 h → ouverture) : la seule porte vers le site avant vendredi. #}
+  {% if fiches %}
+  <section class="fiche" aria-labelledby="ficheTitre">
+    {% if v.grimpeur %}
+    <h2 id="ficheTitre">Ta fiche est prête, {{ v.grimpeur.pseudo }}</h2>
+    <p>Tu fais partie des grimpeurs. Rendez-vous vendredi à {{ heure_ouverture }}.</p>
+    {% else %}
+    <h2 id="ficheTitre">Les fiches sont ouvertes</h2>
+    <p>Crée ta fiche avant vendredi {{ heure_ouverture }} pour faire partie de l'ascension. Ensuite, plus personne ne pourra rejoindre la tour.</p>
+    <a class="enter" href="{{ '/inscription' if v.connecte else '/connexion' }}">Créer ma fiche <span aria-hidden="true">→</span></a>
+    {% endif %}
+  </section>
+  {% endif %}
+
   <section class="opened" id="opened"{% if not ouvert %} hidden{% endif %} aria-live="polite">
     <h2>Les portes sont ouvertes</h2>
     <p>La tour attend ses grimpeurs. Le premier étage se gravit ensemble&nbsp;: rejoignez l'ascension depuis le Discord de l'événement.</p>
@@ -75,7 +89,6 @@
   </section>
 </main>
 {% endblock %}
-{% block mention_visuels %}&nbsp;; tous les visuels de cette page sont dessinés par le code{% endblock %}
 {#- Pas de lien vers Duffus avant l'ouverture : le guide ne doit pas mettre sur la piste (demande de Shadoaze, 04/11). #}
 {% block merci %}{% endblock %}
 {% block scripts %}<script src="/static/teaser/teaser.js"></script>{% endblock %}

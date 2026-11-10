@@ -29,7 +29,7 @@ from starlette.requests import HTTPConnection
 from starlette.types import Scope
 
 from epreuve.discord.oauth import ErreurDiscord, PasMembre, est_admin
-from epreuve.domaine.mode_site import mode_effectif
+from epreuve.domaine.mode_site import fiches_ouvertes, mode_effectif
 from epreuve.domaine.modeles import Grimpeur, Session
 from epreuve.web.securite import csrf_valide, origine_permise
 
@@ -241,7 +241,9 @@ async def retour(request: Request, code: str = "", state: str = "", error: str =
     await s.depot.creer_session(hacher(jeton), identite.discord_user_id, identite.nom, admin, jeton_oauth,
                                 secrets.token_urlsafe(32), maintenant, DUREE_SESSION)
     grimpeur = await s.depot.grimpeur_par_discord(identite.discord_user_id)
-    vers = "/" if grimpeur is not None or (mode(request) == "teaser" and not admin) else "/inscription"
+    # Pendant le teaser, un joueur sans fiche va à sa fiche si la fenêtre est ouverte, sinon au compte à rebours.
+    fiches = fiches_ouvertes(s.config.fiches_ouvertes_le, s.config.fin_des_fiches, maintenant)
+    vers = "/" if grimpeur is not None or (mode(request) == "teaser" and not admin and not fiches) else "/inscription"
     reponse = RedirectResponse(vers, status_code=303)
     _poser_cookie(reponse, COOKIE_SESSION, jeton, DUREE_SESSION)
     reponse.delete_cookie(COOKIE_STATE, path="/", secure=True, httponly=True, samesite="lax")

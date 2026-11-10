@@ -18,16 +18,19 @@ ModeEffectif = Literal["teaser", "ouvert"]
 
 # Ce que le middleware laisse passer en mode teaser, pour tout le monde.
 # Lot B : la connexion est permise pour que les admins puissent entrer pendant le teaser. Un joueur
-# connecté revoit le teaser : « /inscription » n'est PAS permise, aucune fiche n'est créée avant l'ouverture.
+# connecté revoit le teaser. « /inscription » n'est pas dans cette liste : elle ne s'ouvre que pendant la
+# fenêtre des fiches (`fiches_ouvertes`, décision du 07/11), et le filtre la traite à part.
 CHEMINS_TOUJOURS_PERMIS: frozenset[str] = frozenset({"/", "/sante", "/connexion", "/auth/discord/retour",
                                                      "/deconnexion"})
 # Fichiers statiques du site, permis par chemin exact : la feuille et le script commun, sans aucune donnée
 # d'étage. Sans eux, les pages servies à un visiteur (erreur de connexion, etc.) s'afficheraient sans style.
 # Les icônes du site sont en ligne dans les gabarits : aucun fichier d'icône à permettre.
-CHEMINS_STATIQUES_SITE_PERMIS: frozenset[str] = frozenset({"/static/style.css", "/static/app.js"})
+CHEMINS_STATIQUES_SITE_PERMIS: frozenset[str] = frozenset({"/static/style.css", "/static/commun.css", "/static/app.js"})
 # Seuls les dossiers du teaser : une route à paramètre en tête (`/{x}/…`) ne doit jamais passer pour
 # un fichier statique. Jamais de préfixe large « /static/ ».
 PREFIXES_TOUJOURS_PERMIS: tuple[str, ...] = ("/static/teaser/", "/static/fonts/")
+# La seule page du site servie à un joueur pendant la fenêtre des fiches, avant l'ouverture.
+CHEMIN_FICHE = "/inscription"
 
 
 def mode_effectif(reglage: ReglageMode, ouvert_le: datetime, maintenant: datetime) -> ModeEffectif:
@@ -49,3 +52,16 @@ def voit_site_complet(mode: ModeEffectif, est_admin: bool) -> bool:
     Aucun joueur avant l'ouverture : le statut de « testeur » du lot A a disparu au lot B.
     """
     return mode == "ouvert" or est_admin
+
+
+def fiches_ouvertes(ouvertes_le: datetime, fermees_le: datetime, maintenant: datetime) -> bool:
+    """Un joueur peut-il créer sa fiche ? Vrai de `ouvertes_le` (compris) à `fermees_le` (exclu).
+
+    La pré-inscription (11/11 17 h → 13/11 17 h) donne le nombre de grimpeurs actifs dès l'ouverture,
+    donc le vrai palier de l'étage 0 ; passé `fermees_le`, plus personne ne s'ajoute (seul un admin le peut).
+    Lève ValueError si une date n'a pas de fuseau.
+    """
+    for nom, d in (("ouvertes_le", ouvertes_le), ("fermees_le", fermees_le), ("maintenant", maintenant)):
+        if d.tzinfo is None or d.utcoffset() is None:
+            raise ValueError(f"{nom} doit porter un fuseau horaire : {d.isoformat()}")
+    return ouvertes_le <= maintenant < fermees_le

@@ -6,6 +6,7 @@ et 404 compris. Une route ajoutée plus tard est donc filtrée d'office, sans qu
 - `FiltreMode` : en mode teaser, seuls `/`, `/sante`, `/static/…` et la connexion répondent (websockets
   compris), sauf pour un **admin connecté**, qui voit tout (recette). Le reste reçoit une redirection
   303 vers `/`, sauf les chemins `/api/…`, qui reçoivent un 404. Un joueur connecté revoit donc le teaser.
+  Seule exception : `/inscription` pendant la fenêtre des fiches (11/11 17 h → 13/11 17 h), pour se pré-inscrire.
 - `EntetesSecurite` : pose la CSP et les autres en-têtes sur toutes les réponses qui le traversent.
   Les erreurs 500 passent par un autre chemin (le gestionnaire d'erreurs de `app.py`), qui pose
   les mêmes en-têtes lui-même.
@@ -25,10 +26,12 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 from starlette.websockets import WebSocketClose
 
 from epreuve.domaine.mode_site import (
+    CHEMIN_FICHE,
     CHEMINS_STATIQUES_SITE_PERMIS,
     CHEMINS_TOUJOURS_PERMIS,
     PREFIXES_TOUJOURS_PERMIS,
     ReglageMode,
+    fiches_ouvertes,
     mode_effectif,
     voit_site_complet,
 )
@@ -69,21 +72,26 @@ class FiltreMode:
     """En mode teaser, ne laisse passer que les chemins toujours permis, sauf pour un admin connecté.
 
     `est_admin(scope)` lit la session du visiteur (cookie) : le site complet n'est servi qu'aux admins.
+    `fiches` (début, fin) : pendant cette fenêtre, `/inscription` passe aussi ; la route vérifie le reste.
     """
 
     def __init__(self, app: ASGIApp, reglage: ReglageMode, ouvert_le: datetime,
                  horloge: Callable[[], datetime],
-                 est_admin: Callable[[Scope], Awaitable[bool]] = _personne) -> None:
+                 est_admin: Callable[[Scope], Awaitable[bool]] = _personne,
+                 fiches: tuple[datetime, datetime] | None = None) -> None:
         self.app, self.reglage, self.ouvert_le, self.horloge = app, reglage, ouvert_le, horloge
-        self.est_admin = est_admin
+        self.est_admin, self.fiches = est_admin, fiches
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         # Les websockets aussi : une route `@app.websocket` ne doit pas échapper au teaser.
         if scope["type"] not in ("http", "websocket") or chemin_permis(scope["path"]):
             await self.app(scope, receive, send)
             return
-        mode = mode_effectif(self.reglage, self.ouvert_le, self.horloge())
-        if mode == "ouvert" or voit_site_complet(mode, est_admin=await self.est_admin(scope)):
+        maintenant = self.horloge()
+        mode = mode_effectif(self.reglage, self.ouvert_le, maintenant)
+        fiche = (scope["type"] == "http" and scope["path"] == CHEMIN_FICHE and self.fiches is not None
+                 and fiches_ouvertes(*self.fiches, maintenant))
+        if mode == "ouvert" or fiche or voit_site_complet(mode, est_admin=await self.est_admin(scope)):
             await self.app(scope, receive, send)
             return
         if scope["type"] == "websocket":

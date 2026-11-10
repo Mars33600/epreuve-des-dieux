@@ -401,7 +401,7 @@ class DepotDemo:
 
     # ------------------------------------------------------------------ écriture grimpeur
     async def creer_grimpeur(self, discord_user_id, nom_discord, pseudo, classe, niveau_declare, maintenant, *,
-                             liste_obligatoire: bool = True):
+                             liste_obligatoire: bool = True, dispo_guilde=None):
         if discord_user_id not in self._liste and liste_obligatoire:
             raise PasSurLaListe("pas sur la liste officielle")
         if await self.grimpeur_par_discord(discord_user_id) is not None:
@@ -410,7 +410,7 @@ class DepotDemo:
         id_ = max(self._grimpeurs, default=0) + 1
         g = Grimpeur(id_, discord_user_id, nom_discord, pseudo, classe, self._liste.get(discord_user_id, "actif"),
                      niveau_declare,
-                     maintenant)
+                     maintenant, dispo_guilde=dispo_guilde)
         self._grimpeurs[id_] = g
         self._journaliser(discord_user_id, maintenant, "inscription", grimpeur_id=id_, pseudo=pseudo)
         return g

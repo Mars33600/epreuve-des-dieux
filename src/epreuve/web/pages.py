@@ -7,7 +7,7 @@
                                      (?etage=N&quoi=… ; morceaux de page avec Accept: text/html-fragment)
     POST /grimpeurs/moi              modifier son pseudo, sa classe, son niveau (le formulaire est sur le
                                      tableau de bord ; GET /grimpeurs/{id} est dans `tableau.py`)
-    GET/POST /inscription            créer sa fiche (membre de la liste officielle, après l'ouverture)
+    GET/POST /inscription            créer sa fiche (du 11/11 17 h à l'ouverture, page seule derrière le teaser)
 
 Brouillard de guerre : un étage scellé répond 404 comme un étage inexistant (sauf admin), et les
 prérequis d'un étage scellé sont masqués par `masquer_prerequis_scelles` sur tous les chemins.
@@ -24,6 +24,7 @@ from epreuve.db.depot import DejaInscrit, Introuvable, PasSurLaListe, PseudoDeja
 from epreuve.domaine.bareme import palier
 from epreuve.domaine.classes import CLASSES, repartition_classes
 from epreuve.domaine.fiche import FicheQuete, masquer_prerequis_scelles
+from epreuve.domaine.mode_site import fiches_ouvertes
 from epreuve.domaine.modeles import CATEGORIES, NOM_CATEGORIE, ElementRef, Etage, Grimpeur
 from epreuve.domaine.progression import qui, qui_categorie
 from epreuve.domaine.textes import valider_pseudo
@@ -49,7 +50,28 @@ IMAGES_ETAGES = Path(__file__).resolve().parents[3] / "donnees" / "images" / "et
 INTROUVABLE = "Introuvable."
 MESSAGES_FICHE = {"pseudo": "Le pseudo doit faire entre 2 et 30 caractères.",
                   "pris": "Ce pseudo est déjà pris (sans tenir compte des majuscules).",
-                  "classe": "Classe inconnue.", "niveau": "Le niveau va de 1 à 200."}
+                  "classe": "Classe inconnue.", "niveau": "Le niveau va de 1 à 200.",
+                  "dispo": "Dis-nous si tu es là vendredi entre 16 h et 17 h pour rejoindre la guilde.",
+                  "quand": "Dis-nous à partir de quand tu seras là pour être invité (100 caractères au plus)."}
+DISPO_OUI = "oui"  # dispo vendredi 13/11 entre 16 h et 17 h ; sinon, le texte libre « à partir de quand »
+
+
+def lire_dispo(form, obligatoire: bool) -> str | None:
+    """La question de Shadoaze (10/11) : « dispo vendredi 16 h-17 h pour la guilde ? Sinon, à partir de quand ? »
+
+    Renvoie « oui », le texte libre (1 à 100 caractères) ou None si la question est facultative et sans réponse.
+    """
+    reponse = str(form.get("dispo", "")).strip()
+    if reponse == DISPO_OUI:
+        return DISPO_OUI
+    if reponse == "non":
+        quand = " ".join(str(form.get("dispo_quand", "")).split())
+        if not 1 <= len(quand) <= 100:
+            raise ValueError("quand")
+        return quand
+    if obligatoire:
+        raise ValueError("dispo")
+    return None
 
 
 def _s(request: Request):
@@ -354,22 +376,40 @@ def lire_fiche(form, regles) -> tuple[str, str | None, int | None]:
 
 # ---------------------------------------------------------------- inscription
 
+MESSAGE_FICHES_CLOSES = ("Les inscriptions sont closes depuis l'ouverture de la tour. "
+                         "Si tu devais en être, écris à Shadoaze ou à Mars sur le Discord.")
+
+
 async def _inscription_permise(request: Request) -> Visiteur:
+    """Pré-inscription (décision du 07/11) : un joueur crée sa fiche de FICHES_OUVERTES_LE à la fin des fiches
+    (l'ouverture du site), sur une page seule derrière le compte à rebours. Un admin le peut toujours."""
     v = await exiger_connecte(request)
-    if mode(request) == "teaser" and not v.est_admin:
-        raise Refus(303, "", vers="/")  # avant l'ouverture, seuls les admins peuvent créer leur fiche (SPEC-V5 §7)
     if v.grimpeur is not None:
         raise Refus(303, "", vers="/")
+    if not v.est_admin:
+        config, maintenant = _s(request).config, _s(request).horloge()
+        if maintenant >= config.fin_des_fiches:
+            raise Refus(403, MESSAGE_FICHES_CLOSES)
+        if mode(request) == "teaser" and not fiches_ouvertes(config.fiches_ouvertes_le, config.fin_des_fiches,
+                                                             maintenant):
+            raise Refus(303, "", vers="/")  # trop tôt : le compte à rebours
     return v
+
+
+def _cadre_fiche(request: Request, v: Visiteur) -> dict:
+    """Pendant le teaser, un joueur voit la fiche seule (`fiche_seule.html`), sans la navigation du site."""
+    seule = mode(request) == "teaser" and not v.est_admin
+    return {"cadre": "fiche_seule.html" if seule else "site.html", "seule": seule}
 
 
 @routeur.get("/inscription")
 async def inscription(request: Request):
     v = await _inscription_permise(request)
     s = _s(request)
+    cadre = _cadre_fiche(request, v)
     if s.regles.liste_officielle_obligatoire and v.discord_id not in await s.depot.liste_officielle():
-        return await rendre(request, "inscription.html", {"hors_liste": True})
-    return await rendre(request, "inscription.html", {"hors_liste": False, "classes": CLASSES, "valeurs": {}})
+        return await rendre(request, "inscription.html", {"hors_liste": True, **cadre})
+    return await rendre(request, "inscription.html", {"hors_liste": False, "classes": CLASSES, "valeurs": {}, **cadre})
 
 
 @routeur.post("/inscription")
@@ -377,21 +417,23 @@ async def inscrire(request: Request):
     await verifier_ecriture(request)
     v = await _inscription_permise(request)
     s = _s(request)
+    cadre = _cadre_fiche(request, v)
     form = await request.form()
-    valeurs = {k: str(form.get(k, "")) for k in ("pseudo", "classe", "niveau")}
+    valeurs = {k: str(form.get(k, "")) for k in ("pseudo", "classe", "niveau", "dispo", "dispo_quand")}
     try:
         pseudo, classe, niveau = lire_fiche(form, s.regles)
         niveau = niveau or 1  # le formulaire ne demande plus le niveau : tout le monde part du niveau 1
+        dispo = lire_dispo(form, obligatoire=cadre["seule"])  # obligatoire pour la pré-inscription des joueurs
         await s.depot.creer_grimpeur(v.discord_id, v.session.nom_discord, pseudo, classe, niveau, s.horloge(),
-                                     liste_obligatoire=s.regles.liste_officielle_obligatoire)
+                                     liste_obligatoire=s.regles.liste_officielle_obligatoire, dispo_guilde=dispo)
     except ValueError as e:
-        return await rendre(request, "inscription.html", {"hors_liste": False, "classes": CLASSES,
+        return await rendre(request, "inscription.html", {"hors_liste": False, "classes": CLASSES, **cadre,
                                                           "valeurs": valeurs, "erreur": MESSAGES_FICHE[e.args[0]]}, 422)
     except PseudoDejaPris:
-        return await rendre(request, "inscription.html", {"hors_liste": False, "classes": CLASSES,
+        return await rendre(request, "inscription.html", {"hors_liste": False, "classes": CLASSES, **cadre,
                                                           "valeurs": valeurs, "erreur": MESSAGES_FICHE["pris"]}, 409)
     except PasSurLaListe:
-        return await rendre(request, "inscription.html", {"hors_liste": True}, 403)
+        return await rendre(request, "inscription.html", {"hors_liste": True, **cadre}, 403)
     except (DejaInscrit, Introuvable):
         pass
     return RedirectResponse("/", status_code=303)

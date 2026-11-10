@@ -31,6 +31,7 @@ from epreuve.web.demo import (
 
 SITE = "https://epreuve.test"
 AVANT_OUVERTURE = datetime(2026, 11, 10, 12, 0, tzinfo=UTC)
+PENDANT_FICHES = datetime(2026, 11, 12, 12, 0, tzinfo=UTC)  # fiches ouvertes (11/11 17 h → 13/11 17 h)
 ID_BRINDILLE = _id_discord(1)   # grimpeur 1, actif
 ID_OMBREVIVE = _id_discord(8)   # grimpeur 8, en pause
 ID_FOURBE = _id_discord(13)     # grimpeur 13, exclu

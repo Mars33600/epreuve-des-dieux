@@ -184,6 +184,7 @@ class Grimpeur:
     niveau_declare: int | None
     inscrit_le: datetime
     prologue_vu: bool = False  # a passé le prologue plein écran de la première connexion
+    dispo_guilde: str | None = None  # « oui » (vendredi 16 h-17 h) ou « à partir de quand » ; None : pas demandé
 
     def __post_init__(self) -> None:
         if self.classe is not None and self.classe not in CLASSES:
@@ -236,6 +237,7 @@ class Regles:
     monde_des_douze: bool = False  # SPEC-V5 §2 : encyclopédie, stuffs, builder, outils, archis et avis, fiche de quête
     ouverture_automatique: bool = True  # Shadoaze : jauge pleine et date plancher passée → étage suivant ouvert seul
     delai_grace_secondes: int = 60  # Marceau : la jauge reste pleine une minute avant l'ouverture (coche par erreur)
+    serveur: str | None = None  # le serveur Dofus de l'aventure, affiché dans les règles (jamais sur le teaser)
 
 
 @dataclass(frozen=True)

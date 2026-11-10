@@ -9,6 +9,7 @@ from tests.web.outils import (
     ID_BRINDILLE,
     ID_HORS_LISTE,
     ID_NOUVELLE,
+    PENDANT_FICHES,
     SITE,
     monde,
 )
@@ -54,7 +55,7 @@ def test_menu_sans_deroulant_dans_l_ordre():
 
 
 def test_tout_membre_du_discord_cree_sa_fiche_sans_liste():
-    m = monde()  # liste_officielle_obligatoire: false par défaut
+    m = monde(maintenant=PENDANT_FICHES)  # liste_officielle_obligatoire: false par défaut
     c = m.connecter(ID_HORS_LISTE)
     assert "<form" in c.get("/inscription").text
     r = c.post("/inscription", data={"csrf": m.csrf(c, "/inscription"), "pseudo": "Passant"}, headers={"Origin": SITE})

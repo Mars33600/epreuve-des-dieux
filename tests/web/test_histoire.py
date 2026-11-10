@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from epreuve.web.demo import ID_NOUVELLE
 from epreuve.web.histoire import paragraphes
-from tests.web.outils import ID_BRINDILLE, SITE, monde
+from tests.web.outils import ID_BRINDILLE, PENDANT_FICHES, SITE, monde
 
 TEXTE_CLE = ["Il existe, quelque part dans le Monde des Douze", "Tous… sauf un.", "Goultard.",
              "Oserez-vous franchir le seuil ?"]
@@ -27,7 +27,7 @@ def test_page_histoire_dans_le_menu():
 
 
 def test_prologue_a_la_premiere_connexion_puis_plus_jamais():
-    m = monde()
+    m = monde(maintenant=PENDANT_FICHES)
     m.depot._liste[ID_NOUVELLE] = "actif"
     c = m.connecter(ID_NOUVELLE)
     r = c.post("/inscription", data={"csrf": m.csrf(c, "/inscription"), "pseudo": "Lune"}, headers={"Origin": SITE})

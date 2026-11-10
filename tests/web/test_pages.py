@@ -15,7 +15,7 @@ import pytest
 from epreuve.domaine.modeles import Regles
 from epreuve.web import pages
 from epreuve.web.demo import ID_HORS_LISTE, ID_MARCEAU, ID_NOUVELLE, DepotDemo
-from tests.web.outils import ID_BRINDILLE, ID_OMBREVIVE, SITE, monde, routes_declarees
+from tests.web.outils import ID_BRINDILLE, ID_OMBREVIVE, PENDANT_FICHES, SITE, monde, routes_declarees
 
 PAGES_GRIMPEUR = ["/", "/etages/0", "/etages/0/quetes/101", "/etages/0/quetes/104", "/etages/0/quetes/109",
                   "/grimpeurs", "/grimpeurs?quoi=categorie:donjons", "/grimpeurs/2", "/grimpeurs/3", "/regles"]
@@ -80,7 +80,7 @@ def inscrire(m, c, **champs):
 
 
 def test_inscription_cree_la_fiche_au_statut_de_la_liste():
-    m = monde()
+    m = monde(maintenant=PENDANT_FICHES)
     m.depot._liste[ID_NOUVELLE] = "pause"
     c = m.connecter(ID_NOUVELLE)
     r = inscrire(m, c, pseudo="  Nouvelle  Lune ", classe="", niveau="")
@@ -101,7 +101,7 @@ def test_inscription_cree_la_fiche_au_statut_de_la_liste():
     ({"pseudo": "Lune", "niveau": "abc"}, 422, "de 1 à 200"),
 ])
 def test_inscription_refusee(champs, statut, message):
-    m = monde()
+    m = monde(maintenant=PENDANT_FICHES)
     c = m.connecter(ID_NOUVELLE)
     r = inscrire(m, c, **champs)
     assert r.status_code == statut and message in r.text
@@ -109,14 +109,14 @@ def test_inscription_refusee(champs, statut, message):
 
 
 def test_inscription_avec_classe_et_niveau():
-    m = monde()
+    m = monde(maintenant=PENDANT_FICHES)
     c = m.connecter(ID_NOUVELLE)
     inscrire(m, c, pseudo="Lune", classe="Huppermage", niveau="12")
     assert (m.depot._grimpeurs[14].classe, m.depot._grimpeurs[14].niveau_declare) == ("Huppermage", 12)
 
 
 def test_inscription_sans_niveau_part_du_niveau_1():
-    m = monde()
+    m = monde(maintenant=PENDANT_FICHES)
     c = m.connecter(ID_NOUVELLE)
     assert 'name="niveau"' not in c.get("/inscription").text
     inscrire(m, c, pseudo="Lune", classe="Huppermage")
@@ -124,13 +124,13 @@ def test_inscription_sans_niveau_part_du_niveau_1():
 
 
 def test_classe_obligatoire_si_le_reglage_le_demande():
-    m = monde(regles=Regles(classe_obligatoire=True))
+    m = monde(maintenant=PENDANT_FICHES, regles=Regles(classe_obligatoire=True))
     c = m.connecter(ID_NOUVELLE)
     assert inscrire(m, c, pseudo="Lune").status_code == 422
 
 
 def test_hors_liste_ne_peut_pas_creer_de_fiche():
-    m = monde(regles=Regles(liste_officielle_obligatoire=True))
+    m = monde(maintenant=PENDANT_FICHES, regles=Regles(liste_officielle_obligatoire=True))
     c = m.connecter(ID_HORS_LISTE)
     html = c.get("/inscription").text
     assert "Envoie ta validation en MP à Shadoaze" in html

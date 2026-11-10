@@ -21,6 +21,7 @@ from tests.web.outils import (
     ID_ADMIN_SUP,
     ID_BRINDILLE,
     ID_FOURBE,
+    PENDANT_FICHES,
     ROLE_ADMIN,
     SITE,
     monde,
@@ -156,7 +157,7 @@ def test_membre_de_la_liste_sans_fiche_va_creer_sa_fiche():
 
 
 def test_membre_hors_liste_voit_le_message():
-    m = monde(regles=Regles(liste_officielle_obligatoire=True))
+    m = monde(maintenant=PENDANT_FICHES, regles=Regles(liste_officielle_obligatoire=True))
     c = m.connecter(ID_HORS_LISTE)
     html = c.get("/inscription").text
     assert "Envoie ta validation en MP à Shadoaze" in html and "<form" not in html.split("<main")[0][-1:]

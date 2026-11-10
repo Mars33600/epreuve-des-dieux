@@ -1,4 +1,4 @@
-{% extends "site.html" %}
+{% extends cadre|default("site.html") %}
 {% block titre %}Créer ma fiche · L'Épreuve des Dieux{% endblock %}
 {% block page %}
 <section class="card solo" aria-labelledby="inscrTitre">
@@ -9,6 +9,7 @@
   {% else %}
   <div class="eyebrow">Bienvenue, {{ v.session.nom_discord }}</div>
   <h2 id="inscrTitre">Créer ma fiche</h2>
+  {% if seule %}<p>Ta fiche confirme ta participation : tu comptes parmi les grimpeurs dès l'ouverture de la tour, <b>vendredi 13 novembre à 17 h</b>. Les fiches ferment à ce moment-là.</p>{% endif %}
   {% if erreur %}<p class="alerte" role="alert">{{ erreur }}</p>{% endif %}
   <form method="post" action="/inscription" class="ask">
     <input type="hidden" name="csrf" value="{{ v.csrf }}">
@@ -20,6 +21,13 @@
         <option value="">—</option>
         {% for c in classes %}<option{% if valeurs.classe == c %} selected{% endif %}>{{ c }}</option>{% endfor %}
       </select></div>
+    <fieldset class="champ dispo">
+      <legend>Seras-tu là vendredi 13 novembre entre 16 h et 17 h pour rejoindre la guilde ?</legend>
+      <label><input type="radio" name="dispo" value="oui"{% if valeurs.dispo == "oui" %} checked{% endif %}{% if seule %} required{% endif %}> Oui</label>
+      <label><input type="radio" name="dispo" value="non"{% if valeurs.dispo == "non" %} checked{% endif %}> Non</label>
+      <label for="dispo_quand">Si non, à partir de quand pourras-tu être invité ?</label>
+      <input type="text" id="dispo_quand" name="dispo_quand" maxlength="100" value="{{ valeurs.dispo_quand or '' }}" placeholder="ex. samedi à partir de 14 h">
+    </fieldset>
     <p><button class="btn or" type="submit">Créer ma fiche</button></p>
   </form>
   {% endif %}

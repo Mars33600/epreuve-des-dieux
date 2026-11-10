@@ -23,12 +23,13 @@
   {% if moins and vue %}<p class="note">Le moins avancé des actifs : <b>{{ moins.pseudo }}</b>, {{ vue.points(moins.id) }} point(s), {{ vue.avancement(moins.id)[0] }}/{{ vue.avancement(moins.id)[1] }} cases{% if moins.niveau_declare %}, niveau {{ moins.niveau_declare }}{% endif %}.</p>{% endif %}
   <div class="table-wrap">
   <table>
-    <thead><tr><th>Pseudo</th><th>Classe</th><th>Statut</th><th>Niveau</th><th>Dernière activité</th><th>Inscrit le</th><th>Actions</th></tr></thead>
+    <thead><tr><th>Pseudo</th><th>Classe</th><th>Guilde vendredi</th><th>Statut</th><th>Niveau</th><th>Dernière activité</th><th>Inscrit le</th><th>Actions</th></tr></thead>
     <tbody>
     {%- for g in grimpeurs %}
       <tr>
         <td><a href="/grimpeurs/{{ g.id }}">{{ g.pseudo }}</a><br><span class="muted">{{ g.nom_discord }}</span></td>
         <td>{{ g.classe or "—" }}</td>
+        <td>{% if g.dispo_guilde == "oui" %}vendredi 16 h-17 h{% elif g.dispo_guilde %}{{ g.dispo_guilde }}{% else %}—{% endif %}</td>
         <td>{{ {"actif": "Actif", "pause": "En pause", "exclu": "Exclu"}[g.statut] }}
           {% if g.statut == "pause" and vue %}<br><span class="muted">{{ vue.points(g.id) }} pt · {{ vue.avancement(g.id)[0] }}/{{ vue.avancement(g.id)[1] }}{% if moins %} (moins avancé des actifs : {{ moins.pseudo }}, {{ vue.points(moins.id) }} pt · {{ vue.avancement(moins.id)[0] }}/{{ vue.avancement(moins.id)[1] }}){% endif %}</span>{% endif %}</td>
         <td class="num">{{ g.niveau_declare or "—" }}</td>

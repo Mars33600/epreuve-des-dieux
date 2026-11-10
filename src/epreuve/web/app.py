@@ -33,7 +33,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from epreuve.config import Config
 from epreuve.discord.oauth import ClientOAuth
-from epreuve.domaine.mode_site import mode_effectif
+from epreuve.domaine.mode_site import fiches_ouvertes, mode_effectif
 from epreuve.domaine.modeles import Regles
 from epreuve.web import admin, api, auth, builder, captures, outils, pages, recherche, tableau
 from epreuve.web.auth import Refus, admin_pour_le_filtre, visiteur
@@ -78,7 +78,7 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
     app.mount("/static", StaticFiles(directory=ICI / "static"), name="static")
     # Ordre : le dernier ajouté enveloppe les autres. Les en-têtes s'ajoutent donc aussi aux 303 et 404 du filtre.
     app.add_middleware(FiltreMode, reglage=config.site_mode, ouvert_le=config.site_ouvert_le, horloge=horloge,
-                       est_admin=admin_pour_le_filtre)
+                       est_admin=admin_pour_le_filtre, fiches=(config.fiches_ouvertes_le, config.fin_des_fiches))
     app.add_middleware(EntetesSecurite)
     ouverture = config.site_ouvert_le.astimezone(ZoneInfo(config.fuseau))  # pour la date écrite en clair
 
@@ -125,6 +125,7 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
             return gabarits.TemplateResponse(request, "teaser.html", {
                 "site_ouvert_le": config.site_ouvert_le, "teaser_lien_entrer": config.teaser_lien_entrer,
                 "ouvert": False, "ouverture": ouverture, "jour_ouverture": jour_en_clair(ouverture),
+                "fiches": fiches_ouvertes(config.fiches_ouvertes_le, config.fin_des_fiches, horloge()), "v": v,
             }, headers={"Cache-Control": "no-store"})  # fmt: skip
         if not v.connecte:
             return await rendre(request, "accueil.html")

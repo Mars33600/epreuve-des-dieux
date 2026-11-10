@@ -17,7 +17,7 @@ import pytest
 
 from epreuve.web.demo import ID_MARCEAU, ID_NOUVELLE
 from epreuve.web.securite import ENTETES_SECURITE
-from tests.web.outils import ID_ADMIN_SUP, ID_BRINDILLE, SITE, cocher, monde
+from tests.web.outils import ID_ADMIN_SUP, ID_BRINDILLE, PENDANT_FICHES, SITE, cocher, monde
 
 XSS = "<img src=x onerror=alert(1)>"
 
@@ -295,7 +295,7 @@ def test_accessibilite_de_base(profil):
 
 
 def test_inscription_accessible():
-    m = monde()
+    m = monde(maintenant=PENDANT_FICHES)
     c = m.connecter(ID_NOUVELLE)
     a = _Audit()
     a.feed(c.get("/inscription").text)

@@ -236,7 +236,7 @@ def test_auto_bascule_a_site_ouvert_le(maintenant, mode):
     # Pendant le teaser, / est le teaser ; ensuite, l'accueil du site avec la connexion Discord.
     html = c.get("/").text
     assert ("teaser.js" in html) is (mode == "teaser")
-    assert ('href="/connexion"' in html) is (mode == "ouvert")
+    assert ("Se connecter avec Discord" in html) is (mode == "ouvert")
     # Une page inconnue : redirigée pendant le teaser, introuvable ensuite.
     assert c.get("/une-adresse-inventee").status_code == (303 if mode == "teaser" else 404)
 

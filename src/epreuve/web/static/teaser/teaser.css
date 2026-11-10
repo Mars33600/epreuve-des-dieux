@@ -200,6 +200,10 @@ h1 .l2{display:block;color:var(--gold-hi)}
 
 /* État « portes ouvertes » */
 .opened{display:grid;gap:12px;justify-items:center;margin-top:6px}
+.fiche{display:grid;gap:10px;justify-items:center;margin-top:18px}
+.fiche h2{margin:0;font:700 clamp(22px,3.4vw,32px)/1.1 var(--f-display);color:var(--gold-hi)}
+.fiche p{margin:0;max-width:30em;color:var(--muted);text-shadow:0 1px 8px rgba(0,0,0,.95)}
+body.is-open .fiche{display:none}
 .opened h2{margin:0;font:700 clamp(30px,5.6vw,54px)/1.05 var(--f-display);color:var(--gold-hi);
   text-shadow:0 0 30px rgba(227,181,82,.45),0 2px 16px rgba(0,0,0,.9)}
 .opened p{margin:0;max-width:30em;color:var(--muted);text-shadow:0 1px 8px rgba(0,0,0,.95)}
@@ -231,7 +235,8 @@ body.opening .opened{animation:rise 1.6s ease both}
   .halo{left:0;top:0;bottom:0;width:62vw;transform:none;
     background:linear-gradient(90deg,rgba(4,6,13,.72),rgba(4,6,13,.45) 60%,transparent)}
   .rule{margin:0}
-  .countdown,.opened{justify-items:start}
+  .countdown,.opened,.fiche{justify-items:start}
+  .fiche p{text-align:left}
   .opened p{text-align:left}
 }
 

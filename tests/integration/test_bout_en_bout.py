@@ -34,7 +34,9 @@ class Site:
         self.maintenant = APRES_OUVERTURE
         self.appels: list[str] = []
         config = Config(SITE_MODE="auto", SITE_URL=SITE, DISCORD_GUILD_ID=1, DISCORD_ADMIN_ROLE_IDS=str(ROLE_ADMIN),
-                        DISCORD_CLIENT_SECRET="secret-de-test", _env_file=None)
+                        DISCORD_CLIENT_SECRET="secret-de-test",
+                        # Le parcours crée des fiches après l'ouverture : on repousse la fin des fiches (réglable).
+                        FICHES_FERMEES_LE="2026-11-20T00:00:00+01:00", _env_file=None)
         oauth = ClientOAuth(config.discord_client_id, SecretStr("secret-de-test"), config.redirect_uri, 1,
                             transport=faux_discord(MEMBRES, self.appels))
         self.app = creer_app(config, horloge=lambda: self.maintenant, source=depot, oauth=oauth,

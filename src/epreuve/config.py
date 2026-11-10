@@ -19,6 +19,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from epreuve.domaine.mode_site import ReglageMode
 
 OUVERTURE_PAR_DEFAUT = datetime.fromisoformat("2026-11-13T17:00:00+01:00")  # vendredi 13/11, 17 h à Paris
+FICHES_PAR_DEFAUT = datetime.fromisoformat("2026-11-11T17:00:00+01:00")  # mercredi 11/11, 17 h : fiches ouvertes
 
 
 class Config(BaseSettings):
@@ -28,6 +29,9 @@ class Config(BaseSettings):
     # --- Le mode du site (lot A, ARCHITECTURE §7.1) ---
     site_mode: ReglageMode = Field(default="auto", alias="SITE_MODE")
     site_ouvert_le: datetime = Field(default=OUVERTURE_PAR_DEFAUT, alias="SITE_OUVERT_LE")
+    # Fenêtre des fiches : de FICHES_OUVERTES_LE à FICHES_FERMEES_LE (par défaut, l'ouverture du site).
+    fiches_ouvertes_le: datetime = Field(default=FICHES_PAR_DEFAUT, alias="FICHES_OUVERTES_LE")
+    fiches_fermees_le: datetime | None = Field(default=None, alias="FICHES_FERMEES_LE")
     teaser_lien_entrer: str = Field(default="", alias="TEASER_LIEN_ENTRER")  # vide : bouton masqué
     site_url: str | None = Field(default=None, alias="SITE_URL")  # ex. https://<domaine> (Origin attendu au lot B)
     fuseau: str = Field(default="Europe/Paris", alias="FUSEAU")
@@ -84,13 +88,19 @@ class Config(BaseSettings):
             raise ValueError(f"liste d'identifiants Discord séparés par des virgules attendue : {v!r}") from e
         return v
 
-    @field_validator("site_ouvert_le")
+    @field_validator("site_ouvert_le", "fiches_ouvertes_le", "fiches_fermees_le")
     @classmethod
-    def _avec_fuseau(cls, v: datetime) -> datetime:
+    def _avec_fuseau(cls, v: datetime | None, info) -> datetime | None:
         # Sans fuseau, « 17:00 » serait lu à l'heure de la machine Fly (UTC) : une heure trop tard.
-        if v.tzinfo is None:
-            raise ValueError("SITE_OUVERT_LE doit porter son fuseau, ex. 2026-11-13T17:00:00+01:00")
+        if v is not None and v.tzinfo is None:
+            nom = info.field_name.upper()
+            raise ValueError(f"{nom} doit porter son fuseau, ex. 2026-11-13T17:00:00+01:00")
         return v
+
+    @property
+    def fin_des_fiches(self) -> datetime:
+        """Fermeture des fiches pour les joueurs : FICHES_FERMEES_LE, ou à défaut l'ouverture du site."""
+        return self.fiches_fermees_le or self.site_ouvert_le
 
     @field_validator("fuseau")
     @classmethod

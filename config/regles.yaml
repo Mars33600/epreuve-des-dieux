@@ -25,3 +25,6 @@ fiche:
 modules:
   verrouiller_par_etage: false  # T-08 (lot E)
   monde_des_douze: false        # SPEC-V5 §2 : true rallume encyclopédie, stuffs, builder, outils, archis, avis, fiche de quête
+
+aventure:
+  serveur: Mikhal              # Shadoaze, 10/11 : affiché dans les règles une fois le site ouvert, jamais sur le compte à rebours

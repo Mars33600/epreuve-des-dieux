@@ -15,6 +15,7 @@
   <section class="regle" aria-labelledby="r1"><h3 id="r1"><span class="regle-n">1</span> Les étages</h3>
     <p>Chaque étage de la tour correspond à une tranche de niveaux du guide Duffus, dans l'ordre du guide.</p>
     <p>On y trouve les donjons et les quêtes de cette tranche, et rien d'autre.</p>
+    {% if regles.serveur %}<p>L'aventure se joue sur le serveur <b>{{ regles.serveur }}</b>.</p>{% endif %}
     <p class="exemple"><b>Très important : récupérez dès Astrub les quêtes « Donjon en mousse » auprès d'Emma Tom Pouce [1,-15] et « Le tour du monde » auprès de Metag Robil [7,-24], et gardez-les comme fil rouge : elles donnent des récompenses à chaque donjon de l'aventure.</b></p>
   </section>
 

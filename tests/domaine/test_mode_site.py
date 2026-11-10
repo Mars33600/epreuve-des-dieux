@@ -59,7 +59,7 @@ def test_chemins_permis_du_lot_b():
     assert CHEMINS_TOUJOURS_PERMIS == {"/", "/sante", "/connexion", "/auth/discord/retour", "/deconnexion"}
     assert "/inscription" not in CHEMINS_TOUJOURS_PERMIS
     assert PREFIXES_TOUJOURS_PERMIS == ("/static/teaser/", "/static/fonts/")
-    assert CHEMINS_STATIQUES_SITE_PERMIS == {"/static/style.css", "/static/app.js"}
+    assert CHEMINS_STATIQUES_SITE_PERMIS == {"/static/style.css", "/static/commun.css", "/static/app.js"}
 
 
 # --- Cas adverses ---------------------------------------------------------------------------------------
@@ -98,3 +98,18 @@ def test_meme_instant_quel_que_soit_le_fuseau_de_l_horloge(decalage_h):
     assert mode_effectif("auto", OUVERTURE, (OUVERTURE - SECONDE).astimezone(fuseau)) == "teaser"
     assert mode_effectif("auto", OUVERTURE, OUVERTURE.astimezone(fuseau)) == "ouvert"
 
+
+
+# --- La fenêtre des fiches (pré-inscription, 07/11) -------------------------------------------------------
+
+def test_fiches_ouvertes_du_debut_compris_a_la_fin_exclue():
+    from epreuve.domaine.mode_site import fiches_ouvertes
+
+    debut = datetime(2026, 11, 11, 16, 0, tzinfo=UTC)
+    fin = datetime(2026, 11, 13, 16, 0, tzinfo=UTC)
+    assert not fiches_ouvertes(debut, fin, debut - timedelta(seconds=1))
+    assert fiches_ouvertes(debut, fin, debut)
+    assert fiches_ouvertes(debut, fin, fin - timedelta(seconds=1))
+    assert not fiches_ouvertes(debut, fin, fin)
+    with pytest.raises(ValueError, match="fermees_le"):
+        fiches_ouvertes(debut, fin.replace(tzinfo=None), debut)
