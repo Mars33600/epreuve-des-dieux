@@ -15,6 +15,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] 10/11 : tableau de bord, catégories en clair, lien « N blocs du guide à cocher », points par catégorie et profil de jeu (« Plutôt donjons ») ; règles, Duffus pour les quêtes une à une, le site pour le bloc entier
 - [x] 10/11 : « Il te reste à cocher » liste aussi les donjons pas complets ; encadré « Mode teaser » compact ; « guide Duffus » en lien dans les règles
 - [x] 10/11 : message « Jauge pleine » aligné sur l'ouverture automatique (1 min de grâce, date plancher, annonce du Gardien)
+- [x] 10/11 : page d'étage, catégories de la jauge en liens vers les dépliants « Donjons de l'étage » et « Blocs du guide » (pliés par défaut)
 - [x] 10/11 : coches de recette de Marceau retirées (sauvegarde avant), sa fiche Marshield gardée ; base : 1 fiche, 0 coche, 0 bilan, étage 0 seul ouvert
 - [ ] Ouverture du site le vendredi 13/11 à 17 h, tout prêt « nickel au démarrage »
 
