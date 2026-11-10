@@ -14,6 +14,7 @@ Détails : `DECISIONS-V4.md`.
 - [x] 10/11 : tableau de bord, carte profil dorée (initiale) et carte « Étage en cours » sombre à bandeau ; récapitulatif des dispos guilde dans /admin/grimpeurs
 - [x] 10/11 : tableau de bord, catégories en clair, lien « N blocs du guide à cocher », points par catégorie et profil de jeu (« Plutôt donjons ») ; règles, Duffus pour les quêtes une à une, le site pour le bloc entier
 - [x] 10/11 : « Il te reste à cocher » liste aussi les donjons pas complets ; encadré « Mode teaser » compact ; « guide Duffus » en lien dans les règles
+- [x] 10/11 : message « Jauge pleine » aligné sur l'ouverture automatique (1 min de grâce, date plancher, annonce du Gardien)
 - [ ] Avant le 13/11 17 h : vérifier que les coches d'admins faites pendant la recette sont voulues (sinon les retirer)
 - [ ] Ouverture du site le vendredi 13/11 à 17 h, tout prêt « nickel au démarrage »
 
