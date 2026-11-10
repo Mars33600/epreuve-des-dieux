@@ -9,7 +9,7 @@
   <div class="pyr-jauge">
     {% if ouvert %}
     {{ bandeau_etage(ouvert, vue, jauge, "Étage en cours", titre_etage(ouvert)) }}
-    <div class="card">{{ jauge_bloc(jauge, verdict_plein, verdict_pas_plein) }}</div>
+    <div class="card">{{ jauge_bloc(jauge, verdict_plein, verdict_pas_plein, ouvert.numero) }}</div>
     {% else %}
     <section class="card"><h2>La tour se prépare</h2><p class="muted">Aucun étage n'est ouvert pour l'instant.</p></section>
     {% endif %}

@@ -628,7 +628,7 @@ def structure_blocs(ctx: Contexte, numero: int) -> int:
 def lien_duffus(ctx: Contexte) -> None:
     """Le lien général « Duffus » en tête des blocs : un nouvel onglet vers duffus.fr, la page de l'étage reste ouverte."""
     p = ctx.page
-    lien = p.locator("section:has(#blocsTitre) p a[href^='https://duffus.fr']").first
+    lien = p.locator("details:has(#blocsTitre) p a[href^='https://duffus.fr']").first
     if lien.count() == 0:
         ctx.defaut("blocs du guide : le lien général vers Duffus a disparu")
         return

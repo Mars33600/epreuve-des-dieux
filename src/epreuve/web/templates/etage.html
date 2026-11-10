@@ -17,7 +17,7 @@
     {{ bandeau_etage(etage, vue, jauge,
          "Niveaux " ~ etage.niveau_min ~ " à " ~ etage.niveau_max ~ (" · terminé" if etage.statut == "termine" else (" · scellé (vue admin)" if etage.statut == "scelle" else "")),
          titre_etage(etage)) }}
-    {% if etage.statut == "ouvert" %}<div class="card">{{ jauge_bloc(jauge, verdict_plein, verdict_pas_plein) }}</div>{% endif %}
+    {% if etage.statut == "ouvert" %}<div class="card">{{ jauge_bloc(jauge, verdict_plein, verdict_pas_plein, etage.numero) }}</div>{% endif %}
     <section class="card regle-etage">
       <p class="how">Entre grimpeurs, <b>sans dépasser le cap</b> de niveau {{ etage.level_cap }}, <b>sans PL</b>. Chaque catégorie terminée en entier rapporte un point. {{ formule }}.</p>
       {% if bilan %}<p class="note">Bilan figé le {{ bilan.fige_le|date_paris }} : score {{ bilan.score }} sur un palier de {{ bilan.palier }}, {{ bilan.actifs }} grimpeur{{ "s" if bilan.actifs > 1 }} actif{{ "s" if bilan.actifs > 1 }}.{% if bilan.force %} Ouverture forcée par un admin.{% endif %} Cocher ici complète ta fiche sans changer ce bilan.</p>{% endif %}
@@ -46,16 +46,19 @@
         {{ filtre() }}
       </section>
 
-      <section class="card" aria-labelledby="donjonsTitre" data-section>
-        <div class="row"><h2 id="donjonsTitre">Donjons de l'étage</h2></div>
-        {{ liste_donjons(vue, cible, cochable) }}
-      </section>
+      {#- Deux dépliants pliés (retour du 10/11) : les titres des catégories de la jauge y mènent et les ouvrent. #}
+      <details class="card pli pli-1" data-section>
+        <summary><h2 class="pli-titre" id="donjonsTitre">Donjons de l'étage <span class="pli-cpt num">({{ vue.contenu.donjons|length }})</span></h2></summary>
+        <div class="pli-corps">{{ liste_donjons(vue, cible, cochable) }}</div>
+      </details>
 
-      <section class="card" aria-labelledby="blocsTitre" data-section>
-        <div class="row"><h2 id="blocsTitre">Blocs du guide</h2></div>
+      <details class="card pli pli-1" data-section>
+        <summary><h2 class="pli-titre" id="blocsTitre">Blocs du guide <span class="pli-cpt num">({{ vue.contenu.blocs|length }})</span></h2></summary>
+        <div class="pli-corps">
         <p class="muted">Tu fais le guide sur <a href="https://duffus.fr/guide-complet" target="_blank" rel="noopener">Duffus<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span></a>, quête par quête. Quand tu as fini un bloc, coche-le ici : <b class="rouge">cadre rouge</b> = bloc principal, <b class="jaune">cadre jaune</b> = bloc secondaire.</p>
         {{ liste_blocs(vue, cible, cochable) }}
-      </section>
+        </div>
+      </details>
     </div>
 
     <details class="card actifs-etage" id="actifsEtage">

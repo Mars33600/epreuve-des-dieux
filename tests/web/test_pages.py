@@ -221,8 +221,9 @@ def test_etage_donjons_puis_blocs_du_guide_avec_cadres_et_libelles():
     html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
     liste = html.split('id="liste"')[1]
     # Les donjons d'abord, puis les blocs du guide dans l'ordre, avec leur numéro et le titre de Duffus.
-    ordre = [liste.index(n) for n in ("Donjons de l'étage</h2>", 'id="donjon-1"', 'id="donjon-2"', 'id="donjon-3"',
-                                      "Blocs du guide</h2>", "Bloc 1 · Incarnam", "Bloc 2 · Astrub",
+    cpt = ' <span class="pli-cpt num">'
+    ordre = [liste.index(n) for n in ("Donjons de l'étage" + cpt, 'id="donjon-1"', 'id="donjon-2"', 'id="donjon-3"',
+                                      "Blocs du guide" + cpt, "Bloc 1 · Incarnam", "Bloc 2 · Astrub",
                                       "Bloc 3 · Petits services d&#39;Astrub")]
     assert ordre == sorted(ordre)
     assert liste.count("<details class=\"dj-ligne\"") == 3
@@ -799,3 +800,10 @@ def test_revue_admin_montre_les_quetes_utiles_du_bloc():
     html = m.connecter(ID_MARCEAU).get("/admin/etages/0").text
     assert "⚠ Contient" in html and "pour un Dofus" in html
     assert html_mod.escape(noms[0], quote=True) in html
+
+
+def test_categories_de_la_jauge_menent_aux_depliants():
+    html = monde().connecter(ID_BRINDILLE).get("/etages/0").text
+    assert '<a href="/etages/0#donjonsTitre">Donjons</a>' in html
+    assert '<a href="/etages/0#blocsTitre">Quêtes principales</a>' in html
+    assert html.count('<details class="card pli pli-1" data-section>') == 2  # pliés par défaut

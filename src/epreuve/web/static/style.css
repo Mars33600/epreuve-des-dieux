@@ -67,6 +67,9 @@ main{display:grid;gap:22px;min-width:0}
 .cat{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;align-items:center;padding:12px;border-radius:8px;background:rgba(21,27,51,.92);border:1px solid var(--line-soft)}
 .cat .ic{grid-row:span 2;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent)}
 .cat h3{font:700 17px/1.2 var(--f-body)}
+.cat h3 a{color:inherit;text-decoration:underline;text-decoration-color:var(--gold-line);text-underline-offset:3px}
+.cat h3 a:hover{color:var(--gold-hi);text-decoration-color:var(--gold-hi)}
+h2.pli-titre{margin:0;font-size:var(--t-h2)}
 .cat p{font-size:var(--t-sm);color:var(--muted)}
 .cat .stat{grid-column:1 / -1;display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:4px}
 .cat .stat b{font:500 17px/1 var(--f-data);color:var(--ink)}

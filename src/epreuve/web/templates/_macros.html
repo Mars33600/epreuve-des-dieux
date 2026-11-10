@@ -125,12 +125,15 @@
 </section>
 {%- endmacro %}
 
-{% macro jauge_bloc(jauge, verdict_plein, verdict_pas_plein) -%}
+{% macro jauge_bloc(jauge, verdict_plein, verdict_pas_plein, numero=none) -%}
+{#- `numero` : chaque titre de catégorie mène au dépliant de l'étage qui la contient (et l'ouvre, app.js). -#}
+{%- set ancres = {"donjons": "donjonsTitre", "full_succes": "donjonsTitre", "principales": "blocsTitre",
+                  "secondaires": "blocsTitre"} -%}
 <div class="jauge-bloc" id="jauge" data-vide="{{ 1 if jauge.actifs == 0 else 0 }}" data-palier="{{ jauge.palier }}" data-actifs="{{ jauge.actifs }}" data-en-pause="{{ jauge.en_pause }}">
 <div class="cats">
   {%- for info in CATS %}{% set k = jauge.points_par_categorie.get(info.cle, 0) %}
   <div class="cat c-{{ info.cle }}">
-    <span class="ic">{{ icone(info.icone) }}</span><h3>{{ info.nom }}</h3><p>{{ info.desc }}</p>
+    <span class="ic">{{ icone(info.icone) }}</span><h3>{% if numero is not none %}<a href="/etages/{{ numero }}#{{ ancres[info.cle] }}">{{ info.nom }}</a>{% else %}{{ info.nom }}{% endif %}</h3><p>{{ info.desc }}</p>
     <div class="stat"><b><span data-jcat="{{ info.cle }}">{{ k }}</span><small> / {{ jauge.actifs }} grimpeurs</small></b><a class="linkbtn" href="/grimpeurs?quoi=categorie:{{ info.cle }}">Qui manque&nbsp;?</a></div>
     <div class="mini"><i class="{{ k|pct(jauge.actifs) }}" data-jmini="{{ info.cle }}"></i></div>
   </div>

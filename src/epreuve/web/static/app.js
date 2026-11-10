@@ -323,6 +323,9 @@ function versReponse(){
 
 /* =================== Clics =================== */
 document.addEventListener("click", e => {
+  // Un lien vers une ancre de cette page déjà dans l'adresse ne déclenche pas « hashchange » : on rouvre quand même.
+  const ancre = e.target.closest("a[href*='#']");
+  if (ancre && ancre.pathname === location.pathname && ancre.hash === location.hash) setTimeout(ouvrirAncre, 0);
   const tout = e.target.closest("[data-donjon-tout]");
   if (tout){ toutLeDonjon(tout); return; }
   const cp = e.target.closest("[data-copier]");
