@@ -22,7 +22,7 @@ svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-widt
 
 
 /* ---------- Structure ---------- */
-.wrap{overflow-x:clip;position:relative;z-index:1;max-width:1200px;margin:0 auto;display:grid;gap:var(--s5);
+.wrap{overflow-x:clip;position:relative;z-index:1;max-width:1200px;margin:0 auto;display:grid;gap:var(--s5);align-content:start;
   padding:var(--s5) max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
 .layout{display:grid;grid-template-columns:270px minmax(0,1fr);gap:24px;align-items:start}
 main{display:grid;gap:22px;min-width:0}

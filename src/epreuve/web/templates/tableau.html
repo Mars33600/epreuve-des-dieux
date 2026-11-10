@@ -126,14 +126,17 @@
   </div>
 {{ corps_progression(b) }}
 </section>
-{% if a_faire %}{% set numero, restants = a_faire %}
-{#- Pas plié : au plus NB_A_FAIRE blocs de l'étage en cours, la liste ne grossit pas avec les étages. Une moitié de bloc
-    hybride a sa ligne, avec sa partie. #}
+{% if a_faire %}{% set numero, donjons_restants, restants = a_faire %}
+{#- Pas plié : les donjons de l'étage en cours (quelques-uns) et au plus NB_A_FAIRE blocs, la liste ne grossit pas avec
+    les étages. Une moitié de bloc hybride a sa ligne, avec sa partie. #}
 <section class="card" aria-labelledby="tbSuite">
   <h3 id="tbSuite">Il te reste à cocher (étage {{ numero }})</h3>
-  <p class="muted aide-suite">Les blocs de l'étage en cours que tu n'as pas encore cochés : les rouges d'abord, dans l'ordre du guide.</p>
-  {%- if restants %}
+  <p class="muted aide-suite">Ce que tu n'as pas encore coché à l'étage en cours : les donjons (boss à vaincre d'abord), puis les blocs du guide, les rouges d'abord.</p>
+  {%- if donjons_restants or restants %}
   <ul class="suite">
+  {%- for d, faits, total in donjons_restants %}
+    <li><a href="/etages/{{ numero }}#donjon-{{ d.id }}"><b>Donjon · {{ d.nom }}</b></a> <small class="muted">({% if faits == 0 %}boss à vaincre{% else %}{{ faits }}/{{ total }} cases, succès à finir{% endif %})</small></li>
+  {%- endfor %}
   {%- for b in restants %}
     <li><a href="/etages/{{ numero }}#bloc-{{ b.id }}"><b>{{ b.titre_complet }}{% if b.moitie %} · partie {{ b.nature }}{% endif %}</b></a> <small class="muted">({{ texte_quetes_bloc(b) }})</small></li>
   {%- endfor %}

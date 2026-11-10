@@ -148,8 +148,8 @@ def test_il_te_reste_a_cocher_une_ligne_par_partie_puis_tout_est_coche():
     html = m.connecter(ID_BRINDILLE).get("/tableau-de-bord").text
     carte = html.split('id="tbSuite"')[1].split("</section>")[0]
     assert ">Il te reste à cocher (étage 0)</h3>" in carte
-    assert ("Les blocs de l'étage en cours que tu n'as pas encore cochés : les rouges d'abord, "
-            "dans l'ordre du guide.") in carte
+    assert ("Ce que tu n'as pas encore coché à l'étage en cours : les donjons (boss à vaincre d'abord), "
+            "puis les blocs du guide, les rouges d'abord.") in carte
     lignes = re.findall(r'<a href="/etages/0#bloc-(\d+)"><b>([^<]+)</b></a> <small class="muted">\(([^<]+)\)</small>',
                         carte)
     assert lignes == [("1", "Bloc 1 · Incarnam · partie principale", "1 principale"),
@@ -158,5 +158,21 @@ def test_il_te_reste_a_cocher_une_ligne_par_partie_puis_tout_est_coche():
                       ("3", "Bloc 3 · Petits services d&#39;Astrub", "3 secondaires")]
     assert "dont" not in carte
     m.depot._coches_blocs[1] = {1, 2, 3, 5}
+    m.depot._coches_cases[1] = set(m.depot._cases)  # et tous les donjons complets
     carte = m.connecter(ID_BRINDILLE).get("/tableau-de-bord").text.split('id="tbSuite"')[1].split("</section>")[0]
     assert "Tout est coché à cet étage." in carte and "<ul" not in carte
+
+
+def test_il_te_reste_a_cocher_les_donjons_d_abord():
+    """Les donjons pas encore complets de l'étage en cours sont dans la carte, avec un lien vers leur case."""
+    m = monde()
+    m.depot._coches_blocs[1] = set()
+    m.depot._coches_cases[1] = set()
+    carte = m.connecter(ID_BRINDILLE).get("/tableau-de-bord").text.split('id="tbSuite"')[1].split("</section>")[0]
+    motif = r'<a href="/etages/0#donjon-(\d+)"><b>Donjon · ([^<]+)</b></a> <small class="muted">\(([^<]+)\)'
+    donjons = re.findall(motif, carte)
+    assert donjons and all(etat == "boss à vaincre" for _, _, etat in donjons)
+    assert carte.index("#donjon-") < carte.index("#bloc-")
+    m.depot._coches_cases[1] = set(m.depot._cases)
+    carte = m.connecter(ID_BRINDILLE).get("/tableau-de-bord").text.split('id="tbSuite"')[1].split("</section>")[0]
+    assert "#donjon-" not in carte and "#bloc-" in carte

@@ -175,3 +175,9 @@ def test_profil_de_jeu():
 def test_regles_expliquent_duffus_et_le_bloc():
     html = monde().connecter(ID_BRINDILLE).get("/regles").text
     assert "tu y coches les quêtes une à une" in html and "seul le bloc compte pour les points" in html
+
+
+def test_regles_lien_vers_le_guide_duffus():
+    html = monde().connecter(ID_BRINDILLE).get("/regles").text
+    assert ('tranche de niveaux du <a href="https://duffus.fr/guide-complet" target="_blank" rel="noopener">'
+            'guide Duffus') in html

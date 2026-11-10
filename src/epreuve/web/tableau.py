@@ -97,17 +97,26 @@ async def blocs_du_grimpeur(request: Request, g: Grimpeur, cochable: Callable[[E
     return blocs
 
 
-def a_faire(blocs: list[BlocEtage], grimpeur_id: int) -> tuple[int, list] | None:
-    """La carte « Il te reste à cocher (étage N) » : (N, les premiers blocs ou moitiés de bloc pas encore cochés de
-    l'étage ouvert, sinon du plus récent), les rouges d'abord, puis dans l'ordre du guide. Une liste vide dit « tout
-    est coché » ; None quand il n'y a rien à montrer (aucun étage, ou un étage sans bloc importé)."""
+def a_faire(blocs: list[BlocEtage], grimpeur_id: int) -> tuple[int, list, list] | None:
+    """La carte « Il te reste à cocher (étage N) » de l'étage ouvert (sinon du plus récent) : (N, les donjons pas encore
+    complets, les premiers blocs ou moitiés de bloc pas encore cochés). Donjons : (donjon, cases faites, cases), les
+    boss pas encore vaincus d'abord. Blocs : les rouges d'abord, puis dans l'ordre du guide. Deux listes vides disent
+    « tout est coché » ; None quand il n'y a rien à montrer (aucun étage, ou un étage sans bloc ni donjon)."""
     ouvert = next((b for b in blocs if b.vue.etage.statut == "ouvert"), blocs[0] if blocs else None)
-    if ouvert is None or not ouvert.vue.contenu.blocs:
+    if ouvert is None or not (ouvert.vue.contenu.blocs or ouvert.vue.contenu.donjons):
         return None
-    coches = ouvert.vue.coches_de(grimpeur_id)
-    restants = [b for b in sorted(ouvert.vue.contenu.blocs, key=lambda b: (b.nature != "principale", b.ordre))
+    vue, coches = ouvert.vue, ouvert.vue.coches_de(grimpeur_id)
+    donjons = []
+    for d in vue.contenu.donjons:
+        cases = vue.contenu.cases_du_donjon(d.id)
+        faits = sum(1 for c in cases if c.id in coches.cases)
+        if faits < len(cases):
+            classique = vue.classique(d.id)
+            donjons.append((classique is not None and classique.id in coches.cases, d, faits, len(cases)))
+    donjons = [x[1:] for x in sorted(donjons, key=lambda x: x[0])]  # tri stable : l'ordre de l'étage, à égalité
+    restants = [b for b in sorted(vue.contenu.blocs, key=lambda b: (b.nature != "principale", b.ordre))
                 if b.id not in coches.blocs]
-    return ouvert.vue.etage.numero, restants[:NB_A_FAIRE]
+    return vue.etage.numero, donjons, restants[:NB_A_FAIRE]
 
 
 def onglet_valide(onglet: str) -> str:
