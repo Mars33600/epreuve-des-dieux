@@ -138,7 +138,7 @@ def test_etage_ouvert_sans_aucun_actif():
     c = m.connecter(ID_MARCEAU)
     html = c.get("/etages/0").text
     assert "Aucun grimpeur actif pour l'instant" in html
-    assert ">Un admin pourra ouvrir le prochain étage quand la jauge sera pleine.</p>" in html
+    assert ">Le prochain étage s&#39;ouvrira tout seul quand la jauge sera pleine.</p>" in html
     assert "aucun grimpeur actif" in c.get("/admin/etages/0").text
     tour = c.get("/").text.split('class="pyramide"')[1]
     assert "prêt" not in tour

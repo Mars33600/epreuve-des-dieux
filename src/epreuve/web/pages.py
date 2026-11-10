@@ -94,7 +94,7 @@ def peut_cocher_soi(v: Visiteur, etage: Etage, regles) -> bool:
 
 def contexte_etage(request: Request, vue: VueEtage) -> dict:
     s = _s(request)
-    plein, pas_plein = verdicts(vue.etage, s.horloge())
+    plein, pas_plein = verdicts(vue.etage, s.horloge(), s.regles, s.config.discord_webhook_annonces is not None)
     actifs_points = vue.grimpeurs_par_statut("actif")
     pauses_points = vue.grimpeurs_par_statut("pause")
     return {"vue": vue, "jauge": vue.jauge, "encoches": encoches(vue.jauge),

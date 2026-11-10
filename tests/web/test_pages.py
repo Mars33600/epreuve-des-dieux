@@ -308,7 +308,8 @@ def test_palier_manuel_annonce():
     m = monde()
     m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=7)
     html = m.connecter(ID_BRINDILLE).get("/etages/0").text
-    assert "Palier fixé par un admin" in html and "Jauge pleine : un admin va vérifier" in html
+    assert "Palier fixé par un admin" in html
+    assert "Jauge pleine : le prochain étage s&#39;ouvre tout seul dans une minute" in html
 
 
 def test_verdict_avec_la_date_plancher():

@@ -213,11 +213,27 @@ def texte_jauge(jauge: EtatJauge) -> str:
     return f"{debut} {actifs}{pause}."
 
 
-def verdicts(etage: Etage, maintenant: datetime) -> tuple[str, str]:
-    """(jauge pleine, jauge pas pleine) : app.js bascule de l'un à l'autre après une coche. Aucun scellé nommé."""
-    plein = "Jauge pleine : un admin va vérifier et ouvrir le prochain étage."
+def verdicts(etage: Etage, maintenant: datetime, regles: Regles | None = None,
+             annonce: bool = False) -> tuple[str, str]:
+    """(jauge pleine, jauge pas pleine) : app.js bascule de l'un à l'autre après une coche. Aucun scellé nommé.
+
+    Avec l'ouverture automatique (règle par défaut), on dit le vrai : l'étage s'ouvre seul, après le délai de grâce
+    et pas avant la date plancher ; sinon, un admin vérifie et ouvre."""
+    regles = regles or Regles()
     plancher = etage.date_plancher_suivant
-    if plancher is not None and maintenant < plancher:
+    attente = plancher is not None and maintenant < plancher
+    if regles.ouverture_automatique:
+        gardien = " Le Gardien de la Tour l'annoncera sur le Discord." if annonce else ""
+        grace = regles.delai_grace_secondes
+        delai = "dans une minute" if grace == 60 else (f"dans {grace} secondes" if grace else "aussitôt")
+        if attente:
+            return (f"Jauge pleine : le prochain étage s'ouvrira tout seul le {date_paris(plancher)}.{gardien}",
+                    f"Le prochain étage s'ouvrira tout seul quand la jauge sera pleine, "
+                    f"et pas avant le {date_paris(plancher)}.")
+        return (f"Jauge pleine : le prochain étage s'ouvre tout seul {delai}, si elle reste pleine.{gardien}",
+                "Le prochain étage s'ouvrira tout seul quand la jauge sera pleine.")
+    plein = "Jauge pleine : un admin va vérifier et ouvrir le prochain étage."
+    if attente:
         return plein, (f"Un admin pourra ouvrir le prochain étage quand la jauge sera pleine, "
                        f"et pas avant le {date_paris(plancher)}.")
     return plein, "Un admin pourra ouvrir le prochain étage quand la jauge sera pleine."
