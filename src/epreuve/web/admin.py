@@ -47,7 +47,7 @@ MESSAGES = {
     "liste": "Liste officielle mise à jour.", "statut": "Statut changé.", "fiche": "Fiche corrigée.",
     "palier": "Palier enregistré.", "plancher": "Date plancher enregistrée.", "ouvert": "Étage ouvert.",
     "reglages": "Réglages de l'étage enregistrés.", "donjon": "Donjon ajouté.", "contenu": "Contenu modifié.",
-    "auto": "Enregistré. La jauge est pleine : l'étage suivant s'est ouvert automatiquement.",
+    "auto": "Enregistré. Le palier est atteint : l'étage suivant s'est ouvert automatiquement.",
 }
 ERREURS = {
     "motif": "Un motif est obligatoire.", "confirmer": "Coche « Je confirme » pour exclure.",

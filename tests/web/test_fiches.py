@@ -191,10 +191,10 @@ def test_verdicts_ouverture_automatique():
     m = monde()
     etage = replace(m.depot._etages[1], date_plancher_suivant=datetime(2026, 11, 13, 16, 0, tzinfo=UTC))
     plein, pas_plein = verdicts(etage, PENDANT_FICHES, Regles(), annonce=True)
-    assert plein.startswith("Jauge pleine : le prochain étage s'ouvrira tout seul le vendredi 13 novembre à 17 h")
+    assert plein.startswith("Palier atteint : le prochain étage s'ouvrira tout seul le vendredi 13 novembre à 17 h")
     assert "Gardien de la Tour" in plein and "pas avant le vendredi 13 novembre" in pas_plein
     plein, _ = verdicts(etage, APRES_OUVERTURE, Regles(delai_grace_secondes=30))
-    assert plein == "Jauge pleine : le prochain étage s'ouvre tout seul dans 30 secondes, si elle reste pleine."
+    assert plein == "Palier atteint : le prochain étage s'ouvre tout seul dans 30 secondes, si le score s'y maintient."
     assert "aussitôt" in verdicts(etage, APRES_OUVERTURE, Regles(delai_grace_secondes=0))[0]
     plein, pas_plein = verdicts(etage, PENDANT_FICHES, Regles(ouverture_automatique=False))
     assert "un admin va vérifier" in plein and "Un admin pourra ouvrir" in pas_plein

@@ -310,7 +310,7 @@ def test_palier_manuel_annonce():
     m.depot._etages[1] = replace(m.depot._etages[1], palier_manuel=7)
     html = m.connecter(ID_BRINDILLE).get("/etages/0").text
     assert "Palier fixé par un admin" in html
-    assert "Jauge pleine : le prochain étage s&#39;ouvre tout seul dans une minute" in html
+    assert "Palier atteint : le prochain étage s&#39;ouvre tout seul dans une minute" in html
 
 
 def test_verdict_avec_la_date_plancher():
@@ -524,7 +524,7 @@ def test_page_des_regles_lit_la_configuration():
     manuel = monde(regles=Regles(ouverture_automatique=False)).connecter(ID_BRINDILLE).get("/regles").text
     assert "un admin vérifie et ouvre" in manuel and "s'ouvre tout seul" not in manuel
     # Le délai de grâce : dit en une phrase, en minute s'il vaut 60 s, absent s'il est coupé.
-    assert "s'ouvre une minute après que la jauge est pleine (le temps de rattraper une coche par erreur)" in html
+    assert "s'ouvre une minute après que le palier est atteint (le temps de rattraper une coche par erreur)" in html
     sans = monde(regles=Regles(delai_grace_secondes=0)).connecter(ID_BRINDILLE).get("/regles").text
     assert "rattraper une coche" not in sans
     assert "s'ouvre 90 secondes après" in monde(regles=Regles(delai_grace_secondes=90)).connecter(

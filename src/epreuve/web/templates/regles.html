@@ -59,13 +59,13 @@
 
   <section class="regle" aria-labelledby="r6"><h3 id="r6"><span class="regle-n">6</span> L'ouverture de l'étage suivant</h3>
     {% if regles.ouverture_automatique %}
-    <p>Quand la jauge est pleine, <b>l'étage suivant s'ouvre tout seul</b>
+    <p>Quand la jauge atteint le palier, <b>l'étage suivant s'ouvre tout seul</b>
       {%- if plancher %}, mais pas avant le {{ plancher|date_paris }} : s'il est plein plus tôt, il s'ouvre à cette heure-là{% endif %}.</p>
     {% set grace = regles.delai_grace_secondes %}
-    {% if grace %}<p>L'étage suivant s'ouvre {{ "une minute" if grace == 60 else grace ~ " secondes" }} après que la jauge est pleine (le temps de rattraper une coche par erreur).</p>{% endif %}
+    {% if grace %}<p>L'étage suivant s'ouvre {{ "une minute" if grace == 60 else grace ~ " secondes" }} après que le palier est atteint (le temps de rattraper une coche par erreur).</p>{% endif %}
     <p>Un admin peut aussi ouvrir l'étage à la main, en cas de besoin, en donnant un motif.</p>
     {% else %}
-    <p>Quand la jauge est pleine, <b>un admin vérifie et ouvre</b> l'étage suivant à la main
+    <p>Quand la jauge atteint le palier, <b>un admin vérifie et ouvre</b> l'étage suivant à la main
       {%- if plancher %}, et pas avant le {{ plancher|date_paris }}{% endif %}.</p>
     {% endif %}
     {% if annonce_discord %}

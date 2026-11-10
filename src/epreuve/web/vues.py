@@ -207,7 +207,7 @@ def texte_jauge(jauge: EtatJauge) -> str:
     pause = f", {jauge.en_pause} en pause" if jauge.en_pause else ""
     actifs = f"{jauge.actifs} grimpeur{'s' if jauge.actifs > 1 else ''} actif{'s' if jauge.actifs > 1 else ''}"
     if jauge.pleine:
-        debut = f"Score {jauge.score} sur un palier de {jauge.palier} : la jauge est pleine."
+        debut = f"Score {jauge.score} sur un palier de {jauge.palier} : le palier est atteint."
     else:
         debut = (f"Score {jauge.score} sur un palier de {jauge.palier}, il en manque {jauge.manquants}.")
     return f"{debut} {actifs}{pause}."
@@ -227,16 +227,16 @@ def verdicts(etage: Etage, maintenant: datetime, regles: Regles | None = None,
         grace = regles.delai_grace_secondes
         delai = "dans une minute" if grace == 60 else (f"dans {grace} secondes" if grace else "aussitôt")
         if attente:
-            return (f"Jauge pleine : le prochain étage s'ouvrira tout seul le {date_paris(plancher)}.{gardien}",
-                    f"Le prochain étage s'ouvrira tout seul quand la jauge sera pleine, "
+            return (f"Palier atteint : le prochain étage s'ouvrira tout seul le {date_paris(plancher)}.{gardien}",
+                    f"Le prochain étage s'ouvrira tout seul quand le palier sera atteint, "
                     f"et pas avant le {date_paris(plancher)}.")
-        return (f"Jauge pleine : le prochain étage s'ouvre tout seul {delai}, si elle reste pleine.{gardien}",
-                "Le prochain étage s'ouvrira tout seul quand la jauge sera pleine.")
-    plein = "Jauge pleine : un admin va vérifier et ouvrir le prochain étage."
+        return (f"Palier atteint : le prochain étage s'ouvre tout seul {delai}, si le score s'y maintient.{gardien}",
+                "Le prochain étage s'ouvrira tout seul quand le palier sera atteint.")
+    plein = "Palier atteint : un admin va vérifier et ouvrir le prochain étage."
     if attente:
-        return plein, (f"Un admin pourra ouvrir le prochain étage quand la jauge sera pleine, "
+        return plein, (f"Un admin pourra ouvrir le prochain étage quand le palier sera atteint, "
                        f"et pas avant le {date_paris(plancher)}.")
-    return plein, "Un admin pourra ouvrir le prochain étage quand la jauge sera pleine."
+    return plein, "Un admin pourra ouvrir le prochain étage quand le palier sera atteint."
 
 
 def encoches(jauge: EtatJauge) -> list[str]:
