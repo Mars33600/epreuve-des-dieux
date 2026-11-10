@@ -131,3 +131,18 @@ def test_pied_de_page_les_auteurs():
         pied = re.search(r"<footer>(.*?)</footer>", html, re.S).group(1)
         assert "Réalisé par Shadoaze et Mars" in pied and "Projet de fans, non officiel" in pied
         assert "code" not in pied
+
+
+def test_recapitulatif_des_dispos_pour_les_admins():
+    m = monde(maintenant=PENDANT_FICHES)
+    _poster(m.connecter(ID_NOUVELLE), pseudo="Lune", dispo="non", dispo_quand="samedi 14 h")
+    html = m.connecter(ID_MARCEAU).get("/admin/grimpeurs").text
+    assert "Guilde, vendredi 16 h-17 h : 0 dispo" in html
+    assert "À inviter plus tard (1)" in html and "<li>Lune : samedi 14 h</li>" in html
+
+
+def test_tableau_de_bord_deux_cartes_distinctes():
+    m = monde()
+    html = m.connecter(ID_BRINDILLE).get("/tableau-de-bord").text
+    assert 'class="card carte-profil"' in html and 'class="initiale" aria-hidden="true">B<' in html
+    assert 'class="card carte-etage"' in html and "Étage en cours" in html
