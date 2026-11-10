@@ -51,10 +51,8 @@ dl.faits dd{margin:2px 0 0;font-size:19px}
 .res-ligne.fait span:first-child{text-decoration:line-through;color:var(--faint)}
 .mini.glob i{--c:var(--gold)}
 /* Tableau de bord : résumé d'un étage (blocs, donjons, succès) */
-.resume-etage{display:flex;flex-wrap:wrap;gap:8px 24px;margin:0}
-.resume-etage div{display:grid;gap:2px}
-.resume-etage dt{font:500 var(--t-sm)/1.3 var(--f-data);color:var(--muted)}
-.resume-etage dd{margin:0;font-size:19px;color:var(--ink)}
+.actions-etage{display:flex;flex-wrap:wrap;gap:10px;margin:0}
+.legende-pips{margin:0}
 
 /* Tableau de bord : la carte profil (dorée, initiale du pseudo) et la carte de l'étage en cours (sombre, bandeau) */
 .carte-profil{background:linear-gradient(135deg,rgba(227,181,82,.16),rgba(13,18,36,.97) 55%);border-color:var(--gold);
@@ -68,3 +66,11 @@ dl.faits dd{margin:2px 0 0;font-size:19px}
 .carte-etage .bandeau-etage{margin:0 -24px;padding:8px 24px;background:var(--surface-2);border-bottom:1px solid var(--line-soft)}
 @media (max-width:420px){.carte-profil .initiale{width:44px;height:44px;font-size:20px}
   .carte-etage .bandeau-etage{margin:0 -16px;padding:8px 16px}}
+.stats-cat{display:grid;gap:8px;padding:12px 14px;border-radius:var(--r);background:rgba(5,7,14,.35);border:1px solid var(--line-soft)}
+.stats-tete{margin:0;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.profil-jeu{font:600 var(--t-sm)/1.3 var(--f-data);color:var(--gold-hi);text-transform:uppercase;letter-spacing:.08em}
+.stats-cat ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.stats-cat li{display:grid;grid-template-columns:minmax(9em,auto) 1fr auto;gap:12px;align-items:center}
+.stats-cat .mini{grid-column:auto;height:7px}
+.stats-cat b small{color:var(--muted);font-weight:400}
+@media (max-width:420px){.stats-cat li{grid-template-columns:1fr auto}.stats-cat .mini{grid-column:1 / -1;grid-row:2}}

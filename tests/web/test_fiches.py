@@ -146,3 +146,32 @@ def test_tableau_de_bord_deux_cartes_distinctes():
     html = m.connecter(ID_BRINDILLE).get("/tableau-de-bord").text
     assert 'class="card carte-profil"' in html and 'class="initiale" aria-hidden="true">B<' in html
     assert 'class="card carte-etage"' in html and "Étage en cours" in html
+
+
+def test_stats_par_categorie_sur_le_tableau_de_bord():
+    m = monde()
+    html = m.connecter(ID_BRINDILLE).get("/tableau-de-bord").text
+    assert "Mes points par catégorie" in html and html.count('<li><span>Blocs ') == 2
+    autre = m.connecter(ID_MARCEAU).get("/grimpeurs/1").text
+    assert "Ses points par catégorie" in autre
+
+
+def test_profil_de_jeu():
+    from types import SimpleNamespace as N
+
+    from epreuve.web.tableau import stats_categories
+
+    def bloc(**acquises):
+        cats = {c: N(acquise=acquises.get(c, False), total=1)
+                for c in ("donjons", "full_succes", "principales", "secondaires")}
+        return N(vue=N(categories=lambda _gid, cats=cats: cats))
+
+    assert stats_categories([bloc()], 1)[1] == ""
+    stats, profil = stats_categories([bloc(donjons=True), bloc(donjons=True, principales=True)], 1)
+    assert profil == "Plutôt donjons" and [(p, n) for _, p, n in stats] == [(2, 2), (0, 2), (1, 2), (0, 2)]
+    assert stats_categories([bloc(donjons=True, secondaires=True)], 1)[1] == "Profil équilibré"
+
+
+def test_regles_expliquent_duffus_et_le_bloc():
+    html = monde().connecter(ID_BRINDILLE).get("/regles").text
+    assert "tu y coches les quêtes une à une" in html and "seul le bloc compte pour les points" in html

@@ -928,11 +928,12 @@ def fiche_et_tableau(ctx: Contexte, numero: int) -> None:
     # Sur son propre tableau, les blocs se cochent sur la page de l'étage (contrôlé plus haut).
     ctx.aller("/tableau-de-bord")
     ctx.photo("tableau")
-    dt = p.locator("dl.resume-etage").first
-    if "Blocs du guide" not in dt.inner_text():
-        ctx.defaut("tableau de bord : « Blocs du guide » absent du résumé d'étage")
-    elif entier(dt.locator("div", has_text="Blocs du guide").locator("dd").inner_text()) < 1:
-        ctx.defaut("tableau de bord : le compteur de blocs ne compte pas le bloc coché")
+    cellules = [p.locator(".carte-etage .bigpips .pipcell", has_text=nom).first
+                for nom in ("Blocs principaux", "Blocs secondaires")]
+    if not all(c.count() for c in cellules):
+        ctx.defaut("tableau de bord : « Blocs principaux / secondaires » absents de la carte de l'étage")
+    elif sum(entier(c.locator("b").inner_text().split("/")[0]) for c in cellules) < 1:
+        ctx.defaut("tableau de bord : les compteurs de blocs ne comptent pas le bloc coché")
     suite = p.locator("#tbSuite").locator("xpath=..")
     # Par l'ancre et non par le titre : les deux moitiés d'un bloc hybride partagent leur titre.
     if suite.count() and suite.locator(f"a[href$='#bloc-{bid}']").count():

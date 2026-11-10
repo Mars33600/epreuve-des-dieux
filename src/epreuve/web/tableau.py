@@ -35,10 +35,27 @@ from epreuve.domaine.visibilite import etage_cochable
 from epreuve.web.auth import Refus, exiger_grimpeur
 from epreuve.web.pages import INTROUVABLE, MESSAGES_FICHE, peut_cocher_soi
 from epreuve.web.rendu import rendre
-from epreuve.web.vues import VueEtage, charger_vue_etage, separer_courant
+from epreuve.web.vues import INFOS_CATEGORIES, VueEtage, charger_vue_etage, separer_courant
 
 routeur = APIRouter()
 NB_A_FAIRE = 6
+# Le profil de jeu (retour du 10/11) : la catégorie où le grimpeur a rapporté le plus de points.
+PROFILS = {"donjons": "donjons", "full_succes": "full succès", "principales": "quêtes principales",
+           "secondaires": "quêtes secondaires"}
+
+
+def stats_categories(blocs: list[BlocEtage], grimpeur_id: int) -> tuple[list[tuple], str]:
+    """Par catégorie : (info, points rapportés, étages où elle comptait), tous étages ouverts ou terminés, et le
+    profil dominant (« Plutôt donjons », « Profil équilibré », ou rien sans aucun point)."""
+    stats = []
+    for info in INFOS_CATEGORIES:
+        etats = [b.vue.categories(grimpeur_id)[info.cle] for b in blocs]
+        stats.append((info, sum(1 for e in etats if e.acquise and e.total), sum(1 for e in etats if e.total)))
+    meilleur = max(p for _, p, _ in stats)
+    if not meilleur:
+        return stats, ""
+    tete = [info for info, p, _ in stats if p == meilleur]
+    return stats, f"Plutôt {PROFILS[tete[0].cle]}" if len(tete) == 1 else "Profil équilibré"
 
 
 @dataclass
@@ -104,7 +121,9 @@ async def rendre_tableau(request: Request, g: Grimpeur, onglet: str, reste: int,
     blocs = await blocs_du_grimpeur(request, g, cochable)
     faits, total = sum(b.faits for b in blocs), sum(b.total for b in blocs)
     courant, precedents = separer_courant(blocs, lambda b: b.vue.etage)
+    stats, profil = stats_categories(blocs, g.id)
     return await rendre(request, "tableau.html", {
+        "stats": stats, "profil": profil,
         "onglet": onglet_valide(onglet), "reste": bool(reste), "g": g, "blocs": blocs, "courant": courant,
         "precedents": precedents, "faits": faits, "total": total, "soi": soi, "edition": edition,
         "base": "/tableau-de-bord" if soi else f"/grimpeurs/{g.id}",

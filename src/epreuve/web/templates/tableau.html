@@ -19,6 +19,19 @@
   </div>
   {% if total %}<div class="mini glob" role="img" aria-label="{{ faits }} éléments faits sur {{ total }}"><i class="{{ faits|pct(total) }}"></i></div>
   <p class="muted">{{ faits }} sur {{ total }} éléments faits ({{ faits * 100 // total }} %), tous étages ouverts confondus.</p>{% endif %}
+  {% if blocs %}
+  {#- Les points rapportés par catégorie, sur tous les étages : quel genre de grimpeur (retour du 10/11). #}
+  <div class="stats-cat">
+    <p class="stats-tete"><b>{{ "Mes" if soi else "Ses" }} points par catégorie</b>{% if profil %} <span class="profil-jeu">{{ profil }}</span>{% endif %}</p>
+    <ul>
+    {%- set noms = {"donjons": "Donjons vaincus", "full_succes": "Succès de donjon", "principales": "Blocs principaux",
+                    "secondaires": "Blocs secondaires"} %}
+    {%- for info, pts, n in stats %}
+      <li><span>{{ noms[info.cle] }}</span><span class="mini c-{{ info.cle }}" role="img" aria-label="{{ pts }} point{{ 's' if pts > 1 }} sur {{ n }} étage{{ 's' if n > 1 }}"><i class="{{ pts|pct(n) }}"></i></span><b class="num">{{ pts }} pt{{ "s" if pts > 1 }}<small> / {{ n }} étage{{ "s" if n > 1 }}</small></b></li>
+    {%- endfor %}
+    </ul>
+  </div>
+  {% endif %}
   {% if soi and g.statut == "pause" %}<p class="note">Tu es en pause : tu peux cocher pour rattraper ton retard, tes points compteront à ta réintégration.</p>{% endif %}
   {% if message %}<p class="succes-msg" role="status">{{ message }}</p>{% endif %}
   {% if erreur %}<p class="alerte" role="alert">{{ erreur }}</p>{% endif %}
@@ -53,13 +66,16 @@
     « Étages précédents », un <details> par étage dont le résumé tient sur une ligne. Rien n'est ouvert en dur. -#}
 {% macro corps_progression(b, niveau=2) %}{% set vue = b.vue %}{% set cats = vue.categories(g.id) %}
   <p class="muted">Niveaux {{ vue.etage.niveau_min }} à {{ vue.etage.niveau_max }}{% if vue.etage.statut == "termine" %} · étage terminé{% else %} · jauge {{ vue.jauge.score }}/{{ vue.jauge.palier }}{% endif %}</p>
-  <div class="bigpips">{% for info in CATS %}{% set e = cats[info.cle] %}<span class="pipcell">{{ pip(info, e, True) }}<span>{{ info.court }}</span><b>{{ e.faits }}/{{ e.total }}</b></span>{% endfor %}</div>
-  <dl class="resume-etage">
-    <div><dt>Blocs du guide</dt><dd class="num">{{ b.blocs_faits }}/{{ b.blocs_total }}</dd></div>
-    <div><dt>Donjons vaincus</dt><dd class="num">{{ b.donjons_vaincus }}/{{ b.donjons_total }}</dd></div>
-    <div><dt>Succès de donjon</dt><dd class="num">{{ b.succes_faits }}/{{ b.succes_total }}</dd></div>
-  </dl>
-  {% if b.donjons_restants %}<p><a class="btn" href="{{ base }}?onglet=succes&amp;reste=1#etage{{ vue.etage.numero }}">{{ b.donjons_restants }} donjon{{ "s" if b.donjons_restants > 1 }} à compléter</a></p>{% endif %}
+  {#- Les 4 catégories en clair (retour du 10/11) : ce qu'on compte, et 1 point par catégorie terminée en entier. #}
+  {%- set libelles = {"donjons": "Donjons vaincus", "full_succes": "Succès de donjon",
+                      "principales": "Blocs principaux", "secondaires": "Blocs secondaires"} %}
+  <p class="muted legende-pips">1 point par catégorie terminée en entier :</p>
+  <div class="bigpips">{% for info in CATS %}{% set e = cats[info.cle] %}<span class="pipcell">{{ pip(info, e, True) }}<span>{{ libelles[info.cle] }}</span><b>{{ e.faits }}/{{ e.total }}</b></span>{% endfor %}</div>
+  {%- set blocs_restants = b.blocs_total - b.blocs_faits %}
+  {% if b.donjons_restants or (soi and blocs_restants) %}<p class="actions-etage">
+    {%- if b.donjons_restants %}<a class="btn" href="{{ base }}?onglet=succes&amp;reste=1#etage{{ vue.etage.numero }}">{{ b.donjons_restants }} donjon{{ "s" if b.donjons_restants > 1 }} à compléter</a>{% endif %}
+    {%- if soi and blocs_restants %} <a class="btn" href="/etages/{{ vue.etage.numero }}#blocsTitre">{{ blocs_restants }} bloc{{ "s" if blocs_restants > 1 }} du guide à cocher</a>{% endif %}
+  </p>{% endif %}
   {#- Chez un autre : ses blocs du guide, faits ou non (cases désactivées), cochables pour l'admin. Plié : la liste
       est longue. Sur son propre tableau, on coche ses blocs sur la page de l'étage. #}
   {% if not soi and vue.contenu.blocs %}
