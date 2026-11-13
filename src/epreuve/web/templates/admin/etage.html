@@ -21,6 +21,18 @@
   </form>
 </section>
 
+{% if etage.statut == "scelle" %}
+{#- Un palier se règle aussi à l'avance (retour du 13/11) : il s'appliquera dès l'ouverture de l'étage. #}
+<section class="card" aria-labelledby="palierAvanceTitre">
+  <h2 id="palierAvanceTitre">Palier, réglable à l'avance</h2>
+  <p>Par défaut, le palier suit la formule (2 points par grimpeur actif). Un nombre fixé ici s'appliquera dès l'ouverture de l'étage.{% if etage.palier_manuel %} <b>Palier fixé : {{ etage.palier_manuel }} points.</b>{% endif %}</p>
+  <form method="post" action="/admin/etages/{{ etage.numero }}/palier" class="formrow">{{ csrf() }}
+    <div class="champ"><label for="palierAvance">Palier manuel (vide = la formule)</label><input type="number" id="palierAvance" name="palier" min="1" value="{{ etage.palier_manuel or '' }}"></div>
+    <div class="champ"><label for="motifPalierAvance">Motif (obligatoire)</label><input type="text" id="motifPalierAvance" name="motif" required></div>
+    <button class="btn" type="submit">Régler le palier</button>
+  </form>
+</section>
+{% endif %}
 {% if etage.statut == "ouvert" %}
 <section class="card" aria-labelledby="ouvTitre">
   <h2 id="ouvTitre">Jauge et ouverture</h2>

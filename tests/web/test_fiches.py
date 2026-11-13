@@ -198,3 +198,23 @@ def test_verdicts_ouverture_automatique():
     assert "aussitôt" in verdicts(etage, APRES_OUVERTURE, Regles(delai_grace_secondes=0))[0]
     plein, pas_plein = verdicts(etage, PENDANT_FICHES, Regles(ouverture_automatique=False))
     assert "un admin va vérifier" in plein and "Un admin pourra ouvrir" in pas_plein
+
+
+def test_palier_reglable_a_l_avance_sur_un_etage_scelle():
+    m = monde()
+    numero = next(e.numero for e in m.depot._etages.values() if e.statut == "scelle")
+    c = m.connecter(ID_MARCEAU)
+    html = c.get(f"/admin/etages/{numero}").text
+    assert "Palier, réglable à l'avance" in html and f'action="/admin/etages/{numero}/palier"' in html
+    jeton = _csrf(html)
+    r = c.post(f"/admin/etages/{numero}/palier", data={"csrf": jeton, "palier": "12", "motif": "étage court"},
+               headers={"Origin": SITE})
+    assert r.status_code == 303
+    etage = next(e for e in m.depot._etages.values() if e.numero == numero)
+    assert etage.palier_manuel == 12 and "Palier fixé : 12 points." in c.get(f"/admin/etages/{numero}").text
+
+
+def test_regle_8_equipement():
+    html = monde().connecter(ID_BRINDILLE).get("/regles").text
+    assert "Huit règles" in html and "Interdit d&#39;acheter un équipement" not in html  # texte statique : pas échappé
+    assert "Interdit d'acheter un équipement" in html and "Seules les <b>ressources</b>" in html
