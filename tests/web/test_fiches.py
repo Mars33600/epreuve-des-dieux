@@ -218,3 +218,10 @@ def test_regle_8_equipement():
     html = monde().connecter(ID_BRINDILLE).get("/regles").text
     assert "Huit règles" in html and "Interdit d&#39;acheter un équipement" not in html  # texte statique : pas échappé
     assert "Interdit d'acheter un équipement" in html and "Seules les <b>ressources</b>" in html
+
+
+def test_www_renvoie_vers_le_domaine_du_site():
+    c = monde(mode="auto", maintenant=PENDANT_FICHES).client()
+    r = c.get("https://www.epreuve.test/connexion?x=1")
+    assert r.status_code == 301 and r.headers["location"] == "https://epreuve.test/connexion?x=1"
+    assert c.get("/sante").status_code == 200  # le domaine du site, lui, répond normalement

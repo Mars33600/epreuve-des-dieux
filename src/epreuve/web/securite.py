@@ -103,6 +103,29 @@ class FiltreMode:
         await reponse(scope, receive, send)
 
 
+class DomaineUnique:
+    """Renvoie (301) toute requête arrivée sur un autre nom que celui de SITE_URL (ex. « www. ») vers SITE_URL.
+
+    Les cookies de session sont liés au nom exact du site, et Discord revient toujours sur SITE_URL : sur « www. »,
+    la connexion ne pouvait pas aboutir (le joueur restait sur le compte à rebours, 13/11).
+    """
+
+    def __init__(self, app: ASGIApp, site_url: str | None) -> None:
+        self.app = app
+        self.site_url = (site_url or "").rstrip("/")
+        self.hote = self.site_url.split("://", 1)[-1].split("/", 1)[0].lower() if self.site_url else ""
+
+    async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
+        if scope["type"] == "http" and self.hote:
+            hote = dict(scope["headers"]).get(b"host", b"").decode("latin-1").lower().split(":")[0]
+            if hote.startswith("www.") and hote[4:] == self.hote:
+                requete = scope["query_string"].decode("latin-1")
+                cible = self.site_url + scope["path"] + (f"?{requete}" if requete else "")
+                await RedirectResponse(cible, status_code=301)(scope, receive, send)
+                return
+        await self.app(scope, receive, send)
+
+
 class EntetesSecurite:
     """Ajoute `ENTETES_SECURITE` à chaque réponse, au moment où ses en-têtes partent."""
 

@@ -39,7 +39,7 @@ from epreuve.web import admin, api, auth, builder, captures, outils, pages, rech
 from epreuve.web.auth import Refus, admin_pour_le_filtre, visiteur
 from epreuve.web.encyclopedie import brancher as brancher_encyclopedie
 from epreuve.web.rendu import creer_gabarits, rendre
-from epreuve.web.securite import ENTETES_SECURITE, EntetesSecurite, FiltreMode
+from epreuve.web.securite import ENTETES_SECURITE, DomaineUnique, EntetesSecurite, FiltreMode
 
 journal = logging.getLogger("epreuve.web")
 ICI = Path(__file__).parent
@@ -80,6 +80,7 @@ def creer_app(config: Config, horloge: Callable[[], datetime] = maintenant_utc,
     app.add_middleware(FiltreMode, reglage=config.site_mode, ouvert_le=config.site_ouvert_le, horloge=horloge,
                        est_admin=admin_pour_le_filtre, fiches=(config.fiches_ouvertes_le, config.fin_des_fiches))
     app.add_middleware(EntetesSecurite)
+    app.add_middleware(DomaineUnique, site_url=config.site_url)  # le plus externe : « www. » repart tout de suite
     ouverture = config.site_ouvert_le.astimezone(ZoneInfo(config.fuseau))  # pour la date écrite en clair
 
     def mode():
