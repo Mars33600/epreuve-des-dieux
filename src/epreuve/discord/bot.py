@@ -6,7 +6,8 @@ On le mentionne : « @Gardien paysan lvl 15 » liste les grimpeurs qui ont décl
 
 Il tourne dans le même programme que le site (une tâche asyncio de `main.lancer`) et lit la même base : il voit
 les fiches et les métiers déclarés sur le tableau de bord. Sans `DISCORD_BOT_TOKEN`, il ne démarre pas.
-Discord transmet le texte d'un message qui mentionne le bot même sans l'intention « contenu des messages ».
+Il demande l'intention « contenu des messages » : Discord ne transmet le texte d'une mention du rôle du bot
+qu'avec elle (vu le 15/11). Elle doit aussi être activée dans le portail développeur.
 """
 
 from __future__ import annotations
@@ -60,6 +61,9 @@ class BotMetiers(discord.Client):  # pragma: no cover — la connexion à Discor
         intents = discord.Intents.none()
         intents.guilds = True
         intents.guild_messages = True
+        # Sans cette intention, une mention du RÔLE du bot (proposé par Discord en tapant « @anpe ») arrive vide.
+        # À activer aussi dans le portail développeur (onglet Bot, « Message Content Intent »).
+        intents.message_content = True
         super().__init__(intents=intents, allowed_mentions=discord.AllowedMentions.none())
         self.depot, self.site = depot, site
 
