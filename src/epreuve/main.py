@@ -77,6 +77,8 @@ def main() -> None:  # pragma: no cover — lance un vrai serveur
     config = Config()  # lit l'environnement ; s'arrête avec un message clair si une variable est mal formée
     logging.basicConfig(level=config.journal_niveau,
                         format="%(asctime)s %(levelname)s %(name)s : %(message)s")
+    # httpx écrit l'adresse de chaque requête en INFO : celle du webhook du Gardien porte son jeton (vu le 13/11).
+    logging.getLogger("httpx").setLevel(logging.WARNING)
     logging.getLogger("epreuve").info("démarrage, configuration : %s", config)  # secrets masqués
     asyncio.run(lancer(config))
 
