@@ -52,7 +52,8 @@ MESSAGES_FICHE = {"pseudo": "Le pseudo doit faire entre 2 et 30 caractères.",
                   "pris": "Ce pseudo est déjà pris (sans tenir compte des majuscules).",
                   "classe": "Classe inconnue.", "niveau": "Le niveau va de 1 à 200.",
                   "dispo": "Dis-nous si tu es là vendredi entre 16 h et 17 h pour rejoindre la guilde.",
-                  "quand": "Dis-nous à partir de quand tu seras là pour être invité (100 caractères au plus)."}
+                  "quand": "Dis-nous à partir de quand tu seras là pour être invité (100 caractères au plus).",
+                  "metier": "Un niveau de métier est un nombre de 1 à 200 (vide ou 0 : pas ce métier)."}
 DISPO_OUI = "oui"  # dispo vendredi 13/11 entre 16 h et 17 h ; sinon, le texte libre « à partir de quand »
 
 

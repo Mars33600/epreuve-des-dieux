@@ -39,6 +39,7 @@ from epreuve.discord.oauth import ClientOAuth
 from epreuve.domaine.annonce import JOURNAL_LANCEMENT
 from epreuve.domaine.bareme import cascade_coche
 from epreuve.domaine.fiche import Besoin, EtapeFiche, FicheQuete, Position, Prerequis
+from epreuve.domaine.metiers import NiveauMetier
 from epreuve.domaine.modeles import (
     Bloc,
     CaseSucces,
@@ -268,6 +269,7 @@ class DepotDemo:
         self._coches_blocs: dict[int, set[int]] = {}
         self._suivi: set[tuple[int, int, int]] = set()
         self._activite: dict[int, datetime] = {}
+        self._metiers: dict[tuple[int, str], NiveauMetier] = {}
         self._liste: dict[int, Statut] = {ID_NOUVELLE: "actif"}
         for id_, pseudo, classe, niv, statut, d, p, s in BRUT:
             did = _id_discord(id_)
@@ -428,6 +430,18 @@ class DepotDemo:
         g = self._grimpeurs.get(grimpeur_id)
         if g is not None:
             self._grimpeurs[grimpeur_id] = replace(g, prologue_vu=True)
+
+    async def metiers(self, grimpeur_id=None):
+        return [n for n in self._metiers.values() if grimpeur_id is None or n.grimpeur_id == grimpeur_id]
+
+    async def regler_metiers(self, grimpeur_id, niveaux, acteur, maintenant):
+        for cle in [c for g, c in self._metiers if g == grimpeur_id and c not in niveaux]:
+            del self._metiers[(grimpeur_id, cle)]
+        for cle, niveau in niveaux.items():
+            avant = self._metiers.get((grimpeur_id, cle))
+            if avant is None or avant.niveau != niveau:
+                self._metiers[(grimpeur_id, cle)] = NiveauMetier(grimpeur_id, cle, niveau, maintenant)
+        self._journaliser(acteur, maintenant, "metiers", grimpeur_id=grimpeur_id, public=False, niveaux=niveaux)
 
     async def modifier_grimpeur(self, grimpeur_id, acteur, maintenant, *, pseudo=None, classe=None,
                                 niveau_declare=None):

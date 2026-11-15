@@ -49,6 +49,33 @@
     </form>
   </details>
   {% endif %}
+  {#- Recensement des métiers (15/11) : plié, il ne sert que de temps en temps. Vide ou 0 = pas ce métier. #}
+  {% if soi %}
+  <details class="pli pli-2 metiers-moi" id="mesMetiers">
+    <summary><span class="pli-titre">Mes métiers <span class="pli-cpt num">({{ mes_metiers|length }})</span></span></summary>
+    <div class="pli-corps">
+    <form method="post" action="/grimpeurs/moi/metiers">
+      <input type="hidden" name="csrf" value="{{ v.csrf }}">
+      <p class="muted">Mets le niveau de chaque métier que tu as (vide ou 0 : pas ce métier), puis mets-le à jour quand tu montes. Tout le monde le voit sur la page <a href="/metiers">Métiers</a>.</p>
+      {%- for cle_f, nom_f in FAMILLES_METIERS %}
+      <fieldset class="grille-metiers"><legend>{{ nom_f }}</legend>
+        {%- for m in METIERS if m.famille == cle_f %}
+        <label class="champ"><span>{{ m.nom }}</span><input type="number" name="metier_{{ m.cle }}" min="0" max="200" inputmode="numeric" value="{{ mes_metiers[m.cle].niveau if m.cle in mes_metiers else '' }}" placeholder="—"></label>
+        {%- endfor %}
+      </fieldset>
+      {%- endfor %}
+      <button class="btn or" type="submit">Enregistrer mes métiers</button>
+    </form>
+    </div>
+  </details>
+  {% elif mes_metiers %}
+  <details class="pli pli-2">
+    <summary><span class="pli-titre">Ses métiers <span class="pli-cpt num">({{ mes_metiers|length }})</span></span></summary>
+    <div class="pli-corps"><ul class="liste-metier">
+      {%- for m in METIERS if m.cle in mes_metiers %}<li>{{ m.nom }} <b class="num">niv. {{ mes_metiers[m.cle].niveau }}</b></li>{% endfor %}
+    </ul></div>
+  </details>
+  {% endif %}
   {% if edition %}
   <div class="force">
     <label class="champ" for="motif"><span>Motif de la modification (obligatoire)</span>

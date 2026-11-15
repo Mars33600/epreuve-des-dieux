@@ -154,6 +154,14 @@ grimpeur = Table(
     Column("dispo_guilde", Text),  # « oui » (vendredi 16 h-17 h pour la guilde) ou « à partir de quand »
 )
 
+metier = Table(
+    "metier", metadata,
+    Column("grimpeur_id", Integer, ForeignKey("grimpeur.id"), primary_key=True),
+    Column("metier", Text, primary_key=True),  # clé de domaine.metiers.METIERS
+    Column("niveau", Integer, nullable=False),
+    Column("maj_le", Horodatage, nullable=False),  # dernier changement de niveau
+)
+
 coche_case = Table(
     "coche_case", metadata,
     Column("grimpeur_id", Integer, ForeignKey("grimpeur.id"), primary_key=True),

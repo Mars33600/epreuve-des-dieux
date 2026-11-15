@@ -1,0 +1,45 @@
+{% extends "site.html" %}
+{#- Le recensement des métiers (15/11) : chercher qui peut fabriquer à un niveau donné, puis la liste complète,
+    un dépliant par métier, plié par défaut. Chacun déclare ses métiers sur son tableau de bord. -#}
+{% block titre %}Métiers de la guilde · L'Épreuve des Dieux{% endblock %}
+{% block page %}
+<section class="card" aria-labelledby="metiersTitre">
+  <div class="eyebrow">Qui peut fabriquer ?</div>
+  <h2 id="metiersTitre">Métiers de la guilde</h2>
+  <p class="muted">Chacun déclare ses métiers sur son <a href="/tableau-de-bord#mesMetiers">tableau de bord</a> et les met à jour quand il monte. La date indique le dernier changement de niveau.</p>
+  <form method="get" action="/metiers" class="formrow">
+    <div class="champ"><label for="metier">Métier</label>
+      <select id="metier" name="metier" required><option value="">—</option>
+      {%- for cle_f, nom_f in FAMILLES_METIERS %}<optgroup label="{{ nom_f }}">
+        {%- for m in METIERS if m.famille == cle_f %}<option value="{{ m.cle }}"{% if choisi and choisi.cle == m.cle %} selected{% endif %}>{{ m.nom }}</option>{% endfor %}
+      </optgroup>{% endfor %}
+      </select></div>
+    <div class="champ"><label for="min">Niveau minimum</label><input type="number" id="min" name="min" min="1" max="200" value="{{ minimum }}"></div>
+    <button class="btn or" type="submit">Chercher</button>
+  </form>
+  {% if choisi %}
+  <div class="resultat-metier" role="status">
+    <h3>{{ choisi.nom }} niveau {{ minimum }} ou plus : {{ resultat|length }} grimpeur{{ "s" if resultat|length > 1 }}</h3>
+    {% if resultat %}<ul class="liste-metier">{% for n in resultat %}<li><a href="/grimpeurs/{{ n.grimpeur_id }}">{{ grimpeurs[n.grimpeur_id].pseudo }}</a> <b class="num">niv. {{ n.niveau }}</b> <small class="muted">({{ n.maj_le|date_paris }})</small></li>{% endfor %}</ul>
+    {% else %}<p class="muted">Personne pour l'instant. Baisse le niveau minimum, ou demande sur le Discord.</p>{% endif %}
+  </div>
+  {% endif %}
+</section>
+
+{% for cle_f, nom_f in FAMILLES_METIERS %}
+<details class="card pli pli-1">
+  <summary><span class="pli-titre">{{ nom_f }} <span class="pli-cpt num">({{ total_famille[cle_f] }} déclaré{{ "s" if total_famille[cle_f] > 1 }})</span></span></summary>
+  <div class="pli-corps">
+  {%- for m in METIERS if m.famille == cle_f %}{% set liste = par_metier[m.cle] %}
+    <details class="pli pli-2">
+      <summary><span class="pli-titre">{{ m.nom }} <span class="pli-cpt num">({{ liste|length }}{% if liste %} · max {{ liste[0].niveau }}{% endif %})</span></span></summary>
+      <div class="pli-corps">
+      {%- if liste %}<ul class="liste-metier">{% for n in liste %}<li><a href="/grimpeurs/{{ n.grimpeur_id }}">{{ grimpeurs[n.grimpeur_id].pseudo }}</a> <b class="num">niv. {{ n.niveau }}</b> <small class="muted">({{ n.maj_le|date_paris }})</small></li>{% endfor %}</ul>
+      {%- else %}<p class="muted">Personne pour l'instant.</p>{% endif %}
+      </div>
+    </details>
+  {%- endfor %}
+  </div>
+</details>
+{% endfor %}
+{% endblock %}

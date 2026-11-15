@@ -131,7 +131,9 @@ async def rendre_tableau(request: Request, g: Grimpeur, onglet: str, reste: int,
     faits, total = sum(b.faits for b in blocs), sum(b.total for b in blocs)
     courant, precedents = separer_courant(blocs, lambda b: b.vue.etage)
     stats, profil = stats_categories(blocs, g.id)
+    mes_metiers = {n.metier: n for n in await request.app.state.depot.metiers(g.id)}
     return await rendre(request, "tableau.html", {
+        "mes_metiers": mes_metiers,
         "stats": stats, "profil": profil,
         "onglet": onglet_valide(onglet), "reste": bool(reste), "g": g, "blocs": blocs, "courant": courant,
         "precedents": precedents, "faits": faits, "total": total, "soi": soi, "edition": edition,
@@ -150,7 +152,8 @@ async def tableau_de_bord(request: Request, onglet: str = "progression", reste: 
     regles = request.app.state.regles
     return await rendre_tableau(
         request, v.grimpeur, onglet, reste, lambda e: peut_cocher_soi(v, e, regles), soi=True,
-        plus={"classes": CLASSES, "message": "Fiche enregistrée." if fait else "",
+        plus={"classes": CLASSES,
+              "message": {"metiers": "Métiers enregistrés."}.get(fait, "Fiche enregistrée." if fait else ""),
               "erreur": MESSAGES_FICHE.get(erreur, "")})
 
 

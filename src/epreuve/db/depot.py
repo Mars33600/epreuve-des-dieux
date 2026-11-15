@@ -29,6 +29,7 @@ from epreuve.db import tables as t
 from epreuve.domaine.annonce import JOURNAL_LANCEMENT
 from epreuve.domaine.bareme import cascade_coche
 from epreuve.domaine.fiche import Besoin, EtapeFiche, FicheQuete, Position, Prerequis
+from epreuve.domaine.metiers import NiveauMetier
 from epreuve.domaine.modeles import (
     Bloc,
     CaseSucces,
@@ -409,6 +410,35 @@ class Depot:
             await c.execute(update(t.grimpeur).where(t.grimpeur.c.id == grimpeur_id,
                                                      t.grimpeur.c.prologue_vu_le.is_(None))
                             .values(prologue_vu_le=maintenant))
+
+    # --- Les métiers (recensement de la guilde) -------------------------------------------------------------------
+
+    async def metiers(self, grimpeur_id: int | None = None) -> list[NiveauMetier]:
+        """Les métiers déclarés, de tous les grimpeurs ou d'un seul."""
+        q = select(t.metier)
+        if grimpeur_id is not None:
+            q = q.where(t.metier.c.grimpeur_id == grimpeur_id)
+        async with self._moteur.connect() as c:
+            return [NiveauMetier(r.grimpeur_id, r.metier, r.niveau, r.maj_le) for r in (await c.execute(q)).all()]
+
+    async def regler_metiers(self, grimpeur_id: int, niveaux: dict[str, int], acteur: int,
+                             maintenant: datetime) -> None:
+        """Remplace les métiers du grimpeur par `niveaux` ({clé: 1..200}, déjà validés). `maj_le` ne bouge que pour
+        un niveau qui change : la page Métiers montre depuis quand un niveau n'a pas été mis à jour."""
+        async with self._moteur.begin() as c:
+            avant = {r.metier: r.niveau for r in (await c.execute(
+                select(t.metier.c.metier, t.metier.c.niveau).where(t.metier.c.grimpeur_id == grimpeur_id))).all()}
+            partis = set(avant) - set(niveaux)
+            if partis:
+                await c.execute(delete(t.metier).where(t.metier.c.grimpeur_id == grimpeur_id,
+                                                       t.metier.c.metier.in_(partis)))
+            for cle, niveau in niveaux.items():
+                if avant.get(cle) == niveau:
+                    continue
+                q = insert_pg(t.metier).values(grimpeur_id=grimpeur_id, metier=cle, niveau=niveau, maj_le=maintenant)
+                await c.execute(q.on_conflict_do_update(index_elements=["grimpeur_id", "metier"],
+                                                        set_={"niveau": niveau, "maj_le": maintenant}))
+            await self._journaliser(c, "metiers", acteur, maintenant, {"niveaux": niveaux}, grimpeur_id=grimpeur_id)
 
     async def modifier_grimpeur(self, grimpeur_id: int, acteur: int, maintenant: datetime, *,
                                 pseudo: str | None = None, classe: str | None = None,

@@ -31,6 +31,7 @@
         <a href="/regles"{{ actif("/regles") }}>Règles</a>
         {% if bar_gid %}<a href="/tableau-de-bord"{{ actif("/tableau-de-bord") }}>Tableau de bord</a>{% endif %}
         <a href="/grimpeurs"{{ actif("/grimpeurs") }}>Grimpeurs</a>
+        {% if bar_membre %}<a href="/metiers"{{ actif("/metiers") }}>Métiers</a>{% endif %}
         {% if bar_admin %}<a href="/admin"{{ actif("/admin") }}>Admin</a>{% endif %}
       </nav>
     {% endif %}

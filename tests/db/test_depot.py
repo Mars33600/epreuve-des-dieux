@@ -440,3 +440,15 @@ async def test_suivi_des_etapes_ne_coche_jamais_la_quete(base):
     assert await base.etapes_suivies(g.id, 2) == frozenset()  # par quête
     contenu = await base.coches_etage(1)
     assert 1 not in contenu.get(g.id, Coches(g.id)).quetes  # la quête n'est pas cochée, même étape par étape
+
+
+async def test_metiers_remplaces_et_date_du_dernier_changement(depot):
+    g = await depot.creer_grimpeur(10, "d10", "Billy", "Iop", None, OUVERTURE, liste_obligatoire=False)
+    await depot.regler_metiers(g.id, {"bijoutier": 20, "tailleur": 23}, 10, OUVERTURE)
+    plus_tard = OUVERTURE + timedelta(days=1)
+    await depot.regler_metiers(g.id, {"bijoutier": 25, "tailleur": 23}, 10, plus_tard)
+    niveaux = {n.metier: n for n in await depot.metiers(g.id)}
+    assert (niveaux["bijoutier"].niveau, niveaux["bijoutier"].maj_le) == (25, plus_tard)
+    assert niveaux["tailleur"].maj_le == OUVERTURE  # niveau inchangé : la date reste
+    await depot.regler_metiers(g.id, {"tailleur": 30}, 10, plus_tard)
+    assert [(n.metier, n.niveau) for n in await depot.metiers()] == [("tailleur", 30)]

@@ -74,3 +74,7 @@ dl.faits dd{margin:2px 0 0;font-size:19px}
 .stats-cat .mini{grid-column:auto;height:7px}
 .stats-cat b small{color:var(--muted);font-weight:400}
 @media (max-width:420px){.stats-cat li{grid-template-columns:1fr auto}.stats-cat .mini{grid-column:1 / -1;grid-row:2}}
+/* Recensement des métiers : grille de saisie (tableau de bord) et listes (page Métiers) */
+.grille-metiers{border:0;padding:0;margin:0 0 12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px 14px}
+.grille-metiers legend{font-weight:700;margin-bottom:6px;color:var(--gold-hi)}
+.grille-metiers input{max-width:100px}

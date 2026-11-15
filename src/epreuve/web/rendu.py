@@ -19,6 +19,7 @@ from fastapi.templating import Jinja2Templates
 from markupsafe import Markup
 
 from epreuve.contenu.fiche_duffus import BALISES
+from epreuve.domaine.metiers import FAMILLES, METIERS
 from epreuve.domaine.textes import date_paris
 from epreuve.encyclopedie.liens import Liens, decouper_quantite
 from epreuve.web.vues import (
@@ -61,7 +62,8 @@ def creer_gabarits() -> Jinja2Templates:
                          fiche_propre=fiche_propre)
     g.env.globals.update(CATS=INFOS_CATEGORIES, texte_donjons=texte_point_donjons, texte_full=texte_point_full,
                          titre_etage=titre_etage, avec_article=avec_article, decouper_quantite=decouper_quantite,
-                         texte_quetes_bloc=texte_quetes_bloc, LIENS_VIDES=Liens())
+                         texte_quetes_bloc=texte_quetes_bloc, LIENS_VIDES=Liens(), METIERS=METIERS,
+                         FAMILLES_METIERS=FAMILLES)
     return g
 
 
