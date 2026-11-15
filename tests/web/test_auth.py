@@ -251,7 +251,8 @@ def test_session_expiree_apres_7_jours():
 
 
 def test_aucun_bot_seulement_les_quatre_adresses_oauth():
-    """Critère 29 : le site n'appelle Discord que pour la connexion, et la configuration ne lit aucun jeton de bot."""
+    """Critère 29 : le site n'appelle Discord que pour la connexion. Depuis le 15/11, la configuration lit un seul
+    jeton de bot, DISCORD_BOT_TOKEN (le bot du salon « métiers », qui tourne à part du site), toujours masqué."""
     m = monde()
     c = m.connecter(ID_MARCEAU)
     m.avancer(minutes=11)
@@ -260,7 +261,9 @@ def test_aucun_bot_seulement_les_quatre_adresses_oauth():
     permis = {"POST /api/v10/oauth2/token", "GET /api/v10/users/@me", "GET /api/v10/users/@me/guilds/1/member",
               "POST /api/v10/oauth2/token/revoke"}
     assert set(m.appels) == permis
-    assert not any("token" in nom.lower() and "secret" not in nom.lower() for nom in Config.model_fields)
+    jetons = [nom for nom in Config.model_fields if "token" in nom.lower() and "secret" not in nom.lower()]
+    assert jetons == ["discord_bot_token"]
+    assert "jeton-du-bot" not in repr(Config(_env_file=None, DISCORD_BOT_TOKEN="jeton-du-bot").model_dump())
 
 
 def test_jeton_de_bot_dans_l_environnement_ignore(monkeypatch):

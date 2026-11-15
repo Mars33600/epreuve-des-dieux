@@ -57,6 +57,8 @@ class Config(BaseSettings):
     # aucun jeton). L'adresse contient son propre secret : qui la connaît peut poster, d'où le SecretStr.
     # Absente ou vide : aucune annonce, le reste du site fonctionne pareil.
     discord_webhook_annonces: SecretStr | None = Field(default=None, alias="DISCORD_WEBHOOK_ANNONCES")
+    # Le bot du salon « métiers » (15/11) : sans jeton, il ne démarre pas. Jamais affiché (SecretStr).
+    discord_bot_token: SecretStr | None = Field(default=None, alias="DISCORD_BOT_TOKEN")
     # Recette des admins avant l'ouverture : l'étage suivant s'ouvre seul aussi pendant le teaser. Les annonces
     # Discord restent coupées tant que le site n'est pas ouvert. À retirer avant le 13/11 (fly secrets unset).
     ouverture_auto_teaser: bool = Field(default=False, alias="OUVERTURE_AUTO_TEASER")

@@ -2,7 +2,7 @@
 
     python -m epreuve.main
 
-Plus de bot connecté en permanence (ARCHITECTURE §2) : un seul programme, une seule tâche.
+Un seul programme : le site, ses tâches de fond et, si DISCORD_BOT_TOKEN est posé, le bot du salon « métiers ».
 Au lot A, la base est facultative : sans `DATABASE_URL`, le teaser tourne et `/sante` répond
 « base absente ». Si le serveur s'arrête sur une erreur, Fly.io relance la machine.
 """
@@ -62,9 +62,17 @@ async def lancer(config: Config) -> None:
         # La veille d'ouverture : une jauge pleine avant la date plancher ouvre l'étage à l'heure dite, même si
         # plus personne ne coche (voir web/ouverture_auto.py).
         taches = [asyncio.create_task(purger_chaque_jour(source)), asyncio.create_task(veiller(app.state))]
+    bot = None
+    if source is not None and config.discord_bot_token is not None:
+        from epreuve.discord.bot import BotMetiers
+        # Le bot du salon « métiers » : même programme, même base que le site (voir discord/bot.py).
+        bot = BotMetiers(source, (config.site_url or "").rstrip("/"))
+        taches.append(asyncio.create_task(bot.start(config.discord_bot_token.get_secret_value())))
     try:
         await serveur.serve()
     finally:
+        if bot is not None:
+            await bot.close()
         for tache in taches:
             tache.cancel()
             with contextlib.suppress(asyncio.CancelledError):
