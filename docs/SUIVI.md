@@ -21,7 +21,8 @@ Détails : `DECISIONS-V4.md`.
 - [x] 11/11 : coches de test de Shadoaze retirées (7 coches, 18 lignes de journal, copie locale faute de sauvegarde GitHub : miroir Ubuntu en panne) ; fiches gardées
 - [x] 13/11 : palier réglable à l'avance sur un étage scellé (admin), 8e règle « équipement : craft, loot, forgemagie », redirection www → epreuve-des-dieux.fr (la connexion échouait sur www)
 - [x] 15/11 : recensement des métiers (tableau de bord « Mes métiers », page /metiers avec recherche métier + niveau, migration j1) ; httpx en WARNING (jeton du webhook hors des journaux)
-- [ ] Bot Discord « @bot paysan lvl 15 » / « @bot <pseudo> » dans le salon métiers : jeton de bot à poser en secret Fly, bot invité sur le serveur
+- [x] 15/11 : bot des métiers codé et déployé (discord/bot.py), inactif sans jeton
+- [ ] Activer le bot : Marceau pose DISCORD_BOT_TOKEN en secret Fly et invite le bot (lire et écrire dans le salon « métiers »)
 - [ ] Régénérer l'URL du webhook du Gardien (le jeton est passé dans les journaux le 13/11)
 - [ ] Ouverture du site le vendredi 13/11 à 17 h, tout prêt « nickel au démarrage »
 
