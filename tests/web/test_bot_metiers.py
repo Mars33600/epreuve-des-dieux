@@ -52,3 +52,10 @@ def test_arret_du_bot_ecrit_au_journal(caplog):
 
     asyncio.run(scenario())
     assert "le bot des métiers s'est arrêté" in caplog.text and "jeton refusé" in caplog.text
+
+
+def test_metier_retire_ignore_par_le_bot():
+    d = _depot()
+    d._metiers[(1, "parchomage")] = d._metiers[(1, "paysan")].__class__(1, "parchomage", 40, T)
+    pseudo = next(g.pseudo for g in asyncio.run(d.grimpeurs()) if g.id == 1)
+    assert asyncio.run(repondre(d, f"<@1> {pseudo}", SITE)) == f"**{pseudo}** : Paysan 30 · Bijoutier 12"

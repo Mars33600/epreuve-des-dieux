@@ -43,7 +43,7 @@ async def repondre(depot, texte: str, site: str) -> str:
     if demande is None:
         return texte_aide(site)
     grimpeurs = {g.id: g for g in await depot.grimpeurs() if g.statut != "exclu"}
-    niveaux = [n for n in await depot.metiers() if n.grimpeur_id in grimpeurs]
+    niveaux = [n for n in await depot.metiers() if n.grimpeur_id in grimpeurs and n.metier in PAR_CLE]
     if demande.metier is not None:
         liste = [(grimpeurs[n.grimpeur_id].pseudo, n.niveau)
                  for n in artisans(niveaux, demande.metier.cle, demande.minimum)]

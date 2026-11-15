@@ -10,7 +10,8 @@ T = datetime(2026, 11, 15, tzinfo=UTC)
 
 
 def test_liste_des_metiers():
-    assert len(METIERS) == len(PAR_CLE) == 22
+    assert len(METIERS) == len(PAR_CLE) == 20
+    assert "parchomage" not in PAR_CLE and "bestiologue" not in PAR_CLE
     assert {m.famille for m in METIERS} == {f for f, _ in FAMILLES}
     assert PAR_CLE["bijoutier"].nom == "Bijoutier" and PAR_CLE["pecheur"].nom == "Pêcheur"
 
@@ -94,3 +95,8 @@ def test_textes_du_bot():
     assert f"{site}/metiers" in texte_aide(site)
     long = texte_artisans(PAR_CLE["paysan"], 1, [(f"Joueur{i:03}", 10) for i in range(200)], site)
     assert len(long) <= LIMITE_DISCORD + 2 and long.endswith("\n…")
+
+
+def test_metier_retire_ignore():
+    niveaux = [NiveauMetier(1, "parchomage", 40, T), NiveauMetier(1, "paysan", 10, T)]
+    assert artisans(niveaux, "parchomage") == [] and len(artisans(niveaux, "paysan")) == 1

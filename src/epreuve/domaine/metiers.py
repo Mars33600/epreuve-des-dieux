@@ -2,7 +2,8 @@
 
 Chaque grimpeur déclare ses métiers et leur niveau sur son tableau de bord ; la page « Métiers » liste, pour un
 métier et un niveau minimum, qui peut fabriquer (« un bijoutier 25 pour un anneau Bouftou ? »). La liste suit les
-métiers de DofusDB (`/jobs`), sans « Base ». Un niveau vide ou à 0 veut dire « pas ce métier ».
+métiers de DofusDB (`/jobs`), sans « Base », « Parchomage » ni « Bestiologue » (absents du jeu, Mars 15/11).
+Un niveau vide ou à 0 veut dire « pas ce métier ». Un métier retiré de la liste et resté en base est ignoré.
 """
 
 from __future__ import annotations
@@ -42,9 +43,8 @@ METIERS: tuple[Metier, ...] = (
     Metier("tailleur", "Tailleur", "artisanat"),
     Metier("cordomage", "Cordomage", "forgemagie"), Metier("costumage", "Costumage", "forgemagie"),
     Metier("facomage", "Façomage", "forgemagie"), Metier("forgemage", "Forgemage", "forgemagie"),
-    Metier("joaillomage", "Joaillomage", "forgemagie"), Metier("parchomage", "Parchomage", "forgemagie"),
-    Metier("sculptemage", "Sculptemage", "forgemagie"),
-    Metier("bestiologue", "Bestiologue", "autre"), Metier("eleveur", "Éleveur", "autre"),
+    Metier("joaillomage", "Joaillomage", "forgemagie"), Metier("sculptemage", "Sculptemage", "forgemagie"),
+    Metier("eleveur", "Éleveur", "autre"),
 )  # fmt: skip
 FAMILLES: tuple[tuple[Famille, str], ...] = (
     ("recolte", "Récolte"), ("artisanat", "Artisanat"), ("forgemagie", "Forgemagie"), ("autre", "Autres"),
@@ -73,7 +73,7 @@ def lire_niveaux(saisie: dict[str, str]) -> dict[str, int]:
 
 def artisans(niveaux: list[NiveauMetier], cle: str, minimum: int = 1) -> list[NiveauMetier]:
     """Ceux qui ont le métier `cle` au niveau `minimum` ou plus, du plus haut niveau au plus bas."""
-    return sorted((n for n in niveaux if n.metier == cle and n.niveau >= minimum),
+    return sorted((n for n in niveaux if n.metier == cle and n.metier in PAR_CLE and n.niveau >= minimum),
                   key=lambda n: (-n.niveau, n.grimpeur_id))
 
 

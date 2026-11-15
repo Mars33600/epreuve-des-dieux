@@ -24,7 +24,7 @@ async def page_metiers(request: Request, metier: str = "", min: str = ""):  # no
     await exiger_grimpeur(request)
     depot = request.app.state.depot
     grimpeurs = {g.id: g for g in await depot.grimpeurs() if g.statut != "exclu"}
-    niveaux = [n for n in await depot.metiers() if n.grimpeur_id in grimpeurs]
+    niveaux = [n for n in await depot.metiers() if n.grimpeur_id in grimpeurs and n.metier in PAR_CLE]
     minimum = int(min) if min.isdigit() and 1 <= int(min) <= NIVEAU_MAX else 1
     choisi = PAR_CLE.get(metier)
     par_metier = {m: artisans(niveaux, m) for m in PAR_CLE}

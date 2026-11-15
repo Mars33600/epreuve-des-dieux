@@ -30,6 +30,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import RedirectResponse
 
 from epreuve.domaine.classes import CLASSES
+from epreuve.domaine.metiers import PAR_CLE
 from epreuve.domaine.modeles import Etage, Grimpeur
 from epreuve.domaine.visibilite import etage_cochable
 from epreuve.web.auth import Refus, exiger_grimpeur
@@ -131,7 +132,7 @@ async def rendre_tableau(request: Request, g: Grimpeur, onglet: str, reste: int,
     faits, total = sum(b.faits for b in blocs), sum(b.total for b in blocs)
     courant, precedents = separer_courant(blocs, lambda b: b.vue.etage)
     stats, profil = stats_categories(blocs, g.id)
-    mes_metiers = {n.metier: n for n in await request.app.state.depot.metiers(g.id)}
+    mes_metiers = {n.metier: n for n in await request.app.state.depot.metiers(g.id) if n.metier in PAR_CLE}
     return await rendre(request, "tableau.html", {
         "mes_metiers": mes_metiers,
         "stats": stats, "profil": profil,
