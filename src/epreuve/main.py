@@ -34,6 +34,12 @@ async def purger_chaque_jour(depot, horloge=lambda: datetime.now(UTC), attendre=
         await attendre(UN_JOUR)
 
 
+def signaler_arret_du_bot(tache: asyncio.Task) -> None:
+    """Le bot s'est arrêté (jeton refusé, Discord injoignable…) : on l'écrit au journal, le site continue."""
+    if not tache.cancelled() and tache.exception() is not None:
+        journal.error("le bot des métiers s'est arrêté : %r", tache.exception())
+
+
 async def lancer(config: Config) -> None:
     moteur = None
     source = None
@@ -67,7 +73,9 @@ async def lancer(config: Config) -> None:
         from epreuve.discord.bot import BotMetiers
         # Le bot du salon « métiers » : même programme, même base que le site (voir discord/bot.py).
         bot = BotMetiers(source, (config.site_url or "").rstrip("/"))
-        taches.append(asyncio.create_task(bot.start(config.discord_bot_token.get_secret_value())))
+        tache_bot = asyncio.create_task(bot.start(config.discord_bot_token.get_secret_value()))
+        tache_bot.add_done_callback(signaler_arret_du_bot)  # un jeton refusé ne doit pas passer inaperçu
+        taches.append(tache_bot)
     try:
         await serveur.serve()
     finally:

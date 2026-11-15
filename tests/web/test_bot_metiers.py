@@ -36,3 +36,19 @@ def test_reponse_par_joueur_et_aide():
     assert asyncio.run(repondre(d, f"<@1> {pseudo.lower()}", SITE)) == f"**{pseudo}** : Paysan 30 · Bijoutier 12"
     assert "Je ne trouve ni métier ni grimpeur « Personne »" in asyncio.run(repondre(d, "<@1> Personne", SITE))
     assert asyncio.run(repondre(d, "<@1>", SITE)).startswith("Demande-moi un métier")
+
+
+def test_arret_du_bot_ecrit_au_journal(caplog):
+    from epreuve.main import signaler_arret_du_bot
+
+    async def echoue():
+        raise RuntimeError("jeton refusé")
+
+    async def scenario():
+        t = asyncio.create_task(echoue())
+        await asyncio.sleep(0)
+        await asyncio.sleep(0)
+        signaler_arret_du_bot(t)
+
+    asyncio.run(scenario())
+    assert "le bot des métiers s'est arrêté" in caplog.text and "jeton refusé" in caplog.text
